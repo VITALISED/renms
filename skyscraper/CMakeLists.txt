@@ -1,7 +1,9 @@
 add_library(
     renms_skyscraper
+    "engine/source/shared/utxmlparser.h"
     "toolkit/attachments/TkHandle.h"
     "toolkit/data/TkClassPointer.h"
+    "toolkit/data/TkID.h"
     "toolkit/data/TkMetaDataClasses.h"
     "toolkit/graphics/TkColour.h"
     "toolkit/maths/geometry/TkAABB.h"
@@ -12,7 +14,6 @@ add_library(
     "toolkit/maths/numeric/generic/TkVector2Generic.cpp"
     "toolkit/maths/numeric/generic/TkVector3Generic.h" 
     "toolkit/maths/numeric/generic/TkVector4Generic.h"
-    "toolkit/metadata/TkID.h"
     "toolkit/resources/TkResource.h"
     "toolkit/resources/TkResourceDescriptor.h"
     "toolkit/resources/TkSmartResHandle.h"

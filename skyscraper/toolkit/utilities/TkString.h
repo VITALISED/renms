@@ -21,7 +21,7 @@ public:
 	T macBuffer[size];
 };
 
-class cTkDynamicString : cTkDynamicArray<char>
+class cTkDynamicString : public cTkDynamicArray<char>
 { };
 
 SKYSCRAPER_END

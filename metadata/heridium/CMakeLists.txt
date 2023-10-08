@@ -1,5 +1,7 @@
 add_library(Heridium SHARED
     "dllmain.cpp"
+    "analysis.h"
+    "analysis.cpp"
     "cpp/header.cpp"
     "cpp/source.cpp"
     "cpp/notation.h"
