@@ -5,8 +5,6 @@
 #include <cstring>
 #include "rapidxml.h"
 
-SKYSCRAPER_BEGIN
-
 #if defined( _MSC_VER ) && _MSC_VER >= 1400
 #	pragma warning( push )
 #	pragma warning( disable : 4996 )  // Disable deprecation warnings
@@ -21,8 +19,7 @@ inline void rapidxml::parse_error_handler( const char *what, void *where )
 }
 #endif
 
-
-namespace Horde3D {
+SKYSCRAPER_BEGIN
 
 class XMLAttribute
 {
@@ -135,7 +132,5 @@ private:
 #if defined( _MSC_VER ) && _MSC_VER >= 1400
 #	pragma warning( pop )
 #endif
-
-}
 
 SKYSCRAPER_END
