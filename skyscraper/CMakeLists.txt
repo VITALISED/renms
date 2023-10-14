@@ -1,5 +1,9 @@
 add_library(
     renms_skyscraper
+    "engine/source/engine/EgShader.h"
+    "engine/source/engine/EgShader.cpp"
+    "engine/source/shared/rapidxml.h"
+    "engine/source/shared/rapidxml_print.h"
     "engine/source/shared/utxmlparser.h"
     "toolkit/attachments/TkHandle.h"
     "toolkit/data/TkClassPointer.h"
