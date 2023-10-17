@@ -7,7 +7,6 @@ add_library(
     "engine/source/shared/utxmlparser.h"
     "toolkit/attachments/TkHandle.h"
     "toolkit/data/TkClassPointer.h"
-    "toolkit/data/TkID.h"
     "toolkit/data/TkMetaData.h"
     "toolkit/data/TkMetaDataClasses.h"
     "toolkit/data/TkMetaDataXML.h"
