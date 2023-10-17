@@ -9,7 +9,7 @@ class cTkVector2
 public:
     float mfX, mfY;
 
-    double GetLength();
+    float GetLength();
 };
 
 SKYSCRAPER_END
