@@ -8,6 +8,7 @@ add_library(
     "toolkit/attachments/TkHandle.h"
     "toolkit/data/TkClassPointer.h"
     "toolkit/data/TkID.h"
+    "toolkit/data/TkMetaData.h"
     "toolkit/data/TkMetaDataClasses.h"
     "toolkit/data/TkMetaDataXML.h"
     "toolkit/graphics/TkColour.h"
