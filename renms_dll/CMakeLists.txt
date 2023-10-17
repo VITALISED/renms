@@ -16,4 +16,6 @@ target_include_directories(
     ${CMAKE_SOURCE_DIR}/thirdparty/include
 )
 
+target_precompile_headers(renms_dll PRIVATE renms.h)
+
 add_subdirectory(proxy)

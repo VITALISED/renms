@@ -15,4 +15,9 @@ target_include_directories(
     Heridium PRIVATE
     ${CMAKE_SOURCE_DIR}/thirdparty/include
     ${CMAKE_SOURCE_DIR}/skyscraper
+    ${CMAKE_SOURCE_DIR}/renms
+)
+
+target_link_libraries(
+    Heridium PRIVATE ${CMAKE_SOURCE_DIR}/thirdparty/lib/MinHook.x64.lib
 )
