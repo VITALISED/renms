@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cstdint>
 #include <skyscraper.h>
 
 SKYSCRAPER_BEGIN
@@ -92,7 +93,8 @@ public:
     const FloatLimits mFloatLimits;
 };
 
-const class cTkMetaDataClass
+//Bad kitty.  Bad.
+/*const*/ class cTkMetaDataClass
 {
 public:
     const char *mpacName;

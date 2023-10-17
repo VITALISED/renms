@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cstdint>
 #include <skyscraper.h>
 
 SKYSCRAPER_BEGIN
