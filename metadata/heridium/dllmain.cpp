@@ -5,10 +5,10 @@
 #define HERIDIUM_LANGUAGE_TARGET EHeridiumLanguageType_CXX
 #endif
 
-DWORD WINAPI MainThread()
-{
+// DWORD WINAPI MainThread()
+// {
     
-}
+// }
 
 BOOL APIENTRY DllMain(HMODULE hModule,
                       DWORD ul_reason_for_call,

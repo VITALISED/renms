@@ -2,9 +2,11 @@
 
 SKYSCRAPER_BEGIN
 
-double cTkVector2::GetLength()
+float cTkVector2::GetLength()
 {
+    float fVal = (this->mfX * this->mfX) + (this->mfY * this->mfY);
 
+    return sqrtf(fVal);
 }
 
 SKYSCRAPER_END
