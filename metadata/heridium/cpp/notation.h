@@ -44,11 +44,11 @@ constexpr const char* Heridium_CXX_MemberTypeToNamed(cTkMetaDataMember::eType le
 		case cTkMetaDataMember::EType_Int:
 			return "int";
 		case cTkMetaDataMember::EType_Int16:
-			return "__int16";
+			return "short";
 		case cTkMetaDataMember::EType_Int64:
-			return "__int64";
+			return "long long";
 		case cTkMetaDataMember::EType_Int8:
-			return "__int8";
+			return "char";
 		case cTkMetaDataMember::EType_LocId:
 			return "TkID<256>";
 		case cTkMetaDataMember::EType_NodeHandle:
@@ -78,11 +78,11 @@ constexpr const char* Heridium_CXX_MemberTypeToNamed(cTkMetaDataMember::eType le
 		case cTkMetaDataMember::EType_UInt:
 			return "unsigned int";
 		case cTkMetaDataMember::EType_UInt16:
-			return "unsigned __int16";
+			return "unsigned short";
 		case cTkMetaDataMember::EType_UInt64:
-			return "unsigned __int64";
+			return "unsigned long long";
 		case cTkMetaDataMember::EType_UInt8:
-			return "unsigned __int8";
+			return "unsigned char";
 		case cTkMetaDataMember::EType_UniqueId:
 			return "cTkNetworkID"; 
 		case cTkMetaDataMember::EType_Vector:
