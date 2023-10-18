@@ -80,7 +80,7 @@ inline LPVOID RelToAbsolute(uintptr_t lpOffset, int liInstructionLength = 1)
 {
     int relativeOffset = *reinterpret_cast<int*>(lpOffset + liInstructionLength);
 
-    return (LPVOID)(lpOffset + (8 - sizeof(short) + liInstructionLength) + relativeOffset);
+    return (LPVOID)(lpOffset + (8 - sizeof(short) - liInstructionLength) + relativeOffset);
 }
 
 RENMS_END
