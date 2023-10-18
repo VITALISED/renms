@@ -2,6 +2,10 @@
 
 #include <cstring>
 #include <filesystem>
+#include "framework.h"
+
+#define HERIDIUM_BEGIN namespace heridium {
+#define HERIDIUM_END }
 
 enum HeridiumLanguageType
 {
