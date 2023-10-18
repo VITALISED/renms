@@ -1,8 +1,13 @@
 add_library(
     renms_dll
     "dllmain.cpp"
+    "commands/commands.h"
+    # "commands/manager.h"
+    # "commands/manager.cpp"
+    # "commands/test.cpp"
     "memory/memory.h"
     "memory/hooks.h"
+
 )
 
 set_target_properties(renms_dll PROPERTIES OUTPUT_NAME libSceFios2)
