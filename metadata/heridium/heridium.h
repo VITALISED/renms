@@ -3,9 +3,6 @@
 #include <cstring>
 #include <filesystem>
 #include "framework.h"
-#include <spdlog/spdlog.h>
-#include "paths.h"
-#include <MinHook.h>
 
 #define HERIDIUM_BEGIN namespace heridium {
 #define HERIDIUM_END }

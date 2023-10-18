@@ -1,69 +1,35 @@
 #include "analysis.h"
+#include <memory/memory.h>
 
-INIT_HOOK()
+HERIDIUM_BEGIN
 
-void RegisterHook(const cTkMetaDataClass* lpClassMetadata,
-    void(* lDefaultFunction)(cTkClassPointer*, cTkLinearMemoryPool*),
-    void(* lFixingFunction)(cTkClassPointer*, bool, unsigned __int64),
-    void(* lValidateFunction)(cTkClassPointer*),
-    void(* lRenderFunction)(cTkClassPointer*),
-    bool(* lEqualsFunction)(const cTkClassPointer*, const cTkClassPointer*),
-    void(* lCopyFunction)(cTkClassPointer*, const cTkClassPointer*),
-    cTkClassPointer* (* lCreateFunction)(cTkClassPointer* result),
-    unsigned __int64(* lHashFunction)(const cTkClassPointer*, unsigned __int64, bool),
-    void(* lDestroyFunction)(cTkClassPointer*))
+void DoLookupIter()
 {
-    spdlog::info(lpClassMetadata->mpacName);
+    typedef cTkMetaDataFunctionLookup*(*__cTkMetaData__GetLookup__)(const unsigned __int64 luiNameHash);
 
-    HeridiumCXXFile file = HeridiumCXXFile("temp", lpClassMetadata);
-    file.WriteHeaderFile();
+    cTkVector<cTkMetaDataXMLFunctionLookup>* xmlWriteLookup = (cTkVector<cTkMetaDataXMLFunctionLookup>*)OFFSET(0x32618A8);
 
-    typedef void(*HOOK_TYPE)(
-        const cTkMetaDataClass* lpClassMetadata,
-        void(* lDefaultFunction)(cTkClassPointer*, cTkLinearMemoryPool*),
-        void(* lFixingFunction)(cTkClassPointer*, bool, unsigned __int64),
-        void(* lValidateFunction)(cTkClassPointer*),
-        void(* lRenderFunction)(cTkClassPointer*),
-        bool(* lEqualsFunction)(const cTkClassPointer*, const cTkClassPointer*),
-        void(* lCopyFunction)(cTkClassPointer*, const cTkClassPointer*),
-        cTkClassPointer* (* lCreateFunction)(cTkClassPointer* result),
-        unsigned __int64(* lHashFunction)(const cTkClassPointer*, unsigned __int64, bool),
-        void(* lDestroyFunction)(cTkClassPointer*)
-        );
+    for(cTkMetaDataXMLFunctionLookup item : *xmlWriteLookup)
+    {
+        unsigned __int64 luClassHash = *(unsigned __int64*)UnpackClassPointerWriteFunc(item.mWriteFunction);
+        
+        // work from here
+        __cTkMetaData__GetLookup__ getLookupPtr = (__cTkMetaData__GetLookup__)OFFSET(0x2487860);
 
-    CALL_ORIGINAL(cTkMetaData::Register, lpClassMetadata, lDefaultFunction, lFixingFunction, lValidateFunction, lRenderFunction, lEqualsFunction, lCopyFunction, lCreateFunction, lHashFunction, lDestroyFunction);
+        cTkMetaDataFunctionLookup* classMetadata = getLookupPtr(luClassHash);
+    }
 }
 
-void AnalysisInit()
+uintptr_t UnpackClassPointerWriteFunc(LPVOID ClassPointerWriteFunction)
 {
-    HOOK(OFFSET(0x248ABC0), RegisterHook, cTkMetaData::Register);
+    //Get the call to Cast() from the Write function
+    uintptr_t castCallInstruction = (uintptr_t)ClassPointerWriteFunction + 0x11;
+    LPVOID castPtr = renms::RelToAbsolute(castCallInstruction);
 
-    if(HOOK_STATUS() == MH_OK)
-        spdlog::info("Ready to analyse some banger metadata");
+    // return address of what's in the mov call in Cast()
+    uintptr_t hashAddr = (uintptr_t)castPtr + 0xC;
+
+    return hashAddr;
 }
 
-// HERIDIUM_BEGIN
-
-// void DoLookupIter()
-// {
-//     typedef cTkMetaDataFunctionLookup*(*__cTkMetaData__GetLookup__)(const unsigned __int64 luiNameHash);
-
-//     for(std::pair<const char*, const char*> items : classPaths)
-//     {
-//         std::string fullName = items.first;
-//     }
-// }
-
-// uintptr_t UnpackClassPointerWriteFunc(LPVOID ClassPointerWriteFunction)
-// {
-//     //Get the call to Cast() from the Write function
-//     uintptr_t castCallInstruction = (uintptr_t)ClassPointerWriteFunction + 0x11;
-//     LPVOID castPtr = renms::RelToAbsolute(castCallInstruction);
-
-//     // return address of what's in the mov call in Cast()
-//     uintptr_t hashAddr = (uintptr_t)castPtr + 0xC;
-
-//     return hashAddr;
-// }
-
-// HERIDIUM_END
+HERIDIUM_END
