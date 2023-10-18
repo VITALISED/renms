@@ -15,7 +15,7 @@ target_include_directories(
     Heridium PRIVATE
     ${CMAKE_SOURCE_DIR}/thirdparty/include
     ${CMAKE_SOURCE_DIR}/skyscraper
-    ${CMAKE_SOURCE_DIR}/renms
+    ${CMAKE_SOURCE_DIR}/renms_dll
 )
 
 target_link_libraries(
