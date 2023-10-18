@@ -26,16 +26,16 @@ union TkID
 
 class cTkMetaDataFunctionLookup
 {
-  const cTkMetaDataClass *mpClassMetadata;
-  void (*mCreateDefaultFunction)(cTkClassPointer *, cTkLinearMemoryPool *);
-  void (*mRenderFunction)(cTkClassPointer *);
-  void (*mFixingFunction)(cTkClassPointer *, bool, unsigned __int64);
-  void (*mValidateDataFunction)(cTkClassPointer *);
-  bool (*mEqualsFunction)(const cTkClassPointer *, const cTkClassPointer *);
-  void (*mCopyFunction)(cTkClassPointer *, const cTkClassPointer *);
-  cTkClassPointer *(*mCreatePtrFunction)(cTkClassPointer *result);
-  unsigned __int64 (*mHashFunction)(const cTkClassPointer *, unsigned __int64, bool);
-  void (*mDestroyFunction)(cTkClassPointer *);
+    const cTkMetaDataClass *mpClassMetadata;
+    void (*mCreateDefaultFunction)(cTkClassPointer *, cTkLinearMemoryPool *);
+    void (*mRenderFunction)(cTkClassPointer *);
+    void (*mFixingFunction)(cTkClassPointer *, bool, unsigned __int64);
+    void (*mValidateDataFunction)(cTkClassPointer *);
+    bool (*mEqualsFunction)(const cTkClassPointer *, const cTkClassPointer *);
+    void (*mCopyFunction)(cTkClassPointer *, const cTkClassPointer *);
+    cTkClassPointer *(*mCreatePtrFunction)(cTkClassPointer *result);
+    unsigned __int64 (*mHashFunction)(const cTkClassPointer *, unsigned __int64, bool);
+    void (*mDestroyFunction)(cTkClassPointer *);
 };
 
 SKYSCRAPER_END
