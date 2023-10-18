@@ -1,22 +1,30 @@
 #include "analysis.h"
+#include <memory/memory.h>
 
-void Heridium_Analysis_DoLookupIter()
+HERIDIUM_ANALYSIS_BEGIN
+
+void DoLookupIter()
 {
-    cTkVector<cTkMetaDataXMLFunctionLookup>* xmlWriteLookup = NULL;
+    cTkVector<cTkMetaDataXMLFunctionLookup>* xmlWriteLookup = (cTkVector<cTkMetaDataXMLFunctionLookup>*)OFFSET(0x53AAA48);
 
     for(cTkMetaDataXMLFunctionLookup item : *xmlWriteLookup)
     {
-        //handle crap
+        unsigned __int64 luClassHash = *(unsigned __int64*)UnpackClassPointerWriteFunc(item.mWriteFunction);
+        
+        // work from here
     }
 }
 
-uintptr_t Heridium_Analysis_UnpackClassPointerWriteFunc(LPVOID ClassPointerWriteFunction)
+uintptr_t UnpackClassPointerWriteFunc(LPVOID ClassPointerWriteFunction)
 {
-    //
-    uintptr_t cast_addr = (uintptr_t)ClassPointerWriteFunction + 0xBAD;
-
-    //somehow resolve and jump to cast
+    //Get the call to Cast() from the Write function
+    uintptr_t castCallInstruction = (uintptr_t)ClassPointerWriteFunction + 0x11;
+    LPVOID castPtr = renms::RelToAbsolute(castCallInstruction);
 
     // return address of what's in the mov call in Cast()
-    return cast_addr + 0xC;
+    uintptr_t hashAddr =  (uintptr_t)castPtr + 0xC;
+
+    return hashAddr;
 }
+
+HERIDIUM_ANALYSIS_END

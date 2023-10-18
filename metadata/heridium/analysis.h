@@ -6,6 +6,9 @@
 
 using namespace NMS;
 
+#define HERIDIUM_ANALYSIS_BEGIN namespace HeridiumAnalysis {
+#define HERIDIUM_ANALYSIS_END }
+
 void Heridium_Analysis_DoLookupIter();
 //HACK: since I lack the braincells to figure out how hashes are generated we will instead retrieve them from the generated functions.
 uintptr_t Heridium_Analysis_UnpackClassPointerWriteFunc(LPVOID ClassPointerWriteFunction);
