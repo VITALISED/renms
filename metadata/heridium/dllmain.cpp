@@ -8,6 +8,7 @@
 
 DWORD WINAPI MainThread(LPVOID lpReserved)
 {
+    AnalysisInit();
     return TRUE;
 }
 

@@ -14,12 +14,27 @@ void RegisterHook(const cTkMetaDataClass* lpClassMetadata,
     unsigned __int64(* lHashFunction)(const cTkClassPointer*, unsigned __int64, bool),
     void(* lDestroyFunction)(cTkClassPointer*))
 {
+    typedef void(*HOOK_TYPE)(
+        const cTkMetaDataClass* lpClassMetadata,
+        void(* lDefaultFunction)(cTkClassPointer*, cTkLinearMemoryPool*),
+        void(* lFixingFunction)(cTkClassPointer*, bool, unsigned __int64),
+        void(* lValidateFunction)(cTkClassPointer*),
+        void(* lRenderFunction)(cTkClassPointer*),
+        bool(* lEqualsFunction)(const cTkClassPointer*, const cTkClassPointer*),
+        void(* lCopyFunction)(cTkClassPointer*, const cTkClassPointer*),
+        cTkClassPointer* (* lCreateFunction)(cTkClassPointer* result),
+        unsigned __int64(* lHashFunction)(const cTkClassPointer*, unsigned __int64, bool),
+        void(* lDestroyFunction)(cTkClassPointer*)
+        );
 
+    CALL_ORIGINAL(cTkMetaData::Register, lpClassMetadata, lDefaultFunction, lFixingFunction, lValidateFunction, lRenderFunction, lEqualsFunction, lCopyFunction, lCreateFunction, lHashFunction, lDestroyFunction);
 }
 
 MH_STATUS DISPATCH_HOOK()
 {
-    HOOK(OFFSET(0x123), RegisterHook, cTkMetaData::Register);
+    HOOK(OFFSET(0x248ABC0), RegisterHook, cTkMetaData::Register);
+
+    return HOOK_STATUS();
 }
 
 void AnalysisInit()
