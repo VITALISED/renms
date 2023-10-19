@@ -24,10 +24,10 @@ MH_STATUS DISPATCH_HOOK()
 
 void AnalysisInit()
 {
-    if(DISPATCH_HOOK() == MH_OK)
-    {
-        spdlog::info("Analysis starting");
-    }
+    HOOK(OFFSET(0x248ABC0), reinterpret_cast<LPVOID>(RegisterHook), cTkMetaData::Register);
+
+    if(HOOK_STATUS() == MH_OK)
+        spdlog::info("Ready to analyse some banger metadata");
 }
 
 // HERIDIUM_BEGIN
