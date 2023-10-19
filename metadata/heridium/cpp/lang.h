@@ -5,22 +5,14 @@
 
 class HeridiumCXXFile
 {
+    std::ofstream target_file;
     const char* file_location;
     const cTkMetaDataClass* metadata_class;
-    std::ofstream target_file;
     
 public:
-    HeridiumCXXFile(const char* file_location, const cTkMetaDataClass* metadata_class)
-    {
-        this->file_location = file_location;
-        this->metadata_class = metadata_class;
-        
-        this->DoHeaderFirstPass();
-        this->WriteHeaderFile();
-        this->WriteSourceFile();
-    }
-
-    void WriteHeaderFile();
     void DoHeaderFirstPass();
+    void WriteHeaderFile();
     void WriteSourceFile();
+
+    HeridiumCXXFile(const char* file_location, const cTkMetaDataClass* metadata_class);
 };
