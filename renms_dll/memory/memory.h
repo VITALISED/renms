@@ -8,7 +8,7 @@
 
 RENMS_BEGIN
 
-constexpr std::vector<int> *IDAPatternToVec(const char *lpacSig)
+inline std::vector<int> *IDAPatternToVec(const char *lpacSig)
 {
     std::vector<int> *bytes = (std::vector<int> *)malloc(sizeof(std::vector<int>));
 
