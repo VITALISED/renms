@@ -19,7 +19,7 @@ inline MH_STATUS AddHook(LPVOID pTarget, LPVOID pDetour, void *ppOriginal, const
 {
 	const char *formatName = fmt::format("{} ({})", name, pTarget).c_str();
 
-	MH_STATUS CreateHook =MH_CreateHook(pTarget, pDetour, (LPVOID *)ppOriginal);
+	MH_STATUS CreateHook = MH_CreateHook(pTarget, pDetour, (LPVOID *)ppOriginal);
 
 	if (CreateHook == MH_OK)
 	{
