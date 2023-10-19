@@ -25,13 +25,16 @@ inline MH_STATUS AddHook(LPVOID pTarget, LPVOID pDetour, void *ppOriginal, const
 	{
 		MH_STATUS EnableHook = MH_EnableHook(pTarget);
 
-		if (EnableHook == MH_OK)
+		if (EnableHook == MH_OK) {
 			spdlog::info("Enabling hook: {}", formatName);
-		else
-			spdlog::error("MH_EnableHook failed for: {} {}", formatName, MH_StatusToString(EnableHook)); return EnableHook;
+		} else {
+			spdlog::error("MH_EnableHook failed for: {} {}", formatName, MH_StatusToString(EnableHook));
+			return EnableHook;
+		}
 	}
-	else
-		spdlog::error("MH_CreateHook failed for: {} {}", formatName, MH_StatusToString(CreateHook)); return CreateHook;
+	
+	spdlog::error("MH_CreateHook failed for: {} {}", formatName, MH_StatusToString(CreateHook));
+	return CreateHook;
 }
 
 RENMS_END
