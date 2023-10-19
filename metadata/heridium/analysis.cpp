@@ -36,7 +36,7 @@ void RegisterHook(const cTkMetaDataClass* lpClassMetadata,
 
 void AnalysisInit()
 {
-    HOOK(OFFSET(0x248ABC0), RegisterHook, cTkMetaData::Register);
+    HOOK(OFFSET(0x248ABC0), reinterpret_cast<LPVOID>(RegisterHook), cTkMetaData::Register);
 
     if(HOOK_STATUS() == MH_OK)
         spdlog::info("Ready to analyse some banger metadata");
