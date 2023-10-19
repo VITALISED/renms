@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cstring>
 #include <filesystem>
 #include "framework.h"
 #include <spdlog/spdlog.h>

@@ -1,7 +1,20 @@
 #include "lang.h"
 
-void HeridiumCXXFile::WriteHeaderFile()
+HeridiumCXXFile::HeridiumCXXFile(const char* file_location, const cTkMetaDataClass* metadata_class) :
+    target_file(file_location),
+    metadata_class(metadata_class)
 {
+    this->DoHeaderFirstPass();
+    this->WriteHeaderFile();
+    this->WriteSourceFile();
+}
+
+void HeridiumCXXFile::DoHeaderFirstPass() {
+    //Todo: this.
+}
+
+void HeridiumCXXFile::WriteHeaderFile()
+{/* Immense compiler warnings
     HM_BEGIN_BUFFER; 
 
     HM_PRELUDE;
@@ -11,6 +24,7 @@ void HeridiumCXXFile::WriteHeaderFile()
     {
         cTkMetaDataMember currentMember = this->metadata_class->maMembers[i];
 
+        //Todo: this.
         switch(currentMember.mType)
         {
             case cTkMetaDataMember::EType_Unspecified:
@@ -20,4 +34,8 @@ void HeridiumCXXFile::WriteHeaderFile()
 
         }
     }
+*/}
+
+void HeridiumCXXFile::WriteSourceFile() {
+    //Todo: this.
 }

@@ -92,7 +92,7 @@ public:
     const FloatLimits mFloatLimits;
 };
 
-const class cTkMetaDataClass
+class cTkMetaDataClass
 {
 public:
     const char *mpacName;
