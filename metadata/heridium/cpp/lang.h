@@ -6,10 +6,11 @@
 class HeridiumCXXFile
 {
     const char* file_location;
-    cTkMetaDataClass* metadata_class;
+    const cTkMetaDataClass* metadata_class;
     std::ofstream target_file;
     
-    HeridiumCXXFile(const char* file_location, cTkMetaDataClass* metadata_class)
+public:
+    HeridiumCXXFile(const char* file_location, const cTkMetaDataClass* metadata_class)
     {
         this->file_location = file_location;
         this->metadata_class = metadata_class;
