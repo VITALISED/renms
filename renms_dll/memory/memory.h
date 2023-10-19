@@ -57,7 +57,7 @@ inline LPVOID ScanPattern(std::vector<int> *lpPattern)
     int s = pattern_bytes.size();
     int *d = pattern_bytes.data();
 
-    for (long i = 0ul; i < size_of_image - s; ++i)
+    for (DWORD i = 0ul; i < size_of_image - s; ++i)
     {
         bool found = true;
 
