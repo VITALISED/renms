@@ -7,8 +7,7 @@ add_library(
     # "commands/test.cpp"
     "memory/memory.h"
     "memory/hooks.h"
-    "plugins/plugin.h"
-    "plugins/plugin.cpp"
+    "memory/module.h"
 
 )
 

@@ -1,6 +1,7 @@
 #include "framework.h"
 #include "heridium.h"
 #include "analysis.h"
+#include "analysis.h"
 
 #ifndef HERIDIUM_LANGUAGE_TARGET
 #define HERIDIUM_LANGUAGE_TARGET EHeridiumLanguageType_CXX
@@ -8,7 +9,6 @@
 
 DWORD WINAPI MainThread(LPVOID lpReserved)
 {
-    AnalysisInit();
     return TRUE;
 }
 
