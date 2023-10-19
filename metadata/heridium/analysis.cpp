@@ -1,5 +1,4 @@
 #include "analysis.h"
-#include <memory/hooks.h>
 
 INIT_HOOK()
 
@@ -14,6 +13,11 @@ void RegisterHook(const cTkMetaDataClass* lpClassMetadata,
     unsigned __int64(* lHashFunction)(const cTkClassPointer*, unsigned __int64, bool),
     void(* lDestroyFunction)(cTkClassPointer*))
 {
+    spdlog::info(lpClassMetadata->mpacName);
+
+    HeridiumCXXFile file = HeridiumCXXFile("temp", lpClassMetadata);
+    file.WriteHeaderFile();
+
     typedef void(*HOOK_TYPE)(
         const cTkMetaDataClass* lpClassMetadata,
         void(* lDefaultFunction)(cTkClassPointer*, cTkLinearMemoryPool*),
@@ -30,19 +34,12 @@ void RegisterHook(const cTkMetaDataClass* lpClassMetadata,
     CALL_ORIGINAL(cTkMetaData::Register, lpClassMetadata, lDefaultFunction, lFixingFunction, lValidateFunction, lRenderFunction, lEqualsFunction, lCopyFunction, lCreateFunction, lHashFunction, lDestroyFunction);
 }
 
-MH_STATUS DISPATCH_HOOK()
+void AnalysisInit()
 {
     HOOK(OFFSET(0x248ABC0), RegisterHook, cTkMetaData::Register);
 
-    return HOOK_STATUS();
-}
-
-void AnalysisInit()
-{
-    if(DISPATCH_HOOK() == MH_OK)
-    {
-        spdlog::info("Analysis starting");
-    }
+    if(HOOK_STATUS() == MH_OK)
+        spdlog::info("Ready to analyse some banger metadata");
 }
 
 // HERIDIUM_BEGIN

@@ -1,3 +1,3 @@
 #pragma once
 
-//add relevant skyscraper classes metadata will need here
+//add relevant skyscraper headers metadata will need here

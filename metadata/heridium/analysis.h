@@ -1,9 +1,12 @@
 #pragma once
 
 #include "heridium.h"
+#include "cpp/lang.h"
 #include <toolkit/utilities/containers/TkVector.h>
 #include <toolkit/data/TkMetaData.h>
 #include <toolkit/data/TkMetaDataXML.h>
+#include <memory/hooks.h>
+
 
 using namespace nms;
 
