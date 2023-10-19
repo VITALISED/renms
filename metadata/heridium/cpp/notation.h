@@ -3,7 +3,7 @@
 #include <toolkit/data/TkMetaDataClasses.h>
 #include <cassert>
 
-using namespace NMS;
+using namespace nms;
 
 constexpr const char* Heridium_CXX_MemberTypeToNamed(cTkMetaDataMember::eType leType)
 {

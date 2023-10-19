@@ -26,6 +26,7 @@ union TkID
 
 class cTkMetaDataFunctionLookup
 {
+public:
     const cTkMetaDataClass *mpClassMetadata;
     void (*mCreateDefaultFunction)(cTkClassPointer *, cTkLinearMemoryPool *);
     void (*mRenderFunction)(cTkClassPointer *);

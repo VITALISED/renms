@@ -7,10 +7,11 @@ add_library(
     # "commands/test.cpp"
     "memory/memory.h"
     "memory/hooks.h"
+    "memory/module.h"
 
 )
 
-set_target_properties(renms_dll PROPERTIES OUTPUT_NAME libSceFios2)
+set_target_properties(renms_dll PROPERTIES OUTPUT_NAME renms)
 
 target_link_libraries(
     renms_dll PRIVATE ${CMAKE_SOURCE_DIR}/thirdparty/lib/MinHook.x64.lib
