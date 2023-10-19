@@ -9,6 +9,7 @@
 DWORD WINAPI MainThread(LPVOID lpReserved)
 {
     AnalysisInit();
+    heridium::CreateOutputDirectories();
     return TRUE;
 }
 

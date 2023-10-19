@@ -1,17 +1,22 @@
 #include "heridium.h"
 
-bool Heridium_CreateOutputDirectories(const char* metadata_item_path)
+HERIDIUM_BEGIN
+
+void CreateOutputDirectories()
 {
 #if HERIDIUM_LANGUAGE_TARGET == EHeridiumLanguageType_CXX
-    char* local_path = (char*)"/HERIDIUM/cpp";
+    char* lpacLocalPath = (char*)"/HERIDIUM/cpp/";
 #else 
     static_assert("No language target defined for heridium");
 #endif
 
-    strcat(local_path, metadata_item_path);
-
-    char* full_path = (char*)std::filesystem::current_path().string().c_str(); // peak c++
-    strcat(full_path, local_path);
-
-    return std::filesystem::create_directories(full_path);
+    for(std::pair<const char*, const char*> lPair : classPaths)
+    {
+        strcat(lpacLocalPath, lPair.second);
+        char* lpacFullPath = (char*)std::filesystem::current_path().string().c_str(); // peak c++
+        strcat(lpacFullPath, lpacLocalPath);
+        std::filesystem::create_directories(lpacFullPath);
+    }
 };
+
+HERIDIUM_END

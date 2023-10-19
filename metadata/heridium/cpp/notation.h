@@ -5,6 +5,8 @@
 
 using namespace nms;
 
+
+
 constexpr const char* Heridium_CXX_MemberTypeToNamed(cTkMetaDataMember::eType leType)
 {
     switch (leType)
@@ -14,7 +16,7 @@ constexpr const char* Heridium_CXX_MemberTypeToNamed(cTkMetaDataMember::eType le
 		case cTkMetaDataMember::EType_Bool:
 			return "bool";
 		case cTkMetaDataMember::EType_Byte:
-			return "unsigned __int8";
+			return "unsigned char";
 		case cTkMetaDataMember::EType_Class:
 			return ""; // we resolve classnames elsewhere
 		case cTkMetaDataMember::EType_ClassPointer:
