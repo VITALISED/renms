@@ -13,7 +13,11 @@ void HeridiumCXXFile::WriteHeaderFile()
 
         switch(currentMember.mType)
         {
-            
+            case cTkMetaDataMember::EType_Unspecified:
+                exit(1); //fuck your program
+            case cTkMetaDataMember::EType_Bool:
+
+
         }
     }
 }
