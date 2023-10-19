@@ -92,8 +92,7 @@ public:
     const FloatLimits mFloatLimits;
 };
 
-//Bad kitty.  Bad.
-/*const*/ class cTkMetaDataClass
+class cTkMetaDataClass
 {
 public:
     const char *mpacName;
