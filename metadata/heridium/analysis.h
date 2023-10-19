@@ -7,6 +7,8 @@
 
 using namespace nms;
 
+void AnalysisInit();
+
 HERIDIUM_BEGIN
 
 void DoLookupIter();
