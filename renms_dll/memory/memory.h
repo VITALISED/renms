@@ -61,7 +61,7 @@ inline LPVOID ScanPattern(std::vector<int> *lpPattern)
     {
         bool found = true;
 
-        for (long j = 0ul; j < s; ++j)
+        for (size_t j = 0ul; j < s; ++j)
         {
             if (scan_bytes[i + j] != d[j] && d[j] != -1)
             {
