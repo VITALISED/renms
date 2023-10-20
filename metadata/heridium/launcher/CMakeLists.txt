@@ -1,3 +1,4 @@
 add_executable(launcher
-    "launcher.cpp"
+    "main.cpp"
+    "winprocess.cpp"
 )

@@ -1,12 +1,5 @@
 
-#include <filesystem>
-#include <bitset>
-#include <Windows.h>
-#include <shellapi.h>
-#include <vector>
-#include <iostream>
-#include <string>
-#include <format>
+#include "winprocess.h"
 
 #ifdef _MSC_VER
 #define HERIDIUM_LIB "Heridium.dll"
@@ -55,84 +48,6 @@ void CheckPath(std::filesystem::path path, std::string filename) {
     }
 }
 
-PROCESS_INFORMATION CreateProcessFrozen(LPCSTR path) {
-    STARTUPINFOA startupInfo;
-    PROCESS_INFORMATION processInfo;
-    ZeroMemory(&startupInfo, sizeof(startupInfo));
-    ZeroMemory(&processInfo, sizeof(processInfo));
-    startupInfo.cb = sizeof(startupInfo);
-
-    CreateProcessA(
-        path,
-        NULL,
-        NULL,
-        NULL,
-        FALSE,
-        CREATE_SUSPENDED,
-        NULL,
-        NULL,
-        &startupInfo,
-        &processInfo
-    );
-
-    DWORD lastError = GetLastError();
-    if (lastError != 0) {
-        std::bitset<32> errorBits(lastError);
-        throw std::runtime_error(std::format(
-            "Failed to create process, error: {}", errorBits.to_string()
-        ));
-    }
-
-    return processInfo;
-}
-
-HANDLE InjectDLL(std::filesystem::path path, HANDLE processHandle) {
-    LPVOID loadLibraryAddress = (LPVOID) GetProcAddress(
-        GetModuleHandleA("kernel32.dll"),
-        "LoadLibraryA"
-    );
-
-    if (!loadLibraryAddress)
-        throw std::runtime_error("Failed to get LoadLibraryA address");
-
-    LPVOID remoteString = VirtualAllocEx(
-        processHandle,
-        NULL,
-        path.string().length(),
-        MEM_RESERVE | MEM_COMMIT,
-        PAGE_READWRITE
-    );
-
-    if (!remoteString)
-        throw std::runtime_error("Failed to allocate memory in process");
-
-    BOOL wrote = WriteProcessMemory(
-        processHandle,
-        remoteString,
-        path.string().c_str(),
-        path.string().length(),
-        NULL
-    );
-
-    if (!wrote)
-        throw std::runtime_error("Failed to write to process memory");
-
-    HANDLE remoteThread = CreateRemoteThread(
-        processHandle,
-        NULL,
-        (SIZE_T)NULL,
-        reinterpret_cast<LPTHREAD_START_ROUTINE>(loadLibraryAddress),
-        remoteString,
-        CREATE_SUSPENDED,
-        NULL
-    );
-
-    if (!remoteThread)
-        throw std::runtime_error("Failed to create remote thread");
-
-    return remoteThread;
-}
-
 int main(int argc, char** argv) {
     std::cout << std::endl <<
     "Heridium Launcher by tractorbeam - Developed for the RE:NMS project\n" << std::flush;
@@ -157,12 +72,11 @@ int main(int argc, char** argv) {
         std::cout << "Injecting the DLL...\n" << std::flush;
         auto dllProcess = InjectDLL(heridiumPath, nmsProcess.hProcess);
 
-        std::cout << "Initializing the DLL...\n" << std::flush;
         ResumeThread(dllProcess);
         Sleep(1000);
         ResumeThread(nmsProcess.hThread);
 
-        std::cout << "Injection successful!\n\n" << std::endl;
+        std::cout << "Injection successful!\n" << std::endl;
         WaitToClose(0);
     } catch (std::exception& e) {
         std::cout << "Error! " << e.what() << std::endl;
