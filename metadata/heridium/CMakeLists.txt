@@ -24,9 +24,6 @@ add_library(paths STATIC
 
 target_link_libraries(Heridium PRIVATE
     ${CMAKE_SOURCE_DIR}/thirdparty/lib/MinHook.x64.lib
-)
-
-target_link_libraries(Heridium PRIVATE
     paths
 )
 
