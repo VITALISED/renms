@@ -11,7 +11,6 @@ DWORD WINAPI MainThread(LPVOID lpReserved)
     UNREFERENCED_PARAMETER(lpReserved);
 
     AnalysisInit();
-    heridium::CreateOutputDirectories();
     return TRUE;
 }
 
