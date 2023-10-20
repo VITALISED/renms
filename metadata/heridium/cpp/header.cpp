@@ -4,13 +4,8 @@ HeridiumCXXFile::HeridiumCXXFile(const char* lpacFileLocation, const cTkMetaData
     mTargetFile(lpacFileLocation),
     mpMetaDataClass(lpMetaDataClass)
 {
-    this->DoHeaderFirstPass();
     this->WriteHeaderFile();
     this->WriteSourceFile();
-}
-
-void HeridiumCXXFile::DoHeaderFirstPass() {
-    //Todo: this.
 }
 
 void HeridiumCXXFile::WriteHeaderFile()
