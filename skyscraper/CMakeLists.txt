@@ -38,6 +38,9 @@ add_library(
 target_include_directories(
     renms_skyscraper PRIVATE
     ${CMAKE_SOURCE_DIR}/skyscraper
+    ${CMAKE_SOURCE_DIR}/metadata/common
+    ${CMAKE_SOURCE_DIR}/metadata/source
+    ${CMAKE_SOURCE_DIR}/metadata/toolkit
 )
 
 # set_target_properties(renms_skyscraper PROPERTIES LINKER_LANGUAGE CXX)
