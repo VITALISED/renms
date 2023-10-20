@@ -49,12 +49,23 @@ bool IsUserAdmin() {
 }
 
 void UACPrompt(std::string filepath, std::string args = "") {
-    SHELLEXECUTEINFOA sei = { sizeof(sei) };
-    sei.lpVerb = (LPCSTR)"runas";
-    sei.lpFile = (LPCSTR)filepath.c_str();
-    sei.lpParameters = (LPCSTR)args.c_str();
-    sei.hwnd = NULL;
-    sei.nShow = SW_NORMAL;
+    SHELLEXECUTEINFOA sei = {
+        sizeof(sei),        // cbSize
+        0,                  // fMask
+        NULL,               // hwnd
+        "runas",            // lpVerb
+        filepath.c_str(),   // lpFile
+        args.c_str(),       // lpParameters
+        NULL,               // lpDirectory
+        SW_NORMAL,          // nShow
+        NULL,               // hInstApp
+        NULL,               // lpIDList
+        NULL,               // lpClass
+        NULL,               // hkeyClass
+        0,                  // dwHotKey
+        NULL,               // hIcon
+        NULL                // hProcess
+    };
 
     if (!ShellExecuteExA(&sei)) {
         DWORD dwError = GetLastError();
