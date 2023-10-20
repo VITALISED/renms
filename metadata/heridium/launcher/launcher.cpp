@@ -117,11 +117,11 @@ int main(int argc, char** argv) {
 
     try {
         std::filesystem::path nmsPath = argv[1];
-        std::filesystem::path heridiumPath = "./heridium.dll";
+        std::filesystem::path heridiumPath = "../libHeridium.dll";
         CheckPath(nmsPath, false);
         CheckPath(heridiumPath, true);
         HANDLE nmsProcess = CreateProcessFrozen(nmsPath);
-        InjectDLL("heridium.dll", nmsProcess);
+        InjectDLL(heridiumPath, nmsProcess);
         ResumeThread(nmsProcess);
 
         std::cout << "Injection successful!" << std::endl;
