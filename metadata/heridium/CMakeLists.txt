@@ -18,8 +18,16 @@ target_include_directories(
     ${CMAKE_SOURCE_DIR}/renms_dll
 )
 
-target_link_libraries(
-    Heridium PRIVATE ${CMAKE_SOURCE_DIR}/thirdparty/lib/MinHook.x64.lib
+add_library(paths STATIC
+    "paths.cpp"
+)
+
+target_link_libraries(Heridium PRIVATE
+    ${CMAKE_SOURCE_DIR}/thirdparty/lib/MinHook.x64.lib
+)
+
+target_link_libraries(Heridium PRIVATE
+    paths
 )
 
 add_subdirectory(launcher)
