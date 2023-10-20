@@ -19,4 +19,4 @@
                                                         buffer.append(" = ").append(lpacValue); HM_SEMI 
 
 
-#define HM_PUSHSTRING(chars) buffer += string;
+#define HM_PUSHSTRING(lpacString) buffer += lpacString;

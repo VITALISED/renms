@@ -9,7 +9,6 @@ class HeridiumCXXFile
     const cTkMetaDataClass* mpMetaDataClass;
     
 public:
-    void DoHeaderFirstPass();
     void WriteHeaderFile();
     void WriteSourceFile();
 
