@@ -2,12 +2,16 @@
 
 #include "notation.h"
 
-#define HM_BEGIN_BUFFER std::string buffer = "";
+#define HM_BEGIN_BUFFER std::string buffer = ""
 #define HM_PRELUDE buffer += "pragma once\n #include <metadata/metadata_common.h>\n\n"
 #define HM_CLASS_BEGIN(lpacName)  buffer.append("class ").append(lpacName).append("\n{\n")
-#define HM_CLASS_END buffer.append("}\n");
+#define HM_CLASS_END buffer.append("}\n")
 #define HM_INDENT buffer += "    "
 #define HM_SEMI buffer += ";\n"
+
+#define HM_ISDEPENDENCYDEFINED(lpacName)    (std::find(this->mDefinedTypes.begin(), this->mDefinedTypes.end(), lpacName) != this->mDefinedTypes.end())
+#define HM_ADDINCLUDE(lpacPath, lpacName)   buffer.append("#include <").append(lpacPath).append(">\n"); \
+                                            this->mDefinedTypes.push_back(lpacName)
 
 #define HM_DEFINED_MEMBER(lpacType, lpacMember)
 #define HM_MEMBER(lpacType, lpacMember) HM_INDENT; buffer.append(heridium::CXX_MemberTypeToNamed(lpacType)) \
@@ -19,4 +23,4 @@
                                                         buffer.append(" = ").append(lpacValue); HM_SEMI 
 
 
-#define HM_PUSHSTRING(lpacString) buffer += lpacString;
+#define HM_PUSHSTRING(lpacString) buffer += lpacString

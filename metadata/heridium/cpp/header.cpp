@@ -4,8 +4,54 @@ HeridiumCXXFile::HeridiumCXXFile(const char* lpacFileLocation, const cTkMetaData
     mTargetFile(lpacFileLocation),
     mpMetaDataClass(lpMetaDataClass)
 {
+    this->mDefinedTypes = std::vector<const char*>();
     this->WriteHeaderFile();
     this->WriteSourceFile();
+}
+
+const char* HeridiumCXXFile::FindIncludePathForClass(const char* lpacClassName)
+{
+    char lpacLowers[128] = {};
+
+    for(int i = 0; i < strlen(lpacClassName); i++)
+    {
+        putchar(tolower(lpacLowers[i]));
+    }
+
+    for(std::pair<const char*, const char*> lItem : classPaths)
+    {
+        if(lpacLowers == lItem.first)
+        {
+            return lItem.second;
+        }
+    }
+}
+
+const char* HeridiumCXXFile::DoHeaderFirstPass()
+{
+    HM_BEGIN_BUFFER; 
+
+    for(int i = 0; i < this->mpMetaDataClass->miNumMembers; i++)
+    {
+        cTkMetaDataMember currentMember = this->mpMetaDataClass->maMembers[i];
+
+        switch(currentMember.mType)
+        {
+            case cTkMetaDataMember::EType_Class:
+                if(!HM_ISDEPENDENCYDEFINED(currentMember.mpClassMetadata->mpacName))
+                    HM_ADDINCLUDE(FindIncludePathForClass(currentMember.mpClassMetadata->mpacName), currentMember.mpClassMetadata->mpacName);
+                break;
+        }
+
+        // we also need to scan inner types as well which is kind of annoying
+        switch(currentMember.mInnerType)
+        {
+            case cTkMetaDataMember::EType_Class:
+                if(!HM_ISDEPENDENCYDEFINED(currentMember.mpClassMetadata->mpacName))
+                    HM_ADDINCLUDE(FindIncludePathForClass(currentMember.mpClassMetadata->mpacName), currentMember.mpClassMetadata->mpacName);
+                break;
+        }
+    }
 }
 
 void HeridiumCXXFile::WriteHeaderFile()
