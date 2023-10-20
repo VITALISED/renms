@@ -24,7 +24,7 @@ void CheckPath(std::filesystem::path path, bool isDLL) {
         return;
     }
 
-    if (!std::filesystem::is_fifo(path)) {
+    if (path.extension() != ".exe") {
         throw std::runtime_error(
             std::format("Not a valid executable: {}", path.string()));
     }
