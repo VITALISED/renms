@@ -1,8 +1,8 @@
 #include "lang.h"
 
-HeridiumCXXFile::HeridiumCXXFile(const char* file_location, const cTkMetaDataClass* metadata_class) :
-    target_file(file_location),
-    metadata_class(metadata_class)
+HeridiumCXXFile::HeridiumCXXFile(const char* lpacFileLocation, const cTkMetaDataClass* lpMetaDataClass) :
+    mTargetFile(lpacFileLocation),
+    mpMetaDataClass(lpMetaDataClass)
 {
     this->DoHeaderFirstPass();
     this->WriteHeaderFile();
@@ -14,27 +14,30 @@ void HeridiumCXXFile::DoHeaderFirstPass() {
 }
 
 void HeridiumCXXFile::WriteHeaderFile()
-{/* Immense compiler warnings
+{
     HM_BEGIN_BUFFER; 
 
     HM_PRELUDE;
-    HM_CLASS_BEGIN(this->metadata_class->mpacName);
+    HM_CLASS_BEGIN(this->mpMetaDataClass->mpacName);
 
-    for(int i = 0; i < this->metadata_class->miNumMembers; i++)
+    // hashes
+    HM_MEMBER_VAL("static unsigned long long", "muNameHash", fmt::format("{:X}", this->mpMetaDataClass->muNameHash));
+    HM_MEMBER_VAL("static unsigned long long", "muTemplateHash", fmt::format("{:X}", this->mpMetaDataClass->muTemplateHash));
+
+    for(int i = 0; i < this->mpMetaDataClass->miNumMembers; i++)
     {
-        cTkMetaDataMember currentMember = this->metadata_class->maMembers[i];
+        cTkMetaDataMember currentMember = this->mpMetaDataClass->maMembers[i];
 
-        //Todo: this.
         switch(currentMember.mType)
         {
             case cTkMetaDataMember::EType_Unspecified:
                 exit(1); //fuck your program
             case cTkMetaDataMember::EType_Bool:
-
+                HM_MEMBER(cTkMetaDataMember::EType_Bool, currentMember.mpacName);
 
         }
     }
-*/}
+}
 
 void HeridiumCXXFile::WriteSourceFile() {
     //Todo: this.
