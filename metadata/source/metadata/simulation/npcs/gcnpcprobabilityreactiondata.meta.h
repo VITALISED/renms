@@ -1,6 +1,6 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
+#include <metadata/simulation/npcs/gcnpcraceprobabilitymodifierdata.meta.h>
 
 class cGcNPCProbabilityReactionData
 {

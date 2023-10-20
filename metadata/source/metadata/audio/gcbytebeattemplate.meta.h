@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/audio/gcbytebeattoken.meta.h>
+#include <metadata/audio/gcbytebeattemplate.meta.h>
 
 class cGcByteBeatTemplate
 {

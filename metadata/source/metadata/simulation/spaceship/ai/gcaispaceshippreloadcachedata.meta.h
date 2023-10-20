@@ -1,9 +1,9 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/reality/gcrealitycommonfactions.meta.h>
+#include <metadata/simulation/spaceship/ai/gcaispaceshiproles.meta.h>
+#include <metadata/simulation/gcspaceshipclasses.meta.h>
+#include <metadata/reality/gcfrigateclass.meta.h>
 
 class cGcAISpaceshipPreloadCacheData
 {

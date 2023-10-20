@@ -1,6 +1,6 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
+#include <metadata/graphics/ngui/metadata/gcnguielementdata.meta.h>
 
 class cGcNGuiSpacingData
 {

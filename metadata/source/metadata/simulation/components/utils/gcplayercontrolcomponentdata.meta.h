@@ -1,8 +1,8 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/simulation/character/gcplayercontrolinput.meta.h>
+#include <metadata/simulation/character/gcplayercontrolstate.meta.h>
+#include <metadata/simulation/tkblackboardkey.meta.h>
 
 class cGcPlayerControlComponentData
 {

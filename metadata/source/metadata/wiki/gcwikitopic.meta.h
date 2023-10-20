@@ -1,8 +1,8 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/tktextureresource.meta.h>
+#include <metadata/wiki/gcwikipage.meta.h>
+#include <metadata/input/gcactionsettype.meta.h>
 
 class cGcWikiTopic
 {

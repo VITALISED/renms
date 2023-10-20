@@ -1,8 +1,8 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/reality/gcgenericrewardtableentry.meta.h>
+#include <metadata/reality/reward/gcrewardtableentitlementitem.meta.h>
+#include <metadata/reality/gcrewardtableentry.meta.h>
 
 class cGcRewardTable
 {

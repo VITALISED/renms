@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/simulation/gcspaceshipclasses.meta.h>
+#include <metadata/reality/gcinventoryclass.meta.h>
 
 class cGcMissionConditionHasShip
 {

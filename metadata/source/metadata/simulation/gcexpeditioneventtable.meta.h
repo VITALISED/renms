@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/simulation/gcexpeditioneventdata.meta.h>
+#include <metadata/simulation/gcexpeditioninterventioneventdata.meta.h>
 
 class cGcExpeditionEventTable
 {

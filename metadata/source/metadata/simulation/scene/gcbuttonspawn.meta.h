@@ -1,6 +1,6 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
+#include <metadata/utilities/data/tkinputenum.meta.h>
 enum eEvent
 {
     EEvent_None = 0,
@@ -9,7 +9,7 @@ enum eEvent
     EEvent_Traders = 3,
     EEvent_Walker = 4,
 }
-#include <?>
+#include <metadata/simulation/scene/gcbuttonspawnoffset.meta.h>
 
 class cGcButtonSpawn
 {

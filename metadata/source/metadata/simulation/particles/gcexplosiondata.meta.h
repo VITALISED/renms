@@ -1,8 +1,8 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/tkmodelresource.meta.h>
+#include <metadata/audio/gcaudiowwiseevents.meta.h>
+#include <metadata/simulation/particles/gcdebrisdata.meta.h>
 
 class cGcExplosionData
 {

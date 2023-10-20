@@ -6,7 +6,7 @@ enum eAerialViewMode
     EAerialViewMode_FaceOut = 1,
     EAerialViewMode_FaceDownThenOut = 2,
 }
-#include <?>
+#include <metadata/animation/tkcurvetype.meta.h>
 
 class cGcCameraAerialViewData
 {

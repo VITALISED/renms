@@ -1,8 +1,8 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/gamestate/customisation/gccharactercustomisationcolourdata.meta.h>
+#include <metadata/gamestate/customisation/gccharactercustomisationtextureoptiondata.meta.h>
+#include <metadata/gamestate/customisation/gccharactercustomisationbonescaledata.meta.h>
 
 class cGcCharacterCustomisationData
 {

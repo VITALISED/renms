@@ -1,13 +1,13 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/simulation/galaxy/gcgalaxystartypes.meta.h>
+#include <metadata/simulation/solarsystem/planet/gcplanetclass.meta.h>
+#include <metadata/simulation/solarsystem/planet/gcplanetsize.meta.h>
+#include <metadata/simulation/ecosystem/gccreatureroledatatable.meta.h>
+#include <metadata/simulation/solarsystem/planet/gcterraincontrols.meta.h>
+#include <metadata/simulation/solarsystem/planet/gcbiometype.meta.h>
+#include <metadata/simulation/solarsystem/planet/gcbiomesubtype.meta.h>
+#include <metadata/simulation/environment/gcexternalobjectlistoptions.meta.h>
 
 class cGcPlanetGenerationIntermediateData
 {

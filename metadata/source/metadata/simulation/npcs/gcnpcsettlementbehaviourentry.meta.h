@@ -1,9 +1,9 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/simulation/npcs/gcnpcsettlementbehaviourbuildingclasscapacityentry.meta.h>
+#include <metadata/simulation/npcs/gcnpcsettlementbehaviourareapropertyweightentry.meta.h>
+#include <metadata/simulation/npcs/gcnpcsettlementbehaviourbuildingclassweightentry.meta.h>
+#include <metadata/simulation/npcs/gcnpcsettlementbehaviourobjecttypeweightentry.meta.h>
 
 class cGcNPCSettlementBehaviourEntry
 {

@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/simulation/ecosystem/creatures/gccreaturetypes.meta.h>
+#include <metadata/simulation/spaceship/ai/gcaispaceshiptypes.meta.h>
 enum eSpawnerMode
 {
     ESpawnerMode_Hidden = 0,
@@ -9,8 +9,8 @@ enum eSpawnerMode
     ESpawnerMode_HideOnSpawn = 2,
     ESpawnerMode_HiddenTimer = 3,
 }
-#include <?>
-#include <?>
+#include <metadata/utilities/data/gcresourceelement.meta.h>
+#include <metadata/simulation/ecosystem/gcspawncomponentoption.meta.h>
 
 class cGcCreatureSpawnComponentData
 {

@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/reality/gctradingclassdata.meta.h>
+#include <metadata/reality/gctradingcategorydata.meta.h>
 
 class cGcTradingClassTable
 {

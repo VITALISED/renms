@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/input/gcactionusetype.meta.h>
+#include <metadata/utilities/input/actions/gcinputactions.meta.h>
 
 class cGcActionSetAction
 {

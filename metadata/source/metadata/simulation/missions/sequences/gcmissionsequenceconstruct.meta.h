@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/simulation/missions/types/gcconstructionpart.meta.h>
+#include <metadata/simulation/missions/types/gcbuildingpartsearchtype.meta.h>
 
 class cGcMissionSequenceConstruct
 {

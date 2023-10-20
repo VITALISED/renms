@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/reality/tables/gcwordcategorytableenum.meta.h>
+#include <metadata/reality/gcalienrace.meta.h>
 
 class cGcMissionConditionWordCategoryKnown
 {

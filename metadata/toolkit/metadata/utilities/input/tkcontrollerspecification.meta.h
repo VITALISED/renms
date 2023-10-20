@@ -1,8 +1,8 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/utilities/input/tkbuttonimagelookup.meta.h>
+#include <metadata/utilities/input/tkaxisimagelookup.meta.h>
+#include <metadata/utilities/input/tkchordsimagelookup.meta.h>
 
 class cTkControllerSpecification
 {

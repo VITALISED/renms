@@ -1,20 +1,20 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/tktextureresource.meta.h>
+#include <metadata/simulation/missions/types/gcmissionpagehint.meta.h>
+#include <metadata/simulation/missions/types/gcmissioncategory.meta.h>
+#include <metadata/simulation/missions/types/gcmissionconditiontest.meta.h>
 enum eRepeatLogic
 {
     ERepeatLogic_None = 0,
     ERepeatLogic_Loop = 1,
     ERepeatLogic_RestartOnConditionFail = 2,
 }
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/utilities/data/tkinputenum.meta.h>
+#include <metadata/simulation/missions/gcobjectivetextformatoptions.meta.h>
+#include <metadata/simulation/missions/gctargetmissionsurveyoptions.meta.h>
+#include <metadata/simulation/missions/gccustomnotifytimeroptions.meta.h>
+#include <metadata/simulation/missions/gcgenericmissionstage.meta.h>
 
 class cGcMissionSequenceGroup
 {

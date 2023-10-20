@@ -7,7 +7,7 @@ enum eBuildPartSearchType
     EBuildPartSearchType_AllPlayerOwned = 2,
     EBuildPartSearchType_OtherPlayerBase = 3,
 }
-#include <?>
+#include <metadata/gamestate/basebuilding/gcpersistentbasetypes.meta.h>
 
 class cGcBuildingPartSearchType
 {

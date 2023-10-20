@@ -1,8 +1,8 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/simulation/ecosystem/creatures/behaviours/data/gccreatureiktype.meta.h>
+#include <metadata/simulation/player/gcplayercharacterikoverridedata.meta.h>
+#include <metadata/simulation/player/gcplayercharacterikstatedata.meta.h>
 
 class cGcIKConstraint
 {

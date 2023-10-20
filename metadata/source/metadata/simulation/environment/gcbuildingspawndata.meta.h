@@ -1,8 +1,8 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/utilities/data/gcresourceelement.meta.h>
+#include <metadata/simulation/environment/gcbuildingclassification.meta.h>
+#include <metadata/voxel/generator/tknoiseflattenoptions.meta.h>
 
 class cGcBuildingSpawnData
 {

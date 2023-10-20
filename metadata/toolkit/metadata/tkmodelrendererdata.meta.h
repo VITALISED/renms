@@ -1,6 +1,6 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
+#include <metadata/tkmodelrenderercameradata.meta.h>
 enum eThumbnailMode
 {
     EThumbnailMode_None = 0,

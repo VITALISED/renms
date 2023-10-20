@@ -1,8 +1,8 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/gamestate/gcinventorylayout.meta.h>
+#include <metadata/gamestate/gcinventorycontainer.meta.h>
+#include <metadata/utilities/data/gcresourceelement.meta.h>
 
 class cGcMultitoolData
 {

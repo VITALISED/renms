@@ -1,10 +1,10 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/simulation/environment/gcsubstanceamount.meta.h>
+#include <metadata/reality/gcstatsenum.meta.h>
+#include <metadata/reality/gcrewardmissionoverride.meta.h>
+#include <metadata/tkmodelresource.meta.h>
+#include <metadata/simulation/components/utils/gclootprobability.meta.h>
 
 class cGcDestructableComponentData
 {

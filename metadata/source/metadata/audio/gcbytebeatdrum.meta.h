@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/audio/gcbytebeatenvelope.meta.h>
+#include <metadata/audio/gcbytebeatwave.meta.h>
 enum eAugmentMode
 {
     EAugmentMode_Add = 0,

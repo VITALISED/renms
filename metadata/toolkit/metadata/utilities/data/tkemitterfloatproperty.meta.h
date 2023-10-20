@@ -6,7 +6,7 @@ enum eAuthoring
     EAuthoring_RandomRangeFloat = 1,
     EAuthoring_Curves = 2,
 }
-#include <?>
+#include <metadata/animation/tkcurvetype.meta.h>
 
 class cTkEmitterFloatProperty
 {

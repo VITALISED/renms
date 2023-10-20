@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/user/gcblockeduser.meta.h>
+#include <metadata/user/gcblockedmessage.meta.h>
 
 class cGcBlockListPersistence
 {

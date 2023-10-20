@@ -1,12 +1,12 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/tktextureresource.meta.h>
+#include <metadata/tkmodelresource.meta.h>
+#include <metadata/reality/gcrealitysubstancecategory.meta.h>
+#include <metadata/reality/gcrarity.meta.h>
+#include <metadata/reality/gclegality.meta.h>
+#include <metadata/reality/gcitempricemodifiers.meta.h>
+#include <metadata/reality/gctradecategory.meta.h>
 
 class cGcRealitySubstanceData
 {

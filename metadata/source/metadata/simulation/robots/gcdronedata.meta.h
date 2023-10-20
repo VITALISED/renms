@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/simulation/robots/gcdronecontroldata.meta.h>
+#include <metadata/simulation/robots/gcsentinelresource.meta.h>
 
 class cGcDroneData
 {

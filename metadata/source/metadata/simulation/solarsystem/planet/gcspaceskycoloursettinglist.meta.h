@@ -1,6 +1,6 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
+#include <metadata/simulation/solarsystem/planet/gcsolarsystemskycolourdata.meta.h>
 
 class cGcSpaceSkyColourSettingList
 {

@@ -39,15 +39,15 @@ enum eSimpleInteractionType
     ESimpleInteractionType_MiniPortalTrigger = 34,
     ESimpleInteractionType_SuperDoopaScanner = 35,
 }
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/reality/gcrarity.meta.h>
+#include <metadata/reality/gcsizeindicator.meta.h>
+#include <metadata/gameplay/gcfiendcrime.meta.h>
+#include <metadata/gameplay/gcinteractionactivationcost.meta.h>
+#include <metadata/reality/gcstatsenum.meta.h>
+#include <metadata/reality/gcdiscoverytype.meta.h>
+#include <metadata/gameplay/gcinteractionbasebuildingstate.meta.h>
+#include <metadata/reality/gcrewardmissionoverride.meta.h>
+#include <metadata/gameplay/gcpersistencymissionoverride.meta.h>
 
 class cGcSimpleInteractionComponentData
 {

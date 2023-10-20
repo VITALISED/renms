@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/utilities/data/tkinputenum.meta.h>
+#include <metadata/utilities/data/tkinputhandenum.meta.h>
 
 class cTkButtonPathMapping
 {

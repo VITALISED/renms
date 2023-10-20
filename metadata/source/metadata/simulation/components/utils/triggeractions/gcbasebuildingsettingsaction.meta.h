@@ -6,7 +6,7 @@ enum eUseCorePartsOnly
     EUseCorePartsOnly_True = 1,
     EUseCorePartsOnly_DontCare = 2,
 }
-#include <?>
+#include <metadata/enginesettings/tkgraphicsdetailtypes.meta.h>
 
 class cGcBaseBuildingSettingsAction
 {

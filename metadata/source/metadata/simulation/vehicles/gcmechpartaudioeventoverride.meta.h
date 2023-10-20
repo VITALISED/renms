@@ -1,8 +1,8 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/simulation/vehicles/gcmechmeshpart.meta.h>
+#include <metadata/simulation/vehicles/gcmechmeshtype.meta.h>
+#include <metadata/audio/gcaudiowwiseevents.meta.h>
 
 class cGcMechPartAudioEventOverride
 {

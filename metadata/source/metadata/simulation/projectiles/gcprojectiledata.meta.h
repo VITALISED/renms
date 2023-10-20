@@ -1,9 +1,9 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/utilities/data/gcresourceelement.meta.h>
+#include <metadata/audio/gcaudiowwiseevents.meta.h>
+#include <metadata/simulation/projectiles/gcdamagetype.meta.h>
+#include <metadata/simulation/projectiles/gcprojectilelinedata.meta.h>
 enum exBehaviourFlags
 {
     FBehaviourFlags_ = 0,
@@ -22,8 +22,8 @@ enum eClass
     EClass_Ship = 2,
     EClass_Robot = 3,
 }
-#include <?>
-#include <?>
+#include <metadata/simulation/projectiles/gcprojectileimpactdata.meta.h>
+#include <metadata/gameplay/gcimpactcombateffectdata.meta.h>
 
 class cGcProjectileData
 {

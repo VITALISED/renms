@@ -1,9 +1,9 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/simulation/components/gameplay/gcinteractiontype.meta.h>
+#include <metadata/tktextureresource.meta.h>
+#include <metadata/wiki/gcstoryentry.meta.h>
+#include <metadata/wiki/gcwikitopictype.meta.h>
 
 class cGcStoryPage
 {

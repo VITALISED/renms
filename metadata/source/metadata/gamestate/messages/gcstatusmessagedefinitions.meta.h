@@ -1,8 +1,8 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/gamestate/messages/gcstatusmessagedefinition.meta.h>
+#include <metadata/gamestate/messages/gcpetvocabularyentry.meta.h>
+#include <metadata/gamestate/messages/gcfriendlydronevocabularyentry.meta.h>
 
 class cGcStatusMessageDefinitions
 {

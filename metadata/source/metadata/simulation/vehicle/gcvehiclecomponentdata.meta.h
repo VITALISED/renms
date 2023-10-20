@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/simulation/vehicles/gcvehicletype.meta.h>
+#include <metadata/tkmodelresource.meta.h>
 
 class cGcVehicleComponentData
 {

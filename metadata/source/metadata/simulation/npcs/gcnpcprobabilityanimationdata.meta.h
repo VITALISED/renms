@@ -7,7 +7,7 @@ enum eAnimationIntensity
     EAnimationIntensity_High = 2,
     EAnimationIntensity_None = 3,
 }
-#include <?>
+#include <metadata/reality/gcalienrace.meta.h>
 
 class cGcNPCProbabilityAnimationData
 {

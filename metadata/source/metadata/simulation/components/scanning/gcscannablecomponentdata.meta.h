@@ -1,6 +1,6 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
+#include <metadata/graphics/hud/gcscannericontypes.meta.h>
 enum eScannableType
 {
     EScannableType_Binoculars = 0,

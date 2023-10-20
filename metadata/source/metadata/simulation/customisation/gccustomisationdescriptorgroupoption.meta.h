@@ -1,8 +1,8 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/simulation/customisation/gccustomisationtexturegroup.meta.h>
+#include <metadata/simulation/customisation/gccustomisationcolourgroup.meta.h>
+#include <metadata/simulation/customisation/gccustomisationbonescales.meta.h>
 
 class cGcCustomisationDescriptorGroupOption
 {

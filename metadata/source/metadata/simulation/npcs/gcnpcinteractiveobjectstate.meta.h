@@ -1,9 +1,9 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/simulation/ecosystem/npcs/gcnpcproptype.meta.h>
+#include <metadata/simulation/ecosystem/npcs/gcnpcseatedposture.meta.h>
+#include <metadata/simulation/npcs/gcnpcprobabilityanimationdata.meta.h>
+#include <metadata/simulation/npcs/gcnpcinteractiveobjectstatetransition.meta.h>
 
 class cGcNPCInteractiveObjectState
 {

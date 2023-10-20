@@ -19,15 +19,6 @@ enum eObjectCoverageType
     EObjectCoverageType_Cluster = 1,
     EObjectCoverageType_Solo = 2,
 }
-enum eObjectAlignment
-{
-    EObjectAlignment_Upright = 0,
-    EObjectAlignment_SlightOffsetFromUpright = 1,
-    EObjectAlignment_LargeOffsetFromUpright = 2,
-    EObjectAlignment_ToNormal = 3,
-    EObjectAlignment_SlightOffsetFromNormal = 4,
-    EObjectAlignment_LargeOffsetFromNormal = 5,
-}
 
 class cGcObjectDefinitionData
 {

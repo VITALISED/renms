@@ -1,6 +1,6 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
+#include <metadata/ik/gcikconstraint.meta.h>
 enum ePlayerHeadUpAxis
 {
     EPlayerHeadUpAxis_X = 0,
@@ -10,8 +10,8 @@ enum ePlayerHeadUpAxis
     EPlayerHeadUpAxis_Z = 4,
     EPlayerHeadUpAxis_ZNeg = 5,
 }
-#include <?>
-#include <?>
+#include <metadata/simulation/ecosystem/gccreatureikdata.meta.h>
+#include <metadata/simulation/character/gccharacterlookatdata.meta.h>
 
 class cGcPlayerFullBodyIKComponentData
 {

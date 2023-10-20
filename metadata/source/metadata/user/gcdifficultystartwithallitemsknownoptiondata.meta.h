@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/gamestate/gcknownthingspreset.meta.h>
+#include <metadata/gamestate/gcinventorycontainer.meta.h>
 
 class cGcDifficultyStartWithAllItemsKnownOptionData
 {

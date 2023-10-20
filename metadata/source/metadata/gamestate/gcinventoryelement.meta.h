@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/reality/gcinventorytype.meta.h>
+#include <metadata/gamestate/gcinventoryindex.meta.h>
 
 class cGcInventoryElement
 {

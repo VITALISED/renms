@@ -5,9 +5,9 @@ enum ePetBehaviourValidity
     EPetBehaviourValidity_Everywhere = 0,
     EPetBehaviourValidity_OnPlanet = 1,
 }
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/simulation/ecosystem/creatures/gcpetfollowupbehaviour.meta.h>
+#include <metadata/simulation/ecosystem/creatures/gcpetbehaviourtraitmodifier.meta.h>
+#include <metadata/simulation/ecosystem/creatures/gcpetbehaviourmoodmodifier.meta.h>
 
 class cGcPetBehaviourData
 {

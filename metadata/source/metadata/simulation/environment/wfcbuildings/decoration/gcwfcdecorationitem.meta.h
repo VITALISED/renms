@@ -1,13 +1,13 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
+#include <metadata/simulation/environment/wfcbuildings/gcweightedresource.meta.h>
 enum eInsideOutside
 {
     EInsideOutside_Both = 0,
     EInsideOutside_InteriorOnly = 1,
     EInsideOutside_ExteriorOnly = 2,
 }
-#include <?>
+#include <metadata/simulation/environment/wfcbuildings/decoration/gcwfcdecorationface.meta.h>
 
 class cGcWFCDecorationItem
 {

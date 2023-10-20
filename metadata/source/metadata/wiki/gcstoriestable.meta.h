@@ -1,6 +1,6 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
+#include <metadata/wiki/gcstorycategory.meta.h>
 
 class cGcStoriesTable
 {

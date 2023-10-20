@@ -1,8 +1,8 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/simulation/missions/types/gcmissiontype.meta.h>
+#include <metadata/simulation/missions/types/gcmissiondifficulty.meta.h>
+#include <metadata/simulation/missions/types/gcmissionfaction.meta.h>
 enum eDefaultItemTypeForInitialWarp
 {
     EDefaultItemTypeForInitialWarp_None = 0,

@@ -13,7 +13,7 @@ enum eRewardChoice
     ERewardChoice_SelectAlwaysSilent = 8,
     ERewardChoice_SelectFromSuccessSilent = 9,
 }
-#include <?>
+#include <metadata/reality/gcrewardtableitem.meta.h>
 
 class cGcRewardTableItemList
 {

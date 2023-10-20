@@ -1,14 +1,14 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
+#include <metadata/simulation/projectiles/gcdamagetype.meta.h>
 enum eHitType
 {
     EHitType_Shootable = 0,
     EHitType_Terrain = 1,
     EHitType_Generic = 2,
 }
-#include <?>
-#include <?>
+#include <metadata/gameplay/gcimpactcombateffectdata.meta.h>
+#include <metadata/simulation/projectiles/gccombateffectdamagemultiplier.meta.h>
 
 class cGcMessageProjectileImpact
 {

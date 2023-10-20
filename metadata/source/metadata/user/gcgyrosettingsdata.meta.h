@@ -32,22 +32,31 @@ enum eLookStickEnabled
     ELookStickEnabled_Disabled = 1,
     ELookStickEnabled_Enabled = 2,
 }
+enum eCursorLookStickEnabled
+{
+    ECursorLookStickEnabled_None = 0,
+    ECursorLookStickEnabled_Disabled = 1,
+}
 enum eHandedness
 {
     EHandedness_Left = 0,
     EHandedness_Right = 1,
+}
+enum eGyroRotationSpace
+{
+    EGyroRotationSpace_Local = 0,
+    EGyroRotationSpace_Player = 1,
+}
+enum eGyroRotationSpaceHandheld
+{
+    EGyroRotationSpaceHandheld_Local = 0,
+    EGyroRotationSpaceHandheld_Player = 1,
 }
 enum eYawAxisDirection
 {
     EYawAxisDirection_Disabled = 0,
     EYawAxisDirection_Standard = 1,
     EYawAxisDirection_Inverted = 2,
-}
-enum eRollAxisDirection
-{
-    ERollAxisDirection_Disabled = 0,
-    ERollAxisDirection_Standard = 1,
-    ERollAxisDirection_Inverted = 2,
 }
 
 class cGcGyroSettingsData

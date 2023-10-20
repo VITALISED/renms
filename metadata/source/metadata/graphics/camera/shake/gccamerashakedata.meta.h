@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/graphics/camera/shake/gccamerashakecaptureddata.meta.h>
+#include <metadata/graphics/camera/shake/gccamerashakemechanicaldata.meta.h>
 
 class cGcCameraShakeData
 {

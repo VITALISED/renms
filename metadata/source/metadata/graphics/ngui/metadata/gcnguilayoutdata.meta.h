@@ -1,8 +1,8 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/graphics/ngui/metadata/gcvroverride_layout.meta.h>
+#include <metadata/graphics/ngui/metadata/gcaccessibleoverride_layout.meta.h>
+#include <metadata/ngui/tknguialignment.meta.h>
 
 class cGcNGuiLayoutData
 {

@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/reality/gcmaintenanceelementgroups.meta.h>
+#include <metadata/reality/gcinventorytype.meta.h>
 enum eUpdateType
 {
     EUpdateType_UpdatesAlways = 0,

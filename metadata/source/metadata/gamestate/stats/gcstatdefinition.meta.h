@@ -1,9 +1,9 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/gamestate/stats/gcstattype.meta.h>
+#include <metadata/gamestate/stats/gcstattracktype.meta.h>
+#include <metadata/gamestate/stats/gcstatdisplaytype.meta.h>
+#include <metadata/gamestate/stats/gcstatvaluedata.meta.h>
 
 class cGcStatDefinition
 {

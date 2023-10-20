@@ -1,6 +1,6 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
+#include <metadata/animation/tkanimationgamedata.meta.h>
 enum eAnimType
 {
     EAnimType_Loop = 0,

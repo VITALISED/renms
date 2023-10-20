@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/simulation/ecosystem/gcpetaccessoryinfo.meta.h>
+#include <metadata/simulation/ecosystem/gcpetaccessorygroup.meta.h>
 
 class cGcPetAccessoryTable
 {

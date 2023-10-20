@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/reality/gcrealitysubstancecategory.meta.h>
+#include <metadata/reality/gcrarity.meta.h>
 
 class cGcRewardProduct
 {

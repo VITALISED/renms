@@ -1,9 +1,9 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/simulation/customisation/gccustomisationthrustereffect.meta.h>
+#include <metadata/simulation/customisation/gccustomisationbackpackdata.meta.h>
+#include <metadata/simulation/customisation/gccustomisationshiptrails.meta.h>
+#include <metadata/simulation/customisation/gccustomisationfreighterengineeffect.meta.h>
 
 class cGcCustomisationThrusterEffects
 {

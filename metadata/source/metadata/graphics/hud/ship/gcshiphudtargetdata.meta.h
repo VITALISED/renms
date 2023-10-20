@@ -1,6 +1,6 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
+#include <metadata/graphics/hud/ship/gcshiphudtargeticondata.meta.h>
 
 class cGcShipHUDTargetData
 {

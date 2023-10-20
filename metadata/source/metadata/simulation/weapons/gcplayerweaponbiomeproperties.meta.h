@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/simulation/solarsystem/planet/gcbiometype.meta.h>
+#include <metadata/reality/stats/gcstatsbonus.meta.h>
 
 class cGcPlayerWeaponBiomeProperties
 {

@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/simulation/components/gameplay/gcinteractiontype.meta.h>
+#include <metadata/reality/gcalienrace.meta.h>
 enum eEventStartType
 {
     EEventStartType_None = 0,
@@ -21,7 +21,7 @@ enum eBuildingLocation
     EBuildingLocation_PlanetSearch = 5,
     EBuildingLocation_PlayerSettlement = 6,
 }
-#include <?>
+#include <metadata/simulation/environment/gcbuildingclassification.meta.h>
 enum eSolarSystemLocation
 {
     ESolarSystemLocation_Local = 0,
@@ -31,13 +31,13 @@ enum eSolarSystemLocation
     ESolarSystemLocation_FromList = 4,
     ESolarSystemLocation_SeasonParty = 5,
 }
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/simulation/gcscaneventsolarsystemlookup.meta.h>
+#include <metadata/simulation/gcscaneventtriggers.meta.h>
+#include <metadata/reality/gctechnologycategory.meta.h>
+#include <metadata/tktextureresource.meta.h>
+#include <metadata/graphics/hud/gcscannericonhighlighttypes.meta.h>
+#include <metadata/audio/gcaudiowwiseevents.meta.h>
+#include <metadata/utilities/data/gcresourceelement.meta.h>
 
 class cGcScanEventData
 {

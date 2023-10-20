@@ -1,8 +1,8 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/simulation/gcregionhotspotdata.meta.h>
+#include <metadata/simulation/gcregionhotspotbiomegases.meta.h>
+#include <metadata/simulation/gcregionhotspotsubstance.meta.h>
 
 class cGcRegionHotspotsTable
 {

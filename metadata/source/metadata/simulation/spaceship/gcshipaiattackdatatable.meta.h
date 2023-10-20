@@ -1,9 +1,9 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/simulation/spaceship/gcshipaicombatdefinition.meta.h>
+#include <metadata/simulation/spaceship/gcshipaiattackdata.meta.h>
+#include <metadata/simulation/spaceship/ai/gcspaceshiptraveldata.meta.h>
+#include <metadata/simulation/spaceship/ai/gcspaceshipshielddata.meta.h>
 
 class cGcShipAIAttackDataTable
 {

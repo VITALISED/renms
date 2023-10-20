@@ -1,6 +1,6 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
+#include <metadata/gamestate/basebuilding/gcnpchabitationtype.meta.h>
 enum eWorkerInCurrentBase
 {
     EWorkerInCurrentBase_DontCare = 0,

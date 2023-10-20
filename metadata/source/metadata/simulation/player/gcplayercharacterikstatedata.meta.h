@@ -1,8 +1,8 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/simulation/player/gcplayercharacterstatetype.meta.h>
+#include <metadata/simulation/player/gcplayercharacterikoverridedata.meta.h>
+#include <metadata/simulation/player/gcplayercharacteranimationoverridedata.meta.h>
 
 class cGcPlayerCharacterIKStateData
 {

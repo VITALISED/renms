@@ -1,8 +1,8 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/simulation/ecosystem/creatures/behaviours/data/gcprimaryaxis.meta.h>
+#include <metadata/simulation/ecosystem/creatures/data/gccreaturehealthdata.meta.h>
+#include <metadata/gameplay/gcdronegun.meta.h>
 
 class cGcDroneComponentData
 {

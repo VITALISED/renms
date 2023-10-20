@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/utilities/data/gcresourceelement.meta.h>
+#include <metadata/simulation/player/gcplayercommunicatormessage.meta.h>
 
 class cGcPulseEncounterSpawnTrader
 {

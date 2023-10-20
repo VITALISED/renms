@@ -1,8 +1,8 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/voxel/generator/tknoiseuberdata.meta.h>
+#include <metadata/voxel/generator/tknoisevoxeltypeenum.meta.h>
+#include <metadata/voxel/generator/tknoiseoffsetenum.meta.h>
 enum eWaterFade
 {
     EWaterFade_None = 0,

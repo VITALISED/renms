@@ -10,26 +10,26 @@ enum eMissionClass
     EMissionClass_Seasonal = 5,
     EMissionClass_Milestone = 6,
 }
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/reality/gcnumberedtextlist.meta.h>
+#include <metadata/tktextureresource.meta.h>
+#include <metadata/simulation/missions/types/gcmissioncategory.meta.h>
+#include <metadata/simulation/missions/types/gcmissionpagehint.meta.h>
+#include <metadata/simulation/missions/defaultmissionitems/gcdefaultmissionitemstable.meta.h>
 enum eMessageComplete
 {
     EMessageComplete_Default = 0,
     EMessageComplete_Always = 1,
     EMessageComplete_Never = 2,
 }
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/simulation/missions/gcmissionboardoptions.meta.h>
+#include <metadata/reality/gcalienpuzzletable.meta.h>
+#include <metadata/simulation/gcscaneventdata.meta.h>
+#include <metadata/reality/gcgenericrewardtableentry.meta.h>
+#include <metadata/reality/gccosttableentry.meta.h>
+#include <metadata/reality/gctradedata.meta.h>
+#include <metadata/simulation/missions/types/gcmissionconditiontest.meta.h>
+#include <metadata/simulation/missions/gcgenericmissionversionprogress.meta.h>
+#include <metadata/simulation/missions/gcgenericmissionstage.meta.h>
 
 class cGcGenericMissionSequence
 {

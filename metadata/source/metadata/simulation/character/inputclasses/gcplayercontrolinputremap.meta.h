@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/simulation/character/gccharactercontrolinputvalidity.meta.h>
+#include <metadata/utilities/input/actions/gcinputactions.meta.h>
 enum eInputRemapMode
 {
     EInputRemapMode_ReplaceOriginalBinding = 0,

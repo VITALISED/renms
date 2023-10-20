@@ -1,6 +1,6 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
+#include <metadata/gamestate/basebuilding/gcbasebuildingpartdata.meta.h>
 
 class cGcBaseBuildingPartsDataTable
 {

@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/simulation/projectiles/gcprojectileimpacttype.meta.h>
+#include <metadata/gameplay/gcfiendcrime.meta.h>
 
 class cGcShootableComponentData
 {

@@ -1,6 +1,6 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
+#include <metadata/reality/gcgenericrewardtableentry.meta.h>
 
 class cGcExpeditionRewardTable
 {

@@ -1,8 +1,8 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/graphics/ngui/metadata/gcnguipresetgraphic.meta.h>
+#include <metadata/graphics/ngui/metadata/gcnguipresettext.meta.h>
+#include <metadata/graphics/ngui/metadata/gcnguilayoutdata.meta.h>
 
 class cGcNGuiPreset
 {

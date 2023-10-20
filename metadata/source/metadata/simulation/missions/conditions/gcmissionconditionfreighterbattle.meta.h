@@ -7,7 +7,7 @@ enum eFreighterBattleStatus
     EFreighterBattleStatus_Joined = 2,
     EFreighterBattleStatus_Reward = 3,
 }
-#include <?>
+#include <metadata/tkequalityenum.meta.h>
 
 class cGcMissionConditionFreighterBattle
 {

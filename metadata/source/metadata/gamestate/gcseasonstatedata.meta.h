@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/gamestate/gcuaprotectedlocations.meta.h>
+#include <metadata/gamestate/gcseasonsavestateondeath.meta.h>
 
 class cGcSeasonStateData
 {

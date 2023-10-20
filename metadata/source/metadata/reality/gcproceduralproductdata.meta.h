@@ -1,10 +1,10 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/reality/gcnamegeneratorword.meta.h>
+#include <metadata/reality/gcproceduralproductword.meta.h>
+#include <metadata/reality/gcproductdata.meta.h>
+#include <metadata/reality/gcproductproceduralonlydata.meta.h>
+#include <metadata/simulation/solarsystem/planet/gcbiomelist.meta.h>
 
 class cGcProceduralProductData
 {

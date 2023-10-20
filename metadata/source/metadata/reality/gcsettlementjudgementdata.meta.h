@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/gameplay/gcsettlementjudgementtype.meta.h>
+#include <metadata/reality/gcsettlementjudgementoption.meta.h>
 enum eNPCs
 {
     ENPCs_None = 0,

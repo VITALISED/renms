@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/simulation/solarsystem/planet/gcwealthclass.meta.h>
+#include <metadata/simulation/solarsystem/planet/gctradingclass.meta.h>
 
 class cGcPlanetTradingData
 {

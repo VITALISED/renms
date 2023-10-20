@@ -1,8 +1,8 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/simulation/ecosystem/gccreatureroledescription.meta.h>
+#include <metadata/simulation/environment/gcterraintiletype.meta.h>
+#include <metadata/simulation/environment/gcplanetlife.meta.h>
 
 class cGcCreatureRoleDescriptionTable
 {

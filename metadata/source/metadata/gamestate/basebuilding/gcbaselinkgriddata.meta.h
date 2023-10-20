@@ -1,13 +1,20 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
+#include <metadata/gamestate/basebuilding/gcbaselinkgridconnectiondata.meta.h>
 enum eDependsOnEnvironment
 {
     EDependsOnEnvironment_None = 0,
     EDependsOnEnvironment_DayNight = 1,
     EDependsOnEnvironment_Storms = 2,
 }
-#include <?>
+enum eDependsOnHotspots
+{
+    EDependsOnHotspots_None = 0,
+    EDependsOnHotspots_Power = 1,
+    EDependsOnHotspots_Mineral = 2,
+    EDependsOnHotspots_Gas = 3,
+}
+#include <metadata/gamestate/basebuilding/gcbaselinkgridconnectiondependency.meta.h>
 
 class cGcBaseLinkGridData
 {

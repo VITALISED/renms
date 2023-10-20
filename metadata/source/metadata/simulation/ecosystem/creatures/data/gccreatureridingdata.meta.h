@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/simulation/ecosystem/creatures/data/gccreatureridingpartmodifier.meta.h>
+#include <metadata/simulation/ecosystem/creatures/data/gccreatureridinganimation.meta.h>
 
 class cGcCreatureRidingData
 {

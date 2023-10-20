@@ -8,7 +8,7 @@ enum eHUDTextDisplayType
     EHUDTextDisplayType_Prompt = 3,
     EHUDTextDisplayType_Tooltip = 4,
 }
-#include <?>
+#include <metadata/reality/gcalienrace.meta.h>
 
 class cGcDisplayText
 {

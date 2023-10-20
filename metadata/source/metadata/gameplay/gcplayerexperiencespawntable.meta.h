@@ -5,7 +5,7 @@ enum eExperienceSpawnType
     EExperienceSpawnType_Freighter = 0,
     EExperienceSpawnType_Mission = 1,
 }
-#include <?>
+#include <metadata/gameplay/gcplayerexperiencespawndata.meta.h>
 
 class cGcPlayerExperienceSpawnTable
 {

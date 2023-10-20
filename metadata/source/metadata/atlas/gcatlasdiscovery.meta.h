@@ -1,10 +1,10 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/atlas/gcatlasdownloadtype.meta.h>
+#include <metadata/reality/gcdiscoveryowner.meta.h>
+#include <metadata/atlas/gcatlasdiscoverydata.meta.h>
+#include <metadata/atlas/gcatlasdiscoverymetadata.meta.h>
+#include <metadata/atlas/gcatlasmessage.meta.h>
 
 class cGcAtlasDiscovery
 {

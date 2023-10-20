@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/gamestate/gcplayerstatedata.meta.h>
+#include <metadata/gamestate/gcplayerspawnstatedata.meta.h>
 
 class cGcDefaultSaveData
 {

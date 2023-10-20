@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/audio/gcaudiowwiseevents.meta.h>
+#include <metadata/audio/gcaudiowwisertpcs.meta.h>
 
 class cGcGalaxyAudioSetupData
 {

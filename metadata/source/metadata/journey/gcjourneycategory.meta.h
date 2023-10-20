@@ -1,10 +1,10 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/journey/gcjourneycategorytype.meta.h>
+#include <metadata/gamestate/gcgamemode.meta.h>
+#include <metadata/simulation/missions/types/gcmissionfaction.meta.h>
+#include <metadata/tktextureresource.meta.h>
+#include <metadata/journey/gcjourneymedal.meta.h>
 
 class cGcJourneyCategory
 {

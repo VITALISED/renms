@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/tktextureresource.meta.h>
+#include <metadata/audio/gcaudiowwiseevents.meta.h>
 enum ePlayerDamageType
 {
     EPlayerDamageType_Normal = 0,
@@ -10,7 +10,7 @@ enum ePlayerDamageType
     EPlayerDamageType_Freeze = 3,
     EPlayerDamageType_Scorch = 4,
 }
-#include <?>
+#include <metadata/reality/gcbreaktechbystatdata.meta.h>
 
 class cGcPlayerDamageData
 {

@@ -1,9 +1,9 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/simulation/weapons/gcplayerweaponclass.meta.h>
+#include <metadata/reality/stats/gcstatstypes.meta.h>
+#include <metadata/simulation/weapons/gcremoteweapons.meta.h>
+#include <metadata/simulation/weapons/gcplayerweaponbiomeproperties.meta.h>
 
 class cGcPlayerWeaponPropertiesData
 {

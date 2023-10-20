@@ -1,6 +1,6 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
+#include <metadata/simulation/missions/types/gcbuildingpartsearchtype.meta.h>
 enum ePartInCurrentBase
 {
     EPartInCurrentBase_DontCare = 0,

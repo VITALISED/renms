@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/ngui/tknguigraphicstyledata.meta.h>
+#include <metadata/animation/tkcurvetype.meta.h>
 enum eAnimate
 {
     EAnimate_None = 0,

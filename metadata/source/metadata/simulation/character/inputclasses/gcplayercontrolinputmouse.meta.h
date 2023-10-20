@@ -1,11 +1,11 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
+#include <metadata/simulation/character/gccharactercontrolinputvalidity.meta.h>
 enum eInputMouseMode
 {
     EInputMouseMode_ScreenCentrePos = 0,
 }
-#include <?>
+#include <metadata/simulation/character/gccharactercontroloutputspace.meta.h>
 
 class cGcPlayerControlInputMouse
 {

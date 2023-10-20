@@ -1,12 +1,12 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
+#include <metadata/animation/tkcurvetype.meta.h>
 enum eCoordinates
 {
     ECoordinates_Polar = 0,
     ECoordinates_Cartesian = 1,
 }
-#include <?>
+#include <metadata/animation/blendtree/tkanim2dblendnodedata.meta.h>
 
 class cTkAnim2dBlendNode
 {

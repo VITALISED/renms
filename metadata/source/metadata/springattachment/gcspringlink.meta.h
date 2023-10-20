@@ -23,14 +23,6 @@ enum eApplyMotionLimitsIn
     EApplyMotionLimitsIn_Parent = 3,
     EApplyMotionLimitsIn_Component = 4,
 }
-enum eApplyAngularMotionScaleIn
-{
-    EApplyAngularMotionScaleIn_Disabled = 0,
-    EApplyAngularMotionScaleIn_Uniform = 1,
-    EApplyAngularMotionScaleIn_Itself = 2,
-    EApplyAngularMotionScaleIn_Parent = 3,
-    EApplyAngularMotionScaleIn_Component = 4,
-}
 enum eApplyAngularLimitsIn
 {
     EApplyAngularLimitsIn_Disabled = 0,

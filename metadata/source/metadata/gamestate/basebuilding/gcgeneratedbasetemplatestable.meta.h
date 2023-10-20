@@ -1,9 +1,9 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/gamestate/basebuilding/gcgeneratedbasedecorationtemplate.meta.h>
+#include <metadata/gamestate/basebuilding/gcgeneratedbaseroomtemplate.meta.h>
+#include <metadata/gamestate/basebuilding/gcgeneratedbasethemetemplate.meta.h>
+#include <metadata/gamestate/basebuilding/gcgeneratedbasepruningrule.meta.h>
 
 class cGcGeneratedBaseTemplatesTable
 {

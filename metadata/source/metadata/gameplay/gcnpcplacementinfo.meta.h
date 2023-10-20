@@ -1,9 +1,9 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/reality/gcalienrace.meta.h>
+#include <metadata/simulation/components/gameplay/gcinteractiontype.meta.h>
+#include <metadata/reality/gctechnologycategory.meta.h>
+#include <metadata/reality/gcalienpuzzlemissionoverride.meta.h>
 
 class cGcNPCPlacementInfo
 {

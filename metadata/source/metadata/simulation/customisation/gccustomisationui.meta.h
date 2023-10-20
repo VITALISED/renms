@@ -1,8 +1,8 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/simulation/customisation/gccustomisationcameradata.meta.h>
+#include <metadata/simulation/customisation/gccustomisationrace.meta.h>
+#include <metadata/simulation/customisation/gccustomisationgroups.meta.h>
 
 class cGcCustomisationUI
 {

@@ -6,7 +6,7 @@ enum eGeneratorUnitType
     EGeneratorUnitType_GasHarvester = 1,
     EGeneratorUnitType_SystemHoover = 2,
 }
-#include <?>
+#include <metadata/simulation/components/gameplay/gcmaintenancecomponentdata.meta.h>
 
 class cGcGeneratorUnitComponentData
 {

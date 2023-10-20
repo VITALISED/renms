@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/simulation/projectiles/gcprojectiledata.meta.h>
+#include <metadata/simulation/projectiles/gclaserbeamdata.meta.h>
 
 class cGcProjectileDataTable
 {

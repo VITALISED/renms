@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/simulation/environment/gcskyproperties.meta.h>
+#include <metadata/simulation/environment/gcfogproperties.meta.h>
 
 class cGcPlanetSkyProperties
 {

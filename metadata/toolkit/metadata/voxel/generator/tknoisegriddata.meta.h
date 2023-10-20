@@ -1,6 +1,6 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
+#include <metadata/voxel/generator/tknoisevoxeltypeenum.meta.h>
 enum eNoiseGridType
 {
     ENoiseGridType_Cube = 0,
@@ -26,10 +26,10 @@ enum eNoiseGridType
     ENoiseGridType_SuperPrimitive = 20,
     ENoiseGridType_File = 21,
 }
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/voxel/generator/tknoiseoffsetenum.meta.h>
+#include <metadata/voxel/generator/tknoiseuberlayerdata.meta.h>
+#include <metadata/voxel/generator/tknoisesuperformuladata.meta.h>
+#include <metadata/voxel/generator/tknoisesuperprimitivedata.meta.h>
 
 class cTkNoiseGridData
 {

@@ -1,6 +1,6 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
+#include <metadata/gamestate/interactions/gcinteractiondata.meta.h>
 
 class cGcInteractionBuffer
 {

@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/gamestate/gcgalacticaddressdata.meta.h>
+#include <metadata/simulation/galaxy/gcgalaxywaypointtypes.meta.h>
 
 class cGcGalaxyWaypoint
 {

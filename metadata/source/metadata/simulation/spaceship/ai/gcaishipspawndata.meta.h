@@ -1,15 +1,15 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/utilities/data/tkinputenum.meta.h>
+#include <metadata/simulation/spaceship/ai/gcaispaceshiproles.meta.h>
+#include <metadata/simulation/spaceship/ai/gcaishipspawnmarkerdata.meta.h>
 enum eSpawnShape
 {
     ESpawnShape_Sphere = 0,
     ESpawnShape_Cone = 1,
 }
-#include <?>
-#include <?>
+#include <metadata/simulation/spaceship/gcshipaiperformancearray.meta.h>
+#include <metadata/simulation/spaceship/ai/gcaishipspawndata.meta.h>
 
 class cGcAIShipSpawnData
 {

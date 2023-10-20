@@ -1,16 +1,16 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/gamestate/basebuilding/gcbasebuildingpartstyle.meta.h>
+#include <metadata/tkmodelresource.meta.h>
+#include <metadata/gamestate/basebuilding/gcbasebuildingobjectdecorationtypes.meta.h>
+#include <metadata/simulation/solarsystem/planet/gcbiometype.meta.h>
+#include <metadata/gamestate/basebuilding/gcbasebuildingentrygroup.meta.h>
 enum eBaseTerrainEditShape
 {
     EBaseTerrainEditShape_Cube = 0,
     EBaseTerrainEditShape_Cylinder = 1,
 }
-#include <?>
+#include <metadata/gamestate/basebuilding/gcbaselinkgriddata.meta.h>
 
 class cGcBaseBuildingEntry
 {

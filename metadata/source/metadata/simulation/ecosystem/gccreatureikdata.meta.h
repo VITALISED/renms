@@ -1,6 +1,6 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
+#include <metadata/simulation/ecosystem/creatures/behaviours/data/gccreatureiktype.meta.h>
 
 class cGcCreatureIkData
 {

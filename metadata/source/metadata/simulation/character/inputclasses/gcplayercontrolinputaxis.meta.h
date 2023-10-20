@@ -1,8 +1,8 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/simulation/character/gccharactercontrolinputvalidity.meta.h>
+#include <metadata/utilities/input/actions/gcinputactions.meta.h>
+#include <metadata/simulation/character/gccharactercontroloutputspace.meta.h>
 
 class cGcPlayerControlInputAxis
 {

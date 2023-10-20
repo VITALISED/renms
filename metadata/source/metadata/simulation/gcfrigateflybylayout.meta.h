@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/simulation/gcfrigateflybytype.meta.h>
+#include <metadata/simulation/gcfrigateflybyoption.meta.h>
 
 class cGcFrigateFlybyLayout
 {

@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/simulation/ecosystem/creatures/behaviours/data/gcprimaryaxis.meta.h>
+#include <metadata/components/physics/tkcreaturetailparams.meta.h>
 
 class cTkCreatureTailComponentData
 {

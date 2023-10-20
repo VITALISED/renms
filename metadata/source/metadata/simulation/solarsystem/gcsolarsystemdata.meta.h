@@ -1,25 +1,25 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/simulation/solarsystem/planet/gcsolarsystemclass.meta.h>
+#include <metadata/simulation/galaxy/gcgalaxystartypes.meta.h>
+#include <metadata/simulation/solarsystem/planet/gcplanetgenerationinputdata.meta.h>
+#include <metadata/simulation/solarsystem/gcspacestationspawndata.meta.h>
+#include <metadata/simulation/solarsystem/gcsolarsystemtraderspawndata.meta.h>
+#include <metadata/simulation/solarsystem/gcsolarsystemlocator.meta.h>
 enum eAsteroidLevel
 {
     EAsteroidLevel_NoRares = 0,
     EAsteroidLevel_SomeRares = 1,
     EAsteroidLevel_LotsOfRares = 2,
 }
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/simulation/solarsystem/planet/gcplanetcolourdata.meta.h>
+#include <metadata/simulation/environment/gclightproperties.meta.h>
+#include <metadata/simulation/environment/gcspaceskyproperties.meta.h>
+#include <metadata/graphics/gcscreenfilters.meta.h>
+#include <metadata/simulation/spaceship/ai/gcaispaceshippreloadcachedata.meta.h>
+#include <metadata/reality/gcalienrace.meta.h>
+#include <metadata/simulation/solarsystem/planet/gcplanettradingdata.meta.h>
+#include <metadata/simulation/solarsystem/planet/gcplayerconflictdata.meta.h>
 
 class cGcSolarSystemData
 {

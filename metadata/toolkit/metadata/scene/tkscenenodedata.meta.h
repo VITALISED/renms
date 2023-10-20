@@ -1,8 +1,8 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/scene/tktransformdata.meta.h>
+#include <metadata/scene/tkscenenodeattributedata.meta.h>
+#include <metadata/scene/tkscenenodedata.meta.h>
 
 class cTkSceneNodeData
 {

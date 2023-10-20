@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/simulation/gcspaceshipclasses.meta.h>
+#include <metadata/tkmodelrendererdata.meta.h>
 
 class cGcSpaceshipComponentData
 {

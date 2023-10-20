@@ -1,19 +1,13 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
+#include <metadata/reality/gcalienmood.meta.h>
 enum eTranslateAlienTextOverride
 {
     ETranslateAlienTextOverride_None = 0,
     ETranslateAlienTextOverride_Translate = 1,
     ETranslateAlienTextOverride_DoNotTranslate = 2,
 }
-enum eBracketsOverride
-{
-    EBracketsOverride_None = 0,
-    EBracketsOverride_Brackets = 1,
-    EBracketsOverride_NoBrackets = 2,
-}
-#include <?>
+#include <metadata/audio/gcaudiowwiseevents.meta.h>
 
 class cGcPuzzleTextFlow
 {

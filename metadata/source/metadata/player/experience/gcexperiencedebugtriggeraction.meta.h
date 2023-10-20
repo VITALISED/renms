@@ -1,6 +1,6 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
+#include <metadata/player/experience/gcexperiencedebugtriggeractiontypes.meta.h>
 
 class cGcExperienceDebugTriggerAction
 {

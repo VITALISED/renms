@@ -1,9 +1,9 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/animation/tkanimposedata.meta.h>
+#include <metadata/animation/tkanimposecorrelationdata.meta.h>
+#include <metadata/animation/tkanimposeexampledata.meta.h>
+#include <metadata/animation/tkanimposebabymodifier.meta.h>
 
 class cTkAnimPoseComponentData
 {

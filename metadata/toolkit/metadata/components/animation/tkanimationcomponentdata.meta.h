@@ -1,8 +1,8 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/animation/tkanimationdata.meta.h>
+#include <metadata/animation/tkanimblendtree.meta.h>
+#include <metadata/animation/tkanimjointloddata.meta.h>
 
 class cTkAnimationComponentData
 {

@@ -1,8 +1,8 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/reality/gcalienrace.meta.h>
+#include <metadata/gamestate/gcpetdata.meta.h>
+#include <metadata/gamestate/gcpetcustomisationdata.meta.h>
 
 class cGcNPCDebugSpawnData
 {

@@ -5,7 +5,7 @@ enum eBlendOperation
     EBlendOperation_Blend = 0,
     EBlendOperation_Add = 1,
 }
-#include <?>
+#include <metadata/animation/blendtree/tkanimvectorblendnodedata.meta.h>
 
 class cTkAnimVectorBlendNode
 {

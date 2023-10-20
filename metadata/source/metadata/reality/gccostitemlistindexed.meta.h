@@ -6,6 +6,12 @@ enum eItemOutOfBoundsBehaviour
     EItemOutOfBoundsBehaviour_UseFirst = 1,
     EItemOutOfBoundsBehaviour_UseLast = 2,
 }
+enum eItemIndexProvider
+{
+    EItemIndexProvider_None = 0,
+    EItemIndexProvider_Biome = 1,
+    EItemIndexProvider_SubBiome = 2,
+}
 
 class cGcCostItemListIndexed
 {

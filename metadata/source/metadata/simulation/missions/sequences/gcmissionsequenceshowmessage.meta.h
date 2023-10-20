@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/simulation/missions/types/gcmissioncategory.meta.h>
+#include <metadata/audio/gcaudiowwiseevents.meta.h>
 enum eOSDMessageStyle
 {
     EOSDMessageStyle_Standard = 0,

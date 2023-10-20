@@ -6,7 +6,7 @@ enum eFactionOption
     EFactionOption_CurrentMission = 1,
     EFactionOption_CurrentSystem = 2,
 }
-#include <?>
+#include <metadata/simulation/missions/types/gcmissionfaction.meta.h>
 
 class cGcFactionSelectOptions
 {
