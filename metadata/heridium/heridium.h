@@ -6,6 +6,8 @@
 #include <spdlog/spdlog.h>
 #include "paths.h"
 #include <MinHook.h>
+#include <fstream>
+#include <fmt/format.h>
 
 #define HERIDIUM_BEGIN namespace heridium {
 #define HERIDIUM_END }

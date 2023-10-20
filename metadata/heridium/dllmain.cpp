@@ -8,6 +8,8 @@
 
 DWORD WINAPI MainThread(LPVOID lpReserved)
 {
+    UNREFERENCED_PARAMETER(lpReserved);
+
     AnalysisInit();
     heridium::CreateOutputDirectories();
     return TRUE;
@@ -17,6 +19,8 @@ BOOL APIENTRY DllMain(HMODULE hModule,
                       DWORD ul_reason_for_call,
                       LPVOID lpReserved)
 {
+    UNREFERENCED_PARAMETER(lpReserved);
+
     switch (ul_reason_for_call)
     {
     case DLL_PROCESS_ATTACH:

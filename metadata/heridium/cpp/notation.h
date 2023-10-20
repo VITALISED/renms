@@ -1,13 +1,14 @@
 #pragma once
 
+#include "../heridium.h"
 #include <toolkit/data/TkMetaDataClasses.h>
 #include <cassert>
 
 using namespace nms;
 
+HERIDIUM_BEGIN
 
-
-constexpr const char* Heridium_CXX_MemberTypeToNamed(cTkMetaDataMember::eType leType)
+constexpr const char* CXX_MemberTypeToNamed(cTkMetaDataMember::eType leType)
 {
     switch (leType)
 	{
@@ -97,10 +98,11 @@ constexpr const char* Heridium_CXX_MemberTypeToNamed(cTkMetaDataMember::eType le
 			return "wchar_t*";
 		default:
 			assert("Heridium_CXX_MemberTypeToNamed: hit default, this is considerably bad in all honesty");
+			return "foil";
 	}
 }
 
-constexpr const char* Heridium_CXX_GetNotationForMember(cTkMetaDataMember::eType leType)
+constexpr const char* CXX_GetNotationForMember(cTkMetaDataMember::eType leType)
 {
 	// we prepend the notation mostly for parity with class dumps from ida.
 	switch (leType)
@@ -191,5 +193,8 @@ constexpr const char* Heridium_CXX_GetNotationForMember(cTkMetaDataMember::eType
 		return "mac";
 	default:
 		assert("Heridium_CXX_GetNotationForMember: hit default, this is considerably bad in all honesty");
+		return "foil";
 	}
 }
+
+HERIDIUM_END

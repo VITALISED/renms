@@ -20,7 +20,7 @@ RENMS_BEGIN
 #define CALL_ORIGINAL(lpacName, ...) auto it = std::find(__hook_module::__hook_ids.begin(), __hook_module::__hook_ids.end(), #lpacName); \
 									if(it != __hook_module::__hook_ids.end()) \
 									{	\
-										int index = it - __hook_module::__hook_ids.begin();	\
+										auto index = it - __hook_module::__hook_ids.begin();	\
 										HOOK_TYPE __original__ = *reinterpret_cast<HOOK_TYPE*>(__hook_module::__ppOriginals[index]);	\
 										return __original__(__VA_ARGS__);	\
 									}
@@ -43,9 +43,10 @@ inline MH_STATUS AddHook(LPVOID pTarget, LPVOID pDetour, void *ppOriginal, const
 			spdlog::error("MH_EnableHook failed for: {} {}", formatName, MH_StatusToString(EnableHook));
 			return EnableHook;
 		}
+	} else {
+		spdlog::error("MH_CreateHook failed for: {} {}", formatName, MH_StatusToString(CreateHook));
 	}
-	
-	spdlog::error("MH_CreateHook failed for: {} {}", formatName, MH_StatusToString(CreateHook));
+
 	return CreateHook;
 }
 

@@ -1,0 +1,93 @@
+#pragma once
+#include <metadata/metadata_common.h>
+#include <?>
+#include <?>
+
+class cGcScannerIcons
+{
+    static unsigned long long muNameHash = 0x392CEA8FE98D0F4;
+    static unsigned long long muTemplateHash = 0x136B9B1D27C723B6;
+
+    cGcScannerIcon TaggedBuilding;
+    cGcScannerIcon Ship;
+    cGcScannerIcon Vehicle;
+    cGcScannerIcon Freighter;
+    cGcScannerIcon FreighterBase;
+    cGcScannerIcon PlayerFreighter;
+    cGcScannerIcon DamagedFrigate;
+    cGcScannerIcon PurchasableFrigate;
+    cGcScannerIcon Expedition;
+    cGcScannerIcon PlayerBase;
+    cGcScannerIcon EditingBase;
+    cGcScannerIcon Death;
+    cGcScannerIcon Bounty1;
+    cGcScannerIcon Bounty2;
+    cGcScannerIcon Bounty3;
+    cGcScannerIcon Battle;
+    cGcScannerIcon ShipSmall;
+    cGcScannerIcon DeathSmall;
+    cGcScannerIcon BountySmall;
+    cGcScannerIcon BattleSmall;
+    cGcScannerIcon TimedEvent;
+    cGcScannerIcon Checkpoint;
+    cGcScannerIcon Garage;
+    cGcScannerIcon NPC;
+    cGcScannerIcon SettlementNPC;
+    cGcScannerIcon CircleAnimation;
+    cGcScannerIcon HexAnimation;
+    cGcScannerIcon DiamondAnimation;
+    cGcScannerIcon ArrowSmall;
+    cGcScannerIcon ArrowLarge;
+    cTkFixedArray<cGcScannerIcon> maGenericIcons;
+    cTkFixedArray<cGcScannerIcon> maBuildingIcons;
+    cTkFixedArray<cGcScannerIcon> maBuildingIconsBinocs;
+    cTkFixedArray<cGcScannerIcon> maBuildingIconsHuge;
+    cTkFixedArray<cGcScannerIcon> maScannableIcons;
+    cTkFixedArray<cGcScannerIcon> maScannableIconsBinocs;
+    cTkFixedArray<cTkColour> maScannableColours;
+    cTkColour mBuildingColour;
+    cTkColour mGenericColour;
+    cTkColour mRelicColour;
+    cTkColour mSignalColour;
+    cTkColour mUnknownColour;
+    cGcScannerIcon CreatureDiscovered;
+    cGcScannerIcon CreatureUndiscovered;
+    cGcScannerIcon CreatureUnknown;
+    cGcScannerIcon MessageBeacon;
+    cGcScannerIcon MessageBeaconSmall;
+    cGcScannerIcon BaseBuildingMarker;
+    cGcScannerIcon PlanetPoleNorth;
+    cGcScannerIcon PlanetPoleSouth;
+    cGcScannerIcon MonumentMarker;
+    cGcScannerIcon NetworkPlayerMarker;
+    cGcScannerIcon NetworkPlayerMarkerShip;
+    cGcScannerIcon NetworkPlayerMarkerVehicle;
+    cTkFixedArray<cGcScannerIcon> maNetworkFSPlayerMarkers;
+    cTkFixedArray<cGcScannerIcon> maNetworkFSPlayerMarkersShip;
+    cTkFixedArray<cTkColour> maNetworkFSPlayerColours;
+    cTkFixedArray<cGcScannerIcon> maNetworkPlayerFreighter;
+    cGcScannerIcon PortalMarker;
+    cGcScannerIcon BlackHole;
+    cGcScannerIcon CreatureCurious;
+    cGcScannerIcon CreatureAction;
+    cGcScannerIcon CreatureTame;
+    cGcScannerIcon CreatureDanger;
+    cGcScannerIcon CreatureFiend;
+    cGcScannerIcon CreatureMilk;
+    cTkFixedArray<cTkTextureResource> maHighlightIcons;
+    cGcScannerIcon MissionEnterOrbit;
+    cGcScannerIcon MissionEnterBuilding;
+    cGcScannerIcon MissionEnterStation;
+    cGcScannerIcon MissionEnterFreighter;
+    cGcScannerIcon MissionAbandonedFreighter;
+    cGcScannerIcon CreatureInteraction;
+    cGcScannerIcon PetInteraction;
+    cGcScannerIcon Pet;
+    cGcScannerIcon PetSad;
+    cGcScannerIcon PetActivity;
+    cGcScannerIcon PlayerSettlement;
+    cGcScannerIcon OtherPlayerSettlement;
+    cGcScannerIcon FriendlyDrone;
+    cGcScannerIcon PirateRaid;
+    cGcScannerIcon FuelAsteroid;
+}

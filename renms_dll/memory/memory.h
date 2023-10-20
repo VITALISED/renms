@@ -54,7 +54,7 @@ inline LPVOID ScanPattern(std::vector<int> *lpPattern)
 
     uint8_t *scan_bytes = reinterpret_cast<std::uint8_t *>(module_handle);
 
-    int s = pattern_bytes.size();
+    size_t s = pattern_bytes.size();
     int *d = pattern_bytes.data();
 
     for (DWORD i = 0ul; i < size_of_image - s; ++i)
