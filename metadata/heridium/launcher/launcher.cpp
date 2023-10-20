@@ -8,6 +8,12 @@
 #include <string>
 #include <format>
 
+#ifdef _MSC_VER
+#define HERIDIUM_LIB "Heridium.dll"
+#else
+#define HERIDIUM_LIB "libHeridium.dll"
+#endif
+
 void WaitToClose(int code) {
     if (code == -1) {   //started without elevation
         exit(code);
@@ -185,9 +191,9 @@ int main(int argc, char** argv) {
             nmsPath = argv[1];
 
         heridiumPath = exePath.parent_path();
-        heridiumPath /= "libHeridium.dll";
+        heridiumPath /= HERIDIUM_LIB;
         CheckPath(nmsPath, "NMS.exe");
-        CheckPath(heridiumPath, "libHeridium.dll");
+        CheckPath(heridiumPath, HERIDIUM_LIB);
 
         std::cout << "Checking if we're running as admin...\n" << std::flush;
         if (!IsUserAdmin()) {
