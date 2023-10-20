@@ -1,12 +1,12 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
+#include <metadata/voxel/generator/tknoisevoxeltypeenum.meta.h>
 enum eFeatureType
 {
     EFeatureType_Tube = 0,
     EFeatureType_Blob = 1,
 }
-#include <?>
+#include <metadata/voxel/generator/tknoiseoffsetenum.meta.h>
 
 class cTkNoiseFeatureData
 {

@@ -42,7 +42,7 @@ void RegisterHook(const cTkMetaDataClass* lpClassMetadata,
 
     spdlog::info(lPath);
 
-    HeridiumCXXFile* file = new HeridiumCXXFile(lPath.c_str(), lpClassMetadata);
+    HeridiumCXXFile(lPath.c_str(), lpClassMetadata);
 
     typedef void(*HOOK_TYPE)(
         const cTkMetaDataClass* lpClassMetadata,

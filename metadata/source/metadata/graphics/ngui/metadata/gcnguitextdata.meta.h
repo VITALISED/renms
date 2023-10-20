@@ -1,10 +1,10 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/graphics/ngui/metadata/gcnguielementdata.meta.h>
+#include <metadata/ngui/tknguitextstyle.meta.h>
+#include <metadata/ngui/tknguigraphicstyle.meta.h>
+#include <metadata/graphics/ngui/metadata/gcvroverride_text.meta.h>
+#include <metadata/graphics/ngui/metadata/gcaccessibleoverride_text.meta.h>
 
 class cGcNGuiTextData
 {

@@ -1,8 +1,8 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/graphics/camera/gccameraambientbuildingdata.meta.h>
+#include <metadata/graphics/camera/gccameraambientspacedata.meta.h>
+#include <metadata/graphics/camera/gccameraambientspecialdata.meta.h>
 
 class cGcAmbientModeCameras
 {

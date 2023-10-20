@@ -1,6 +1,6 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
+#include <metadata/reality/gcweightedfilename.meta.h>
 enum eSpawnConditions
 {
     ESpawnConditions_Anytime = 0,
@@ -15,13 +15,7 @@ enum eWeatherEffectBehaviour
     EWeatherEffectBehaviour_Wander = 1,
     EWeatherEffectBehaviour_ChasePlayer = 2,
 }
-enum eWeatherEffectSpawnType
-{
-    EWeatherEffectSpawnType_Single = 0,
-    EWeatherEffectSpawnType_Cluster = 1,
-    EWeatherEffectSpawnType_Patch = 2,
-}
-#include <?>
+#include <metadata/audio/gcaudiowwiseevents.meta.h>
 
 class cGcWeatherEffect
 {

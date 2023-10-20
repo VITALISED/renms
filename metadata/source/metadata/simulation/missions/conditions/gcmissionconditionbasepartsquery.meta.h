@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/gamestate/basebuilding/gcbasepartsearchfilter.meta.h>
+#include <metadata/gamestate/basebuilding/gcbasesearchfilter.meta.h>
 
 class cGcMissionConditionBasePartsQuery
 {

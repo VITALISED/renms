@@ -1,6 +1,6 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
+#include <metadata/enginesettings/tkgraphicsdetailtypes.meta.h>
 enum eUIQuality
 {
     EUIQuality_Normal = 0,
@@ -24,7 +24,7 @@ enum eAnisotropyLevel
     EAnisotropyLevel_8 = 3,
     EAnisotropyLevel_16 = 4,
 }
-#include <?>
+#include <metadata/enginesettings/tkdynamicresscalingsettings.meta.h>
 
 class cTkGraphicsDetailPreset
 {

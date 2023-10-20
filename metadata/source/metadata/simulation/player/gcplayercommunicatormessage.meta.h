@@ -14,7 +14,7 @@ enum eCommunicatorType
     ECommunicatorType_CargoScanDrone = 9,
     ECommunicatorType_Tethys = 10,
 }
-#include <?>
+#include <metadata/reality/gcalienrace.meta.h>
 
 class cGcPlayerCommunicatorMessage
 {

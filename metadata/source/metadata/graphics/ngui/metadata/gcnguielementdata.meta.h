@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/ngui/tknguiforcedstyle.meta.h>
+#include <metadata/graphics/ngui/metadata/gcnguilayoutdata.meta.h>
 
 class cGcNGuiElementData
 {

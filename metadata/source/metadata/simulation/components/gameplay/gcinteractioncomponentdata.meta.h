@@ -6,13 +6,13 @@ enum eInteractionAction
     EInteractionAction_HoldButton = 1,
     EInteractionAction_Shoot = 2,
 }
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/simulation/components/gameplay/gcinteractiontype.meta.h>
+#include <metadata/tkmodelrendererdata.meta.h>
+#include <metadata/reality/gcalienrace.meta.h>
+#include <metadata/gameplay/gcinteractionactivationcost.meta.h>
+#include <metadata/simulation/components/gameplay/gcinteractiondof.meta.h>
+#include <metadata/reality/gcalienpuzzlemissionoverride.meta.h>
+#include <metadata/reality/gcstoryutilityoverride.meta.h>
 enum eOverrideInteriorExteriorMarker
 {
     EOverrideInteriorExteriorMarker_No = 0,

@@ -1,8 +1,8 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/reality/gcfrigateclass.meta.h>
+#include <metadata/reality/gcalienrace.meta.h>
+#include <metadata/reality/gcinventoryclass.meta.h>
 
 class cGcFleetFrigateSaveData
 {

@@ -1,10 +1,10 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/scene/geometry/tkjointbindingdata.meta.h>
+#include <metadata/scene/geometry/tkjointextentdata.meta.h>
+#include <metadata/scene/geometry/tkjointmirroraxis.meta.h>
+#include <metadata/scene/geometry/tkvertexlayout.meta.h>
+#include <metadata/scene/geometry/tkmeshmetadata.meta.h>
 
 class cTkGeometryData
 {

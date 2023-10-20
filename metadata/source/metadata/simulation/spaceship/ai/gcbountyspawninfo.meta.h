@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/simulation/spaceship/ai/gcaishipspawndata.meta.h>
+#include <metadata/tktextureresource.meta.h>
 
 class cGcBountySpawnInfo
 {

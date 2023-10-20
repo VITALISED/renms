@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/gameplay/gcfiendcrime.meta.h>
+#include <metadata/gameplay/gcfiendcrimespawndata.meta.h>
 
 class cGcFiendCrimeSpawnTable
 {

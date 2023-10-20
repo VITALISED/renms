@@ -1,13 +1,13 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
+#include <metadata/graphics/hud/gcgenericicontypes.meta.h>
 enum eDisplayMode
 {
     EDisplayMode_Always = 0,
     EDisplayMode_SpaceOnly = 1,
     EDisplayMode_PlanetOnly = 2,
 }
-#include <?>
+#include <metadata/reality/gcrealitygameicons.meta.h>
 
 class cGcMarkerComponentData
 {

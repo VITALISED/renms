@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/reality/gcrealitysubstancedata.meta.h>
+#include <metadata/reality/gcrealitycraftingrecipedata.meta.h>
 
 class cGcSubstanceTable
 {

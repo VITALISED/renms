@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/utilities/input/actions/gcinputactionmapping.meta.h>
+#include <metadata/utilities/input/actions/gcinputactionmapping2.meta.h>
 
 class cTkGameSettings
 {

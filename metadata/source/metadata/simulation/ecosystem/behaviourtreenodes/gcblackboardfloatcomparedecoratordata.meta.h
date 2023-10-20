@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/simulation/tkblackboarddefaultvaluefloat.meta.h>
+#include <metadata/simulation/tkblackboardcomparisontypeenum.meta.h>
 
 class cGcBlackboardFloatCompareDecoratorData
 {

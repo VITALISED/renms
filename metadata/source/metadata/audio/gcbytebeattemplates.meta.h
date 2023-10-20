@@ -1,8 +1,8 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/audio/gcbytebeattemplate.meta.h>
+#include <metadata/audio/gcbytebeatdrum.meta.h>
+#include <metadata/audio/gcbytebeatsong.meta.h>
 
 class cGcByteBeatTemplates
 {

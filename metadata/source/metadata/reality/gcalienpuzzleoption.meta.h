@@ -1,10 +1,10 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/reality/gcalienmood.meta.h>
+#include <metadata/simulation/ecosystem/npcs/gcnpcproptype.meta.h>
+#include <metadata/audio/gcaudiowwiseevents.meta.h>
+#include <metadata/simulation/missions/types/gcmissionconditiontest.meta.h>
+#include <metadata/reality/tables/gcwordcategorytableenum.meta.h>
 
 class cGcAlienPuzzleOption
 {

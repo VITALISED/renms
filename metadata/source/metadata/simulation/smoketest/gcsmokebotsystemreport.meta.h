@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/simulation/smoketest/gcsmokebotstats.meta.h>
+#include <metadata/simulation/smoketest/gcsmokebotplanetreport.meta.h>
 
 class cGcSmokeBotSystemReport
 {

@@ -1,8 +1,8 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/simulation/solarsystem/planet/gcbiomesubtype.meta.h>
+#include <metadata/audio/gcaudiowwiseevents.meta.h>
+#include <metadata/animation/tkcurvetype.meta.h>
 enum eDeathType
 {
     EDeathType_Explode = 0,

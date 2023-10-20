@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/simulation/space/gcbackgroundspaceencounterspawnconditions.meta.h>
+#include <metadata/simulation/space/pulseencounters/gcpulseencounterspawnobject.meta.h>
 
 class cGcBackgroundSpaceEncounterInfo
 {

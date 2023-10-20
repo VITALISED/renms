@@ -1,8 +1,8 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/simulation/ecosystem/gccreaturespawndata.meta.h>
+#include <metadata/simulation/environment/gcobjectspawndata.meta.h>
+#include <metadata/simulation/environment/spawn/gcselectableobjectspawnlist.meta.h>
 
 class cGcEnvironmentSpawnData
 {

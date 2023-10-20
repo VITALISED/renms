@@ -1,9 +1,9 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/gamestate/gcinventorycontainer.meta.h>
+#include <metadata/gamestate/gcinventorylayout.meta.h>
+#include <metadata/resource/gcexactresource.meta.h>
+#include <metadata/simulation/gcweaponclasses.meta.h>
 
 class cGcRewardSpecificWeapon
 {

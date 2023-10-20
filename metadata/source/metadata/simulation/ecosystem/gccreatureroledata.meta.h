@@ -1,11 +1,11 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/simulation/ecosystem/creatures/gccreaturetypes.meta.h>
+#include <metadata/simulation/ecosystem/gccreatureroledescription.meta.h>
+#include <metadata/simulation/ecosystem/creatures/gccreatureinfo.meta.h>
+#include <metadata/simulation/environment/gcterraintiletype.meta.h>
+#include <metadata/simulation/ecosystem/gccreaturediet.meta.h>
+#include <metadata/simulation/ecosystem/gccreaturehemisphere.meta.h>
 
 class cGcCreatureRoleData
 {

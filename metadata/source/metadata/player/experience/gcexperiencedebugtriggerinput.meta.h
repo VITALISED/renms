@@ -16,7 +16,7 @@ enum eKeyPress
     EKeyPress_PadLeft = 11,
     EKeyPress_PadRight = 12,
 }
-#include <?>
+#include <metadata/player/experience/gcexperiencedebugtriggeraction.meta.h>
 
 class cGcExperienceDebugTriggerInput
 {

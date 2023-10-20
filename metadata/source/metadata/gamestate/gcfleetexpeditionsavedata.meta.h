@@ -1,8 +1,8 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/reality/gcexpeditioncategory.meta.h>
+#include <metadata/reality/gcexpeditionduration.meta.h>
+#include <metadata/gamestate/gcexpeditioneventsavedata.meta.h>
 
 class cGcFleetExpeditionSaveData
 {

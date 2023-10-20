@@ -5,8 +5,8 @@ enum eType
     EType_Instanced = 0,
     EType_Single = 1,
 }
-#include <?>
-#include <?>
+#include <metadata/utilities/data/gcresourceelement.meta.h>
+#include <metadata/simulation/environment/gcterraintiletype.meta.h>
 enum ePlacementPriority
 {
     EPlacementPriority_Low = 0,
@@ -29,7 +29,7 @@ enum eGroundColourIndex
     EGroundColourIndex_Main = 1,
     EGroundColourIndex_Patch = 2,
 }
-#include <?>
+#include <metadata/simulation/environment/gcobjectspawndatavariant.meta.h>
 
 class cGcObjectSpawnData
 {

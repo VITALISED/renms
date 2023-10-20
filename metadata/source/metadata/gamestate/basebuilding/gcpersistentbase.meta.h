@@ -1,11 +1,11 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/gamestate/basebuilding/gcpersistentbaseentry.meta.h>
+#include <metadata/reality/gcdiscoveryowner.meta.h>
+#include <metadata/gamestate/basebuilding/gcpersistentbasetypes.meta.h>
+#include <metadata/gamestate/gcgamemode.meta.h>
+#include <metadata/user/gcpersistentbasedifficultydata.meta.h>
+#include <metadata/gamestate/basebuilding/gcbaseautopowersetting.meta.h>
 
 class cGcPersistentBase
 {

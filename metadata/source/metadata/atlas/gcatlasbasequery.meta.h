@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/gamestate/gcuniverseaddressdata.meta.h>
+#include <metadata/gamestate/gcgamemode.meta.h>
 
 class cGcAtlasBaseQuery
 {

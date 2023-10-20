@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/simulation/player/gchand.meta.h>
+#include <metadata/simulation/player/gcscaneffectdata.meta.h>
 
 class cGcPlayerEmotePropData
 {

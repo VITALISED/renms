@@ -1,19 +1,25 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/reality/gcalienrace.meta.h>
+#include <metadata/simulation/components/gameplay/gcinteractiontype.meta.h>
+#include <metadata/reality/gcalienpuzzlecategory.meta.h>
 enum eAdditionalOptions
 {
     EAdditionalOptions_None = 0,
     EAdditionalOptions_LearnWord = 1,
     EAdditionalOptions_SayWord = 2,
 }
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/reality/gcalienpuzzleoption.meta.h>
+#include <metadata/reality/gcalienmood.meta.h>
+#include <metadata/simulation/ecosystem/npcs/gcnpcproptype.meta.h>
+#include <metadata/reality/gcpuzzletextflow.meta.h>
+enum ePersistancyBufferOverride
+{
+    EPersistancyBufferOverride_None = 0,
+    EPersistancyBufferOverride_AlwaysPersonal = 1,
+    EPersistancyBufferOverride_AlwaysFireteam = 2,
+}
+#include <metadata/audio/gcaudiowwiseevents.meta.h>
 
 class cGcAlienPuzzleEntry
 {

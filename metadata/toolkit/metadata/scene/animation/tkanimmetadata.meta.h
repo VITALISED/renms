@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/scene/animation/tkanimnodedata.meta.h>
+#include <metadata/scene/animation/tkanimnodeframedata.meta.h>
 
 class cTkAnimMetadata
 {

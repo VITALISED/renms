@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/simulation/environment/gcterraintiletype.meta.h>
+#include <metadata/simulation/environment/gcobjectspawndata.meta.h>
 
 class cGcObjectSpawnDataArray
 {

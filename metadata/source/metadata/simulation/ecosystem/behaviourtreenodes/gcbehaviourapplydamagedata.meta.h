@@ -1,8 +1,8 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/simulation/tkblackboarddefaultvalueid.meta.h>
+#include <metadata/simulation/tkblackboarddefaultvaluefloat.meta.h>
+#include <metadata/simulation/tkblackboarddefaultvaluevector.meta.h>
 
 class cGcBehaviourApplyDamageData
 {

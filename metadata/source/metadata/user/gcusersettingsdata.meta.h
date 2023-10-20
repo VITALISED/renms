@@ -1,6 +1,6 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
+#include <metadata/user/gcblocklistpersistence.meta.h>
 enum ePS4FixedFPS
 {
     EPS4FixedFPS_Invalid = 0,
@@ -20,7 +20,7 @@ enum eTemperatureUnit
     ETemperatureUnit_F = 2,
     ETemperatureUnit_K = 3,
 }
-#include <?>
+#include <metadata/simulation/player/gcmovementdirection.meta.h>
 enum eSpaceCombatFollowMode
 {
     ESpaceCombatFollowMode_Disabled = 0,
@@ -35,10 +35,10 @@ enum exEyeTrackingFlags
     FEyeTrackingFlags_LookVector = 4,
     FEyeTrackingFlags_BinocScanner = 8,
 }
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/user/gcgyrosettingsdata.meta.h>
+#include <metadata/tklanguages.meta.h>
+#include <metadata/simulation/player/gchand.meta.h>
+#include <metadata/ui/hud/gcinworlduiscreendata.meta.h>
 
 class cGcUserSettingsData
 {

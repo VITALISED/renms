@@ -7,7 +7,7 @@ enum eChoice
     EChoice_SpecificIndex = 2,
     EChoice_InFrontOfPlayer = 3,
 }
-#include <?>
+#include <metadata/simulation/solarsystem/gcsolarsystemlocatortypes.meta.h>
 
 class cGcSolarSystemLocatorChoice
 {

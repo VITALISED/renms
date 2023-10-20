@@ -1,8 +1,8 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/animation/tkcurvetype.meta.h>
+#include <metadata/audio/gcaudiowwiseevents.meta.h>
+#include <metadata/gamestate/gcseasonsavestateondeath.meta.h>
 
 class cGcRewardDeath
 {

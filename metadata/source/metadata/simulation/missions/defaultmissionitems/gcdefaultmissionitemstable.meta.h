@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/simulation/missions/defaultmissionitems/gcdefaultmissionsubstance.meta.h>
+#include <metadata/simulation/missions/defaultmissionitems/gcdefaultmissionproduct.meta.h>
 
 class cGcDefaultMissionItemsTable
 {

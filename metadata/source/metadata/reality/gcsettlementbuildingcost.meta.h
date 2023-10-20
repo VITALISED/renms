@@ -1,6 +1,6 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
+#include <metadata/reality/gcsettlementbuildingcostdata.meta.h>
 
 class cGcSettlementBuildingCost
 {

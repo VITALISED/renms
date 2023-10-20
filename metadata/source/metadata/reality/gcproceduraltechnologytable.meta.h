@@ -1,6 +1,6 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
+#include <metadata/reality/gcproceduraltechnologydata.meta.h>
 
 class cGcProceduralTechnologyTable
 {

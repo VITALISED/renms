@@ -1,6 +1,6 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
+#include <metadata/simulation/tkblackboarddefaultvaluefloat.meta.h>
 enum eBehaviourMoveSpeed
 {
     EBehaviourMoveSpeed_Normal = 0,

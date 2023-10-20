@@ -1,11 +1,11 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/simulation/environment/wfcbuildings/gcmoduleoverride.meta.h>
+#include <metadata/simulation/environment/wfcbuildings/gcminimumuseconstraint.meta.h>
+#include <metadata/simulation/environment/wfcbuildings/gcweightedresource.meta.h>
+#include <metadata/simulation/environment/wfcbuildings/gcweightedbuildingsize.meta.h>
+#include <metadata/gamestate/basebuilding/gcbasebuildingpartstyle.meta.h>
+#include <metadata/simulation/environment/wfcbuildings/gcfreighterbaseroom.meta.h>
 
 class cGcWFCBuilding
 {

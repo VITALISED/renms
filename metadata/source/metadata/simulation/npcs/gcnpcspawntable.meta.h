@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/gameplay/gcuniquenpcspawndata.meta.h>
+#include <metadata/gameplay/gcnpcplacementinfo.meta.h>
 
 class cGcNPCSpawnTable
 {

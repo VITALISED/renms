@@ -1,8 +1,8 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/input/gcactionsettype.meta.h>
+#include <metadata/input/gcactionusetype.meta.h>
+#include <metadata/input/gcactionsetaction.meta.h>
 
 class cGcActionSet
 {

@@ -1,8 +1,8 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/simulation/customisation/gccustomisationbannerimagedata.meta.h>
+#include <metadata/graphics/2d/gcpalettedata.meta.h>
+#include <metadata/gamestate/gccustomisationcolourpaletteextradata.meta.h>
 
 class cGcCustomisationBannerGroup
 {

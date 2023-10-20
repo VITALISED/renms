@@ -6,7 +6,7 @@ enum eTypeOfCost
     ETypeOfCost_Substance = 1,
     ETypeOfCost_Product = 2,
 }
-#include <?>
+#include <metadata/reality/gccurrency.meta.h>
 
 class cGcUnlockableTreeCostType
 {

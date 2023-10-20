@@ -1,9 +1,9 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/reality/gcdiscoveryowner.meta.h>
+#include <metadata/gameplay/gcsettlementjudgementtype.meta.h>
+#include <metadata/gamestate/gcsettlementproductionslotdata.meta.h>
+#include <metadata/simulation/environment/gcbuildingclassification.meta.h>
 
 class cGcSettlementState
 {

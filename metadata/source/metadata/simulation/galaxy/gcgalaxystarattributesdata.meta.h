@@ -1,11 +1,11 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/simulation/galaxy/gcgalaxystartypes.meta.h>
+#include <metadata/simulation/galaxy/gcgalaxystaranomaly.meta.h>
+#include <metadata/simulation/solarsystem/planet/gcplanetsize.meta.h>
+#include <metadata/simulation/solarsystem/planet/gcplanettradingdata.meta.h>
+#include <metadata/simulation/solarsystem/planet/gcplayerconflictdata.meta.h>
+#include <metadata/reality/gcalienrace.meta.h>
 
 class cGcGalaxyStarAttributesData
 {

@@ -1,9 +1,9 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/simulation/gcfrigateflybytype.meta.h>
+#include <metadata/simulation/player/gcplayercommunicatormessage.meta.h>
+#include <metadata/tktextureresource.meta.h>
+#include <metadata/audio/gcaudiowwiseevents.meta.h>
 
 class cGcRewardFrigateFlyby
 {

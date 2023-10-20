@@ -1,6 +1,6 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
+#include <metadata/atlas/gcatlassendsubmitcontribution.meta.h>
 enum eSubmitType
 {
     ESubmitType_Value = 0,

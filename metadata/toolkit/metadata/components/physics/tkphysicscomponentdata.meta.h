@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/physics/tkphysicsdata.meta.h>
+#include <metadata/components/physics/tkvolumetriggertype.meta.h>
 enum eSurfaceProperties
 {
     ESurfaceProperties_None = 0,

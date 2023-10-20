@@ -1,8 +1,8 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/tktextureresource.meta.h>
+#include <metadata/simulation/space/gcpulseencounterspawnconditions.meta.h>
+#include <metadata/audio/gcaudiowwiseevents.meta.h>
 
 class cGcPulseEncounterInfo
 {

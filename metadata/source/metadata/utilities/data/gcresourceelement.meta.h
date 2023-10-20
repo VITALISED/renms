@@ -1,6 +1,6 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
+#include <metadata/tkproceduraltexturechosenoptionlist.meta.h>
 
 class cGcResourceElement
 {

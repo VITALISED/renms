@@ -1,6 +1,6 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
+#include <metadata/voxel/generator/tknoiseflattenoptions.meta.h>
 
 class cGcBuildingDefinitionData
 {

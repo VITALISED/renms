@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/tktextureresource.meta.h>
+#include <metadata/graphics/hud/gcscannericonhighlighttypes.meta.h>
 
 class cGcScannerIcon
 {

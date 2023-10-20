@@ -1,14 +1,14 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/tktextureresource.meta.h>
+#include <metadata/reality/gcrealitysubstancecategory.meta.h>
+#include <metadata/reality/gctechnologycategory.meta.h>
+#include <metadata/reality/gctechnologyrarity.meta.h>
+#include <metadata/reality/gctechnologyrequirement.meta.h>
+#include <metadata/reality/stats/gcstatstypes.meta.h>
+#include <metadata/reality/stats/gcstatsbonus.meta.h>
+#include <metadata/reality/gcitempricemodifiers.meta.h>
+#include <metadata/reality/gcalienrace.meta.h>
 
 class cGcTechnology
 {

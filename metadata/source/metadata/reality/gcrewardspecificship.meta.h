@@ -1,11 +1,11 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/utilities/data/gcresourceelement.meta.h>
+#include <metadata/gamestate/gcinventorylayout.meta.h>
+#include <metadata/gamestate/gcinventorycontainer.meta.h>
+#include <metadata/reality/gccurrency.meta.h>
+#include <metadata/simulation/gcspaceshipclasses.meta.h>
+#include <metadata/reality/gcinventorylayoutsizetype.meta.h>
 
 class cGcRewardSpecificShip
 {

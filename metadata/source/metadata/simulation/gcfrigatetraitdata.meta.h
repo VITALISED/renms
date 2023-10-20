@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/reality/gcfrigatestattype.meta.h>
+#include <metadata/reality/gcfrigatetraitstrength.meta.h>
 
 class cGcFrigateTraitData
 {

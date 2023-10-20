@@ -1,8 +1,8 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/utilities/input/actions/gcinputactions.meta.h>
+#include <metadata/utilities/data/tkinputenum.meta.h>
+#include <metadata/utilities/data/tkinputaxisenum.meta.h>
 
 class cGcInputBinding
 {

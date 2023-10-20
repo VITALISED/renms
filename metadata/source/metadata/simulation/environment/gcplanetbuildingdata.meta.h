@@ -1,8 +1,8 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/simulation/environment/gcbuildingspawnslot.meta.h>
+#include <metadata/simulation/environment/gcbuildingspawndata.meta.h>
+#include <metadata/simulation/environment/gcbuildingoverridedata.meta.h>
 
 class cGcPlanetBuildingData
 {

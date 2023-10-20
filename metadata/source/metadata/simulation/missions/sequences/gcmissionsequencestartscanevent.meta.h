@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/simulation/gcscaneventtabletype.meta.h>
+#include <metadata/gamestate/gcplayermissionparticipanttype.meta.h>
 
 class cGcMissionSequenceStartScanEvent
 {

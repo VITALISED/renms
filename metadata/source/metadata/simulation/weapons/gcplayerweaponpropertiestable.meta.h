@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/simulation/weapons/gccamouflagedata.meta.h>
+#include <metadata/simulation/weapons/gcplayerweaponpropertiesdata.meta.h>
 
 class cGcPlayerWeaponPropertiesTable
 {

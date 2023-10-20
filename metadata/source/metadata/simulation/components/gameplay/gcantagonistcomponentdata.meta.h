@@ -1,9 +1,9 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/gameplay/gcantagonistgroup.meta.h>
+#include <metadata/gameplay/gcantagonistfriend.meta.h>
+#include <metadata/gameplay/gcantagonistenemy.meta.h>
+#include <metadata/gameplay/gcantagonistperception.meta.h>
 
 class cGcAntagonistComponentData
 {

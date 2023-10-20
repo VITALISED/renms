@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/reality/gcproductdata.meta.h>
+#include <metadata/gamestate/basebuilding/gcbasebuildingentry.meta.h>
 
 class cGcModBasePart
 {

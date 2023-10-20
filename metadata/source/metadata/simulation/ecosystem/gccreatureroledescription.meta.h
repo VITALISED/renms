@@ -1,10 +1,10 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/simulation/ecosystem/gccreatureroles.meta.h>
+#include <metadata/simulation/ecosystem/creatures/gccreaturetypes.meta.h>
+#include <metadata/simulation/ecosystem/creatures/gccreaturesizeclasses.meta.h>
+#include <metadata/simulation/ecosystem/gccreaturegenerationdensity.meta.h>
+#include <metadata/simulation/ecosystem/gccreatureactivetime.meta.h>
 
 class cGcCreatureRoleDescription
 {

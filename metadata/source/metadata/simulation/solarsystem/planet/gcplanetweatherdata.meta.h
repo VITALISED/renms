@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/simulation/environment/weather/gcweatheroptions.meta.h>
+#include <metadata/simulation/solarsystem/planet/gcplanetheavyairdata.meta.h>
 enum eWeatherIntensity
 {
     EWeatherIntensity_Default = 0,
@@ -13,8 +13,8 @@ enum eStormFrequency
     EStormFrequency_Low = 1,
     EStormFrequency_High = 2,
 }
-#include <?>
-#include <?>
+#include <metadata/graphics/gcscreenfilters.meta.h>
+#include <metadata/simulation/solarsystem/planet/gcrainbowtype.meta.h>
 
 class cGcPlanetWeatherData
 {

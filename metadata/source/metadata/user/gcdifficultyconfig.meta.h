@@ -1,13 +1,13 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/user/gcdifficultysettingsdata.meta.h>
+#include <metadata/user/gcdifficultyoptionuigroup.meta.h>
+#include <metadata/user/gcdifficultysettingcommondata.meta.h>
+#include <metadata/user/gcdifficultystartwithallitemsknownoptiondata.meta.h>
+#include <metadata/user/gcdifficultyinventorystacksizeoptiondata.meta.h>
+#include <metadata/user/gcdifficultyfueluseoptiondata.meta.h>
+#include <metadata/user/gcdifficultycurrencycostoptiondata.meta.h>
+#include <metadata/user/gcitemshopavailabilitydifficultyoptiondata.meta.h>
 
 class cGcDifficultyConfig
 {

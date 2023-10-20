@@ -1,6 +1,6 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
+#include <metadata/reality/gcitemneedpurpose.meta.h>
 
 class cGcMissionConditionItemCostsEnabled
 {

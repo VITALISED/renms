@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/graphics/hud/gctextpreset.meta.h>
+#include <metadata/animation/tkcurvetype.meta.h>
 
 class cGcHUDManagerData
 {

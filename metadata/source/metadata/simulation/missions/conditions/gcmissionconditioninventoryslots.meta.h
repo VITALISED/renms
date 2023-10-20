@@ -7,7 +7,7 @@ enum eInventoryTest
     EInventoryTest_Ship = 2,
     EInventoryTest_Vehicle = 3,
 }
-#include <?>
+#include <metadata/tkequalityenum.meta.h>
 
 class cGcMissionConditionInventorySlots
 {

@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/simulation/ecosystem/creatures/gccreaturetypes.meta.h>
+#include <metadata/simulation/ecosystem/creatures/gccreaturetagandrarity.meta.h>
 enum eMoveArea
 {
     EMoveArea_Ground = 0,
@@ -9,8 +9,8 @@ enum eMoveArea
     EMoveArea_Air = 2,
     EMoveArea_Space = 3,
 }
-#include <?>
-#include <?>
+#include <metadata/reality/gccreaturerarity.meta.h>
+#include <metadata/simulation/ecosystem/creatures/gccreaturerolefrequencymodifier.meta.h>
 
 class cGcCreatureData
 {

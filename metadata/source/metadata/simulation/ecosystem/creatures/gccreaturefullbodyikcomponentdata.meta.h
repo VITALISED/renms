@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/simulation/ecosystem/gccreatureikdata.meta.h>
+#include <metadata/simulation/ecosystem/gcikpistondata.meta.h>
 enum eHeadUpAxis
 {
     EHeadUpAxis_X = 0,

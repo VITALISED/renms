@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/gameplay/gcsettlementstattype.meta.h>
+#include <metadata/reality/gcsettlementstatstrength.meta.h>
 
 class cGcSettlementStatChange
 {

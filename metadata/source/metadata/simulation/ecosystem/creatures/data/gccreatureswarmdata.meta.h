@@ -9,7 +9,7 @@ enum eSwarmMovementType
     ESwarmMovementType_FollowPlayer = 4,
     ESwarmMovementType_FollowPlayerLimited = 5,
 }
-#include <?>
+#include <metadata/simulation/ecosystem/creatures/data/gccreatureswarmdataparams.meta.h>
 
 class cGcCreatureSwarmData
 {

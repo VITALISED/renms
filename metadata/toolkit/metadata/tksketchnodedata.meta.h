@@ -9,7 +9,7 @@ enum eTriggerType
     ETriggerType_QueueLatest = 4,
     ETriggerType_QueueAll = 5,
 }
-#include <?>
+#include <metadata/tksketchnodeconnections.meta.h>
 
 class cTkSketchNodeData
 {

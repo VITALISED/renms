@@ -1,8 +1,8 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/gamestate/basebuilding/gcbasebuildingpartstyle.meta.h>
+#include <metadata/simulation/environment/wfcbuildings/gcweightedcolourid.meta.h>
+#include <metadata/simulation/environment/wfcbuildings/gcbuildingcolourpalette.meta.h>
 
 class cGcSettlementColourPalette
 {

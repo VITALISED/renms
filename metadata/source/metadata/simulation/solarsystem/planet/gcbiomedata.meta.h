@@ -1,12 +1,12 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/simulation/solarsystem/planet/gcminingsubstancedata.meta.h>
+#include <metadata/simulation/solarsystem/planet/gcplanetwaterdata.meta.h>
+#include <metadata/simulation/environment/gcexternalobjectlistoptions.meta.h>
+#include <metadata/simulation/solarsystem/planet/gcweatherweightings.meta.h>
+#include <metadata/simulation/solarsystem/planet/gcbiomecloudsettings.meta.h>
+#include <metadata/simulation/solarsystem/planet/gcterraincontrols.meta.h>
+#include <metadata/simulation/solarsystem/planet/gcscreenfilteroption.meta.h>
 
 class cGcBiomeData
 {

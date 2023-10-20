@@ -1,6 +1,6 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
+#include <metadata/simulation/environment/spawn/gcselectableobjectlist.meta.h>
 
 class cGcSelectableObjectTable
 {

@@ -1,8 +1,8 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/simulation/ecosystem/gccreaturegenerationoptionalweightedlist.meta.h>
+#include <metadata/simulation/ecosystem/gccreaturegenerationweightedlist.meta.h>
+#include <metadata/simulation/ecosystem/gccreaturegenerationweightedlistdomainentry.meta.h>
 
 class cGcCreatureGenerationData
 {

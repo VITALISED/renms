@@ -5,7 +5,7 @@ enum eUpgradeBaseType
     EUpgradeBaseType_AllMatching = 0,
     EUpgradeBaseType_NearestMatching = 1,
 }
-#include <?>
+#include <metadata/gamestate/basebuilding/gcpersistentbasetypes.meta.h>
 
 class cGcRewardUpgradeBase
 {

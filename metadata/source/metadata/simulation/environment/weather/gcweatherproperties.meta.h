@@ -1,12 +1,12 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/simulation/environment/gcfogproperties.meta.h>
+#include <metadata/simulation/environment/weather/gcweathercolourmodifiers.meta.h>
+#include <metadata/simulation/environment/gcstormproperties.meta.h>
+#include <metadata/simulation/environment/weather/gchazardvalues.meta.h>
+#include <metadata/graphics/gcscreenfilters.meta.h>
+#include <metadata/simulation/environment/gcskyproperties.meta.h>
+#include <metadata/simulation/environment/gclightshaftproperties.meta.h>
 
 class cGcWeatherProperties
 {

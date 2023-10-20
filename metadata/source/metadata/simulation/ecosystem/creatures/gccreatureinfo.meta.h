@@ -5,7 +5,7 @@ enum eAge
     EAge_Regular = 0,
     EAge_Weird = 1,
 }
-#include <?>
+#include <metadata/reality/gcrarity.meta.h>
 
 class cGcCreatureInfo
 {

@@ -1,14 +1,14 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/reality/gcinventorytableentry.meta.h>
+#include <metadata/reality/gcinventorylayoutgenerationdata.meta.h>
+#include <metadata/reality/gcinventorycostdata.meta.h>
+#include <metadata/reality/gcinventorycostdataentry.meta.h>
+#include <metadata/reality/gcinventoryclassprobabilities.meta.h>
+#include <metadata/reality/gcinventorygenerationbasestatdata.meta.h>
+#include <metadata/reality/gcinventorybasestat.meta.h>
+#include <metadata/reality/gcshipinventorymaxupgradecapacity.meta.h>
+#include <metadata/reality/gcweaponinventorymaxupgradecapacity.meta.h>
 
 class cGcInventoryTable
 {

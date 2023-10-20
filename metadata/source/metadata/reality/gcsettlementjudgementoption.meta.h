@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/reality/gcsettlementjudgementperkoption.meta.h>
+#include <metadata/reality/gcsettlementstatchange.meta.h>
 
 class cGcSettlementJudgementOption
 {

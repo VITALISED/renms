@@ -1,6 +1,6 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
+#include <metadata/simulation/environment/wfcbuildings/gcweightedresource.meta.h>
 enum eTerrainEdits
 {
     ETerrainEdits_None = 0,
@@ -8,8 +8,8 @@ enum eTerrainEdits
     ETerrainEdits_UseScene = 2,
     ETerrainEdits_UseBasebuildingEdits = 3,
 }
-#include <?>
-#include <?>
+#include <metadata/simulation/environment/wfcbuildings/gcwfcterrainconstraint.meta.h>
+#include <metadata/simulation/environment/wfcbuildings/gcwfcface.meta.h>
 enum eFreighterModuleType
 {
     EFreighterModuleType_None = 0,

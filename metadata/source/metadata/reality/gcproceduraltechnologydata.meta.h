@@ -9,9 +9,9 @@ enum eQuality
     EQuality_Illegal = 4,
     EQuality_Sentinel = 5,
 }
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/reality/gcproceduraltechnologycategory.meta.h>
+#include <metadata/reality/gcweightingcurve.meta.h>
+#include <metadata/reality/gcproceduraltechnologystatlevel.meta.h>
 
 class cGcProceduralTechnologyData
 {

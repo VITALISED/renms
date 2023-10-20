@@ -1,8 +1,8 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/simulation/ecosystem/creatures/behaviours/data/gcprimaryaxis.meta.h>
+#include <metadata/simulation/particles/gcreplacementeffectdata.meta.h>
+#include <metadata/simulation/particles/gccreaturediscoverythumbnailoverride.meta.h>
 
 class cGcCreatureComponentData
 {

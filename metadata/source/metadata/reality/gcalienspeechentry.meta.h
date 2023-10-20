@@ -1,12 +1,12 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
+#include <metadata/reality/tables/gcwordcategorytableenum.meta.h>
 enum eWordInteractEffect
 {
     EWordInteractEffect_Pain = 0,
     EWordInteractEffect_Heal = 1,
 }
-#include <?>
+#include <metadata/reality/gcalienrace.meta.h>
 
 class cGcAlienSpeechEntry
 {

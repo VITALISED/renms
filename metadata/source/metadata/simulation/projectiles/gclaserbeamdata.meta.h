@@ -1,10 +1,10 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/audio/gcaudiowwiseevents.meta.h>
+#include <metadata/simulation/projectiles/gcdamagetype.meta.h>
+#include <metadata/simulation/projectiles/gcprojectileimpactdata.meta.h>
+#include <metadata/gameplay/gcimpactcombateffectdata.meta.h>
+#include <metadata/simulation/projectiles/gccombateffectdamagemultiplier.meta.h>
 
 class cGcLaserBeamData
 {

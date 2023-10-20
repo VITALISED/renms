@@ -1,10 +1,10 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/simulation/galaxy/gcgalaxystartypes.meta.h>
+#include <metadata/simulation/solarsystem/planet/gcplanetclass.meta.h>
+#include <metadata/simulation/solarsystem/planet/gcplanetsize.meta.h>
+#include <metadata/simulation/solarsystem/planet/gcbiometype.meta.h>
+#include <metadata/simulation/solarsystem/planet/gcbiomesubtype.meta.h>
 
 class cGcPlanetGenerationInputData
 {

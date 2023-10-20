@@ -1,9 +1,9 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/simulation/solarsystem/planet/gcbiomefilelistoptions.meta.h>
+#include <metadata/simulation/solarsystem/planet/gcbiometype.meta.h>
+#include <metadata/simulation/environment/gcexternalobjectlistoptions.meta.h>
+#include <metadata/simulation/solarsystem/planet/gcexternalobjectfilelist.meta.h>
 
 class cGcBiomeFileList
 {

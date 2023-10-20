@@ -1,8 +1,8 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/simulation/spaceship/ai/gcaispaceshiproles.meta.h>
+#include <metadata/reality/gcrealitycommonfactions.meta.h>
+#include <metadata/simulation/spaceship/ai/gcaispaceshiptypes.meta.h>
 
 class cGcDoShipEscort
 {

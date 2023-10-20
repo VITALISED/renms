@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/simulation/ecosystem/creatures/gcpetbehaviours.meta.h>
+#include <metadata/reality/gcalienmood.meta.h>
 
 class cGcMessagePetBehaviourEvent
 {

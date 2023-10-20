@@ -1,6 +1,6 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
+#include <metadata/simulation/missions/types/gcjudgementmessageoptions.meta.h>
 
 class cGcMissionSequenceCompleteSettlementJudgement
 {

@@ -1,14 +1,14 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/tkmodelresource.meta.h>
+#include <metadata/tkmaterialresource.meta.h>
+#include <metadata/gamestate/basebuilding/gcbasebuildingentry.meta.h>
+#include <metadata/gamestate/basebuilding/gcbasebuildinggroup.meta.h>
+#include <metadata/gamestate/basebuilding/gcbasebuildingpalette.meta.h>
+#include <metadata/gamestate/basebuilding/gcid256list.meta.h>
+#include <metadata/gamestate/basebuilding/gcbasebuildingmaterial.meta.h>
+#include <metadata/gamestate/basebuilding/gcbasebuildingproperties.meta.h>
+#include <metadata/gamestate/basebuilding/gcbasebuildingfamily.meta.h>
 
 class cGcBaseBuildingTable
 {

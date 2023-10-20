@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/simulation/missions/types/gcmissionconditiontest.meta.h>
+#include <metadata/gamestate/messages/gcstatusmessagemissionmarkup.meta.h>
 
 class cGcMissionSequenceWaitForConditions
 {

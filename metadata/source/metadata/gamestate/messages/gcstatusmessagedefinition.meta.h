@@ -11,7 +11,7 @@ enum eReplicateTo
     EReplicateTo_Fireteam_Global_Distance = 6,
     EReplicateTo_Not_Fireteam = 7,
 }
-#include <?>
+#include <metadata/gamestate/messages/gcstatusmessagemissionmarkup.meta.h>
 
 class cGcStatusMessageDefinition
 {

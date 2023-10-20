@@ -1,10 +1,10 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/voxel/generator/tknoisevoxeltypeenum.meta.h>
+#include <metadata/voxel/generator/tknoiseuberlayerdata.meta.h>
+#include <metadata/voxel/generator/tknoisegriddata.meta.h>
+#include <metadata/voxel/generator/tknoisefeaturedata.meta.h>
+#include <metadata/voxel/generator/tknoisecavedata.meta.h>
 
 class cTkVoxelGeneratorData
 {

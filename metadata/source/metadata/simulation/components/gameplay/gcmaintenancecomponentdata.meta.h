@@ -1,6 +1,6 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
+#include <metadata/reality/gcmaintenanceelement.meta.h>
 enum eInteractable
 {
     EInteractable_OnlyWhenComplete = 0,
@@ -8,13 +8,13 @@ enum eInteractable
     EInteractable_Always = 2,
     EInteractable_Never = 3,
 }
-#include <?>
+#include <metadata/tkmodelrendererdata.meta.h>
 enum eModelRendererResource
 {
     EModelRendererResource_ModelNode = 0,
     EModelRendererResource_MasterModelNode = 1,
 }
-#include <?>
+#include <metadata/simulation/components/utils/gcbroadcastlevel.meta.h>
 
 class cGcMaintenanceComponentData
 {

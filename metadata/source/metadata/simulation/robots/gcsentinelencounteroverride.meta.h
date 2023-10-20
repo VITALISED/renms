@@ -1,8 +1,8 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/audio/gcaudiowwiseevents.meta.h>
+#include <metadata/reality/gcrealitygameicons.meta.h>
+#include <metadata/gameplay/gcencountertype.meta.h>
 
 class cGcSentinelEncounterOverride
 {

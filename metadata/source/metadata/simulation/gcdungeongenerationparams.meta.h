@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/simulation/gcdungeonroomparams.meta.h>
+#include <metadata/simulation/gcdungeonquestparams.meta.h>
 
 class cGcDungeonGenerationParams
 {

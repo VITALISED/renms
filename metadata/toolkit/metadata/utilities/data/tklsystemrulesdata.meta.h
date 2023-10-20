@@ -1,9 +1,9 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/utilities/data/tklsystemglobalrestriction.meta.h>
+#include <metadata/utilities/data/tklsystemglobalvariation.meta.h>
+#include <metadata/utilities/data/tklsystemrule.meta.h>
+#include <metadata/utilities/data/tklsystemruletemplate.meta.h>
 
 class cTkLSystemRulesData
 {

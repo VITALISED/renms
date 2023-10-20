@@ -1,6 +1,6 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
+#include <metadata/simulation/projectiles/gcprojectileimpacttype.meta.h>
 enum eImpactAlignment
 {
     EImpactAlignment_ImpactNormal = 0,

@@ -1,26 +1,26 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/simulation/environment/gcplanetlife.meta.h>
+#include <metadata/simulation/solarsystem/planet/gcplanethazarddata.meta.h>
 enum eResourceLevel
 {
     EResourceLevel_Low = 0,
     EResourceLevel_High = 1,
 }
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/simulation/environment/gcbuildingdensitylevels.meta.h>
+#include <metadata/simulation/solarsystem/planet/gcplanetdataresourcehint.meta.h>
+#include <metadata/simulation/solarsystem/planet/gcplanetcolourdata.meta.h>
+#include <metadata/simulation/solarsystem/planet/gcplanetweatherdata.meta.h>
+#include <metadata/simulation/environment/gcplanetcloudproperties.meta.h>
+#include <metadata/simulation/solarsystem/planet/gcplanetwaterdata.meta.h>
+#include <metadata/voxel/generator/tkvoxelgeneratordata.meta.h>
+#include <metadata/simulation/environment/gcenvironmentspawndata.meta.h>
+#include <metadata/reality/gcalienrace.meta.h>
+#include <metadata/simulation/environment/gcplanetbuildingdata.meta.h>
+#include <metadata/simulation/solarsystem/planet/gcplanetgenerationintermediatedata.meta.h>
+#include <metadata/simulation/solarsystem/planet/gcplanetinfo.meta.h>
+#include <metadata/simulation/solarsystem/planet/gcplanetsentineldata.meta.h>
+#include <metadata/simulation/solarsystem/planet/gcplanetringdata.meta.h>
 
 class cGcPlanetData
 {

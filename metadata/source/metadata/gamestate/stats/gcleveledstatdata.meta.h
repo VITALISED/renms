@@ -6,8 +6,8 @@ enum eStatMessageType
     EStatMessageType_Quick = 1,
     EStatMessageType_Silent = 2,
 }
-#include <?>
-#include <?>
+#include <metadata/tktextureresource.meta.h>
+#include <metadata/gamestate/stats/gcstatleveldata.meta.h>
 
 class cGcLeveledStatData
 {

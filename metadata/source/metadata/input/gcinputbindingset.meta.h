@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/input/gcactionsettype.meta.h>
+#include <metadata/input/gcinputbinding.meta.h>
 
 class cGcInputBindingSet
 {

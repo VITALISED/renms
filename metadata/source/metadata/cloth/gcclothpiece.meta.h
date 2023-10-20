@@ -24,14 +24,14 @@ enum eInitialShapeSource
     EInitialShapeSource_TakenFromRenderMesh = 1,
     EInitialShapeSource_Saved = 2,
 }
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/cloth/gcrectangularinitialshape.meta.h>
+#include <metadata/cloth/gcclothcollisionbone.meta.h>
+#include <metadata/cloth/gcclothattachmentcirlce.meta.h>
+#include <metadata/cloth/gcclothattachmentline.meta.h>
+#include <metadata/cloth/gcattachmentpointset.meta.h>
+#include <metadata/cloth/gcconstraintstocreatespec.meta.h>
+#include <metadata/cloth/gcadvancedtweaks.meta.h>
+#include <metadata/cloth/gcattachednode.meta.h>
 
 class cGcClothPiece
 {

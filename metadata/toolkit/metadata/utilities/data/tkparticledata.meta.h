@@ -1,9 +1,9 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/utilities/data/tkparticleburstdata.meta.h>
+#include <metadata/utilities/data/tkemitterfloatproperty.meta.h>
+#include <metadata/utilities/data/tkemitfromparticleinfo.meta.h>
+#include <metadata/animation/tkcurvetype.meta.h>
 enum eDragType
 {
     EDragType_IgnoreGravity = 0,
@@ -30,7 +30,7 @@ enum eBillboardAlignment
     EBillboardAlignment_NegativeZLocal = 6,
     EBillboardAlignment_ScreenWorld = 7,
 }
-#include <?>
+#include <metadata/utilities/data/tkcoordinateorientation.meta.h>
 enum eFlipbookPlaybackRate
 {
     EFlipbookPlaybackRate_Absolute = 0,
@@ -43,7 +43,7 @@ enum eOnRefractionsDisabled
     EOnRefractionsDisabled_Hide = 0,
     EOnRefractionsDisabled_AlphaBlend = 1,
 }
-#include <?>
+#include <metadata/tkfloatrange.meta.h>
 
 class cTkParticleData
 {

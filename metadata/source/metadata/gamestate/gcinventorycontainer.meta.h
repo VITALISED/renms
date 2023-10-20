@@ -1,11 +1,11 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/gamestate/gcinventoryelement.meta.h>
+#include <metadata/gamestate/gcinventoryindex.meta.h>
+#include <metadata/reality/gcinventoryclass.meta.h>
+#include <metadata/reality/gcinventorystacksizegroup.meta.h>
+#include <metadata/reality/gcinventorybasestatentry.meta.h>
+#include <metadata/gamestate/gcinventoryspecialslot.meta.h>
 
 class cGcInventoryContainer
 {

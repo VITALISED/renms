@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/simulation/npcs/gcnpcprobabilityanimationdata.meta.h>
+#include <metadata/simulation/npcs/gcnpcanimationlist.meta.h>
 
 class cGcNPCAnimationSetData
 {

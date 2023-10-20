@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/simulation/environment/gcbuildingclassification.meta.h>
+#include <metadata/simulation/environment/wfcbuildings/gcweightedcolourid.meta.h>
 
 class cGcBuildingColourPalette
 {

@@ -1,14 +1,14 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/tkmodelresource.meta.h>
+#include <metadata/tktextureresource.meta.h>
+#include <metadata/reality/gcrealitysubstancecategory.meta.h>
+#include <metadata/reality/gcproductcategory.meta.h>
+#include <metadata/reality/gcrarity.meta.h>
+#include <metadata/reality/gclegality.meta.h>
+#include <metadata/reality/gctechnologyrequirement.meta.h>
+#include <metadata/reality/gcitempricemodifiers.meta.h>
+#include <metadata/reality/gctradecategory.meta.h>
 enum eWikiCategory
 {
     EWikiCategory_NotEnabled = 0,

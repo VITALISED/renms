@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/gamestate/stats/gcstattype.meta.h>
+#include <metadata/tktextureresource.meta.h>
 
 class cGcJourneyMedal
 {

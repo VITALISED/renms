@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/reality/gcalienrace.meta.h>
+#include <metadata/simulation/environment/spawn/gcselectableobjectdata.meta.h>
 
 class cGcSelectableObjectList
 {

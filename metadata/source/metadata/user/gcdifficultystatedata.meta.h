@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/user/gcdifficultypresettype.meta.h>
+#include <metadata/user/gcdifficultysettingsdata.meta.h>
 
 class cGcDifficultyStateData
 {

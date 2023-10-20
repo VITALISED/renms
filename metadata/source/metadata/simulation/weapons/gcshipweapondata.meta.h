@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/reality/stats/gcstatstypes.meta.h>
+#include <metadata/simulation/weapons/gcremoteweapons.meta.h>
 
 class cGcShipWeaponData
 {

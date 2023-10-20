@@ -1,6 +1,6 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
+#include <metadata/tktextureresource.meta.h>
 enum eShipsToMark
 {
     EShipsToMark_None = 0,

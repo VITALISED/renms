@@ -1,12 +1,12 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/reality/gcalienrace.meta.h>
+#include <metadata/simulation/galaxy/gcgalaxystaranomaly.meta.h>
+#include <metadata/simulation/solarsystem/planet/gcplayerconflictdata.meta.h>
+#include <metadata/simulation/galaxy/gcgalaxystartypes.meta.h>
+#include <metadata/simulation/solarsystem/planet/gcplanettradingdata.meta.h>
+#include <metadata/simulation/solarsystem/planet/gcbiometype.meta.h>
+#include <metadata/simulation/solarsystem/planet/gcbiomesubtype.meta.h>
 
 class cGcScanEventSolarSystemLookup
 {

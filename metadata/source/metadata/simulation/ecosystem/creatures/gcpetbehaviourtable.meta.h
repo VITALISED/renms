@@ -1,11 +1,11 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/simulation/ecosystem/creatures/gcpetbehaviourdata.meta.h>
+#include <metadata/simulation/ecosystem/creatures/gcpettraitmoodmodifierlist.meta.h>
+#include <metadata/simulation/ecosystem/creatures/gcpetactionmoodmodifier.meta.h>
+#include <metadata/simulation/ecosystem/creatures/data/gccreaturepettraitranges.meta.h>
+#include <metadata/simulation/ecosystem/creatures/gcpettraitstaminamodifier.meta.h>
+#include <metadata/simulation/ecosystem/creatures/gcpetmoodstaminamodifier.meta.h>
 
 class cGcPetBehaviourTable
 {

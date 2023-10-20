@@ -1,8 +1,8 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/scene/materials/tkmaterialflags.meta.h>
+#include <metadata/scene/materials/tkmaterialuniform.meta.h>
+#include <metadata/scene/materials/tkmaterialsampler.meta.h>
 
 class cTkMaterialData
 {

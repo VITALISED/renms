@@ -9,8 +9,8 @@ enum eMultiItemRewardType
     EMultiItemRewardType_InventorySlot = 4,
     EMultiItemRewardType_CommunityTierProduct = 5,
 }
-#include <?>
-#include <?>
+#include <metadata/reality/gcproceduralproductcategory.meta.h>
+#include <metadata/reality/gcrarity.meta.h>
 
 class cGcMultiSpecificItemEntry
 {

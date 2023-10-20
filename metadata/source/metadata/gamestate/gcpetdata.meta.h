@@ -1,8 +1,8 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/simulation/solarsystem/planet/gcbiometype.meta.h>
+#include <metadata/simulation/ecosystem/creatures/gccreaturetypes.meta.h>
+#include <metadata/reality/gcdiscoveryowner.meta.h>
 
 class cGcPetData
 {

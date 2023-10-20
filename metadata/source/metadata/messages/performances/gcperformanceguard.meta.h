@@ -1,6 +1,6 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
+#include <metadata/simulation/components/gameplay/gcencountercomponentdata.meta.h>
 
 class cGcPerformanceGuard
 {

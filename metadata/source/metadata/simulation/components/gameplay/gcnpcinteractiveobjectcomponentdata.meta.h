@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/simulation/npcs/gcnpcinteractiveobjecttype.meta.h>
+#include <metadata/simulation/npcs/gcnpcinteractiveobjectstate.meta.h>
 
 class cGcNPCInteractiveObjectComponentData
 {

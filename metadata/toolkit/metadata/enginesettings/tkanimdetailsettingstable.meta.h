@@ -1,6 +1,6 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
+#include <metadata/enginesettings/tkanimdetailsettings.meta.h>
 
 class cTkAnimDetailSettingsTable
 {

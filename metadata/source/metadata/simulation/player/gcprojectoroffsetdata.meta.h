@@ -1,6 +1,6 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
+#include <metadata/ui/hud/gcinworlduiscreendata.meta.h>
 
 class cGcProjectorOffsetData
 {

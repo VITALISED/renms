@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/gamestate/basebuilding/gcpersistentbasetypes.meta.h>
+#include <metadata/gamestate/basebuilding/gcbasepartsearchfilter.meta.h>
 
 class cGcBaseSearchFilter
 {

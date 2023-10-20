@@ -1,17 +1,17 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/simulation/spaceship/ai/gcaishipspawndata.meta.h>
+#include <metadata/simulation/spaceship/ai/gcbountyspawninfo.meta.h>
+#include <metadata/simulation/space/gcpulseencounterinfo.meta.h>
+#include <metadata/simulation/space/gcbackgroundspaceencounterinfo.meta.h>
+#include <metadata/gameplay/gcplayerexperiencespawntable.meta.h>
+#include <metadata/gameplay/gcplayerexperiencespawnarchetypedata.meta.h>
+#include <metadata/gameplay/gcplayerexperienceasteroidcreaturespawntable.meta.h>
+#include <metadata/gameplay/gcsentinelspawnsequencegrouplist.meta.h>
+#include <metadata/simulation/robots/gcsentinelencounteroverride.meta.h>
+#include <metadata/gameplay/gcsentinelwavegroup.meta.h>
+#include <metadata/gameplay/gcsentinelspawnnamedsequence.meta.h>
+#include <metadata/gameplay/gcsentinelspawnwave.meta.h>
 
 class cGcExperienceSpawnTable
 {

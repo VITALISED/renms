@@ -5,7 +5,7 @@ enum eFreighterBaseGenerationMode
     EFreighterBaseGenerationMode_Prefab = 0,
     EFreighterBaseGenerationMode_WFC = 1,
 }
-#include <?>
+#include <metadata/simulation/gcfreighterbaseoptions.meta.h>
 
 class cGcFreighterBaseComponentData
 {

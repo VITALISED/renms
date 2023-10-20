@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/wiki/gcstoryentrybranch.meta.h>
+#include <metadata/reality/gcalienrace.meta.h>
 
 class cGcStoryEntry
 {

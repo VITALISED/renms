@@ -1,8 +1,8 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/simulation/environment/gcbuildingfilenamelist.meta.h>
+#include <metadata/simulation/environment/gcbuildingdefinitiondata.meta.h>
+#include <metadata/simulation/environment/gcbuildingclusterlayout.meta.h>
 
 class cGcBuildingDefinitionTable
 {

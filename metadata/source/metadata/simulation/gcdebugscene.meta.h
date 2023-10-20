@@ -1,18 +1,18 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/player/experience/gcexperiencedebugtriggerinput.meta.h>
+#include <metadata/simulation/npcs/gcnpcdebugspawndata.meta.h>
+#include <metadata/simulation/ecosystem/creatures/gcpetbehaviours.meta.h>
+#include <metadata/gamestate/gcpetdata.meta.h>
+#include <metadata/gamestate/gcpetcustomisationdata.meta.h>
+#include <metadata/simulation/space/spaceship/gcdebugshiptravelline.meta.h>
+#include <metadata/simulation/vehicles/gcdebugcamera.meta.h>
+#include <metadata/simulation/ecosystem/gccreaturedebugspawndata.meta.h>
+#include <metadata/simulation/vehicles/gcmechdebugspawndata.meta.h>
+#include <metadata/simulation/spaceship/ai/gcaishipdebugspawndata.meta.h>
+#include <metadata/graphics/camera/follow/gccamerafollowsettings.meta.h>
+#include <metadata/animation/tkcurvetype.meta.h>
+#include <metadata/simulation/spaceship/ai/gcdebugplanetpos.meta.h>
 
 class cGcDebugScene
 {

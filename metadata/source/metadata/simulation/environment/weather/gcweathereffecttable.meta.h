@@ -1,6 +1,6 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
+#include <metadata/simulation/environment/weather/gcweathereffect.meta.h>
 
 class cGcWeatherEffectTable
 {

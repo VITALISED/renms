@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/graphics/ngui/metadata/gcnguielementdata.meta.h>
+#include <metadata/ngui/tknguigraphicstyle.meta.h>
 enum eAltMode
 {
     EAltMode_None = 0,

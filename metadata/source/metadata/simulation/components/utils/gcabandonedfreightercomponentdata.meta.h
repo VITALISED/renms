@@ -1,8 +1,8 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/tkmodelresource.meta.h>
+#include <metadata/simulation/gcfreighterdungeonchoice.meta.h>
+#include <metadata/tktextureresource.meta.h>
 
 class cGcAbandonedFreighterComponentData
 {

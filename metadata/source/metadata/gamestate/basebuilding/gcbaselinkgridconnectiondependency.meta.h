@@ -1,6 +1,6 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
+#include <metadata/gamestate/basebuilding/gcbaselinkgridconnectiondata.meta.h>
 enum eDependentEffect
 {
     EDependentEffect_None = 0,

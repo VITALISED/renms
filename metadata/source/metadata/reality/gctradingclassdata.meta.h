@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/reality/gctradecategory.meta.h>
+#include <metadata/tktextureresource.meta.h>
 
 class cGcTradingClassData
 {

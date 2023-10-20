@@ -1,6 +1,6 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
+#include <metadata/simulation/gcfrigateflybylayout.meta.h>
 
 class cGcFrigateFlybyTable
 {

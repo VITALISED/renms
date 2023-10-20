@@ -1,9 +1,9 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/scene/materials/tkmaterialshadermillnode.meta.h>
+#include <metadata/scene/materials/tkmaterialshadermilllink.meta.h>
+#include <metadata/scene/materials/tkmaterialshadermillflag.meta.h>
+#include <metadata/scene/materials/tkmaterialshadermillcomment.meta.h>
 
 class cTkMaterialShaderMillData
 {

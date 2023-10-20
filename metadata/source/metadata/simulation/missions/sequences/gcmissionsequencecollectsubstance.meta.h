@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/simulation/missions/defaultmissionitems/gcdefaultmissionsubstanceenum.meta.h>
+#include <metadata/reality/gcitemneedpurpose.meta.h>
 
 class cGcMissionSequenceCollectSubstance
 {

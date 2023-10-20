@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/reality/gcunlockableitemtrees.meta.h>
+#include <metadata/reality/gcunlockabletreecosttype.meta.h>
 
 class cGcUnlockableTrees
 {

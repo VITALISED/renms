@@ -1,9 +1,9 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
-#include <?>
-#include <?>
+#include <metadata/simulation/solarsystem/planet/gcbiometype.meta.h>
+#include <metadata/simulation/photo/gcphotofauna.meta.h>
+#include <metadata/simulation/photo/gcphotoflora.meta.h>
+#include <metadata/simulation/photo/gcphotobuildings.meta.h>
 
 class cGcMissionSequenceWaitForPhoto
 {

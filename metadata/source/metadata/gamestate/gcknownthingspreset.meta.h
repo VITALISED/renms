@@ -1,7 +1,7 @@
 #pragma once
 #include <metadata/metadata_common.h>
-#include <?>
-#include <?>
+#include <metadata/gamestate/gcwordknowledge.meta.h>
+#include <metadata/gamestate/gcwordgroupknowledge.meta.h>
 
 class cGcKnownThingsPreset
 {

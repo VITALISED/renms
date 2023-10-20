@@ -7,7 +7,7 @@ enum eVsyncEx
     EVsyncEx_Adaptive = 2,
     EVsyncEx_Triple = 3,
 }
-#include <?>
+#include <metadata/enginesettings/tkgraphicsdetailpreset.meta.h>
 enum eTextureStreamingVk
 {
     ETextureStreamingVk_Off = 0,
