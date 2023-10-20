@@ -65,7 +65,7 @@ void UACPrompt(std::string filepath, std::string args = "") {
     }
 }
 
-HANDLE CreateProcessFrozen(std::filesystem::path path) {
+PROCESS_INFORMATION CreateProcessFrozen(LPCSTR path) {
     STARTUPINFOA startupInfo;
     PROCESS_INFORMATION processInfo;
     ZeroMemory(&startupInfo, sizeof(startupInfo));
@@ -73,14 +73,14 @@ HANDLE CreateProcessFrozen(std::filesystem::path path) {
     startupInfo.cb = sizeof(startupInfo);
 
     CreateProcessA(
-        (LPCSTR)path.c_str(),
+        path,
         NULL,
         NULL,
         NULL,
         FALSE,
         CREATE_SUSPENDED,
         NULL,
-        (LPCSTR)path.parent_path().c_str(),
+        NULL,
         &startupInfo,
         &processInfo
     );
@@ -93,10 +93,10 @@ HANDLE CreateProcessFrozen(std::filesystem::path path) {
         ));
     }
 
-    return processInfo.hProcess;
+    return processInfo;
 }
 
-void InjectDLL(std::filesystem::path path, HANDLE processHandle) {
+HANDLE InjectDLL(std::filesystem::path path, HANDLE processHandle) {
     LPVOID loadLibraryAddress = (LPVOID) GetProcAddress(
         GetModuleHandleA("kernel32.dll"),
         "LoadLibraryA"
@@ -133,16 +133,18 @@ void InjectDLL(std::filesystem::path path, HANDLE processHandle) {
         (SIZE_T)NULL,
         reinterpret_cast<LPTHREAD_START_ROUTINE>(loadLibraryAddress),
         remoteString,
-        (DWORD)NULL,
+        CREATE_SUSPENDED,
         NULL
     );
 
     if (!remoteThread)
         throw std::runtime_error("Failed to create remote thread");
 
-    WaitForSingleObject(remoteThread, INFINITE);
-    CloseHandle(remoteThread);
-    VirtualFreeEx(processHandle, remoteString, 0, MEM_RELEASE);
+    return remoteThread;
+
+    //WaitForSingleObject(remoteThread, INFINITE);
+    //CloseHandle(remoteThread);
+    //VirtualFreeEx(processHandle, remoteString, 0, MEM_RELEASE);
 }
 
 int main(int argc, char** argv) {
@@ -163,9 +165,14 @@ int main(int argc, char** argv) {
         std::filesystem::path heridiumPath = "../libHeridium.dll";
         CheckPath(nmsPath, false);
         CheckPath(heridiumPath, true);
-        HANDLE nmsProcess = CreateProcessFrozen(nmsPath);
-        InjectDLL(heridiumPath, nmsProcess);
-        ResumeThread(nmsProcess);
+        auto nmsProcess = CreateProcessFrozen(argv[1]);
+        auto dllProcess = InjectDLL(heridiumPath, nmsProcess.hProcess);
+
+        std::cout << "Press enter when ready..." << std::flush;
+        std::cin.get();
+
+        ResumeThread(nmsProcess.hThread);
+        ResumeThread(dllProcess);
 
         std::cout << "Injection successful!" << std::endl;
         return 0;
