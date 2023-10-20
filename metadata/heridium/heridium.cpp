@@ -18,7 +18,7 @@ void CreateOutputDirectories()
         lpacFullPath.append(lpacLocalPath);
         size_t lastindex = lpacFullPath.find_last_of("/"); 
         std::string lpacDirPath = lpacFullPath.substr(0, lastindex); 
-        std::filesystem::create_directories(lpacFullPath);
+        std::filesystem::create_directories(lpacDirPath);
     }
 };
 

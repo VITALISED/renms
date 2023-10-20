@@ -3,12 +3,13 @@
 #include "notation.h"
 
 #define HM_BEGIN_BUFFER std::string buffer = ""
-#define HM_PRELUDE buffer += "pragma once\n #include <metadata/metadata_common.h>\n\n"
+#define HM_PRELUDE buffer += "#pragma once\n#include <metadata/metadata_common.h>\n"
 #define HM_CLASS_BEGIN(lpacName)  buffer.append("class ").append(lpacName).append("\n{\n")
 #define HM_CLASS_END buffer.append("}\n")
 #define HM_INDENT buffer += "    "
 #define HM_SEMI buffer += ";\n"
 #define HM_BUFFER_CSTR buffer.c_str()
+#define HM_BUFFER buffer;
 
 #define HM_ISDEPENDENCYDEFINED(lpacName)    (std::find(this->mDefinedTypes.begin(), this->mDefinedTypes.end(), lpacName) != this->mDefinedTypes.end())
 #define HM_ADDINCLUDE(lpacPath, lpacName)   buffer.append("#include <").append(lpacPath).append(">\n"); \

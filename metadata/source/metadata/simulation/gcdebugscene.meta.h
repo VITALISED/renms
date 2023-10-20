@@ -1,0 +1,89 @@
+#pragma once
+#include <metadata/metadata_common.h>
+#include <?>
+#include <?>
+#include <?>
+#include <?>
+#include <?>
+#include <?>
+#include <?>
+#include <?>
+#include <?>
+#include <?>
+#include <?>
+#include <?>
+#include <?>
+
+class cGcDebugScene
+{
+    static unsigned long long muNameHash = 0xB5B196A1179FFE00;
+    static unsigned long long muTemplateHash = 0x6795C586BE70BA4E;
+
+    bool mbActive;
+    bool mbDebugDraw;
+    bool mbAutoSave;
+    cTkDynamicArray<cGcExperienceDebugTriggerInput> maTriggerActions;
+    bool mbFlyCamSmooth;
+    float mfFlyCamSmoothFactor;
+    float mfFlyCamSpeedModifier;
+    float mfNPCIdleMinDelay;
+    float mfNPCIdleMaxDelay;
+    cTkDynamicArray<TkID<128>> maDefaultNPCIdles;
+    cTkDynamicArray<cGcNPCDebugSpawnData> maDebugNPCSpawns;
+    bool mbLoadPetsFromDebugScene;
+    bool mbUpdatePetMoods;
+    bool mbResetMoodsOnSummon;
+    bool mbShowAccessoryMoods;
+    cGcPetBehaviours PetForceBehaviour;
+    cTkFixedArray<cGcPetData> maPets;
+    cTkFixedArray<cGcPetCustomisationData> maPetAccessoryCustomisation;
+    bool mbForcePlayerWalk;
+    float mfPlayerWalkSpeed;
+    int miPetRideIndex;
+    cTkDynamicArray<cTkVector3> maPetRideWayPoints;
+    bool mbForceSunPosition;
+    cTkVector3 mForcedSunPosition;
+    bool mbControlClouds;
+    float mfCloudCover;
+    float mfCloudAnimScale;
+    cTkVector2 mCloudWindOffset;
+    cTkVector2 mCloudStratosphereWindOffset;
+    bool mbBusyShips;
+    float mfCustomShipDockedTime;
+    float mfShipSpawningMultiplier;
+    cTkDynamicArray<cGcDebugShipTravelLine> maDebugShipPaths;
+    cTkDynamicArray<cGcDebugCamera> maDebugCameraPaths;
+    cTkDynamicArray<cGcCreatureDebugSpawnData> maDebugCreatureSpawns;
+    cTkDynamicArray<cGcMechDebugSpawnData> maDebugMechSpawns;
+    cTkDynamicArray<cGcAIShipDebugSpawnData> maDebugEnemyShipSpawns;
+    cTkDynamicArray<cGcAIShipDebugSpawnData> maDebugShipSpawns;
+    cTkFixedArray<cGcCameraFollowSettings> maVehicleCameraOverride;
+    bool mbDebugDroneScanPlayer;
+    cTkVector3 mDebugDroneSpawn;
+    cTkVector3 mDebugDroneTarget;
+    int miDebugNumDrones;
+    cTkVector3 mDebugWalkerSpawn;
+    cTkVector3 mDebugWalkerTarget;
+    cTkVector3 mDebugFlybyTarget;
+    cTkVector3 mDebugFlybyDir;
+    float mfDebugFlybyRange;
+    cTkSeed mDebugFlybySeed;
+    TkID<128> mDebugExperienceCamShake;
+    cTkVector3 mDebugShipSpawnPos;
+    cTkVector3 mDebugShipSpawnFacing;
+    cTkVector3 mDebugShipSpawnUp;
+    TkID<128> mPulseEncounter;
+    TkID<128> mBackgroundSpaceEncounter;
+    cTkVector3 mSandwormSpawnPos;
+    cTkVector3 mDebugFrigateFlybySpawnPos;
+    float mfDebugFrigateFlybyRotation;
+    float mfDebugFrigateFlybyHeightOffset;
+    TkID<128> mNormandyReward;
+    TkID<128> mLivingFrigateReward;
+    float mfCameraSpinTime;
+    float mfCameraSpinRevolutions;
+    float mfCameraSpinVerticalOffset;
+    float mfCameraSpinDistanceOffset;
+    cTkCurveType CameraSpinEasing;
+    cTkFixedArray<cGcDebugPlanetPos> maPlanetPositions;
+}

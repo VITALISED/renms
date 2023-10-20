@@ -1,0 +1,116 @@
+#pragma once
+#include <metadata/metadata_common.h>
+#include <?>
+#include <?>
+#include <?>
+#include <?>
+#include <?>
+#include <?>
+#include <?>
+#include <?>
+#include <?>
+#include <?>
+#include <?>
+#include <?>
+#include <?>
+#include <?>
+#include <?>
+#include <?>
+#include <?>
+#include <?>
+#include <?>
+
+class cGcSeasonalGameModeData
+{
+    static unsigned long long muNameHash = 0xFD6B0BE30E218605;
+    static unsigned long long muTemplateHash = 0xA4C94919ED47AAA7;
+
+    int miSeasonId;
+    unsigned long long mui64StartTimeUTC;
+    unsigned long long mui64EndTimeUTC;
+    unsigned long long mui64Hash;
+    cTkFixedString<32,char> macTitle;
+    cTkFixedString<32,char> macSubtitle;
+    cTkFixedString<32,char> macDescription;
+    TkID<256> mFinalStageTitle;
+    TkID<256> mMilestoneWithStageLocId;
+    cGcGameMode GameMode;
+    cGcDifficultyPresetType DifficultySettingPreset;
+    cGcDifficultySettingsData DifficultyMinimums;
+    cTkFixedString<32,char> macSeasonalUAOverride;
+    unsigned long long mui64UAOverrideValue;
+    TkID<128> mFinalReward;
+    TkID<128> mFinalRewardSwitchAlt;
+    TkID<256> mFinalCantRewardMessage;
+    cTkFixedString<512,char> macFinalRewardDescription;
+    cTkTextureResource MainIcon;
+    int miSeasonNumber;
+    int miRemixNumber;
+    int miDisplayNumber;
+    TkID<256> mSeasonName;
+    TkID<256> mSeasonNameUpper;
+    TkID<256> mMainMissionTitle;
+    TkID<256> mMainMissionMessage;
+    bool mbDoCommunityMissionTextSubstitutions;
+    bool mbDefaultToPvPOff;
+    bool mbMustCraftInBases;
+    cTkDynamicArray<TkID<128>> maAdditionalTradeProducts;
+    cTkDynamicArray<TkID<128>> maNeverTradeProducts;
+    int miStartingSuitSlots;
+    int miStartingSuitTechSlots;
+    int miStartingSuitCargoSlots;
+    cTkSeed mWeaponSeed;
+    cTkSeed mShipSeed;
+    cGcSpaceshipClasses ShipType;
+    bool mbStartWithFreighter;
+    cTkFixedString<128,char> macFreighterBaseOverrideFilename;
+    cGcAlienRace FreighterRace;
+    bool mbStartAboardFreighter;
+    bool mbForceStartSystemTernary;
+    bool mbForceStartSystemAbandoned;
+    cTkDynamicArray<cGcBuildingClassification> maValidSpawnBuildings;
+    cGcInventoryLayout WeaponInventoryLayout;
+    cGcInventoryLayout ShipInventoryLayout;
+    cGcInventoryLayout ShipTechInventoryLayout;
+    bool mbUseDefaultAppearance;
+    cGcInventoryContainer Inventory;
+    cGcInventoryContainer Inventory_TechOnly;
+    cGcInventoryContainer Inventory_Cargo;
+    cGcInventoryContainer ShipInventory;
+    cGcInventoryContainer WeaponInventory;
+    bool mbUseRandomPet;
+    cTkDynamicArray<cGcSeasonPetConstraints> maRandomPetConstraints;
+    cTkFixedArray<cGcPetData> maSpecificPets;
+    cTkDynamicArray<cGcSandwormTimerAndFrequencyOverride> maSandwormOverrides;
+    bool mbSandwormGlobalOverride;
+    float mfSandwormGlobalOverrideTimer;
+    float mfSandwormGlobalOverrideSpawnChance;
+    bool mbStartNextToShip;
+    float mfDistanceFromShipAtStartOfGame;
+    bool mbShipStartsDamaged;
+    bool mbAllowMissionDetailMessages;
+    bool mbUseStartPlanetObjectListOverrides;
+    TkID<128> mStartPlanetRareSubstanceOverride;
+    bool mbTrashInventoryOnGalaxyTravel;
+    int miFreighterBattleEarlyWarpsOverride;
+    bool mbForceDeepSpaceAmbientFrigatesOnInfested;
+    int miTechCostMultiplier;
+    cTkDynamicArray<TkID<128>> maNeverLearnableTech;
+    cTkDynamicArray<TkID<128>> maForgottenProducts;
+    bool mbIncreaseXClassTechOddsWithCommTier;
+    float mfAbandonedFreighterHazardProtectionMul;
+    float mfHazardProtectionDrainMultiplier;
+    float mfEnergyDrainMultiplier;
+    int miQuestSubstanceReducer;
+    cTkDynamicArray<cGcSeasonalStage> maStages;
+    cGcScanEventTable ScanEventTable;
+    bool mbResetSaveOnDeath;
+    cTkDynamicArray<cGcPersistedStatData> maStatsToPersistOnReset;
+    bool mbCompatibleWithState;
+    bool mbHasBeenConverted;
+    cTkDynamicArray<cGcTechnology> maTechnologyTable;
+    cTkDynamicArray<cGcProductData> maProductTable;
+    cTkDynamicArray<cGcRealitySubstanceData> maSubstanceTable;
+    cGcTradeData SeasonalUAStationTradeData;
+    bool mbUseSeasonalUAStationTradeData;
+}

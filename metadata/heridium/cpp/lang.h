@@ -10,11 +10,11 @@ class HeridiumCXXFile
     std::vector<const char*> mDefinedTypes;
     
 public:
-    const char* FindIncludePathForClass(const char* lpacClassName);
-    const char* DoEnumLookup(cTkMetaDataMember* lpCurrentMember);
-    const char* DoFlagLookup(cTkMetaDataMember* lpCurrentMember);
-    const char* DoHeaderFirstPass();
-    const char* GetInnerType(cTkMetaDataMember* lpCurrentMember);
+    std::string FindIncludePathForClass(const char* lpacClassName);
+    std::string DoEnumLookup(cTkMetaDataMember* lpCurrentMember);
+    std::string DoFlagLookup(cTkMetaDataMember* lpCurrentMember);
+    std::string DoHeaderFirstPass();
+    std::string GetInnerType(cTkMetaDataMember* lpCurrentMember);
     void WriteHeaderFile();
     void WriteSourceFile();
 
