@@ -3,12 +3,36 @@
 #include <bitset>
 #include <Windows.h>
 #include <shellapi.h>
+#include <vector>
 #include <iostream>
 #include <string>
 #include <format>
-#include <fstream>
 
-void CheckPath(std::filesystem::path path, bool isDLL) {
+void WaitToClose(int code) {
+    if (code == -1) {   //started without elevation
+        exit(code);
+
+    } else if (code == 0) {
+        std::cout << "\n";
+        for (int i = 5; i >= 0; i--) {
+            std::cout << std::format("\rClosing in {}...", i) << std::flush;
+            Sleep(1000);
+        }
+        std::cout << std::endl;
+        exit(code);
+
+    } else {
+        std::cout << "\nPress enter to close..." << std::flush;
+        std::cin.get();
+        exit(code);
+    }
+}
+
+void CheckPath(std::filesystem::path path, std::string filename) {
+    if (std::filesystem::is_directory(path)) {
+        path /= filename;
+    }
+    
     if (!std::filesystem::exists(path)) {
         throw std::runtime_error(
             std::format("File not found: {}", path.string()));
@@ -19,17 +43,9 @@ void CheckPath(std::filesystem::path path, bool isDLL) {
             std::format("Not a file: {}", path.string()));
     }
 
-    if (isDLL) {
-        if (path.extension() != ".dll") {
-            throw std::runtime_error(
-                std::format("Not a DLL: {}", path.string()));
-        }
-        return;
-    }
-
-    if (path.extension() != ".exe") {
+    if (path.filename() != filename) {
         throw std::runtime_error(
-            std::format("Not a valid executable: {}", path.string()));
+            std::format("Not the right kind of file: got {}, expected {}", path.filename().string(), filename));
     }
 }
 
@@ -152,45 +168,48 @@ HANDLE InjectDLL(std::filesystem::path path, HANDLE processHandle) {
         throw std::runtime_error("Failed to create remote thread");
 
     return remoteThread;
-
-    //WaitForSingleObject(remoteThread, INFINITE);
-    //CloseHandle(remoteThread);
-    //VirtualFreeEx(processHandle, remoteString, 0, MEM_RELEASE);
 }
 
 int main(int argc, char** argv) {
-    if (argc < 2) {
-        std::cout << std::endl <<
-        "Heridium Launcher by tractorbeam - Developed for the RE:NMS project\n" <<
-        std::format("Usage: launcher.exe <path to NMS.exe>\n") << std::flush;
-        return 1;
-    }
+    std::cout << std::endl <<
+    "Heridium Launcher by tractorbeam - Developed for the RE:NMS project\n" << std::flush;
 
     try {
+        std::filesystem::path exePath, nmsPath, heridiumPath;
+        exePath = argv[0];
+
+        if (argc < 2) {
+            nmsPath = exePath.parent_path();
+            nmsPath /= "NMS.exe";
+        } else
+            nmsPath = argv[1];
+
+        heridiumPath = exePath.parent_path();
+        heridiumPath /= "libHeridium.dll";
+        CheckPath(nmsPath, "NMS.exe");
+        CheckPath(heridiumPath, "libHeridium.dll");
+
+        std::cout << "Checking if we're running as admin...\n" << std::flush;
         if (!IsUserAdmin()) {
+            std::cout << "Not running as admin, restarting with elevation...\n" << std::flush;
             UACPrompt(argv[0], argv[1]);
-            return 0;
+            WaitToClose(-1);
         }
 
-        std::filesystem::path nmsPath = argv[1];
-        std::filesystem::path heridiumPath = "../libHeridium.dll";
-        CheckPath(nmsPath, false);
-        CheckPath(heridiumPath, true);
+        std::cout << "Loading NMS.exe...\n" << std::flush;
         auto nmsProcess = CreateProcessFrozen(argv[1]);
+        std::cout << "Injecting the DLL...\n" << std::flush;
         auto dllProcess = InjectDLL(heridiumPath, nmsProcess.hProcess);
 
-        std::cout << "Press enter when ready..." << std::flush;
-        std::cin.get();
-
-        ResumeThread(nmsProcess.hThread);
+        std::cout << "Initializing the DLL...\n" << std::flush;
         ResumeThread(dllProcess);
+        Sleep(1000);
+        ResumeThread(nmsProcess.hThread);
 
-        std::cout << "Injection successful!" << std::endl;
-        return 0;
+        std::cout << "Injection successful!\n\n" << std::endl;
+        WaitToClose(0);
     } catch (std::exception& e) {
         std::cout << "Error! " << e.what() << std::endl;
-        std::ofstream errorfile("./error.log", std::ios::app);
-        errorfile << e.what() << std::endl;
-        return 1;
+        WaitToClose(1);
     }
 }
