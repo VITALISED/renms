@@ -12,8 +12,8 @@
 #define HM_BUFFER buffer;
 
 #define HM_ISDEPENDENCYDEFINED(lpacName)    (std::find(this->mDefinedTypes.begin(), this->mDefinedTypes.end(), lpacName) != this->mDefinedTypes.end())
-#define HM_ADDINCLUDE(lpacPath, lpacName)   buffer.append("#include <").append(lpacPath).append(">\n"); \
-                                            this->mDefinedTypes.push_back(lpacName)
+//This do-while suppresses a warning about multiple statements on a single line. It turns this into it's own block, but it should still work.
+#define HM_ADDINCLUDE(lpacPath, lpacName) do{buffer.append("#include <").append(lpacPath).append(">\n"); this->mDefinedTypes.push_back(lpacName);} while (0)
 #define HM_ENUMNAME(lpacName) std::string("e").append(lpacName).c_str()
 #define HM_FLAGNAME(lpacName) std::string("ex").append(lpacName).c_str()
 #define HM_ENUMNOTATION(lpacName) std::string("E").append(lpacName).c_str()

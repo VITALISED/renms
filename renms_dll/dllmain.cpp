@@ -4,6 +4,8 @@ BOOL APIENTRY DllMain(HMODULE hModule,
                       DWORD ul_reason_for_call,
                       LPVOID lpReserved)
 {
+    //Required for dll entry point to work
+    UNREFERENCED_PARAMETER(hModule);
     UNREFERENCED_PARAMETER(lpReserved);
 
     switch (ul_reason_for_call)
