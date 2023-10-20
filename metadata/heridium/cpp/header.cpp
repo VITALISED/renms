@@ -9,6 +9,40 @@ HeridiumCXXFile::HeridiumCXXFile(const char* lpacFileLocation, const cTkMetaData
     this->WriteSourceFile();
 }
 
+const char* HeridiumCXXFile::DoEnumLookup(cTkMetaDataMember* lpCurrentMember)
+{
+    HM_BEGIN_BUFFER;
+
+    HM_ENUM_BEGIN(lpCurrentMember->mpClassMetadata->mpacName);
+
+    for(int i = 0; i < lpCurrentMember->miNumEnumMembers; i++)
+    {
+        cTkMetaDataEnumLookup lCurrentEnumMember = lpCurrentMember->mpEnumLookup[i];
+        HM_ENUM_VAL(lCurrentEnumMember.mpacName, lCurrentEnumMember.miValue);
+    }
+
+    HM_ENUM_END;
+
+    return HM_BUFFER_CSTR;
+}
+
+const char* HeridiumCXXFile::DoFlagLookup(cTkMetaDataMember* lpCurrentMember)
+{
+    HM_BEGIN_BUFFER;
+
+    HM_FLAG_BEGIN(lpCurrentMember->mpClassMetadata->mpacName);
+
+    for(int i = 0; i < lpCurrentMember->miNumEnumMembers; i++)
+    {
+        cTkMetaDataEnumLookup lCurrentEnumMember = lpCurrentMember->mpEnumLookup[i];
+        HM_FLAG_VAL(lCurrentEnumMember.mpacName, lCurrentEnumMember.miValue);
+    }
+
+    HM_FLAG_END;
+
+    return HM_BUFFER_CSTR;
+}
+
 const char* HeridiumCXXFile::FindIncludePathForClass(const char* lpacClassName)
 {
     char lpacLowers[128] = {};
@@ -23,8 +57,10 @@ const char* HeridiumCXXFile::FindIncludePathForClass(const char* lpacClassName)
         if(lpacLowers == lItem.first)
         {
             return lItem.second;
-        }
+        } 
     }
+
+    return "?";
 }
 
 const char* HeridiumCXXFile::DoHeaderFirstPass()
@@ -34,12 +70,32 @@ const char* HeridiumCXXFile::DoHeaderFirstPass()
     for(int i = 0; i < this->mpMetaDataClass->miNumMembers; i++)
     {
         cTkMetaDataMember currentMember = this->mpMetaDataClass->maMembers[i];
+        const char* lpacEnumName;
+        const char* lpacFlagName;
 
         switch(currentMember.mType)
         {
             case cTkMetaDataMember::EType_Class:
                 if(!HM_ISDEPENDENCYDEFINED(currentMember.mpClassMetadata->mpacName))
                     HM_ADDINCLUDE(FindIncludePathForClass(currentMember.mpClassMetadata->mpacName), currentMember.mpClassMetadata->mpacName);
+                break;
+            case cTkMetaDataMember::EType_Enum:
+                lpacEnumName = HM_ENUMNAME(currentMember.mpClassMetadata->mpacName);
+                if(!HM_ISDEPENDENCYDEFINED(lpacEnumName))
+                {
+                    this->mDefinedTypes.push_back(lpacEnumName);
+                    HM_PUSHSTRING(this->DoEnumLookup(&currentMember));
+                }
+                break;
+            case cTkMetaDataMember::EType_Flags:
+                lpacFlagName = HM_FLAGNAME(currentMember.mpClassMetadata->mpacName);
+                if(!HM_ISDEPENDENCYDEFINED(lpacFlagName))
+                {
+                    this->mDefinedTypes.push_back(lpacFlagName);
+                    HM_PUSHSTRING(this->DoFlagLookup(&currentMember));
+                }
+                break;
+            default:
                 break;
         }
 
@@ -50,7 +106,44 @@ const char* HeridiumCXXFile::DoHeaderFirstPass()
                 if(!HM_ISDEPENDENCYDEFINED(currentMember.mpClassMetadata->mpacName))
                     HM_ADDINCLUDE(FindIncludePathForClass(currentMember.mpClassMetadata->mpacName), currentMember.mpClassMetadata->mpacName);
                 break;
+            case cTkMetaDataMember::EType_Enum:
+                lpacEnumName = HM_ENUMNAME(currentMember.mpClassMetadata->mpacName);
+                if(!HM_ISDEPENDENCYDEFINED(lpacEnumName))
+                {
+                    this->mDefinedTypes.push_back(lpacEnumName);
+                    HM_PUSHSTRING(this->DoEnumLookup(&currentMember));
+                }
+                break;
+            case cTkMetaDataMember::EType_Flags:
+                lpacFlagName = HM_FLAGNAME(currentMember.mpClassMetadata->mpacName);
+                if(!HM_ISDEPENDENCYDEFINED(lpacFlagName))
+                {
+                    this->mDefinedTypes.push_back(lpacFlagName);
+                    HM_PUSHSTRING(this->DoFlagLookup(&currentMember));
+                }
+                break;
+            default:
+                break;
         }
+    }
+
+    HM_PUSHSTRING("\n");
+
+    return HM_BUFFER_CSTR;
+}
+
+const char* HeridiumCXXFile::GetInnerType(cTkMetaDataMember* lpCurrentMember)
+{
+    switch(lpCurrentMember->mInnerType)
+    {
+        case cTkMetaDataMember::EType_Class:
+            return lpCurrentMember->mpClassMetadata->mpacName;
+        case cTkMetaDataMember::EType_Enum:
+            return HM_ENUMNAME(lpCurrentMember->mpClassMetadata->mpacName);
+        case cTkMetaDataMember::EType_Flags:
+            return HM_FLAGNAME(lpCurrentMember->mpClassMetadata->mpacName);
+        default:
+            return heridium::CXX_MemberTypeToNamed(lpCurrentMember->mInnerType);
     }
 }
 
@@ -59,6 +152,9 @@ void HeridiumCXXFile::WriteHeaderFile()
     HM_BEGIN_BUFFER; 
 
     HM_PRELUDE;
+
+    HM_PUSHSTRING(this->DoHeaderFirstPass());
+
     HM_CLASS_BEGIN(this->mpMetaDataClass->mpacName);
 
     // hashes
@@ -82,7 +178,7 @@ void HeridiumCXXFile::WriteHeaderFile()
                 HM_MEMBER(cTkMetaDataMember::EType_Byte, currentMember.mpacName);
                 break;
             case cTkMetaDataMember::EType_Class:
-                //use class preprocessor
+                HM_DEFINED_MEMBER(currentMember.mpClassMetadata->mpacName, currentMember.mpacName);
                 break;
             case cTkMetaDataMember::EType_ClassPointer:
                 HM_MEMBER(cTkMetaDataMember::EType_ClassPointer, currentMember.mpacName);
@@ -91,7 +187,7 @@ void HeridiumCXXFile::WriteHeaderFile()
                 HM_MEMBER(cTkMetaDataMember::EType_Colour, currentMember.mpacName);
                 break;
 		    case cTkMetaDataMember::EType_DynamicArray:
-                //use inner type preprocessor
+                HM_TEMPLATED_MEMBER(currentMember);
                 break;
             case cTkMetaDataMember::EType_DynamicString:
                 HM_MEMBER(cTkMetaDataMember::EType_DynamicString, currentMember.mpacName);
@@ -100,13 +196,13 @@ void HeridiumCXXFile::WriteHeaderFile()
                 HM_MEMBER(cTkMetaDataMember::EType_DynamicWideString, currentMember.mpacName);
                 break;
             case cTkMetaDataMember::EType_Enum:
-                //user class preprocessor (maybe)
+                HM_DEFINED_MEMBER(HM_ENUMNAME(currentMember.mpClassMetadata->mpacName), currentMember.mpacName);
                 break;
             case cTkMetaDataMember::EType_Filename:
                 HM_MEMBER(cTkMetaDataMember::EType_Filename, currentMember.mpacName);
                 break;
 		    case cTkMetaDataMember::EType_Flags:
-                //basically the same as an enum
+                HM_DEFINED_MEMBER(HM_FLAGNAME(currentMember.mpClassMetadata->mpacName), currentMember.mpacName);
                 break;
             case cTkMetaDataMember::EType_Float:
                 HM_MEMBER(cTkMetaDataMember::EType_Float, currentMember.mpacName);
@@ -148,7 +244,7 @@ void HeridiumCXXFile::WriteHeaderFile()
                 HM_MEMBER(cTkMetaDataMember::EType_Seed, currentMember.mpacName);
                 break;
             case cTkMetaDataMember::EType_StaticArray:
-                // use inner type preprocessor
+                HM_TEMPLATED_MEMBER(currentMember);
                 break;
             case cTkMetaDataMember::EType_String1024:
                 HM_MEMBER(cTkMetaDataMember::EType_String1024, currentMember.mpacName);
@@ -202,8 +298,10 @@ void HeridiumCXXFile::WriteHeaderFile()
                 break;
         }
     }
-}
 
-void HeridiumCXXFile::WriteSourceFile() {
-    //Todo: this.
+    const char* lFinal =  HM_BUFFER_CSTR;
+
+    this->mTargetFile << lFinal;
+
+    this->mTargetFile.close();
 }

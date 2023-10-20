@@ -14,8 +14,26 @@ void RegisterHook(const cTkMetaDataClass* lpClassMetadata,
     void(* lDestroyFunction)(cTkClassPointer*))
 {
     spdlog::info(lpClassMetadata->mpacName);
+    
+    char lpacLowers[128] = {};
 
-    HeridiumCXXFile file = HeridiumCXXFile("temp", lpClassMetadata);
+    for(int i = 0; i < strlen(lpClassMetadata->mpacName); i++)
+    {
+        putchar(tolower(lpacLowers[i]));
+    }
+
+    std::string lPath = std::filesystem::current_path().string();
+    lPath.append("/HERIDIUM/cpp/");
+
+    for(std::pair<const char*, const char*> lItem : classPaths)
+    {
+        if(lpacLowers == lItem.first)
+        {
+            lPath.append(lItem.second);
+        } 
+    }
+
+    HeridiumCXXFile file = HeridiumCXXFile(lPath.c_str(), lpClassMetadata);
     file.WriteHeaderFile();
 
     typedef void(*HOOK_TYPE)(
@@ -36,6 +54,8 @@ void RegisterHook(const cTkMetaDataClass* lpClassMetadata,
 
 void AnalysisInit()
 {
+    heridium::CreateOutputDirectories();
+
     HOOK(OFFSET(0x248ABC0), reinterpret_cast<LPVOID>(RegisterHook), cTkMetaData::Register);
 
     if(HOOK_STATUS() == MH_OK)

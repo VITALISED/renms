@@ -43,9 +43,10 @@ inline MH_STATUS AddHook(LPVOID pTarget, LPVOID pDetour, void *ppOriginal, const
 			spdlog::error("MH_EnableHook failed for: {} {}", formatName, MH_StatusToString(EnableHook));
 			return EnableHook;
 		}
+	} else {
+		spdlog::error("MH_CreateHook failed for: {} {}", formatName, MH_StatusToString(CreateHook));
 	}
-	
-	spdlog::error("MH_CreateHook failed for: {} {}", formatName, MH_StatusToString(CreateHook));
+
 	return CreateHook;
 }
 

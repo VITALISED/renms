@@ -11,7 +11,10 @@ class HeridiumCXXFile
     
 public:
     const char* FindIncludePathForClass(const char* lpacClassName);
+    const char* DoEnumLookup(cTkMetaDataMember* lpCurrentMember);
+    const char* DoFlagLookup(cTkMetaDataMember* lpCurrentMember);
     const char* DoHeaderFirstPass();
+    const char* GetInnerType(cTkMetaDataMember* lpCurrentMember);
     void WriteHeaderFile();
     void WriteSourceFile();
 
