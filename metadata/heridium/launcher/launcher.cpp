@@ -110,7 +110,7 @@ int main(int argc, char** argv) {
     if (argc < 2) {
         std::cout << std::endl <<
         "Heridium Launcher by tractorbeam - Developed for the RE:NMS project\n" <<
-        std::format("Usage: {} <path to NMS.exe>", argv[0]) <<
+        std::format("Usage: launcher.exe <path to NMS.exe>\n") <<
         "(Hint: You can just drag and drop the exe over the launcher)\n\n" << std::flush;
         return 1;
     }
