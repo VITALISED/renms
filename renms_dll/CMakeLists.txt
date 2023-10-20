@@ -9,7 +9,6 @@ add_library(
     "memory/hooks.h"
     "plugins/plugin.h"
     "plugins/plugin.cpp"
-
 )
 
 set_target_properties(renms_dll PROPERTIES OUTPUT_NAME renms)

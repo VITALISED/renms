@@ -1,18 +1,22 @@
 #include "lex.h"
 #include "notation.h"
-
-#include <fstream>
+#include "../heridium.h"
 
 class HeridiumCXXFile
 {
-    std::ofstream target_file;
-    const char* file_location;
-    const cTkMetaDataClass* metadata_class;
+    std::ofstream mTargetFile;
+    const char* mpacFileLocation;
+    const cTkMetaDataClass* mpMetaDataClass;
+    std::vector<const char*> mDefinedTypes;
     
 public:
-    void DoHeaderFirstPass();
+    std::string FindIncludePathForClass(const char* lpacClassName);
+    std::string DoEnumLookup(cTkMetaDataMember* lpCurrentMember);
+    std::string DoFlagLookup(cTkMetaDataMember* lpCurrentMember);
+    std::string DoHeaderFirstPass();
+    std::string GetInnerType(cTkMetaDataMember* lpCurrentMember);
     void WriteHeaderFile();
     void WriteSourceFile();
 
-    HeridiumCXXFile(const char* file_location, const cTkMetaDataClass* metadata_class);
+    HeridiumCXXFile(const char* lpacFileLocation, const cTkMetaDataClass* lpMetaDataClass);
 };

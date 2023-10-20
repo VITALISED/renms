@@ -13,10 +13,36 @@ void RegisterHook(const cTkMetaDataClass* lpClassMetadata,
     unsigned __int64(* lHashFunction)(const cTkClassPointer*, unsigned __int64, bool),
     void(* lDestroyFunction)(cTkClassPointer*))
 {
-    spdlog::info(lpClassMetadata->mpacName);
+    std::string lsKey = lpClassMetadata->mpacName;
+    
+    if (lsKey.find_first_of("c") != std::string::npos)
+    {
+        lsKey = lsKey.substr(lsKey.find_first_of("c"));
+    }
 
-    HeridiumCXXFile file = HeridiumCXXFile("temp", lpClassMetadata);
-    file.WriteHeaderFile();
+    std::transform(lsKey.begin(), lsKey.end(), lsKey.begin(),
+        [](unsigned char c) { return (char)std::tolower(c); });
+
+    std::string lPath = std::filesystem::current_path().string();
+    lPath.append("/HERIDIUM/cpp/");
+
+    bool lbFoundPath = false;
+
+    for(std::pair<const char*, const char*> lItem : classPaths)
+    {
+        if(lItem.first == lsKey)
+        {
+            lPath.append(lItem.second);
+            lbFoundPath = true;
+        }
+    }
+
+    if(!lbFoundPath)
+        lPath.append("/unmapped/").append(lsKey).append(".meta.h");
+
+    spdlog::info(lPath);
+
+    HeridiumCXXFile(lPath.c_str(), lpClassMetadata);
 
     typedef void(*HOOK_TYPE)(
         const cTkMetaDataClass* lpClassMetadata,
@@ -29,13 +55,15 @@ void RegisterHook(const cTkMetaDataClass* lpClassMetadata,
         cTkClassPointer* (* lCreateFunction)(cTkClassPointer* result),
         unsigned __int64(* lHashFunction)(const cTkClassPointer*, unsigned __int64, bool),
         void(* lDestroyFunction)(cTkClassPointer*)
-        );
+    );
 
     CALL_ORIGINAL(cTkMetaData::Register, lpClassMetadata, lDefaultFunction, lFixingFunction, lValidateFunction, lRenderFunction, lEqualsFunction, lCopyFunction, lCreateFunction, lHashFunction, lDestroyFunction);
 }
 
 void AnalysisInit()
 {
+    heridium::CreateOutputDirectories();
+
     HOOK(OFFSET(0x248ABC0), reinterpret_cast<LPVOID>(RegisterHook), cTkMetaData::Register);
 
     if(HOOK_STATUS() == MH_OK)
