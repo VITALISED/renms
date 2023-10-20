@@ -1,9 +1,12 @@
 
 #include <filesystem>
+#include <bitset>
 #include <Windows.h>
+#include <shellapi.h>
 #include <iostream>
 #include <string>
 #include <format>
+#include <fstream>
 
 void CheckPath(std::filesystem::path path, bool isDLL) {
     if (!std::filesystem::exists(path)) {
@@ -30,6 +33,38 @@ void CheckPath(std::filesystem::path path, bool isDLL) {
     }
 }
 
+bool IsUserAdmin() {
+    BOOL isAdmin = FALSE;
+    PSID adminSID = NULL;
+    SID_IDENTIFIER_AUTHORITY ntAuthority = SECURITY_NT_AUTHORITY;
+
+    if (AllocateAndInitializeSid(&ntAuthority, 2, SECURITY_BUILTIN_DOMAIN_RID,
+        DOMAIN_ALIAS_RID_ADMINS, 0, 0, 0, 0, 0, 0, &adminSID)) {
+        if (!CheckTokenMembership(NULL, adminSID, &isAdmin)) {
+            isAdmin = FALSE;
+        }
+        FreeSid(adminSID);
+    }
+    return isAdmin == TRUE;
+}
+
+void UACPrompt(std::string filepath, std::string args = "") {
+    SHELLEXECUTEINFOA sei = { sizeof(sei) };
+    sei.lpVerb = (LPCSTR)"runas";
+    sei.lpFile = (LPCSTR)filepath.c_str();
+    sei.lpParameters = (LPCSTR)args.c_str();
+    sei.hwnd = NULL;
+    sei.nShow = SW_NORMAL;
+
+    if (!ShellExecuteExA(&sei)) {
+        DWORD dwError = GetLastError();
+        if (dwError == ERROR_CANCELLED)
+            throw std::runtime_error("User refused elevation");
+        else
+            throw std::runtime_error("Failed to elevate");
+    }
+}
+
 HANDLE CreateProcessFrozen(std::filesystem::path path) {
     STARTUPINFOA startupInfo;
     PROCESS_INFORMATION processInfo;
@@ -37,7 +72,7 @@ HANDLE CreateProcessFrozen(std::filesystem::path path) {
     ZeroMemory(&processInfo, sizeof(processInfo));
     startupInfo.cb = sizeof(startupInfo);
 
-    bool worked = CreateProcessA(
+    CreateProcessA(
         (LPCSTR)path.c_str(),
         NULL,
         NULL,
@@ -45,13 +80,17 @@ HANDLE CreateProcessFrozen(std::filesystem::path path) {
         FALSE,
         CREATE_SUSPENDED,
         NULL,
-        NULL,
+        (LPCSTR)path.parent_path().c_str(),
         &startupInfo,
         &processInfo
     );
 
-    if (!worked) {
-        throw std::runtime_error("Failed to create process");
+    DWORD lastError = GetLastError();
+    if (lastError != 0) {
+        std::bitset<32> errorBits(lastError);
+        throw std::runtime_error(std::format(
+            "Failed to create process, error: {}", errorBits.to_string()
+        ));
     }
 
     return processInfo.hProcess;
@@ -110,12 +149,16 @@ int main(int argc, char** argv) {
     if (argc < 2) {
         std::cout << std::endl <<
         "Heridium Launcher by tractorbeam - Developed for the RE:NMS project\n" <<
-        std::format("Usage: launcher.exe <path to NMS.exe>\n") <<
-        "(Hint: You can just drag and drop the exe over the launcher)\n\n" << std::flush;
+        std::format("Usage: launcher.exe <path to NMS.exe>\n") << std::flush;
         return 1;
     }
 
     try {
+        if (!IsUserAdmin()) {
+            UACPrompt(argv[0], argv[1]);
+            return 0;
+        }
+
         std::filesystem::path nmsPath = argv[1];
         std::filesystem::path heridiumPath = "../libHeridium.dll";
         CheckPath(nmsPath, false);
@@ -127,7 +170,9 @@ int main(int argc, char** argv) {
         std::cout << "Injection successful!" << std::endl;
         return 0;
     } catch (std::exception& e) {
-        std::cout << "Exception Occurred: " << e.what() << std::endl;
+        std::cout << "Error! " << e.what() << std::endl;
+        std::ofstream errorfile("./error.log", std::ios::app);
+        errorfile << e.what() << std::endl;
         return 1;
     }
 }
