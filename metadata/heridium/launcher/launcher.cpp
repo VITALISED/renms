@@ -55,49 +55,6 @@ void CheckPath(std::filesystem::path path, std::string filename) {
     }
 }
 
-bool IsUserAdmin() {
-    BOOL isAdmin = FALSE;
-    PSID adminSID = NULL;
-    SID_IDENTIFIER_AUTHORITY ntAuthority = SECURITY_NT_AUTHORITY;
-
-    if (AllocateAndInitializeSid(&ntAuthority, 2, SECURITY_BUILTIN_DOMAIN_RID,
-        DOMAIN_ALIAS_RID_ADMINS, 0, 0, 0, 0, 0, 0, &adminSID)) {
-        if (!CheckTokenMembership(NULL, adminSID, &isAdmin)) {
-            isAdmin = FALSE;
-        }
-        FreeSid(adminSID);
-    }
-    return isAdmin == TRUE;
-}
-
-void UACPrompt(std::string filepath, std::string args = "") {
-    SHELLEXECUTEINFOA sei = {
-        sizeof(sei),        // cbSize
-        0,                  // fMask
-        NULL,               // hwnd
-        "runas",            // lpVerb
-        filepath.c_str(),   // lpFile
-        args.c_str(),       // lpParameters
-        NULL,               // lpDirectory
-        SW_NORMAL,          // nShow
-        NULL,               // hInstApp
-        NULL,               // lpIDList
-        NULL,               // lpClass
-        NULL,               // hkeyClass
-        0,                  // dwHotKey
-        NULL,               // hIcon
-        NULL                // hProcess
-    };
-
-    if (!ShellExecuteExA(&sei)) {
-        DWORD dwError = GetLastError();
-        if (dwError == ERROR_CANCELLED)
-            throw std::runtime_error("User refused elevation");
-        else
-            throw std::runtime_error("Failed to elevate");
-    }
-}
-
 PROCESS_INFORMATION CreateProcessFrozen(LPCSTR path) {
     STARTUPINFOA startupInfo;
     PROCESS_INFORMATION processInfo;
@@ -194,13 +151,6 @@ int main(int argc, char** argv) {
         heridiumPath /= HERIDIUM_LIB;
         CheckPath(nmsPath, "NMS.exe");
         CheckPath(heridiumPath, HERIDIUM_LIB);
-
-        std::cout << "Checking if we're running as admin...\n" << std::flush;
-        if (!IsUserAdmin()) {
-            std::cout << "Not running as admin, restarting with elevation...\n" << std::flush;
-            UACPrompt(argv[0], argv[1]);
-            WaitToClose(-1);
-        }
 
         std::cout << "Loading NMS.exe...\n" << std::flush;
         auto nmsProcess = CreateProcessFrozen(argv[1]);
