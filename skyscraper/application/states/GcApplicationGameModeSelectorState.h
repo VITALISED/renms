@@ -40,6 +40,7 @@ namespace ModeSelectorPhase
 
 class cGcApplicationGameModeSelectorState : public cGcApplicationState
 {
+public:
     enum DisplayState
     {
         EHostJoinSelection,

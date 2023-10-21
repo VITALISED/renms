@@ -3,6 +3,7 @@
 #include <skyscraper.h>
 #include <toolkit/resources/TkSmartResHandle.h>
 #include <toolkit/utilities/containers/TkVector.h>
+#include <toolkit/graphics/2d/texture/vulkan/TkTextureVulkan.h>
 
 SKYSCRAPER_BEGIN
 

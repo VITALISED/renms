@@ -20,6 +20,11 @@ public:
     };
 };
 
+namespace ApplicationStateEvents
+{
+    typedef WinHttpTask::State::Enum Enum;
+}
+
 class cGcApplicationState : public cTkFSMState
 {
     cTkPhysRelMat34 mStereoCameraMatrices[2];

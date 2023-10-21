@@ -1,10 +1,12 @@
 #pragma once
 
 #include <skyscraper.h>
+#include <toolkit/graphics/2d/texture/TkTextureBase.h>
+#include <toolkit/graphics/2d/texture/vulkan/TkDeviceMemory.h>
 
 SKYSCRAPER_BEGIN
 
-class cTkTexture : cTkTextureBase
+class cTkTexture : public cTkTextureBase
 {
     void *mpTextureData;
     struct VkImage_T *mTexture;

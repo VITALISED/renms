@@ -4,6 +4,9 @@
 #include <application/states/GcApplicationState.h>
 #include <toolkit/system/timer/TkStopwatch.h>
 #include <toolkit/maths/numeric/generic/TkMatrix34Generic.h>
+#include <toolkit/graphics/2d/ui/objects/text/Tk2dText.h>
+#include <toolkit/graphics/2d/ui/objects/text/Tk2dTextPreset.h>
+#include <simulation/solarsystem/planet/GcUserdataPrimaryPlanetChange.h>
 
 SKYSCRAPER_BEGIN
 
