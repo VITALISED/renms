@@ -5,7 +5,7 @@
 SKYSCRAPER_BEGIN
 
 template <typename T>
-class TkSTLAllocatorShim : std::allocator<T>
+class TkSTLAllocatorShim : public std::allocator<T>
 { 
     template <typename U>
     struct rebind

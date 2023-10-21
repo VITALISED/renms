@@ -7,6 +7,7 @@ SKYSCRAPER_BEGIN
 
 class cGcApplicationBootState : public cGcApplicationState
 {
+    
 };
 
 SKYSCRAPER_END

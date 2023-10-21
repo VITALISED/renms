@@ -2,8 +2,13 @@
 
 #include <skyscraper.h>
 #include <application/states/GcApplicationState.h>
+#include <toolkit/utilities/containers/TkVector.h>
+#include <graphics/ngui/GcNGuiLayer.h>
+#include <graphics/ngui/GcNGuiTextSpecial.h>
+#include <graphics/ngui/GcNGuiText.h>
 #include <metadata/user/gcdifficultypresettype.meta.h>
 #include <metadata/user/gcdifficultysettingsdata.meta.h>
+#include <metadata/gamestate/gcgamemode.meta.h>
 
 SKYSCRAPER_BEGIN
 

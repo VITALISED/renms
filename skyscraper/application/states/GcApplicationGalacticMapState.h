@@ -2,6 +2,7 @@
 
 #include <skyscraper.h>
 #include <application/states/GcApplicationState.h>
+#include <toolkit/maths/numeric/generic/TkMatrix34Generic.h>
 
 SKYSCRAPER_BEGIN
 
