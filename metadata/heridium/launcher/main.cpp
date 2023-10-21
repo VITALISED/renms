@@ -73,7 +73,7 @@ int main(int argc, char** argv) {
         InjectDLL(heridiumPath, nmsProcess.hProcess);
 
         //Todo: Not this. Whenever we got GcApplication hooked, wait until that's actually initialized before unfreezing NMS.
-        Sleep(1000);
+        Sleep(5000);
         ResumeThread(nmsProcess.hThread);
 
         std::cout << "Injection successful!\n" << std::endl;
