@@ -7,6 +7,7 @@ SKYSCRAPER_BEGIN
 namespace TkStrongTypeIDs
 {
     struct TkResHandleID;
+    struct cTkNGuiFontHandleID;
 }
 
 template <typename T, class StrongTypeID>

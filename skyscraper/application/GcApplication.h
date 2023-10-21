@@ -25,7 +25,6 @@
 #include <application/states/GcApplicationTitleScreenState.h>
 #include <application/states/GcApplicationUGCBaseViewerState.h>
 
-
 SKYSCRAPER_BEGIN
 
 class cGcApplication : public cTkFSM

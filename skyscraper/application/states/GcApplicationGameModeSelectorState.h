@@ -5,12 +5,16 @@
 #include <application/states/GcApplicationState.h>
 #include <toolkit/utilities/containers/TkVector.h>
 #include <toolkit/graphics/ngui/TkNGuiInput.h>
+#include <gamestate/GcGameStatePersistence.h>
 #include <graphics/ngui/GcNGuiLayer.h>
 #include <graphics/ngui/GcNGuiTextSpecial.h>
 #include <graphics/ngui/GcNGuiText.h>
 #include <graphics/ngui/GcNGuiGraphic.h>
+#include <graphics/ngui/GcLayerInteractControl.h>
+#include <graphics/ngui/ScrollBarState.h>
 #include <toolkit/system/pc/TkStoragePersistent.h>
 #include <toolkit/maths/numeric/TkSmoothCD.h>
+#include <system/GcModManager.h>
 #include <metadata/user/gcdifficultypresettype.meta.h>
 #include <metadata/user/gcdifficultysettingsdata.meta.h>
 #include <metadata/gamestate/gcgamemode.meta.h>

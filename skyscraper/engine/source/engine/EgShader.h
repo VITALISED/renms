@@ -7,9 +7,17 @@
 
 SKYSCRAPER_BEGIN
 
-// class cEgShaderResource
-// {
-//     bool ParseFXSection(const char* lpcData);
-// }
+class cEgShaderResource
+{
+public:
+    bool ParseFXSection(const char* lpcData);
+
+    struct CombinationCompilationTask
+    {
+        cEgShaderResource *mpResource;
+        int miContextIndex;
+        unsigned __int64 mxComboMask;
+    };
+};
 
 SKYSCRAPER_END

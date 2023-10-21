@@ -4,6 +4,7 @@
 #include <toolkit/graphics/ngui/TkNGuiInput.h>
 #include <toolkit/audio/wwise/TkAudioManagerWwise.h>
 #include <graphics/ngui/GcNGuiLayer.h>
+#include <simulation/player/GcPlayer.h>
 
 SKYSCRAPER_BEGIN
 
