@@ -24,6 +24,7 @@ struct ManifestData
 
 class cTkStoragePersistent
 {
+public:
     typedef TkPollResult State;
 
     struct LowSpaceWarningData
@@ -95,3 +96,5 @@ class cTkStoragePersistent
     cTkStoragePersistent::Data *mpData;
     cTkStoragePersistent::State meState;
 };
+
+SKYSCRAPER_END

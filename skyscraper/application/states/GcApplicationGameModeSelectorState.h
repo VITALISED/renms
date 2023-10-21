@@ -1,11 +1,16 @@
 #pragma once
 
 #include <skyscraper.h>
+#include <atlas/WinHttpTask.h>
 #include <application/states/GcApplicationState.h>
 #include <toolkit/utilities/containers/TkVector.h>
+#include <toolkit/graphics/ngui/TkNGuiInput.h>
 #include <graphics/ngui/GcNGuiLayer.h>
 #include <graphics/ngui/GcNGuiTextSpecial.h>
 #include <graphics/ngui/GcNGuiText.h>
+#include <graphics/ngui/GcNGuiGraphic.h>
+#include <toolkit/system/pc/TkStoragePersistent.h>
+#include <toolkit/maths/numeric/TkSmoothCD.h>
 #include <metadata/user/gcdifficultypresettype.meta.h>
 #include <metadata/user/gcdifficultysettingsdata.meta.h>
 #include <metadata/gamestate/gcgamemode.meta.h>
@@ -23,6 +28,11 @@ enum eModeSelectPreset
     EModeSelectPreset_Seasonal,
     EModeSelectPreset_NumTypes,
 };
+
+namespace ModeSelectorPhase
+{
+    typedef WinHttpTask::State::Enum Enum;
+}
 
 class cGcApplicationGameModeSelectorState : public cGcApplicationState
 {
@@ -87,6 +97,41 @@ class cGcApplicationGameModeSelectorState : public cGcApplicationState
         float mfConfirmationValue;
         bool mbWaitingOnInputGap;
         bool mbPlayingHoldAudio;
+    };
+
+    struct SlotComponents
+    {
+        cGcNGuiLayer *mpSlot;
+        cGcNGuiLayer *mpChoiceRoot;
+        cGcNGuiGraphic *mpIcon;
+        cGcNGuiTextSpecial *mpModeTitle;
+        cGcNGuiTextSpecial *mpSubtitle;
+        cGcNGuiGraphic *mpBackground;
+        cGcNGuiGraphic *mpBackgroundDesaturated;
+        cGcNGuiGraphic *mpBackgroundLocked;
+        cGcNGuiLayer *mpHighlightLayer;
+        cGcNGuiLayer *mpSeasonLayer;
+        cGcNGuiTextSpecial *mpSeasonHeaderText;
+        cGcNGuiTextSpecial *mpSeasonTimeText;
+        cGcNGuiGraphic *mpSeasonTimeBackground;
+        cGcNGuiGraphic *mpSeasonTimeLowBackground;
+        cGcNGuiTextSpecial *mpSeasonDescText;
+        cGcNGuiTextSpecial *mpSeasonTitleText;
+        cGcNGuiText *mpSlotTitle;
+        cGcNGuiLayer *mpTwoLineSlot;
+        cGcNGuiText *mpTwoLineSlotTitle;
+        cGcNGuiText *mpSlotSummary;
+        cGcNGuiText *mpGameModeFinger;
+        cGcNGuiLayer *mpLayerSaveContainer;
+        cGcNGuiLayer *mpLayerSaveBlank;
+        cGcNGuiLayer *mpLayerSaveOK;
+        cGcNGuiTextSpecial *mpSaveTimeText;
+        cGcNGuiLayer *mpLayerPlayContainer;
+        cGcNGuiLayer *mpLayerPlayBlank;
+        cGcNGuiLayer *mpLayerPlayOK;
+        cGcNGuiTextSpecial *mpPlayTimeText;
+        cGcNGuiLayer *mpDisabled;
+        cTkSmoothCD<float> mfHighlightAlpha;
     };
 
     cGcNGuiLayer *mpSelectorUIRoot;
