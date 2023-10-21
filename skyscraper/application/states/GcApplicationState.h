@@ -9,6 +9,17 @@
 
 SKYSCRAPER_BEGIN
 
+class cGcAsyncLoadOps
+{
+public:
+    enum Operation
+    {
+        DrainFileIO,
+        DrainShaders,
+        DrainTasks,
+    };
+};
+
 class cGcApplicationState : public cTkFSMState
 {
     cTkPhysRelMat34 mStereoCameraMatrices[2];
