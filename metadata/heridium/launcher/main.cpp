@@ -70,9 +70,9 @@ int main(int argc, char** argv) {
         std::cout << "Loading NMS.exe...\n" << std::flush;
         auto nmsProcess = CreateProcessFrozen(argv[1]);
         std::cout << "Injecting the DLL...\n" << std::flush;
-        auto dllProcess = InjectDLL(heridiumPath, nmsProcess.hProcess);
+        InjectDLL(heridiumPath, nmsProcess.hProcess);
 
-        ResumeThread(dllProcess);
+        //Todo: Not this. Whenever we got GcApplication hooked, wait until that's actually initialized before unfreezing NMS.
         Sleep(1000);
         ResumeThread(nmsProcess.hThread);
 
