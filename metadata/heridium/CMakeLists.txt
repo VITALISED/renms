@@ -31,7 +31,8 @@ add_subdirectory(launcher)
 
 add_custom_command(
     OUTPUT ${META_SOURCE_DIR} ${META_TOOLKIT_DIR}
-    COMMAND "${CMAKE_BINARY_DIR}/metadata/heridium/launcher/launcher.exe" "${NMS_EXE_DIR}/NMS.exe"
+    ## Given that WINE_EXECUTABLE won't be defined with WIN32, this should work fine on all platforms
+    COMMAND "${WINE_EXECUTABLE} ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/launcher.exe" "${NMS_EXE_DIR}/NMS.exe"
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
     DEPENDS Heridium launcher
 )
