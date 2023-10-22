@@ -8,11 +8,7 @@
 #endif
 
 void WaitToClose(int code) {
-    if (code == -1) {   //started without elevation
-        exit(code);
-
-    } else if (code == 0) {
-        std::cout << "\n";
+    if (code == 0) {
         for (int i = 5; i >= 0; i--) {
             std::cout << std::format("\rClosing in {}...", i) << std::flush;
             Sleep(1000);
@@ -71,10 +67,6 @@ int main(int argc, char** argv) {
         auto nmsProcess = CreateProcessFrozen(argv[1]);
         std::cout << "Injecting the DLL...\n" << std::flush;
         InjectDLL(heridiumPath, nmsProcess.hProcess);
-
-        //Todo: Not this. Whenever we got GcApplication hooked, wait until that's actually initialized before unfreezing NMS.
-        Sleep(5000);
-        ResumeThread(nmsProcess.hThread);
 
         std::cout << "Injection successful!\n" << std::endl;
         WaitToClose(0);
