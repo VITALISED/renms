@@ -23,13 +23,6 @@ union TkID
 	unsigned __int64 mUInt64[uiSize / 64];
 };
 
-namespace TkIDUnorderedMap
-{
-    struct Hash128
-    { };
-}
-
-
 class cTkMetaDataFunctionLookup
 {
 public:
