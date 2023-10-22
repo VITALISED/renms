@@ -7,6 +7,12 @@
 #define HERIDIUM_LIB "libHeridium.dll"
 #endif
 
+void printDebug(std::string message) {
+    #ifdef _DEBUG
+    std::cout << message << std::endl;
+    #endif
+}
+
 void CheckPath(std::filesystem::path path, std::string filename) {
     if (std::filesystem::is_directory(path)) {
         path /= filename;
@@ -48,12 +54,12 @@ int main(int argc, char** argv) {
         CheckPath(nmsPath, "NMS.exe");
         CheckPath(heridiumPath, HERIDIUM_LIB);
 
-        std::cout << "Loading NMS.exe...\n" << std::flush;
+        printDebug("Loading NMS.exe...\n");
         auto nmsProcess = CreateProcessFrozen(argv[1]);
-        std::cout << "Injecting the DLL...\n" << std::flush;
+        printDebug("Injecting the DLL...\n");
         InjectDLL(heridiumPath, nmsProcess.hProcess);
 
-        std::cout << "Injection successful!\n" << std::endl;
+        printDebug("Injection successful!\n");
         //Wait for NMS.exe to get closed
         WaitForSingleObject(nmsProcess.hProcess, INFINITE);
         CloseHandle(nmsProcess.hProcess);
