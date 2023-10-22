@@ -38,7 +38,7 @@
                                         buffer.append(lpacMember.mpacName); HM_SEMI
 
 #define HM_TEMPLATED_MEMBER_FIXED(lpacMember) HM_INDENT; buffer.append(heridium::CXX_MemberTypeToNamed(lpacMember.mType)).append(this->GetInnerType(&lpacMember)); \
-                                        buffer.append(", ").append(lpacMember.miCount); \
+                                        buffer.append(", ").append(std::to_string(lpacMember.miCount)); \
                                         buffer.append(">").append(" ").append(heridium::CXX_GetNotationForMember(lpacMember.mType)); \
                                         buffer.append(lpacMember.mpacName); HM_SEMI
 
