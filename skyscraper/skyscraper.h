@@ -2,7 +2,7 @@
 
 #include <cstdint>
 #include <cmath>
-#include <Windows.h>    //see toolkit/system/TkCSMutex.h
+#include <windows.h>    //see toolkit/system/TkCSMutex.h
 #include <functional>
 #include <array>
 #include <string>
