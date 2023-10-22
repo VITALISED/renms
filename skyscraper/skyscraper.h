@@ -8,6 +8,7 @@
 #include <string>
 #include <unordered_map>
 #include <memory>
+#include <map>
 #include <vulkan/vulkan.h>
 #include <robin_hood.h>
 

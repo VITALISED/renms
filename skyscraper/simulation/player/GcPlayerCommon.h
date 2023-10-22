@@ -2,6 +2,10 @@
 
 #include <skyscraper.h>
 #include <gamestate/EnvironmentLocation.h>
+#include <simulation/player/GcOwnerConcept.h>
+#include <simulation/player/GcPlayerWanted.h>
+#include <toolkit/attachments/TkAttachment.h>
+#include <toolkit/utilities/containers/TkVector.h>
 #include <metadata/simulation/player/gchand.meta.h>
 
 SKYSCRAPER_BEGIN
@@ -22,13 +26,13 @@ class cGcPlayerCommon
     virtual void NotifyBeingScanned(cTkAttachment *);
     virtual bool IsStealthActive();
 
-    __declspec(align(16)) cGcOwnerConcept mOwnerConcept;
+    cGcOwnerConcept mOwnerConcept;
     cGcPlayerWanted mWanted;
     TkHandle mRootNode;
-    std::vector<cTkAttachmentPtr,TkSTLAllocatorShim<cTkAttachmentPtr,8,-1> > maBeingScannedBy;
+    cTkVector<cTkAttachmentPtr> maBeingScannedBy;
     float mfLastBeingScannedTime;
-    std::vector<cTkAttachmentPtr,TkSTLAllocatorShim<cTkAttachmentPtr,8,-1> > maAttackingPredators;
-    std::vector<cTkAttachmentPtr,TkSTLAllocatorShim<cTkAttachmentPtr,8,-1> > maEngagedPredators;
+    cTkVector<cTkAttachmentPtr> maAttackingPredators;
+    cTkVector<cTkAttachmentPtr> maEngagedPredators;
     float mfLastAttackTime;
     float mfLastRespawnTime;
     cTkAttachmentPtr mpRidingCreature;

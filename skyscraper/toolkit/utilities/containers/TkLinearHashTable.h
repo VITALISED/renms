@@ -4,6 +4,10 @@
 
 SKYSCRAPER_BEGIN
 
+template <typename T>
+class cTkLinearHashTableHash
+{ };
+
 template<typename K, typename V, typename H>
 class cTkLinearHashTable
 {

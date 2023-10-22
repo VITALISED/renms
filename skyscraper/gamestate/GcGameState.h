@@ -1,6 +1,9 @@
 #pragma once
 
 #include <skyscraper.h>
+#include <networking/GcRpcCallBase.h>
+#include <metadata/gamestate/gcplayerspawnstatedata.meta.h>
+
 
 SKYSCRAPER_BEGIN
 

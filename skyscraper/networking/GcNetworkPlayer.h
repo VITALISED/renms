@@ -6,6 +6,7 @@
 #include <toolkit/utilities/TkString.h>
 #include <toolkit/networking/TkUserIdBase.h>
 #include <gamestate/EnvironmentLocation.h>
+#include <simulation/player/GcPlayerCommon.h>
 #include <networking/GcNetworkConstants.h>
 #include <networking/GcNetworkMessage.h>
 #include <networking/GcNetworkAddress.h>
