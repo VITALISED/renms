@@ -35,6 +35,10 @@ std::string HeridiumCXXFile::DoFlagLookup(cTkMetaDataMember* lpCurrentMember)
     for(int i = 0; i < lpCurrentMember->miNumEnumMembers; i++)
     {
         cTkMetaDataEnumLookup lCurrentEnumMember = lpCurrentMember->mpEnumLookup[i];
+
+        if(std::string(lCurrentEnumMember.mpacName).empty())
+            continue;
+
         HM_FLAG_VAL(lCurrentEnumMember.mpacName, lCurrentEnumMember.miValue);
     }
 
@@ -261,7 +265,7 @@ void HeridiumCXXFile::WriteHeaderFile()
                 HM_MEMBER(cTkMetaDataMember::EType_Seed, currentMember.mpacName);
                 break;
             case cTkMetaDataMember::EType_StaticArray:
-                HM_TEMPLATED_MEMBER(currentMember);
+                HM_TEMPLATED_MEMBER_FIXED(currentMember);
                 break;
             case cTkMetaDataMember::EType_String1024:
                 HM_MEMBER(cTkMetaDataMember::EType_String1024, currentMember.mpacName);
