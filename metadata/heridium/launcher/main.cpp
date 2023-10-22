@@ -7,14 +7,6 @@
 #define HERIDIUM_LIB "libHeridium.dll"
 #endif
 
-void WaitToClose(int code) {
-    if (code != 0) {
-        std::cout << "\nPress enter to close..." << std::flush;
-        std::cin.get();
-    }
-    exit(code);
-}
-
 void CheckPath(std::filesystem::path path, std::string filename) {
     if (std::filesystem::is_directory(path)) {
         path /= filename;
@@ -61,9 +53,9 @@ int main(int argc, char** argv) {
         InjectDLL(heridiumPath, nmsProcess.hProcess);
 
         std::cout << "Injection successful!\n" << std::endl;
-        WaitToClose(0);
+        exit(0);
     } catch (std::exception& e) {
         std::cout << "Error! " << e.what() << std::endl;
-        WaitToClose(1);
+        exit(1);
     }
 }
