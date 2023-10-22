@@ -35,3 +35,8 @@ add_custom_command(
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
     DEPENDS Heridium launcher
 )
+
+add_custom_target(
+    metadata
+    DEPENDS ${META_SOURCE_DIR} ${META_TOOLKIT_DIR}
+)
