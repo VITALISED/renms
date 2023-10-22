@@ -4,6 +4,7 @@
 #include <gamestate/GcInventoryStore.h>
 #include <gamestate/StatWatcher.h>
 #include <gamestate/GcPlayerNPCWorkers.h>
+#include <gamestate/GcSeasonState.h>
 #include <simulation/vehicle/GcVehicleLocation.h>
 #include <simulation/player/GcPlayerBanner.h>
 #include <simulation/player/GcPlayerLogBook.h>
@@ -28,8 +29,23 @@
 #include <metadata/gamestate/gcportalsavedata.meta.h>
 #include <metadata/simulation/weapons/gcplayerweapons.meta.h>
 #include <metadata/wiki/gcstorypageseendataarray.meta.h>
+#include <metadata/gamestate/gcsettlementstate.meta.h>
+#include <metadata/reality/gcrewarddeath.meta.h>
+#include <metadata/gamestate/gccustomisationdescriptorgroups.meta.h>
+#include <metadata/gamestate/gccustomisationtextureoptions.meta.h>
+#include <metadata/gamestate/gccustomisationpresets.meta.h>
+#include <metadata/gamestate/gccustomisationcolourpalettes.meta.h>
+#include <metadata/simulation/customisation/gccustomisationbannergroup.meta.h>
+#include <metadata/simulation/customisation/gccustomisationthrustereffects.meta.h>
+#include <metadata/simulation/customisation/gccustomisationshipbobbleheads.meta.h>
 
 SKYSCRAPER_BEGIN
+
+enum ePlayerFinalisePurchaseState
+{
+    EPlayerFinalisePurchaseState_None,
+    EPlayerFinalisePurchaseState_SpawnNewShip,
+};
 
 struct sPlayerTitleStatWatcher : public IStatWatcher
 {

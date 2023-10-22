@@ -1,6 +1,7 @@
 #pragma once
 
 #include <skyscraper.h>
+#include <gamestate/GcPlayerState.h>
 #include <networking/GcRpcCallBase.h>
 #include <metadata/gamestate/gcplayerspawnstatedata.meta.h>
 
