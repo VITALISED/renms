@@ -29,10 +29,11 @@ void CheckPath(std::filesystem::path path, std::string filename) {
 }
 
 int main(int argc, char** argv) {
-    std::cout << std::endl <<
-    "Heridium Launcher by tractorbeam - Developed for the RE:NMS project\n" << std::flush;
-
     try {
+        if (argc < 0) { //I put this easter egg in every one of my command-line programs, almost forgot to put it in here - tractorbeam
+            throw std::runtime_error("Achievement Unlocked: \"How did we get here?\" (You somehow managed to run this with a negative number of arguments)");
+        }
+
         std::filesystem::path exePath, nmsPath, heridiumPath;
         exePath = argv[0];
 
