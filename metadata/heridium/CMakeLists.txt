@@ -37,6 +37,6 @@ add_custom_command(
 )
 
 add_custom_target(
-    metadata
+    BuildMetadata
     DEPENDS ${META_SOURCE_DIR} ${META_TOOLKIT_DIR}
 )
