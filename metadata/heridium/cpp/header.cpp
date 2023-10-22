@@ -161,6 +161,12 @@ std::string HeridiumCXXFile::GetInnerType(cTkMetaDataMember* lpCurrentMember)
 
 void HeridiumCXXFile::WriteHeaderFile()
 {
+    if (!this->mTargetFile.is_open())
+    {
+        spdlog::error("Failed to open file for writing: {}", this->mpacFileLocation);
+        return;
+    }
+
     HM_BEGIN_BUFFER; 
 
     HM_PRELUDE;

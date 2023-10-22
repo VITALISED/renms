@@ -41,10 +41,13 @@ if (CMAKE_GENERATOR STREQUAL "Ninja")
     C_APPEND_FLAGS("-fdiagnostics-color=always")
 endif()
 
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+if (NOT DEFINED NMS_EXE_DIR)
+    message(FATAL_ERROR "Append ( -DNMS_EXE_DIR=\"C:/.../No Man's Sky/Binaries\" ) to your cmake command. It must be the directory that contains NMS.exe, remember to use forward slashes (/).")
+endif()
 
-message("=== Binaries will be placed in: ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
+set (META_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/source")
+set (META_TOOLKIT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/toolkit")
 
-add_subdirectory(skyscraper)
-add_subdirectory(renms_dll)
 add_subdirectory(metadata)
+add_subdirectory(renms_dll)
+add_subdirectory(skyscraper)

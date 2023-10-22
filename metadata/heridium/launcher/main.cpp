@@ -42,7 +42,7 @@ int main(int argc, char** argv) {
         } else
             nmsPath = argv[1];
 
-        heridiumPath = exePath.parent_path();
+        heridiumPath = exePath.parent_path().parent_path();
         heridiumPath /= HERIDIUM_LIB;
         CheckPath(nmsPath, "NMS.exe");
         CheckPath(heridiumPath, HERIDIUM_LIB);
@@ -53,6 +53,10 @@ int main(int argc, char** argv) {
         InjectDLL(heridiumPath, nmsProcess.hProcess);
 
         std::cout << "Injection successful!\n" << std::endl;
+        //Wait for NMS.exe to get closed
+        WaitForSingleObject(nmsProcess.hProcess, INFINITE);
+        CloseHandle(nmsProcess.hProcess);
+        CloseHandle(nmsProcess.hThread);
         exit(0);
     } catch (std::exception& e) {
         std::cout << "Error! " << e.what() << std::endl;
