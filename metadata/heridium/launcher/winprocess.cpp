@@ -70,7 +70,7 @@ HANDLE InjectDLL(std::filesystem::path path, HANDLE processHandle) {
         (SIZE_T)NULL,
         reinterpret_cast<LPTHREAD_START_ROUTINE>(loadLibraryAddress),
         remoteString,
-        CREATE_SUSPENDED,
+        0,
         NULL
     );
 
