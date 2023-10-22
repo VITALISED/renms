@@ -50,7 +50,7 @@ void RegisterHook(const cTkMetaDataClass* lpClassMetadata,
         [](unsigned char c) { return (char)std::tolower(c); });
 
     std::string lPath = std::filesystem::current_path().string();
-    lPath.append("/HERIDIUM/cpp/");
+    lPath.append("/");
 
     bool lbFoundPath = false;
 
