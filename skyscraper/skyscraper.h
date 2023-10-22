@@ -9,6 +9,7 @@
 #include <unordered_map>
 #include <memory>
 #include <vulkan/vulkan.h>
+#include <robin_hood.h>
 
 #define SKYSCRAPER_BEGIN namespace nms {
 #define SKYSCRAPER_END }

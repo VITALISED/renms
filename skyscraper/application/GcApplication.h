@@ -25,6 +25,10 @@
 #include <application/states/GcApplicationTitleScreenState.h>
 #include <application/states/GcApplicationUGCBaseViewerState.h>
 
+#include <application/GcFirstBootContext.h>
+#include <toolkit/maths/utilities/spatial/TkSampleDistribution.h>
+#include <reality/GcRealityManager.h>
+
 SKYSCRAPER_BEGIN
 
 class cGcApplication : public cTkFSM

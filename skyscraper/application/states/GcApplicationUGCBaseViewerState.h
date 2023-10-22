@@ -31,7 +31,7 @@ class cGcApplicationUGCBaseViewerState : public cGcApplicationState
         bool mbPlayingHoldAudio;
     };
 
-    struct  IconResources
+    struct IconResources
     {
         cTkSmartResHandle mIconNormal;
         cTkSmartResHandle mIconSurvival;

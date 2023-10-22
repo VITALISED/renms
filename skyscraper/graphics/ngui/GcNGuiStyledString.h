@@ -7,6 +7,7 @@
 #include <toolkit/data/TkMetaData.h>
 #include <toolkit/maths/numeric/generic/TkVector2Generic.h>
 #include <toolkit/utilities/containers/TkVector.h>
+#include <toolkit/utilities/containers/TkUnorderedMap.h>
 #include <metadata/reality/gcalienmood.meta.h>
 #include <metadata/simulation/ecosystem/npcs/gcnpcproptype.meta.h>
 
@@ -84,7 +85,7 @@ public:
     struct StyledStringLayout
     {
         cTkNGuiTextStyle mBaseTextStyle;
-        std::unordered_map<TkID<128>, cGcNGuiStyledString::SpecialStyle, TkIDUnorderedMap::Hash128 ,std::equal_to<TkID<128> >,TkSTLAllocatorShim<std::pair<TkID<128> const ,cGcNGuiStyledString::SpecialStyle> > > mTextStyles;
+        cTkUnorderedMap<TkID<128>, cGcNGuiStyledString::SpecialStyle, TkIDUnorderedMap::Hash128 ,std::equal_to<TkID<128> > > mTextStyles;
         cTkVector<cGcNGuiStyledString::LayoutInstruction> maStyleInstructions;
         cTkVector<TkID<128> > mStyleStack;
         float mfScrollOffset;
