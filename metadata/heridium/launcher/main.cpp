@@ -8,19 +8,11 @@
 #endif
 
 void WaitToClose(int code) {
-    if (code == 0) {
-        for (int i = 5; i >= 0; i--) {
-            std::cout << std::format("\rClosing in {}...", i) << std::flush;
-            Sleep(1000);
-        }
-        std::cout << std::endl;
-        exit(code);
-
-    } else {
+    if (code != 0) {
         std::cout << "\nPress enter to close..." << std::flush;
         std::cin.get();
-        exit(code);
     }
+    exit(code);
 }
 
 void CheckPath(std::filesystem::path path, std::string filename) {
