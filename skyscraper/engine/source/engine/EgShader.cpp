@@ -1,4 +1,6 @@
-#include "EgShader.h"
+#include <engine/source/engine/EgScene.h>
+
+#include <skyscraper.h>
 
 SKYSCRAPER_BEGIN
 
