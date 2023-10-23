@@ -25,9 +25,9 @@ PROCESS_INFORMATION CreateProcessFrozen(LPCSTR path) {
     DWORD lastError = GetLastError();
     if (lastError != 0) {
         std::bitset<32> errorBits(lastError);
-        throw std::runtime_error(std::format(
-            "Failed to create process, error: {}", errorBits.to_string()
-        ));
+        throw std::runtime_error(std::string(
+            "Failed to create process, error: {}") + errorBits.to_string()
+        );
     }
 
     return processInfo;
