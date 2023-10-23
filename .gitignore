@@ -399,5 +399,5 @@ FodyWeavers.xsd
 *.sln.iml
 
 build/
-metadata/source/
-metadata/toolkit/
+metadata/source/*
+metadata/toolkit/*

@@ -6,13 +6,10 @@ project(
     VERSION 0.0.1
 )
 
-## since the toolchain loads specific compilers unknown to cmake, it won't know how to set the standard, so we don't set these if the toolchain was loaded.
-if(NOT DEFINED TOOLCHAIN_LOADED)
-    set(CMAKE_CXX_STANDARD 20)
-    set(CMAKE_CXX_STANDARD_REQUIRED ON)
-    set(CMAKE_C_STANDARD 17)
-    set(CMAKE_C_STANDARD_REQUIRED ON)
-endif()
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_C_STANDARD 17)
+set(CMAKE_C_STANDARD_REQUIRED ON)
 
 ## ================================================================================================== Functions.
 
@@ -35,9 +32,11 @@ function(CHECK_OS)
         message("=== OS is some strange thing other than Windows, macOS, or Unix/Linux. Building anyways! (No Promises)")
     endif()
 
-    if (NOT DEFINED WIN32 AND NOT DEFINED TOOLCHAIN_LOADED)
-        message(FATAL_ERROR "Please append ( -DCMAKE_TOOLCHAIN_FILE=\"./toolchain-win.cmake\" ) to your cmake command. See BUILD.md for more info.")
-        find_program(WINE_EXECUTABLE wine)
+    if (NOT DEFINED WIN32)
+        message("=== Cross-compiling for Windows")
+        if (NOT DEFINED WINE_EXECUTABLE)
+            find_program(WINE_EXECUTABLE wine)
+        endif()
     endif()
 endfunction()
 
@@ -71,7 +70,7 @@ CHECK_OS()
 CHECK_NMS_DIR()
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin")
-message("=== Built executables will be placed in: ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
+message("=== Binaries will be placed in: ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
 
 if (CMAKE_BUILD_TYPE STREQUAL "")
     set(CMAKE_BUILD_TYPE "Release")
@@ -97,9 +96,7 @@ if (CMAKE_GENERATOR STREQUAL "Ninja")
     C_APPEND_FLAGS("-fdiagnostics-color=always")
 endif()
 
-set (META_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/source")
-set (META_TOOLKIT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/toolkit")
-
+add_subdirectory(thirdparty)
 add_subdirectory(metadata)
 add_subdirectory(renms_dll)
 add_subdirectory(skyscraper)

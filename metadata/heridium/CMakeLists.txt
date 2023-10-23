@@ -23,7 +23,6 @@ add_library(paths STATIC
 )
 
 target_link_libraries(Heridium PRIVATE
-    ${CMAKE_SOURCE_DIR}/thirdparty/lib/MinHook.x64.lib
     paths
 )
 
@@ -31,22 +30,24 @@ add_subdirectory(launcher)
 
 if (NOT DEFINED WIN32)
     add_custom_command(
-        OUTPUT ${META_SOURCE_DIR} ${META_TOOLKIT_DIR}
-        ## Given that WINE_EXECUTABLE won't be defined with WIN32, this should work fine on all platforms
+        OUTPUT fakething
         COMMAND "${WINE_EXECUTABLE}" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/launcher.exe" "${NMS_EXE_DIR}/NMS.exe"
+        COMMAND "${CMAKE_COMMAND} -P" "${CMAKE_CURRENT_SOURCE_DIR}/SearchDirs.cmake"
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
         DEPENDS Heridium launcher
     )
 else()
     add_custom_command(
-        OUTPUT ${META_SOURCE_DIR} ${META_TOOLKIT_DIR}
+        OUTPUT fakething
         COMMAND "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/launcher.exe" "${NMS_EXE_DIR}/NMS.exe"
+        COMMAND "${CMAKE_COMMAND} -P" "${CMAKE_CURRENT_SOURCE_DIR}/SearchDirs.cmake"
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
         DEPENDS Heridium launcher
     )
 endif()
 
+#This is just so you can invoke the extraction without precompiling from the command line.
 add_custom_target(
-    BuildMetadata
-    DEPENDS ${META_SOURCE_DIR} ${META_TOOLKIT_DIR}
+    ExtractMetadata
+    DEPENDS fakething
 )
