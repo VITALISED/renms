@@ -11,7 +11,7 @@ void printDebug(std::string input) {
     #ifdef _DEBUG
     std::cout << input << std::endl;
     #else
-    _IsUnused(input);
+    do {} while (input != input);   //This is a really dumb way to make the compiler not complain about unused variables. I love it.
     #endif
 }
 
