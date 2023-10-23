@@ -86,8 +86,6 @@ std::string HeridiumCXXFile::DoHeaderFirstPass()
     for(int i = 0; i < this->mpMetaDataClass->miNumMembers; i++)
     {
         cTkMetaDataMember currentMember = this->mpMetaDataClass->maMembers[i];
-        // const char* lpacEnumName;
-        // const char* lpacFlagName;
 
         switch(currentMember.mType)
         {
