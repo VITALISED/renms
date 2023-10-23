@@ -57,4 +57,8 @@ cmake --build .
 
 This is why we use cmake. After all of that is done and generated, this is the entire build command, every single time. It will even reconfigure on it's own if you add a few new source files or something like that. Marvelous.
 
+## Known issues
+
+Heridium's (the metadata builder's) launcher will refuse to function if built with **MSBuild**. We have no idea why, and frankly we don't have the energy to fix it. Might I suggest using Ninja?
+
 <center><sup><sub>-tractorbeam wrote this-</sub></sup></center>
