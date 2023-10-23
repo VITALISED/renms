@@ -25,7 +25,7 @@ Contact me (@tractorbeam on discord) or, if the issue is something on our end (a
 
 ### "Why does it need to know where No Man's Sky is?"
 
-It's not your average run-of-the-mill build process. For legal reasons, (or maybe not, not gonna risk it either way), we can't include a lot of the headers that are needed for renms to build. It's based off of metadata we extracted from a leaked developer build, and as such it isn't ours, and we shouldn't distribute it. Luckily, the extraction and building of these headers can be automagically pulled from No Man's Sky using Heridium! Unfortunately, this means that the path to your NMS.exe must be specified to the compiler, but aside from that it's easy rolling.
+It's not your average run-of-the-mill build process. Due to the immense number of classes (>2000) it's difficult to track them without bogging the repo down (along with the various potential legal repurcussions of shipping stripped code). Luckily, the extraction and building of these headers can be automagically pulled from No Man's Sky using Heridium! Unfortunately, this means that the path to your NMS.exe must be specified to the compiler, but aside from that it's easy rolling.
 
 ### OS
 
