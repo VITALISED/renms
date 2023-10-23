@@ -86,8 +86,8 @@ std::string HeridiumCXXFile::DoHeaderFirstPass()
     for(int i = 0; i < this->mpMetaDataClass->miNumMembers; i++)
     {
         cTkMetaDataMember currentMember = this->mpMetaDataClass->maMembers[i];
-        const char* lpacEnumName;
-        const char* lpacFlagName;
+        // const char* lpacEnumName;
+        // const char* lpacFlagName;
 
         switch(currentMember.mType)
         {
@@ -96,20 +96,10 @@ std::string HeridiumCXXFile::DoHeaderFirstPass()
                     HM_ADDINCLUDE(FindIncludePathForClass(currentMember.mpClassMetadata->mpacName), currentMember.mpClassMetadata->mpacName);
                 break;
             case cTkMetaDataMember::EType_Enum:
-                lpacEnumName = HM_ENUMNAME(currentMember.mpacName);
-                if(!HM_ISDEPENDENCYDEFINED(lpacEnumName))
-                {
-                    this->mDefinedTypes.push_back(lpacEnumName);
-                    HM_PUSHSTRING(this->DoEnumLookup(&currentMember));
-                }
+                HM_PUSHSTRING(this->DoEnumLookup(&currentMember));
                 break;
             case cTkMetaDataMember::EType_Flags:
-                lpacFlagName = HM_FLAGNAME(currentMember.mpacName);
-                if(!HM_ISDEPENDENCYDEFINED(lpacFlagName))
-                {
-                    this->mDefinedTypes.push_back(lpacFlagName);
-                    HM_PUSHSTRING(this->DoFlagLookup(&currentMember));
-                }
+                HM_PUSHSTRING(this->DoFlagLookup(&currentMember));
                 break;
             default:
                 break;
@@ -123,20 +113,10 @@ std::string HeridiumCXXFile::DoHeaderFirstPass()
                     HM_ADDINCLUDE(FindIncludePathForClass(currentMember.mpClassMetadata->mpacName), currentMember.mpClassMetadata->mpacName);
                 break;
             case cTkMetaDataMember::EType_Enum:
-                lpacEnumName = HM_ENUMNAME(currentMember.mpacName);
-                if(!HM_ISDEPENDENCYDEFINED(lpacEnumName))
-                {
-                    this->mDefinedTypes.push_back(lpacEnumName);
-                    HM_PUSHSTRING(this->DoEnumLookup(&currentMember));
-                }
+                HM_PUSHSTRING(this->DoEnumLookup(&currentMember));
                 break;
             case cTkMetaDataMember::EType_Flags:
-                lpacFlagName = HM_FLAGNAME(currentMember.mpacName);
-                if(!HM_ISDEPENDENCYDEFINED(lpacFlagName))
-                {
-                    this->mDefinedTypes.push_back(lpacFlagName);
-                    HM_PUSHSTRING(this->DoFlagLookup(&currentMember));
-                }
+                HM_PUSHSTRING(this->DoFlagLookup(&currentMember));
                 break;
             default:
                 break;
