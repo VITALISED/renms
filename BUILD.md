@@ -7,7 +7,7 @@ Make a build directory, go into it, configure, and then compile as per the below
 ```bash
 mkdir build
 cd build
-cmake .. -DNMS_EXE_PATH="C:/.../No Man's Sky/Binaries"
+cmake .. -DNMS_EXE_DIR="C:/.../No Man's Sky/Binaries"
 cmake --build .
 ```
 
