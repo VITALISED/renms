@@ -3,7 +3,7 @@
 HERIDIUM_BEGIN
 
 #if HERIDIUM_LANGUAGE_TARGET == EHeridiumLanguageType_CXX
-    #define _HM_PATH "/HERIDIUM/cpp/"
+    //Might be a thing in the future, will never run the below for now
 #else 
     static_assert("No language target defined for heridium");
 #endif
@@ -12,7 +12,7 @@ void CreateOutputDirectories()
 {
     for(std::pair<const char*, const char*> lPair : classPaths)
     {
-        std::string lpacLocalPath = _HM_PATH;
+        std::string lpacLocalPath = "/";
         lpacLocalPath.append(lPair.second);
         std::string lpacFullPath = std::filesystem::current_path().string(); 
         lpacFullPath.append(lpacLocalPath);

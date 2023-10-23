@@ -1,6 +1,32 @@
 #include "analysis.h"
+#include <tlhelp32.h>
 
 INIT_HOOK()
+
+void ResumeModuleThread(HMODULE hModule) {
+    //Get PID from handle
+    DWORD dwPID = GetProcessId(hModule);
+    HANDLE h = CreateToolhelp32Snapshot(TH32CS_SNAPTHREAD, dwPID);
+    if (h != INVALID_HANDLE_VALUE) {
+        THREADENTRY32 te;
+        te.dwSize = sizeof(te);
+        if (Thread32First(h, &te)) {
+            do {
+                if (te.dwSize >= FIELD_OFFSET(THREADENTRY32, th32OwnerProcessID) +
+                                 sizeof(te.th32OwnerProcessID)) {
+                    //If the thread is suspended, resume it
+                    if (te.th32OwnerProcessID == GetCurrentProcessId() && te.th32ThreadID != GetCurrentThreadId() && te.dwSize >= FIELD_OFFSET(THREADENTRY32, th32ThreadID) + sizeof(te.th32ThreadID)) {
+                        HANDLE hThread = OpenThread(THREAD_SUSPEND_RESUME, FALSE, te.th32ThreadID);
+                        ResumeThread(hThread);
+                        CloseHandle(hThread);
+                    }
+                }
+                te.dwSize = sizeof(te);
+            } while (Thread32Next(h, &te));
+        }
+    CloseHandle(h);
+    }
+}
 
 void RegisterHook(const cTkMetaDataClass* lpClassMetadata,
     void(* lDefaultFunction)(cTkClassPointer*, cTkLinearMemoryPool*),
@@ -24,7 +50,7 @@ void RegisterHook(const cTkMetaDataClass* lpClassMetadata,
         [](unsigned char c) { return (char)std::tolower(c); });
 
     std::string lPath = std::filesystem::current_path().string();
-    lPath.append("/HERIDIUM/cpp/");
+    lPath.append("/");
 
     bool lbFoundPath = false;
 
@@ -68,6 +94,10 @@ void AnalysisInit()
 
     if(HOOK_STATUS() == MH_OK)
         spdlog::info("Ready to analyse some banger metadata");
+    else
+        spdlog::error("Failed to hook!");
+    
+    ResumeModuleThread(MODULE_BASE);
 }
 
 // HERIDIUM_BEGIN

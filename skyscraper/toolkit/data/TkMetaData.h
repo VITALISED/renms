@@ -23,7 +23,6 @@ union TkID
 	unsigned __int64 mUInt64[uiSize / 64];
 };
 
-
 class cTkMetaDataFunctionLookup
 {
 public:

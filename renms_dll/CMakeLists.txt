@@ -1,5 +1,5 @@
 add_library(
-    renms_dll
+    renms_dll SHARED
     "dllmain.cpp"
     "commands/commands.h"
     # "commands/manager.h"

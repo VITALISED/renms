@@ -1,0 +1,11 @@
+set(CMAKE_SYSTEM_NAME Windows)
+
+unset(WIN32)
+
+find_program(CMAKE_C_COMPILER x86_64-w64-mingw32-gcc REQUIRED)
+find_program(CMAKE_CXX_COMPILER x86_64-w64-mingw32-g++ REQUIRED)
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++20")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c17")
+
+set(TOOLCHAIN_LOADED 1)
