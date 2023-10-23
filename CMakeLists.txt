@@ -96,7 +96,9 @@ if (CMAKE_GENERATOR STREQUAL "Ninja")
     C_APPEND_FLAGS("-fdiagnostics-color=always")
 endif()
 
-add_subdirectory(thirdparty)
 add_subdirectory(metadata)
 add_subdirectory(renms_dll)
 add_subdirectory(skyscraper)
+
+set_directory_properties(PROPERTIES COMPILE_OPTIONS "")
+add_subdirectory(thirdparty)
