@@ -7,9 +7,11 @@
 #define HERIDIUM_LIB "libHeridium.dll"
 #endif
 
-void printDebug(std::string message) {
+void printDebug(std::string input) {
     #ifdef _DEBUG
-    std::cout << message << std::endl;
+    std::cout << input << std::endl;
+    #else
+    _IsUnused(input);
     #endif
 }
 
