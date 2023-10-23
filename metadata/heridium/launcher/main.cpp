@@ -51,7 +51,7 @@ int main(int argc, char** argv) {
         } else
             nmsPath = argv[1];
 
-        heridiumPath = exePath.parent_path().parent_path();
+        heridiumPath = exePath.parent_path();
         heridiumPath /= HERIDIUM_LIB;
         CheckPath(nmsPath, "NMS.exe");
         CheckPath(heridiumPath, HERIDIUM_LIB);
