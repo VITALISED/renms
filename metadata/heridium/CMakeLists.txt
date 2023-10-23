@@ -29,13 +29,22 @@ target_link_libraries(Heridium PRIVATE
 
 add_subdirectory(launcher)
 
-add_custom_command(
-    OUTPUT ${META_SOURCE_DIR} ${META_TOOLKIT_DIR}
-    ## Given that WINE_EXECUTABLE won't be defined with WIN32, this should work fine on all platforms
-    COMMAND "${WINE_EXECUTABLE} ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/launcher.exe" "${NMS_EXE_DIR}/NMS.exe"
-    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-    DEPENDS Heridium launcher
-)
+if (NOT DEFINED WIN32)
+    add_custom_command(
+        OUTPUT ${META_SOURCE_DIR} ${META_TOOLKIT_DIR}
+        ## Given that WINE_EXECUTABLE won't be defined with WIN32, this should work fine on all platforms
+        COMMAND "${WINE_EXECUTABLE}" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/launcher.exe" "${NMS_EXE_DIR}/NMS.exe"
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+        DEPENDS Heridium launcher
+    )
+else()
+    add_custom_command(
+        OUTPUT ${META_SOURCE_DIR} ${META_TOOLKIT_DIR}
+        COMMAND "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/launcher.exe" "${NMS_EXE_DIR}/NMS.exe"
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+        DEPENDS Heridium launcher
+    )
+endif()
 
 add_custom_target(
     BuildMetadata
