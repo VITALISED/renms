@@ -44,6 +44,7 @@ else()
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
         DEPENDS Heridium launcher
     )
+endif()
 
 add_custom_target(
     BuildMetadata
