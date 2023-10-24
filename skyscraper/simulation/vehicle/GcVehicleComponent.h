@@ -1,14 +1,30 @@
 #pragma once
 
 #include <skyscraper.h>
+#include <simulation/projectiles/GcLaserBeam.h>
+#include <simulation/vehicle/GcVehicleWeapon.h>
+#include <simulation/player/GcPlayer.h>
+#include <simulation/components/gameplay/GcTechnologyAttachmentComponent.h>
+#include <toolkit/simulation/components/TkAnimationComponent.h>
 #include <toolkit/simulation/components/TkComponent.h>
+#include <toolkit/utilities/containers/TkVector.h>
 #include <metadata/simulation/vehicle/gcvehiclecomponentdata.meta.h>
 #include <metadata/simulation/vehicles/gcvehicledata.meta.h>
+#include <metadata/simulation/vehicles/gcmechmeshtype.meta.h>
+#include <metadata/simulation/vehicles/gcmechweaponlocation.meta.h>
 
 SKYSCRAPER_BEGIN
 
 class cGcVehicleComponent : public cTkComponent
 {
+	typedef cGcPlayer::eRocketBootsDoubleTapState eCustomisationState;
+
+	struct sMechWeaponLocationInfo
+	{
+		eMechWeaponLocation leActiveLocation;
+		float lfTimeActivated;
+	};
+
 	cGcVehicleComponentData* mpData;
 	cGcVehicleData* mpVehicleData;
 	cGcLaserBeam mLaser;
@@ -19,8 +35,8 @@ class cGcVehicleComponent : public cTkComponent
 	cGcOwnerConcept mOwnerConcept;
 	TkAudioObject mAudioObject;
 	bool mbRemotelyOwnedEgineOn;
-	std::vector<TkHandle, TkSTLAllocatorShim<TkHandle, 4, -1> > mDamageEffectNodes;
-	std::vector<EffectInstance, TkSTLAllocatorShim<EffectInstance, 8, -1> > mCrashEffectHandles;
+	cTkVector<TkHandle> mDamageEffectNodes;
+	cTkVector<EffectInstance> mCrashEffectHandles;
 	bool mbDamageEffectActive;
 	cTkMatrix34 mBaseGraphicsOffsetMatrix;
 	cTkMatrix34 mSpawnMatrix;

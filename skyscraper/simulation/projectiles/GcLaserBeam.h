@@ -1,8 +1,12 @@
 #pragma once
 
 #include <skyscraper.h>
+#include <simulation/EffectInstance.h>
 #include <simulation/player/GcOwnerConcept.h>
+#include <simulation/projectiles/GcBeamEffect.h>
 #include <toolkit/audio/wwise/TkAudioManagerWwise.h>
+#include <toolkit/simulation/physics/havok/TkRigidBody.h>
+#include <toolkit/utilities/containers/TkVector.h>
 #include <metadata/simulation/projectiles/gclaserbeamdata.meta.h>
 #include <metadata/simulation/projectiles/gcprojectiledata.meta.h>
 
@@ -46,8 +50,8 @@ class cGcLaserBeam
 	float mfWidthBoost;
 	bool mbHeatBoostNumbers;
 	bool mbTracerMode;
-	std::vector<cGcImpactCombatEffectData, TkSTLAllocatorShim<cGcImpactCombatEffectData, 4, -1> > maCombatEffects;
-	std::vector<cGcCombatEffectDamageMultiplier, TkSTLAllocatorShim<cGcCombatEffectDamageMultiplier, 4, -1> > maCombatEffectsDmgMultipliers;
+	cTkVector<cGcImpactCombatEffectData> maCombatEffects;
+	cTkVector<cGcCombatEffectDamageMultiplier> maCombatEffectsDmgMultipliers;
 };
 
 SKYSCRAPER_END
