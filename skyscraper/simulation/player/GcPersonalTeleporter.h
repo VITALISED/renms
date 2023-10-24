@@ -5,6 +5,7 @@
 #include <toolkit/maths/geometry/TkPhysRelMat34.h>
 #include <toolkit/attachments/TkHandle.h>
 #include <toolkit/simulation/physics/havok/TkRigidBody.h>
+#include <toolkit/simulation/physics/TkRaycastJob.h>
 #include <metadata/simulation/player/gchand.meta.h>
 
 SKYSCRAPER_BEGIN

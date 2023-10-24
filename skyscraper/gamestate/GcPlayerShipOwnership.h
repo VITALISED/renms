@@ -1,6 +1,7 @@
 #pragma once
 
 #include <skyscraper.h>
+#include <simulation/player/GcPersonalTeleporter.h>
 #include <toolkit/attachments/TkHandle.h>
 #include <toolkit/resources/TkSmartResHandle.h>
 #include <toolkit/attachments/TkAttachment.h>
@@ -15,6 +16,7 @@ SKYSCRAPER_BEGIN
 
 class cGcPlayerShipOwnership
 {
+public:
     struct sGcShipData
     {
         cTkSeed mPlayerShipSeed;
@@ -23,6 +25,19 @@ class cGcPlayerShipOwnership
         cTkAttachmentPtr mpPlayerShipAttachment;
         int mFreighterDockIndex;
         cGcCustomisationComponentData mShipCustomisationData;
+    };
+
+    struct RetiredShipRecord
+    {
+        cTkSmartResHandle mShipResHandle;
+        TkHandle mShipNode;
+    };
+
+    enum eMeshRefreshState
+    {
+        ReadyForRefresh,
+        Generating,
+        SwapMesh,
     };
 
     std::unordered_map<int,std::function<void __cdecl(cTkMatrix34 const &)>> mNewSpaceshipSpawnCallbacks;
@@ -49,7 +64,7 @@ class cGcPlayerShipOwnership
     float mfShipPreviewFirstActiveTime;
     float mfShipPreviewLastActiveTime;
     cTkVector3 mShipPreviewScale;
-     cTkColour mShipPreviewColour;
+    cTkColour mShipPreviewColour;
     bool mbShouldRefreshMesh;
     cGcPlayerShipOwnership::eMeshRefreshState mMeshRefreshState;
     cTkSmartResHandle mRefreshSwapRes;

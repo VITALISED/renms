@@ -13,6 +13,7 @@
 #include <robin_hood.h>
 #include <Havok/hkVector4f.h>
 #include <Havok/hknpMassDistribution.h>
+#include <Havok/hknpConstraintId.h>
 
 #define SKYSCRAPER_BEGIN namespace nms {
 #define SKYSCRAPER_END }
