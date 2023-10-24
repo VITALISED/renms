@@ -15,4 +15,4 @@
 #include <Havok/hknpMassDistribution.h>
 
 #define SKYSCRAPER_BEGIN namespace nms {
-#define SKYSCRAPER_END }
+#define SKYSCRAPER_END };
