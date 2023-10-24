@@ -1,14 +1,8 @@
+set_directory_properties(PROPERTIES COMPILE_OPTIONS "")
 
 include(FetchContent)
-if (CMAKE_BUILD_TYPE STREQUAL "Debug")
-    set(FETCHCONTENT_QUIET OFF)
-else()
-    set(FETCHCONTENT_QUIET ON)
-endif()
 
-set (LIB "${CMAKE_CURRENT_SOURCE_DIR}/lib")
-
-message(STATUS "Fetching and compiling dependencies (This may take a moment)...")
+message(STATUS "Fetching dependencies...")
 FetchContent_Declare(
     LIB_FMT
     GIT_REPOSITORY "https://github.com/fmtlib/fmt.git"
@@ -38,5 +32,3 @@ FetchContent_Declare(
 )
 
 FetchContent_MakeAvailable(LIB_FMT LIB_SPDLOG LIB_MINHOOK LIB_ROBINHOOD)
-
-link_directories(${LIB})
