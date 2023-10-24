@@ -18,6 +18,16 @@ target_include_directories(
     ${CMAKE_SOURCE_DIR}/thirdparty/include
 )
 
+if (CMAKE_BUILD_TYPE STREQUAL "Debug")
+    target_link_libraries(renms_dll
+        ${LIB}/fmt/libfmtd.a
+    )
+else()
+    target_link_libraries(renms_dll
+        ${LIB}/fmt/libfmt.a
+    )
+endif()
+
 target_precompile_headers(renms_dll PRIVATE renms.h)
 
 add_subdirectory(proxy)
