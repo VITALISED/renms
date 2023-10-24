@@ -24,6 +24,20 @@ enum eAnimLayerState
 	ENumLayerStates,
 };
 
+class cTkAnimLayerHandle
+{
+	int miChannelIndex;
+	int miAnimIndex;
+	int miUid;
+};
+
+class cTkAnimInstanceHandle
+{
+	cTkAnimLayerHandle mLayer;
+	int miInstIndex;
+	int miAnimDataIndex;
+};
+
 class cTkAnimationBlend
 {
 	enum eBlendType

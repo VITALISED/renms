@@ -6,6 +6,12 @@
 #include <toolkit/audio/wwise/TkAudioManagerWwise.h>
 #include <toolkit/resources/TkResourceDescriptor.h>
 #include <toolkit/simulation/components/TkAnimationComponent.h>
+#include <toolkit/system/timer/TkTimer.h>
+#include <toolkit/maths/geometry/TkPhysRelMat34.h>
+#include <toolkit/maths/numeric/TkSmoothCD.h>
+#include <toolkit/animation/TkHitCurve.h>
+#include <toolkit/utilities/containers/TkVector.h>
+#include <metadata/simulation/vehicles/gcmechmeshtype.meta.h>
 
 SKYSCRAPER_BEGIN
 
@@ -16,6 +22,16 @@ class cGcVehicleCockpit
 		ECockpitLoadState_Waiting,
 		ECockpitLoadState_Loading,
 		ECockpitLoadState_Loaded,
+	};
+
+	enum eCockpitMode
+	{
+		ECockpit_None,
+		ECockpit_EnterInterp,
+		ECockpit_Enter,
+		ECockpit_Inside,
+		ECockpit_Exit,
+		ECockpit_ExitFinal,
 	};
 
 	cGcVehicleCockpit::eCockpitLoadStates meCockpitLoadingState;
@@ -54,7 +70,7 @@ class cGcVehicleCockpit
 	TkHandle mAtmosphereEffectTopNode;
 	cTkMatrix34 mCockpitSpeedMeshStartFrame;
 	TkHandle mCockpitSpeedMesh;
-	std::vector<TkHandle, TkSTLAllocatorShim<TkHandle, 4, -1> > maStoppedVFXNodes;
+	cTkVector<TkHandle> maStoppedVFXNodes;
 	bool mbIsMoving;
 	bool mbCockpitVisible;
 	bool mbCockpitOverriddenToBeInvisible;

@@ -52,6 +52,7 @@ add_library(
     "graphics/ngui/NGuiAnimationEvent.h"
     "graphics/ngui/NGuiInputType.h"
     "graphics/ngui/ScrollBarState.h"
+    "networking/components/GcNetworkComponent.h"
     "networking/GcLobbyId.h"
     "networking/GcNetworkAddress.h"
     "networking/GcNetworkConstants.h"
@@ -84,6 +85,7 @@ add_library(
     "simulation/projectiles/GcBeamEffect.h"
     "simulation/projectiles/GcLaserBeam.h"
     "simulation/projectiles/GcTerrainEditorBeam.h"
+    "simulation/projectiles/GcShootableComponent.h"
     "simulation/scenemanager/GcFadeNode.h"
     "simulation/solarsystem/asteroid/GcAsteroidLayout.h"
     "simulation/solarsystem/planet/GcUserdataPrimaryPlanetChange.h"
@@ -97,6 +99,7 @@ add_library(
     "simulation/GcSmokeTestScenario.h"
     "simulation/GcTrackArrowTypes.h"
     "simulation/GcWitness.h"
+    "toolkit/animation/TkHitCurve.h"
     "toolkit/animation/engine/TkNodeAnimationControllerEngine.h"
     "toolkit/attachments/TkAttachment.h"
     "toolkit/attachments/TkHandle.h"
@@ -167,6 +170,7 @@ add_library(
     "toolkit/system/memory/pools/TkMemoryPool.h"
     "toolkit/system/timer/TkClock.h"
     "toolkit/system/timer/TkStopwatch.h"
+    "toolkit/system/timer/TkTimer.h" 
     "toolkit/system/thread/TkRegionThreadManager.h"
     "toolkit/system/TkCSMutex.h"
     "toolkit/system/TkIterationState.h"
@@ -182,6 +186,7 @@ add_library(
     "toolkit/utilities/containers/TkLinearHashTable.h"
     "toolkit/utilities/containers/TkMetaMessageMap.h"
     "toolkit/utilities/containers/TkMetaMessageSink.h"
+    "toolkit/utilities/containers/TkFunctionPointerArray.h"
     "toolkit/utilities/fsm/TkFSM.h"
     "toolkit/utilities/fsm/TkFSMState.h"
     "toolkit/utilities/TkString.h"
@@ -189,7 +194,7 @@ add_library(
     "toolkit/utilities/TkStrongType.h"
     "toolkit/utilities/TkArray.h"
     "toolkit/voxel/TkHalfVectors.h"
-)
+   "simulation/projectiles/GcProjectileImpact.h" "simulation/components/gameplay/GcCombatEffectsComponent.h" "simulation/components/utils/GcPlayerCharacterComponent.h" "simulation/GcCharacterInterface.h" "simulation/CharacterPhysicsDisabledReasons.h" "simulation/components/utils/GcPlayerControlComponent.h" "toolkit/simulation/components/TkSketchComponent.h" "toolkit/system/thread/TkSpinMutex.h" "toolkit/utilities/containers/TkForwardList.h" "toolkit/simulation/physics/havok/TkHavokDynamicCharacterController.h" "toolkit/simulation/TkBlackBoard.h")
 
 target_include_directories(
     renms_skyscraper PRIVATE
