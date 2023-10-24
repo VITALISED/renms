@@ -23,31 +23,22 @@ add_library(paths STATIC
 )
 
 target_link_libraries(Heridium PRIVATE
+    ${LIB}/minhook/minhook.x64d.a
     paths
 )
 
 add_subdirectory(launcher)
 
-if (NOT DEFINED WIN32)
-    add_custom_command(
-        OUTPUT fakething
-        COMMAND "${WINE_EXECUTABLE}" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/launcher.exe" "${NMS_EXE_DIR}/NMS.exe"
-        COMMAND "${CMAKE_COMMAND} -P" "${CMAKE_CURRENT_SOURCE_DIR}/SearchDirs.cmake"
-        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-        DEPENDS Heridium launcher
+if (DEFINED WINE_EXECUTABLE)
+    add_custom_target(ExtractMetadata
+        COMMAND "${WINE_EXECUTABLE}" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/heridiumLauncher.exe" "${NMS_EXE_DIR}/NMS.exe"
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/classcache
+        DEPENDS Heridium heridiumLauncher
     )
 else()
-    add_custom_command(
-        OUTPUT fakething
-        COMMAND "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/launcher.exe" "${NMS_EXE_DIR}/NMS.exe"
-        COMMAND "${CMAKE_COMMAND} -P" "${CMAKE_CURRENT_SOURCE_DIR}/SearchDirs.cmake"
-        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-        DEPENDS Heridium launcher
+    add_custom_target(ExtractMetadata
+        COMMAND "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/heridiumLauncher.exe" "${NMS_EXE_DIR}/NMS.exe"
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/classcache
+        DEPENDS Heridium heridiumLauncher
     )
 endif()
-
-#This is just so you can invoke the extraction without precompiling from the command line.
-add_custom_target(
-    ExtractMetadata
-    DEPENDS fakething
-)

@@ -1,4 +1,4 @@
-add_executable(launcher
+add_executable(heridiumLauncher
     "main.cpp"
     "winprocess.cpp"
 )

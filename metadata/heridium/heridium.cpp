@@ -8,10 +8,16 @@ HERIDIUM_BEGIN
     static_assert("No language target defined for heridium");
 #endif
 
+//This also creates the header with all the includes
 void CreateOutputDirectories()
 {
+    std::ofstream lHeaderStream("./GIVEMEALLTHECLASSES.h");
+    lHeaderStream << "#pragma once\n\n";
     for(std::pair<const char*, const char*> lPair : classPaths)
     {
+        if (std::string(lPair.second) != "source/globals/gcdebugoptions.meta.h")
+            lHeaderStream << "#include \"" << lPair.second << "\"\n";
+
         std::string lpacLocalPath = "/";
         lpacLocalPath.append(lPair.second);
         std::string lpacFullPath = std::filesystem::current_path().string(); 
@@ -20,6 +26,8 @@ void CreateOutputDirectories()
         std::string lpacDirPath = lpacFullPath.substr(0, lastindex); 
         std::filesystem::create_directories(lpacDirPath);
     }
+
+    lHeaderStream.close();
 };
 
 HERIDIUM_END
