@@ -398,7 +398,7 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 
+bin/
+lib/
 build/
-metadata/source/*
-metadata/toolkit/*
-thirdparty/lib
+classcache/
