@@ -11,6 +11,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_C_STANDARD 17)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 
+message("\n")   ## Fix a problem with Ninja where it doesn't place a newline and the first output is on the same line as the Ninja.
+
+
 ## ================================================================================================== Functions.
 
 
@@ -63,10 +66,12 @@ Remember to use forward slashes (/). See the BUILD.md for why it needs to know t
     endif()
 endfunction()
 
+
 ## ================================================================================================== Main.
 
-CHECK_OS()
 
+set(LIB ${CMAKE_CURRENT_SOURCE_DIR}/lib)
+CHECK_OS()
 CHECK_NMS_DIR()
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin")
@@ -80,12 +85,14 @@ endif()
 ## scheduler for the OS work more efficiently with our stuff, so we'll use it.
 
 if (MSVC)
-    C_APPEND_FLAGS("/await /W4")
+    C_APPEND_FLAGS("/W4")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /await")
     if (CMAKE_BUILD_TYPE STREQUAL "Release")
         C_APPEND_FLAGS("/WX")
     endif()
 else()
-    C_APPEND_FLAGS("-fcoroutines -Wall -Wextra")
+    C_APPEND_FLAGS("-Wall -Wextra")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fcoroutines")
     if (CMAKE_BUILD_TYPE STREQUAL "Release")
         C_APPEND_FLAGS("-Werror")
     endif()
@@ -96,9 +103,17 @@ if (CMAKE_GENERATOR STREQUAL "Ninja")
     C_APPEND_FLAGS("-fdiagnostics-color=always")
 endif()
 
+link_directories(${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/lib)
+
 add_subdirectory(metadata)
 add_subdirectory(renms_dll)
 add_subdirectory(skyscraper)
-
-set_directory_properties(PROPERTIES COMPILE_OPTIONS "")
 add_subdirectory(thirdparty)
+
+## Finally, the clean target.
+add_custom_target(uberclean
+    COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
+    COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_SOURCE_DIR}/classcache
+    COMMAND ${CMAKE_COMMAND} -E remove_directory ${LIB}
+    COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target clean
+)
