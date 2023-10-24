@@ -67,11 +67,11 @@ set_target_properties(fmt::fmt-header-only PROPERTIES
   INTERFACE_INCLUDE_DIRECTORIES "C:/Users/gavat/OneDrive/Desktop/codingstuff/renms/build/_deps/lib_fmt-src/include"
 )
 
-# Import target "fmt::fmt" for configuration "Debug"
-set_property(TARGET fmt::fmt APPEND PROPERTY IMPORTED_CONFIGURATIONS DEBUG)
+# Import target "fmt::fmt" for configuration "Release"
+set_property(TARGET fmt::fmt APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
 set_target_properties(fmt::fmt PROPERTIES
-  IMPORTED_LINK_INTERFACE_LANGUAGES_DEBUG "CXX"
-  IMPORTED_LOCATION_DEBUG "C:/Users/gavat/OneDrive/Desktop/codingstuff/renms/thirdparty/lib/fmt/libfmtd.a"
+  IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "CXX"
+  IMPORTED_LOCATION_RELEASE "C:/Users/gavat/OneDrive/Desktop/codingstuff/renms/thirdparty/lib/fmt/libfmt.a"
   )
 
 # This file does not depend on other imported targets which have

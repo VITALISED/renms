@@ -401,3 +401,4 @@ FodyWeavers.xsd
 build/
 metadata/source/*
 metadata/toolkit/*
+thirdparty/lib
