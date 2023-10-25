@@ -3,11 +3,14 @@
 #include <skyscraper.h>
 #include <simulation/CharacterPhysicsDisabledReasons.h>
 #include <simulation/components/utils/GcPlayerControlComponent.h>
+#include <simulation/CharacterSlopeState.h>
+#include <simulation/player/GcCharacterSit.h>
 #include <networking/GcNetworkConstants.h>
 #include <toolkit/maths/numeric/generic/TkVector2Generic.h>
 #include <toolkit/maths/geometry/TkPhysRelMat34.h>
 #include <toolkit/attachments/TkAttachment.h>
 #include <metadata/reality/gcalienrace.meta.h>
+#include <metadata/simulation/projectiles/gcdamagetype.meta.h>
 
 SKYSCRAPER_BEGIN
 

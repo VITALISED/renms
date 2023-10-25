@@ -1,6 +1,7 @@
 #pragma once
 
 #include <skyscraper.h>
+#include <simulation/projectiles/GcShootableComponent.h>
 #include <toolkit/attachments/TkAttachment.h>
 #include <toolkit/attachments/TkHandle.h>
 #include <toolkit/audio/wwise/TkAudioManagerWwise.h>
@@ -32,6 +33,13 @@ class cGcVehicleCockpit
 		ECockpit_Inside,
 		ECockpit_Exit,
 		ECockpit_ExitFinal,
+	};
+
+	enum eBobbleHeadLoadStates
+	{
+		EBoobleHeadLoadState_Start,
+		EBoobleHeadLoadState_Loading,
+		EBoobleHeadLoadState_Update,
 	};
 
 	cGcVehicleCockpit::eCockpitLoadStates meCockpitLoadingState;

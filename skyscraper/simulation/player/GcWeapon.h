@@ -5,8 +5,19 @@
 #include <toolkit/utilities/containers/TkVector.h>
 #include <metadata/gamestate/gcinventoryelement.meta.h>
 #include <metadata/reality/stats/gcstatstypes.meta.h>
+#include <metadata/simulation/weapons/gcremoteweapons.meta.h>
 
 SKYSCRAPER_BEGIN
+
+class cGcMuzzleFlash
+{
+	cTkSmartResHandle mResource;
+	TkHandle mNode;
+	cTkAttachmentPtr mpAttachment;
+	TkID<128> mActiveParticlesEffect;
+	EffectInstance mParticlesEffectHandle;
+	eRemoteWeaponType meRemoteWeaponType;
+};
 
 class cGcWeapon
 {

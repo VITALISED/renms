@@ -5,8 +5,23 @@
 #include <toolkit/maths/geometry/TkPhysRelVec3.h>
 #include <toolkit/simulation/physics/havok/TkRigidBodyGameplayFlags.h>
 #include <toolkit/system/thread/TkRegionThreadManager.h>
+#include <toolkit/simulation/physics/havok/TkRigidBody.h>
 
 SKYSCRAPER_BEGIN
+
+class cTkContactPoint
+{
+	cTkRigidBodyPtr mpHitBody;
+	cTkPhysRelVec3 mvContactPoint;
+	cTkVector3 mvContactNormal;
+	int miMaterial;
+	int miSubIndex;
+	float mfDistance;
+	float mfFraction;
+	bool mbIsFresh;
+	bool mbIsBodyA;
+	unsigned __int8 muRayHitFlags;
+};
 
 class cTkRaycastJob
 {

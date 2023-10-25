@@ -2,17 +2,34 @@
 
 #include <skyscraper.h>
 #include <simulation/projectiles/GcProjectileImpact.h>
+#include <simulation/components/gameplay/GcCombatEffectsComponent.h>
+#include <simulation/environment/GcSimpleScanEffect.h>
+#include <graphics/camera/shake/GcCameraShake.h>
 #include <networking/components/GcNetworkComponent.h>
 #include <toolkit/simulation/physics/TkPhysicsComponent.h>
 #include <toolkit/networking/TkReplicatedVariable.h>
 #include <toolkit/maths/geometry/TkAABB.h>
 #include <toolkit/utilities/containers/TkFunctionPointerArray.h>
+#include <toolkit/animation/TkHitCurve.h>
 #include <metadata/simulation/projectiles/gcshootablecomponentdata.meta.h>
 
 SKYSCRAPER_BEGIN
 
 class cGcShootableComponent : public cGcNetworkComponent
 {
+	enum eInterceptType
+	{
+		EInterceptType_Ship,
+		EInterceptType_Bounds,
+		EInterceptType_AimNode,
+	};
+
+	class cGcDelayedImpact
+	{
+		cGcProjectileImpact mImpact;
+		float mfDelay;
+	};
+
 	cGcShootableComponentData* mpData;
 	cTkFunctionPointerArray<bool(__cdecl*)(void*, cGcProjectileImpact const&), void, 12> mCallbacks;
 	cTkFunctionPointerArray<bool(__cdecl*)(void*, cGcProjectileImpact const&), void, 12> mDeathCallbacks;
@@ -38,8 +55,8 @@ class cGcShootableComponent : public cGcNetworkComponent
 	cTkAABB mOBBox;
 	cTkAABB mVisibleOBBox;
 	cTkHitCurve mHUDHitCurve;
-	std::vector<cTkAttachmentPtr, TkSTLAllocatorShim<cTkAttachmentPtr, 8, -1> > mapArmour;
-	std::vector<cGcSimpleScanEffect, TkSTLAllocatorShim<cGcSimpleScanEffect, 16, -1> > maArmourHighlighters;
+	cTkVector<cTkAttachmentPtr> mapArmour;
+	cTkVector<cGcSimpleScanEffect> maArmourHighlighters;
 	int miNumActiveArmours;
 	TkID<256> mArmourName;
 	cGcSimpleScanEffect mHitEffect;
@@ -56,7 +73,7 @@ class cGcShootableComponent : public cGcNetworkComponent
 	bool mbOverrideWantedLevel;
 	int miCustomWantedLevelIncrease;
 	bool mbPrepared;
-	std::vector<cGcShootableComponent::cGcDelayedImpact, TkSTLAllocatorShim<cGcShootableComponent::cGcDelayedImpact, 16, -1> > maDelayedImpacts;
+	cTkVector<cGcShootableComponent::cGcDelayedImpact> maDelayedImpacts;
 };
 
 SKYSCRAPER_END

@@ -1,14 +1,82 @@
 #pragma once
 
 #include <skyscraper.h>
+#include <simulation/GcCharacterInterface.h>
+#include <simulation/player/GcCharacterSuitAudio.h>
+#include <simulation/EffectInstance.h>
+#include <simulation/particles/GcJetPackEffect.h>
+#include <simulation/components/player/GcPlayerFullBodyIkComponent.h>
+#include <networking/components/GcNetworkInterpolationComponent.h>
+#include <toolkit/maths/numeric/TkSmoothCD.h>
+#include <toolkit/networking/TkReplicatedVariable.h>
 #include <toolkit/simulation/components/TkComponent.h>
+#include <toolkit/graphics/utilities/StencilModes.h>
+#include <toolkit/animation/engine/TkNodeAnimationControllerEngine.h>
+#include <toolkit/simulation/components/TkAnimationComponent.h>
+#include <toolkit/utilities/containers/TkVector.h>
+#include <toolkit/utilities/random/TkPersonalRNG.h>
 #include <metadata/simulation/components/utils/gcplayercharactercomponentdata.meta.h>
 #include <metadata/simulation/player/gcplayercharacterstatetype.meta.h>
+#include <metadata/simulation/player/gcplayercharacterstatetable.meta.h>
+#include <metadata/simulation/character/gcplayercontrolstate.meta.h>
+#include <metadata/animation/gcthirdpersonanimparams.meta.h>
 
 SKYSCRAPER_BEGIN
 
+typedef StencilModes::List eCamouflageState;
+
+enum AnimationTransitionType
+{
+	NoTransition,
+	TransitionInto,
+	Intermediate,
+};
+
+
+class cGcPlayerBackpackBars
+{
+	TkHandle mThirdPersonNode;
+	TkHandle mBackpackMeshNode;
+	cTkSmartResHandle mBackpackLifeSupportMaterial;
+	cTkSmartResHandle mBackpackHazardProtectionMaterial;
+	cGcCharacterInterface* mpCharacterInterface;
+	float mfBackpackFlashTimer;
+	float mfBackpackLifeSupportBarValue;
+	float mfBackpackHazardBarValue;
+};
+
+class cGcAnimationLayerQueue
+{
+	struct AnimEntry
+	{
+		TkID<128> mAnimName;
+		float mfBlendTime;
+		int miForceLayer;
+		AnimationTransitionType meTransition;
+		eCurve meBlendInCurve;
+		eCurve meBlendOutCurve;
+		bool mbMirror;
+		float mfPlayTime;
+		bool mbPlaying;
+	};
+
+	cGcPlayerCharacterComponent* mpPlayerCharacterComponent;
+	cTkAnimationComponent* mpAnimationComponent;
+	TkID<128> mLayerName;
+	cTkAnimLayerHandle mLayerHandle;
+	std::deque<cGcAnimationLayerQueue::AnimEntry> mAnimationQueue;
+	bool mbIsFullBodyLayer;
+};
+
 class cGcPlayerCharacterComponent : public cTkComponent
 {
+	class cGcPlayerControlMode
+	{
+		cGcPlayerControlModeEntry* mpEntry;
+		cTkSmartResHandle mResource;
+		cTkAttachmentPtr mpAttachment;
+	};
+
 	cGcCharacterInterface* mpCharacterInterface;
 	cGcPlayerCharacterComponentData* mpData;
 	cGcCharacterSuitAudio mSuitAudio;
@@ -19,7 +87,7 @@ class cGcPlayerCharacterComponent : public cTkComponent
 	float mTimeInCurrentState;
 	float mCamoMaterialColour[4];
 	float mCamoRefractionParams[4];
-	cTkReplicatedVariable<enum eCamouflageState> meCamoState;
+	cTkReplicatedVariable<eCamouflageState> meCamoState;
 	bool mbCamoApplied;
 	float mfTimeInCamo;
 	float mfTimeCamoDisabled;
@@ -50,7 +118,7 @@ class cGcPlayerCharacterComponent : public cTkComponent
 	EffectInstance maUnderwaterJetpackBubbles[2];
 	EffectInstance mSplashEffect;
 	float mfSplashTime;
-	std::vector<cTkSmartResHandle, TkSTLAllocatorShim<cTkSmartResHandle, 4, -1> > maJetpackEffectMeshMaterials;
+	cTkVector<cTkSmartResHandle> maJetpackEffectMeshMaterials;
 	float mfJetpackEffectMeshTimer;
 	bool mbWasJetpacking;
 	bool mbWasSliding;
@@ -58,8 +126,8 @@ class cGcPlayerCharacterComponent : public cTkComponent
 	float mfJetpackInitialLightIntensity;
 	float mfJetpackTrailTimer;
 	cTkSmoothCD<float> mfJetActivation;
-	std::vector<cGcJetpackEffect, TkSTLAllocatorShim<cGcJetpackEffect, 16, -1> > maJetpackEffects;
-	std::vector<cGcPlayerCharacterComponent::cGcPlayerControlMode, TkSTLAllocatorShim<cGcPlayerCharacterComponent::cGcPlayerControlMode, 8, -1> > maControlModes;
+	std::vector<cGcJetpackEffect> maJetpackEffects;
+	std::vector<cGcPlayerCharacterComponent::cGcPlayerControlMode> maControlModes;
 	TkID<128> mCurrentControlMode;
 	TkID<128> mRequestedControlMode;
 	bool mbFooting;

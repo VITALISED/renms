@@ -5,6 +5,12 @@
 #include <simulation/vehicle/GcVehicleWeapon.h>
 #include <simulation/player/GcPlayer.h>
 #include <simulation/components/gameplay/GcTechnologyAttachmentComponent.h>
+#include <simulation/vehicle/GcVehicleCockpit.h>
+#include <simulation/player/GcPlayerController.h>
+#include <simulation/player/controllers/GcPlayerStick.h>
+#include <simulation/vehicle/GcVehicleControlStick.h>
+#include <simulation/vehicle/GcCarSuspensionAction.h>
+#include <simulation/vehicle/GcMechControl.h>
 #include <toolkit/simulation/components/TkAnimationComponent.h>
 #include <toolkit/simulation/components/TkComponent.h>
 #include <toolkit/utilities/containers/TkVector.h>
@@ -23,6 +29,12 @@ class cGcVehicleComponent : public cTkComponent
 	{
 		eMechWeaponLocation leActiveLocation;
 		float lfTimeActivated;
+	};
+
+	struct sVehicleMech
+	{
+		cGcMechControl* mpMechControl;
+		cGcMechAIController* mpMechAIController;
 	};
 
 	cGcVehicleComponentData* mpData;
