@@ -4,6 +4,7 @@
 #include <simulation/player/GcPlayerCommon.h>
 #include <simulation/player/GcPlayerThirdPerson.h>
 #include <simulation/player/GcPlayerImpact.h>
+#include <simulation/player/attachments/GcPlayerWeapon.h>
 #include <simulation/CharacterPhysicsDisabledReasons.h>
 #include <graphics/camera/behaviours/GcCameraBehaviourFirstPerson.h>
 #include <toolkit/simulation/physics/havok/TkRigidBody.h>

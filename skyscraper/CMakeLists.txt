@@ -71,7 +71,7 @@ add_library(
     "simulation/components/gameplay/GcTechnologyAttachmentComponent.h"
     "simulation/components/scanning/GcScanEffectComponent.h"
     "simulation/customisation/GcResourceCustomisation.h"
-    "simulation/galaxy/GcGalacticVoxelCoordinate.h"
+    "simulation/galaxy/GcGalaxyTypes.h"
     "simulation/particles/GcExplosion.h"
     "simulation/player/GcOwnerConcept.h"
     "simulation/player/GcPersonalTeleporter.h"
@@ -198,7 +198,7 @@ add_library(
     "simulation/vehicle/GcCarSuspensionAction.h"
     "simulation/VoxelType.h" "simulation/vehicle/mech/GcMechControl.h" "simulation/ecosystem/creatures/GcCreatureFullBodyIkComponent.h" "simulation/vehicle/mech/GcMechAIController.h" "simulation/vehicle/mech/GcMechBehaviourTree.h" "toolkit/simulation/ai/behaviourtree/TkBehaviourTree.h" "toolkit/simulation/ai/behaviourtree/TkBehaviourTreeSelector.h" "toolkit/simulation/ai/behaviourtree/TkBehaviourTreeNode.h" "simulation/navigation/GcNavigation.h" "simulation/navigation/GcNavObstacleTracker.h" "simulation/navigation/GcNavigationConfig.h" "simulation/navigation/GcNavigationQuery.h" "simulation/navigation/GcNavTarget.h" "simulation/navigation/GcNavigationWorkingData.h"
     "simulation/navigation/GcPathfindingObstacle.h"    
- "simulation/navigation/GcNavSteering.h" "simulation/navigation/navigator/GcEnvironmentNavigator.h" "simulation/navigation/GcNavigationResult.h" "simulation/vehicle/mech/GcMechBlackboard.h" "simulation/player/GcPlayerThirdPerson.h" "graphics/camera/behaviours/GcCameraBehaviourCharacter.h" "toolkit/graphics/camera/behaviours/TkCameraBehaviour.h" "toolkit/graphics/camera/TkCameraManager.h" "toolkit/graphics/camera/TkCamera.h" "simulation/components/effects/GcPlayerEffectsComponent.h" "simulation/player/GcPlayerEffect.h" "graphics/camera/behaviours/GcCameraBehaviourFirstPerson.h" "graphics/camera/behaviours/GcGameCamera.h" "simulation/player/GcPlayerImpact.h" "simulation/player/attachments/GcPlayerWeapon.h" "graphics/ngui/GcNGui.h" "toolkit/graphics/2d/ui/layers/Tk3dLayer.h"  "toolkit/graphics/2d/ui/layers/Tk2dLayer.h" "toolkit/graphics/2d/ui/objects/Tk2dImage.h" "toolkit/utilities/containers/TkClassPool.h")
+ "simulation/navigation/GcNavSteering.h" "simulation/navigation/navigator/GcEnvironmentNavigator.h" "simulation/navigation/GcNavigationResult.h" "simulation/vehicle/mech/GcMechBlackboard.h" "simulation/player/GcPlayerThirdPerson.h" "graphics/camera/behaviours/GcCameraBehaviourCharacter.h" "toolkit/graphics/camera/behaviours/TkCameraBehaviour.h" "toolkit/graphics/camera/TkCameraManager.h" "toolkit/graphics/camera/TkCamera.h" "simulation/components/effects/GcPlayerEffectsComponent.h" "simulation/player/GcPlayerEffect.h" "graphics/camera/behaviours/GcCameraBehaviourFirstPerson.h" "graphics/camera/behaviours/GcGameCamera.h" "simulation/player/GcPlayerImpact.h" "simulation/player/attachments/GcPlayerWeapon.h" "graphics/ngui/GcNGui.h" "toolkit/graphics/2d/ui/layers/Tk3dLayer.h"  "toolkit/graphics/2d/ui/layers/Tk2dLayer.h" "toolkit/graphics/2d/ui/objects/Tk2dImage.h" "toolkit/utilities/containers/TkClassPool.h" "graphics/GcInWorldUIManager.h" "simulation/GcWarpJumpTarget.h" )
 
 target_include_directories(
     renms_skyscraper PRIVATE

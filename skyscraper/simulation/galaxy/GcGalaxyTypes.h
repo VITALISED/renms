@@ -12,4 +12,11 @@ class cGcGalacticVoxelCoordinate
     bool mbValid;
 };
 
+class cGcGalacticSolarSystemAddress
+{
+    cGcGalacticVoxelCoordinate mVoxelCoordinate;
+    unsigned __int16 mSolarIndex;
+    unsigned __int16 mIteration;
+};
+
 SKYSCRAPER_END

@@ -3,8 +3,11 @@
 #include <skyscraper.h>
 #include <simulation/player/GcWeapon.h>
 #include <simulation/projectiles/GcLaserBeam.h>
+#include <simulation/environment/GcSimpleScanEffect.h>
+#include <graphics/GcInWorldUIManager.h>
 #include <graphics/ngui/GcNGui.h>
 #include <toolkit/utilities/containers/TkClassPool.h>
+#include <toolkit/system/timer/TkTimer.h>
 #include <metadata/simulation/weapons/gcplayerweapons.meta.h>
 #include <metadata/simulation/gcweaponclasses.meta.h>
 
@@ -13,6 +16,7 @@ SKYSCRAPER_BEGIN
 class cGcPlayerWeapon : public cGcWeapon
 {
 	typedef cGcInWorldUIManager::cGcScreenProjector::RepositioningState eReloadHolsterState;
+	typedef cGcPlayerShipOwnership::eMeshRefreshState eMeshRefreshState;
 
 	enum eWeaponState
 	{
