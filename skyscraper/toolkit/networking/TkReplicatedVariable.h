@@ -6,9 +6,9 @@
 SKYSCRAPER_BEGIN
 
 template <typename T>
-class cTkReplicatedVariablePlayer : public cTkReplicatedVariableTemplated<cTkUserIdBase<cTkFixedString<64,char> > >
+class cTkReplicatedVariable : cTkReplicatedVariableTemplated<T>
 {
-    bool mbIsLocallyOwned;
+	cTkComponent* mpOwner;
 };
 
 SKYSCRAPER_END

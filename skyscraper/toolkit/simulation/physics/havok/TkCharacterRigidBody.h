@@ -5,8 +5,9 @@
 
 SKYSCRAPER_BEGIN
 
-class cTkCharacterRigidBody : hknpCharacterRigidBody
+class cTkCharacterRigidBody
 {
+    uintptr_t __vft; //TODO: implement havok bullshit
     hkVector4f mvGroundNormal;
     cTkVector3 mvGroundSurfaceVelocity;
     bool mbOnGround;
