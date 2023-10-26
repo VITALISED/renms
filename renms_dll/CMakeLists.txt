@@ -13,14 +13,20 @@ add_library(
 
 set_target_properties(renms_dll PROPERTIES OUTPUT_NAME renms)
 
-target_link_libraries(
-    renms_dll PRIVATE ${CMAKE_SOURCE_DIR}/thirdparty/lib/MinHook.x64.lib
-)
-
 target_include_directories(
     renms_dll PRIVATE
     ${CMAKE_SOURCE_DIR}/thirdparty/include
 )
+
+if (CMAKE_BUILD_TYPE STREQUAL "Debug")
+    target_link_libraries(renms_dll
+        fmt::fmt
+    )
+else()
+    target_link_libraries(renms_dll
+        fmt::fmt
+    )
+endif()
 
 target_precompile_headers(renms_dll PRIVATE renms.h)
 

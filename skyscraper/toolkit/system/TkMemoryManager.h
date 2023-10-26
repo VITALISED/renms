@@ -4,6 +4,29 @@
 
 SKYSCRAPER_BEGIN
 
+enum eTkMemType
+{
+	EMemoryPool_Physics,
+	EMemoryPool_SingleBuffer,
+	EMemoryPool_DoubleBuffer,
+	EMemoryPool_DoubleBufferPausable,
+	EMemoryPool_IO,
+	EMemoryPool_Network,
+	EMemoryPool_Resources,
+	EMemoryPool_Audio,
+	EMemoryPool_Graphics,
+	EMemoryPool_Compute,
+	EMemoryPool_Nodes,
+	EMemoryPool_AnimStages,
+	EMemoryPool_BlockAllocator,
+	EMemoryPool_GraphicsContext,
+	EMemoryPool_CommandBuffers,
+	EMemoryPool_Debug,
+	EMemoryPool_Metadata,
+	EMemoryPool_NodeAllocator,
+	ENumTkMemoryPools = 18,
+};
+
 template <unsigned int liSize, unsigned int liAlignment>
 class cTkAlignedBlock
 {

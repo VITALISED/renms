@@ -5,6 +5,15 @@
 #include <toolkit/data/TkClassPointer.h>
 #include <toolkit/system/memory/pools/TkLinearMemoryPool.h>
 
+#include <toolkit/simulation/TkSeed.h>
+#include <toolkit/graphics/TkColour.h>
+#include <toolkit/attachments/TkHandle.h>
+#include <toolkit/resources/TkSmartResHandle.h>
+#include <toolkit/maths/numeric/generic/TkVector4Generic.h>
+#include <toolkit/maths/numeric/generic/TkVector3Generic.h>
+#include <toolkit/maths/numeric/generic/TkVector2Generic.h>
+#include <toolkit/voxel/TkHalfVectors.h>
+
 SKYSCRAPER_BEGIN
 
 template <unsigned int uiSize>

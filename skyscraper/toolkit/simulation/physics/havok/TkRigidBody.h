@@ -1,10 +1,17 @@
 #pragma once
 
 #include <skyscraper.h>
+#include <toolkit/utilities/TkArray.h>
 #include <toolkit/attachments/TkHandle.h>
 #include <toolkit/simulation/physics/TkPhysicsProperties.h>
+#include <toolkit/simulation/physics/havok/TkCharacterRigidBody.h>
+#include <toolkit/simulation/physics/havok/TkCollision.h>
+#include <toolkit/simulation/physics/havok/TkRigidBodyGameplayFlags.h>
 
 SKYSCRAPER_BEGIN
+
+class cTkPhysicsComponent;
+class cTkStaticPhysicsComponent;
 
 enum eBodyOwnerType
 {
@@ -68,7 +75,7 @@ class cTkRigidBody
   	float mfMaxLinearSpeed;
   	unsigned __int16 miFilterGroup;
   	unsigned __int16 miFilterMask;
-  	cTkBitArray<unsigned int,1,32> mKinematicFlags;
+  	cTkBitArray<unsigned int, 32> mKinematicFlags;
 
 	struct
 	{

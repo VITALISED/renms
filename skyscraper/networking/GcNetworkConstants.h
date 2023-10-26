@@ -17,6 +17,18 @@ public:
         Fireteam,
         NumLobbyTypes,
     };
+
+    enum OnlinePlatformType
+    {
+        Generic,
+        GOG,
+        PlayStation,
+        Steam,
+        XboxLive,
+        GenericKBM,
+        Nintendo,
+        NumOnlinePlatformTypes = 7,
+    };
 };
 
 SKYSCRAPER_END

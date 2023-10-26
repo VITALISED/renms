@@ -398,6 +398,8 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 
+bin/
 build/
-metadata/source/
-metadata/toolkit/
+metadata/
+RayRod's Multiverse/
+config.cmake

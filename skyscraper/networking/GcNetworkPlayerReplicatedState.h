@@ -6,7 +6,7 @@
 #include <toolkit/data/TkMetaData.h>
 #include <toolkit/utilities/TkString.h>
 #include <toolkit/networking/TkUserIdBase.h>
-#include <toolkit/networking/TkReplicatedVariable.h>
+#include <toolkit/networking/TkReplicatedVariablePlayer.h>
 #include <toolkit/networking/TkReplicatedVariableArray.h>
 #include <metadata/gamestate/gcsettlementstate.meta.h>
 #include <metadata/user/gcdifficultysettingsreplicatedstate.meta.h>

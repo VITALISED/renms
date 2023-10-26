@@ -4,6 +4,7 @@
 #include <application/states/GcApplicationState.h>
 #include <toolkit/utilities/TkStrongType.h>
 #include <toolkit/utilities/containers/TkVector.h>
+#include <graphics/ngui/GcNGui.h>
 #include <metadata/gamestate/gcinventoryelement.meta.h>
 
 SKYSCRAPER_BEGIN

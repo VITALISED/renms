@@ -1,8 +1,12 @@
 #pragma once
 
 #include <skyscraper.h>
+#include <toolkit/system/TkMemoryManager.h>
 
 SKYSCRAPER_BEGIN
+
+template<eTkMemType> class AutoPooled 
+{ };
 
 class cTkMemoryPool
 {
