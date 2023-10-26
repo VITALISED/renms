@@ -12,34 +12,11 @@ if (CMAKE_GENERATOR STREQUAL "Ninja")
     message("")
 endif()
 
-## Just making the options easier to read, and so you can do -DVAR=VAL on the command line if you really want to.
-function(SetIfNotDef var val)
-    if (NOT DEFINED ${var})
-        set(${var} ${val} PARENT_SCOPE)
-    endif()
-endfunction()
-
-## ================================================================================================== Options.
-
-
-SetIfNotDef(CMAKE_BUILD_TYPE Release)
-SetIfNotDef(SKIP_NMS_CHECK FALSE)
-SetIfNotDef(NMS_EXE_DIR "C:/NoMansSkyFractalDebug/NoMansSky/Binaries")
-SetIfNotDef(FETCHCONTENT_QUIET OFF)
+include(./config.cmake)
 
 
 ## ================================================================================================== First checks.
 
-
-if (DEFINED CMAKE_CROSSCOMPILING)
-    message(STATUS "Cross-compiling for Windows")
-elseif (DEFINED UNIX)
-    message(STATUS "OS is Unix/Linux")
-elseif(DEFINED WIN32)
-    message(STATUS "OS is Windows")
-else()
-    message(STATUS "OS is some strange thing other than Windows, macOS, or Unix/Linux. Building anyways! (No Promises)")
-endif()
 
 if (NOT DEFINED NMS_EXE_DIR AND NOT SKIP_NMS_CHECK)
     message(FATAL_ERROR
