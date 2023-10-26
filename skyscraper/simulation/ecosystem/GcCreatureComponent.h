@@ -20,9 +20,9 @@
 #include <skyscraper.h>
 #include <toolkit/simulation/components/TkComponent.h>
 #include <toolkit/utilities/containers/TkVector.h>
-#include <metadata/simulation/ecosystem/gccreaturecomponentdata.meta.h>
-#include <metadata/simulation/ecosystem/creatures/gccreaturedata.meta.h>
-#include <metadata/simulation/ecosystem/gccreatureroledata.meta.h>
+#include <metadata/source/simulation/ecosystem/gccreaturecomponentdata.meta.h>
+#include <metadata/source/simulation/ecosystem/creatures/gccreaturedata.meta.h>
+#include <metadata/source/simulation/ecosystem/gccreatureroledata.meta.h>
 
 SKYSCRAPER_BEGIN
 

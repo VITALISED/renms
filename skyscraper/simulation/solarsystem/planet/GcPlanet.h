@@ -18,14 +18,54 @@
 #pragma once
 
 #include <skyscraper.h>
+#include <simulation/solarsystem/planet/GcPlanetControls.h>
+#include <simulation/solarsystem/buildings/GcBuildingList.h>
 #include <gamestate/GcDiscoveryCommon.h>
 #include <metadata/source/simulation/solarsystem/planet/gcplanetdata.meta.h>
 #include <metadata/source/simulation/solarsystem/planet/gcplanetgenerationinputdata.meta.h>
+#include <metadata/source/simulation/environment/gcobjectspawndata.meta.h>
 
 SKYSCRAPER_BEGIN
 
+enum eSentinelCrimeResponse
+{
+  	ESentinelCrimeResponse_Respond,
+  	ESentinelCrimeResponse_Ignore,
+};
+
+
+class cGcPlanetObjectSpawnData
+{
+  	cGcObjectSpawnData *mpSpawnData;
+  	cGcResourceElement mResource;
+  	cTkDynamicArray<cGcResourceElement> maAltResources;
+  	cGcTerrainTileType mTileType;
+  	bool mbAllowLimiting;
+  	int miCachedCollisionNodeCount;
+  	bool mbEnabled;
+};
+
+class cGcPlanetSpawnData
+{
+  	cTkVector<cGcPlanetObjectSpawnData> maDistantObjects;
+  	cTkVector<cGcPlanetObjectSpawnData> maLandmarks;
+  	cTkVector<cGcPlanetObjectSpawnData> maObjects;
+  	cTkVector<cGcPlanetObjectSpawnData> maDetailObjects;
+  	bool mbDistantObjectsEnabled;
+  	bool mbLandmarksEnabled;
+  	bool mbObjectsEnabled;
+  	bool mbDetailObjectsEnabled;
+};
+
 class cGcPlanet
 {
+	struct sSentinelCrimeResponse
+	{
+  		eSentinelCrimeResponse meCrimeResponse;
+  		float mfCrimeResponseResetTime;
+  		float mfSentinelIgnoreCrimeStartTime;
+	};
+	
 	std::array<bool, 7> mabActivePrimaryRegionStates;
 	cGcDiscoveryData mPlanetDiscoveryData;
 	unsigned __int64 muBeaconUpdateIndex;

@@ -18,10 +18,13 @@
 #pragma once
 
 #include <skyscraper.h>
+#include <simulation/player/GcPlayer.h>
 #include <toolkit/utilities/TkArray.h>
-#include <metadata/tkpalettetexture.meta.h>
+#include <toolkit/utilities/random/TkPersonalRNG.h>
+#include <metadata/toolkit/tkpalettetexture.meta.h>
 #include <metadata/source/simulation/environment/gcobjectspawndata.meta.h>
 #include <metadata/source/simulation/ecosystem/gccreaturespawndata.meta.h>
+#include <metadata/source/simulation/environment/gcbuildingclassification.meta.h>
 
 SKYSCRAPER_BEGIN
 
@@ -50,6 +53,8 @@ enum eTerrainAtlasTextures
 
 class cGcPlanetControls
 {
+	typedef cGcPlayer::eRocketBootsDoubleTapState BuildingJumpRequest;
+
 	class cGcPlanetGenerateRequest
 	{
 		bool mbRequired;
