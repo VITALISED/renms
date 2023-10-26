@@ -34,7 +34,7 @@ class cTkAlignedBlock
 };
 
 template <typename T>
-struct __declspec(align(8)) StackAllocator : std::allocator<T>
+struct StackAllocator : std::allocator<T>
 {
 	using value_type = T;
 
