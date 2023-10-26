@@ -1,7 +1,7 @@
 #pragma once
 
 #include <skyscraper.h>
-#include <metadata/reality/gcnamegeneratortypes.meta.h>
+#include <metadata/source/reality/gcnamegeneratortypes.meta.h>
 
 SKYSCRAPER_BEGIN
 

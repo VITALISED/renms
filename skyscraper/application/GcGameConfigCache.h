@@ -1,8 +1,8 @@
 #pragma once
 
 #include <skyscraper.h>
-#include <metadata/gamestate/gcgamemode.meta.h>
-#include <metadata/simulation/environment/gcplanetlife.meta.h>
+#include <metadata/source/gamestate/gcgamemode.meta.h>
+#include <metadata/source/simulation/environment/gcplanetlife.meta.h>
 
 SKYSCRAPER_BEGIN
 

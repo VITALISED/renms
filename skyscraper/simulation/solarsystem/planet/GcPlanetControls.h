@@ -3,8 +3,8 @@
 #include <skyscraper.h>
 #include <toolkit/utilities/TkArray.h>
 #include <metadata/tkpalettetexture.meta.h>
-#include <metadata/simulation/environment/gcobjectspawndata.meta.h>
-#include <metadata/simulation/ecosystem/gccreaturespawndata.meta.h>
+#include <metadata/source/simulation/environment/gcobjectspawndata.meta.h>
+#include <metadata/source/simulation/ecosystem/gccreaturespawndata.meta.h>
 
 SKYSCRAPER_BEGIN
 

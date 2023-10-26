@@ -2,7 +2,7 @@
 
 #include <skyscraper.h>
 #include <toolkit/data/TkMetaData.h>
-#include <metadata/reality/gcinventoryclass.meta.h>
+#include <metadata/source/reality/gcinventoryclass.meta.h>
 
 SKYSCRAPER_BEGIN
 

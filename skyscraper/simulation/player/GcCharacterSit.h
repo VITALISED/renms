@@ -3,7 +3,7 @@
 #include <skyscraper.h>
 #include <simulation/components/utils/GcPlayerCharacterComponent.h>
 #include <toolkit/maths/geometry/TkPhysRelMat34.h>
-#include <metadata/simulation/ecosystem/npcs/gcnpcseatedposture.meta.h>
+#include <metadata/source/simulation/ecosystem/npcs/gcnpcseatedposture.meta.h>
 
 SKYSCRAPER_BEGIN
 

@@ -6,10 +6,10 @@
 #include <toolkit/maths/numeric/generic/TkMatrix34Generic.h>
 #include <toolkit/simulation/physics/havok/TkRigidBody.h>
 #include <toolkit/utilities/containers/TkVector.h>
-#include <metadata/simulation/projectiles/gcdamagetype.meta.h>
-#include <metadata/gameplay/gccombateffecttype.meta.h>
-#include <metadata/gameplay/gcimpactcombateffectdata.meta.h>
-#include <metadata/simulation/projectiles/gccombateffectdamagemultiplier.meta.h>
+#include <metadata/source/simulation/projectiles/gcdamagetype.meta.h>
+#include <metadata/source/gameplay/gccombateffecttype.meta.h>
+#include <metadata/source/gameplay/gcimpactcombateffectdata.meta.h>
+#include <metadata/source/simulation/projectiles/gccombateffectdamagemultiplier.meta.h>
 
 SKYSCRAPER_BEGIN
 

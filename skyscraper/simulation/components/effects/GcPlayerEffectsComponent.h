@@ -3,7 +3,7 @@
 #include <skyscraper.h>
 #include <simulation/player/GcPlayerEffect.h>
 #include <toolkit/simulation/components/TkComponent.h>
-#include <metadata/simulation/components/effects/gcplayereffectscomponentdata.meta.h>
+#include <metadata/source/simulation/components/effects/gcplayereffectscomponentdata.meta.h>
 
 SKYSCRAPER_BEGIN
 

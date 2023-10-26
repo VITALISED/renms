@@ -2,7 +2,7 @@
 
 #include <skyscraper.h>
 #include <toolkit/system/memory/pools/TkMemoryPool.h>
-#include <metadata/reality/gcdiscoverytype.meta.h>
+#include <metadata/source/reality/gcdiscoverytype.meta.h>
 
 SKYSCRAPER_BEGIN
 

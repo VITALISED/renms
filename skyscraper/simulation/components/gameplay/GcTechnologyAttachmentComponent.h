@@ -2,8 +2,8 @@
 
 #include <skyscraper.h>
 #include <toolkit/simulation/components/TkComponent.h>
-#include <metadata/simulation/components/gameplay/gctechnologyattachmentcomponentdata.meta.h>
-#include <metadata/simulation/vehicles/gcvehicletype.meta.h>
+#include <metadata/source/simulation/components/gameplay/gctechnologyattachmentcomponentdata.meta.h>
+#include <metadata/source/simulation/vehicles/gcvehicletype.meta.h>
 
 SKYSCRAPER_BEGIN
 

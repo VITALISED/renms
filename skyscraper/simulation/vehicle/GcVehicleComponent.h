@@ -14,10 +14,10 @@
 #include <toolkit/simulation/components/TkAnimationComponent.h>
 #include <toolkit/simulation/components/TkComponent.h>
 #include <toolkit/utilities/containers/TkVector.h>
-#include <metadata/simulation/vehicle/gcvehiclecomponentdata.meta.h>
-#include <metadata/simulation/vehicles/gcvehicledata.meta.h>
-#include <metadata/simulation/vehicles/gcmechmeshtype.meta.h>
-#include <metadata/simulation/vehicles/gcmechweaponlocation.meta.h>
+#include <metadata/source/simulation/vehicle/gcvehiclecomponentdata.meta.h>
+#include <metadata/source/simulation/vehicles/gcvehicledata.meta.h>
+#include <metadata/source/simulation/vehicles/gcmechmeshtype.meta.h>
+#include <metadata/source/simulation/vehicles/gcmechweaponlocation.meta.h>
 
 SKYSCRAPER_BEGIN
 

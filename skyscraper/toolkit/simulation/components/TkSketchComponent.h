@@ -6,7 +6,7 @@
 #include <toolkit/utilities/containers/TkStackVector.h>
 #include <toolkit/system/thread/TkSpinMutex.h>
 #include <toolkit/utilities/containers/TkForwardList.h>
-#include <metadata/components/tksketchcomponentdata.meta.h>
+#include <metadata/toolkit/components/tksketchcomponentdata.meta.h>
 
 SKYSCRAPER_BEGIN
 

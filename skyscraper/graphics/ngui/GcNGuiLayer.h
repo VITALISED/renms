@@ -7,8 +7,8 @@
 #include <toolkit/utilities/containers/TkLinearHashTable.h>
 #include <toolkit/maths/numeric/generic/TkVector2Generic.h>
 #include <toolkit/graphics/ngui/TkHashedNGuiElement.h>
-#include <metadata/ngui/tknguigraphicstyledata.meta.h>
-#include <metadata/graphics/ngui/metadata/gcnguilayerdata.meta.h>
+#include <metadata/toolkit/ngui/tknguigraphicstyledata.meta.h>
+#include <metadata/source/graphics/ngui/metadata/gcnguilayerdata.meta.h>
 
 SKYSCRAPER_BEGIN
 

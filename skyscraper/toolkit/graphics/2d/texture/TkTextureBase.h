@@ -1,7 +1,7 @@
 #pragma once
 
 #include <skyscraper.h>
-#include <metadata/scene/materials/tkmaterialsampler.meta.h>
+#include <metadata/toolkit/scene/materials/tkmaterialsampler.meta.h>
 #include <toolkit/graphics/2d/texture/TkTextureStreamFuncs.h>
 
 SKYSCRAPER_BEGIN

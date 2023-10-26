@@ -1,7 +1,7 @@
 #pragma once
 
 #include <skyscraper.h>
-#include <metadata/voxel/generator/tknoisevoxeltypeenum.meta.h>
+#include <metadata/toolkit/voxel/generator/tknoisevoxeltypeenum.meta.h>
 
 SKYSCRAPER_BEGIN
 

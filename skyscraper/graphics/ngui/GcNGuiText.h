@@ -2,9 +2,9 @@
 
 #include <skyscraper.h>
 #include <graphics/ngui/GcNGuiElement.h>
-#include <metadata/ngui/tknguitextstyledata.meta.h>
-#include <metadata/ngui/tknguigraphicstyledata.meta.h>
-#include <metadata/graphics/ngui/metadata/gcnguitextdata.meta.h>
+#include <metadata/toolkit/ngui/tknguitextstyledata.meta.h>
+#include <metadata/toolkit/ngui/tknguigraphicstyledata.meta.h>
+#include <metadata/source/graphics/ngui/metadata/gcnguitextdata.meta.h>
 
 SKYSCRAPER_BEGIN
 

@@ -6,7 +6,7 @@
 #include <toolkit/utilities/fsm/TkFSM.h>
 #include <toolkit/utilities/containers/TkVector.h>
 #include <toolkit/utilities/TkString.h>
-#include <metadata/gamestate/gcgamemode.meta.h>
+#include <metadata/source/gamestate/gcgamemode.meta.h>
 #include <application/GcGameConfigCache.h>
 
 // states

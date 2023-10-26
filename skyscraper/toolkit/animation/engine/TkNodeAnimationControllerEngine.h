@@ -8,10 +8,10 @@
 #include <toolkit/maths/numeric/TkQuaternion.h>
 #include <toolkit/system/timer/TkClock.h>
 #include <toolkit/utilities/containers/TkUnorderedMap.h>
-#include <metadata/animation/blendtree/tkanimblendnode.meta.h>
-#include <metadata/animation/tkanimationdata.meta.h>
-#include <metadata/animation/blendtree/tkanimanimnode.meta.h>
-#include <metadata/animation/tkanimblendtree.meta.h>
+#include <metadata/toolkit/animation/blendtree/tkanimblendnode.meta.h>
+#include <metadata/toolkit/animation/tkanimationdata.meta.h>
+#include <metadata/toolkit/animation/blendtree/tkanimanimnode.meta.h>
+#include <metadata/toolkit/animation/tkanimblendtree.meta.h>
 
 SKYSCRAPER_BEGIN
 

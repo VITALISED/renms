@@ -8,9 +8,9 @@
 #include <toolkit/networking/TkUserIdBase.h>
 #include <toolkit/networking/TkReplicatedVariablePlayer.h>
 #include <toolkit/networking/TkReplicatedVariableArray.h>
-#include <metadata/gamestate/gcsettlementstate.meta.h>
-#include <metadata/user/gcdifficultysettingsreplicatedstate.meta.h>
-#include <metadata/reality/gcinventoryclass.meta.h>
+#include <metadata/source/gamestate/gcsettlementstate.meta.h>
+#include <metadata/source/user/gcdifficultysettingsreplicatedstate.meta.h>
+#include <metadata/source/reality/gcinventoryclass.meta.h>
 
 SKYSCRAPER_BEGIN
 

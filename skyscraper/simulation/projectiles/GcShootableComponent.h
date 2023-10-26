@@ -11,7 +11,7 @@
 #include <toolkit/maths/geometry/TkAABB.h>
 #include <toolkit/utilities/containers/TkFunctionPointerArray.h>
 #include <toolkit/animation/TkHitCurve.h>
-#include <metadata/simulation/projectiles/gcshootablecomponentdata.meta.h>
+#include <metadata/source/simulation/projectiles/gcshootablecomponentdata.meta.h>
 
 SKYSCRAPER_BEGIN
 

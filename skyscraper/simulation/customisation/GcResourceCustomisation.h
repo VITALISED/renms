@@ -4,9 +4,9 @@
 #include <toolkit/simulation/TkSeed.h>
 #include <toolkit/utilities/containers/TkVector.h>
 #include <toolkit/data/TkMetaData.h>
-#include <metadata/tkproceduraltexturechosenoptionlist.meta.h>
-#include <metadata/simulation/solarsystem/planet/gcplanetcolourdata.meta.h>
-#include <metadata/tkpalettetexture.meta.h>
+#include <metadata/toolkit/tkproceduraltexturechosenoptionlist.meta.h>
+#include <metadata/source/simulation/solarsystem/planet/gcplanetcolourdata.meta.h>
+#include <metadata/toolkit/tkpalettetexture.meta.h>
 
 SKYSCRAPER_BEGIN
 

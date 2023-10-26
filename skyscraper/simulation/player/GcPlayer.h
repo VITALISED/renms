@@ -14,7 +14,7 @@
 #include <toolkit/simulation/physics/havok/TkRigidBody.h>
 #include <toolkit/utilities/containers/TkVector.h>
 #include <toolkit/utilities/containers/TkUnorderedMap.h>
-#include <metadata/gamestate/gcteleportendpoint.meta.h>
+#include <metadata/source/gamestate/gcteleportendpoint.meta.h>
 
 SKYSCRAPER_BEGIN
 

@@ -2,8 +2,8 @@
 
 #include <skyscraper.h>
 #include <toolkit/utilities/TkString.h>
-#include <metadata/gamestate/gcgamemode.meta.h>
-#include <metadata/user/gcdifficultypresettype.meta.h>
+#include <metadata/source/gamestate/gcgamemode.meta.h>
+#include <metadata/source/user/gcdifficultypresettype.meta.h>
 
 SKYSCRAPER_BEGIN
 

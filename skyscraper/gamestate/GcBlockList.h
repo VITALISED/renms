@@ -2,7 +2,7 @@
 
 #include <skyscraper.h>
 #include <toolkit/system/memory/pools/TkMemoryPool.h>
-#include <metadata/user/gcblocklistpersistence.meta.h>
+#include <metadata/source/user/gcblocklistpersistence.meta.h>
 
 SKYSCRAPER_BEGIN
 

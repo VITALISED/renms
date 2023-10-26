@@ -12,7 +12,7 @@
 #include <toolkit/maths/numeric/TkSmoothCD.h>
 #include <toolkit/animation/TkHitCurve.h>
 #include <toolkit/utilities/containers/TkVector.h>
-#include <metadata/simulation/vehicles/gcmechmeshtype.meta.h>
+#include <metadata/source/simulation/vehicles/gcmechmeshtype.meta.h>
 
 SKYSCRAPER_BEGIN
 

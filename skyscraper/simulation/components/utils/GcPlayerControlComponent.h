@@ -7,8 +7,8 @@
 #include <toolkit/simulation/components/TkSketchComponent.h>
 #include <toolkit/simulation/physics/havok/TkHavokDynamicCharacterController.h>
 #include <toolkit/utilities/containers/TkVector.h>
-#include <metadata/simulation/components/utils/gcplayercontrolcomponentdata.meta.h>
-#include <metadata/simulation/character/inputclasses/gcplayercontrolinputremap.meta.h>
+#include <metadata/source/simulation/components/utils/gcplayercontrolcomponentdata.meta.h>
+#include <metadata/source/simulation/character/inputclasses/gcplayercontrolinputremap.meta.h>
 
 SKYSCRAPER_BEGIN
 

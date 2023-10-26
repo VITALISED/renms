@@ -19,5 +19,4 @@ class cTkReplicatedVariableTemplated : public cTkReplicatedVariableBase
     std::function<void __cdecl(T const &, T const &)> mOnReceiveChange;
 };
 
-
 SKYSCRAPER_END

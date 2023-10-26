@@ -2,7 +2,7 @@
 
 #include <skyscraper.h>
 #include <graphics/camera/behaviours/GcGameCamera.h>
-#include <metadata/simulation/player/gczoomdata.meta.h>
+#include <metadata/source/simulation/player/gczoomdata.meta.h>
 
 SKYSCRAPER_BEGIN
 

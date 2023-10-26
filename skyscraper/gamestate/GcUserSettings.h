@@ -2,7 +2,7 @@
 
 #include <skyscraper.h>
 #include <gamestate/GcBlockList.h>
-#include <metadata/user/gcusersettingsdata.meta.h>
+#include <metadata/source/user/gcusersettingsdata.meta.h>
 
 SKYSCRAPER_BEGIN
 

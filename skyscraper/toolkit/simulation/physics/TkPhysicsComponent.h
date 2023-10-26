@@ -7,9 +7,9 @@
 #include <toolkit/simulation/physics/havok/TkCollision.h>
 #include <toolkit/simulation/physics/havok/TkRigidBody.h>
 #include <toolkit/simulation/physics/havok/TkPhysicsConstraint.h>
-#include <metadata/components/physics/tkphysicscomponentdata.meta.h>
-#include <metadata/components/physics/tkdynamicchaincomponentdata.meta.h>
-#include <metadata/physics/ragdoll/tkragdolldata.meta.h>
+#include <metadata/toolkit/components/physics/tkphysicscomponentdata.meta.h>
+#include <metadata/toolkit/components/physics/tkdynamicchaincomponentdata.meta.h>
+#include <metadata/toolkit/physics/ragdoll/tkragdolldata.meta.h>
 
 SKYSCRAPER_BEGIN
 

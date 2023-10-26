@@ -3,8 +3,8 @@
 #include <skyscraper.h>
 #include <toolkit/attachments/TkAttachment.h>
 #include <toolkit/utilities/containers/TkUnorderedMap.h>
-#include <metadata/simulation/tkblackboardcategory.meta.h>
-#include <metadata/simulation/tkblackboardtype.meta.h>
+#include <metadata/toolkit/simulation/tkblackboardcategory.meta.h>
+#include <metadata/toolkit/simulation/tkblackboardtype.meta.h>
 
 SKYSCRAPER_BEGIN
 

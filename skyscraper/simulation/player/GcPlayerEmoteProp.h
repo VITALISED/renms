@@ -3,7 +3,7 @@
 #include <skyscraper.h>
 #include <toolkit/attachments/TkAttachment.h>
 #include <toolkit/maths/numeric/TkSmoothCD.h>
-#include <metadata/simulation/player/gcplayeremotepropdata.meta.h>
+#include <metadata/source/simulation/player/gcplayeremotepropdata.meta.h>
 
 SKYSCRAPER_BEGIN
 

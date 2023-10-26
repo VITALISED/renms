@@ -1,7 +1,7 @@
 #pragma once
 
 #include <skyscraper.h>
-#include <metadata/ngui/tknguitextstyledata.meta.h>
+#include <metadata/toolkit/ngui/tknguitextstyledata.meta.h>
 
 SKYSCRAPER_BEGIN
 

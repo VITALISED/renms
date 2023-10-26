@@ -4,7 +4,7 @@
 #include <simulation/scenemanager/GcFadeNode.h>
 #include <toolkit/audio/wwise/TkAudioManagerWwise.h>
 #include <toolkit/simulation/physics/TkPhysicsComponent.h>
-#include <metadata/simulation/particles/gcexplosiondata.meta.h>
+#include <metadata/source/simulation/particles/gcexplosiondata.meta.h>
 
 SKYSCRAPER_BEGIN
 
