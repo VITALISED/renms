@@ -74,7 +74,7 @@ class cGcPlayerInteract
 	cGcPlayerInteract::eHoldMode meHoldMode;
 	float mfHoldTimer;
 	float mfErrorTimer;
-	__declspec(align(16)) cGcMarkerRenderData mRenderData;
+	cGcMarkerRenderData mRenderData;
 	cTkSmoothCD<float> mfHoldAlpha;
 	cTkVector3 mNetworkLockPosition;
 	bool mNetworkLockRequested;
