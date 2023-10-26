@@ -68,6 +68,8 @@ endif()
 
 include(FetchContent)
 
+set(CMAKE_FIND_PACKAGE_TARGETS_GLOBAL ON)
+
 macro(FetchAndCheck dep includedir)
     message(STATUS "Looking for ${dep}...")
     FetchContent_MakeAvailable(${dep})
@@ -102,8 +104,6 @@ FetchContent_Declare(
     dep_minhook
     GIT_REPOSITORY "https://github.com/TsudaKageyu/minhook.git"
 )
-
-set(CMAKE_FIND_PACKAGE_TARGETS_GLOBAL ON)
 
 FetchAndCheck(dep_fmt /include)
 FetchAndCheck(dep_spdlog /include)
@@ -167,30 +167,3 @@ add_custom_target(uberclean
 add_subdirectory(metadata)
 add_subdirectory(renms_dll)
 add_subdirectory(skyscraper)
-
-## Setting up actual build flow
-
-## MilestoneOne, dependencies
-add_custom_target(Milestone_One
-    DEPENDS fmt spdlog minhook
-)
-
-## Milestone two, Metadata class extraction
-add_custom_target(Milestone_Two
-    DEPENDS Milestone_One Heridium ExtractMetadata
-)
-
-## Milestone three, Metadata class precompilation
-add_custom_target(Milestone_Three
-    DEPENDS Milestone_Two PrecompiledMetadata
-)
-
-## Milestone four, renms_dll.
-add_custom_target(Milestone_Four
-    DEPENDS Milestone_Three renms_dll
-)
-
-## Milestone five, skyscraper
-add_custom_target(Milestone_Five ALL
-    DEPENDS Milestone_Four renms_skyscraper
-)
