@@ -1,8 +1,8 @@
-#include <engine/source/engine/EgScene.h>
+//#include <engine/source/engine/EgScene.h>
 
-#include <skyscraper.h>
+//#include <skyscraper.h>
 
-SKYSCRAPER_BEGIN
+//SKYSCRAPER_BEGIN
 
 // class Tokenizer
 // {
@@ -142,4 +142,4 @@ SKYSCRAPER_BEGIN
 // 	}
 // }
 
-SKYSCRAPER_END
+//SKYSCRAPER_END
