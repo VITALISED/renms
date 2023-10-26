@@ -1,1 +1,0 @@
-A plugin loader for the Multiverse Framework.
