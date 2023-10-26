@@ -18,7 +18,7 @@
 #pragma once
 
 #include <skyscraper.h>
-#include <metadata/graphics/camera/shake/gccamerashakedata.meta.h>
+#include <metadata/source/graphics/camera/shake/gccamerashakedata.meta.h>
 
 SKYSCRAPER_BEGIN
 

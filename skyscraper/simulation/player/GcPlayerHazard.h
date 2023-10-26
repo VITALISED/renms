@@ -20,9 +20,9 @@
 #include <skyscraper.h>
 #include <toolkit/audio/wwise/TkAudioManagerWwise.h>
 #include <toolkit/utilities/containers/TkVector.h>
-#include <metadata/simulation/player/gcplayerhazardtable.meta.h>
-#include <metadata/simulation/player/gcplayerhazardtype.meta.h>
-#include <metadata/gamestate/gcinventoryelement.meta.h>
+#include <metadata/source/simulation/player/gcplayerhazardtable.meta.h>
+#include <metadata/source/simulation/player/gcplayerhazardtype.meta.h>
+#include <metadata/source/gamestate/gcinventoryelement.meta.h>
 
 SKYSCRAPER_BEGIN
 

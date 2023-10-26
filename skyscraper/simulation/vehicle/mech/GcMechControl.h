@@ -20,10 +20,10 @@
 #include <skyscraper.h>
 #include <simulation/ecosystem/creatures/GcCreatureFullBodyIkComponent.h>
 #include <toolkit/simulation/physics/havok/TkRigidBody.h>
-#include <metadata/simulation/vehicles/gcvehicledata.meta.h>
-#include <metadata/simulation/vehicles/gcmechdebugspawndata.meta.h>
-#include <metadata/simulation/vehicles/gcmechmeshtype.meta.h>
-#include <metadata/simulation/vehicles/gcmechweaponlocation.meta.h>
+#include <metadata/source/simulation/vehicles/gcvehicledata.meta.h>
+#include <metadata/source/simulation/vehicles/gcmechdebugspawndata.meta.h>
+#include <metadata/source/simulation/vehicles/gcmechmeshtype.meta.h>
+#include <metadata/source/simulation/vehicles/gcmechweaponlocation.meta.h>
 
 SKYSCRAPER_BEGIN
 

@@ -32,9 +32,9 @@
 #include <toolkit/system/pc/TkStoragePersistent.h>
 #include <toolkit/maths/numeric/TkSmoothCD.h>
 #include <system/GcModManager.h>
-#include <metadata/user/gcdifficultypresettype.meta.h>
-#include <metadata/user/gcdifficultysettingsdata.meta.h>
-#include <metadata/gamestate/gcgamemode.meta.h>
+#include <metadata/source/user/gcdifficultypresettype.meta.h>
+#include <metadata/source/user/gcdifficultysettingsdata.meta.h>
+#include <metadata/source/gamestate/gcgamemode.meta.h>
 
 SKYSCRAPER_BEGIN
 

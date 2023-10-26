@@ -22,7 +22,7 @@
 #include <toolkit/maths/geometry/TkPhysRelMat34.h>
 #include <toolkit/maths/numeric/TkQuaternion.h>
 #include <toolkit/simulation/physics/havok/TkRigidBody.h>
-#include <metadata/simulation/components/networking/gcnetworkinterpolationcomponentdata.meta.h>
+#include <metadata/source/simulation/components/networking/gcnetworkinterpolationcomponentdata.meta.h>
 
 SKYSCRAPER_BEGIN
 

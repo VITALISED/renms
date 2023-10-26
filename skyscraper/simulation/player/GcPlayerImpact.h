@@ -19,7 +19,7 @@
 
 #include <skyscraper.h>
 #include <toolkit/simulation/physics/havok/TkRigidBody.h>
-#include <metadata/messages/gcmessageprojectileimpact.meta.h>
+#include <metadata/source/messages/gcmessageprojectileimpact.meta.h>
 
 SKYSCRAPER_BEGIN
 

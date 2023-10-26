@@ -21,7 +21,7 @@
 #include <simulation/VoxelType.h>
 #include <toolkit/simulation/physics/havok/TkRigidBody.h>
 #include <toolkit/audio/wwise/TkAudioManagerWwise.h>
-#include <metadata/simulation/vehicles/gcvehicledata.meta.h>
+#include <metadata/source/simulation/vehicles/gcvehicledata.meta.h>
 
 SKYSCRAPER_BEGIN
 

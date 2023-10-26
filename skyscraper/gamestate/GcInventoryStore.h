@@ -21,12 +21,12 @@
 #include <toolkit/data/TkMetaData.h>
 #include <toolkit/utilities/TkArray.h>
 #include <toolkit/utilities/containers/TkUnorderedMap.h>
-#include <metadata/gamestate/gcinventoryelement.meta.h>
-#include <metadata/gamestate/gcinventoryspecialslot.meta.h>
-#include <metadata/reality/gcinventorybasestatentry.meta.h>
-#include <metadata/gamestate/gcinventorylayout.meta.h>
-#include <metadata/reality/gcinventorystacksizegroup.meta.h>
-#include <metadata/reality/gcinventoryclass.meta.h>
+#include <metadata/source/gamestate/gcinventoryelement.meta.h>
+#include <metadata/source/gamestate/gcinventoryspecialslot.meta.h>
+#include <metadata/source/reality/gcinventorybasestatentry.meta.h>
+#include <metadata/source/gamestate/gcinventorylayout.meta.h>
+#include <metadata/source/reality/gcinventorystacksizegroup.meta.h>
+#include <metadata/source/reality/gcinventoryclass.meta.h>
 
 SKYSCRAPER_BEGIN
 

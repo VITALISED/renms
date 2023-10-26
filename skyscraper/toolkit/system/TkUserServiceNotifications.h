@@ -19,7 +19,7 @@
 
 #include <skyscraper.h>
 #include <toolkit/utilities/TkString.h>
-#include <metadata/system/tkuserserviceauthprovider.meta.h>
+#include <metadata/toolkit/system/tkuserserviceauthprovider.meta.h>
 
 class ITkUserServiceNotifications
 {

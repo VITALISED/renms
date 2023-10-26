@@ -20,7 +20,7 @@
 #include <skyscraper.h>
 #include <toolkit/maths/numeric/generic/TkVector3Generic.h>
 #include <toolkit/animation/utils/TkIKSolver.h>
-#include <metadata/simulation/ecosystem/creatures/behaviours/data/gcprimaryaxis.meta.h>
+#include <metadata/source/simulation/ecosystem/creatures/behaviours/data/gcprimaryaxis.meta.h>
 
 SKYSCRAPER_BEGIN
 

@@ -20,7 +20,7 @@
 #include <skyscraper.h>
 #include <toolkit/networking/TkReplicatedVariable.h>
 #include <toolkit/simulation/components/TkComponent.h>
-#include <metadata/simulation/components/scanning/gcscaneffectcomponentdata.meta.h>
+#include <metadata/source/simulation/components/scanning/gcscaneffectcomponentdata.meta.h>
 
 SKYSCRAPER_BEGIN
 

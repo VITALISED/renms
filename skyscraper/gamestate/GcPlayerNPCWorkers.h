@@ -20,7 +20,7 @@
 #include <skyscraper.h>
 #include <gamestate/basebuilding/BaseIndex.h>
 #include <toolkit/simulation/TkSeed.h>
-#include <metadata/utilities/data/gcresourceelement.meta.h>
+#include <metadata/source/utilities/data/gcresourceelement.meta.h>
 
 SKYSCRAPER_BEGIN
 

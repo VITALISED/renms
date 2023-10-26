@@ -23,7 +23,7 @@
 #include <simulation/player/GcPlayerWanted.h>
 #include <toolkit/attachments/TkAttachment.h>
 #include <toolkit/utilities/containers/TkVector.h>
-#include <metadata/simulation/player/gchand.meta.h>
+#include <metadata/source/simulation/player/gchand.meta.h>
 
 SKYSCRAPER_BEGIN
 

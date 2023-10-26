@@ -21,7 +21,7 @@
 #include <toolkit/simulation/components/TkComponent.h>
 #include <toolkit/simulation/physics/havok/TkCollision.h>
 #include <toolkit/simulation/physics/havok/TkRigidBody.h>
-#include <metadata/components/physics/tkstaticphysicscomponentdata.meta.h>
+#include <metadata/toolkit/components/physics/tkstaticphysicscomponentdata.meta.h>
 
 SKYSCRAPER_BEGIN
 

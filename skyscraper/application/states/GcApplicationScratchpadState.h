@@ -25,9 +25,9 @@
 #include <simulation/solarsystem/asteroid/GcAsteroidLayout.h>
 #include <simulation/GcPresetDualPMap.h>
 #include <simulation/GcPresetTerrainTexture.h>
-#include <metadata/simulation/solarsystem/asteroids/gcasteroidgeneratorring.meta.h>
-#include <metadata/simulation/solarsystem/asteroids/gcasteroidgeneratorslab.meta.h>
-#include <metadata/simulation/solarsystem/asteroids/gcasteroidgeneratorsurround.meta.h>
+#include <metadata/source/simulation/solarsystem/asteroids/gcasteroidgeneratorring.meta.h>
+#include <metadata/source/simulation/solarsystem/asteroids/gcasteroidgeneratorslab.meta.h>
+#include <metadata/source/simulation/solarsystem/asteroids/gcasteroidgeneratorsurround.meta.h>
 
 SKYSCRAPER_BEGIN
 

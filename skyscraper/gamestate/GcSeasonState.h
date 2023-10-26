@@ -21,10 +21,10 @@
 #include <toolkit/utilities/containers/TkVector.h>
 #include <toolkit/maths/numeric/generic/TkVector3Generic.h>
 #include <toolkit/simulation/TkSeed.h>
-#include <metadata/gamestate/gcseasonsavestateondeath.meta.h>
-#include <metadata/reality/gctechnology.meta.h>
-#include <metadata/reality/gcproductdata.meta.h>
-#include <metadata/reality/gcrealitysubstancedata.meta.h>
+#include <metadata/source/gamestate/gcseasonsavestateondeath.meta.h>
+#include <metadata/source/reality/gctechnology.meta.h>
+#include <metadata/source/reality/gcproductdata.meta.h>
+#include <metadata/source/reality/gcrealitysubstancedata.meta.h>
 
 SKYSCRAPER_BEGIN
 

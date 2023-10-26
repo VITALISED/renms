@@ -21,7 +21,7 @@
 #include <gamestate/GcUserSettings.h>
 #include <simulation/player/GcPlayerController.h>
 #include <toolkit/maths/numeric/TkSmoothCD.h>
-#include <metadata/simulation/player/gcplayerstickdata.meta.h>
+#include <metadata/source/simulation/player/gcplayerstickdata.meta.h>
 
 SKYSCRAPER_BEGIN
 

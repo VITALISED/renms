@@ -23,8 +23,8 @@
 #include <toolkit/graphics/ngui/TkNGuiTypeUndoable.h>
 #include <toolkit/maths/geometry/TkBBox2d.h>
 #include <toolkit/maths/numeric/generic/TkVector2Generic.h>
-#include <metadata/graphics/ngui/metadata/gcnguilayoutdata.meta.h>
-#include <metadata/graphics/ngui/metadata/gcnguielementdata.meta.h>
+#include <metadata/source/graphics/ngui/metadata/gcnguilayoutdata.meta.h>
+#include <metadata/source/graphics/ngui/metadata/gcnguielementdata.meta.h>
 
 SKYSCRAPER_BEGIN
 

@@ -25,8 +25,8 @@
 #include <toolkit/maths/numeric/generic/TkVector2Generic.h>
 #include <toolkit/utilities/containers/TkVector.h>
 #include <toolkit/utilities/containers/TkUnorderedMap.h>
-#include <metadata/reality/gcalienmood.meta.h>
-#include <metadata/simulation/ecosystem/npcs/gcnpcproptype.meta.h>
+#include <metadata/source/reality/gcalienmood.meta.h>
+#include <metadata/source/simulation/ecosystem/npcs/gcnpcproptype.meta.h>
 
 SKYSCRAPER_BEGIN
 

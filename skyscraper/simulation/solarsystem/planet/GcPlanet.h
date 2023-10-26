@@ -19,8 +19,8 @@
 
 #include <skyscraper.h>
 #include <gamestate/GcDiscoveryCommon.h>
-#include <metadata/simulation/solarsystem/planet/gcplanetdata.meta.h>
-#include <metadata/simulation/solarsystem/planet/gcplanetgenerationinputdata.meta.h>
+#include <metadata/source/simulation/solarsystem/planet/gcplanetdata.meta.h>
+#include <metadata/source/simulation/solarsystem/planet/gcplanetgenerationinputdata.meta.h>
 
 SKYSCRAPER_BEGIN
 

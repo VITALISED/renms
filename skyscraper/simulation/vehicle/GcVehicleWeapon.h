@@ -19,7 +19,7 @@
 
 #include <skyscraper.h>
 #include <simulation/player/GcWeapon.h>
-#include <metadata/simulation/vehicles/gcvehicleweaponmode.meta.h>
+#include <metadata/source/simulation/vehicles/gcvehicleweaponmode.meta.h>
 
 SKYSCRAPER_BEGIN
 

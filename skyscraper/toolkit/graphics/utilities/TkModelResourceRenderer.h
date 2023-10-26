@@ -23,7 +23,7 @@
 #include <toolkit/maths/geometry/TkPhysRelMat34.h>
 #include <toolkit/maths/geometry/TkAABB.h>
 #include <toolkit/utilities/containers/TkVector.h>
-#include <metadata/tkmodelrendererdata.meta.h>
+#include <metadata/toolkit/tkmodelrendererdata.meta.h>
 
 SKYSCRAPER_BEGIN
 

@@ -20,8 +20,8 @@
 #include <skyscraper.h>
 #include <toolkit/utilities/containers/TkVector.h>
 #include <simulation/components/utils/GcPlayerCharacterComponent.h>
-#include <metadata/simulation/components/gameplay/gccombateffectscomponentdata.meta.h>
-#include <metadata/gameplay/gcimpactcombateffectdata.meta.h>
+#include <metadata/source/simulation/components/gameplay/gccombateffectscomponentdata.meta.h>
+#include <metadata/source/gameplay/gcimpactcombateffectdata.meta.h>
 
 SKYSCRAPER_BEGIN
 

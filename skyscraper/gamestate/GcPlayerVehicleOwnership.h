@@ -24,8 +24,8 @@
 #include <toolkit/resources/TkSmartResHandle.h>
 #include <toolkit/maths/numeric/generic/TkMatrix34Generic.h>
 #include <toolkit/maths/numeric/generic/TkMatrix34Generic.h>
-#include <metadata/simulation/vehicles/gcvehicletype.meta.h>
-#include <metadata/simulation/player/gcscaneffectdata.meta.h>
+#include <metadata/source/simulation/vehicles/gcvehicletype.meta.h>
+#include <metadata/source/simulation/player/gcscaneffectdata.meta.h>
 
 SKYSCRAPER_BEGIN
 

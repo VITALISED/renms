@@ -19,7 +19,7 @@
 
 #include <skyscraper.h>
 #include <toolkit/utilities/TkString.h>
-#include <metadata/gamestate/gcmodsettingsinfo.meta.h>
+#include <metadata/source/gamestate/gcmodsettingsinfo.meta.h>
 
 SKYSCRAPER_BEGIN
 

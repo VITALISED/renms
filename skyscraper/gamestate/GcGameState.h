@@ -21,7 +21,7 @@
 #include <gamestate/GcPlayerState.h>
 #include <gamestate/GcPlayerShipOwnership.h>
 #include <networking/GcRpcCallBase.h>
-#include <metadata/gamestate/gcplayerspawnstatedata.meta.h>
+#include <metadata/source/gamestate/gcplayerspawnstatedata.meta.h>
 
 
 SKYSCRAPER_BEGIN

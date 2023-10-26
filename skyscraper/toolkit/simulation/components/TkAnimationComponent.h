@@ -22,8 +22,8 @@
 #include <toolkit/animation/engine/TkNodeAnimationControllerEngine.h>
 #include <toolkit/utilities/containers/TkStackVector.h>
 #include <toolkit/utilities/containers/TkLinearHashTable.h>
-#include <metadata/components/animation/tkanimationcomponentdata.meta.h>
-#include <metadata/enginesettings/tkanimdetailsettings.meta.h>
+#include <metadata/toolkit/components/animation/tkanimationcomponentdata.meta.h>
+#include <metadata/toolkit/enginesettings/tkanimdetailsettings.meta.h>
 
 SKYSCRAPER_BEGIN
 

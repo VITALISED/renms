@@ -20,9 +20,9 @@
 #include <skyscraper.h>
 #include <simulation/projectiles/GcTerrainEditorBeam.h>
 #include <toolkit/utilities/containers/TkVector.h>
-#include <metadata/gamestate/gcinventoryelement.meta.h>
-#include <metadata/reality/stats/gcstatstypes.meta.h>
-#include <metadata/simulation/weapons/gcremoteweapons.meta.h>
+#include <metadata/source/gamestate/gcinventoryelement.meta.h>
+#include <metadata/source/reality/stats/gcstatstypes.meta.h>
+#include <metadata/source/simulation/weapons/gcremoteweapons.meta.h>
 
 SKYSCRAPER_BEGIN
 

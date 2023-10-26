@@ -25,9 +25,9 @@
 #include <toolkit/simulation/TkSeed.h>
 #include <toolkit/utilities/containers/TkVector.h>
 #include <toolkit/graphics/utilities/TkModelResourceRenderer.h>
-#include <metadata/simulation/customisation/gccustomisationcomponentdata.meta.h>
-#include <metadata/simulation/spaceship/gcspaceshipcomponentdata.meta.h>
-#include <metadata/simulation/player/gcscaneffectdata.meta.h>
+#include <metadata/source/simulation/customisation/gccustomisationcomponentdata.meta.h>
+#include <metadata/source/simulation/spaceship/gcspaceshipcomponentdata.meta.h>
+#include <metadata/source/simulation/player/gcscaneffectdata.meta.h>
 
 SKYSCRAPER_BEGIN
 

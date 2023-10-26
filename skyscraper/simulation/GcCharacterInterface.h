@@ -26,8 +26,8 @@
 #include <toolkit/maths/numeric/generic/TkVector2Generic.h>
 #include <toolkit/maths/geometry/TkPhysRelMat34.h>
 #include <toolkit/attachments/TkAttachment.h>
-#include <metadata/reality/gcalienrace.meta.h>
-#include <metadata/simulation/projectiles/gcdamagetype.meta.h>
+#include <metadata/source/reality/gcalienrace.meta.h>
+#include <metadata/source/simulation/projectiles/gcdamagetype.meta.h>
 
 SKYSCRAPER_BEGIN
 

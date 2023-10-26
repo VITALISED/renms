@@ -24,8 +24,8 @@
 #include <toolkit/maths/geometry/TkAABB.h>
 #include <toolkit/simulation/physics/TkRaycastJob.h>
 #include <simulation/GcCharacterInterface.h>
-#include <metadata/simulation/components/player/gcplayerfullbodyikcomponentdata.meta.h>
-#include <metadata/simulation/ecosystem/creatures/data/gccreaturefootparticledata.meta.h>
+#include <metadata/source/simulation/components/player/gcplayerfullbodyikcomponentdata.meta.h>
+#include <metadata/source/simulation/ecosystem/creatures/data/gccreaturefootparticledata.meta.h>
 
 SKYSCRAPER_BEGIN
 

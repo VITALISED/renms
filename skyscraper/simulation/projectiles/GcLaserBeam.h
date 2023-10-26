@@ -24,8 +24,8 @@
 #include <toolkit/audio/wwise/TkAudioManagerWwise.h>
 #include <toolkit/simulation/physics/havok/TkRigidBody.h>
 #include <toolkit/utilities/containers/TkVector.h>
-#include <metadata/simulation/projectiles/gclaserbeamdata.meta.h>
-#include <metadata/simulation/projectiles/gcprojectiledata.meta.h>
+#include <metadata/source/simulation/projectiles/gclaserbeamdata.meta.h>
+#include <metadata/source/simulation/projectiles/gcprojectiledata.meta.h>
 
 SKYSCRAPER_BEGIN
 

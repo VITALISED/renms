@@ -23,7 +23,7 @@
 #include <toolkit/simulation/components/TkComponent.h>
 #include <toolkit/animation/utils/TkIKSolver.h>
 #include <toolkit/utilities/containers/TkVector.h>
-#include <metadata/simulation/ecosystem/creatures/gccreaturefullbodyikcomponentdata.meta.h>
+#include <metadata/source/simulation/ecosystem/creatures/gccreaturefullbodyikcomponentdata.meta.h>
 
 SKYSCRAPER_BEGIN
 

@@ -32,11 +32,11 @@
 #include <toolkit/simulation/components/TkAnimationComponent.h>
 #include <toolkit/utilities/containers/TkVector.h>
 #include <toolkit/utilities/random/TkPersonalRNG.h>
-#include <metadata/simulation/components/utils/gcplayercharactercomponentdata.meta.h>
-#include <metadata/simulation/player/gcplayercharacterstatetype.meta.h>
-#include <metadata/simulation/player/gcplayercharacterstatetable.meta.h>
-#include <metadata/simulation/character/gcplayercontrolstate.meta.h>
-#include <metadata/animation/gcthirdpersonanimparams.meta.h>
+#include <metadata/source/simulation/components/utils/gcplayercharactercomponentdata.meta.h>
+#include <metadata/source/simulation/player/gcplayercharacterstatetype.meta.h>
+#include <metadata/source/simulation/player/gcplayercharacterstatetable.meta.h>
+#include <metadata/source/simulation/character/gcplayercontrolstate.meta.h>
+#include <metadata/source/animation/gcthirdpersonanimparams.meta.h>
 
 SKYSCRAPER_BEGIN
 

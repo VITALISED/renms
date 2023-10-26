@@ -19,7 +19,7 @@
 
 #include <skyscraper.h>
 #include <toolkit/resources/TkSmartResHandle.h>
-#include <metadata/simulation/solarsystem/planet/gcplanetweathercolourdata.meta.h>
+#include <metadata/source/simulation/solarsystem/planet/gcplanetweathercolourdata.meta.h>
 #include <toolkit/maths/numeric/generic/TkVector3Generic.h>
 #include <toolkit/utilities/TkString.h>
 

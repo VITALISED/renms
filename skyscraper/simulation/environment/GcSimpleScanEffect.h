@@ -20,7 +20,7 @@
 #include <skyscraper.h>
 #include <simulation/player/GcPlayerEmoteProp.h>
 #include <toolkit/maths/numeric/TkSmoothCD.h>
-#include <metadata/simulation/player/gcscaneffectdata.meta.h>
+#include <metadata/source/simulation/player/gcscaneffectdata.meta.h>
 
 SKYSCRAPER_BEGIN
 

@@ -25,8 +25,8 @@
 #include <graphics/ngui/GcNGui.h>
 #include <toolkit/utilities/containers/TkClassPool.h>
 #include <toolkit/system/timer/TkTimer.h>
-#include <metadata/simulation/weapons/gcplayerweapons.meta.h>
-#include <metadata/simulation/gcweaponclasses.meta.h>
+#include <metadata/source/simulation/weapons/gcplayerweapons.meta.h>
+#include <metadata/source/simulation/gcweaponclasses.meta.h>
 
 SKYSCRAPER_BEGIN
 
