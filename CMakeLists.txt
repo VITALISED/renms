@@ -12,7 +12,7 @@ if (CMAKE_GENERATOR STREQUAL "Ninja")
     message("")
 endif()
 
-## Just making the options easier to read, so you can do -DVAR=VAL on the command line if you really want to.
+## Just making the options easier to read, and so you can do -DVAR=VAL on the command line if you really want to.
 function(SetIfNotDef var val)
     if (NOT DEFINED ${var})
         set(${var} ${val} PARENT_SCOPE)
@@ -23,14 +23,9 @@ endfunction()
 
 
 SetIfNotDef(CMAKE_BUILD_TYPE Release)
-SetIfNotDef(LIB ${CMAKE_CURRENT_SOURCE_DIR}/lib)
-SetIfNotDef(NMS_EXE_DIR "~/git/renms")
 SetIfNotDef(SKIP_NMS_CHECK FALSE)
-
-## You only need this is you aren't compiling on Windows
-if (NOT DEFINED CMAKE_CROSSCOMPILING)
-    SetIfNotDef(WINE_EXECUTABLE "/bin/wine64")
-endif()
+SetIfNotDef(NMS_EXE_DIR "C:/NoMansSkyFractalDebug/NoMansSky/Binaries")
+SetIfNotDef(FETCHCONTENT_QUIET OFF)
 
 
 ## ================================================================================================== First checks.
@@ -38,7 +33,6 @@ endif()
 
 if (DEFINED CMAKE_CROSSCOMPILING)
     message(STATUS "Cross-compiling for Windows")
-    find_program(WINE_EXECUTABLE wine64 REQUIRED)
 elseif (DEFINED UNIX)
     message(STATUS "OS is Unix/Linux")
 elseif(DEFINED WIN32)
@@ -73,10 +67,9 @@ endif()
 
 
 include(FetchContent)
-set(FETCHCONTENT_QUIET OFF)
 
 macro(FetchAndCheck dep includedir)
-    message(STATUS "Configuring ${dep}...")
+    message(STATUS "Looking for ${dep}...")
     FetchContent_MakeAvailable(${dep})
 
     set(DEP_SOURCE_DIR ${${dep}_SOURCE_DIR})
@@ -138,8 +131,8 @@ if (MSVC)
         set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /WX")
     endif()
 else()
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fcoroutines -Wall -Wextra")
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static -fcoroutines -Wall -Wextra")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -static -Wall -Wextra")
 
     if (CMAKE_BUILD_TYPE STREQUAL "Release")
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror")
@@ -154,11 +147,6 @@ endif()
 
 if (CMAKE_BUILD_TYPE STREQUAL "")
     set(CMAKE_BUILD_TYPE "Release")
-endif()
-
-if (DEFINED CMAKE_CROSSCOMPILING)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static")
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -static")
 endif()
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin")
@@ -204,5 +192,5 @@ add_custom_target(Milestone_Four
 
 ## Milestone five, skyscraper
 add_custom_target(Milestone_Five ALL
-    DEPENDS Milestone_Four skyscraper
+    DEPENDS Milestone_Four renms_skyscraper
 )
