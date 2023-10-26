@@ -399,6 +399,5 @@ FodyWeavers.xsd
 *.sln.iml
 
 bin/
-lib/
 build/
-classcache/
+metadata/
