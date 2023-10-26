@@ -6,6 +6,12 @@ add_library(PrecompiledMetadata STATIC
     "pch.cpp"
 )
 
+target_include_directories(PrecompiledMetadata
+    PRIVATE "${CMAKE_SOURCE_DIR}/skyscraper"
+    PRIVATE "${CMAKE_SOURCE_DIR}/classcache/toolkit"
+    PRIVATE "${CMAKE_SOURCE_DIR}/classcache/source"
+)
+
 add_dependencies(PrecompiledMetadata
     ExtractMetadata
 )
