@@ -38,10 +38,6 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug")
     target_link_libraries(renms_dll
         fmt::fmt
     )
-else()
-    target_link_libraries(renms_dll
-        fmt::fmt
-    )
 endif()
 
 target_precompile_headers(renms_dll PRIVATE renms.h)
