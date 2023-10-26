@@ -22,12 +22,12 @@ void CheckPath(std::filesystem::path path, std::string filename) {
     
     if (!std::filesystem::exists(path)) {
         throw std::runtime_error(
-            std::string("File not found: {}") + path.string());
+            std::string("File not found: ") + path.string());
     }
 
     if (!std::filesystem::is_regular_file(path)) {
         throw std::runtime_error(
-            std::string("Not a file: {}") + path.string());
+            std::string("Not a file: ") + path.string());
     }
 
     if (path.filename() != filename) {
