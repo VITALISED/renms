@@ -401,4 +401,5 @@ FodyWeavers.xsd
 bin/
 build/
 metadata/
+RayRod's Multiverse/
 config.cmake
