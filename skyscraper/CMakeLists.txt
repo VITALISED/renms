@@ -27,9 +27,5 @@ target_precompile_headers(
 
 target_include_directories(
     renms_skyscraper PRIVATE
-    ${CMAKE_SOURCE_DIR}/thirdparty/include
-    ${CMAKE_SOURCE_DIR}/skyscraper
-    ${CMAKE_SOURCE_DIR}/metadata/common
-    ${CMAKE_SOURCE_DIR}/metadata/source
-    ${CMAKE_SOURCE_DIR}/metadata/toolkit
+    ${CMAKE_SOURCE_DIR}
 )
