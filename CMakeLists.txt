@@ -15,7 +15,7 @@ endif()
 if (EXISTS "${CMAKE_SOURCE_DIR}/config.cmake")
     include(./config.cmake)
 else()
-    message(FATAL "No config.cmake found! Check out the config-template.cmake.")
+    message(FATAL_ERROR "No config.cmake found! Check out the config-template.cmake.")
 endif()
 
 
