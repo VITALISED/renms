@@ -15,11 +15,11 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#include <engine/source/engine/EgScene.h>
+//#include <engine/source/engine/EgScene.h>
 
-#include <skyscraper.h>
+//#include <skyscraper.h>
 
-SKYSCRAPER_BEGIN
+//SKYSCRAPER_BEGIN
 
 // class Tokenizer
 // {
@@ -159,4 +159,4 @@ SKYSCRAPER_BEGIN
 // 	}
 // }
 
-SKYSCRAPER_END
+//SKYSCRAPER_END
