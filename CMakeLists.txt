@@ -52,22 +52,21 @@ include(FetchContent)
 set(CMAKE_FIND_PACKAGE_TARGETS_GLOBAL ON)
 
 macro(FetchAndCheck dep includedir)
-    FetchContent_GetProperties(${dep})
+    set(DEP_SOURCE_DIR ${CMAKE_BINARY_DIR}/_deps/${dep}-src)
+    set(DEP_BINARY_DIR ${CMAKE_BINARY_DIR}/_deps/${dep}-build)
 
-    if (NOT ${dep}_POPULATED)
+    if (EXISTS ${DEP_SOURCE_DIR})
+        message(STATUS "${dep} found, skipping fetch.")
+    else()
         message(STATUS "${dep} not found, fetching...")
         FetchContent_Populate(${dep})
-        add_subdirectory(${${dep}_SOURCE_DIR} ${${dep}_BINARY_DIR})
-    else()
-        message(STATUS "${dep} found, skipping fetch.")
+        add_subdirectory(${DEP_SOURCE_DIR} ${DEP_BINARY_DIR} EXCLUDE_FROM_ALL)
     endif()
-
-    set(DEP_SOURCE_DIR ${${dep}_SOURCE_DIR})
 
     get_directory_property(DEP_CXX_STANDARD DEP_SOURCE_DIR CMAKE_CXX_STANDARD)
     file(GLOB_RECURSE DEP_SOURCE_LIST ${DEP_SOURCE_DIR}/${includedir}/*.h)
     set_source_files_properties(${DEP_SOURCE_LIST} VAR CMAKE_CXX_STANDARD DEP_CXX_STANDARD)
-    include_directories(${${dep}_SOURCE_DIR}${includedir})
+    include_directories(${DEP_SOURCE_DIR}/${includedir})
 endmacro()
 
 FetchContent_Declare(
