@@ -11,16 +11,27 @@ add_library(
     "plugins/plugin.cpp"
 )
 
+add_dependencies(renms_dll
+    renms_skyscraper
+    PrecompiledMetadata
+)
+
+target_include_directories(renms_dll
+    PRIVATE ../skyscraper
+    PRIVATE ../metadata/source
+    PRIVATE ../metadata/toolkit
+)
+
 set_target_properties(renms_dll PROPERTIES OUTPUT_NAME renms)
 
 target_link_libraries(renms_dll
-    fmt::fmt
+    fmt
 )
 
 target_precompile_headers(renms_dll
     PRIVATE renms.h
     PRIVATE ../skyscraper/skyscraper.h
-    REUSE_FROM PrecompiledMetadata
+    PRIVATE ../metadata/GIVEMEALLTHECLASSES.h
 )
 
 add_subdirectory(proxy)
