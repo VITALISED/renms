@@ -12,7 +12,11 @@ if (CMAKE_GENERATOR STREQUAL "Ninja")
     message("")
 endif()
 
-include(./config.cmake)
+if (EXISTS "${CMAKE_SOURCE_DIR}/config.cmake")
+    include(./config.cmake)
+else()
+    message(FATAL "No config.cmake found! Check out the config-template.cmake.")
+endif()
 
 
 ## ================================================================================================== First checks.
