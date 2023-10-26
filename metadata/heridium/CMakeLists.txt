@@ -18,25 +18,28 @@ target_include_directories(
     ${CMAKE_SOURCE_DIR}/renms_dll
 )
 
-add_library(paths STATIC
-    "paths.cpp"
+target_link_libraries(Heridium PRIVATE
+    fmt
+    minhook
 )
 
-target_link_libraries(Heridium PRIVATE
-    ${LIB}/minhook/minhook.x64d.a
-    paths
+target_precompile_headers(Heridium PRIVATE
+    "paths.h"
 )
 
 add_subdirectory(launcher)
+make_directory(${CMAKE_SOURCE_DIR}/classcache)
 
 if (DEFINED WINE_EXECUTABLE)
     add_custom_target(ExtractMetadata
-        COMMAND "${WINE_EXECUTABLE}" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/heridiumLauncher.exe" "${NMS_EXE_DIR}/NMS.exe"
+        BYPRODUCTS ${CMAKE_SOURCE_DIR}/classcache/GIVEMEALLTHECLASSES.h
+        COMMAND "${WINE_EXECUTABLE}" "Z:${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/heridiumLauncher.exe" "Z:${NMS_EXE_DIR}/NMS.exe"
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/classcache
         DEPENDS Heridium heridiumLauncher
     )
 else()
     add_custom_target(ExtractMetadata
+        BYPRODUCTS ${CMAKE_SOURCE_DIR}/classcache/GIVEMEALLTHECLASSES.h
         COMMAND "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/heridiumLauncher.exe" "${NMS_EXE_DIR}/NMS.exe"
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/classcache
         DEPENDS Heridium heridiumLauncher

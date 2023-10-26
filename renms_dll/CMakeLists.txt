@@ -20,11 +20,11 @@ target_include_directories(
 
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
     target_link_libraries(renms_dll
-        ${LIB}/fmt/libfmtd.a
+        fmt::fmt
     )
 else()
     target_link_libraries(renms_dll
-        ${LIB}/fmt/libfmt.a
+        fmt::fmt
     )
 endif()
 
