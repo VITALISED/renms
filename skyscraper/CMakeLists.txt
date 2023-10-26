@@ -1,4 +1,4 @@
-file(GLOB_RECURSE SKYSCRAPER_SOURCES *.h *.cpp)
+file(GLOB_RECURSE SKYSCRAPER_SOURCES "./" "*.cpp" "*.h")
 
 add_library(
     renms_skyscraper
@@ -17,10 +17,3 @@ target_include_directories(
     ${CMAKE_SOURCE_DIR}/metadata/source
     ${CMAKE_SOURCE_DIR}/metadata/toolkit
 )
-
-target_link_directories(
-    renms_skyscraper PRIVATE
-    ${CMAKE_SOURCE_DIR}/thirdparty/lib
-)
-
-# set_target_properties(renms_skyscraper PROPERTIES LINKER_LANGUAGE CXX)
