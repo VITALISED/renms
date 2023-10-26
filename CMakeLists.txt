@@ -27,8 +27,7 @@ if (NOT DEFINED NMS_EXE_DIR AND NOT SKIP_NMS_CHECK)
 
 "NMS_EXE_DIR not defined!\n\
 Look inside the root CMakeLists.txt for the option, and set it's exact path. \
-It must be the directory that contains NMS.exe, remember to use forward slashes (/). \
-See the BUILD.md for why it needs to know this.")
+It must be the directory that contains NMS.exe. See the BUILD.md for why it needs to know this.")
 
 endif()
 
@@ -37,7 +36,7 @@ if (NOT EXISTS "${NMS_EXE_DIR}/NMS.exe" AND NOT SKIP_NMS_CHECK)
     message(FATAL_ERROR
 
 "NMS_EXE_DIR either isn't a valid directory or doesn't contain NMS.exe!\n\
-Remember to use forward slashes (/). See the BUILD.md for why it needs to know this.")
+See the BUILD.md for why it needs to know this.")
 
 else()
     message(STATUS "NMS Executable found: ${NMS_EXE_DIR}/NMS.exe")
