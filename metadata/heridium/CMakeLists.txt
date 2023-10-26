@@ -28,11 +28,3 @@ target_precompile_headers(Heridium PRIVATE
 )
 
 add_subdirectory(launcher)
-make_directory(${CMAKE_SOURCE_DIR}/classcache)
-
-add_custom_target(ExtractMetadata
-    BYPRODUCTS ${CMAKE_SOURCE_DIR}/classcache/GIVEMEALLTHECLASSES.h
-    COMMAND "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/heridiumLauncher.exe" "${NMS_EXE_DIR}/NMS.exe"
-    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/classcache
-    DEPENDS Heridium heridiumLauncher
-)
