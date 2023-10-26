@@ -10,7 +10,7 @@
 #include <memory>
 #include <map>
 #include <vulkan/vulkan.h>
-//#include <robin_hood.h>
+#include <robin_hood.h>
 //#include <Havok/hkVector4f.h>
 //#include <Havok/hknpMassDistribution.h>
 

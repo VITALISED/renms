@@ -64,13 +64,6 @@ macro(FetchAndCheck dep includedir)
 endmacro()
 
 FetchContent_Declare(
-    dep_vulkan
-    GIT_REPOSITORY "https://github.com/KhronosGroup/Vulkan-Headers"
-    GIT_TAG "374f9fd"
-    BUILD_COMMAND "#Don't."
-)
-
-FetchContent_Declare(
     dep_fmt
     GIT_REPOSITORY "https://github.com/fmtlib/fmt.git"
 )
@@ -86,10 +79,23 @@ FetchContent_Declare(
     GIT_REPOSITORY "https://github.com/TsudaKageyu/minhook.git"
 )
 
+FetchContent_Declare(
+    dep_vulkan
+    GIT_REPOSITORY "https://github.com/KhronosGroup/Vulkan-Headers"
+    GIT_TAG "374f9fd"
+    BUILD_COMMAND "#Don't."
+)
+
+FetchContent_Declare(
+    dep_robin_hood
+    GIT_REPOSITORY "https://github.com/martinus/robin-hood-hashing.git"
+)
+
 FetchAndCheck(dep_fmt /include)
 FetchAndCheck(dep_spdlog /include)
 FetchAndCheck(dep_minhook /include)
 FetchAndCheck(dep_vulkan /include)
+FetchAndCheck(dep_robin_hood /src/include)
 
 
 ## ================================================================================================== Compiler setup.
