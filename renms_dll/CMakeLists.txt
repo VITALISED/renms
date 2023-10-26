@@ -29,17 +29,14 @@ add_library(
 
 set_target_properties(renms_dll PROPERTIES OUTPUT_NAME renms)
 
-target_include_directories(
-    renms_dll PRIVATE
-    ${CMAKE_SOURCE_DIR}/thirdparty/include
+target_link_libraries(renms_dll
+    fmt::fmt
 )
 
-if (CMAKE_BUILD_TYPE STREQUAL "Debug")
-    target_link_libraries(renms_dll
-        fmt::fmt
-    )
-endif()
-
-target_precompile_headers(renms_dll PRIVATE renms.h)
+target_precompile_headers(renms_dll
+    PRIVATE renms.h
+    PRIVATE ../skyscraper/skyscraper.h
+    REUSE_FROM PrecompiledMetadata
+)
 
 add_subdirectory(proxy)

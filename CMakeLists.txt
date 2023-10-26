@@ -28,15 +28,15 @@ if (CMAKE_GENERATOR STREQUAL "Ninja")
     message("")
 endif()
 
+
+## ================================================================================================== First checks.
+
+
 if (EXISTS "${CMAKE_SOURCE_DIR}/config.cmake")
     include(./config.cmake)
 else()
     message(FATAL_ERROR "No config.cmake found! Check out the config-template.cmake.")
 endif()
-
-
-## ================================================================================================== First checks.
-
 
 if (NOT DEFINED NMS_EXE_DIR AND NOT SKIP_NMS_CHECK)
     message(FATAL_ERROR
@@ -68,13 +68,20 @@ include(FetchContent)
 set(CMAKE_FIND_PACKAGE_TARGETS_GLOBAL ON)
 
 macro(FetchAndCheck dep includedir)
-    message(STATUS "Looking for ${dep}...")
-    FetchContent_MakeAvailable(${dep})
+    FetchContent_GetProperties(${dep})
+
+    if (NOT ${dep}_POPULATED)
+        message(STATUS "${dep} not found, fetching...")
+        FetchContent_Populate(${dep})
+        add_subdirectory(${${dep}_SOURCE_DIR} ${${dep}_BINARY_DIR})
+    else()
+        message(STATUS "${dep} found, skipping fetch.")
+    endif()
 
     set(DEP_SOURCE_DIR ${${dep}_SOURCE_DIR})
 
     get_directory_property(DEP_CXX_STANDARD DEP_SOURCE_DIR CMAKE_CXX_STANDARD)
-    file(GLOB_RECURSE DEP_SOURCE_LIST ${DEP_SOURCE_DIR}${includedir}/*.h)
+    file(GLOB_RECURSE DEP_SOURCE_LIST ${DEP_SOURCE_DIR}/${includedir}/*.h)
     set_source_files_properties(${DEP_SOURCE_LIST} VAR CMAKE_CXX_STANDARD DEP_CXX_STANDARD)
     include_directories(${${dep}_SOURCE_DIR}${includedir})
 endmacro()
@@ -107,11 +114,11 @@ FetchContent_Declare(
     GIT_REPOSITORY "https://github.com/martinus/robin-hood-hashing.git"
 )
 
-FetchAndCheck(dep_fmt /include)
-FetchAndCheck(dep_spdlog /include)
-FetchAndCheck(dep_minhook /include)
-FetchAndCheck(dep_vulkan /include)
-FetchAndCheck(dep_robin_hood /src/include)
+FetchAndCheck(dep_fmt include)
+FetchAndCheck(dep_spdlog include)
+FetchAndCheck(dep_minhook include)
+FetchAndCheck(dep_vulkan include)
+FetchAndCheck(dep_robin_hood src/include)
 
 
 ## ================================================================================================== Compiler setup.
