@@ -6,10 +6,15 @@
 #include <simulation/player/GcPlayerImpact.h>
 #include <simulation/player/attachments/GcPlayerWeapon.h>
 #include <simulation/CharacterPhysicsDisabledReasons.h>
+#include <simulation/GcWarpJumpTarget.h>
+#include <simulation/player/GcPlayerAim.h>
+#include <simulation/player/GcPersonalTeleporter.h>
+#include <simulation/player/GcPlayerHazard.h>
 #include <graphics/camera/behaviours/GcCameraBehaviourFirstPerson.h>
 #include <toolkit/simulation/physics/havok/TkRigidBody.h>
 #include <toolkit/utilities/containers/TkVector.h>
 #include <toolkit/utilities/containers/TkUnorderedMap.h>
+#include <metadata/gamestate/gcteleportendpoint.meta.h>
 
 SKYSCRAPER_BEGIN
 
@@ -24,6 +29,11 @@ public:
         SingleTap,
         FEEDBACK_PEN_DOUBLETAP,
     };
+
+    //this shit is so real
+    typedef cGcPlayer::eRocketBootsDoubleTapState WarpTargetMode;
+    typedef cGcPlayer::eRocketBootsDoubleTapState eCreatureRideState;
+    typedef cGcPlayer::eRocketBootsDoubleTapState eFreeJetpackSurface;
 
     cTkRigidBody* lpGrabbedBody;
     cGcPlayerThirdPerson* mpThirdPerson;

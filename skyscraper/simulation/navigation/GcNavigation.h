@@ -19,5 +19,4 @@ class cGcNavigation
 	bool mbDebugBreak;
 };
 
-
 SKYSCRAPER_END

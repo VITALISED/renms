@@ -27,4 +27,43 @@ class cGcPlacementArc
     cTkRaycastJob mRayJob;
 };
 
+class cGcPersonalTeleporter
+{
+    enum eTeleporterState
+    {
+        ETeleporterState_Ready,
+        ETeleporterState_Charging,
+        ETeleporterState_Charged,
+        ETeleporterState_Teleporting,
+        ETeleporterState_Canceling,
+    };
+
+    cGcPlacementArc mPlacementArc;
+    TkHandle mEndEffectNode;
+    TkHandle mEndEffectDirection;
+    TkHandle mTravelEffect;
+    TkHandle mTravelEffectActive;
+    TkHandle mTravelEffectBlocked;
+    TkHandle mTravelEffectBehind;
+    TkHandle mTravelEffectComplete;
+    TkHandle mEndEffectActive;
+    TkHandle mEndEffectBlocked;
+    cTkPhysRelVec3 mInitialPosition;
+    cTkVector2 mInitialTargetDirection;
+    cTkVector2 mTargetDirection;
+    cGcPersonalTeleporter::eTeleporterState meState;
+    float mfMovementTime;
+    float mfChargeTime;
+    float mfFadeTime;
+    float mfTeleportTime;
+    float mfLastSnapTurnImpulse;
+    bool mbWantsTeleport;
+    bool mbValidLastFrame;
+    bool mbTeleported;
+    bool mbAdjustFacing;
+    bool mbDrawArc;
+    bool mbOffHandSetsDirection;
+};
+
+
 SKYSCRAPER_END
