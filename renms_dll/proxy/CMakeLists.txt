@@ -1,5 +1,5 @@
 add_library(
-    renms_proxy
+    renms_proxy SHARED
     "dllmain.cpp"    
 )
 
