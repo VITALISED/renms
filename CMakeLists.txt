@@ -72,7 +72,7 @@ macro(FetchAndCheck dep includedir)
 
     message(STATUS "Populating ${dep} ...")
     FetchContent_GetProperties(${dep})
-    if (NOT DEFINED ${dep}_POPULATED)
+    if (NOT ${dep}_POPULATED)
         FetchContent_Populate(${dep})
     endif()
     add_subdirectory(${DEP_SOURCE_DIR} ${DEP_BINARY_DIR} EXCLUDE_FROM_ALL)
