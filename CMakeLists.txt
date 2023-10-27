@@ -70,13 +70,12 @@ macro(FetchAndCheck dep includedir)
     set(DEP_SOURCE_DIR ${CMAKE_BINARY_DIR}/_deps/${dep}-src)
     set(DEP_BINARY_DIR ${CMAKE_BINARY_DIR}/_deps/${dep}-build)
 
-    if (EXISTS ${DEP_SOURCE_DIR})
-        message(STATUS "${dep} found, skipping fetch.")
-    else()
-        message(STATUS "${dep} not found, fetching...")
+    message(STATUS "Populating ${dep} ...")
+    FetchContent_GetProperties(${dep})
+    if (NOT DEFINED ${dep}_POPULATED)
         FetchContent_Populate(${dep})
-        add_subdirectory(${DEP_SOURCE_DIR} ${DEP_BINARY_DIR} EXCLUDE_FROM_ALL)
     endif()
+    add_subdirectory(${DEP_SOURCE_DIR} ${DEP_BINARY_DIR} EXCLUDE_FROM_ALL)
 
     get_directory_property(DEP_CXX_STANDARD DEP_SOURCE_DIR CMAKE_CXX_STANDARD)
     file(GLOB_RECURSE DEP_SOURCE_LIST ${DEP_SOURCE_DIR}/${includedir}/*.h)
@@ -95,9 +94,11 @@ FetchContent_Declare(
     GIT_TAG "v1.x"
 )
 
+set(patchcommand git apply ${CMAKE_SOURCE_DIR}/patches/minhook.patch)
 FetchContent_Declare(
     dep_minhook
     GIT_REPOSITORY "https://github.com/TsudaKageyu/minhook.git"
+    PATCH_COMMAND ${patchcommand}
 )
 
 FetchContent_Declare(
