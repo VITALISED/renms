@@ -18,7 +18,7 @@
 #pragma once
 
 #include <skyscraper.h>
-#include <vk_mem_alloc.h>
+//#include <vk_mem_alloc.h>
 
 SKYSCRAPER_BEGIN
 
