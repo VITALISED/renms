@@ -18,7 +18,7 @@
 #pragma once
 
 #include <skyscraper.h>
-#include <simulation/ecosystem/GcCreatureNavigation.h>
+#include <simulation/ecosystem/creatures/GcCreatureNavigation.h>
 #include <toolkit/simulation/components/TkAudioComponent.h>
 #include <toolkit/animation/utils/TkIKSolver.h>
 #include <toolkit/maths/geometry/TkAABB.h>

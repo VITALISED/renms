@@ -20,7 +20,7 @@
 #include <skyscraper.h>
 #include <atlas/WinHttpTask.h>
 #include <toolkit/simulation/TkSeed.h>
-#include <simulation/galaxy/GcGalacticVoxelCoordinate.h>
+#include <simulation/galaxy/GcGalaxyTypes.h>
 
 SKYSCRAPER_BEGIN
 

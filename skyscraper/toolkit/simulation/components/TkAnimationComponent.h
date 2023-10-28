@@ -27,6 +27,10 @@
 
 SKYSCRAPER_BEGIN
 
+struct AnimLookup<4> {
+	cTkAnimationComponent *mpAnimComponent;
+}
+
 class cTkAnimationComponent : public cTkComponent
 {
 	struct AnimSnapshot

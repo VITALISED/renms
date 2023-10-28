@@ -20,6 +20,7 @@
 #include <skyscraper.h>
 #include <gamestate/GcPlayerShipOwnership.h>
 #include <simulation/player/GcPersonalTeleporter.h>
+#include <simulation/vehicle/GcVehicleComponent.h>
 #include <toolkit/attachments/TkHandle.h>
 #include <toolkit/resources/TkSmartResHandle.h>
 #include <toolkit/maths/numeric/generic/TkMatrix34Generic.h>

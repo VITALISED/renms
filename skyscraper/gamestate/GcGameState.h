@@ -20,6 +20,7 @@
 #include <skyscraper.h>
 #include <gamestate/GcPlayerState.h>
 #include <gamestate/GcPlayerShipOwnership.h>
+#include <gamestate/GcPlayerVehicleOwnership.h>
 #include <networking/GcRpcCallBase.h>
 #include <metadata/source/gamestate/gcplayerspawnstatedata.meta.h>
 

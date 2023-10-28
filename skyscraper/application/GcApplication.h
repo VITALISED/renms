@@ -42,6 +42,9 @@
 #include <application/states/GcApplicationTitleScreenState.h>
 #include <application/states/GcApplicationUGCBaseViewerState.h>
 
+// other
+#include <gamestate/GcGameState.h>
+
 #include <application/GcFirstBootContext.h>
 #include <toolkit/maths/utilities/spatial/TkSampleDistribution.h>
 #include <reality/GcRealityManager.h>

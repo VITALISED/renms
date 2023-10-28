@@ -27,7 +27,8 @@
 #include <simulation/player/controllers/GcPlayerStick.h>
 #include <simulation/vehicle/GcVehicleControlStick.h>
 #include <simulation/vehicle/GcCarSuspensionAction.h>
-#include <simulation/vehicle/GcMechControl.h>
+#include <simulation/vehicle/mech/GcMechControl.h>
+#include <simulation/vehicle/mech/GcMechAIController.h>
 #include <toolkit/simulation/components/TkAnimationComponent.h>
 #include <toolkit/simulation/components/TkComponent.h>
 #include <toolkit/utilities/containers/TkVector.h>
@@ -35,6 +36,8 @@
 #include <metadata/source/simulation/vehicles/gcvehicledata.meta.h>
 #include <metadata/source/simulation/vehicles/gcmechmeshtype.meta.h>
 #include <metadata/source/simulation/vehicles/gcmechweaponlocation.meta.h>
+#include <metadata/source/simulation/spaceship/gcplayerspaceshipcontroldata.meta.h>
+#include <metadata/source/simulation/spaceship/gcspaceshipavoidancedata.meta.h>
 
 SKYSCRAPER_BEGIN
 
@@ -52,6 +55,12 @@ class cGcVehicleComponent : public cTkComponent
 	{
 		cGcMechControl* mpMechControl;
 		cGcMechAIController* mpMechAIController;
+	};
+	
+	enum Headlight {
+		EHeadLightValidity_All,
+		EHeadLightValidity_First,
+		EHeadLightValidity_Third
 	};
 
 	cGcVehicleComponentData* mpData;
@@ -153,7 +162,7 @@ class cGcVehicleComponent : public cTkComponent
 	cTkVector3 mRemoteThrottle;
 	int miNumHitsSinceLastTechDamaged;
 	float mfTimeOfLastTechDamageHit;
-	cGcSpaceshipControl::cGcAvoidance mAvoidance;
+	cGcSpaceshipAvoidanceData mAvoidance;
 	std::vector<cGcVehicleComponent::Headlight, TkSTLAllocatorShim<cGcVehicleComponent::Headlight, 4, -1> > maHeadlights;
 	cTkSmoothCD<cTkVector2> mHeadLightSpring;
 	std::vector<EffectInstance, TkSTLAllocatorShim<EffectInstance, 8, -1> > maUnderwaterEffects;
