@@ -2,7 +2,7 @@
 
 ## "I want it now!"
 
-This is really easy. See the `config-template.cmake`? Copy it into a file called `config.cmake`, and change any values you think need changed (at the very least NMS_EXE_DIR must be changed). Then configure and build using whatever you configure and build with, if it's in the shell:
+This is really easy. See the `config-template.cmake`? Copy it into a file called `config.cmake`, and change any values you think need changed (at the very least NMS_EXE_DIR must be changed). Then configure and build, if it's in the shell:
 
 ```sh
 mkdir build && cd build
