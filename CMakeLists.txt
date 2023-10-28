@@ -54,8 +54,10 @@ if (NOT EXISTS "${NMS_EXE_DIR}/NMS.exe" AND NOT SKIP_NMS_CHECK)
 "NMS_EXE_DIR either isn't a valid directory or doesn't contain NMS.exe!\n\
 See the BUILD.md for why it needs to know this.")
 
-else()
+elseif(NOT SKIP_NMS_CHECK)
     message(STATUS "NMS Executable found: ${NMS_EXE_DIR}/NMS.exe")
+else()
+    message(STATUS "NMS.exe check skipped! Unless you already extracted all the metadata, the build will fail! Be warned!")
 endif()
 
 
@@ -66,58 +68,42 @@ include(FetchContent)
 
 set(CMAKE_FIND_PACKAGE_TARGETS_GLOBAL ON)
 
-macro(FetchAndCheck dep includedir)
-    set(DEP_SOURCE_DIR ${CMAKE_BINARY_DIR}/_deps/${dep}-src)
-    set(DEP_BINARY_DIR ${CMAKE_BINARY_DIR}/_deps/${dep}-build)
-
-    message(STATUS "Populating ${dep} ...")
-    FetchContent_GetProperties(${dep})
-    if (NOT ${dep}_POPULATED)
-        FetchContent_Populate(${dep})
-    endif()
-    add_subdirectory(${DEP_SOURCE_DIR} ${DEP_BINARY_DIR} EXCLUDE_FROM_ALL)
-
-    get_directory_property(DEP_CXX_STANDARD DEP_SOURCE_DIR CMAKE_CXX_STANDARD)
-    file(GLOB_RECURSE DEP_SOURCE_LIST ${DEP_SOURCE_DIR}/${includedir}/*.h)
-    set_source_files_properties(${DEP_SOURCE_LIST} VAR CMAKE_CXX_STANDARD DEP_CXX_STANDARD)
-    include_directories(${DEP_SOURCE_DIR}/${includedir})
-endmacro()
-
 FetchContent_Declare(
     dep_fmt
-    GIT_REPOSITORY "https://github.com/fmtlib/fmt.git"
-)
+    GIT_REPOSITORY "https://github.com/fmtlib/fmt.git")
+FetchContent_MakeAvailable(dep_fmt)
+include_directories(${dep_fmt_SOURCE_DIR}/include)
 
 FetchContent_Declare(
     dep_spdlog
     GIT_REPOSITORY "https://github.com/gabime/spdlog.git"
-    GIT_TAG "v1.x"
-)
+    GIT_TAG "v1.x")
+FetchContent_MakeAvailable(dep_spdlog)
+include_directories(${dep_spdlog_SOURCE_DIR}/include)
 
-set(patchcommand git apply ${CMAKE_SOURCE_DIR}/patches/minhook.patch)
 FetchContent_Declare(
     dep_minhook
-    GIT_REPOSITORY "https://github.com/TsudaKageyu/minhook.git"
-    PATCH_COMMAND ${patchcommand}
-)
+    GIT_REPOSITORY "https://github.com/TsudaKageyu/minhook.git")
+
+FetchContent_Populate(dep_minhook)
+execute_process(    # When the patch command is ran after it's been run before, it fails. This is a workaround.
+    COMMAND git apply ${CMAKE_SOURCE_DIR}/patches/minhook.patch
+    WORKING_DIRECTORY ${dep_minhook_SOURCE_DIR})
+add_subdirectory(${dep_minhook_SOURCE_DIR})
 
 FetchContent_Declare(
     dep_vulkan
     GIT_REPOSITORY "https://github.com/KhronosGroup/Vulkan-Headers"
     GIT_TAG "374f9fd"
-    BUILD_COMMAND "#Don't."
-)
+    BUILD_COMMAND "# Don't.")
+FetchContent_MakeAvailable(dep_vulkan)
+include_directories(${dep_vulkan_SOURCE_DIR}/include)
 
 FetchContent_Declare(
     dep_robin_hood
-    GIT_REPOSITORY "https://github.com/martinus/robin-hood-hashing.git"
-)
-
-FetchAndCheck(dep_fmt include)
-FetchAndCheck(dep_spdlog include)
-FetchAndCheck(dep_minhook include)
-FetchAndCheck(dep_vulkan include)
-FetchAndCheck(dep_robin_hood src/include)
+    GIT_REPOSITORY "https://github.com/martinus/robin-hood-hashing.git")
+FetchContent_MakeAvailable(dep_robin_hood)
+include_directories(${dep_robin_hood_SOURCE_DIR}/src/include)
 
 
 ## ================================================================================================== Compiler setup.
