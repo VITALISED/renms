@@ -28,11 +28,6 @@
 #include <map>
 #include <vulkan/vulkan.h>
 #include <robin_hood.h>
-//#include <Havok/hkVector4f.h>
-//#include <Havok/hknpMassDistribution.h>
-//#include <Havok/hknpConstraintId.h>
-//#include <Havok/hknpBodyId.h>
-//#include <Havok/hknpRefPtr.h>
 #include <deque>
 #include <forward_list>
 
