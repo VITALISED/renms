@@ -17,14 +17,18 @@
 
 #pragma once
 
+// general types
 #include <skyscraper.h>
+#include <toolkit/maths/utilities/spatial/TkSampleDistribution.h>
 #include <toolkit/system/TkCSMutex.h>
 #include <toolkit/system/timer/TkStopwatch.h>
 #include <toolkit/utilities/fsm/TkFSM.h>
 #include <toolkit/utilities/containers/TkVector.h>
 #include <toolkit/utilities/TkString.h>
-#include <metadata/source/gamestate/gcgamemode.meta.h>
 #include <application/GcGameConfigCache.h>
+
+// metadata
+#include <metadata/source/gamestate/gcgamemode.meta.h>
 
 // states
 #include <application/states/GcApplicationAmbientGameState.h>
@@ -42,12 +46,13 @@
 #include <application/states/GcApplicationTitleScreenState.h>
 #include <application/states/GcApplicationUGCBaseViewerState.h>
 
-// other
-#include <gamestate/GcGameState.h>
-
-#include <application/GcFirstBootContext.h>
-#include <toolkit/maths/utilities/spatial/TkSampleDistribution.h>
+// managers
 #include <reality/GcRealityManager.h>
+
+// other
+#include <simulation/GcSimulation.h>
+#include <gamestate/GcGameState.h>
+#include <application/GcFirstBootContext.h>
 
 SKYSCRAPER_BEGIN
 
