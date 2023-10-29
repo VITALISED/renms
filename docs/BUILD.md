@@ -52,4 +52,8 @@ This is why we use cmake. After all of this is done and generated, this is the e
 
 It's not your average run-of-the-mill build process. Due to the immense number of classes (>2000) it's difficult to track them without bogging the repo down (along with the various potential legal repurcussions of shipping stripped code directly from the exe). Luckily, the extraction and building of these headers can be automagically pulled from No Man's Sky using Heridium by attaching it to the running executable and extracting them all when it loads. Even better, this all happens at compile time without any extra input from you, aside from the path to the NMS.exe in the config.cmake.
 
+### "I keep getting a dubious error about ' `patch failed` ' when reconfiguring. What?"
+
+This is completely normal. We apply a patch to MinHook, a dependency, because MinHook hasn't been updated in a while and CMake complains about it being from an older version that may go out of support. Unfortunately, the patching command runs every single time it's reconfigured, and if it's already been patched it errors out, but it's perfectly ignorable, hence why the configuring continues.
+
 <sup><sub>-tractorbeam wrote this-</sub></sup>
