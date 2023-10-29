@@ -19,6 +19,7 @@
 
 #include <skyscraper.h>
 #include <toolkit/attachments/TkHandle.h>
+#include <string>
 
 SKYSCRAPER_BEGIN
 
@@ -34,6 +35,36 @@ class cEgNodeAttachment
     
     virtual ~cEgNodeAttachment();
     virtual void OnUpdate();
+};
+
+class cEgSceneNode
+{
+    cEgSceneNode_vtbl *__vftable /*VFT*/;
+    TkHandle mLookupHandle;
+    unsigned int muNameHash;
+    cTkSmartResHandle mResHandle;
+    unsigned int muNetworkId;
+    cTkSharedPtr<std::basic_string<char,std::char_traits<char>,std::allocator<char> > > msName;
+    cTkSharedPtr<cTkResourceDescriptor const > mpAltId;
+    cEgNodeAttachment *mpNodeAttachment;
+    cTkSlotAlloc *mpAllocator;
+    int miIsMaster;
+};
+
+class cEgSceneNodeTemplate
+{
+    cEgSceneNodeTemplate_vtbl *__vftable;
+    __declspec(align(16)) int miType;
+    unsigned int muNameHash;
+    cTkSharedPtr<std::string> msName;
+    cTkSharedPtr<cTkResourceDescriptor const > mpDescriptor;
+    cTkVector3 mTranslation;
+    cTkVector3 mRotation;
+    cTkVector3 mScale;
+    cTkAttachmentData *mpAttachment;
+    cEgSceneNode *mpParent;
+    TkHandle mHandle;
+    std::vector<cEgSceneNodeTemplate *,TkSTLAllocatorShim<cEgSceneNodeTemplate *,8,-1> > mChildren;
 };
 
 SKYSCRAPER_END
