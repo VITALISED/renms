@@ -64,46 +64,13 @@ endif()
 ## ================================================================================================== Dependencies.
 
 
-include(FetchContent)
-
-set(CMAKE_FIND_PACKAGE_TARGETS_GLOBAL ON)
-
-FetchContent_Declare(
-    dep_fmt
-    GIT_REPOSITORY "https://github.com/fmtlib/fmt.git")
-FetchContent_MakeAvailable(dep_fmt)
-include_directories(${dep_fmt_SOURCE_DIR}/include)
-
-FetchContent_Declare(
-    dep_spdlog
-    GIT_REPOSITORY "https://github.com/gabime/spdlog.git"
-    GIT_TAG "v1.x")
-FetchContent_MakeAvailable(dep_spdlog)
-include_directories(${dep_spdlog_SOURCE_DIR}/include)
-
-FetchContent_Declare(
-    dep_minhook
-    GIT_REPOSITORY "https://github.com/TsudaKageyu/minhook.git")
-
-FetchContent_Populate(dep_minhook)
-execute_process(    # When the patch command is ran after it's been run before, it fails. This is a workaround.
-    COMMAND git apply ${CMAKE_SOURCE_DIR}/patches/minhook.patch
-    WORKING_DIRECTORY ${dep_minhook_SOURCE_DIR})
-add_subdirectory(${dep_minhook_SOURCE_DIR})
-
-FetchContent_Declare(
-    dep_vulkan
-    GIT_REPOSITORY "https://github.com/KhronosGroup/Vulkan-Headers"
-    GIT_TAG "374f9fd"
-    BUILD_COMMAND "# Don't.")
-FetchContent_MakeAvailable(dep_vulkan)
-include_directories(${dep_vulkan_SOURCE_DIR}/include)
-
-FetchContent_Declare(
-    dep_robin_hood
-    GIT_REPOSITORY "https://github.com/martinus/robin-hood-hashing.git")
-FetchContent_MakeAvailable(dep_robin_hood)
-include_directories(${dep_robin_hood_SOURCE_DIR}/src/include)
+add_subdirectory(fmt)
+add_subdirectory(minhook)
+add_subdirectory(robin-hood-hashing)
+include_directories(${CMAKE_SOURCE_DIR}/robin-hood-hashing/src/include)
+add_subdirectory(spdlog)
+include_directories(${CMAKE_SOURCE_DIR}/spdlog/include)
+add_subdirectory(Vulkan-Headers)
 
 
 ## ================================================================================================== Compiler setup.
