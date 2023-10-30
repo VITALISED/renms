@@ -32,7 +32,9 @@ void ResumeModuleThread(HMODULE hModule) {
                 if (te.dwSize >= FIELD_OFFSET(THREADENTRY32, th32OwnerProcessID) +
                                  sizeof(te.th32OwnerProcessID)) {
                     //If the thread is suspended, resume it
-                    if (te.th32OwnerProcessID == GetCurrentProcessId() && te.th32ThreadID != GetCurrentThreadId() && te.dwSize >= FIELD_OFFSET(THREADENTRY32, th32ThreadID) + sizeof(te.th32ThreadID)) {
+                    if (te.th32OwnerProcessID == GetCurrentProcessId()
+                     && te.th32ThreadID != GetCurrentThreadId()
+                     && te.dwSize >= FIELD_OFFSET(THREADENTRY32, th32ThreadID) + sizeof(te.th32ThreadID)) {
                         HANDLE hThread = OpenThread(THREAD_SUSPEND_RESUME, FALSE, te.th32ThreadID);
                         ResumeThread(hThread);
                         CloseHandle(hThread);
