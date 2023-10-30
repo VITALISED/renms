@@ -2,9 +2,10 @@
 
 ## "I want it now!"
 
-This is really easy. See the `config-template.cmake`? Copy it into a file called `config.cmake`, and change any values you think need changed (at the very least NMS_EXE_DIR must be changed). Then configure and build, if it's in the shell:
+This is really easy. See the `config-template.cmake`? Copy it into a file called `config.cmake`, and change any values you think need changed (at the very least NMS_EXE_DIR must be changed). Then sync the submodules, configure, and build. If it's in the shell:
 
 ```sh
+git submodules update --init --recursive
 mkdir build && cd build
 cmake ..
 cmake --build .
@@ -23,11 +24,10 @@ Contact me (@tractorbeam on discord) or, if the issue is something on our end (a
 ## Configuring
 
 ```sh
+git submodules update --init --recursive
 mkdir build && cd build
 cmake ..
 ```
-
-If you want to contribute, all we require is that you use a dedicated build folder. It's just proper project etiquette.
 
 ### OS
 
@@ -36,7 +36,7 @@ If you want to contribute, all we require is that you use a dedicated build fold
 
 ### Dependencies
 
-All this requires is Cmake, a build system (like Ninja or Gnu Make), and your choice of C/C++ compiler flavour. Everything else is downloaded automatically at configure time.
+All this requires is Cmake, a build system (like Ninja or Gnu Make), and your choice of C/C++ compiler flavour. Everything else is managed by the git submodules system.
 
 ## Compiling
 
@@ -52,8 +52,8 @@ This is why we use cmake. After all of this is done and generated, this is the e
 
 It's not your average run-of-the-mill build process. Due to the immense number of classes (>2000) it's difficult to track them without bogging the repo down (along with the various potential legal repurcussions of shipping stripped code directly from the exe). Luckily, the extraction and building of these headers can be automagically pulled from No Man's Sky using Heridium by attaching it to the running executable and extracting them all when it loads. Even better, this all happens at compile time without any extra input from you, aside from the path to the NMS.exe in the config.cmake.
 
-### "I keep getting a dubious error about ' `patch failed` ' when reconfiguring. What?"
+### "CMake subdirectory version??!?!11?!?!"
 
-This is completely normal. We apply a patch to MinHook, a dependency, because MinHook hasn't been updated in a while and CMake complains about it being from an older version that may go out of support. Unfortunately, the patching command runs every single time it's reconfigured, and if it's already been patched it errors out, but it's perfectly ignorable, hence why the configuring continues.
+I would change it if I could, but unfortunately MinHook hasn't been updated in 7 years.
 
 <sup><sub>-tractorbeam wrote this-</sub></sup>

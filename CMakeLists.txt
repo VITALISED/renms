@@ -64,13 +64,20 @@ endif()
 ## ================================================================================================== Dependencies.
 
 
-add_subdirectory(fmt)
-add_subdirectory(minhook)
-add_subdirectory(robin-hood-hashing)
-include_directories(${CMAKE_SOURCE_DIR}/robin-hood-hashing/src/include)
-add_subdirectory(spdlog)
-include_directories(${CMAKE_SOURCE_DIR}/spdlog/include)
-add_subdirectory(Vulkan-Headers)
+macro(add_dependency_custom dir include)
+    if (NOT EXISTS "${CMAKE_SOURCE_DIR}/${dir}")
+        message(FATAL_ERROR "Dependency ${dir} doesn't exist! Did you forget to sync your submodules with 'git submodule update --init --recursive' ?")
+    endif()
+
+    add_subdirectory(${dir})
+    include_directories(${CMAKE_SOURCE_DIR}/${dir}/${include})
+endmacro()
+
+add_dependency_custom(./fmt                 ./fmt/include)
+add_dependency_custom(./minhook             ./minhook/include)
+add_dependency_custom(./robin-hood-hashing  ./robin-hood-hashing/src/include)
+add_dependency_custom(./spdlog              ./spdlog/include)
+add_dependency_custom(./Vulkan-Headers      ./Vulkan-Headers/include)
 
 
 ## ================================================================================================== Compiler setup.
