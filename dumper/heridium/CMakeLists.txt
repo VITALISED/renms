@@ -28,8 +28,7 @@ add_library(Heridium SHARED
 )
 
 target_include_directories(
-    Heridium PRIVATE
-    ${CMAKE_SOURCE_DIR}/thirdparty/include
+    Heridium PUBLIC
     ${CMAKE_SOURCE_DIR}/skyscraper
     ${CMAKE_SOURCE_DIR}/renms_dll
 )
@@ -37,6 +36,7 @@ target_include_directories(
 target_link_libraries(Heridium PRIVATE
     fmt
     minhook
+    spdlog
 )
 
 target_precompile_headers(Heridium PRIVATE

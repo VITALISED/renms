@@ -70,7 +70,7 @@ macro(add_dependency_custom dir include)
     endif()
 
     add_subdirectory(${dir})
-    include_directories(${CMAKE_SOURCE_DIR}/${dir}/${include})
+    include_directories(${CMAKE_SOURCE_DIR}/${include})
 endmacro()
 
 add_dependency_custom(./fmt                 ./fmt/include)
