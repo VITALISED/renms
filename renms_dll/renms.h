@@ -18,10 +18,10 @@
 #pragma once
 
 #include "framework.h"
+#include "log.h"
 #include <MinHook.h>
 #include <fmt/format.h>
 #include <string>
-#include <spdlog/spdlog.h>
 #include <vector>
 #include <array>
 

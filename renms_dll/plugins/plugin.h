@@ -21,6 +21,14 @@
 
 RENMS_BEGIN
 
+enum PluginStatus
+{
+    Ok,
+    Failed,
+    Exiting,
+    Loading,
+};
+
 class Plugin
 {
     const char* mpacName;
@@ -28,6 +36,12 @@ class Plugin
     const char* mpacAuthor;
     const char* mpacDescription;
     HMODULE mHModule;
+
+    virtual ~Plugin();
+    virtual PluginStatus Initialise() = 0;
+    virtual void Construct() = 0;
+    virtual void Update(float lfTimeStep) = 0;
+    virtual void Destruct() = 0;
 };
 
 class PluginManager
