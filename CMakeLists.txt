@@ -75,12 +75,12 @@ macro(add_dependency_custom dir include)
     include_directories(${CMAKE_SOURCE_DIR}/${include})
 endmacro()
 
-add_dependency_custom(./thirdparty/fmt                 ./fmt/include)
-add_dependency_custom(./thirdparty/minhook             ./minhook/include)
-add_dependency_custom(./thirdparty/robin-hood-hashing  ./robin-hood-hashing/src/include)
-add_dependency_custom(./thirdparty/spdlog              ./spdlog/include)
-include_directories(./thirdparty/spdlog/include)
-add_dependency_custom(./thirdparty/Vulkan-Headers      ./Vulkan-Headers/include)
+add_dependency_custom(./fmt                 ./fmt/include)
+add_dependency_custom(./minhook             ./minhook/include)
+add_dependency_custom(./robin-hood-hashing  ./robin-hood-hashing/src/include)
+add_dependency_custom(./spdlog              ./spdlog/include)
+include_directories(./spdlog/include)
+add_dependency_custom(./Vulkan-Headers      ./Vulkan-Headers/include)
 
 
 ## ================================================================================================== Compiler setup.
