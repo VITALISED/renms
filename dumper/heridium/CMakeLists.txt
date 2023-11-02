@@ -39,8 +39,4 @@ target_link_libraries(Heridium PRIVATE
     spdlog
 )
 
-target_precompile_headers(Heridium PRIVATE
-    "paths.h"
-)
-
 add_subdirectory(launcher)
