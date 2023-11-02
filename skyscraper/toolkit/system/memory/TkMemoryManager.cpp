@@ -1,6 +1,7 @@
 #include <skyscraper.h>
 #include <toolkit/system/memory/TkMemoryManager.h>
 
+/* @tractorbeam this unfortunately breaks the build and I need it to do that. Sorry :(
 SKYSCRAPER_BEGIN
 
 void *cTkMemoryManager::Malloc(int liSize, const char* lpacFile, int liLine, const char* lpacFunction, int liAlign, int liPool) 
@@ -23,3 +24,4 @@ void *cTkMemoryManager::Malloc(int liSize, const char* lpacFile, int liLine, con
 }
 
 SKYSCRAPER_END
+*/
