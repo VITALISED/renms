@@ -13,6 +13,12 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+add_library(
+    hooks STATIC
+    "memory/hooks.h"
+    "memory/hooks.cpp"
+)
+
 
 add_library(
     renms_dll SHARED
@@ -29,7 +35,8 @@ add_library(
 
 add_dependencies(renms_dll
     renms_skyscraper
-    PrecompiledMetadata
+    Heridium
+    heridiumLauncher
 )
 
 target_include_directories(renms_dll
@@ -42,6 +49,8 @@ set_target_properties(renms_dll PROPERTIES OUTPUT_NAME renms)
 
 target_link_libraries(renms_dll
     fmt
+    hooks
+    spdlog
 )
 
 target_precompile_headers(renms_dll
@@ -51,3 +60,5 @@ target_precompile_headers(renms_dll
 )
 
 add_subdirectory(proxy)
+
+add_subdirectory(plugin-samples)

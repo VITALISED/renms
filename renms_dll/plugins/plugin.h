@@ -18,27 +18,29 @@
 #pragma once
 
 #include "../renms.h"
+#include "../memory/hooks.h"
+#include <string>
 
 RENMS_BEGIN
 
-class Plugin
+class PluginTemplate
 {
-    const char* mpacName;
-    const char* mpacDisplayName;
-    const char* mpacAuthor;
-    const char* mpacDescription;
-    HMODULE mHModule;
+    public:
+    char* lpacPluginId;
+    char* mpacDisplayName;
+    char* mpacAuthor;
+    char* mpacDescription;
 };
 
 class PluginManager
 {
-    std::vector<Plugin> mPlugins;
+    public:
+    std::vector<void*> mPluginList;
 
     PluginManager();
-    void LoadPluginFolder();
-    void Load(const char* lpacPluginName);
-    void Unload(const char* lpacPluginName);
-    void Reload(const char* lpacPluginName);
+    void Load(const char* lpacPluginId);
+    void Unload(const char* lpacPluginId);
+    void Reload(const char* lpacPluginId);
 };
 
 RENMS_END
