@@ -1,15 +1,15 @@
-[submodule "fmt"]
-	path = fmt
+[submodule "submodules/fmt"]
+	path = submodules/fmt
 	url = https://github.com/fmtlib/fmt.git
-[submodule "spdlog"]
-	path = spdlog
+[submodule "submodules/spdlog"]
+	path = submodules/spdlog
 	url = https://github.com/gabime/spdlog.git
-[submodule "minhook"]
-	path = minhook
+[submodule "submodules/minhook"]
+	path = submodules/minhook
 	url = https://github.com/TsudaKageyu/minhook.git
-[submodule "Vulkan-Headers"]
-	path = Vulkan-Headers
+[submodule "submodules/Vulkan-Headers"]
+	path = submodules/Vulkan-Headers
 	url = https://github.com/KhronosGroup/Vulkan-Headers.git
-[submodule "robin-hood-hashing"]
-	path = robin-hood-hashing
+[submodule "submodules/robin-hood-hashing"]
+	path = submodules/robin-hood-hashing
 	url = https://github.com/martinus/robin-hood-hashing.git
