@@ -24,7 +24,7 @@ RENMS_BEGIN
 MH_STATUS lastHookRes = MH_UNKNOWN;
 
 template<typename HOOK_TYPE>
-HookFunction<HOOK_TYPE>::HookFunction(char* lpacID, LPVOID lpDetour, LPVOID lpOffset) : mpacID(ID), mpDetour(pDetour), mpOffset(offset)
+HookFunction<HOOK_TYPE>::HookFunction(char* lpacID, LPVOID lpDetour, LPVOID lpOffset) : mpacID(lpacID), mpDetour(lpDetour), mpOffset(lpOffset)
 {
     if (lpOffset == 0) {
         //TODO: If the offset isn't specified, search by HOOK_TYPE.
