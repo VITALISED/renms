@@ -21,11 +21,8 @@ add_library(
     ${SKYSCRAPER_SOURCES}
 )
 
-target_precompile_headers(
-    renms_skyscraper REUSE_FROM PrecompiledMetadata
-)
-
 target_include_directories(
     renms_skyscraper PRIVATE
     ${CMAKE_SOURCE_DIR}
+    ${CMAKE_SOURCE_DIR}/skyscraper
 )
