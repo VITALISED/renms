@@ -48,7 +48,6 @@ public:
     void IsEnabled(bool lbEnabled);
 };
 
+RENMS_END
 //This is just the way templates have to work, I'm sorry.
 #include "hooks.tpp"
-
-RENMS_END
