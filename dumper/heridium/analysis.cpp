@@ -20,6 +20,9 @@
 
 INIT_HOOK()
 
+//Do you want to know what all this is for?
+//It's all for resuming a thread knowing just the module handle.
+//The Windows API is a nightmare...
 void ResumeModuleThread(HMODULE hModule) {
     //Get PID from handle
     DWORD dwPID = GetProcessId(hModule);
@@ -119,7 +122,7 @@ void AnalysisInit()
     ResumeModuleThread(MODULE_BASE);
 }
 
-// HERIDIUM_BEGIN
+HERIDIUM_BEGIN
 
 // void DoLookupIter()
 // {
@@ -131,16 +134,16 @@ void AnalysisInit()
 //     }
 // }
 
-// uintptr_t UnpackClassPointerWriteFunc(LPVOID ClassPointerWriteFunction)
-// {
-//     //Get the call to Cast() from the Write function
-//     uintptr_t castCallInstruction = (uintptr_t)ClassPointerWriteFunction + 0x11;
-//     LPVOID castPtr = renms::RelToAbsolute(castCallInstruction);
+uintptr_t UnpackClassPointerWriteFunc(LPVOID ClassPointerWriteFunction)
+{
+    //Get the call to Cast() from the Write function
+    uintptr_t castCallInstruction = (uintptr_t)ClassPointerWriteFunction + 0x11;
+    LPVOID castPtr = renms::RelToAbsolute(castCallInstruction);
 
-//     // return address of what's in the mov call in Cast()
-//     uintptr_t hashAddr = (uintptr_t)castPtr + 0xC;
+    // return address of what's in the mov call in Cast()
+    uintptr_t hashAddr = (uintptr_t)castPtr + 0xC;
 
-//     return hashAddr;
-// }
+    return hashAddr;
+}
 
-// HERIDIUM_END
+HERIDIUM_END
