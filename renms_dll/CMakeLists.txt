@@ -23,6 +23,8 @@ add_library(
 add_library(
     renms_dll SHARED
     "dllmain.cpp"
+    "log.h"
+    "framework.h"
     "commands/commands.h"
     # "commands/manager.h"
     # "commands/manager.cpp"

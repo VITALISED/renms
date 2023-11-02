@@ -25,6 +25,13 @@ RENMS_BEGIN
 
 class PluginTemplate
 {
+    enum status
+    {
+        Ok,
+        Failed,
+        Exiting,
+        Loading,
+    };
     public:
     char* lpacPluginId;
     char* mpacDisplayName;

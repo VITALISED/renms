@@ -4,6 +4,8 @@
 #include <simulation/solarsystem/buildings/wfcbuildings/GcModule.h>
 #include <simulation/solarsystem/buildings/wfcbuildings/GcMap.h>
 #include <simulation/solarsystem/buildings/wfcbuildings/GcSlot.h>
+#include <simulation/solarsystem/buildings/GcBuildingPreset.h>
+#include <simulation/solarsystem/planet/GcPlanet.h>
 #include <toolkit/utilities/TkString.h>
 #include <toolkit/maths/numeric/generic/TkVector3Generic.h>
 #include <metadata/source/simulation/environment/wfcbuildings/gcwfcmoduleset.meta.h>

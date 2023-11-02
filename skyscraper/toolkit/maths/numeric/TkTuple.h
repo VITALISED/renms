@@ -10,5 +10,4 @@ class cTkIntTuple3
     T maVals[3];
 };
 
-
 SKYSCRAPER_END

@@ -16,21 +16,34 @@
 */
 
 #include "framework.h"
+#include "renms.h"
+
+DWORD WINAPI MainThread(LPVOID lpReserved)
+{
+    CreateLogger();
+    spdlog::info("renms attached :)");
+    return TRUE;
+}
 
 BOOL APIENTRY DllMain(HMODULE hModule,
                       DWORD ul_reason_for_call,
                       LPVOID lpReserved)
 {
     //Required for dll entry point to work
-    UNREFERENCED_PARAMETER(hModule);
     UNREFERENCED_PARAMETER(lpReserved);
 
     switch (ul_reason_for_call)
     {
     case DLL_PROCESS_ATTACH:
+        DisableThreadLibraryCalls(hModule);
+        AllocConsole();
+        MH_Initialize();
+        CreateThread(NULL, NULL, MainThread, hModule, NULL, NULL);
+        break;
     case DLL_THREAD_ATTACH:
     case DLL_THREAD_DETACH:
     case DLL_PROCESS_DETACH:
+        MH_Uninitialize();
         break;
     }
     return TRUE;
