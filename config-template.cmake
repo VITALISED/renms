@@ -26,5 +26,5 @@ endfunction()
 
 SetIfNotDef(CMAKE_BUILD_TYPE Release)
 SetIfNotDef(SKIP_NMS_CHECK FALSE)
-SetIfNotDef(NMS_EXE_DIR "C:/Your/Path/To/NMS/Exe/Dir/Here")
+SetIfNotDef(NMS_EXE_PATH "C:/Your/Path/To/NMS/Exe/Dir/Here/NMS.exe")
 SetIfNotDef(FETCHCONTENT_QUIET OFF)

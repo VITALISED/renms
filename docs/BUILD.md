@@ -2,7 +2,7 @@
 
 ## "I want it now!"
 
-This is really easy. See the `config-template.cmake`? Copy it into a file called `config.cmake`, and change any values you think need changed (at the very least NMS_EXE_DIR must be changed). Then sync the submodules, configure, and build. If it's in the shell:
+This is really easy. See the `config-template.cmake`? Copy it into a file called `config.cmake`, and change any values you think need changed (at the very least NMS_EXE_PATH must be changed). Then sync the submodules, configure, and build. If it's in the shell:
 
 ```sh
 git submodules update --init --recursive

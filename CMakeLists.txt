@@ -38,24 +38,24 @@ else()
     message(FATAL_ERROR "No config.cmake found! Check out the config-template.cmake.")
 endif()
 
-if (NOT DEFINED NMS_EXE_DIR AND NOT SKIP_NMS_CHECK)
+if (NOT DEFINED NMS_EXE_PATH AND NOT SKIP_NMS_CHECK)
     message(FATAL_ERROR
 
-"NMS_EXE_DIR not defined!\n\
+"NMS_EXE_PATH not defined!\n\
 Look inside the root CMakeLists.txt for the option, and set it's exact path. \
 It must be the directory that contains NMS.exe. See the BUILD.md for why it needs to know this.")
 
 endif()
 
-get_filename_component(NMS_EXE_DIR "${NMS_EXE_DIR}" ABSOLUTE)
-if (NOT EXISTS "${NMS_EXE_DIR}/NMS.exe" AND NOT SKIP_NMS_CHECK)
+get_filename_component(NMS_EXE_PATH "${NMS_EXE_PATH}" ABSOLUTE)
+if (NOT EXISTS "${NMS_EXE_PATH}" AND NOT SKIP_NMS_CHECK)
     message(FATAL_ERROR
 
-"NMS_EXE_DIR either isn't a valid directory or doesn't contain NMS.exe!\n\
+"NMS_EXE_PATH either isn't a valid directory or doesn't contain NMS.exe!\n\
 See the BUILD.md for why it needs to know this.")
 
 elseif(NOT SKIP_NMS_CHECK)
-    message(STATUS "NMS Executable found: ${NMS_EXE_DIR}/NMS.exe")
+    message(STATUS "NMS Executable found: ${NMS_EXE_PATH}")
 else()
     message(STATUS "NMS.exe check skipped! Unless you already extracted all the metadata, the build will fail! Be warned!")
 endif()
@@ -69,7 +69,9 @@ macro(add_dependency_custom dir include)
         message(FATAL_ERROR "Dependency ${dir} doesn't exist! Did you forget to sync your submodules with 'git submodule update --init --recursive' ?")
     endif()
 
-    add_subdirectory(${dir})
+    if (EXISTS "${CMAKE_SOURCE_DIR}/${dir}/CMakeLists.txt")
+        add_subdirectory(${dir})
+    endif()
     include_directories(${CMAKE_SOURCE_DIR}/${include})
 endmacro()
 
@@ -77,6 +79,7 @@ add_dependency_custom(./fmt                 ./fmt/include)
 add_dependency_custom(./minhook             ./minhook/include)
 add_dependency_custom(./robin-hood-hashing  ./robin-hood-hashing/src/include)
 add_dependency_custom(./spdlog              ./spdlog/include)
+include_directories(./spdlog)
 add_dependency_custom(./Vulkan-Headers      ./Vulkan-Headers/include)
 
 
