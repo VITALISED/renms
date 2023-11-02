@@ -18,7 +18,7 @@
 #pragma once
 
 #include <skyscraper.h>
-#include <toolkit/system/TkMemoryManager.h>
+#include <toolkit/system/memory/TkMemoryManager.h>
 #include <toolkit/maths/geometry/TkPhysRelVec3.h>
 #include <toolkit/simulation/physics/havok/TkRigidBodyGameplayFlags.h>
 #include <toolkit/system/thread/TkRegionThreadManager.h>

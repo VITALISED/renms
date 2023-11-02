@@ -30,6 +30,7 @@
 #include <robin_hood.h>
 #include <deque>
 #include <forward_list>
+#include <atomic>
 
 #define SKYSCRAPER_BEGIN namespace nms {
 #define SKYSCRAPER_END };

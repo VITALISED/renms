@@ -18,7 +18,7 @@
 #pragma once
 
 #include <skyscraper.h>
-#include <toolkit/system/TkMemoryManager.h>
+#include <toolkit/system/memory/TkMemoryManager.h>
 
 SKYSCRAPER_BEGIN
 

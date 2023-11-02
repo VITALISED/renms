@@ -23,7 +23,7 @@
 #include <toolkit/audio/wwise/TkAudioManagerWwise.h>
 #include <toolkit/maths/numeric/generic/TkMatrix34Generic.h>
 #include <toolkit/maths/geometry/TkAABB.h>
-#include <toolkit/system/TkMemoryManager.h>
+#include <toolkit/system/memory/TkMemoryManager.h>
 #include <toolkit/attachments/TkAttachment.h>
 #include <simulation/solarsystem/buildings/GcBuilding.h>
 #include <simulation/environment/scanning/GcMarkerPoint.h>
