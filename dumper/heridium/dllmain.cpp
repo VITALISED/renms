@@ -35,6 +35,7 @@ DWORD WINAPI WindowCheckThread(LPVOID lpReserved)
 {
     UNREFERENCED_PARAMETER(lpReserved);
 
+    //Halts this thread until the NMS window shows up.
     while (FindWindowA(0, (LPCSTR)"No Man's Sky") == nullptr);
 
     exit(0);    //Will close everything.
