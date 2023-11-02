@@ -16,6 +16,7 @@
 */
 
 #include "analysis.h"
+#include <memory/thread.h>
 
 INIT_HOOK()
 
