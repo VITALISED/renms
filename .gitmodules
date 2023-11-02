@@ -13,3 +13,7 @@
 [submodule "submodules/robin-hood-hashing"]
 	path = submodules/robin-hood-hashing
 	url = https://github.com/martinus/robin-hood-hashing.git
+[submodule "compile_only"]
+	path = submodules/spdlog
+	url = https://github.com/gabime/spdlog
+	branch = compiled_only
