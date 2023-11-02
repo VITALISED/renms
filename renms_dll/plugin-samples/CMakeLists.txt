@@ -19,8 +19,8 @@ add_library(sample SHARED
     ${CMAKE_SOURCE_DIR}/renms_dll/plugins/plugin.h
 )
 
-target_include_directories(sample PUBLIC
-    ${CMAKE_SOURCE_DIR}
-    ${CMAKE_SOURCE_DIR}/renms_dll
-    ${CMAKE_SOURCE_DIR}/skyscraper
+target_include_directories(sample
+    PUBLIC ${CMAKE_SOURCE_DIR}
+    PUBLIC ${CMAKE_SOURCE_DIR}/renms_dll
+    PUBLIC ${CMAKE_SOURCE_DIR}/skyscraper
 )
