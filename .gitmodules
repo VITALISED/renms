@@ -1,0 +1,25 @@
+[submodule "thirdparty/fmt"]
+	path = thirdparty/fmt
+	url = https://github.com/fmtlib/fmt.git
+[submodule "thirdparty/spdlog"]
+	path = thirdparty/spdlog
+	url = https://github.com/gabime/spdlog.git
+	branch = compiled_only
+[submodule "minhook"]
+	path = minhook
+	url = https://github.com/TsudaKageyu/minhook.git
+[submodule "Vulkan-Headers"]
+	path = Vulkan-Headers
+	url = https://github.com/KhronosGroup/Vulkan-Headers.git
+[submodule "robin-hood-hashing"]
+	path = robin-hood-hashing
+	url = https://github.com/martinus/robin-hood-hashing.git
+[submodule "thirdparty/minhook"]
+	path = thirdparty/minhook
+	url = https://github.com/TsudaKageyu/minhook.git
+[submodule "thirdparty/Vulkan-Headers"]
+	path = thirdparty/Vulkan-Headers
+	url = https://github.comKhronosGroup/Vulkan-Headers.git
+[submodule "thirdparty/robin-hood-hashing"]
+	path = thirdparty/robin-hood-hashing
+	url = https://github.commartinus/robin-hood-hashing.git
