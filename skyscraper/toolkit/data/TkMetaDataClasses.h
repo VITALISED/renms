@@ -21,8 +21,6 @@
 
 SKYSCRAPER_BEGIN
 
-class cTkMetaDataClass;
-
 struct FloatEditOptions
 {
     float mfStepSize;
