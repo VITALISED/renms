@@ -16,18 +16,29 @@
 */
 
 #include "plugin.h"
+#include <filesystem>
+using namespace std::filesystem;
 
 RENMS_BEGIN
 
 PluginManager::PluginManager()
 {
-    this->mPlugins = std::vector<Plugin>();
-    this->LoadPluginFolder();
-}
 
-void PluginManager::LoadPluginFolder()
-{
-    
+    //Populate the list with everything that's in the plugins folder
+    path nmsPath = current_path();
+    path PluginFolder = nmsPath / "renms/plugins";
+
+    if (!is_directory(PluginFolder))
+        create_directories(PluginFolder);
+
+    for (directory_entry PluginEntry : directory_iterator(PluginFolder)) {
+        if (!PluginEntry.is_regular_file()) continue;
+        path Plugin = PluginEntry;
+        
+        if (Plugin.filename().extension() != "rn") continue;
+
+        
+    }
 }
 
 RENMS_END
