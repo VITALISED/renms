@@ -15,10 +15,16 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+#include <spdlog/spdlog.h>
+
 #include <toolkit/data/TkMetaDataClasses.h>
+#include <toolkit/data/TkClassPointer.h>
+#include <toolkit/system/memory/pools/TkLinearMemoryPool.h>
 #include <plugins/plugin.h>
 
-#define Signature \
+using namespace nms;
+
+#define Signature\
 /*  A ptr to the function's own class   */\
     const cTkMetaDataClass* lpClassMetadata,\
 /*  Function pointer........................That function's arguments   */\
@@ -32,11 +38,11 @@
     unsigned __int64(* lHashFunction)       (const cTkClassPointer*, ... __int64, bool),\
     void(* lDestroyFunction)                (cTkClassPointer*)
 
-typedef void(*S_cTkMetadataClass)(Signature);
+typedef void(*S_cTkMetadataClass_Register)(Signature);
 
-void D_cTkMetadataClass(Signature)
+void D_cTkMetadataClass_Register(Signature)
 {
-    spdlog::info("MetadataScanner: Found class: {}", lpClassMetadata->mName);
+    spdlog::info("MetadataScanner: Found class: {}", lpClassMetadata->mpacName);
 }
 
 
@@ -44,12 +50,12 @@ class MetadataProber : renms::PluginTemplate {
     char* lpacPluginId      = "MetadataProber";
     char* mpacDisplayName   = "Metadata Prober";
     char* mpacAuthor        = "tractorbeam & VITALISED";
-    char* mpacDescription   = "Scans the cTkMetadata class's constructor for pointers to all the different classes, because we can.";
-    //   V- Hook_etc         V- Signature_etc             V- Detour_etc
-    Hook(H_cTkMetadataClass, S_cTkMetadataClass, (LPVOID)(D_cTkMetadataClass), RelToAbsPtr(0x248ABC0))
+    char* mpacDescription   = "Scans the cTkMetadata class's Register function for pointers to all the different classes, because we can.";
+    //   V- Hook_etc                  V- Signature_etc                      V- Detour_etc
+    Hook(H_cTkMetadataClass_Register, S_cTkMetadataClass_Register, (LPVOID)(D_cTkMetadataClass_Register), RelToAbsPtr(0x248ABC0))
 
     void OnLoad() {
-        H_cTkMetadataClass.IsEnabled(true);
+        H_cTkMetadataClass_Register.IsEnabled(true);
         spdlog::info("MetadataScanner loaded.");
     }
 };
