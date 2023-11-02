@@ -42,6 +42,8 @@ public:
     const char *mpacName;
 };
 
+class cTkMetaDataClass;
+
 class cTkMetaDataMember
 {
 public:
