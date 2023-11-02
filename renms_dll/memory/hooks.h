@@ -18,32 +18,37 @@
 #pragma once
 #include "../renms.h"
 
-inline LPVOID RelToAbsPtr(uintptr_t lpRelPtr) {
-    return (LPVOID) ((uintptr_t)GetModuleHandleA("NMS.exe") + (uintptr_t)lpRelPtr);
+RENMS_BEGIN
+
+//@vitalised: this name is confusing if we every try to do rel16/32 pointer resolution 
+inline LPVOID RelToAbsPtr(DWORD_PTR lpRelPtr) {
+    return (LPVOID) ((DWORD_PTR)GetModuleHandleA("NMS.exe") + (DWORD_PTR)lpRelPtr);
 }
 
 //An easier way of defining a HookFunction object.
-#define Hook(name, signature, detour, offset) HookFunction<signature> name = HookFunction<signature>(#name, detour, offset);
+#define HOOK(name, signature, detour, offset) HookFunction<signature> name = HookFunction<signature>(#name, detour, offset);
 
 template<typename HOOK_TYPE>
 class HookFunction
 {
 private:
-    char* ID;
-    LPVOID* ppOriginal;
-    LPVOID pDetour;
+    char* mpacID;
+    LPVOID* mppOriginal;
+    LPVOID mpDetour;
 public:
-    LPVOID offset;
-    bool isActive;
+    LPVOID mpOffset;
+    bool mbIsActive;
 
-    HookFunction(char* ID, LPVOID pDetour, LPVOID offset);
+    HookFunction(char* lpacID, LPVOID lpDetour, LPVOID lpOffset);
     ~HookFunction();
 
     HOOK_TYPE CallOriginal(...);
     HOOK_TYPE CallDetour(...);
     
-    void IsEnabled(bool enabled);
+    void IsEnabled(bool lbEnabled);
 };
 
 //This is just the way templates have to work, I'm sorry.
 #include "hooks.tpp"
+
+RENMS_END

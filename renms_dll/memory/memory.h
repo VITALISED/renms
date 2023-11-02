@@ -20,8 +20,8 @@
 #include "../renms.h"
 
 #define MODULE_BASE GetModuleHandleA("NMS.exe")
-#define OFFSET(lpPtr) (LPVOID)((uintptr_t)MODULE_BASE + (uintptr_t)lpPtr)
-#define SIGSCAN(lpacPattern) (LPVOID) RENMS_Memory::ScanPattern(RENMS_Memory::IDAPatternToVec(lpacPattern))
+#define OFFSET(pointer) (LPVOID)((DWORD_PTR)MODULE_BASE + (DWORD_PTR)pointer)
+#define SIGSCAN(pattern) (LPVOID) renms::ScanPattern(renms::IDAPatternToVec(lpacPattern))
 
 RENMS_BEGIN
 

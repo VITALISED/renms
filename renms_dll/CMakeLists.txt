@@ -25,6 +25,9 @@ add_library(
     # "commands/test.cpp"
     "memory/memory.h"
     "memory/hooks.h"
+    "memory/hooks.tpp"
+    "memory/malloc.h"
+    "memory/thread.h"
     "plugins/plugin.h"
     "plugins/plugin.cpp"
 )

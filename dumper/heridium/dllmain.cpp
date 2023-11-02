@@ -38,9 +38,13 @@ DWORD WINAPI WindowCheckThread(LPVOID lpReserved)
     //Halts this thread until the NMS window shows up.
     while (FindWindowA(0, (LPCSTR)"No Man's Sky") == nullptr);
 
-    exit(0);    //Will close everything.
-
     return TRUE;
+}
+
+void HandlePostDump()
+{
+    //exits application, can add more custom logic later
+    exit(0);
 }
 
 BOOL APIENTRY DllMain(HMODULE hModule,
@@ -49,16 +53,22 @@ BOOL APIENTRY DllMain(HMODULE hModule,
 {
     UNREFERENCED_PARAMETER(lpReserved);
 
+    HANDLE lpWindowCheckThreadHandle;
+
     switch (ul_reason_for_call)
     {
     case DLL_PROCESS_ATTACH:
         AllocConsole();
         MH_Initialize();
         DisableThreadLibraryCalls(hModule);
-        spdlog::set_level(spdlog::level::debug);
+
         spdlog::info("Hello from Heridium!");
+
         CreateThread(nullptr, 0, MainThread, hModule, 0, nullptr);
-        CreateThread(nullptr, 0, WindowCheckThread, hModule, 0, nullptr);
+        lpWindowCheckThreadHandle = CreateThread(nullptr, 0, WindowCheckThread, hModule, 0, nullptr);
+
+        WaitForSingleObject(lpWindowCheckThreadHandle, INFINITE);
+        HandlePostDump();
         break;
     case DLL_THREAD_ATTACH:
     case DLL_THREAD_DETACH:

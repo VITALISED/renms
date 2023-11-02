@@ -19,35 +19,37 @@
 #include "memory.h"
 #include "hooks.h"
 
+RENMS_BEGIN
+
 MH_STATUS lastHookRes = MH_UNKNOWN;
 
 template<typename HOOK_TYPE>
-HookFunction<HOOK_TYPE>::HookFunction(char* ID, LPVOID pDetour, LPVOID offset) : ID(ID), pDetour(pDetour), offset(offset)
+HookFunction<HOOK_TYPE>::HookFunction(char* lpacID, LPVOID lpDetour, LPVOID lpOffset) : mpacID(ID), mpDetour(pDetour), mpOffset(offset)
 {
-    if (offset == 0) {
+    if (lpOffset == 0) {
         //TODO: If the offset isn't specified, search by HOOK_TYPE.
     }
 
-    this->ppOriginal = (LPVOID *) malloc(sizeof(LPVOID));
-	lastHookRes = MH_CreateHook(offset, pDetour, ppOriginal);
+    this->mppOriginal = (LPVOID *) malloc(sizeof(LPVOID));
+	lastHookRes = MH_CreateHook(lpOffset, lpDetour, lppOriginal);
     
     if (lastHookRes == MH_OK)
-        spdlog::info("Created hook: {}", ID);
+        spdlog::info("Created hook: {}", lpacID);
     else
         spdlog::error("MH_CreateHook failed: {}", MH_StatusToString(lastHookRes));
 }
 
 template<typename HOOK_TYPE>
 HookFunction<HOOK_TYPE>::~HookFunction() {
-    free(ppOriginal);
+    free(mppOriginal);
 }
 
 template<typename HOOK_TYPE>
 void HookFunction<HOOK_TYPE>::IsEnabled(bool enabled) {
     if (enabled)
-        lastHookRes = MH_EnableHook(offset);
+        lastHookRes = MH_EnableHook(mpOffset);
     else
-        lastHookRes = MH_DisableHook(offset);
+        lastHookRes = MH_DisableHook(mpOffset);
     
     if (lastHookRes != MH_OK)
         spdlog::error("MH_ToggleHook failed: {}", MH_StatusToString(lastHookRes));
@@ -55,12 +57,14 @@ void HookFunction<HOOK_TYPE>::IsEnabled(bool enabled) {
 
 template<typename HOOK_TYPE>
 HOOK_TYPE HookFunction<HOOK_TYPE>::CallOriginal(...) {
-    HOOK_TYPE Original = *reinterpret_cast<HOOK_TYPE*>(ppOriginal);
+    HOOK_TYPE Original = *reinterpret_cast<HOOK_TYPE*>(mppOriginal);
     return Original(va_list());
 }
 
 template<typename HOOK_TYPE>
 HOOK_TYPE HookFunction<HOOK_TYPE>::CallDetour(...) {
-    HOOK_TYPE Original = *reinterpret_cast<HOOK_TYPE*>(&pDetour);
+    HOOK_TYPE Original = *reinterpret_cast<HOOK_TYPE*>(&mpDetour);
     return Original(this, va_list());
 }
+
+RENMS_END
