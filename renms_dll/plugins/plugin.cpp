@@ -51,7 +51,7 @@ PluginManager::PluginManager()
 void PluginManager::Load(std::filesystem::path PluginPath)
 {
     //Load the plugin DLL
-    HMODULE PluginHandle = LoadLibrary((LPCWSTR)PluginPath.string().c_str());
+    HMODULE PluginHandle = LoadLibraryW((LPCWSTR)PluginPath.string().c_str());
     if (PluginHandle == NULL) {
         spdlog::error("Failed to load plugin: {}", PluginPath.filename().string());
         return;
