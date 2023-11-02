@@ -9,7 +9,7 @@
 	url = https://github.com/TsudaKageyu/minhook.git
 [submodule "Vulkan-Headers"]
 	path = Vulkan-Headers
-	url = https://github.com/KhronosGroup/Vulkan-Headers
+	url = https://github.com/KhronosGroup/Vulkan-Headers.git
 [submodule "robin-hood-hashing"]
 	path = robin-hood-hashing
 	url = https://github.com/martinus/robin-hood-hashing.git
