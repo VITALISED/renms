@@ -22,7 +22,7 @@
 #include <toolkit/utilities/containers/TkVector.h>
 #include <toolkit/data/TkMetaData.h>
 #include <toolkit/data/TkMetaDataXML.h>
-#include <memory/hooks.h>
+#include <memory/hooks-old.h>
 
 
 using namespace nms;

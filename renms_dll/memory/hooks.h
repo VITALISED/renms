@@ -18,7 +18,9 @@
 #pragma once
 #include "../renms.h"
 
-inline LPVOID RelToAbsPtr(int lpRelPtr);
+inline LPVOID RelToAbsPtr(uintptr_t lpRelPtr) {
+    return (LPVOID) ((uintptr_t)GetModuleHandleA("NMS.exe") + (uintptr_t)lpRelPtr);
+}
 
 //An easier way of defining a HookFunction object.
 #define Hook(name, signature, detour, offset) HookFunction<signature> name = HookFunction<signature>(#name, detour, offset);
@@ -34,11 +36,14 @@ public:
     LPVOID offset;
     bool isActive;
 
-    HookFunction(char* ID, LPVOID pDetour, LPVOID offset) : ID(ID) pDetour(pDetour) offset(offset) {};
-    ~HookFunction() {};
+    HookFunction(char* ID, LPVOID pDetour, LPVOID offset);
+    ~HookFunction();
 
     HOOK_TYPE CallOriginal(...);
     HOOK_TYPE CallDetour(...);
     
     void IsEnabled(bool enabled);
 };
+
+//This is just the way templates have to work, I'm sorry.
+#include "hooks.tpp"

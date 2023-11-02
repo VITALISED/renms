@@ -19,6 +19,10 @@ add_library(sample SHARED
     ${CMAKE_SOURCE_DIR}/renms_dll/plugins/plugin.h
 )
 
+target_link_libraries(sample
+    minhook
+)
+
 target_include_directories(sample
     PUBLIC ${CMAKE_SOURCE_DIR}
     PUBLIC ${CMAKE_SOURCE_DIR}/renms_dll

@@ -17,8 +17,8 @@
 
 #pragma once
 
-#include "memory.h"
 #include "../renms.h"
+#include "memory.h"
 
 RENMS_BEGIN
 

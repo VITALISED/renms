@@ -35,7 +35,7 @@ using namespace nms;
     bool(* lEqualsFunction)                 (const cTkClassPointer*, const cTkClassPointer*),\
     void(* lCopyFunction)                   (cTkClassPointer*, const cTkClassPointer*),\
     cTkClassPointer* (* lCreateFunction)    (cTkClassPointer* result),\
-    unsigned __int64(* lHashFunction)       (const cTkClassPointer*, ... __int64, bool),\
+    unsigned __int64(* lHashFunction)       (const cTkClassPointer*, __int64, bool ...),\
     void(* lDestroyFunction)                (cTkClassPointer*)
 
 typedef void(*S_cTkMetadataClass_Register)(Signature);
@@ -45,17 +45,18 @@ void D_cTkMetadataClass_Register(Signature)
     spdlog::info("MetadataScanner: Found class: {}", lpClassMetadata->mpacName);
 }
 
-
 class MetadataProber : renms::PluginTemplate {
-    char* lpacPluginId      = "MetadataProber";
-    char* mpacDisplayName   = "Metadata Prober";
-    char* mpacAuthor        = "tractorbeam & VITALISED";
-    char* mpacDescription   = "Scans the cTkMetadata class's Register function for pointers to all the different classes, because we can.";
+    public:
+    std::string lpacPluginId      = "MetadataProber";
+    std::string mpacDisplayName   = "Metadata Prober";
+    std::string mpacAuthor        = "tractorbeam & VITALISED";
+    std::string mpacDescription   = "Scans the cTkMetadata class's Register function for pointers to all the different classes, because we can.";
     //   V- Hook_etc                  V- Signature_etc                      V- Detour_etc
     Hook(H_cTkMetadataClass_Register, S_cTkMetadataClass_Register, (LPVOID)(D_cTkMetadataClass_Register), RelToAbsPtr(0x248ABC0))
-
-    void OnLoad() {
-        H_cTkMetadataClass_Register.IsEnabled(true);
-        spdlog::info("MetadataScanner loaded.");
-    }
 };
+
+void OnLoad() {
+    MetadataProber plugin;
+    plugin.H_cTkMetadataClass_Register.IsEnabled(true);
+    spdlog::info("MetadataScanner loaded.");
+}

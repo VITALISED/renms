@@ -134,11 +134,16 @@ HERIDIUM_BEGIN
 //     }
 // }
 
+inline LPVOID RelToAbsolute(uintptr_t lpRelPtr)
+{
+    return (LPVOID)((uintptr_t)MODULE_BASE + (uintptr_t)lpRelPtr);
+}
+
 uintptr_t UnpackClassPointerWriteFunc(LPVOID ClassPointerWriteFunction)
 {
     //Get the call to Cast() from the Write function
     uintptr_t castCallInstruction = (uintptr_t)ClassPointerWriteFunction + 0x11;
-    LPVOID castPtr = renms::RelToAbsolute(castCallInstruction);
+    LPVOID castPtr = RelToAbsolute(castCallInstruction);
 
     // return address of what's in the mov call in Cast()
     uintptr_t hashAddr = (uintptr_t)castPtr + 0xC;

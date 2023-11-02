@@ -13,12 +13,6 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-add_library(
-    hooks STATIC
-    "memory/hooks.h"
-    "memory/hooks.cpp"
-)
-
 
 add_library(
     renms_dll SHARED
@@ -42,17 +36,22 @@ add_dependencies(renms_dll
 )
 
 target_include_directories(renms_dll
-    PRIVATE ../skyscraper
-    PRIVATE ../metadata/source
-    PRIVATE ../metadata/toolkit
+    PUBLIC "../skyscraper"
+    PUBLIC "../metadata/source"
+    PUBLIC "../metadata/toolkit"
+    PUBLIC "../spdlog/include"
 )
 
 set_target_properties(renms_dll PROPERTIES OUTPUT_NAME renms)
 
 target_link_libraries(renms_dll
     fmt
-    hooks
+    minhook
     spdlog
+)
+
+add_dependencies(renms_dll
+    MetadataClasses
 )
 
 target_precompile_headers(renms_dll

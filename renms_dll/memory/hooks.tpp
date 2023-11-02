@@ -21,12 +21,8 @@
 
 MH_STATUS lastHookRes = MH_UNKNOWN;
 
-inline LPVOID RelToAbsPtr(uintptr_t lpRelPtr) {
-    return (LPVOID) ((uintptr_t)GetModuleHandleA("NMS.exe") + (uintptr_t)lpRelPtr);
-}
-
 template<typename HOOK_TYPE>
-HookFunction<HOOK_TYPE>::HookFunction(char* ID, LPVOID pDetour, LPVOID offset)
+HookFunction<HOOK_TYPE>::HookFunction(char* ID, LPVOID pDetour, LPVOID offset) : ID(ID), pDetour(pDetour), offset(offset)
 {
     if (offset == 0) {
         //TODO: If the offset isn't specified, search by HOOK_TYPE.
@@ -59,12 +55,12 @@ void HookFunction<HOOK_TYPE>::IsEnabled(bool enabled) {
 
 template<typename HOOK_TYPE>
 HOOK_TYPE HookFunction<HOOK_TYPE>::CallOriginal(...) {
-    HOOK_TYPE = *reinterpret_cast<HOOK_TYPE*>(ppOriginal);
-    return HOOK_TYPE(...);
+    HOOK_TYPE Original = *reinterpret_cast<HOOK_TYPE*>(ppOriginal);
+    return Original(va_list());
 }
 
 template<typename HOOK_TYPE>
 HOOK_TYPE HookFunction<HOOK_TYPE>::CallDetour(...) {
-    HOOK_TYPE = *reinterpret_cast<HOOK_TYPE*>(ppDetour);
-    return HOOK_TYPE(this ...)
+    HOOK_TYPE Original = *reinterpret_cast<HOOK_TYPE*>(&pDetour);
+    return Original(this, va_list());
 }

@@ -79,7 +79,7 @@ add_dependency_custom(./fmt                 ./fmt/include)
 add_dependency_custom(./minhook             ./minhook/include)
 add_dependency_custom(./robin-hood-hashing  ./robin-hood-hashing/src/include)
 add_dependency_custom(./spdlog              ./spdlog/include)
-include_directories(./spdlog)
+include_directories(./spdlog/include)
 add_dependency_custom(./Vulkan-Headers      ./Vulkan-Headers/include)
 
 

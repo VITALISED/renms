@@ -20,23 +20,17 @@
 #include "../renms.h"
 #include "../memory/hooks.h"
 #include <string>
+#include <filesystem>
 
 RENMS_BEGIN
 
 class PluginTemplate
 {
-    enum status
-    {
-        Ok,
-        Failed,
-        Exiting,
-        Loading,
-    };
     public:
-    char* lpacPluginId;
-    char* mpacDisplayName;
-    char* mpacAuthor;
-    char* mpacDescription;
+    std::string lpacPluginId;
+    std::string mpacDisplayName;
+    std::string mpacAuthor;
+    std::string mpacDescription;
 };
 
 class PluginManager
@@ -45,9 +39,11 @@ class PluginManager
     std::vector<void*> mPluginList;
 
     PluginManager();
-    void Load(const char* lpacPluginId);
-    void Unload(const char* lpacPluginId);
-    void Reload(const char* lpacPluginId);
+    void Load(std::filesystem::path PluginPath);
+    void Unload(std::filesystem::path PluginPath);
+    void Reload(std::filesystem::path PluginPath);
 };
 
 RENMS_END
+
+void OnLoad();

@@ -17,6 +17,7 @@
 
 #include "plugin.h"
 #include <filesystem>
+#include <windows.h>
 using namespace std::filesystem;
 
 RENMS_BEGIN
@@ -37,8 +38,26 @@ PluginManager::PluginManager()
         
         if (Plugin.filename().extension() != "rn") continue;
 
-        
+        //attempt to load the plugin
+        spdlog::info("Loading plugin: {}", Plugin.filename().string());
+        Load(Plugin);
     }
+
+    if (mPluginList.size() == 0) {
+        spdlog::warn("No plugins found.");
+    }
+}
+
+void PluginManager::Load(std::filesystem::path PluginPath)
+{
+    //Load the plugin DLL
+    HMODULE PluginHandle = LoadLibrary((LPCWSTR)PluginPath.string().c_str());
+    if (PluginHandle == NULL) {
+        spdlog::error("Failed to load plugin: {}", PluginPath.filename().string());
+        return;
+    }
+
+    //Execute the plugin's OnLoad function
 }
 
 RENMS_END
