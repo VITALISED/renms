@@ -1,6 +1,11 @@
 #pragma once
 
 #ifdef _DEBUG
+
+#if defined(SPDLOG_ACTIVE_LEVEL)
+#undef SPDLOG_ACTIVE_LEVEL
+#endif //defined(SPDLOG_ACTIVE_LEVEL)
+
 #define SPDLOG_ACTIVE_LEVEL SPDLOG_LEVEL_DEBUG
 #endif //_DEBUG
 
