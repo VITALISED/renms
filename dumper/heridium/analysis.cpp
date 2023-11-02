@@ -16,39 +16,8 @@
 */
 
 #include "analysis.h"
-#include <tlhelp32.h>
 
 INIT_HOOK()
-
-//Do you want to know what all this is for?
-//It's all for resuming a thread knowing just the module handle.
-//The Windows API is a nightmare...
-void ResumeModuleThread(HMODULE hModule) {
-    //Get PID from handle
-    DWORD dwPID = GetProcessId(hModule);
-    HANDLE h = CreateToolhelp32Snapshot(TH32CS_SNAPTHREAD, dwPID);
-    if (h != INVALID_HANDLE_VALUE) {
-        THREADENTRY32 te;
-        te.dwSize = sizeof(te);
-        if (Thread32First(h, &te)) {
-            do {
-                if (te.dwSize >= FIELD_OFFSET(THREADENTRY32, th32OwnerProcessID) +
-                                 sizeof(te.th32OwnerProcessID)) {
-                    //If the thread is suspended, resume it
-                    if (te.th32OwnerProcessID == GetCurrentProcessId()
-                     && te.th32ThreadID != GetCurrentThreadId()
-                     && te.dwSize >= FIELD_OFFSET(THREADENTRY32, th32ThreadID) + sizeof(te.th32ThreadID)) {
-                        HANDLE hThread = OpenThread(THREAD_SUSPEND_RESUME, FALSE, te.th32ThreadID);
-                        ResumeThread(hThread);
-                        CloseHandle(hThread);
-                    }
-                }
-                te.dwSize = sizeof(te);
-            } while (Thread32Next(h, &te));
-        }
-    CloseHandle(h);
-    }
-}
 
 void RegisterHook(const cTkMetaDataClass* lpClassMetadata,
     void(* lDefaultFunction)(cTkClassPointer*, cTkLinearMemoryPool*),
@@ -119,7 +88,7 @@ void AnalysisInit()
     else
         spdlog::error("Failed to hook!");
     
-    ResumeModuleThread(MODULE_BASE);
+    renms::ResumeModuleThread(MODULE_BASE);
 }
 
 HERIDIUM_BEGIN

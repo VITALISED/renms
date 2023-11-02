@@ -94,9 +94,11 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 ## /await and -fcoroutines may not be part of std yet, but it makes the task
 ## scheduler for the OS work more efficiently with our stuff, so we'll use it.
 
+#@vitalised: we disable warning C4201 due to NMS using lots of anonymous structs/unions.
+
 if (MSVC)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /await /W4")
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /W4")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /await /W4 /wd4201")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /W4 /wd4201")
 
     if (CMAKE_BUILD_TYPE STREQUAL "Release")
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /WX")

@@ -23,7 +23,7 @@
 #include <toolkit/data/TkMetaData.h>
 #include <toolkit/data/TkMetaDataXML.h>
 #include <memory/hooks-old.h>
-
+#include <memory/thread.h>
 
 using namespace nms;
 
