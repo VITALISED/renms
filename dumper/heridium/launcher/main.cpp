@@ -32,24 +32,15 @@ void printDebug(std::string input) {
     #endif
 }
 
-void CheckPath(std::filesystem::path path, std::string filename) {
-    if (std::filesystem::is_directory(path)) {
-        path /= filename;
-    }
-    
-    if (!std::filesystem::exists(path)) {
-        throw std::runtime_error(
-            std::string("File not found: ") + path.string());
-    }
-
+void CheckPath(std::filesystem::path path) {
     if (!std::filesystem::is_regular_file(path)) {
         throw std::runtime_error(
             std::string("Not a file: ") + path.string());
     }
 
-    if (path.filename() != filename) {
+    if (!std::filesystem::exists(path)) {
         throw std::runtime_error(
-            std::string("Not the right kind of file: got ") + path.filename().string() + ", expected " + filename);
+            std::string("File not found: ") + path.string());
     }
 }
 
@@ -59,19 +50,19 @@ int main(int argc, char** argv) {
             throw std::runtime_error("Achievement Unlocked: \"How did we get here?\" (You somehow managed to run this with a negative number of arguments)");
         }
 
-        std::filesystem::path exePath, nmsPath, heridiumPath;
-        exePath = argv[0];
+        std::filesystem::path launcherPath, nmsPath, heridiumPath;
+        launcherPath = argv[0];
 
         if (argc < 2) {
-            nmsPath = exePath.parent_path();
+            nmsPath = launcherPath.parent_path();
             nmsPath /= "NMS.exe";
         } else
             nmsPath = argv[1];
 
-        heridiumPath = exePath.parent_path();
+        heridiumPath = launcherPath.parent_path();
         heridiumPath /= HERIDIUM_LIB;
-        CheckPath(nmsPath, "NMS.exe");
-        CheckPath(heridiumPath, HERIDIUM_LIB);
+        CheckPath(nmsPath);
+        CheckPath(heridiumPath);
 
         printDebug("Loading NMS.exe...\n");
         auto nmsProcess = CreateProcessFrozen(argv[1]);
