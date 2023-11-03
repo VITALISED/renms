@@ -15,9 +15,9 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+#include "analysis.h"
 #include "framework.h"
 #include "heridium.h"
-#include "analysis.h"
 
 #ifndef HERIDIUM_LANGUAGE_TARGET
 #define HERIDIUM_LANGUAGE_TARGET EHeridiumLanguageType_CXX
@@ -39,18 +39,15 @@ DWORD WINAPI WindowCheckThread(LPVOID lpReserved)
 {
     UNREFERENCED_PARAMETER(lpReserved);
 
-    //Halts this thread until the NMS window shows up.
-    while (FindWindowA(NULL, (LPCSTR)"No Man's Sky") != nullptr)
-        Sleep(1000);    //let's not hog resources
+    // Halts this thread until the NMS window shows up.
+    while (FindWindowA(NULL, (LPCSTR) "No Man's Sky") != nullptr) Sleep(1000); // let's not hog resources
 
-    if(HERIDIUM_SHOULD_EXIT) { exit(0); };
+    if (HERIDIUM_SHOULD_EXIT) { exit(0); };
 
     return TRUE;
 }
 
-BOOL APIENTRY DllMain(HMODULE hModule,
-                      DWORD ul_reason_for_call,
-                      LPVOID lpReserved)
+BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserved)
 {
     UNREFERENCED_PARAMETER(lpReserved);
 
@@ -70,8 +67,7 @@ BOOL APIENTRY DllMain(HMODULE hModule,
         break;
     case DLL_THREAD_ATTACH:
     case DLL_THREAD_DETACH:
-    case DLL_PROCESS_DETACH:
-        break;
+    case DLL_PROCESS_DETACH: break;
     }
     return TRUE;
 }

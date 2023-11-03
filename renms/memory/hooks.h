@@ -20,29 +20,30 @@
 
 RENMS_BEGIN
 
-//An easier way of defining a HookFunction object.
-#define HOOK(name, signature, detour, offset) renms::HookFunction<signature> name = renms::HookFunction<signature>(#name, detour, offset);
+// An easier way of defining a HookFunction object.
+#define HOOK(name, signature, detour, offset) \
+    renms::HookFunction<signature> name = renms::HookFunction<signature>(#name, detour, offset)
 
-template<typename HOOK_TYPE>
-class HookFunction
+template <typename HOOK_TYPE> class HookFunction
 {
-private:
-    char* mpacID;
-    LPVOID* mppOriginal;
-    LPVOID mpDetour;
-public:
-    LPVOID mpOffset;
-    bool mbIsActive;
+  private:
+    char   *mpacID;
+    LPVOID *mppOriginal;
+    LPVOID  mpDetour;
 
-    HookFunction(char* lpacID, LPVOID lpDetour, LPVOID lpOffset);
+  public:
+    LPVOID mpOffset;
+    bool   mbIsActive;
+
+    HookFunction(char *lpacID, LPVOID lpDetour, LPVOID lpOffset);
     ~HookFunction();
 
     HOOK_TYPE CallOriginal(...);
     HOOK_TYPE CallDetour(...);
-    
+
     void IsEnabled(bool lbEnabled);
 };
 
 RENMS_END
-//This is just the way templates have to work, I'm sorry.
+// This is just the way templates have to work, I'm sorry.
 #include "hooks.tpp"

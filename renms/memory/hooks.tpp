@@ -16,54 +16,55 @@
 */
 
 #include "../renms.h"
-#include "memory.h"
 #include "hooks.h"
+#include "memory.h"
 
 RENMS_BEGIN
 
 MH_STATUS lastHookRes = MH_UNKNOWN;
 
-template<typename HOOK_TYPE>
-HookFunction<HOOK_TYPE>::HookFunction(char* lpacID, LPVOID lpDetour, LPVOID lpOffset) : mpacID(lpacID), mpDetour(lpDetour), mpOffset(lpOffset)
+template <typename HOOK_TYPE>
+HookFunction<HOOK_TYPE>::HookFunction(char *lpacID, LPVOID lpDetour, LPVOID lpOffset)
+    : mpacID(lpacID), mpDetour(lpDetour), mpOffset(lpOffset)
 {
-    if (lpOffset == 0) {
-        //TODO: If the offset isn't specified, search by HOOK_TYPE.
+    if (lpOffset == 0)
+    {
+        // TODO: If the offset isn't specified, search by HOOK_TYPE.
     }
 
-    this->mppOriginal = (LPVOID *) malloc(sizeof(LPVOID));
-	lastHookRes = MH_CreateHook(lpOffset, lpDetour, mppOriginal);
-    
+    this->mppOriginal = (LPVOID *)malloc(sizeof(LPVOID));
+    lastHookRes       = MH_CreateHook(lpOffset, lpDetour, mppOriginal);
+
     if (lastHookRes == MH_OK)
         spdlog::info("Created hook: {}", lpacID);
     else
         spdlog::error("MH_CreateHook failed: {}", MH_StatusToString(lastHookRes));
 }
 
-template<typename HOOK_TYPE>
-HookFunction<HOOK_TYPE>::~HookFunction() {
+template <typename HOOK_TYPE> HookFunction<HOOK_TYPE>::~HookFunction()
+{
     free(mppOriginal);
 }
 
-template<typename HOOK_TYPE>
-void HookFunction<HOOK_TYPE>::IsEnabled(bool enabled) {
+template <typename HOOK_TYPE> void HookFunction<HOOK_TYPE>::IsEnabled(bool enabled)
+{
     if (enabled)
         lastHookRes = MH_EnableHook(mpOffset);
     else
         lastHookRes = MH_DisableHook(mpOffset);
-    
-    if (lastHookRes != MH_OK)
-        spdlog::error("MH_ToggleHook failed: {}", MH_StatusToString(lastHookRes));
+
+    if (lastHookRes != MH_OK) spdlog::error("MH_ToggleHook failed: {}", MH_StatusToString(lastHookRes));
 }
 
-template<typename HOOK_TYPE>
-HOOK_TYPE HookFunction<HOOK_TYPE>::CallOriginal(...) {
-    HOOK_TYPE Original = *reinterpret_cast<HOOK_TYPE*>(mppOriginal);
+template <typename HOOK_TYPE> HOOK_TYPE HookFunction<HOOK_TYPE>::CallOriginal(...)
+{
+    HOOK_TYPE Original = *reinterpret_cast<HOOK_TYPE *>(mppOriginal);
     return Original(va_list());
 }
 
-template<typename HOOK_TYPE>
-HOOK_TYPE HookFunction<HOOK_TYPE>::CallDetour(...) {
-    HOOK_TYPE Original = *reinterpret_cast<HOOK_TYPE*>(&mpDetour);
+template <typename HOOK_TYPE> HOOK_TYPE HookFunction<HOOK_TYPE>::CallDetour(...)
+{
+    HOOK_TYPE Original = *reinterpret_cast<HOOK_TYPE *>(&mpDetour);
     return Original(this, va_list());
 }
 

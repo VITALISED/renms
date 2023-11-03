@@ -17,21 +17,23 @@
 
 #pragma once
 
-#include <cstdint>
-#include <cmath>
-#include <windows.h>    //see toolkit/system/TkCSMutex.h
-#include <functional>
 #include <array>
-#include <string>
-#include <unordered_map>
-#include <memory>
-#include <map>
-#include <vulkan/vulkan.h>
-#include <robin_hood.h>
+#include <atomic>
+#include <cmath>
+#include <cstdint>
+#include <cstdlib>
 #include <deque>
 #include <forward_list>
-#include <atomic>
-#include <cstdlib>
+#include <functional>
+#include <map>
+#include <memory>
+#include <robin_hood.h>
+#include <string>
+#include <unordered_map>
+#include <vulkan/vulkan.h>
+#include <windows.h> //see toolkit/system/TkCSMutex.h
 
+// clang-format off
 #define SKYSCRAPER_BEGIN namespace nms {
 #define SKYSCRAPER_END };
+// clang-format on

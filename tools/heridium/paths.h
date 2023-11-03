@@ -19,7 +19,9 @@
 
 #include <vector>
 
-const std::vector<std::pair<const char*, const char*> > classPaths = {
+// clang-format off
+
+const std::vector<std::pair<const char*, const char*> > gClassPaths = {
         std::pair<const char*, const char*>("ctknoisevoxeltypeenum", "toolkit/voxel/generator/tknoisevoxeltypeenum.meta.h"),
         std::pair<const char*, const char*>("ctkvoxelgeneratordata", "toolkit/voxel/generator/tkvoxelgeneratordata.meta.h"),
         std::pair<const char*, const char*>("ctkvoxelgeneratorregiondata", "toolkit/voxel/generator/tkvoxelgeneratorregiondata.meta.h"),
@@ -2160,3 +2162,5 @@ const std::vector<std::pair<const char*, const char*> > classPaths = {
         std::pair<const char*, const char*>("cgcatlasmessage", "source/atlas/gcatlasmessage.meta.h"),
         std::pair<const char*, const char*>("cgcatlasmonument", "source/atlas/gcatlasmonument.meta.h")
 };
+
+// clang-format on

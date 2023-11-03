@@ -25,39 +25,38 @@ RENMS_BEGIN
 PluginManager::PluginManager()
 {
 
-    //Populate the list with everything that's in the plugins folder
-    path nmsPath = current_path();
+    // Populate the list with everything that's in the plugins folder
+    path nmsPath      = current_path();
     path PluginFolder = nmsPath / "renms/plugins";
 
-    if (!is_directory(PluginFolder))
-        create_directories(PluginFolder);
+    if (!is_directory(PluginFolder)) create_directories(PluginFolder);
 
-    for (directory_entry PluginEntry : directory_iterator(PluginFolder)) {
+    for (directory_entry PluginEntry : directory_iterator(PluginFolder))
+    {
         if (!PluginEntry.is_regular_file()) continue;
         path Plugin = PluginEntry;
-        
+
         if (Plugin.filename().extension() != "rn") continue;
 
-        //attempt to load the plugin
+        // attempt to load the plugin
         spdlog::info("Loading plugin: {}", Plugin.filename().string());
         Load(Plugin);
     }
 
-    if (mPluginList.size() == 0) {
-        spdlog::warn("No plugins found.");
-    }
+    if (mPluginList.size() == 0) { spdlog::warn("No plugins found."); }
 }
 
 void PluginManager::Load(std::filesystem::path PluginPath)
 {
-    //Load the plugin DLL
+    // Load the plugin DLL
     HMODULE PluginHandle = LoadLibraryW((LPCWSTR)PluginPath.string().c_str());
-    if (PluginHandle == NULL) {
+    if (PluginHandle == NULL)
+    {
         spdlog::error("Failed to load plugin: {}", PluginPath.filename().string());
         return;
     }
 
-    //Execute the plugin's OnLoad function
+    // Execute the plugin's OnLoad function
 }
 
 RENMS_END

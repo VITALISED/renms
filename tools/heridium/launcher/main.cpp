@@ -15,7 +15,6 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-
 #include "winprocess.h"
 
 #ifdef _MSC_VER
@@ -24,39 +23,45 @@
 #define HERIDIUM_LIB "libHeridium.dll"
 #endif
 
-void printDebug(std::string input) {
-    #ifdef _DEBUG
+void printDebug(std::string input)
+{
+#ifdef _DEBUG
     std::cout << input << std::endl;
-    #else
-    do {} while (input != input);   //This is a really dumb way to make the compiler not complain about unused variables. I love it.
-    #endif
+#else
+    UNREFERENCED_PARAMETER(INPUT)
+#endif
 }
 
-void CheckPath(std::filesystem::path path) {
-    if (!std::filesystem::is_regular_file(path)) {
-        throw std::runtime_error(
-            std::string("Not a file: ") + path.string());
+void CheckPath(std::filesystem::path path)
+{
+    if (!std::filesystem::is_regular_file(path))
+    {
+        throw std::runtime_error(std::string("Not a file: ") + path.string());
     }
 
-    if (!std::filesystem::exists(path)) {
-        throw std::runtime_error(
-            std::string("File not found: ") + path.string());
-    }
+    if (!std::filesystem::exists(path)) { throw std::runtime_error(std::string("File not found: ") + path.string()); }
 }
 
-int main(int argc, char** argv) {
-    try {
-        if (argc < 0) { //I put this easter egg in every one of my command-line programs, almost forgot to put it in here - tractorbeam
-            throw std::runtime_error("Achievement Unlocked: \"How did we get here?\" (You somehow managed to run this with a negative number of arguments)");
+int main(int argc, char **argv)
+{
+    try
+    {
+        if (argc < 0)
+        { // I put this easter egg in every one of my command-line programs, almost forgot to put it in here -
+          // tractorbeam
+            throw std::runtime_error("Achievement Unlocked: \"How did we get here?\" (You somehow managed to run this "
+                                     "with a negative number of arguments)");
         }
 
         std::filesystem::path launcherPath, nmsPath, heridiumPath;
         launcherPath = argv[0];
 
-        if (argc < 2) {
+        if (argc < 2)
+        {
             nmsPath = launcherPath.parent_path();
             nmsPath /= "NMS.exe";
-        } else
+        }
+        else
             nmsPath = argv[1];
 
         heridiumPath = launcherPath.parent_path();
@@ -70,12 +75,14 @@ int main(int argc, char** argv) {
         InjectDLL(heridiumPath, nmsProcess.hProcess);
 
         printDebug("Injection successful!\n");
-        //Wait for NMS.exe to get closed
+        // Wait for NMS.exe to get closed
         WaitForSingleObject(nmsProcess.hProcess, INFINITE);
         CloseHandle(nmsProcess.hProcess);
         CloseHandle(nmsProcess.hThread);
         exit(0);
-    } catch (std::exception& e) {
+    }
+    catch (std::exception &e)
+    {
         std::cout << "Error! " << e.what() << std::endl;
         exit(1);
     }

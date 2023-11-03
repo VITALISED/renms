@@ -17,17 +17,19 @@
 
 #pragma once
 
-#include <cstring>
-#include <filesystem>
 #include "framework.h"
-#include <spdlog/spdlog.h>
 #include "paths.h"
 #include <MinHook.h>
-#include <fstream>
+#include <cstring>
+#include <filesystem>
 #include <fmt/format.h>
+#include <fstream>
+#include <spdlog/spdlog.h>
 
+// clang-format off
 #define HERIDIUM_BEGIN namespace heridium {
 #define HERIDIUM_END }
+// clang-format on
 
 HERIDIUM_BEGIN
 

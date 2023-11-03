@@ -20,10 +20,12 @@
 #include "framework.h"
 #include "log.h"
 #include <MinHook.h>
+#include <array>
 #include <fmt/format.h>
 #include <string>
 #include <vector>
-#include <array>
 
+// clang-format off
 #define RENMS_BEGIN namespace renms {
 #define RENMS_END }
+// clang-format on

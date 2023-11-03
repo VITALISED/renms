@@ -20,62 +20,55 @@
 
 INIT_HOOK()
 
-void RegisterHook(const cTkMetaDataClass* lpClassMetadata,
-    void(* lDefaultFunction)(cTkClassPointer*, cTkLinearMemoryPool*),
-    void(* lFixingFunction)(cTkClassPointer*, bool, unsigned __int64),
-    void(* lValidateFunction)(cTkClassPointer*),
-    void(* lRenderFunction)(cTkClassPointer*),
-    bool(* lEqualsFunction)(const cTkClassPointer*, const cTkClassPointer*),
-    void(* lCopyFunction)(cTkClassPointer*, const cTkClassPointer*),
-    cTkClassPointer* (* lCreateFunction)(cTkClassPointer* result),
-    unsigned __int64(* lHashFunction)(const cTkClassPointer*, unsigned __int64, bool),
-    void(* lDestroyFunction)(cTkClassPointer*))
+void RegisterHook(
+    const cTkMetaDataClass *lpClassMetadata, void (*lDefaultFunction)(cTkClassPointer *, cTkLinearMemoryPool *),
+    void (*lFixingFunction)(cTkClassPointer *, bool, unsigned __int64), void (*lValidateFunction)(cTkClassPointer *),
+    void (*lRenderFunction)(cTkClassPointer *),
+    bool (*lEqualsFunction)(const cTkClassPointer *, const cTkClassPointer *),
+    void (*lCopyFunction)(cTkClassPointer *, const cTkClassPointer *),
+    cTkClassPointer *(*lCreateFunction)(cTkClassPointer *result),
+    unsigned __int64 (*lHashFunction)(const cTkClassPointer *, unsigned __int64, bool),
+    void (*lDestroyFunction)(cTkClassPointer *))
 {
     std::string lsKey = lpClassMetadata->mpacName;
-    
-    if (lsKey.find_first_of("c") != std::string::npos)
-    {
-        lsKey = lsKey.substr(lsKey.find_first_of("c"));
-    }
 
-    std::transform(lsKey.begin(), lsKey.end(), lsKey.begin(),
-        [](unsigned char c) { return (char)std::tolower(c); });
+    if (lsKey.find_first_of("c") != std::string::npos) { lsKey = lsKey.substr(lsKey.find_first_of("c")); }
+
+    std::transform(lsKey.begin(), lsKey.end(), lsKey.begin(), [](unsigned char c) { return (char)std::tolower(c); });
 
     std::string lPath = std::filesystem::current_path().string();
     lPath.append("/");
 
     bool lbFoundPath = false;
 
-    for(std::pair<const char*, const char*> lItem : classPaths)
+    for (std::pair<const char *, const char *> lItem : gClassPaths)
     {
-        if(lItem.first == lsKey)
+        if (lItem.first == lsKey)
         {
             lPath.append(lItem.second);
             lbFoundPath = true;
         }
     }
 
-    if(!lbFoundPath)
-        lPath.append("/unmapped/").append(lsKey).append(".meta.h");
+    if (!lbFoundPath) lPath.append("/unmapped/").append(lsKey).append(".meta.h");
 
     spdlog::info(lPath);
 
     HeridiumCXXFile(lPath.c_str(), lpClassMetadata);
 
-    typedef void(*HOOK_TYPE)(
-        const cTkMetaDataClass* lpClassMetadata,
-        void(* lDefaultFunction)(cTkClassPointer*, cTkLinearMemoryPool*),
-        void(* lFixingFunction)(cTkClassPointer*, bool, unsigned __int64),
-        void(* lValidateFunction)(cTkClassPointer*),
-        void(* lRenderFunction)(cTkClassPointer*),
-        bool(* lEqualsFunction)(const cTkClassPointer*, const cTkClassPointer*),
-        void(* lCopyFunction)(cTkClassPointer*, const cTkClassPointer*),
-        cTkClassPointer* (* lCreateFunction)(cTkClassPointer* result),
-        unsigned __int64(* lHashFunction)(const cTkClassPointer*, unsigned __int64, bool),
-        void(* lDestroyFunction)(cTkClassPointer*)
-    );
+    typedef void (*HOOK_TYPE)(
+        const cTkMetaDataClass *lpClassMetadata, void (*lDefaultFunction)(cTkClassPointer *, cTkLinearMemoryPool *),
+        void (*lFixingFunction)(cTkClassPointer *, bool, unsigned __int64),
+        void (*lValidateFunction)(cTkClassPointer *), void (*lRenderFunction)(cTkClassPointer *),
+        bool (*lEqualsFunction)(const cTkClassPointer *, const cTkClassPointer *),
+        void (*lCopyFunction)(cTkClassPointer *, const cTkClassPointer *),
+        cTkClassPointer *(*lCreateFunction)(cTkClassPointer *result),
+        unsigned __int64 (*lHashFunction)(const cTkClassPointer *, unsigned __int64, bool),
+        void (*lDestroyFunction)(cTkClassPointer *));
 
-    CALL_ORIGINAL(cTkMetaData::Register, lpClassMetadata, lDefaultFunction, lFixingFunction, lValidateFunction, lRenderFunction, lEqualsFunction, lCopyFunction, lCreateFunction, lHashFunction, lDestroyFunction);
+    CALL_ORIGINAL(
+        cTkMetaData::Register, lpClassMetadata, lDefaultFunction, lFixingFunction, lValidateFunction, lRenderFunction,
+        lEqualsFunction, lCopyFunction, lCreateFunction, lHashFunction, lDestroyFunction);
 }
 
 void AnalysisInit()
@@ -84,10 +77,10 @@ void AnalysisInit()
 
     HOOK(OFFSET(0x248ABC0), reinterpret_cast<LPVOID>(RegisterHook), cTkMetaData::Register);
 
-    if(HOOK_STATUS() == MH_OK)
+    if (HOOK_STATUS() == MH_OK)
         spdlog::info("Ready to analyse some banger metadata");
     else
         spdlog::error("Failed to hook!");
-    
+
     renms::ResumeModuleThread(MODULE_BASE);
 }

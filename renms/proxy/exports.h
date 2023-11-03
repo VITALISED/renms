@@ -15,6 +15,8 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+// clang-format off
+
 #pragma comment(linker,"/export:sceFiosArchiveGetDecompressorThreadCount=libSceFios2_orig.sceFiosArchiveGetDecompressorThreadCount,@1")
 #pragma comment(linker,"/export:sceFiosArchiveGetMountBufferSize=libSceFios2_orig.sceFiosArchiveGetMountBufferSize,@2")
 #pragma comment(linker,"/export:sceFiosArchiveGetMountBufferSizeSync=libSceFios2_orig.sceFiosArchiveGetMountBufferSizeSync,@3")
@@ -191,3 +193,5 @@
 #pragma comment(linker,"/export:sceFiosTraceTimestamp=libSceFios2_orig.sceFiosTraceTimestamp,@174")
 #pragma comment(linker,"/export:sceFiosUpdateParameters=libSceFios2_orig.sceFiosUpdateParameters,@175")
 #pragma comment(linker,"/export:sceFiosVprintf=libSceFios2_orig.sceFiosVprintf,@176")
+
+// clang-format on

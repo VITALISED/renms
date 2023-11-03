@@ -17,16 +17,16 @@
 
 #pragma once
 
-#include "../renms.h"
 #include "../memory/hooks.h"
-#include <string>
+#include "../renms.h"
 #include <filesystem>
+#include <string>
 
 RENMS_BEGIN
 
 class PluginTemplate
 {
-    public:
+  public:
     std::string lpacPluginId;
     std::string mpacDisplayName;
     std::string mpacAuthor;
@@ -35,8 +35,8 @@ class PluginTemplate
 
 class PluginManager
 {
-    public:
-    std::vector<void*> mPluginList;
+  public:
+    std::vector<void *> mPluginList;
 
     PluginManager();
     void Load(std::filesystem::path PluginPath);
