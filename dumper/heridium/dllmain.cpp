@@ -23,6 +23,10 @@
 #define HERIDIUM_LANGUAGE_TARGET EHeridiumLanguageType_CXX
 #endif
 
+#ifndef HERIDIUM_SHOULD_EXIT
+#define HERIDIUM_SHOULD_EXIT 0
+#endif
+
 DWORD WINAPI MainThread(LPVOID lpReserved)
 {
     UNREFERENCED_PARAMETER(lpReserved);
@@ -36,16 +40,12 @@ DWORD WINAPI WindowCheckThread(LPVOID lpReserved)
     UNREFERENCED_PARAMETER(lpReserved);
 
     //Halts this thread until the NMS window shows up.
-    while (FindWindowA(0, (LPCSTR)"No Man's Sky") != nullptr)
+    while (FindWindowA(NULL, (LPCSTR)"No Man's Sky") != nullptr)
         Sleep(1000);    //let's not hog resources
 
-    return TRUE;
-}
+    if(HERIDIUM_SHOULD_EXIT) { exit(0); };
 
-void HandlePostDump()
-{
-    //exits application, can add more custom logic later
-    exit(0);
+    return TRUE;
 }
 
 BOOL APIENTRY DllMain(HMODULE hModule,
@@ -54,8 +54,6 @@ BOOL APIENTRY DllMain(HMODULE hModule,
 {
     UNREFERENCED_PARAMETER(lpReserved);
 
-    HANDLE lpWindowCheckThreadHandle;
-
     switch (ul_reason_for_call)
     {
     case DLL_PROCESS_ATTACH:
@@ -63,16 +61,12 @@ BOOL APIENTRY DllMain(HMODULE hModule,
         MH_Initialize();
         DisableThreadLibraryCalls(hModule);
 
-        //I'm gonna scream. Why does it stop after the hello message?
         spdlog::info("Hello from Heridium!");
 
         spdlog::debug("Starting MainThread...");
         CreateThread(nullptr, 0, MainThread, hModule, 0, nullptr);
         spdlog::debug("Starting WindowCheckThread...");
-        lpWindowCheckThreadHandle = CreateThread(nullptr, 0, WindowCheckThread, hModule, 0, nullptr);
-
-        WaitForSingleObject(lpWindowCheckThreadHandle, INFINITE);
-        HandlePostDump();
+        CreateThread(nullptr, 0, WindowCheckThread, hModule, 0, nullptr);
         break;
     case DLL_THREAD_ATTACH:
     case DLL_THREAD_DETACH:
