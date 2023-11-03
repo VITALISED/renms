@@ -1,48 +1,65 @@
+/*
+    Copyright (C) 2023  VITALISED, tractorbeam
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/
+
 #pragma once
 
 #include <skyscraper.h>
 
-#include <metadata/reality/gcrealitymanagerdata.meta.h>
-#include <metadata/reality/gcsubstancetable.meta.h>
-#include <metadata/reality/gctechnologytable.meta.h>
-#include <metadata/reality/gcproducttable.meta.h>
-#include <metadata/reality/gcproceduralproducttable.meta.h>
-#include <metadata/reality/gcproceduraltechnologytable.meta.h>
-#include <metadata/reality/gclegacyitemtable.meta.h>
-#include <metadata/reality/gcconsumableitemtable.meta.h>
-#include <metadata/reality/gcrecipetable.meta.h>
-#include <metadata/wiki/gcstoriestable.meta.h>
-#include <metadata/reality/gcrewardtable.meta.h>
-#include <metadata/reality/gcdiscoveryrewardlookuptable.meta.h>
-#include <metadata/simulation/missions/gcmissiontable.meta.h>
-#include <metadata/simulation/missions/scheduling/gcmissionschedulestable.meta.h>
-#include <metadata/simulation/missions/scheduling/gcmissioncommunitydata.meta.h>
-#include <metadata/reality/gcinventorytable.meta.h>
-#include <metadata/reality/gcmaintenancegroupstable.meta.h>
-#include <metadata/reality/gcunlockabletrees.meta.h>
-#include <metadata/simulation/player/gcplayeremotelist.meta.h>
-#include <metadata/reality/gcplayerdamagetable.meta.h>
-#include <metadata/reality/gcpurchaseablebuildingblueprints.meta.h>
-#include <metadata/reality/gcpurchaseablespecials.meta.h>
-#include <metadata/reality/gcunlockableseasonrewards.meta.h>
-#include <metadata/reality/gcunlockabletwitchrewards.meta.h>
-#include <metadata/reality/gcunlockableplatformrewards.meta.h>
-#include <metadata/reality/gcsettlementperkstable.meta.h>
-#include <metadata/wiki/gcwiki.meta.h>
-#include <metadata/gamestate/trading/gcitemcosttable.meta.h>
-#include <metadata/reality/gctradingclasstable.meta.h>
-#include <metadata/reality/gccosttable.meta.h>
-#include <metadata/simulation/weapons/gcplayerweaponpropertiestable.meta.h>
-#include <metadata/gameplay/gccombateffectstable.meta.h>
-#include <metadata/reality/gcplayertitledata.meta.h>
-#include <metadata/reality/gcdialogclearancetable.meta.h>
-#include <metadata/simulation/galaxy/gcgalaxyinfoicons.meta.h>
-#include <metadata/reality/gcalienspeechtable.meta.h>
-#include <metadata/reality/gcproceduralproductcategory.meta.h>
-#include <metadata/reality/gctechboxtable.meta.h>
-#include <metadata/tktextureresource.meta.h>
-#include <metadata/simulation/missions/gcgenericmissionsequence.meta.h>
-#include <metadata/reality/gcalienpuzzleoption.meta.h>
+#include <metadata/source/reality/gcrealitymanagerdata.meta.h>
+#include <metadata/source/reality/gcsubstancetable.meta.h>
+#include <metadata/source/reality/gctechnologytable.meta.h>
+#include <metadata/source/reality/gcproducttable.meta.h>
+#include <metadata/source/reality/gcproceduralproducttable.meta.h>
+#include <metadata/source/reality/gcproceduraltechnologytable.meta.h>
+#include <metadata/source/reality/gclegacyitemtable.meta.h>
+#include <metadata/source/reality/gcconsumableitemtable.meta.h>
+#include <metadata/source/reality/gcrecipetable.meta.h>
+#include <metadata/source/wiki/gcstoriestable.meta.h>
+#include <metadata/source/reality/gcrewardtable.meta.h>
+#include <metadata/source/reality/gcdiscoveryrewardlookuptable.meta.h>
+#include <metadata/source/simulation/missions/gcmissiontable.meta.h>
+#include <metadata/source/simulation/missions/scheduling/gcmissionschedulestable.meta.h>
+#include <metadata/source/simulation/missions/scheduling/gcmissioncommunitydata.meta.h>
+#include <metadata/source/reality/gcinventorytable.meta.h>
+#include <metadata/source/reality/gcmaintenancegroupstable.meta.h>
+#include <metadata/source/reality/gcunlockabletrees.meta.h>
+#include <metadata/source/simulation/player/gcplayeremotelist.meta.h>
+#include <metadata/source/reality/gcplayerdamagetable.meta.h>
+#include <metadata/source/reality/gcpurchaseablebuildingblueprints.meta.h>
+#include <metadata/source/reality/gcpurchaseablespecials.meta.h>
+#include <metadata/source/reality/gcunlockableseasonrewards.meta.h>
+#include <metadata/source/reality/gcunlockabletwitchrewards.meta.h>
+#include <metadata/source/reality/gcunlockableplatformrewards.meta.h>
+#include <metadata/source/reality/gcsettlementperkstable.meta.h>
+#include <metadata/source/wiki/gcwiki.meta.h>
+#include <metadata/source/gamestate/trading/gcitemcosttable.meta.h>
+#include <metadata/source/reality/gctradingclasstable.meta.h>
+#include <metadata/source/reality/gccosttable.meta.h>
+#include <metadata/source/simulation/weapons/gcplayerweaponpropertiestable.meta.h>
+#include <metadata/source/gameplay/gccombateffectstable.meta.h>
+#include <metadata/source/reality/gcplayertitledata.meta.h>
+#include <metadata/source/reality/gcdialogclearancetable.meta.h>
+#include <metadata/source/simulation/galaxy/gcgalaxyinfoicons.meta.h>
+#include <metadata/source/reality/gcalienspeechtable.meta.h>
+#include <metadata/source/reality/gcproceduralproductcategory.meta.h>
+#include <metadata/source/reality/gctechboxtable.meta.h>
+#include <metadata/toolkit/tktextureresource.meta.h>
+#include <metadata/source/simulation/missions/gcgenericmissionsequence.meta.h>
+#include <metadata/source/reality/gcalienpuzzleoption.meta.h>
 
 #include <toolkit/utilities/containers/TkUnorderedMap.h>
 #include <toolkit/utilities/containers/TkVector.h>

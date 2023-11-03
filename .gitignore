@@ -401,5 +401,10 @@ FodyWeavers.xsd
 bin/
 build/
 metadata/
-RayRod's Multiverse/
 config.cmake
+NMS.exe
+
+# @RayRod, Sorry for accidentally pushing some of your assets.
+# It makes a folder in the root of the project when we use Heridium
+# and sometimes we forget to remove it.
+RayRod's Multiverse/

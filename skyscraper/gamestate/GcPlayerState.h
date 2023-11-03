@@ -1,3 +1,20 @@
+/*
+    Copyright (C) 2023  VITALISED, tractorbeam
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/
+
 #pragma once
 
 #include <skyscraper.h>
@@ -14,30 +31,30 @@
 #include <toolkit/utilities/containers/TkUnorderedMap.h>
 #include <toolkit/utilities/containers/TkVector.h>
 #include <toolkit/utilities/containers/TkLinearHashTable.h>
-#include <metadata/gamestate/playerdata/gcplayertitle.meta.h>
-#include <metadata/gamestate/gcuniverseaddressdata.meta.h>
-#include <metadata/resource/gcexactresource.meta.h>
-#include <metadata/simulation/vehicles/gcvehicletype.meta.h>
-#include <metadata/utilities/data/gcresourceelement.meta.h>
-#include <metadata/gamestate/gcrepairtechdata.meta.h>
-#include <metadata/gamestate/interactions/gcsavedinteractionracedata.meta.h>
-#include <metadata/gamestate/gcwordgroupknowledge.meta.h>
-#include <metadata/gamestate/gcsavedentitlement.meta.h>
-#include <metadata/user/gcphotomodesettings.meta.h>
-#include <metadata/gamestate/gcteleportendpoint.meta.h>
-#include <metadata/gamestate/interactions/gcinteractiondata.meta.h>
-#include <metadata/gamestate/gcportalsavedata.meta.h>
-#include <metadata/simulation/weapons/gcplayerweapons.meta.h>
-#include <metadata/wiki/gcstorypageseendataarray.meta.h>
-#include <metadata/gamestate/gcsettlementstate.meta.h>
-#include <metadata/reality/gcrewarddeath.meta.h>
-#include <metadata/gamestate/gccustomisationdescriptorgroups.meta.h>
-#include <metadata/gamestate/gccustomisationtextureoptions.meta.h>
-#include <metadata/gamestate/gccustomisationpresets.meta.h>
-#include <metadata/gamestate/gccustomisationcolourpalettes.meta.h>
-#include <metadata/simulation/customisation/gccustomisationbannergroup.meta.h>
-#include <metadata/simulation/customisation/gccustomisationthrustereffects.meta.h>
-#include <metadata/simulation/customisation/gccustomisationshipbobbleheads.meta.h>
+#include <metadata/source/gamestate/playerdata/gcplayertitle.meta.h>
+#include <metadata/source/gamestate/gcuniverseaddressdata.meta.h>
+#include <metadata/source/resource/gcexactresource.meta.h>
+#include <metadata/source/simulation/vehicles/gcvehicletype.meta.h>
+#include <metadata/source/utilities/data/gcresourceelement.meta.h>
+#include <metadata/source/gamestate/gcrepairtechdata.meta.h>
+#include <metadata/source/gamestate/interactions/gcsavedinteractionracedata.meta.h>
+#include <metadata/source/gamestate/gcwordgroupknowledge.meta.h>
+#include <metadata/source/gamestate/gcsavedentitlement.meta.h>
+#include <metadata/source/user/gcphotomodesettings.meta.h>
+#include <metadata/source/gamestate/gcteleportendpoint.meta.h>
+#include <metadata/source/gamestate/interactions/gcinteractiondata.meta.h>
+#include <metadata/source/gamestate/gcportalsavedata.meta.h>
+#include <metadata/source/simulation/weapons/gcplayerweapons.meta.h>
+#include <metadata/source/wiki/gcstorypageseendataarray.meta.h>
+#include <metadata/source/gamestate/gcsettlementstate.meta.h>
+#include <metadata/source/reality/gcrewarddeath.meta.h>
+#include <metadata/source/gamestate/gccustomisationdescriptorgroups.meta.h>
+#include <metadata/source/gamestate/gccustomisationtextureoptions.meta.h>
+#include <metadata/source/gamestate/gccustomisationpresets.meta.h>
+#include <metadata/source/gamestate/gccustomisationcolourpalettes.meta.h>
+#include <metadata/source/simulation/customisation/gccustomisationbannergroup.meta.h>
+#include <metadata/source/simulation/customisation/gccustomisationthrustereffects.meta.h>
+#include <metadata/source/simulation/customisation/gccustomisationshipbobbleheads.meta.h>
 
 SKYSCRAPER_BEGIN
 
