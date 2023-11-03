@@ -27,6 +27,11 @@ if(CMAKE_GENERATOR STREQUAL "Ninja")
     message("")
 endif()
 
+# Make sure that debug output is printed if we're in debug mode.
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    add_definitions(-DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG)
+endif()
+
 # ==================================================================================================
 # First checks.
 
@@ -124,10 +129,6 @@ else()
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror")
         set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Werror")
     endif()
-endif()
-
-if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-    add_definitions(-DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG)
 endif()
 
 if(CMAKE_BUILD_TYPE STREQUAL "")
