@@ -141,7 +141,7 @@ public:
   		bool mbUseFixedPools;
 	};
 
-	static const bool mgpConstructed = true; //cba to fetch this, besides we're gonna inject after this no matter what
+	static const bool mgbConstructed = true; //cba to fetch this, besides we're gonna inject after this no matter what
 
   	cTkMemoryBackingPoolDefinition *mpMemBackingPoolDefinitionList;
   	cTkMemoryPoolDefinition *mpMemPoolDefinitionList;

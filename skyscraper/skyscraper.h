@@ -31,6 +31,7 @@
 #include <deque>
 #include <forward_list>
 #include <atomic>
+#include <cstdlib>
 
 #define SKYSCRAPER_BEGIN namespace nms {
 #define SKYSCRAPER_END };

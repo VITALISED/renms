@@ -11,9 +11,9 @@ void *cTkMemoryManager::Malloc(int liSize, const char* lpacFile, int liLine, con
     }
 
     //FIXME: liPool is obviously an enum but we dont know what it is
-    if(liPool = -2 && cTkMemoryManager::mgbConstructed)
+    if((liPool == -2) && cTkMemoryManager::mgbConstructed)
     {
-        return aligned_alloc(liSize, liAlign);
+        return std::aligned_alloc(liSize, liAlign);
     }
 
     int liBackingPoolIndex;
