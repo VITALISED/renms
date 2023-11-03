@@ -17,17 +17,8 @@
 
 #pragma once
 
-#include "cpp/lang.h"
-#include "heridium.h"
-#include <memory/hooks-old.h>
-#include <toolkit/data/TkMetaData.h>
-#include <toolkit/data/TkMetaDataXML.h>
-#include <toolkit/utilities/containers/TkVector.h>
-
-using namespace nms;
-
-HERIDIUM_BEGIN
+namespace heridium {
 
 void AnalysisInit();
 
-HERIDIUM_END
+}

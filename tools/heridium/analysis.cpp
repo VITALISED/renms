@@ -16,7 +16,15 @@
 */
 
 #include "analysis.h"
+#include "cpp/lang.h"
+#include "heridium.h"
 #include <memory/thread.h>
+#include <memory/hooks-old.h>
+#include <toolkit/data/TkMetaData.h>
+#include <toolkit/data/TkMetaDataXML.h>
+#include <toolkit/utilities/containers/TkVector.h>
+
+using namespace nms;
 
 INIT_HOOK()
 
