@@ -17,6 +17,7 @@
 
 #include <renms.h>
 
+//SIGNATURE return type is void
 #define SIGNATURE                                                                                         \
     DWORD_PTR thiscall, const char *lpacWarningTitle, const char *lpacWarningPress, const char *lStatus1, \
         char *lStatus2, float lfTimeout
