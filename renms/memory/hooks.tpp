@@ -27,7 +27,7 @@ template <typename HOOK_TYPE>
 HookFunction<HOOK_TYPE>::HookFunction(char *lpacID, LPVOID lpDetour, LPVOID lpOffset)
     : mpacID(lpacID), mpDetour(lpDetour), mpOffset(lpOffset)
 {
-    if (lpOffset == 0)
+    if (lpOffset == 0 || lpOffset == NULL)
     {
         // TODO: If the offset isn't specified, search by HOOK_TYPE.
     }
@@ -38,7 +38,7 @@ HookFunction<HOOK_TYPE>::HookFunction(char *lpacID, LPVOID lpDetour, LPVOID lpOf
     if (lastHookRes == MH_OK)
         spdlog::info("Created hook: {}", lpacID);
     else
-        spdlog::error("MH_CreateHook failed: {}", MH_StatusToString(lastHookRes));
+        spdlog::error("MH_CreateHook {} failed: {}", lpacID, MH_StatusToString(lastHookRes));
 }
 
 template <typename HOOK_TYPE> HookFunction<HOOK_TYPE>::~HookFunction()
