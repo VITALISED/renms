@@ -17,12 +17,16 @@
 
 #include <renms.h>
 
-//SIGNATURE return type is void
+// SIGNATURE return type is void
 #define SIGNATURE                                                                                         \
     DWORD_PTR thiscall, const char *lpacWarningTitle, const char *lpacWarningPress, const char *lStatus1, \
         char *lStatus2, float lfTimeout
 
 typedef void (*__cGcApplicationGameModeSelectorState__RenderWarning__SIGNATURE)(SIGNATURE);
+
+RENMS_HOOK(
+    cGcApplicationGameModeSelectorState__RenderWarning, __cGcApplicationGameModeSelectorState__RenderWarning__SIGNATURE,
+    static_cast<LPVOID>(__cGcApplicationGameModeSelectorState__RenderWarning__), renms::RelToAbsolute(0x1BF7E0));
 
 void __cGcApplicationGameModeSelectorState__RenderWarning__(SIGNATURE)
 {
@@ -30,14 +34,12 @@ void __cGcApplicationGameModeSelectorState__RenderWarning__(SIGNATURE)
     std::printf(lpacWarningPress, "\n");
     std::printf(lStatus1, "\n");
     std::printf(lStatus2, "\n");
+
+    cGcApplicationGameModeSelectorState__RenderWarning.CallOriginal(
+        thiscall, lpacWarningTitle, lpacWarningPress, lStatus1, lStatus2, lfTimeout);
 }
 
 void RENMS_ENTRY PluginMain()
 {
-    std::printf("hello!!!", "\n");
-
-    RENMS_HOOK(
-        cGcApplicationGameModeSelectorState__RenderWarning,
-        __cGcApplicationGameModeSelectorState__RenderWarning__SIGNATURE,
-        static_cast<LPVOID>(__cGcApplicationGameModeSelectorState__RenderWarning__), renms::RelToAbsolute(0x1BF7E0));
+    cGcApplicationGameModeSelectorState__RenderWarning.Toggle(true);
 }

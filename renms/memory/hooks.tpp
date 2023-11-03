@@ -46,7 +46,7 @@ template <typename HOOK_TYPE> HookFunction<HOOK_TYPE>::~HookFunction()
     free(mppOriginal);
 }
 
-template <typename HOOK_TYPE> void HookFunction<HOOK_TYPE>::IsEnabled(bool enabled)
+template <typename HOOK_TYPE> void HookFunction<HOOK_TYPE>::Toggle(bool lbEnabled)
 {
     if (enabled)
         lastHookRes = MH_EnableHook(mpOffset);

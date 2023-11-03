@@ -62,7 +62,4 @@ target_precompile_headers(
 target_compile_definitions(renms PRIVATE RENMS)
 
 add_subdirectory(proxy)
-
-if(SHOULD_COMPILE_EXAMPLES)
-    add_subdirectory(examples)
-endif()
+add_subdirectory(examples)
