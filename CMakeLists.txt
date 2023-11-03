@@ -82,7 +82,7 @@ macro(add_dependency_custom dir include)
         )
     endif()
 
-    if(NOT EXISTS "${CMAKE_SOURCE_DIR}/${dir}/CMakeLists.txt")
+    if(EXISTS "${CMAKE_SOURCE_DIR}/${dir}/CMakeLists.txt")
         add_subdirectory(${dir})
     endif()
     include_directories(${CMAKE_SOURCE_DIR}/${include})
@@ -94,7 +94,6 @@ add_dependency_custom(
     ./submodules/robin-hood-hashing ./submodules/robin-hood-hashing/src/include
 )
 add_dependency_custom(./submodules/spdlog ./submodules/spdlog/include)
-include_directories(./submodules/spdlog/include)
 add_dependency_custom(
     ./submodules/Vulkan-Headers ./submodules/Vulkan-Headers/include
 )
