@@ -137,6 +137,6 @@ add_custom_target(uberclean
 )
 
 
-add_subdirectory(dumper)
-add_subdirectory(renms_dll)
+add_subdirectory(tools)
+add_subdirectory(renms)
 add_subdirectory(skyscraper)

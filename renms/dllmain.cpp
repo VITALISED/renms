@@ -20,6 +20,8 @@
 
 DWORD WINAPI MainThread(LPVOID lpReserved)
 {
+    UNREFERENCED_PARAMETER(lpReserved);
+
     CreateLogger();
     spdlog::info("renms attached :)");
     return TRUE;

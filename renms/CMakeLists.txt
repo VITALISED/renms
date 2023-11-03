@@ -15,7 +15,7 @@
 
 
 add_library(
-    renms_dll SHARED
+    renms SHARED
     "dllmain.cpp"
     "log.h"
     "framework.h"
@@ -27,37 +27,38 @@ add_library(
     "memory/hooks.h"
     "memory/hooks.tpp"
     "memory/malloc.h"
+    "memory/malloc.cpp"
     "memory/thread.h"
     "plugins/plugin.h"
     "plugins/plugin.cpp"
 )
 
-add_dependencies(renms_dll
+add_dependencies(renms
     renms_skyscraper
     Heridium
     heridiumLauncher
 )
 
-target_include_directories(renms_dll
+target_include_directories(renms
     PUBLIC "../skyscraper"
     PUBLIC "../metadata/source"
     PUBLIC "../metadata/toolkit"
     PUBLIC "../spdlog/include"
 )
 
-set_target_properties(renms_dll PROPERTIES OUTPUT_NAME renms)
+set_target_properties(renms PROPERTIES OUTPUT_NAME renms)
 
-target_link_libraries(renms_dll
+target_link_libraries(renms
     fmt
     minhook
     spdlog
 )
 
-add_dependencies(renms_dll
+add_dependencies(renms
     MetadataClasses
 )
 
-target_precompile_headers(renms_dll
+target_precompile_headers(renms
     PRIVATE renms.h
     PRIVATE ../skyscraper/skyscraper.h
     PRIVATE ../metadata/GIVEMEALLTHECLASSES.h

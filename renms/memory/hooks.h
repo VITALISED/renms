@@ -20,13 +20,6 @@
 
 RENMS_BEGIN
 
-//@vitalised: this name is confusing if we every try to do rel16/32 pointer resolution 
-//@tractorbeam: Alright, changed it to be the same as your function in memory.h, with uintptr_t.
-inline LPVOID RelToAbsolute(uintptr_t lpRelPtr)
-{
-    return (LPVOID)((uintptr_t)GetModuleHandleA("NMS.exe") + (uintptr_t)lpRelPtr);
-}
-
 //An easier way of defining a HookFunction object.
 #define HOOK(name, signature, detour, offset) renms::HookFunction<signature> name = renms::HookFunction<signature>(#name, detour, offset);
 

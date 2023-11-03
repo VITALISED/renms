@@ -13,30 +13,18 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-
-add_library(Heridium SHARED
-    "dllmain.cpp"
-    "analysis.h"
-    "analysis.cpp"
-    "heridium.h"
-    "heridium.cpp"
-    "cpp/header.cpp"
-    "cpp/source.cpp"
-    "cpp/notation.h"
-    "cpp/lex.h"
-    "cpp/lang.h"
+add_library(sample SHARED
+    sample.cpp
+    ${CMAKE_SOURCE_DIR}/skyscraper/toolkit/data/TkMetaDataClasses.h
+    ${CMAKE_SOURCE_DIR}/renms/plugins/plugin.h
 )
 
-target_include_directories(
-    Heridium PUBLIC
-    ${CMAKE_SOURCE_DIR}/skyscraper
-    ${CMAKE_SOURCE_DIR}/renms_dll
-)
-
-target_link_libraries(Heridium PRIVATE
-    fmt
+target_link_libraries(sample
     minhook
-    spdlog
 )
 
-add_subdirectory(launcher)
+target_include_directories(sample
+    PUBLIC ${CMAKE_SOURCE_DIR}
+    PUBLIC ${CMAKE_SOURCE_DIR}/renms
+    PUBLIC ${CMAKE_SOURCE_DIR}/skyscraper
+)

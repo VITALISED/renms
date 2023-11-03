@@ -21,9 +21,18 @@
 
 #define MODULE_BASE GetModuleHandleA("NMS.exe")
 #define OFFSET(pointer) (LPVOID)((DWORD_PTR)MODULE_BASE + (DWORD_PTR)pointer)
-#define SIGSCAN(pattern) (LPVOID) renms::ScanPattern(renms::IDAPatternToVec(lpacPattern))
 
 RENMS_BEGIN
+
+inline LPVOID RelToAbsolute(DWORD_PTR lpRelPtr)
+{
+    return (LPVOID)((DWORD_PTR)GetModuleHandleA("NMS.exe") + (DWORD_PTR)lpRelPtr);
+}
+
+inline DWORD_PTR CalculateHalfPointerToFull(HALF_PTR lpHalf, DWORD_PTR lpFull, int liInstructionOffset = 1, int liInstructionLength = 5)
+{
+    return lpFull + static_cast<DWORD_PTR>(lpHalf + liInstructionOffset + liInstructionLength);
+}
 
 inline std::vector<int> *IDAPatternToVec(const char *lpacSig)
 {
@@ -69,12 +78,12 @@ inline LPVOID ScanPattern(std::vector<int> *lpPattern)
 
     free(lpPattern);
 
-    uint8_t *scan_bytes = reinterpret_cast<std::uint8_t *>(module_handle);
+    BYTE *scan_bytes = reinterpret_cast<BYTE *>(module_handle);
 
     size_t s = pattern_bytes.size();
     int *d = pattern_bytes.data();
 
-    for (DWORD i = 0ul; i < size_of_image - s; ++i)
+    for (DWORD i = 0; i < size_of_image - s; ++i)
     {
         bool found = true;
 
