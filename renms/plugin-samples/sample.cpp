@@ -52,10 +52,7 @@ class MetadataProber : public renms::PluginTemplate
     std::string mpacAuthor      = "tractorbeam & VITALISED";
     std::string mpacDescription =
         "Scans the cTkMetadata class's Register function for pointers to all the different classes, because we can.";
-    //   V- Hook_etc                  V- Signature_etc                      V- Detour_etc
-    HOOK(
-        cTkMetadataClass_Register_H, cTkMetadataClass_Register_S, static_cast<LPVOID>(cTkMetadataClass_Register_D),
-        renms::RelToAbsolute(0x248ABC0));
+    HOOK(cTkMetadataClass_Register_H, cTkMetadataClass_Register_S, LPVOID(cTkMetadataClass_Register_D),renms::RelToAbsolute(0x248ABC0));
 };
 
 void OnLoad()
