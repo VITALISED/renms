@@ -15,6 +15,9 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+#include <MinHook.h>
+#include <spdlog/spdlog.h>
+
 #include "analysis.h"
 #include "framework.h"
 #include "heridium.h"

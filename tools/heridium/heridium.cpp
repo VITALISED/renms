@@ -15,6 +15,14 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+#include "framework.h"
+#include "paths.h"
+#include <MinHook.h>
+#include <cstring>
+#include <filesystem>
+#include <fmt/format.h>
+#include <fstream>
+#include <spdlog/spdlog.h>
 #include "heridium.h"
 
 HERIDIUM_BEGIN
