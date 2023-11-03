@@ -76,13 +76,13 @@ endif()
 
 macro(add_dependency_custom dir include)
     if(NOT EXISTS "${CMAKE_SOURCE_DIR}/${dir}/CMakeLists.txt")
-        message(
-            FATAL_ERROR
-                "Dependency ${dir} doesn't exist! Did you forget to sync your submodules with 'git submodule update --init --recursive' ?"
+        execute_process(
+            COMMAND git submodule update --init --recursive ${dir}
+            WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
         )
     endif()
 
-    if(EXISTS "${CMAKE_SOURCE_DIR}/${dir}/CMakeLists.txt")
+    if(NOT EXISTS "${CMAKE_SOURCE_DIR}/${dir}/CMakeLists.txt")
         add_subdirectory(${dir})
     endif()
     include_directories(${CMAKE_SOURCE_DIR}/${include})
