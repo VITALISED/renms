@@ -26,13 +26,8 @@
 
 using namespace nms;
 
-void AnalysisInit();
-
 HERIDIUM_BEGIN
 
-// void DoLookupIter();
-// HACK: since I lack the braincells to figure out how hashes are generated we will instead retrieve them from the
-// generated functions.
-uintptr_t UnpackClassPointerWriteFunc(LPVOID ClassPointerWriteFunction);
+void AnalysisInit();
 
 HERIDIUM_END

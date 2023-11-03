@@ -20,6 +20,8 @@
 
 INIT_HOOK()
 
+HERIDIUM_BEGIN
+
 void RegisterHook(
     const cTkMetaDataClass *lpClassMetadata, void (*lDefaultFunction)(cTkClassPointer *, cTkLinearMemoryPool *),
     void (*lFixingFunction)(cTkClassPointer *, bool, unsigned __int64), void (*lValidateFunction)(cTkClassPointer *),
@@ -73,7 +75,7 @@ void RegisterHook(
 
 void AnalysisInit()
 {
-    heridium::CreateOutputDirectories();
+    CreateOutputDirectories();
 
     HOOK(OFFSET(0x248ABC0), reinterpret_cast<LPVOID>(RegisterHook), cTkMetaData::Register);
 
@@ -84,3 +86,5 @@ void AnalysisInit()
 
     renms::ResumeModuleThread(MODULE_BASE);
 }
+
+HERIDIUM_END

@@ -6,14 +6,16 @@ SKYSCRAPER_BEGIN
 
 class cTkLocklessPoolAllocator
 {
-    unsigned int muNumSlots;
-    unsigned int muSlotSize;
+    unsigned int         muNumSlots;
+    unsigned int         muSlotSize;
     std::atomic<__int64> mFreeListHead;
-    unsigned __int64 miBaseAddress;
-    bool mbOwnsMemory;
-    std::atomic<int> miHighWatermark;
-    std::atomic<int> miOpCount;
-    std::atomic<int> miUsage;
+    unsigned __int64     miBaseAddress;
+    bool                 mbOwnsMemory;
+    std::atomic<int>     miHighWatermark;
+    std::atomic<int>     miOpCount;
+    std::atomic<int>     miUsage;
+
+    void *Alloc();
 };
 
 class cTkLocklessMultiPoolAllocator
@@ -25,11 +27,13 @@ class cTkLocklessMultiPoolAllocator
         int miNumSlots;
     };
 
-    int miNumPools;
-    cTkLocklessPoolAllocator *mpPools;
+    int                                         miNumPools;
+    cTkLocklessPoolAllocator                   *mpPools;
     cTkLocklessMultiPoolAllocator::sPoolConfig *mpPoolConfigs;
-    unsigned __int64 miStart;
-    unsigned __int64 miEnd;
+    unsigned __int64                            miStart;
+    unsigned __int64                            miEnd;
+
+    void *Alloc(unsigned int luSize);
 };
 
 SKYSCRAPER_END

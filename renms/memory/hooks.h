@@ -22,7 +22,7 @@ RENMS_BEGIN
 
 // An easier way of defining a HookFunction object.
 #define HOOK(name, signature, detour, offset) \
-    renms::HookFunction<signature> name = renms::HookFunction<signature>(#name, detour, offset)
+    renms::HookFunction<signature> name = renms::HookFunction<signature>(const_cast<char*>(#name), detour, offset)
 
 template <typename HOOK_TYPE> class HookFunction
 {
@@ -45,5 +45,6 @@ template <typename HOOK_TYPE> class HookFunction
 };
 
 RENMS_END
+
 // This is just the way templates have to work, I'm sorry.
 #include "hooks.tpp"

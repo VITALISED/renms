@@ -17,46 +17,50 @@
 
 #include <spdlog/spdlog.h>
 
-#include <toolkit/data/TkMetaDataClasses.h>
-#include <toolkit/data/TkClassPointer.h>
-#include <toolkit/system/memory/pools/TkLinearMemoryPool.h>
+#include <memory/hooks.h>
 #include <plugins/plugin.h>
+#include <toolkit/data/TkClassPointer.h>
+#include <toolkit/data/TkMetaDataClasses.h>
+#include <toolkit/system/memory/pools/TkLinearMemoryPool.h>
 
 using namespace nms;
 
-#define Signature\
-/*  A ptr to the function's own class   */\
-    const cTkMetaDataClass* lpClassMetadata,\
-/*  Function pointer........................That function's arguments   */\
-    void(* lDefaultFunction)                (cTkClassPointer*, cTkLinearMemoryPool*),\
-    void(* lFixingFunction)                 (cTkClassPointer*, bool, unsigned __int64),\
-    void(* lValidateFunction)               (cTkClassPointer*),\
-    void(* lRenderFunction)                 (cTkClassPointer*),\
-    bool(* lEqualsFunction)                 (const cTkClassPointer*, const cTkClassPointer*),\
-    void(* lCopyFunction)                   (cTkClassPointer*, const cTkClassPointer*),\
-    cTkClassPointer* (* lCreateFunction)    (cTkClassPointer* result),\
-    unsigned __int64(* lHashFunction)       (const cTkClassPointer*, __int64, bool ...),\
-    void(* lDestroyFunction)                (cTkClassPointer*)
+#define SIGNATURE                                                                                                     \
+    /*  A ptr to the function's own class   */                                                                        \
+    const cTkMetaDataClass *lpClassMetadata, /*  Function pointer........................That function's arguments */ \
+        void (*lDefaultFunction)(cTkClassPointer *, cTkLinearMemoryPool *),                                           \
+        void (*lFixingFunction)(cTkClassPointer *, bool, unsigned __int64),                                           \
+        void (*lValidateFunction)(cTkClassPointer *), void (*lRenderFunction)(cTkClassPointer *),                     \
+        bool (*lEqualsFunction)(const cTkClassPointer *, const cTkClassPointer *),                                    \
+        void (*lCopyFunction)(cTkClassPointer *, const cTkClassPointer *),                                            \
+        cTkClassPointer *(*lCreateFunction)(cTkClassPointer * result),                                                \
+        unsigned __int64 (*lHashFunction)(const cTkClassPointer *, __int64, bool...),                                 \
+        void (*lDestroyFunction)(cTkClassPointer *)
 
-typedef void(*S_cTkMetadataClass_Register)(Signature);
+typedef void (*cTkMetadataClass_Register_S)(SIGNATURE);
 
-void D_cTkMetadataClass_Register(Signature)
+void cTkMetadataClass_Register_D(SIGNATURE)
 {
     spdlog::info("MetadataScanner: Found class: {}", lpClassMetadata->mpacName);
 }
 
-class MetadataProber : renms::PluginTemplate {
-    public:
-    std::string lpacPluginId      = "MetadataProber";
-    std::string mpacDisplayName   = "Metadata Prober";
-    std::string mpacAuthor        = "tractorbeam & VITALISED";
-    std::string mpacDescription   = "Scans the cTkMetadata class's Register function for pointers to all the different classes, because we can.";
+class MetadataProber : public renms::PluginTemplate
+{
+  public:
+    std::string lpacPluginId    = "MetadataProber";
+    std::string mpacDisplayName = "Metadata Prober";
+    std::string mpacAuthor      = "tractorbeam & VITALISED";
+    std::string mpacDescription =
+        "Scans the cTkMetadata class's Register function for pointers to all the different classes, because we can.";
     //   V- Hook_etc                  V- Signature_etc                      V- Detour_etc
-    HOOK(H_cTkMetadataClass_Register, S_cTkMetadataClass_Register, (LPVOID)(D_cTkMetadataClass_Register), renms::RelToAbsolute(0x248ABC0))
+    HOOK(
+        cTkMetadataClass_Register_H, cTkMetadataClass_Register_S, static_cast<LPVOID>(cTkMetadataClass_Register_D),
+        renms::RelToAbsolute(0x248ABC0));
 };
 
-void OnLoad() {
+void OnLoad()
+{
     MetadataProber plugin;
-    plugin.H_cTkMetadataClass_Register.IsEnabled(true);
+    plugin.cTkMetadataClass_Register_H.IsEnabled(true);
     spdlog::info("MetadataScanner loaded.");
 }
