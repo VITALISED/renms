@@ -40,20 +40,3 @@ void RENMS_ENTRY PluginMain()
         __cGcApplicationGameModeSelectorState__RenderWarning__SIGNATURE,
         static_cast<LPVOID>(__cGcApplicationGameModeSelectorState__RenderWarning__), renms::RelToAbsolute(0x1BF7E0));
 }
-
-// you shouldn't need to use this, in fact it's preferred not to
-BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserved)
-{
-    UNREFERENCED_PARAMETER(hModule);
-    UNREFERENCED_PARAMETER(ul_reason_for_call);
-    UNREFERENCED_PARAMETER(lpReserved);
-
-    switch (ul_reason_for_call)
-    {
-    case DLL_PROCESS_ATTACH:
-    case DLL_THREAD_ATTACH:
-    case DLL_THREAD_DETACH:
-    case DLL_PROCESS_DETACH: break;
-    }
-    return TRUE;
-}
