@@ -28,7 +28,7 @@ void printDebug(std::string input)
 #ifdef _DEBUG
     std::cout << input << std::endl;
 #else
-    UNREFERENCED_PARAMETER(INPUT)
+    UNREFERENCED_PARAMETER(input)
 #endif
 }
 
