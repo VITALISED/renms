@@ -75,12 +75,12 @@ macro(add_dependency_custom dir include)
     include_directories(${CMAKE_SOURCE_DIR}/${include})
 endmacro()
 
-add_dependency_custom(./fmt                 ./fmt/include)
-add_dependency_custom(./minhook             ./minhook/include)
-add_dependency_custom(./robin-hood-hashing  ./robin-hood-hashing/src/include)
-add_dependency_custom(./spdlog              ./spdlog/include)
-include_directories(./spdlog/include)
-add_dependency_custom(./Vulkan-Headers      ./Vulkan-Headers/include)
+add_dependency_custom(./submodules/fmt                 ./submodules/fmt/include)
+add_dependency_custom(./submodules/minhook             ./submodules/minhook/include)
+add_dependency_custom(./submodules/robin-hood-hashing  ./submodules/robin-hood-hashing/src/include)
+add_dependency_custom(./submodules/spdlog              ./submodules/spdlog/include)
+include_directories(./submodules/spdlog/include)
+add_dependency_custom(./submodules/Vulkan-Headers      ./submodules/Vulkan-Headers/include)
 
 
 ## ================================================================================================== Compiler setup.
@@ -112,6 +112,10 @@ else()
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror")
         set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Werror")
     endif()
+endif()
+
+if (CMAKE_BUILD_TYPE STREQUAL "Debug")
+    add_definitions(-DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG)
 endif()
 
 if (CMAKE_BUILD_TYPE STREQUAL "")

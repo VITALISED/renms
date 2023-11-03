@@ -36,7 +36,8 @@ DWORD WINAPI WindowCheckThread(LPVOID lpReserved)
     UNREFERENCED_PARAMETER(lpReserved);
 
     //Halts this thread until the NMS window shows up.
-    while (FindWindowA(0, (LPCSTR)"No Man's Sky") == nullptr);
+    while (FindWindowA(0, (LPCSTR)"No Man's Sky") != nullptr)
+        Sleep(1000);    //let's not hog resources
 
     return TRUE;
 }
@@ -62,9 +63,12 @@ BOOL APIENTRY DllMain(HMODULE hModule,
         MH_Initialize();
         DisableThreadLibraryCalls(hModule);
 
+        //I'm gonna scream. Why does it stop after the hello message?
         spdlog::info("Hello from Heridium!");
 
+        spdlog::debug("Starting MainThread...");
         CreateThread(nullptr, 0, MainThread, hModule, 0, nullptr);
+        spdlog::debug("Starting WindowCheckThread...");
         lpWindowCheckThreadHandle = CreateThread(nullptr, 0, WindowCheckThread, hModule, 0, nullptr);
 
         WaitForSingleObject(lpWindowCheckThreadHandle, INFINITE);

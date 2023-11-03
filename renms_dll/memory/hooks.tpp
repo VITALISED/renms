@@ -31,7 +31,7 @@ HookFunction<HOOK_TYPE>::HookFunction(char* lpacID, LPVOID lpDetour, LPVOID lpOf
     }
 
     this->mppOriginal = (LPVOID *) malloc(sizeof(LPVOID));
-	lastHookRes = MH_CreateHook(lpOffset, lpDetour, lppOriginal);
+	lastHookRes = MH_CreateHook(lpOffset, lpDetour, mppOriginal);
     
     if (lastHookRes == MH_OK)
         spdlog::info("Created hook: {}", lpacID);
