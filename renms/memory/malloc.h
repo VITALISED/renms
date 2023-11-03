@@ -1,7 +1,10 @@
 #pragma once
 
 #include "../renms.h"
-#include "malloc.h"
+#include "memory.h"
+#include <toolkit/system/memory/TkMemoryManager.h>
+
+using namespace nms;
 
 RENMS_BEGIN
 

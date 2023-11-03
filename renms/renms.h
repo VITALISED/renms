@@ -29,3 +29,9 @@
 #define RENMS_BEGIN namespace renms {
 #define RENMS_END }
 // clang-format on
+
+// Plugin API for developers
+#include "plugins/api.h"
+#ifndef RENMS
+#include "memory/hooks.h"
+#endif
