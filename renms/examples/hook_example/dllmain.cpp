@@ -35,7 +35,7 @@ void RENMS_ENTRY PluginMain()
 {
     std::printf("hello!!!", "\n");
 
-    HOOK(
+    RENMS_HOOK(
         cGcApplicationGameModeSelectorState__RenderWarning,
         __cGcApplicationGameModeSelectorState__RenderWarning__SIGNATURE,
         static_cast<LPVOID>(__cGcApplicationGameModeSelectorState__RenderWarning__), renms::RelToAbsolute(0x1BF7E0));
