@@ -32,9 +32,6 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     add_definitions(-DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG)
 endif()
 
-# Also make sure to fix the strange issue with spdlog that keeps some things from linking.
-add_definitions(-D_GLIBCXX_USE_CXX11_ABI=0)
-
 # Make sure that output is in colour
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fdiagnostics-color=always")
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fdiagnostics-color=always")
