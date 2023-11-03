@@ -1,6 +1,6 @@
 add_library(example SHARED)
 
-target_link_libraries(example minhook)
+target_link_libraries(example minhook spdlog fmt)
 
 target_include_directories(
     example

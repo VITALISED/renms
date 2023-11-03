@@ -16,4 +16,4 @@
 [submodule "compile_only"]
 	path = submodules/spdlog
 	url = https://github.com/gabime/spdlog
-	branch = compiled_only
+	branch = v2.x
