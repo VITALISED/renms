@@ -31,7 +31,7 @@ void __cGcApplicationGameModeSelectorState__RenderWarning__(SIGNATURE)
     std::printf(lStatus2, "\n");
 }
 
-void RENMS_API PluginMain()
+void RENMS_ENTRY PluginMain()
 {
     std::printf("hello!!!", "\n");
 
