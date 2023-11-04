@@ -34,12 +34,11 @@ void __cGcApplicationGameModeSelectorState__RenderWarning__(SIGNATURE)
     std::printf(lpacWarningPress, "\n");
     std::printf(lStatus1, "\n");
     std::printf(lStatus2, "\n");
-
-    cGcApplicationGameModeSelectorState__RenderWarning.CallOriginal(
-        thiscall, lpacWarningTitle, lpacWarningPress, lStatus1, lStatus2, lfTimeout);
 }
 
 void RENMS_ENTRY PluginMain()
 {
+    std::printf("Hi", "\n");
+
     cGcApplicationGameModeSelectorState__RenderWarning.Toggle(true);
 }
