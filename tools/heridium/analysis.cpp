@@ -16,30 +16,25 @@
 */
 
 #include "analysis.h"
-#include "cpp/lang.h"
-#include "heridium.h"
-#include <memory/thread.h>
-#include <memory/hooks-old.h>
-#include <toolkit/data/TkMetaData.h>
-#include <toolkit/data/TkMetaDataXML.h>
-#include <toolkit/utilities/containers/TkVector.h>
 
-using namespace nms;
+#define SIGNATURE                                                                                      \
+    const cTkMetaDataClass *, void (*)(cTkClassPointer *, cTkLinearMemoryPool *),                      \
+        void (*)(cTkClassPointer *, bool, unsigned __int64), void (*)(cTkClassPointer *),              \
+        bool (*)(const cTkClassPointer *, const cTkClassPointer *), void (*)(cTkClassPointer *),       \
+        void (*)(cTkClassPointer *, const cTkClassPointer *), cTkClassPointer *(*)(cTkClassPointer *), \
+        unsigned __int64 (*)(const cTkClassPointer *, unsigned __int64, bool), void (*)(cTkClassPointer *)
 
-INIT_HOOK()
+#define ARGUMENTS                                                                                                      \
+    const cTkMetaDataClass *lpClassMetadata, void (*lDefaultFunction)(cTkClassPointer *, cTkLinearMemoryPool *),       \
+        void (*lFixingFunction)(cTkClassPointer *, bool, unsigned __int64),                                            \
+        void (*lValidateFunction)(cTkClassPointer *),                                                                  \
+        bool (*lEqualsFunction)(const cTkClassPointer *, const cTkClassPointer *),                                     \
+        void (*lRenderFunction)(cTkClassPointer *), void (*lCopyFunction)(cTkClassPointer *, const cTkClassPointer *), \
+        cTkClassPointer *(*lCreateFunction)(cTkClassPointer * result),                                                 \
+        unsigned __int64 (*lHashFunction)(const cTkClassPointer *, unsigned __int64, bool),                            \
+        void (*lDestroyFunction)(cTkClassPointer *)
 
-HERIDIUM_BEGIN
-
-void RegisterHook(
-    const cTkMetaDataClass *lpClassMetadata, void (*lDefaultFunction)(cTkClassPointer *, cTkLinearMemoryPool *),
-    void (*lFixingFunction)(cTkClassPointer *, bool, unsigned __int64), void (*lValidateFunction)(cTkClassPointer *),
-    void (*lRenderFunction)(cTkClassPointer *),
-    bool (*lEqualsFunction)(const cTkClassPointer *, const cTkClassPointer *),
-    void (*lCopyFunction)(cTkClassPointer *, const cTkClassPointer *),
-    cTkClassPointer *(*lCreateFunction)(cTkClassPointer *result),
-    unsigned __int64 (*lHashFunction)(const cTkClassPointer *, unsigned __int64, bool),
-    void (*lDestroyFunction)(cTkClassPointer *))
-{
+RENMS_HOOK(cTkMetaData__Register, void, ARGUMENTS, SIGNATURE, renms::RelToAbsolute(0x248ABC0), {
     std::string lsKey = lpClassMetadata->mpacName;
 
     if (lsKey.find_first_of("c") != std::string::npos) { lsKey = lsKey.substr(lsKey.find_first_of("c")); }
@@ -66,31 +61,18 @@ void RegisterHook(
 
     HeridiumCXXFile(lPath.c_str(), lpClassMetadata);
 
-    typedef void (*HOOK_TYPE)(
-        const cTkMetaDataClass *lpClassMetadata, void (*lDefaultFunction)(cTkClassPointer *, cTkLinearMemoryPool *),
-        void (*lFixingFunction)(cTkClassPointer *, bool, unsigned __int64),
-        void (*lValidateFunction)(cTkClassPointer *), void (*lRenderFunction)(cTkClassPointer *),
-        bool (*lEqualsFunction)(const cTkClassPointer *, const cTkClassPointer *),
-        void (*lCopyFunction)(cTkClassPointer *, const cTkClassPointer *),
-        cTkClassPointer *(*lCreateFunction)(cTkClassPointer *result),
-        unsigned __int64 (*lHashFunction)(const cTkClassPointer *, unsigned __int64, bool),
-        void (*lDestroyFunction)(cTkClassPointer *));
+    return cTkMetaData__Register.CallOriginal(
+        lpClassMetadata, lDefaultFunction, lFixingFunction, lValidateFunction, lEqualsFunction, lRenderFunction,
+        lCopyFunction, lCreateFunction, lHashFunction, lDestroyFunction);
+});
 
-    CALL_ORIGINAL(
-        cTkMetaData::Register, lpClassMetadata, lDefaultFunction, lFixingFunction, lValidateFunction, lRenderFunction,
-        lEqualsFunction, lCopyFunction, lCreateFunction, lHashFunction, lDestroyFunction);
-}
+HERIDIUM_BEGIN
 
 void AnalysisInit()
 {
     CreateOutputDirectories();
 
-    HOOK(OFFSET(0x248ABC0), reinterpret_cast<LPVOID>(RegisterHook), cTkMetaData::Register);
-
-    if (HOOK_STATUS() == MH_OK)
-        spdlog::info("Ready to analyse some banger metadata");
-    else
-        spdlog::error("Failed to hook!");
+    cTkMetaData__Register.Toggle(true);
 
     renms::ResumeModuleThread(MODULE_BASE);
 }

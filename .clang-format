@@ -3,7 +3,6 @@ BasedOnStyle: Microsoft
 AlignAfterOpenBracket: AlwaysBreak
 AlignConsecutiveMacros: 'true'
 AlignConsecutiveAssignments: 'true'
-AlignConsecutiveDeclarations: 'true'
 AlignEscapedNewlines: Left
 AlignTrailingComments: 'true'
 AllowAllConstructorInitializersOnNextLine: 'true'
@@ -12,5 +11,5 @@ AllowShortCaseLabelsOnASingleLine: 'true'
 AllowShortFunctionsOnASingleLine: Inline
 AllowShortIfStatementsOnASingleLine: WithoutElse
 AllowShortLoopsOnASingleLine: 'true'
-
+AlwaysBreakTemplateDeclarations: 'Yes'
 ...

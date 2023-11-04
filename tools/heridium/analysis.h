@@ -14,11 +14,22 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
-
 #pragma once
 
-namespace heridium {
+#include "cpp/lang.h"
+#include "heridium.h"
+#include "paths.h"
+#include <filesystem>
+#include <memory/hooks-old.h>
+#include <memory/thread.h>
+#include <toolkit/data/TkMetaData.h>
+#include <toolkit/data/TkMetaDataXML.h>
+#include <toolkit/utilities/containers/TkVector.h>
+
+HERIDIUM_BEGIN
+
+using namespace nms;
 
 void AnalysisInit();
 
-}
+HERIDIUM_END

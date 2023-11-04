@@ -16,30 +16,39 @@
 */
 
 #pragma once
+
 #include "../renms.h"
 
 RENMS_BEGIN
 
-// An easier way of defining a HookFunction object.
-#define RENMS_HOOK(name, signature, detour, offset) \
-    renms::HookFunction<signature> name = renms::HookFunction<signature>(const_cast<char *>(#name), detour, offset)
+#define RENMS_HOOK(name, return_type, arguments, types, offset, detour)                 \
+    typedef return_type (*name##_SIGNATURE)(arguments);                                 \
+    return_type name##__HOOK(arguments);                                                \
+                                                                                        \
+    renms::HookFunction<name##_SIGNATURE, return_type, types> name =                    \
+        renms::HookFunction<name##_SIGNATURE, return_type, types>(                      \
+            const_cast<char *>(#name), reinterpret_cast<LPVOID>(name##__HOOK), offset); \
+                                                                                        \
+    return_type name##__HOOK(arguments) detour
 
-template <typename HOOK_TYPE> class HookFunction
+template <typename Fn, typename Ret, typename... Args>
+class HookFunction
 {
   private:
-    char   *mpacID;
+    char *mpacID;
     LPVOID *mppOriginal;
-    LPVOID  mpDetour;
+    LPVOID mpDetour;
+    MH_STATUS mLastHookRes;
 
   public:
     LPVOID mpOffset;
-    bool   mbIsActive;
+    bool mbIsActive;
 
     HookFunction(char *lpacID, LPVOID lpDetour, LPVOID lpOffset);
     ~HookFunction();
 
-    HOOK_TYPE CallOriginal(...);
-    HOOK_TYPE CallDetour(...);
+    Ret CallOriginal(Args... lArgs);
+    Ret CallDetour(Args... lArgs);
 
     void Toggle(bool lbEnabled);
 };

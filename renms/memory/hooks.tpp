@@ -21,10 +21,8 @@
 
 RENMS_BEGIN
 
-MH_STATUS lastHookRes = MH_UNKNOWN;
-
-template <typename HOOK_TYPE>
-HookFunction<HOOK_TYPE>::HookFunction(char *lpacID, LPVOID lpDetour, LPVOID lpOffset)
+template <typename Fn, typename Ret, typename... Args>
+HookFunction<Fn, Ret, Args...>::HookFunction(char *lpacID, LPVOID lpDetour, LPVOID lpOffset)
     : mpacID(lpacID), mpDetour(lpDetour), mpOffset(lpOffset)
 {
     if (lpOffset == 0 || lpOffset == NULL)
@@ -32,40 +30,44 @@ HookFunction<HOOK_TYPE>::HookFunction(char *lpacID, LPVOID lpDetour, LPVOID lpOf
         // TODO: If the offset isn't specified, search by HOOK_TYPE.
     }
 
-    this->mppOriginal = (LPVOID *)malloc(sizeof(LPVOID));
-    lastHookRes       = MH_CreateHook(lpOffset, lpDetour, mppOriginal);
+    this->mppOriginal  = (LPVOID *)malloc(sizeof(LPVOID));
+    this->mLastHookRes = MH_CreateHook(lpOffset, lpDetour, mppOriginal);
 
-    if (lastHookRes == MH_OK)
+    if (this->mLastHookRes == MH_OK)
         spdlog::info("Created hook: {}", lpacID);
     else
-        spdlog::error("MH_CreateHook {} failed: {}", lpacID, MH_StatusToString(lastHookRes));
+        spdlog::error("MH_CreateHook {} failed: {}", lpacID, MH_StatusToString(this->mLastHookRes));
 }
 
-template <typename HOOK_TYPE> HookFunction<HOOK_TYPE>::~HookFunction()
+template <typename Fn, typename Ret, typename... Args>
+HookFunction<Fn, Ret, Args...>::~HookFunction()
 {
     free(mppOriginal);
 }
 
-template <typename HOOK_TYPE> void HookFunction<HOOK_TYPE>::Toggle(bool lbEnabled)
+template <typename Fn, typename Ret, typename... Args>
+void HookFunction<Fn, Ret, Args...>::Toggle(bool lbEnabled)
 {
     if (lbEnabled)
-        lastHookRes = MH_EnableHook(mpOffset);
+        this->mLastHookRes = MH_EnableHook(mpOffset);
     else
-        lastHookRes = MH_DisableHook(mpOffset);
+        this->mLastHookRes = MH_DisableHook(mpOffset);
 
-    if (lastHookRes != MH_OK) spdlog::error("MH_ToggleHook failed: {}", MH_StatusToString(lastHookRes));
+    if (this->mLastHookRes != MH_OK) spdlog::error("MH_ToggleHook failed: {}", MH_StatusToString(this->mLastHookRes));
 }
 
-template <typename HOOK_TYPE> HOOK_TYPE HookFunction<HOOK_TYPE>::CallOriginal(...)
+template <typename Fn, typename Ret, typename... Args>
+Ret HookFunction<Fn, Ret, Args...>::CallOriginal(Args... lArgs)
 {
-    HOOK_TYPE Original = *reinterpret_cast<HOOK_TYPE *>(mppOriginal);
-    return Original(va_list());
+    Fn lpOriginal = *reinterpret_cast<Fn *>(mppOriginal);
+    return lpOriginal(lArgs...);
 }
 
-template <typename HOOK_TYPE> HOOK_TYPE HookFunction<HOOK_TYPE>::CallDetour(...)
+template <typename Fn, typename Ret, typename... Args>
+Ret HookFunction<Fn, Ret, Args...>::CallDetour(Args... lArgs)
 {
-    HOOK_TYPE Original = *reinterpret_cast<HOOK_TYPE *>(&mpDetour);
-    return Original(this, va_list());
+    Fn lpDetour = *reinterpret_cast<Fn *>(&mpDetour);
+    return lpDetour(lArgs...);
 }
 
 RENMS_END
