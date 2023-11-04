@@ -16,6 +16,7 @@
 */
 
 #include <MinHook.h>
+#include <iostream>
 #include <spdlog/spdlog.h>
 
 #include "analysis.h"

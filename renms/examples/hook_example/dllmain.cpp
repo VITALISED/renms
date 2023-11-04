@@ -29,7 +29,6 @@ RENMS_HOOK(
 
 void RENMS_ENTRY PluginMain()
 {
-    std::printf("Hi", "\n");
 
     cGcApplicationGameModeSelectorState__RenderWarning.Toggle(true);
 }

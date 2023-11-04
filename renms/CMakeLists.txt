@@ -40,7 +40,7 @@ target_include_directories(
     PUBLIC "../skyscraper"
     PUBLIC "../metadata/source"
     PUBLIC "../metadata/toolkit"
-    PUBLIC "../spdlog/include"
+    PUBLIC "../submodules/spdlog/include"
 )
 
 set_target_properties(renms PROPERTIES OUTPUT_NAME renms)
