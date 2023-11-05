@@ -21,17 +21,25 @@
 
 RENMS_BEGIN
 
-#define RENMS_HOOK(name, return_type, arguments, types, offset, detour)                 \
-    typedef return_type (*name##_SIGNATURE)(arguments);                                 \
-    return_type name##__HOOK(arguments);                                                \
-                                                                                        \
-    renms::HookFunction<name##_SIGNATURE, return_type, types> name =                    \
-        renms::HookFunction<name##_SIGNATURE, return_type, types>(                      \
-            const_cast<char *>(#name), reinterpret_cast<LPVOID>(name##__HOOK), offset); \
-                                                                                        \
+#define ARGUMENTSX(...) __VA_ARGS__
+
+ARGUMENTSX(int a, int b, int c);
+
+#define RENMS_HOOK(name, return_type, arguments, types, offset, detour)                     \
+    typedef return_type (*name##_SIGNATURE)(arguments);                                     \
+    return_type name##__HOOK(arguments);                                                    \
+                                                                                            \
+    renms::HookFunction<return_type, types> name = renms::HookFunction<return_type, types>( \
+        const_cast<char *>(#name), reinterpret_cast<LPVOID>(name##__HOOK), offset);         \
+                                                                                            \
     return_type name##__HOOK(arguments) detour
 
-template <typename Fn, typename Ret, typename... Args>
+template <auto *F>
+class HookFunction
+{
+};
+
+template <typename Ret, typename... Args>
 class HookFunction
 {
   private:
