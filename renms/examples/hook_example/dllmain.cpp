@@ -17,20 +17,14 @@
 
 #include <renms.h>
 
-#define DECLTYPECLOSE )
-#define DECLTYPEOPEN decltype(
-#define ARGUMENTSX(...) __VA_OPT__(DECLTYPEOPEN) __VA_ARGS__ __VA_OPT__(DECLTYPECLOSE)
-#define ARGUMENTS \
-    DWORD_PTR thiscall, const char *lpacWarningTitle, const char *lpacWarningPress, char *lStatus1, const char *lStatus2
-
 RENMS_HOOK(
-    cGcApplicationGameModeSelectorState__RenderWarning, void, ARGUMENTSX(ARGUMENTS), renms::RelToAbsolute(0x1BF7E0), {
-        return cGcApplicationGameModeSelectorState__RenderWarning.CallOriginal(
-            thiscall, lpacWarningTitle, lpacWarningPress, lStatus1, lStatus2);
+    cGcApplicationGameModeSelectorState__RenderWarning, renms::RelToAbsolute(0x1BF7E0),
+    [](uintptr_t thiscall, const char *lpacWarningTitle, const char *lpacWarningPress, const char *lStatus1,
+       char *lStatus2, float lfTimeout) -> void {
+
     });
 
 void RENMS_ENTRY PluginMain()
 {
-    ARGUMENTSX(ARGUMENTS);
-    cGcApplicationGameModeSelectorState__RenderWarning.Toggle(true);
+    cGcApplicationGameModeSelectorState__RenderWarning.Toggle();
 }

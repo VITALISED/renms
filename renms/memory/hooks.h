@@ -18,50 +18,54 @@
 #pragma once
 
 #include "../renms.h"
+#include <functional>
+#include <type_traits>
 
 RENMS_BEGIN
 
-#define ARGUMENTSX(...) __VA_ARGS__
-
-ARGUMENTSX(int a, int b, int c);
-
-#define RENMS_HOOK(name, return_type, arguments, types, offset, detour)                     \
-    typedef return_type (*name##_SIGNATURE)(arguments);                                     \
-    return_type name##__HOOK(arguments);                                                    \
-                                                                                            \
-    renms::HookFunction<return_type, types> name = renms::HookFunction<return_type, types>( \
-        const_cast<char *>(#name), reinterpret_cast<LPVOID>(name##__HOOK), offset);         \
-                                                                                            \
-    return_type name##__HOOK(arguments) detour
-
-template <auto *F>
-class HookFunction
+namespace detail // EDIT: make it an implementation detail
 {
-};
+template <typename T>
+struct deduce_type;
 
-template <typename Ret, typename... Args>
+template <typename RETURN_TYPE, typename CLASS_TYPE, typename... ARGS>
+struct deduce_type<RETURN_TYPE (CLASS_TYPE::*)(ARGS...) const>
+{
+    using type = std::function<RETURN_TYPE(ARGS...)>;
+};
+} // namespace detail
+
+template <typename CLOSURE>
+auto wrap(const CLOSURE &fn) // EDIT: give it a better name
+{
+    return typename detail::deduce_type<decltype(&CLOSURE::operator())>::type(fn);
+}
+
+#define RENMS_HOOK(name, offset, detour) \
+    auto F    = renms::wrap(detour);     \
+    auto name = renms::HookFunction<decltype(F)>(#name, &F, offset);
+
+template <typename Fn>
 class HookFunction
 {
   private:
     char *mpacID;
-    LPVOID *mppOriginal;
-    LPVOID mpDetour;
+    Fn *mpDetour;
     MH_STATUS mLastHookRes;
 
   public:
+    LPVOID *mppOriginal;
     LPVOID mpOffset;
     bool mbIsActive;
 
-    HookFunction(char *lpacID, LPVOID lpDetour, LPVOID lpOffset);
+    HookFunction(char *lpacID, Fn *lpDetour, LPVOID lpOffset);
     ~HookFunction();
 
-    Ret CallOriginal(Args... lArgs);
-    Ret CallDetour(Args... lArgs);
-
-    void Toggle(bool lbEnabled);
+    bool Toggle();
+    bool SetEnabled();
+    bool SetDisabled();
 };
 
 RENMS_END
 
-// This is just the way templates have to work, I'm sorry.
 #include "hooks.tpp"
