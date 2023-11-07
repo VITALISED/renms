@@ -13,20 +13,12 @@
 # You should have received a copy of the GNU General Public License along with
 # this program.  If not, see <https://www.gnu.org/licenses/>.
 
-# Rename this to "config.cmake" and it'll work
+set(RENMS_CONFIG_VERSION 3)
 
-# Just making the options easier to read, and so you can do -DVAR=VAL on the
-# command line if you really want to.
-function(SetIfNotDef var val)
-    if(NOT DEFINED ${var})
-        set(${var}
-            ${val}
-            PARENT_SCOPE
-        )
-    endif()
-endfunction()
+# Sorry for having it in a seperate file instead of having the option stuff be a
+# part of the main CMakeLists.txt, but it's just to make sure these settings don't
+# get synced with the repo.
 
-setifnotdef(CMAKE_BUILD_TYPE Release)
-setifnotdef(SKIP_NMS_CHECK FALSE)
-setifnotdef(NMS_EXE_PATH "C:/Your/Path/To/NMS/Exe/Dir/Here/NMS.exe")
-setifnotdef(EXAMPLE_BUILD_TYPE "hook_example") # you can comment this out to not build any examples
+option(SKIP_NMS_CHECK FALSE)
+set(NMS_EXE_PATH "C:/Your/Path/To/NMS/Exe/Dir/Here/NMS.exe")
+set(EXAMPLE_BUILD_TYPE "hook_example") # you can comment this out to not build any examples

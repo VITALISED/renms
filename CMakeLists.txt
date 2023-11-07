@@ -43,6 +43,11 @@ else()
     )
 endif()
 
+if(NOT DEFINED RENMS_CONFIG_VERSION OR RENMS_CONFIG_VERSION LESS 3)
+    message(WARNING "Your config.cmake is out of date! Chances are it'll still build fine, but I highly \
+suggest checking out the config-template.cmake and updating your config.cmake.")
+endif()
+
 if(NOT DEFINED NMS_EXE_PATH AND NOT SKIP_NMS_CHECK)
     message(
         FATAL_ERROR
