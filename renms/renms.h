@@ -17,13 +17,14 @@
 
 #pragma once
 
-#include "framework.h"
-#include "log.h"
-#include <MinHook.h>
 #include <array>
+#include <core/framework.h>
+#include <core/log.h>
 #include <fmt/format.h>
 #include <string>
 #include <vector>
+
+#include <polyhook2/IHook.hpp>
 
 // clang-format off
 #define RENMS_BEGIN namespace renms {
@@ -31,7 +32,5 @@
 // clang-format on
 
 // Plugin API for developers
-#include "plugins/api.h"
-#ifndef RENMS
-#include "memory/hooks.h"
+#ifndef RENMS || HERIDIUM
 #endif

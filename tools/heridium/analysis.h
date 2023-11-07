@@ -20,7 +20,6 @@
 #include "heridium.h"
 #include "paths.h"
 #include <filesystem>
-#include <memory/hooks-old.h>
 #include <memory/thread.h>
 #include <toolkit/data/TkMetaData.h>
 #include <toolkit/data/TkMetaDataXML.h>

@@ -13,50 +13,40 @@
 # You should have received a copy of the GNU General Public License along with
 # this program.  If not, see <https://www.gnu.org/licenses/>.
 
+file(GLOB_RECURSE RENMS_HEADERS ${PROJECT_SOURCE_DIR}/renms/ "*.h")
+
 add_library(
     renms SHARED
-    "commands/commands.h"
-    # "commands/manager.h"
-    # "commands/manager.cpp"
-    # "commands/test.cpp"
-    "dllmain.cpp"
-    "framework.h"
-    "log.h"
-    "memory/hooks.h"
-    "memory/hooks.tpp"
-    "memory/malloc.cpp"
-    "memory/malloc.h"
-    "memory/memory.h"
-    "memory/thread.h"
-    "plugins/api.h"
-    "plugins/plugin.cpp"
-    "plugins/plugin.h"
+    ${PROJECT_SOURCE_DIR}/renms/dllmain.cpp
+    ${PROJECT_SOURCE_DIR}/renms/memory/malloc.cpp
+    ${PROJECT_SOURCE_DIR}/renms/plugins/plugin.cpp ${RENMS_HEADERS}
 )
 
 add_dependencies(renms renms_skyscraper Heridium heridiumLauncher)
 
 target_include_directories(
     renms
-    PUBLIC "../skyscraper"
-    PUBLIC "../metadata/source"
-    PUBLIC "../metadata/toolkit"
-    PUBLIC "../submodules/spdlog/include"
+    PUBLIC ${PROJECT_SOURCE_DIR}/renms
+    PUBLIC ${PROJECT_SOURCE_DIR}/skyscraper
+    PUBLIC ${PROJECT_SOURCE_DIR}/metadata/source
+    PUBLIC ${PROJECT_SOURCE_DIR}/metadata/toolkit
+    PUBLIC ${PROJECT_SOURCE_DIR}/submodules/spdlog/include
 )
 
 set_target_properties(renms PROPERTIES OUTPUT_NAME renms)
 
-target_link_libraries(renms fmt minhook spdlog)
+target_link_libraries(renms fmt PolyHook_2 spdlog)
 
 add_dependencies(renms MetadataClasses)
 
 target_precompile_headers(
     renms
     PRIVATE
-    renms.h
+    ${PROJECT_SOURCE_DIR}/renms.h
     PRIVATE
-    ../skyscraper/skyscraper.h
+    ${PROJECT_SOURCE_DIR}/skyscraper/skyscraper.h
     PRIVATE
-    ../metadata/GIVEMEALLTHECLASSES.h
+    ${PROJECT_SOURCE_DIR}/metadata/GIVEMEALLTHECLASSES.h
 )
 
 target_compile_definitions(renms PRIVATE RENMS)

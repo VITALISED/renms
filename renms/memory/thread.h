@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../renms.h"
+#include <renms.h>
 #include <tlhelp32.h>
 
 RENMS_BEGIN
@@ -9,8 +9,8 @@ RENMS_BEGIN
 inline void ResumeModuleThread(HMODULE hModule)
 {
     // Get PID from handle
-    DWORD  dwPID = GetProcessId(hModule);
-    HANDLE h     = CreateToolhelp32Snapshot(TH32CS_SNAPTHREAD, dwPID);
+    DWORD dwPID = GetProcessId(hModule);
+    HANDLE h    = CreateToolhelp32Snapshot(TH32CS_SNAPTHREAD, dwPID);
     if (h != INVALID_HANDLE_VALUE)
     {
         THREADENTRY32 te;

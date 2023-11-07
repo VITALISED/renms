@@ -93,9 +93,7 @@ macro(add_dependency_custom dir include)
 endmacro()
 
 add_dependency_custom(./submodules/fmt ./submodules/fmt/include)
-add_dependency_custom(
-    ./submodules/PolyHook2_0 ./submodules/PolyHook2_0/polyhook2
-)
+add_dependency_custom(./submodules/PolyHook2_0 ./submodules/PolyHook2_0)
 add_dependency_custom(
     ./submodules/robin-hood-hashing ./submodules/robin-hood-hashing/src/include
 )
@@ -151,8 +149,8 @@ add_custom_target(
     COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target clean
     COMMAND ${CMAKE_COMMAND} -E remove_directory
             ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
-    COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_SOURCE_DIR}/metadata
-    COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_SOURCE_DIR}/build
+    COMMAND ${CMAKE_COMMAND} -E remove_directory ${PROJECT_SOURCE_DIR}/metadata
+    COMMAND ${CMAKE_COMMAND} -E remove_directory ${PROJECT_SOURCE_DIR}/build
 )
 
 add_subdirectory(tools)

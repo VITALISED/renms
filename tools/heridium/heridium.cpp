@@ -15,14 +15,6 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#include "framework.h"
-#include "paths.h"
-#include <MinHook.h>
-#include <cstring>
-#include <filesystem>
-#include <fmt/format.h>
-#include <fstream>
-#include <spdlog/spdlog.h>
 #include "heridium.h"
 
 HERIDIUM_BEGIN
@@ -50,7 +42,7 @@ void CreateOutputDirectories()
         std::string lpacFullPath = std::filesystem::current_path().string();
         lpacFullPath.append(lpacLocalPath);
 
-        size_t      lastindex   = lpacFullPath.find_last_of("/");
+        size_t lastindex        = lpacFullPath.find_last_of("/");
         std::string lpacDirPath = lpacFullPath.substr(0, lastindex);
 
         std::filesystem::create_directories(lpacDirPath);

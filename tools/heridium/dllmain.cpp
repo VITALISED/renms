@@ -15,12 +15,7 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#include <MinHook.h>
-#include <iostream>
-#include <spdlog/spdlog.h>
-
 #include "analysis.h"
-#include "framework.h"
 #include "heridium.h"
 
 #ifndef HERIDIUM_LANGUAGE_TARGET
@@ -59,7 +54,6 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserv
     {
     case DLL_PROCESS_ATTACH:
         AllocConsole();
-        MH_Initialize();
         DisableThreadLibraryCalls(hModule);
 
         spdlog::info("Hello from Heridium!");
