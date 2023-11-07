@@ -13,7 +13,7 @@
 # You should have received a copy of the GNU General Public License along with
 # this program.  If not, see <https://www.gnu.org/licenses/>.
 
-file(GLOB_RECURSE RENMS_HEADERS ${PROJECT_SOURCE_DIR}/renms/ "*.h")
+file(GLOB_RECURSE RENMS_HEADERS ${PROJECT_SOURCE_DIR}/renms/ "*.h", "*.tpp")
 
 add_library(
     renms SHARED
@@ -40,13 +40,8 @@ target_link_libraries(renms fmt PolyHook_2 spdlog)
 add_dependencies(renms MetadataClasses)
 
 target_precompile_headers(
-    renms
-    PRIVATE
-    ${PROJECT_SOURCE_DIR}/renms/renms.h
-    PRIVATE
+    renms PRIVATE ${PROJECT_SOURCE_DIR}/renms/renms.h PRIVATE
     ${PROJECT_SOURCE_DIR}/skyscraper/skyscraper.h
-    PRIVATE
-    ${PROJECT_SOURCE_DIR}/metadata/GIVEMEALLTHECLASSES.h
 )
 
 target_compile_definitions(renms PRIVATE RENMS)

@@ -17,24 +17,17 @@
 
 #include "analysis.h"
 
-#define SIGNATURE                                                                                      \
-    const cTkMetaDataClass *, void (*)(cTkClassPointer *, cTkLinearMemoryPool *),                      \
-        void (*)(cTkClassPointer *, bool, unsigned __int64), void (*)(cTkClassPointer *),              \
-        bool (*)(const cTkClassPointer *, const cTkClassPointer *), void (*)(cTkClassPointer *),       \
-        void (*)(cTkClassPointer *, const cTkClassPointer *), cTkClassPointer *(*)(cTkClassPointer *), \
-        unsigned __int64 (*)(const cTkClassPointer *, unsigned __int64, bool), void (*)(cTkClassPointer *)
+RENMS_HOOK(cTkMetaData__Register, renms::RelToAbsolute(0x248ABC0), cTkMetaData__Register__DETOUR);
 
-#define ARGUMENTS                                                                                                      \
-    const cTkMetaDataClass *lpClassMetadata, void (*lDefaultFunction)(cTkClassPointer *, cTkLinearMemoryPool *),       \
-        void (*lFixingFunction)(cTkClassPointer *, bool, unsigned __int64),                                            \
-        void (*lValidateFunction)(cTkClassPointer *),                                                                  \
-        bool (*lEqualsFunction)(const cTkClassPointer *, const cTkClassPointer *),                                     \
-        void (*lRenderFunction)(cTkClassPointer *), void (*lCopyFunction)(cTkClassPointer *, const cTkClassPointer *), \
-        cTkClassPointer *(*lCreateFunction)(cTkClassPointer * result),                                                 \
-        unsigned __int64 (*lHashFunction)(const cTkClassPointer *, unsigned __int64, bool),                            \
-        void (*lDestroyFunction)(cTkClassPointer *)
-
-RENMS_HOOK(cTkMetaData__Register, void, ARGUMENTS, SIGNATURE, renms::RelToAbsolute(0x248ABC0), {
+void cTkMetaData__Register__DETOUR(
+    const cTkMetaDataClass *lpClassMetadata, void (*lDefaultFunction)(cTkClassPointer *, cTkLinearMemoryPool *),
+    void (*lFixingFunction)(cTkClassPointer *, bool, unsigned __int64), void (*lValidateFunction)(cTkClassPointer *),
+    bool (*lEqualsFunction)(const cTkClassPointer *, const cTkClassPointer *),
+    void (*lRenderFunction)(cTkClassPointer *), void (*lCopyFunction)(cTkClassPointer *, const cTkClassPointer *),
+    cTkClassPointer *(*lCreateFunction)(cTkClassPointer *result),
+    unsigned __int64 (*lHashFunction)(const cTkClassPointer *, unsigned __int64, bool),
+    void (*lDestroyFunction)(cTkClassPointer *))
+{
     std::string lsKey = lpClassMetadata->mpacName;
 
     if (lsKey.find_first_of("c") != std::string::npos) { lsKey = lsKey.substr(lsKey.find_first_of("c")); }
@@ -61,10 +54,10 @@ RENMS_HOOK(cTkMetaData__Register, void, ARGUMENTS, SIGNATURE, renms::RelToAbsolu
 
     HeridiumCXXFile(lPath.c_str(), lpClassMetadata);
 
-    return cTkMetaData__Register.CallOriginal(
-        lpClassMetadata, lDefaultFunction, lFixingFunction, lValidateFunction, lEqualsFunction, lRenderFunction,
-        lCopyFunction, lCreateFunction, lHashFunction, lDestroyFunction);
-});
+    return RENMS_CALLORIGINAL(
+        cTkMetaData__Register, lpClassMetadata, lDefaultFunction, lFixingFunction, lValidateFunction, lEqualsFunction,
+        lRenderFunction, lCopyFunction, lCreateFunction, lHashFunction, lDestroyFunction);
+};
 
 HERIDIUM_BEGIN
 
@@ -72,7 +65,7 @@ void AnalysisInit()
 {
     CreateOutputDirectories();
 
-    cTkMetaData__Register.Toggle(true);
+    cTkMetaData__Register.Dispatch();
 
     renms::ResumeModuleThread(MODULE_BASE);
 }
