@@ -20,9 +20,9 @@
 #include <MinHook.h>
 #include <cstring>
 #include <filesystem>
+#include <spdlog/spdlog.h>
 #include <fmt/format.h>
 #include <fstream>
-#include <spdlog/spdlog.h>
 #include "heridium.h"
 
 HERIDIUM_BEGIN
