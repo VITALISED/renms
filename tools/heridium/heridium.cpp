@@ -16,6 +16,13 @@
 */
 
 #include "heridium.h"
+#include "framework.h"
+#include "paths.h"
+#include <cstring>
+#include <filesystem>
+#include <fmt/format.h>
+#include <fstream>
+#include <spdlog/spdlog.h>
 
 HERIDIUM_BEGIN
 

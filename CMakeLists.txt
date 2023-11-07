@@ -27,15 +27,6 @@ if(CMAKE_GENERATOR STREQUAL "Ninja")
     message("")
 endif()
 
-# Make sure that debug output is printed if we're in debug mode.
-if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-    add_definitions(-DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG)
-endif()
-
-# Make sure that output is in colour
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fdiagnostics-color=always")
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fdiagnostics-color=always")
-
 # ==================================================================================================
 # First checks.
 
@@ -92,12 +83,12 @@ macro(add_dependency_custom dir include)
     include_directories(${CMAKE_SOURCE_DIR}/${include})
 endmacro()
 
+add_dependency_custom(./submodules/spdlog ./submodules/spdlog/include)
 add_dependency_custom(./submodules/fmt ./submodules/fmt/include)
 add_dependency_custom(./submodules/PolyHook2_0 ./submodules/PolyHook2_0)
 add_dependency_custom(
     ./submodules/robin-hood-hashing ./submodules/robin-hood-hashing/src/include
 )
-add_dependency_custom(./submodules/spdlog ./submodules/spdlog/include)
 add_dependency_custom(
     ./submodules/Vulkan-Headers ./submodules/Vulkan-Headers/include
 )
