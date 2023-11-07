@@ -29,6 +29,4 @@ endfunction()
 setifnotdef(CMAKE_BUILD_TYPE Release)
 setifnotdef(SKIP_NMS_CHECK FALSE)
 setifnotdef(NMS_EXE_PATH "C:/Your/Path/To/NMS/Exe/Dir/Here/NMS.exe")
-setifnotdef(FETCHCONTENT_QUIET OFF)
-setifnotdef(EXAMPLE_BUILD_TYPE "hook_example") # you can comment this out to not
-                                               # build any examples
+setifnotdef(EXAMPLE_BUILD_TYPE "hook_example") # you can comment this out to not build any examples
