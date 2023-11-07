@@ -15,16 +15,16 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#include <renms.h>
+// #include <renms.h>
 
-RENMS_HOOK(
-    cGcApplicationGameModeSelectorState__RenderWarning, renms::RelToAbsolute(0x1BF7E0),
-    [](uintptr_t thiscall, const char *lpacWarningTitle, const char *lpacWarningPress, const char *lStatus1,
-       char *lStatus2, float lfTimeout) -> void {
+// RENMS_HOOK(
+//     cGcApplicationGameModeSelectorState__RenderWarning, renms::RelToAbsolute(0x1BF7E0),
+//     [](uintptr_t thiscall, const char *lpacWarningTitle, const char *lpacWarningPress, const char *lStatus1,
+//        char *lStatus2, float lfTimeout) -> void {
 
-    });
+//     });
 
-void RENMS_ENTRY PluginMain()
-{
-    cGcApplicationGameModeSelectorState__RenderWarning.Toggle();
-}
+// void RENMS_ENTRY PluginMain()
+// {
+//     cGcApplicationGameModeSelectorState__RenderWarning.Toggle();
+// }

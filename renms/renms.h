@@ -21,10 +21,11 @@
 #include <core/framework.h>
 #include <core/log.h>
 #include <fmt/format.h>
+#include <polyhook2/Detour/NatDetour.hpp>
+#include <polyhook2/Enums.hpp>
+#include <polyhook2/IHook.hpp>
 #include <string>
 #include <vector>
-
-#include <polyhook2/IHook.hpp>
 
 // clang-format off
 #define RENMS_BEGIN namespace renms {
@@ -32,5 +33,6 @@
 // clang-format on
 
 // Plugin API for developers
-#ifndef RENMS || HERIDIUM
+#ifndef RENMS
+#define guh
 #endif
