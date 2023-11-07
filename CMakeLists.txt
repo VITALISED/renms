@@ -118,10 +118,11 @@ add_subdirectory(tools)
 
 # --------------------------------------------------------------------------------------------------
 # uberclean - A completely thorough clean that removes EVERYTHING that isn't included in the repo,
-#             except for submodules. Useful for debugging build issues.
+#             including submodules. Useful for debugging build issues.
 add_custom_target(
     uberclean
     COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target clean
+    COMMAND git submodule deinit --all -f
     COMMAND ${CMAKE_COMMAND} -E remove_directory
             ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
     COMMAND ${CMAKE_COMMAND} -E remove_directory ${PROJECT_SOURCE_DIR}/metadata
