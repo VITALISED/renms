@@ -21,8 +21,8 @@
 
 RENMS_BEGIN
 
-template <typename Fn, typename Ret, typename... Args>
-HookFunction<Fn, Ret, Args...>::HookFunction(char *lpacID, LPVOID lpDetour, LPVOID lpOffset)
+template <typename Fn>
+HookFunction<Fn>::HookFunction(char *lpacID, Fn *lpDetour, LPVOID lpOffset)
     : mpacID(lpacID), mpDetour(lpDetour), mpOffset(lpOffset)
 {
     if (lpOffset == 0 || lpOffset == NULL)
@@ -39,35 +39,39 @@ HookFunction<Fn, Ret, Args...>::HookFunction(char *lpacID, LPVOID lpDetour, LPVO
         spdlog::error("MH_CreateHook {} failed: {}", lpacID, MH_StatusToString(this->mLastHookRes));
 }
 
-template <typename Fn, typename Ret, typename... Args>
-HookFunction<Fn, Ret, Args...>::~HookFunction()
+template <typename Fn>
+HookFunction<Fn>::~HookFunction()
 {
     free(mppOriginal);
 }
 
-template <typename Fn, typename Ret, typename... Args>
-void HookFunction<Fn, Ret, Args...>::Toggle(bool lbEnabled)
+template <typename Fn>
+bool HookFunction<Fn>::SetEnabled()
 {
-    if (lbEnabled)
-        this->mLastHookRes = MH_EnableHook(mpOffset);
+    if (this->mbIsActive) return this->mbIsActive;
+
+    if (this->mLastHookRes = MH_EnableHook(mpOffset) == MH_OK) this->mbIsActive = true;
+
+    return this->mbIsActive;
+}
+
+template <typename Fn>
+bool HookFunction<Fn>::SetDisabled()
+{
+    if (!this->mbIsActive) return this->mbIsActive;
+
+    if (this->mLastHookRes = MH_DisableHook(mpOffset) == MH_OK) this->mbIsActive = false;
+
+    return this->mbIsActive;
+}
+
+template <typename Fn>
+bool HookFunction<Fn>::Toggle()
+{
+    if (this->mbIsActive)
+        this->SetDisabled();
     else
-        this->mLastHookRes = MH_DisableHook(mpOffset);
-
-    if (this->mLastHookRes != MH_OK) spdlog::error("MH_ToggleHook failed: {}", MH_StatusToString(this->mLastHookRes));
-}
-
-template <typename Fn, typename Ret, typename... Args>
-Ret HookFunction<Fn, Ret, Args...>::CallOriginal(Args... lArgs)
-{
-    Fn lpOriginal = *reinterpret_cast<Fn *>(mppOriginal);
-    return lpOriginal(lArgs...);
-}
-
-template <typename Fn, typename Ret, typename... Args>
-Ret HookFunction<Fn, Ret, Args...>::CallDetour(Args... lArgs)
-{
-    Fn lpDetour = *reinterpret_cast<Fn *>(&mpDetour);
-    return lpDetour(lArgs...);
+        this->SetEnabled();
 }
 
 RENMS_END

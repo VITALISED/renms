@@ -85,7 +85,9 @@ endmacro()
 
 add_dependency_custom(./submodules/spdlog ./submodules/spdlog/include)
 add_dependency_custom(./submodules/fmt ./submodules/fmt/include)
-add_dependency_custom(./submodules/minhook ./submodules/minhook/include)
+add_dependency_custom(
+    ./submodules/PolyHook2_0 ./submodules/PolyHook2_0/polyhook2
+)
 add_dependency_custom(
     ./submodules/robin-hood-hashing ./submodules/robin-hood-hashing/src/include
 )
