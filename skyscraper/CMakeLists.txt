@@ -20,9 +20,3 @@ add_library(
     renms_skyscraper
     ${SKYSCRAPER_SOURCES}
 )
-
-target_include_directories(
-    renms_skyscraper PRIVATE
-    ${CMAKE_SOURCE_DIR}
-    ${CMAKE_SOURCE_DIR}/skyscraper
-)

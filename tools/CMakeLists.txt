@@ -14,18 +14,3 @@
 # this program.  If not, see <https://www.gnu.org/licenses/>.
 
 add_subdirectory(heridium)
-
-make_directory(${PROJECT_SOURCE_DIR}/metadata)
-
-add_custom_target(
-    MetadataClasses
-    DEPENDS ${PROJECT_SOURCE_DIR}/metadata/GIVEMEALLTHECLASSES.h
-)
-
-add_custom_command(
-    OUTPUT ${PROJECT_SOURCE_DIR}/metadata/GIVEMEALLTHECLASSES.h
-    COMMAND "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/heridiumLauncher.exe"
-            "${NMS_EXE_PATH}"
-    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/metadata
-    DEPENDS Heridium heridiumLauncher
-)

@@ -22,29 +22,5 @@ add_library(
     ${PROJECT_SOURCE_DIR}/renms/plugins/plugin.cpp ${RENMS_HEADERS}
 )
 
-add_dependencies(renms renms_skyscraper Heridium heridiumLauncher)
-
-target_include_directories(
-    renms
-    PUBLIC ${PROJECT_SOURCE_DIR}/renms
-    PUBLIC ${PROJECT_SOURCE_DIR}/skyscraper
-    PUBLIC ${PROJECT_SOURCE_DIR}/metadata/source
-    PUBLIC ${PROJECT_SOURCE_DIR}/metadata/toolkit
-    PUBLIC ${PROJECT_SOURCE_DIR}/submodules/spdlog/include
-)
-
-set_target_properties(renms PROPERTIES OUTPUT_NAME renms)
-
-target_link_libraries(renms fmt PolyHook_2 spdlog)
-
-add_dependencies(renms MetadataClasses)
-
-target_precompile_headers(
-    renms PRIVATE ${PROJECT_SOURCE_DIR}/renms/renms.h PRIVATE
-    ${PROJECT_SOURCE_DIR}/skyscraper/skyscraper.h
-)
-
-target_compile_definitions(renms PRIVATE RENMS)
-
 add_subdirectory(proxy)
 add_subdirectory(examples)

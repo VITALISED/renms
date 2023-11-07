@@ -30,6 +30,10 @@ endif()
 # ==================================================================================================
 # First checks.
 
+if(CMAKE_BUILD_TYPE STREQUAL "")
+    set(CMAKE_BUILD_TYPE "Release")
+endif()
+
 if(EXISTS "${CMAKE_SOURCE_DIR}/config.cmake")
     include(./config.cmake)
 else()
@@ -43,7 +47,7 @@ if(NOT DEFINED NMS_EXE_PATH AND NOT SKIP_NMS_CHECK)
     message(
         FATAL_ERROR
             "NMS_EXE_PATH not defined!\n\
-Look inside the root CMakeLists.txt for the option, and set it's exact path. \
+Look inside the config.cmake for the option, and set it's exact path. \
 It must be the directory that contains NMS.exe. See the BUILD.md for why it needs to know this."
     )
 
@@ -54,7 +58,8 @@ if(NOT EXISTS "${NMS_EXE_PATH}" AND NOT SKIP_NMS_CHECK)
     message(
         FATAL_ERROR
             "NMS_EXE_PATH either isn't a valid directory or doesn't contain NMS.exe!\n\
-See the BUILD.md for why it needs to know this."
+Look inside the config.cmake for the option, and set it's exact path. \
+It must be the directory that contains NMS.exe. See the BUILD.md for why it needs to know this."
     )
 
 elseif(NOT SKIP_NMS_CHECK)
@@ -70,6 +75,8 @@ endif()
 # Dependencies.
 
 macro(add_dependency_custom dir include)
+    message(STATUS "Adding dependency: ${dir} (${include})")
+
     if(NOT EXISTS "${CMAKE_SOURCE_DIR}/${dir}/CMakeLists.txt")
         execute_process(
             COMMAND git submodule update --init --recursive ${dir}
@@ -77,10 +84,7 @@ macro(add_dependency_custom dir include)
         )
     endif()
 
-    if(EXISTS "${CMAKE_SOURCE_DIR}/${dir}/CMakeLists.txt")
-        add_subdirectory(${dir})
-    endif()
-    message(STATUS "Adding dependency: ${dir} (${include})")
+    add_subdirectory(${dir})
     include_directories(${CMAKE_SOURCE_DIR}/${include})
 endmacro()
 
@@ -102,40 +106,19 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_C_STANDARD 17)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 
-# /await and -fcoroutines may not be part of std yet, but it makes the task
-# scheduler for the OS work more efficiently with our stuff, so we'll use it.
-
-# @vitalised: we disable warning C4201 due to NMS using lots of anonymous
-# structs/unions.
-
-if(MSVC)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /await /W4 /wd4201")
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /W4 /wd4201")
-
-    if(CMAKE_BUILD_TYPE STREQUAL "Release")
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /WX")
-        set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /WX")
-    endif()
-else()
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static -fcoroutines -Wall -Wextra")
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -static -Wall -Wextra")
-
-    if(CMAKE_BUILD_TYPE STREQUAL "Release")
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror")
-        set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Werror")
-    endif()
-endif()
-
-if(CMAKE_BUILD_TYPE STREQUAL "")
-    set(CMAKE_BUILD_TYPE "Release")
-endif()
-
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin")
 message(STATUS "Binaries will be placed in: ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
 
 # ==================================================================================================
 # Targets.
 
+add_subdirectory(renms)
+add_subdirectory(skyscraper)
+add_subdirectory(tools)
+
+# --------------------------------------------------------------------------------------------------
+# uberclean - A completely thorough clean that removes EVERYTHING that isn't included in the repo,
+#             except for submodules. Useful for debugging build issues.
 add_custom_target(
     uberclean
     COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target clean
@@ -145,6 +128,61 @@ add_custom_target(
     COMMAND ${CMAKE_COMMAND} -E remove_directory ${PROJECT_SOURCE_DIR}/build
 )
 
-add_subdirectory(tools)
-add_subdirectory(renms)
-add_subdirectory(skyscraper)
+# --------------------------------------------------------------------------------------------------
+# MetadataClasses - Generates the metadata classes for renms.
+make_directory(${PROJECT_SOURCE_DIR}/metadata)
+
+add_custom_target(
+    MetadataClasses
+    DEPENDS ${PROJECT_SOURCE_DIR}/metadata/GIVEMEALLTHECLASSES.h
+)
+
+add_custom_command(
+    OUTPUT ${PROJECT_SOURCE_DIR}/metadata/GIVEMEALLTHECLASSES.h
+    COMMAND "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/heridiumLauncher.exe"
+            "${NMS_EXE_PATH}"
+    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/metadata
+    DEPENDS Heridium heridiumLauncher
+)
+
+# --------------------------------------------------------------------------------------------------
+# renms_proxy settings
+set_target_properties(renms_proxy PROPERTIES OUTPUT_NAME libSceFios2)
+
+# --------------------------------------------------------------------------------------------------
+# renms settings
+add_dependencies(renms MetadataClasses Heridium heridiumLauncher)
+target_link_libraries(renms fmt PolyHook_2 spdlog)
+
+target_precompile_headers(
+    renms PRIVATE ${PROJECT_SOURCE_DIR}/renms/renms.h PRIVATE
+    ${PROJECT_SOURCE_DIR}/skyscraper/skyscraper.h
+)
+
+target_compile_definitions(renms PRIVATE RENMS)
+set_target_properties(renms PROPERTIES OUTPUT_NAME renms)
+
+target_include_directories(
+    renms
+    PUBLIC ${PROJECT_SOURCE_DIR}/renms
+    PUBLIC ${PROJECT_SOURCE_DIR}/skyscraper
+    PUBLIC ${PROJECT_SOURCE_DIR}/metadata/source
+    PUBLIC ${PROJECT_SOURCE_DIR}/metadata/toolkit
+    PUBLIC ${PROJECT_SOURCE_DIR}/submodules/spdlog/include
+)
+
+# --------------------------------------------------------------------------------------------------
+# skyscraper settings
+target_include_directories(
+    renms_skyscraper PRIVATE
+    ${CMAKE_SOURCE_DIR}
+    ${CMAKE_SOURCE_DIR}/skyscraper
+)
+
+# --------------------------------------------------------------------------------------------------
+# heridiumLauncher settings (No settings needed)
+
+# --------------------------------------------------------------------------------------------------
+# Heridium settings
+target_include_directories(Heridium PUBLIC ${CMAKE_SOURCE_DIR}/skyscraper ${CMAKE_SOURCE_DIR}/renms)
+target_link_libraries(Heridium PRIVATE spdlog fmt PolyHook_2)
