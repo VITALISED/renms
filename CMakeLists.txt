@@ -80,6 +80,7 @@ macro(add_dependency_custom dir include)
     if(EXISTS "${CMAKE_SOURCE_DIR}/${dir}/CMakeLists.txt")
         add_subdirectory(${dir})
     endif()
+    message(STATUS "Adding dependency: ${dir} (${include})")
     include_directories(${CMAKE_SOURCE_DIR}/${include})
 endmacro()
 

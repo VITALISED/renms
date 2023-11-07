@@ -42,7 +42,7 @@ add_dependencies(renms MetadataClasses)
 target_precompile_headers(
     renms
     PRIVATE
-    ${PROJECT_SOURCE_DIR}/renms.h
+    ${PROJECT_SOURCE_DIR}/renms/renms.h
     PRIVATE
     ${PROJECT_SOURCE_DIR}/skyscraper/skyscraper.h
     PRIVATE
