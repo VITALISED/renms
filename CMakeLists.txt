@@ -21,6 +21,10 @@ project(
     VERSION 0.0.1
 )
 
+# Set the output directory properly.
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin")
+message(STATUS "Binaries will be placed in: ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
+
 # Fix an issue with windows gnu systems where the c++std libs don't get privately
 # linked, and since it isn't available on windows systems by default, it fails as
 # it can't find the library.
@@ -148,18 +152,12 @@ add_dependency_custom(
 )
 
 # ==================================================================================================
-# Compiler setup.
+# Targets.
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_C_STANDARD 17)
 set(CMAKE_C_STANDARD_REQUIRED ON)
-
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin")
-message(STATUS "Binaries will be placed in: ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
-
-# ==================================================================================================
-# Targets.
 
 add_subdirectory(renms)
 add_subdirectory(skyscraper)
