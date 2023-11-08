@@ -21,6 +21,28 @@ project(
     VERSION 0.0.1
 )
 
+# Fix an issue with windows gnu systems where the c++std libs don't get privately
+# linked, and since it isn't available on windows systems by default, it fails as
+# it can't find the library.
+if(CMAKE_CROSSCOMPILING)
+    set(CMAKE_EXE_LINKER_FLAGS
+        "${CMAKE_EXE_LINKER_FLAGS} -static-libstdc++ -static-libgcc"
+    )
+    message(STATUS "Crosscompiling setup detected, linking libstdc++ and libgcc statically.")
+endif()
+
+# Fix another issue where this dll can't be statically linked on windows, and must
+# be copied to the output directory.
+if (CMAKE_CROSSCOMPILING)
+    find_path(WINPTHREAD_PATH NAMES libwinpthread-1.dll)
+    if (NOT WINPTHREAD_PATH)
+        message(WARNING "libwinpthread-1.dll not found! You may get an error while running heridiumLauncher.exe.")
+    else()
+        message(STATUS "libwinpthread-1.dll found at ${WINPTHREAD_PATH}")
+        file(COPY ${WINPTHREAD_PATH}/libwinpthread-1.dll DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+    endif()
+endif()
+
 # Fix a dumb problem with certain setups where it adds "lib" to the front of the
 # library name.
 set(CMAKE_STATIC_LIBRARY_PREFIX "")
@@ -30,6 +52,10 @@ set(CMAKE_SHARED_LIBRARY_PREFIX "")
 # output is on the same line as Ninja's.
 if(CMAKE_GENERATOR STREQUAL "Ninja")
     message("")
+endif()
+
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    add_definitions(-DDEBUG -D_DEBUG)
 endif()
 
 # ==================================================================================================
@@ -107,8 +133,12 @@ macro(add_dependency_custom dir include)
     include_directories(${CMAKE_SOURCE_DIR}/${include})
 endmacro()
 
-add_dependency_custom(./submodules/spdlog ./submodules/spdlog/include)
 add_dependency_custom(./submodules/fmt ./submodules/fmt/include)
+
+set(SPDLOG_FMT_EXTERNAL ON)
+set(SPDLOG_BUILD_SHARED OFF)
+set(SPDLOG_ENABLE_PCH ON)
+add_dependency_custom(./submodules/spdlog ./submodules/spdlog/include)
 add_dependency_custom(./submodules/PolyHook2_0 ./submodules/PolyHook2_0)
 add_dependency_custom(
     ./submodules/robin-hood-hashing ./submodules/robin-hood-hashing/src/include
