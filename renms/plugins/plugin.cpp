@@ -56,7 +56,7 @@ void PluginManager::Load(std::filesystem::path PluginPath)
 
     // Execute plugin main
     PluginMain_t pluginEntry = reinterpret_cast<PluginMain_t>(GetProcAddress(PluginHandle, "PluginMain"));
-    pluginEntry();
+    if (pluginEntry) { pluginEntry(); }
 }
 
 RENMS_END
