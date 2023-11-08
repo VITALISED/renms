@@ -198,7 +198,7 @@ set_target_properties(renms_proxy PROPERTIES OUTPUT_NAME libSceFios2)
 
 # --------------------------------------------------------------------------------------------------
 # renms settings
-add_dependencies(renms MetadataClasses Heridium heridiumLauncher)
+add_dependencies(renms resdk Heridium heridiumLauncher)
 target_link_libraries(renms fmt PolyHook_2 spdlog)
 
 target_precompile_headers(
