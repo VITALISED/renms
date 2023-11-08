@@ -29,14 +29,12 @@ PluginManager::PluginManager()
     path nmsPath      = current_path();
     path PluginFolder = nmsPath / "RENMS/plugins";
 
-    if (!is_directory(PluginFolder)) create_directories(PluginFolder);
-
     for (directory_entry PluginEntry : directory_iterator(PluginFolder))
     {
         if (!PluginEntry.is_regular_file()) continue;
         path Plugin = PluginEntry;
 
-        if (Plugin.filename().extension() != "rn") continue;
+        if (Plugin.filename().extension() != ".dll") continue;
 
         // attempt to load the plugin
         spdlog::info("Loading plugin: {}", Plugin.filename().string());
@@ -56,7 +54,9 @@ void PluginManager::Load(std::filesystem::path PluginPath)
         return;
     }
 
-    // Execute the plugin's OnLoad function
+    // Execute plugin main
+    PluginMain_t pluginEntry = reinterpret_cast<PluginMain_t>(GetProcAddress(PluginHandle, "PluginMain"));
+    pluginEntry();
 }
 
 RENMS_END

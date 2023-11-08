@@ -18,6 +18,7 @@
 #pragma once
 
 #include <filesystem>
+#include <plugins/api.h>
 #include <renms.h>
 #include <string>
 

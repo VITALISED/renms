@@ -16,8 +16,14 @@
 file(GLOB_RECURSE RENMS_HEADERS ${PROJECT_SOURCE_DIR}/renms/ "*.h", "*.tpp")
 
 add_library(
-    renms SHARED ${RENMS_HEADERS} "dllmain.cpp" "memory/malloc.cpp"
-                 "plugins/plugin.cpp" "plugins/api.cpp" "core/warning.cpp"
+    renms SHARED
+    ${RENMS_HEADERS}
+    "dllmain.cpp"
+    "memory/malloc.cpp"
+    "plugins/plugin.cpp"
+    "plugins/api.cpp"
+    "core/warning.cpp"
+    "core/filesystem.cpp"
 )
 
 add_subdirectory(proxy)

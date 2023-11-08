@@ -16,6 +16,7 @@
 */
 
 #include "renms.h"
+#include <core/filesystem.h>
 #include <core/warning.h>
 
 DWORD WINAPI MainThread(LPVOID lpReserved)
@@ -24,7 +25,10 @@ DWORD WINAPI MainThread(LPVOID lpReserved)
 
     CreateLogger();
     spdlog::info("renms attached :)");
+
+    renms::CreateTargetDirectories();
     renms::CreateWarningHooks();
+
     return TRUE;
 }
 
