@@ -17,11 +17,7 @@
 
 #include "winprocess.h"
 
-#ifdef _MSC_VER
 #define HERIDIUM_LIB "Heridium.dll"
-#else
-#define HERIDIUM_LIB "libHeridium.dll"
-#endif
 
 void printDebug(std::string input)
 {

@@ -154,11 +154,11 @@ make_directory(${PROJECT_SOURCE_DIR}/metadata)
 
 add_custom_target(
     MetadataClasses
-    DEPENDS ${PROJECT_SOURCE_DIR}/metadata/GIVEMEALLTHECLASSES.h
+    DEPENDS ${PROJECT_SOURCE_DIR}/metadata/metadata.h
 )
 
 add_custom_command(
-    OUTPUT ${PROJECT_SOURCE_DIR}/metadata/GIVEMEALLTHECLASSES.h
+    OUTPUT ${PROJECT_SOURCE_DIR}/metadata/metadata.h
     COMMAND "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/heridiumLauncher.exe"
             "${NMS_EXE_PATH}"
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/metadata
@@ -174,9 +174,10 @@ set_target_properties(renms_proxy PROPERTIES OUTPUT_NAME libSceFios2)
 add_dependencies(renms MetadataClasses Heridium heridiumLauncher)
 target_link_libraries(renms fmt PolyHook_2 spdlog)
 
-target_precompile_headers(
-    renms PRIVATE ${PROJECT_SOURCE_DIR}/renms/renms.h PRIVATE
-    ${PROJECT_SOURCE_DIR}/skyscraper/skyscraper.h
+target_precompile_headers(renms
+    PRIVATE ${PROJECT_SOURCE_DIR}/renms/renms.h
+    PRIVATE ${PROJECT_SOURCE_DIR}/skyscraper/skyscraper.h
+    PRIVATE ${PROJECT_SOURCE_DIR}/metadata/metadata.h
 )
 
 target_compile_definitions(renms PRIVATE RENMS)
