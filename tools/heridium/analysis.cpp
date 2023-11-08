@@ -17,7 +17,7 @@
 
 #include "analysis.h"
 
-RENMS_HOOK(cTkMetaData__Register, renms::RelToAbsolute(0x248ABC0), cTkMetaData__Register__DETOUR);
+uint64_t cTkMetaData__Register__TRAMPOLINE = 0;
 
 void cTkMetaData__Register__DETOUR(
     const cTkMetaDataClass *lpClassMetadata, void (*lDefaultFunction)(cTkClassPointer *, cTkLinearMemoryPool *),
@@ -54,10 +54,12 @@ void cTkMetaData__Register__DETOUR(
 
     HeridiumCXXFile(lPath.c_str(), lpClassMetadata);
 
-    return RENMS_CALLORIGINAL(
-        cTkMetaData__Register, lpClassMetadata, lDefaultFunction, lFixingFunction, lValidateFunction, lEqualsFunction,
-        lRenderFunction, lCopyFunction, lCreateFunction, lHashFunction, lDestroyFunction);
-};
+    return PLH::FnCast(cTkMetaData__Register__TRAMPOLINE, cTkMetaData__Register__DETOUR)(
+        lpClassMetadata, lDefaultFunction, lFixingFunction, lValidateFunction, lEqualsFunction, lRenderFunction,
+        lCopyFunction, lCreateFunction, lHashFunction, lDestroyFunction);
+}
+
+PLH::x64Detour cTkMetaData__Register__HOOK((uint64_t)renms::RelToAbsolute(0x248ABC0), (uint64_t)cTkMetaData__Register__DETOUR, &cTkMetaData__Register__TRAMPOLINE);
 
 HERIDIUM_BEGIN
 
@@ -65,7 +67,7 @@ void AnalysisInit()
 {
     CreateOutputDirectories();
 
-    cTkMetaData__Register.Dispatch();
+    cTkMetaData__Register__HOOK.hook();
 
     renms::ResumeModuleThread(MODULE_BASE);
 }

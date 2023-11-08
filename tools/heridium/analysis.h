@@ -26,15 +26,6 @@
 #include <toolkit/data/TkMetaDataXML.h>
 #include <toolkit/utilities/containers/TkVector.h>
 
-void cTkMetaData__Register__DETOUR(
-    const cTkMetaDataClass *lpClassMetadata, void (*lDefaultFunction)(cTkClassPointer *, cTkLinearMemoryPool *),
-    void (*lFixingFunction)(cTkClassPointer *, bool, unsigned __int64), void (*lValidateFunction)(cTkClassPointer *),
-    bool (*lEqualsFunction)(const cTkClassPointer *, const cTkClassPointer *),
-    void (*lRenderFunction)(cTkClassPointer *), void (*lCopyFunction)(cTkClassPointer *, const cTkClassPointer *),
-    cTkClassPointer *(*lCreateFunction)(cTkClassPointer *result),
-    unsigned __int64 (*lHashFunction)(const cTkClassPointer *, unsigned __int64, bool),
-    void (*lDestroyFunction)(cTkClassPointer *));
-
 HERIDIUM_BEGIN
 
 using namespace nms;
