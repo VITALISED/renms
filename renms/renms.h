@@ -17,7 +17,7 @@
 
 #pragma once
 
-// #ifdef RENMS
+#ifdef RENMS
 
 #include <array>
 #include <core/framework.h>
@@ -30,7 +30,7 @@
 #include <string>
 #include <vector>
 
-// #endif // RENMS
+#endif // RENMS
 
 // clang-format off
 #define RENMS_BEGIN namespace renms {

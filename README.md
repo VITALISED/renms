@@ -1,7 +1,5 @@
 # renms
 
-To RayRodTV and fans: read the [MANIFESTO.md](docs/MANIFESTO.md).
-
 ## Overview
 
 renms is a No Man's Sky SDK toolchain. The goal of the project is to provide (eventual) cross platform modding support through hooking No Man's Sky's finite state machines (GcApplication for e.g).
