@@ -21,6 +21,10 @@ project(
     VERSION 0.0.1
 )
 
+# Fix a dumb problem with certain setups where it adds "lib" to the front of the library name.
+set(CMAKE_STATIC_LIBRARY_PREFIX "")
+set(CMAKE_SHARED_LIBRARY_PREFIX "")
+
 # Fix a problem with Ninja where it doesn't place a newline and the first cmake
 # output is on the same line as Ninja's.
 if(CMAKE_GENERATOR STREQUAL "Ninja")
