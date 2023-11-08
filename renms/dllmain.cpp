@@ -15,7 +15,6 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#include "framework.h"
 #include "renms.h"
 
 DWORD WINAPI MainThread(LPVOID lpReserved)
@@ -40,7 +39,7 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserv
         break;
     case DLL_THREAD_ATTACH:
     case DLL_THREAD_DETACH:
-    case DLL_PROCESS_DETACH: MH_Uninitialize(); break;
+    case DLL_PROCESS_DETACH: break;
     }
     return TRUE;
 }

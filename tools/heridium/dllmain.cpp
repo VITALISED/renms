@@ -23,7 +23,7 @@
 #endif
 
 #ifndef HERIDIUM_SHOULD_EXIT
-#define HERIDIUM_SHOULD_EXIT 0
+#define HERIDIUM_SHOULD_EXIT 1
 #endif
 
 DWORD WINAPI MainThread(LPVOID lpReserved)
@@ -39,7 +39,7 @@ DWORD WINAPI WindowCheckThread(LPVOID lpReserved)
     UNREFERENCED_PARAMETER(lpReserved);
 
     // Halts this thread until the NMS window shows up.
-    while (FindWindowA(NULL, (LPCSTR) "No Man's Sky") != nullptr) Sleep(1000); // let's not hog resources
+    while (FindWindowA(NULL, (LPCSTR) "No Man's Sky") == nullptr) Sleep(1000); // let's not hog resources
 
     if (HERIDIUM_SHOULD_EXIT) { exit(0); };
 
