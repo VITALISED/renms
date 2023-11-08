@@ -22,7 +22,7 @@ void cGcApplicationGameModeSelectorState__RenderWarning__DETOUR(
         cGcApplicationGameModeSelectorState__RenderWarning__DETOUR)(
         thiscall, "You're running ReNMS", "I understand, Click to Continue.",
         "You may run into various crashes, if you're experiencing issues check the repository for troubleshooting "
-        "tips or open an issue @ https://github.com/VITALISED/renms",
+        "tips or open an issue at https://github.com/VITALISED/renms",
         (char *)"We're not endorsed by Hello Games so please don't send them any Zendesk Tickets, they can't help.",
         lfTimeout);
 }
