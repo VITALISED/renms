@@ -177,11 +177,11 @@ add_custom_target(
 )
 
 # --------------------------------------------------------------------------------------------------
-# MetadataClasses - Generates the metadata classes for renms.
+# resdk - Generates the metadata classes for renms, giving it enough headers to make plugins for it.
 make_directory(${PROJECT_SOURCE_DIR}/metadata)
 
 add_custom_target(
-    MetadataClasses DEPENDS ${PROJECT_SOURCE_DIR}/metadata/metadata.h
+    resdk DEPENDS ${PROJECT_SOURCE_DIR}/metadata/metadata.h
 )
 
 add_custom_command(
