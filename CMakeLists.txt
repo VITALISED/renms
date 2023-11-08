@@ -21,7 +21,8 @@ project(
     VERSION 0.0.1
 )
 
-# Fix a dumb problem with certain setups where it adds "lib" to the front of the library name.
+# Fix a dumb problem with certain setups where it adds "lib" to the front of the
+# library name.
 set(CMAKE_STATIC_LIBRARY_PREFIX "")
 set(CMAKE_SHARED_LIBRARY_PREFIX "")
 
@@ -48,10 +49,12 @@ else()
 endif()
 
 if(NOT DEFINED RENMS_CONFIG_VERSION OR RENMS_CONFIG_VERSION LESS 3)
-    message(WARNING "Your config.cmake is out of date! Chances are it'll still build fine, but I highly \
+    message(
+        WARNING
+            "Your config.cmake is out of date! Chances are it'll still build fine, but I highly \
 suggest checking out the config-template.cmake and updating your config.cmake."
     )
-    
+
 endif()
 
 if(NOT DEFINED NMS_EXE_PATH AND NOT SKIP_NMS_CHECK)
@@ -84,6 +87,11 @@ endif()
 
 # ==================================================================================================
 # Dependencies.
+
+# set Polyhook to use our dynamic runtime
+if(MSVC)
+    set(POLYHOOK_BUILD_STATIC_RUNTIME OFF)
+endif()
 
 macro(add_dependency_custom dir include)
     message(STATUS "Adding dependency: ${dir} (${include})")
@@ -128,8 +136,8 @@ add_subdirectory(skyscraper)
 add_subdirectory(tools)
 
 # --------------------------------------------------------------------------------------------------
-# uberclean - A completely thorough clean that removes EVERYTHING that isn't included in the repo,
-#             including submodules. Useful for debugging build issues.
+# uberclean - A completely thorough clean that removes EVERYTHING that isn't
+# included in the repo, including submodules. Useful for debugging build issues.
 add_custom_target(
     uberclean
     COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target clean
@@ -186,9 +194,7 @@ target_include_directories(
 # --------------------------------------------------------------------------------------------------
 # skyscraper settings
 target_include_directories(
-    renms_skyscraper PRIVATE
-    ${CMAKE_SOURCE_DIR}
-    ${CMAKE_SOURCE_DIR}/skyscraper
+    renms_skyscraper PRIVATE ${CMAKE_SOURCE_DIR} ${CMAKE_SOURCE_DIR}/skyscraper
 )
 
 # --------------------------------------------------------------------------------------------------
@@ -196,5 +202,7 @@ target_include_directories(
 
 # --------------------------------------------------------------------------------------------------
 # Heridium settings
-target_include_directories(Heridium PUBLIC ${CMAKE_SOURCE_DIR}/skyscraper ${CMAKE_SOURCE_DIR}/renms)
+target_include_directories(
+    Heridium PUBLIC ${CMAKE_SOURCE_DIR}/skyscraper ${CMAKE_SOURCE_DIR}/renms
+)
 target_link_libraries(Heridium PRIVATE spdlog fmt PolyHook_2)
