@@ -13,7 +13,7 @@
 # You should have received a copy of the GNU General Public License along with
 # this program.  If not, see <https://www.gnu.org/licenses/>.
 
-file(GLOB_RECURSE RENMS_HEADERS ${PROJECT_SOURCE_DIR}/renms/ "*.h", "*.tpp")
+file(GLOB_RECURSE RENMS_HEADERS ${PROJECT_SOURCE_DIR}/renms/ "*.h" "*.tpp")
 
 add_library(
     renms SHARED
