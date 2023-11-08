@@ -15,30 +15,16 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#pragma once
+// #include <renms.h>
 
-#include "framework.h"
-#include "paths.h"
-#include <cstring>
-#include <filesystem>
-#include <fmt/format.h>
-#include <fstream>
-#include <spdlog/spdlog.h>
-#include <iostream>
+// RENMS_HOOK(
+//     cGcApplicationGameModeSelectorState__RenderWarning, renms::RelToAbsolute(0x1BF7E0),
+//     [](uintptr_t thiscall, const char *lpacWarningTitle, const char *lpacWarningPress, const char *lStatus1,
+//        char *lStatus2, float lfTimeout) -> void {
 
-// clang-format off
-#define HERIDIUM_BEGIN namespace heridium {
-#define HERIDIUM_END }
-// clang-format on
+//     });
 
-HERIDIUM_BEGIN
-
-enum HeridiumLanguageType
-{
-    EHeridiumLanguageType_CXX,
-    EHeridiumLanguageType_None,
-};
-
-void CreateOutputDirectories();
-
-HERIDIUM_END
+// void RENMS_ENTRY PluginMain()
+// {
+//     cGcApplicationGameModeSelectorState__RenderWarning.Toggle();
+// }

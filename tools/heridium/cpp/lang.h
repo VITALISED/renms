@@ -15,6 +15,8 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+#include <fstream>
+
 #include "../heridium.h"
 #include "lex.h"
 #include "notation.h"

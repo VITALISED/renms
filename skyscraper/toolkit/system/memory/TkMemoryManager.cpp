@@ -1,26 +1,55 @@
 #include <skyscraper.h>
 #include <toolkit/system/memory/TkMemoryManager.h>
 
-SKYSCRAPER_BEGIN
+// SKYSCRAPER_BEGIN
 
-void *cTkMemoryManager::Malloc(int liSize, const char* lpacFile, int liLine, const char* lpacFunction, int liAlign, int liPool) 
-{
-    if(liAlign && !(liAlign & (liAlign - 1)))
-    {
-        //handle non power of two alignment
-    }
+// // nt thread stuff in this func makes it a pain to reverse
+// int cTkMemoryManager::GetBackingPoolIndexFromPool(int liMemType)
+// {
+//     if (liMemType == -3) { return this->mpMemPoolDefinitionList[this->miGlobalPoolInd].meBackingPool; }
+//     else if (liMemType == -1) {}
+//     else if (liMemType == this->miDblBufPoolInd) {}
+// }
 
-    //FIXME: liPool is obviously an enum but we dont know what it is
-    if((liPool == -2) && cTkMemoryManager::mgbConstructed)
-    {
-        //i hate this with a fucking passion
-        return _aligned_malloc(liSize, liAlign);
-    }
+// cTkMemoryPool *cTkMemoryManager::GetBackingPool(int liPool)
+// {
+//     if (liPool < 0) {}
 
-    int liBackingPoolIndex;
-    cTkMemoryPool* lpBackingPool;
+//     if (liPool >= this->miNumBackingPools) {}
 
-    return nullptr; //todo: finish
-}
+//     return this->mpapBackingMemoryPools[liPool];
+// }
 
-SKYSCRAPER_END
+// void *cTkMemoryManager::Malloc(
+//     int liSize, const char *lpacFile, int liLine, const char *lpacFunction, int liAlign, int liPool)
+// {
+//     if (liAlign && !(liAlign & (liAlign - 1)))
+//     {
+//         // handle non power of two alignment
+//     }
+
+//     if ((liPool == -2) && cTkMemoryManager::mgbConstructed)
+//     {
+//         // i hate this with a fucking passion
+//         return _aligned_malloc(liSize, liAlign);
+//     }
+
+//     int                 liBackingPoolIndex = this->GetBackingPoolIndexFromPool(liPool);
+//     cTkMemoryPool      *lpBackingPool      = this->GetBackingPool(liBackingPoolIndex);
+//     cTkBackingPoolData *lpBackingPoolData  = &this->mpBackingPoolData[liBackingPoolIndex];
+
+//     if (lpBackingPoolData)
+//     {
+//         int liAllocatedSize;
+
+//         if (lpBackingPoolData->mbUseFixedPools && liAlign > 0)
+//         {
+//             liAllocatedSize = liSize;
+//             this->mFixedPools
+//         }
+//     }
+
+//     return nullptr; // todo: finish
+// }
+
+// SKYSCRAPER_END

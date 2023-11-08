@@ -17,18 +17,14 @@
 
 #include "winprocess.h"
 
-#ifdef _MSC_VER
 #define HERIDIUM_LIB "Heridium.dll"
-#else
-#define HERIDIUM_LIB "libHeridium.dll"
-#endif
 
 void printDebug(std::string input)
 {
 #ifdef _DEBUG
     std::cout << input << std::endl;
 #else
-    UNREFERENCED_PARAMETER(INPUT)
+    UNREFERENCED_PARAMETER(input)
 #endif
 }
 

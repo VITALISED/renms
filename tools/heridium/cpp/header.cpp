@@ -15,6 +15,9 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+#include <spdlog/spdlog.h>
+
+#include "../paths.h"
 #include "lang.h"
 
 HeridiumCXXFile::HeridiumCXXFile(const char *lpacFileLocation, const cTkMetaDataClass *lpMetaDataClass)

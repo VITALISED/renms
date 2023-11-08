@@ -17,9 +17,8 @@
 
 #pragma once
 
-#include "../memory/hooks.h"
-#include "../renms.h"
 #include <filesystem>
+#include <renms.h>
 #include <string>
 
 RENMS_BEGIN
@@ -45,5 +44,3 @@ class PluginManager
 };
 
 RENMS_END
-
-void OnLoad();

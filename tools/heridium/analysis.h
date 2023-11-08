@@ -14,25 +14,22 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
-
 #pragma once
 
 #include "cpp/lang.h"
 #include "heridium.h"
-#include <memory/hooks-old.h>
+#include "paths.h"
+#include <filesystem>
+#include <memory/hook.h>
+#include <memory/thread.h>
 #include <toolkit/data/TkMetaData.h>
 #include <toolkit/data/TkMetaDataXML.h>
 #include <toolkit/utilities/containers/TkVector.h>
 
+HERIDIUM_BEGIN
+
 using namespace nms;
 
 void AnalysisInit();
-
-HERIDIUM_BEGIN
-
-// void DoLookupIter();
-// HACK: since I lack the braincells to figure out how hashes are generated we will instead retrieve them from the
-// generated functions.
-uintptr_t UnpackClassPointerWriteFunc(LPVOID ClassPointerWriteFunction);
 
 HERIDIUM_END

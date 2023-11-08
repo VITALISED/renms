@@ -3,5 +3,3 @@ add_library(
     "dllmain.cpp"    
     "exports.h"
 )
-
-set_target_properties(renms_proxy PROPERTIES OUTPUT_NAME libSceFios2)

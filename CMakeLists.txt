@@ -1,18 +1,17 @@
-#    Copyright (C) 2023  VITALISED, tractorbeam
+# Copyright (C) 2023  VITALISED, tractorbeam
 #
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
+# This program is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free Software
+# Foundation, either version 3 of the License, or (at your option) any later
+# version.
 #
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+# details.
 #
-#    You should have received a copy of the GNU General Public License
-#    along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
+# You should have received a copy of the GNU General Public License along with
+# this program.  If not, see <https://www.gnu.org/licenses/>.
 
 cmake_minimum_required(VERSION 3.15)
 
@@ -22,121 +21,194 @@ project(
     VERSION 0.0.1
 )
 
+# Fix a dumb problem with certain setups where it adds "lib" to the front of the
+# library name.
+set(CMAKE_STATIC_LIBRARY_PREFIX "")
+set(CMAKE_SHARED_LIBRARY_PREFIX "")
 
-## Fix a problem with Ninja where it doesn't place a newline and the first cmake output is on the same line as Ninja's.
-if (CMAKE_GENERATOR STREQUAL "Ninja")
+# Fix a problem with Ninja where it doesn't place a newline and the first cmake
+# output is on the same line as Ninja's.
+if(CMAKE_GENERATOR STREQUAL "Ninja")
     message("")
 endif()
 
+# ==================================================================================================
+# First checks.
 
-## ================================================================================================== First checks.
-
-
-if (EXISTS "${CMAKE_SOURCE_DIR}/config.cmake")
-    include(./config.cmake)
-else()
-    message(FATAL_ERROR "No config.cmake found! Check out the config-template.cmake.")
+if(CMAKE_BUILD_TYPE STREQUAL "")
+    set(CMAKE_BUILD_TYPE "Release")
 endif()
 
-if (NOT DEFINED NMS_EXE_PATH AND NOT SKIP_NMS_CHECK)
-    message(FATAL_ERROR
+if(EXISTS "${CMAKE_SOURCE_DIR}/config.cmake")
+    include(./config.cmake)
+else()
+    message(
+        FATAL_ERROR
+            "No config.cmake found! Check out the config-template.cmake."
+    )
+endif()
 
-"NMS_EXE_PATH not defined!\n\
-Look inside the root CMakeLists.txt for the option, and set it's exact path. \
-It must be the directory that contains NMS.exe. See the BUILD.md for why it needs to know this.")
+if(NOT DEFINED RENMS_CONFIG_VERSION OR RENMS_CONFIG_VERSION LESS 3)
+    message(
+        WARNING
+            "Your config.cmake is out of date! Chances are it'll still build fine, but I highly \
+suggest checking out the config-template.cmake and updating your config.cmake."
+    )
+
+endif()
+
+if(NOT DEFINED NMS_EXE_PATH AND NOT SKIP_NMS_CHECK)
+    message(
+        FATAL_ERROR
+            "NMS_EXE_PATH not defined!\n\
+Look inside the config.cmake for the option, and set it's exact path. \
+It must be the directory that contains NMS.exe. See the BUILD.md for why it needs to know this."
+    )
 
 endif()
 
 get_filename_component(NMS_EXE_PATH "${NMS_EXE_PATH}" ABSOLUTE)
-if (NOT EXISTS "${NMS_EXE_PATH}" AND NOT SKIP_NMS_CHECK)
-    message(FATAL_ERROR
-
-"NMS_EXE_PATH either isn't a valid directory or doesn't contain NMS.exe!\n\
-See the BUILD.md for why it needs to know this.")
+if(NOT EXISTS "${NMS_EXE_PATH}" AND NOT SKIP_NMS_CHECK)
+    message(
+        FATAL_ERROR
+            "NMS_EXE_PATH either isn't a valid directory or doesn't contain NMS.exe!\n\
+Look inside the config.cmake for the option, and set it's exact path. \
+It must be the directory that contains NMS.exe. See the BUILD.md for why it needs to know this."
+    )
 
 elseif(NOT SKIP_NMS_CHECK)
     message(STATUS "NMS Executable found: ${NMS_EXE_PATH}")
 else()
-    message(STATUS "NMS.exe check skipped! Unless you already extracted all the metadata, the build will fail! Be warned!")
+    message(
+        STATUS
+            "NMS.exe check skipped! Unless you already extracted all the metadata, the build will fail! Be warned!"
+    )
 endif()
 
+# ==================================================================================================
+# Dependencies.
 
-## ================================================================================================== Dependencies.
-
+# set Polyhook to use our dynamic runtime
+if(MSVC)
+    set(POLYHOOK_BUILD_STATIC_RUNTIME OFF)
+endif()
 
 macro(add_dependency_custom dir include)
-    if (NOT EXISTS "${CMAKE_SOURCE_DIR}/${dir}")
-        message(FATAL_ERROR "Dependency ${dir} doesn't exist! Did you forget to sync your submodules with 'git submodule update --init --recursive' ?")
+    message(STATUS "Adding dependency: ${dir} (${include})")
+
+    if(NOT EXISTS "${CMAKE_SOURCE_DIR}/${dir}/CMakeLists.txt")
+        execute_process(
+            COMMAND git submodule update --init --recursive ${dir}
+            WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+        )
     endif()
 
-    if (EXISTS "${CMAKE_SOURCE_DIR}/${dir}/CMakeLists.txt")
-        add_subdirectory(${dir})
-    endif()
+    add_subdirectory(${dir})
     include_directories(${CMAKE_SOURCE_DIR}/${include})
 endmacro()
 
-add_dependency_custom(./submodules/fmt                 ./submodules/fmt/include)
-add_dependency_custom(./submodules/minhook             ./submodules/minhook/include)
-add_dependency_custom(./submodules/robin-hood-hashing  ./submodules/robin-hood-hashing/src/include)
-add_dependency_custom(./submodules/spdlog              ./submodules/spdlog/include)
-include_directories(./submodules/spdlog/include)
-add_dependency_custom(./submodules/Vulkan-Headers      ./submodules/Vulkan-Headers/include)
+add_dependency_custom(./submodules/spdlog ./submodules/spdlog/include)
+add_dependency_custom(./submodules/fmt ./submodules/fmt/include)
+add_dependency_custom(./submodules/PolyHook2_0 ./submodules/PolyHook2_0)
+add_dependency_custom(
+    ./submodules/robin-hood-hashing ./submodules/robin-hood-hashing/src/include
+)
+add_dependency_custom(
+    ./submodules/Vulkan-Headers ./submodules/Vulkan-Headers/include
+)
 
-
-## ================================================================================================== Compiler setup.
-
+# ==================================================================================================
+# Compiler setup.
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_C_STANDARD 17)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 
-## /await and -fcoroutines may not be part of std yet, but it makes the task
-## scheduler for the OS work more efficiently with our stuff, so we'll use it.
-
-#@vitalised: we disable warning C4201 due to NMS using lots of anonymous structs/unions.
-
-if (MSVC)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /await /W4 /wd4201")
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /W4 /wd4201")
-
-    if (CMAKE_BUILD_TYPE STREQUAL "Release")
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /WX")
-        set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /WX")
-    endif()
-else()
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static -fcoroutines -Wall -Wextra")
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -static -Wall -Wextra")
-
-    if (CMAKE_BUILD_TYPE STREQUAL "Release")
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror")
-        set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Werror")
-    endif()
-endif()
-
-if (CMAKE_BUILD_TYPE STREQUAL "Debug")
-    add_definitions(-DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG)
-endif()
-
-if (CMAKE_BUILD_TYPE STREQUAL "")
-    set(CMAKE_BUILD_TYPE "Release")
-endif()
-
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin")
 message(STATUS "Binaries will be placed in: ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
 
+# ==================================================================================================
+# Targets.
 
-## ================================================================================================== Targets.
-
-
-add_custom_target(uberclean
-    COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target clean
-    COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
-    COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_SOURCE_DIR}/metadata
-    COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_SOURCE_DIR}/build
-)
-
-
-add_subdirectory(tools)
 add_subdirectory(renms)
 add_subdirectory(skyscraper)
+add_subdirectory(tools)
+
+# --------------------------------------------------------------------------------------------------
+# uberclean - A completely thorough clean that removes EVERYTHING that isn't
+# included in the repo, including submodules. Useful for debugging build issues.
+add_custom_target(
+    uberclean
+    COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target clean
+    COMMAND git submodule deinit --all -f
+    COMMAND ${CMAKE_COMMAND} -E remove_directory
+            ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
+    COMMAND ${CMAKE_COMMAND} -E remove_directory ${PROJECT_SOURCE_DIR}/metadata
+    COMMAND ${CMAKE_COMMAND} -E remove_directory ${PROJECT_SOURCE_DIR}/build
+)
+
+# --------------------------------------------------------------------------------------------------
+# MetadataClasses - Generates the metadata classes for renms.
+make_directory(${PROJECT_SOURCE_DIR}/metadata)
+
+add_custom_target(
+    MetadataClasses DEPENDS ${PROJECT_SOURCE_DIR}/metadata/metadata.h
+)
+
+add_custom_command(
+    OUTPUT ${PROJECT_SOURCE_DIR}/metadata/metadata.h
+    COMMAND "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/heridiumLauncher.exe"
+            "${NMS_EXE_PATH}"
+    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/metadata
+    DEPENDS Heridium heridiumLauncher
+)
+
+# --------------------------------------------------------------------------------------------------
+# renms_proxy settings
+set_target_properties(renms_proxy PROPERTIES OUTPUT_NAME libSceFios2)
+
+# --------------------------------------------------------------------------------------------------
+# renms settings
+add_dependencies(renms MetadataClasses Heridium heridiumLauncher)
+target_link_libraries(renms fmt PolyHook_2 spdlog)
+
+target_precompile_headers(
+    renms
+    PRIVATE
+    ${PROJECT_SOURCE_DIR}/renms/renms.h
+    PRIVATE
+    ${PROJECT_SOURCE_DIR}/skyscraper/skyscraper.h
+    PRIVATE
+    ${PROJECT_SOURCE_DIR}/metadata/metadata.h
+)
+
+target_compile_definitions(renms PRIVATE RENMS)
+set_target_properties(renms PROPERTIES OUTPUT_NAME renms)
+
+target_include_directories(
+    renms
+    PUBLIC ${PROJECT_SOURCE_DIR}/renms
+    PUBLIC ${PROJECT_SOURCE_DIR}/skyscraper
+    PUBLIC ${PROJECT_SOURCE_DIR}/metadata/source
+    PUBLIC ${PROJECT_SOURCE_DIR}/metadata/toolkit
+    PUBLIC ${PROJECT_SOURCE_DIR}/submodules/spdlog/include
+)
+
+# --------------------------------------------------------------------------------------------------
+# skyscraper settings
+target_include_directories(
+    renms_skyscraper PRIVATE ${CMAKE_SOURCE_DIR} ${CMAKE_SOURCE_DIR}/skyscraper
+)
+
+# --------------------------------------------------------------------------------------------------
+# heridiumLauncher settings (No settings needed)
+
+# --------------------------------------------------------------------------------------------------
+# Heridium settings
+target_compile_definitions(Heridium PRIVATE RENMS)
+
+target_include_directories(
+    Heridium PUBLIC ${CMAKE_SOURCE_DIR}/skyscraper ${CMAKE_SOURCE_DIR}/renms
+)
+target_link_libraries(Heridium PRIVATE spdlog fmt PolyHook_2)

@@ -17,15 +17,27 @@
 
 #pragma once
 
-#include "framework.h"
-#include "log.h"
-#include <MinHook.h>
+// #ifdef RENMS
+
 #include <array>
+#include <core/framework.h>
+#include <core/log.h>
 #include <fmt/format.h>
+#include <plugins/api.h>
+#include <polyhook2/Detour/NatDetour.hpp>
+#include <polyhook2/Enums.hpp>
+#include <polyhook2/IHook.hpp>
 #include <string>
 #include <vector>
+
+// #endif // RENMS
 
 // clang-format off
 #define RENMS_BEGIN namespace renms {
 #define RENMS_END }
 // clang-format on
+
+// Plugin API for developers
+#ifndef RENMS
+#include "plugins/api.h"
+#endif

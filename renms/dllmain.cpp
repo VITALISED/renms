@@ -15,8 +15,8 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#include "framework.h"
 #include "renms.h"
+#include <core/warning.h>
 
 DWORD WINAPI MainThread(LPVOID lpReserved)
 {
@@ -24,6 +24,7 @@ DWORD WINAPI MainThread(LPVOID lpReserved)
 
     CreateLogger();
     spdlog::info("renms attached :)");
+    renms::CreateWarningHooks();
     return TRUE;
 }
 
@@ -36,12 +37,11 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserv
     case DLL_PROCESS_ATTACH:
         DisableThreadLibraryCalls(hModule);
         AllocConsole();
-        MH_Initialize();
         CreateThread(NULL, NULL, MainThread, hModule, NULL, NULL);
         break;
     case DLL_THREAD_ATTACH:
     case DLL_THREAD_DETACH:
-    case DLL_PROCESS_DETACH: MH_Uninitialize(); break;
+    case DLL_PROCESS_DETACH: break;
     }
     return TRUE;
 }

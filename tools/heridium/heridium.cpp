@@ -16,6 +16,13 @@
 */
 
 #include "heridium.h"
+#include "framework.h"
+#include "paths.h"
+#include <cstring>
+#include <filesystem>
+#include <fmt/format.h>
+#include <fstream>
+#include <spdlog/spdlog.h>
 
 HERIDIUM_BEGIN
 
@@ -28,7 +35,7 @@ static_assert("No language target defined for heridium");
 // This also creates the header with all the includes
 void CreateOutputDirectories()
 {
-    std::ofstream lHeaderStream("./GIVEMEALLTHECLASSES.h");
+    std::ofstream lHeaderStream("./metadata.h");
     lHeaderStream << "#pragma once\n\n";
 
     for (std::pair<const char *, const char *> lPair : gClassPaths)
@@ -42,7 +49,7 @@ void CreateOutputDirectories()
         std::string lpacFullPath = std::filesystem::current_path().string();
         lpacFullPath.append(lpacLocalPath);
 
-        size_t      lastindex   = lpacFullPath.find_last_of("/");
+        size_t lastindex        = lpacFullPath.find_last_of("/");
         std::string lpacDirPath = lpacFullPath.substr(0, lastindex);
 
         std::filesystem::create_directories(lpacDirPath);

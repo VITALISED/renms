@@ -16,7 +16,6 @@
 */
 
 #include "analysis.h"
-#include "framework.h"
 #include "heridium.h"
 
 #ifndef HERIDIUM_LANGUAGE_TARGET
@@ -24,14 +23,14 @@
 #endif
 
 #ifndef HERIDIUM_SHOULD_EXIT
-#define HERIDIUM_SHOULD_EXIT 0
+#define HERIDIUM_SHOULD_EXIT 1
 #endif
 
 DWORD WINAPI MainThread(LPVOID lpReserved)
 {
     UNREFERENCED_PARAMETER(lpReserved);
 
-    AnalysisInit();
+    heridium::AnalysisInit();
     return TRUE;
 }
 
@@ -40,7 +39,7 @@ DWORD WINAPI WindowCheckThread(LPVOID lpReserved)
     UNREFERENCED_PARAMETER(lpReserved);
 
     // Halts this thread until the NMS window shows up.
-    while (FindWindowA(NULL, (LPCSTR) "No Man's Sky") != nullptr) Sleep(1000); // let's not hog resources
+    while (FindWindowA(NULL, (LPCSTR) "No Man's Sky") == nullptr) Sleep(1000); // let's not hog resources
 
     if (HERIDIUM_SHOULD_EXIT) { exit(0); };
 
@@ -55,7 +54,6 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserv
     {
     case DLL_PROCESS_ATTACH:
         AllocConsole();
-        MH_Initialize();
         DisableThreadLibraryCalls(hModule);
 
         spdlog::info("Hello from Heridium!");
@@ -64,6 +62,7 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserv
         CreateThread(nullptr, 0, MainThread, hModule, 0, nullptr);
         spdlog::debug("Starting WindowCheckThread...");
         CreateThread(nullptr, 0, WindowCheckThread, hModule, 0, nullptr);
+
         break;
     case DLL_THREAD_ATTACH:
     case DLL_THREAD_DETACH:

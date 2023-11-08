@@ -27,7 +27,7 @@ PluginManager::PluginManager()
 
     // Populate the list with everything that's in the plugins folder
     path nmsPath      = current_path();
-    path PluginFolder = nmsPath / "renms/plugins";
+    path PluginFolder = nmsPath / "RENMS/plugins";
 
     if (!is_directory(PluginFolder)) create_directories(PluginFolder);
 

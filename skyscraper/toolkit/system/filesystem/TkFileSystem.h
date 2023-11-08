@@ -28,4 +28,8 @@ enum eFileOpenMode
     EFOM_Append,
 };
 
+class cTkFileSystem
+{
+};
+
 SKYSCRAPER_END

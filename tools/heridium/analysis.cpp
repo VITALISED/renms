@@ -16,16 +16,14 @@
 */
 
 #include "analysis.h"
-#include <memory/thread.h>
 
-INIT_HOOK()
+uint64_t cTkMetaData__Register__TRAMPOLINE = 0;
 
-void RegisterHook(
+void cTkMetaData__Register__DETOUR(
     const cTkMetaDataClass *lpClassMetadata, void (*lDefaultFunction)(cTkClassPointer *, cTkLinearMemoryPool *),
     void (*lFixingFunction)(cTkClassPointer *, bool, unsigned __int64), void (*lValidateFunction)(cTkClassPointer *),
-    void (*lRenderFunction)(cTkClassPointer *),
     bool (*lEqualsFunction)(const cTkClassPointer *, const cTkClassPointer *),
-    void (*lCopyFunction)(cTkClassPointer *, const cTkClassPointer *),
+    void (*lRenderFunction)(cTkClassPointer *), void (*lCopyFunction)(cTkClassPointer *, const cTkClassPointer *),
     cTkClassPointer *(*lCreateFunction)(cTkClassPointer *result),
     unsigned __int64 (*lHashFunction)(const cTkClassPointer *, unsigned __int64, bool),
     void (*lDestroyFunction)(cTkClassPointer *))
@@ -56,31 +54,22 @@ void RegisterHook(
 
     HeridiumCXXFile(lPath.c_str(), lpClassMetadata);
 
-    typedef void (*HOOK_TYPE)(
-        const cTkMetaDataClass *lpClassMetadata, void (*lDefaultFunction)(cTkClassPointer *, cTkLinearMemoryPool *),
-        void (*lFixingFunction)(cTkClassPointer *, bool, unsigned __int64),
-        void (*lValidateFunction)(cTkClassPointer *), void (*lRenderFunction)(cTkClassPointer *),
-        bool (*lEqualsFunction)(const cTkClassPointer *, const cTkClassPointer *),
-        void (*lCopyFunction)(cTkClassPointer *, const cTkClassPointer *),
-        cTkClassPointer *(*lCreateFunction)(cTkClassPointer *result),
-        unsigned __int64 (*lHashFunction)(const cTkClassPointer *, unsigned __int64, bool),
-        void (*lDestroyFunction)(cTkClassPointer *));
-
-    CALL_ORIGINAL(
-        cTkMetaData::Register, lpClassMetadata, lDefaultFunction, lFixingFunction, lValidateFunction, lRenderFunction,
-        lEqualsFunction, lCopyFunction, lCreateFunction, lHashFunction, lDestroyFunction);
+    return PLH::FnCast(cTkMetaData__Register__TRAMPOLINE, cTkMetaData__Register__DETOUR)(
+        lpClassMetadata, lDefaultFunction, lFixingFunction, lValidateFunction, lEqualsFunction, lRenderFunction,
+        lCopyFunction, lCreateFunction, lHashFunction, lDestroyFunction);
 }
+
+PLH::x64Detour cTkMetaData__Register__HOOK((uint64_t)renms::RelToAbsolute(0x248ABC0), (uint64_t)cTkMetaData__Register__DETOUR, &cTkMetaData__Register__TRAMPOLINE);
+
+HERIDIUM_BEGIN
 
 void AnalysisInit()
 {
-    heridium::CreateOutputDirectories();
+    CreateOutputDirectories();
 
-    HOOK(OFFSET(0x248ABC0), reinterpret_cast<LPVOID>(RegisterHook), cTkMetaData::Register);
-
-    if (HOOK_STATUS() == MH_OK)
-        spdlog::info("Ready to analyse some banger metadata");
-    else
-        spdlog::error("Failed to hook!");
+    cTkMetaData__Register__HOOK.hook();
 
     renms::ResumeModuleThread(MODULE_BASE);
 }
+
+HERIDIUM_END

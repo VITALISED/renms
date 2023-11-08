@@ -4,9 +4,6 @@
 [submodule "submodules/spdlog"]
 	path = submodules/spdlog
 	url = https://github.com/gabime/spdlog.git
-[submodule "submodules/minhook"]
-	path = submodules/minhook
-	url = https://github.com/TsudaKageyu/minhook.git
 [submodule "submodules/Vulkan-Headers"]
 	path = submodules/Vulkan-Headers
 	url = https://github.com/KhronosGroup/Vulkan-Headers.git
@@ -16,4 +13,6 @@
 [submodule "compile_only"]
 	path = submodules/spdlog
 	url = https://github.com/gabime/spdlog
-	branch = compiled_only
+[submodule "submodules/PolyHook2_0"]
+	path = submodules/PolyHook2_0
+	url = https://github.com/stevemk14ebr/PolyHook_2_0.git
