@@ -15,16 +15,16 @@
 
 add_library(
     Heridium SHARED
-    dllmain.cpp
-    analysis.h
-    analysis.cpp
-    heridium.h
-    heridium.cpp
-    cpp/header.cpp
-    cpp/source.cpp
-    cpp/notation.h
-    cpp/lex.h
-    cpp/lang.h
+    "analysis.cpp"
+    "analysis.h"
+    "cpp/header.cpp"
+    "cpp/lang.h"
+    "cpp/lex.h"
+    "cpp/notation.h"
+    "cpp/source.cpp"
+    "dllmain.cpp"
+    "heridium.cpp"
+    "heridium.h"
 )
 
 add_subdirectory(launcher)

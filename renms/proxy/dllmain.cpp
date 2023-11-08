@@ -17,6 +17,8 @@
 
 #include <windows.h>
 
+#include "exports.h"
+
 #ifndef RENMS_DLL
 #define RENMS_DLL "renms.dll"
 #endif
