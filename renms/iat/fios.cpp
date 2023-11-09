@@ -53,7 +53,7 @@ PLH::IatHook sceFiosIsValidHandle__HOOK(
     "libSceFios2.dll", "sceFiosIsValidHandle", reinterpret_cast<uint64_t>(sceFiosIsValidHandle__DETOUR),
     &sceFiosIsValidHandle__TRAMPOLINE, L"NMS.exe");
 
-//----------------------------
+//----------------------------sceFiosFileGetSizeSync
 
 uint64_t sceFiosFileGetSizeSync__TRAMPOLINE = NULL;
 
