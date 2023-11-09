@@ -19,9 +19,12 @@
 
 #include "../renms.h"
 
-#define MODULE_BASE GetModuleHandleA("NMS.exe")
-
 RENMS_BEGIN
+
+inline HMODULE GetNMSModuleHandle()
+{
+    return GetModuleHandleA("NMS.exe");
+}
 
 inline LPVOID RelToAbsolute(DWORD_PTR lpRelPtr)
 {
@@ -59,7 +62,7 @@ inline std::vector<int> *IDAPatternToVec(const char *lpacSig)
 
 inline LPVOID ScanPattern(std::vector<int> *lpPattern)
 {
-    const HMODULE module_handle = MODULE_BASE;
+    const HMODULE module_handle = GetNMSModuleHandle();
 
     if (!module_handle) return NULL;
 
