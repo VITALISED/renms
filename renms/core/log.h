@@ -1,13 +1,5 @@
 #pragma once
 
-#ifdef _DEBUG
-
-#if !defined(SPDLOG_ACTIVE_LEVEL)
-#define SPDLOG_ACTIVE_LEVEL SPDLOG_LEVEL_DEBUG
-#endif // !defined(SPDLOG_ACTIVE_LEVEL)
-
-#endif //_DEBUG
-
 #include <spdlog/sinks/rotating_file_sink.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
 #include <spdlog/spdlog.h>
@@ -39,6 +31,7 @@ inline void CreateLogger(const char *lpacLoggerName)
 {
     std::shared_ptr<spdlog::sinks::rotating_file_sink_mt> file_sink   = FileSink();
     std::shared_ptr<spdlog::sinks::stdout_color_sink_mt> console_sink = ConsoleSink();
+
     SetConsoleSinkParams(console_sink);
     file_sink->set_level(spdlog::level::debug);
     spdlog::set_default_logger(
