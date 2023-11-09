@@ -1,6 +1,6 @@
 #include <commands/dispatcher.h>
 
-extern renms::CommandDispatcher gCommandDispatcher = renms::CommandDispatcher::CommandDispatcher();
+extern renms::CommandDispatcher gCommandDispatcher = renms::CommandDispatcher();
 
 uint64_t cGcTextChatInput__ParseTextForCommands__TRAMPOLINE = NULL;
 
@@ -76,6 +76,7 @@ bool CommandDispatcher::TryParseCommand(std::string lsCommandName, std::vector<s
 bool CommandDispatcher::StartsWithPrefix(const cTkFixedString<1023, char> *lMessageText)
 {
     if (std::string(lMessageText->macBuffer).rfind("/", 0)) { return false; }
+    spdlog::info("Found command: {}", lMessageText->macBuffer);
 
     return true;
 }
