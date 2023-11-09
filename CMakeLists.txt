@@ -150,6 +150,7 @@ macro(add_dependency_custom dir include)
 endmacro()
 
 add_dependency_custom(./submodules/libSceFios2 ./submodules/libSceFios2)
+add_dependency_custom(./submodules/inipp ./submodules/inipp)
 add_dependency_custom(./submodules/fmt ./submodules/fmt/include)
 
 set(SPDLOG_FMT_EXTERNAL ON)
