@@ -155,7 +155,6 @@ add_dependency_custom(./submodules/fmt ./submodules/fmt/include)
 
 set(SPDLOG_FMT_EXTERNAL ON)
 set(SPDLOG_BUILD_SHARED OFF)
-set(SPDLOG_ENABLE_PCH ON)
 add_dependency_custom(./submodules/spdlog ./submodules/spdlog/include)
 add_dependency_custom(./submodules/PolyHook2_0 ./submodules/PolyHook2_0)
 add_dependency_custom(
