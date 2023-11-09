@@ -126,7 +126,7 @@ endif()
 # ==================================================================================================
 # Dependencies.
 
-# set Polyhook to use our dynamic runtime
+# set Polyhook to use our runtime
 if(MSVC)
     set(POLYHOOK_BUILD_STATIC_RUNTIME OFF)
 endif()
@@ -218,7 +218,7 @@ target_precompile_headers(
     ${PROJECT_SOURCE_DIR}/metadata/metadata.h
 )
 
-target_compile_definitions(renms PRIVATE RENMS)
+target_compile_definitions(renms PRIVATE RENMS FIOS_TYPES_ONLY)
 set_target_properties(renms PROPERTIES OUTPUT_NAME renms)
 
 target_include_directories(
@@ -228,6 +228,7 @@ target_include_directories(
     PUBLIC ${PROJECT_SOURCE_DIR}/metadata/source
     PUBLIC ${PROJECT_SOURCE_DIR}/metadata/toolkit
     PUBLIC ${PROJECT_SOURCE_DIR}/submodules/spdlog/include
+    PUBLIC ${PROJECT_SOURCE_DIR}/submodules/libSceFios2
 )
 
 # --------------------------------------------------------------------------------------------------

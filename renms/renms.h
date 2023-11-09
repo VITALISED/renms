@@ -27,6 +27,7 @@
 #include <polyhook2/Detour/NatDetour.hpp>
 #include <polyhook2/Enums.hpp>
 #include <polyhook2/IHook.hpp>
+#include <polyhook2/PE/IatHook.hpp>
 #include <string>
 #include <vector>
 

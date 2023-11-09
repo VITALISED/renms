@@ -28,7 +28,6 @@ add_library(
     "commands/dispatcher.cpp"
     "iat/fios.cpp"
     "iat/iat_callback.cpp"
-    "iat/playfab.cpp"
 )
 
 add_subdirectory(proxy)
