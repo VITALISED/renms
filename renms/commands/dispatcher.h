@@ -7,7 +7,17 @@
 
 RENMS_BEGIN
 
-bool IsStockCommand(const cTkFixedString<1023, char> *lMessageText);
-bool StartsWithPrefix(const cTkFixedString<1023, char> *lMessageText);
+class CommandDispatcher
+{
+  public:
+    std::vector<Command *> maCommands;
+
+    CommandDispatcher();
+    void RegisterCommand(Command *lCommand);
+    bool TryParseCommand(const cTkFixedString<1023, char> *lMessageText);
+
+    static bool IsStockCommand(const cTkFixedString<1023, char> *lMessageText);
+    static bool StartsWithPrefix(const cTkFixedString<1023, char> *lMessageText);
+};
 
 RENMS_END

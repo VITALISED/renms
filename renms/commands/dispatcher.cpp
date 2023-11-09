@@ -4,7 +4,8 @@ uint64_t cGcTextChatInput__ParseTextForCommands__TRAMPOLINE = NULL;
 
 void cGcTextChatInput__ParseTextForCommands__DETOUR(uint64_t thiscall, const cTkFixedString<1023, char> *lMessageText)
 {
-    if (renms::IsStockCommand(lMessageText) || !renms::StartsWithPrefix(lMessageText))
+    if (renms::CommandDispatcher::IsStockCommand(lMessageText) ||
+        !renms::CommandDispatcher::StartsWithPrefix(lMessageText))
         return PLH::FnCast(
             cGcTextChatInput__ParseTextForCommands__TRAMPOLINE,
             cGcTextChatInput__ParseTextForCommands__DETOUR)(thiscall, lMessageText);
@@ -17,14 +18,29 @@ PLH::x64Detour cGcTextChatInput__ParseTextForCommands__HOOK(
 
 RENMS_BEGIN
 
-bool StartsWithPrefix(const cTkFixedString<1023, char> *lMessageText)
+CommandDispatcher::CommandDispatcher()
+{
+    this->maCommands = std::vector<Command *>();
+}
+
+void CommandDispatcher::RegisterCommand(Command *lCommand)
+{
+    this->maCommands.push_back(lCommand);
+}
+
+bool CommandDispatcher::TryParseCommand(const cTkFixedString<1023, char> *lMessageText)
+{
+    return true;
+}
+
+bool CommandDispatcher::StartsWithPrefix(const cTkFixedString<1023, char> *lMessageText)
 {
     if (std::string(lMessageText->macBuffer).rfind("/", 0)) { return true; }
 
     return false;
 }
 
-bool IsStockCommand(const cTkFixedString<1023, char> *lMessageText)
+bool CommandDispatcher::IsStockCommand(const cTkFixedString<1023, char> *lMessageText)
 {
     if (strstr(lMessageText->macBuffer, "/g")) return true;
     if (strstr(lMessageText->macBuffer, "/group")) return true;
