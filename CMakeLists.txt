@@ -66,14 +66,15 @@ if(CMAKE_GENERATOR STREQUAL "Ninja")
     message("")
 endif()
 
-if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-    add_definitions(-DDEBUG -D_DEBUG)
-endif()
 
 # ==================================================================================================
 # First checks.
 
-if(CMAKE_BUILD_TYPE STREQUAL "")
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    add_definitions(-DDEBUG -D_DEBUG)
+endif()
+
+if(CMAKE_BUILD_TYPE STREQUAL "" OR CMAKE_BUILD_TYPE STREQUAL "None")
     set(CMAKE_BUILD_TYPE "Release")
 endif()
 
@@ -106,6 +107,7 @@ It must be the directory that contains NMS.exe. See the BUILD.md for why it need
 endif()
 
 get_filename_component(NMS_EXE_PATH "${NMS_EXE_PATH}" ABSOLUTE)
+get_filename_component(NMS_BIN_PATH "${NMS_EXE_PATH}" DIRECTORY)
 if(NOT EXISTS "${NMS_EXE_PATH}" AND NOT SKIP_NMS_CHECK)
     message(
         FATAL_ERROR
@@ -204,8 +206,7 @@ add_custom_command(
 )
 
 # --------------------------------------------------------------------------------------------------
-# renms_proxy settings
-set_target_properties(renms_proxy PROPERTIES OUTPUT_NAME libSceFios2)
+# renms_proxy settings (None needed)
 
 # --------------------------------------------------------------------------------------------------
 # renms settings
@@ -252,3 +253,30 @@ target_include_directories(
     Heridium PUBLIC ${CMAKE_SOURCE_DIR}/skyscraper ${CMAKE_SOURCE_DIR}/renms
 )
 target_link_libraries(Heridium PRIVATE spdlog fmt PolyHook_2)
+
+
+# ==================================================================================================
+# Install
+
+add_custom_target(
+    renms_install
+    COMMAND ${CMAKE_COMMAND} -E rename
+            ${NMS_BIN_PATH}/libSceFios2.dll
+            ${NMS_BIN_PATH}/libSceFios2_orig.dll
+    COMMAND ${CMAKE_COMMAND} -E copy
+            ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<TARGET_FILE_NAME:renms_proxy>
+            ${NMS_BIN_PATH}/libSceFios2.dll
+    COMMAND ${CMAKE_COMMAND} -E copy
+            ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<TARGET_FILE_NAME:renms>
+            ${NMS_BIN_PATH}/renms.dll
+)
+
+add_custom_target(
+    renms_update
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<TARGET_FILE_NAME:renms_proxy>
+            ${NMS_BIN_PATH}/libSceFios2.dll
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<TARGET_FILE_NAME:renms>
+            ${NMS_BIN_PATH}/renms.dll
+)
