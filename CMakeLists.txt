@@ -134,17 +134,21 @@ endif()
 macro(add_dependency_custom dir include)
     message(STATUS "Adding dependency: ${dir} (${include})")
 
-    if(NOT EXISTS "${CMAKE_SOURCE_DIR}/${dir}/CMakeLists.txt")
+    file (GLOB_RECURSE files "${CMAKE_SOURCE_DIR}/${dir}/*.h")
+    if(NOT EXISTS files)
         execute_process(
             COMMAND git submodule update --init --recursive ${dir}
             WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
         )
     endif()
 
-    add_subdirectory(${dir})
+    if (EXISTS "${CMAKE_SOURCE_DIR}/${dir}/CMakeLists.txt")
+        add_subdirectory(${dir})
+    endif()
     include_directories(${CMAKE_SOURCE_DIR}/${include})
 endmacro()
 
+add_dependency_custom(./submodules/libSceFios2 ./submodules/libSceFios2)
 add_dependency_custom(./submodules/fmt ./submodules/fmt/include)
 
 set(SPDLOG_FMT_EXTERNAL ON)
