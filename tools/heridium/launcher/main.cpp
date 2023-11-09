@@ -17,8 +17,6 @@
 
 #include "winprocess.h"
 
-#define HERIDIUM_LIB "Heridium.dll"
-
 void printDebug(std::string input)
 {
 #ifdef _DEBUG
@@ -49,31 +47,30 @@ int main(int argc, char **argv)
                                      "with a negative number of arguments)");
         }
 
-        std::filesystem::path launcherPath, nmsPath, heridiumPath;
+        std::filesystem::path launcherPath, nmsPath, dllPath;
         launcherPath = argv[0];
 
         if (argc < 2)
         {
             nmsPath = launcherPath.parent_path();
             nmsPath /= "NMS.exe";
-        }
-        else
+        } else {
             nmsPath = argv[1];
-
-        heridiumPath = launcherPath.parent_path();
-        heridiumPath /= HERIDIUM_LIB;
+            dllPath = argv[2];
+        }
+        
         CheckPath(nmsPath);
-        CheckPath(heridiumPath);
+        CheckPath(dllPath);
 
         printDebug("Paths found:");
         printDebug("NMS Executable..... " + nmsPath.string());
-        printDebug("DLL Injectee....... " + heridiumPath.string());
+        printDebug("DLL Injectee....... " + dllPath.string());
         printDebug("Current Directory.. " + std::filesystem::current_path().string());
 
         printDebug("Loading NMS.exe...");
         auto nmsProcess = CreateProcessFrozen(argv[1]);
-        printDebug("Injecting the DLL...");
-        InjectDLL(heridiumPath, nmsProcess.hProcess);
+        printDebug("Injecting " + dllPath.filename().string() + "...");
+        InjectDLL(dllPath, nmsProcess.hProcess);
 
         printDebug("Injection successful!");
         // Wait for NMS.exe to get closed
