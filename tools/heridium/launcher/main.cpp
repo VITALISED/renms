@@ -22,7 +22,7 @@
 void printDebug(std::string input)
 {
 #ifdef _DEBUG
-    std::cout << input << std::endl;
+    std::cout << "[ ReLauncher ] " << input << std::endl;
 #else
     UNREFERENCED_PARAMETER(input)
 #endif
@@ -65,12 +65,17 @@ int main(int argc, char **argv)
         CheckPath(nmsPath);
         CheckPath(heridiumPath);
 
-        printDebug("Loading NMS.exe...\n");
+        printDebug("Paths found:");
+        printDebug("NMS Executable..... " + nmsPath.string());
+        printDebug("DLL Injectee....... " + heridiumPath.string());
+        printDebug("Current Directory.. " + std::filesystem::current_path().string());
+
+        printDebug("Loading NMS.exe...");
         auto nmsProcess = CreateProcessFrozen(argv[1]);
-        printDebug("Injecting the DLL...\n");
+        printDebug("Injecting the DLL...");
         InjectDLL(heridiumPath, nmsProcess.hProcess);
 
-        printDebug("Injection successful!\n");
+        printDebug("Injection successful!");
         // Wait for NMS.exe to get closed
         WaitForSingleObject(nmsProcess.hProcess, INFINITE);
         CloseHandle(nmsProcess.hProcess);
@@ -79,7 +84,7 @@ int main(int argc, char **argv)
     }
     catch (std::exception &e)
     {
-        std::cout << "Error! " << e.what() << std::endl;
+        std::cout << "[ ReLauncher ] Error! " << e.what() << std::endl;
         exit(1);
     }
 }
