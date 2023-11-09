@@ -24,6 +24,9 @@ add_library(
     "plugins/api.cpp"
     "core/warning.cpp"
     "core/filesystem.cpp"
+    "commands/builtin.cpp"
+    "commands/commands.cpp"
+    "commands/dispatcher.cpp"
     "iat/fios.cpp"
     "iat/iat_callback.cpp"
 )

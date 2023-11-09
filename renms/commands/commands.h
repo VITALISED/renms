@@ -17,15 +17,21 @@
 
 #pragma once
 
-#include "../renms.h"
+#include <renms.h>
+#include <toolkit/utilities/TkString.h>
 
 RENMS_BEGIN
 
+typedef void (*CommandDispatchCallback_t)(std::vector<std::string> laArgs);
+
 class Command
 {
-    const char                *mpacName;
-    const char                *mpacDescription;
-    std::vector<const char *> *mpacArguments;
+    std::string mpacName;
+    std::vector<std::string> *mpacArguments;
+    CommandDispatchCallback_t mpDispatchFn;
+
+    Command(const cTkFixedString<1023, char> *lMessageText, CommandDispatchCallback_t lpDispatchFn);
+    void Dispatch();
 };
 
 RENMS_END

@@ -19,8 +19,7 @@
 
 #include "../renms.h"
 
-#define MODULE_BASE     GetModuleHandleA("NMS.exe")
-#define OFFSET(pointer) (LPVOID)((DWORD_PTR)MODULE_BASE + (DWORD_PTR)pointer)
+#define MODULE_BASE GetModuleHandleA("NMS.exe")
 
 RENMS_BEGIN
 
@@ -77,7 +76,7 @@ inline LPVOID ScanPattern(std::vector<int> *lpPattern)
     BYTE *scan_bytes = reinterpret_cast<BYTE *>(module_handle);
 
     size_t s = pattern_bytes.size();
-    int   *d = pattern_bytes.data();
+    int *d   = pattern_bytes.data();
 
     for (DWORD i = 0; i < size_of_image - s; ++i)
     {
@@ -95,6 +94,11 @@ inline LPVOID ScanPattern(std::vector<int> *lpPattern)
     }
 
     return NULL;
+}
+
+inline DWORD_PTR SignatureScan(const char *lpacSignature)
+{
+    reinterpret_cast<DWORD_PTR>(ScanPattern(IDAPatternToVec(lpacSignature)));
 }
 
 RENMS_END
