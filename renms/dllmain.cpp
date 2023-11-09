@@ -21,6 +21,7 @@
 #include <core/filesystem.h>
 #include <core/warning.h>
 #include <iat/fios.h>
+#include <memory/thread.h>
 
 DWORD WINAPI MainThread(LPVOID lpReserved)
 {
@@ -34,6 +35,8 @@ DWORD WINAPI MainThread(LPVOID lpReserved)
     renms::CreateFiosHooks();
     renms::CreateTargetDirectories();
     renms::CreateWarningHooks();
+
+    renms::ResumeModuleThread(renms::GetNMSModuleHandle());
 
     return TRUE;
 }
