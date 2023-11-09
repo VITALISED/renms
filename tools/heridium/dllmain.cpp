@@ -56,6 +56,8 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserv
         AllocConsole();
         DisableThreadLibraryCalls(hModule);
 
+        CreateLogger("Heridium");
+
         spdlog::info("Hello from Heridium!");
 
         spdlog::debug("Starting MainThread...");

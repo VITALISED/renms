@@ -24,8 +24,8 @@ DWORD WINAPI MainThread(LPVOID lpReserved)
 {
     UNREFERENCED_PARAMETER(lpReserved);
 
-    CreateLogger();
-    spdlog::info("renms attached :)");
+    CreateLogger("ReNMS");
+    spdlog::info("Attached!");
 
     renms::CreateFiosHooks();
     renms::CreateTargetDirectories();
