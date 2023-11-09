@@ -30,7 +30,7 @@ message(STATUS "Binaries will be placed in: ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
 # it fails as it can't find the library.
 if(CMAKE_CROSSCOMPILING)
     set(CMAKE_EXE_LINKER_FLAGS
-        "${CMAKE_EXE_LINKER_FLAGS} -static-libstdc++ -static-libgcc"
+        "${CMAKE_EXE_LINKER_FLAGS} -static"
     )
     message(
         STATUS
@@ -234,8 +234,6 @@ target_include_directories(
     PUBLIC ${PROJECT_SOURCE_DIR}/skyscraper
     PUBLIC ${PROJECT_SOURCE_DIR}/metadata/source
     PUBLIC ${PROJECT_SOURCE_DIR}/metadata/toolkit
-    PUBLIC ${PROJECT_SOURCE_DIR}/submodules/spdlog/include
-    PUBLIC ${PROJECT_SOURCE_DIR}/submodules/libSceFios2
 )
 
 # --------------------------------------------------------------------------------------------------
