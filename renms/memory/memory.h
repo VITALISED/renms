@@ -17,7 +17,7 @@
 
 #pragma once
 
-#include "../renms.h"
+#include <renms.h>
 
 RENMS_BEGIN
 
