@@ -18,4 +18,4 @@
 	url = https://github.com/stevemk14ebr/PolyHook_2_0.git
 [submodule "submodules/libSceFios2"]
 	path = submodules/libSceFios2
-	url = "https://github.com/VITALISED/libSceFios2.git"
+	url = https://github.com/VITALISED/libSceFios2.git
