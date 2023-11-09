@@ -16,6 +16,8 @@
 */
 
 #include "renms.h"
+#include <commands/builtin.h>
+#include <commands/dispatcher.h>
 #include <core/filesystem.h>
 #include <core/warning.h>
 #include <iat/fios.h>
@@ -27,6 +29,8 @@ DWORD WINAPI MainThread(LPVOID lpReserved)
     CreateLogger("ReNMS");
     spdlog::info("Attached!");
 
+    renms::AddBuiltinCommands();
+    renms::CreateTextChatHooks();
     renms::CreateFiosHooks();
     renms::CreateTargetDirectories();
     renms::CreateWarningHooks();

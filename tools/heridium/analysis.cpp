@@ -71,7 +71,7 @@ void AnalysisInit()
 
     cTkMetaData__Register__HOOK.hook();
 
-    renms::ResumeModuleThread(MODULE_BASE);
+    renms::ResumeModuleThread(renms::GetNMSModuleHandle());
 }
 
 HERIDIUM_END

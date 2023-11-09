@@ -5,7 +5,11 @@
 #include <renms.h>
 #include <toolkit/utilities/TkString.h>
 
+using namespace nms;
+
 RENMS_BEGIN
+
+void CreateTextChatHooks();
 
 class CommandDispatcher
 {
@@ -14,10 +18,12 @@ class CommandDispatcher
 
     CommandDispatcher();
     void RegisterCommand(Command *lCommand);
-    bool TryParseCommand(const cTkFixedString<1023, char> *lMessageText);
+    bool TryParseCommand(std::string lsCommandName, std::vector<std::string> *laArgs);
 
     static bool IsStockCommand(const cTkFixedString<1023, char> *lMessageText);
     static bool StartsWithPrefix(const cTkFixedString<1023, char> *lMessageText);
 };
 
 RENMS_END
+
+extern renms::CommandDispatcher gCommandDispatcher;
