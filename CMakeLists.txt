@@ -25,25 +25,33 @@ project(
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin")
 message(STATUS "Binaries will be placed in: ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
 
-# Fix an issue with windows gnu systems where the c++std libs don't get privately
-# linked, and since it isn't available on windows systems by default, it fails as
-# it can't find the library.
+# Fix an issue with windows gnu systems where the c++std libs don't get
+# privately linked, and since it isn't available on windows systems by default,
+# it fails as it can't find the library.
 if(CMAKE_CROSSCOMPILING)
     set(CMAKE_EXE_LINKER_FLAGS
         "${CMAKE_EXE_LINKER_FLAGS} -static-libstdc++ -static-libgcc"
     )
-    message(STATUS "Crosscompiling setup detected, linking libstdc++ and libgcc statically.")
+    message(
+        STATUS
+            "Crosscompiling setup detected, linking libstdc++ and libgcc statically."
+    )
 endif()
 
-# Fix another issue where this dll can't be statically linked on windows, and must
-# be copied to the output directory.
-if (CMAKE_CROSSCOMPILING)
+# Fix another issue where this dll can't be statically linked on windows, and
+# must be copied to the output directory.
+if(CMAKE_CROSSCOMPILING)
     find_path(WINPTHREAD_PATH NAMES libwinpthread-1.dll)
-    if (NOT WINPTHREAD_PATH)
-        message(WARNING "libwinpthread-1.dll not found! You may get an error while running heridiumLauncher.exe.")
+    if(NOT WINPTHREAD_PATH)
+        message(
+            WARNING
+                "libwinpthread-1.dll not found! You may get an error while running heridiumLauncher.exe."
+        )
     else()
         message(STATUS "libwinpthread-1.dll found at ${WINPTHREAD_PATH}")
-        file(COPY ${WINPTHREAD_PATH}/libwinpthread-1.dll DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+        file(COPY ${WINPTHREAD_PATH}/libwinpthread-1.dll
+             DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
+        )
     endif()
 endif()
 
@@ -177,12 +185,11 @@ add_custom_target(
 )
 
 # --------------------------------------------------------------------------------------------------
-# resdk - Generates the metadata classes for renms, giving it enough headers to make plugins for it.
+# resdk - Generates the metadata classes for renms, giving it enough headers to
+# make plugins for it.
 make_directory(${PROJECT_SOURCE_DIR}/metadata)
 
-add_custom_target(
-    resdk DEPENDS ${PROJECT_SOURCE_DIR}/metadata/metadata.h
-)
+add_custom_target(resdk DEPENDS ${PROJECT_SOURCE_DIR}/metadata/metadata.h)
 
 add_custom_command(
     OUTPUT ${PROJECT_SOURCE_DIR}/metadata/metadata.h
