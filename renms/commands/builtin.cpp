@@ -7,6 +7,8 @@ void TestCommandDispatch(std::vector<std::string> *laArgs)
     spdlog::info("Hit!");
 
     for (std::string lsArg : *laArgs) { spdlog::info(lsArg); }
+
+    free(laArgs);
 }
 
 void AddBuiltinCommands()
