@@ -255,28 +255,11 @@ target_link_libraries(Heridium PRIVATE spdlog fmt PolyHook_2)
 # ==================================================================================================
 # Install
 
+# --------------------------------------------------------------------------------------------------
+# Launch renms (Make sure the previous installer's leftovers are uninstalled first!)
 add_custom_target(
-    renms_install
-    COMMAND ${CMAKE_COMMAND} -E rename ${NMS_BIN_PATH}/libSceFios2.dll
-            ${NMS_BIN_PATH}/libSceFios2_orig.dll
-    COMMAND
-        ${CMAKE_COMMAND} -E copy
-        ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<TARGET_FILE_NAME:renms_proxy>
-        ${NMS_BIN_PATH}/libSceFios2.dll
-    COMMAND
-        ${CMAKE_COMMAND} -E copy
-        ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<TARGET_FILE_NAME:renms>
-        ${NMS_BIN_PATH}/renms.dll
-)
-
-add_custom_target(
-    renms_update
-    COMMAND
-        ${CMAKE_COMMAND} -E copy_if_different
-        ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<TARGET_FILE_NAME:renms_proxy>
-        ${NMS_BIN_PATH}/libSceFios2.dll
-    COMMAND
-        ${CMAKE_COMMAND} -E copy_if_different
-        ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<TARGET_FILE_NAME:renms>
-        ${NMS_BIN_PATH}/renms.dll
+    renms_launch
+    COMMAND $<TARGET_FILE:ReLauncher> ${NMS_EXE_PATH} $<TARGET_FILE:renms>
+    WORKING_DIRECTORY ${NMS_BIN_PATH}
+    DEPENDS renms ReLauncher
 )
