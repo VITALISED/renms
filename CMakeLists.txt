@@ -45,7 +45,7 @@ if(CMAKE_CROSSCOMPILING)
     if(NOT WINPTHREAD_PATH)
         message(
             WARNING
-                "libwinpthread-1.dll not found! You may get an error while running heridiumLauncher.exe."
+                "libwinpthread-1.dll not found! You may get an error while running ReLauncher.exe."
         )
     else()
         message(STATUS "libwinpthread-1.dll found at ${WINPTHREAD_PATH}")
@@ -201,10 +201,8 @@ add_custom_target(resdk DEPENDS ${PROJECT_SOURCE_DIR}/metadata/metadata.h)
 
 add_custom_command(
     OUTPUT ${PROJECT_SOURCE_DIR}/metadata/metadata.h
-    COMMAND "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/heridiumLauncher.exe"
-            "${NMS_EXE_PATH}"
-    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/metadata
-    DEPENDS Heridium heridiumLauncher
+    COMMAND "$<TARGET_FILE:ReLauncher>" "${NMS_EXE_PATH}" "$<TARGET_FILE:Heridium>"
+    DEPENDS Heridium ReLauncher
 )
 
 # --------------------------------------------------------------------------------------------------
@@ -212,7 +210,7 @@ add_custom_command(
 
 # --------------------------------------------------------------------------------------------------
 # renms settings
-add_dependencies(renms resdk Heridium heridiumLauncher)
+add_dependencies(renms resdk Heridium ReLauncher)
 target_link_libraries(renms fmt PolyHook_2 spdlog)
 
 target_precompile_headers(
@@ -243,7 +241,7 @@ target_include_directories(
 )
 
 # --------------------------------------------------------------------------------------------------
-# heridiumLauncher settings (No settings needed)
+# ReLauncher settings (No settings needed)
 
 # --------------------------------------------------------------------------------------------------
 # Heridium settings
