@@ -17,6 +17,7 @@
 
 #include "plugin.h"
 #include <filesystem>
+#include <inipp/inipp.h>
 #include <windows.h>
 using namespace std::filesystem;
 
@@ -31,14 +32,18 @@ PluginManager::PluginManager()
 
     for (directory_entry PluginEntry : directory_iterator(PluginFolder))
     {
-        if (!PluginEntry.is_regular_file()) continue;
-        path Plugin = PluginEntry;
+        if (!PluginEntry.is_directory()) continue;
+        path pluginManifest = PluginEntry.path() / "config.ini";
+        path pluginLibrary  = PluginEntry.path() / "plugin.dll";
 
-        if (Plugin.filename().extension() != ".dll") continue;
-
+        std::ifstream pluginIni(pluginManifest.string());
+        inipp::Ini<char> ini;
+        ini.parse(pluginIni);
         // attempt to load the plugin
-        spdlog::info("Loading plugin: {}", Plugin.filename().string());
-        Load(Plugin);
+        const char *lpacName = "Empty";
+        inipp::get_value(ini.sections["manifest"], "name", lpacName);
+        spdlog::info("Loading plugin: {}", lpacName);
+        Load(pluginLibrary);
     }
 
     if (mPluginList.size() == 0) { spdlog::warn("No plugins found."); }
