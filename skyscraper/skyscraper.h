@@ -38,9 +38,13 @@
 #define SKYSCRAPER_END };
 // clang-format on
 
+SKYSCRAPER_BEGIN
+
 template <unsigned int uiLength>
 class VFT
 {
   public:
     maMembers[uiLength];
 };
+
+SKYSCRAPER_END
