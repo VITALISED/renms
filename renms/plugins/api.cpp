@@ -33,3 +33,14 @@ FnCastTo RENMS_API FnCast(void *fnToCast, FnCastTo)
 {
     return (FnCastTo)fnToCast;
 }
+
+// int BroadcastMessage(const cTkFixedString<1023, char> *lsMessageBody, bool lbSystemMessage)
+// {
+//     typedef int (*cGcTextChatManager__Say)(
+//         uint64_t thiscall, const cTkFixedString<1023, char> *lsMessageBody, bool lbSystemMessage);
+
+//     cGcTextChatManager__Say lpSayFn =
+//         reinterpret_cast<cGcTextChatManager__Say>(renms::RelToAbsolute(GCTEXTCHATMANAGER_SAY));
+
+//     return lpSayFn(lsMessageBody, lbSystemMessage);
+// }

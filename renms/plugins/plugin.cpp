@@ -16,9 +16,7 @@
 */
 
 #include "plugin.h"
-#include <filesystem>
-#include <inipp/inipp.h>
-#include <windows.h>
+
 using namespace std::filesystem;
 
 RENMS_BEGIN
@@ -36,13 +34,16 @@ PluginManager::PluginManager()
         path pluginManifest = PluginEntry.path() / "config.ini";
         path pluginLibrary  = PluginEntry.path() / "plugin.dll";
 
-        // std::ifstream pluginIni(pluginManifest.string());
-        // inipp::Ini<char> ini;
-        // ini.parse(pluginIni);
-        // const char *lpacName = "Empty";
-        // inipp::get_value(ini.sections["manifest"], "name", lpacName);
-        // spdlog::info("Loading plugin: {}", lpacName);
-        // Load(pluginLibrary);
+        std::ifstream pluginIni(pluginManifest);
+        std::ifstream pluginLibFile(pluginLibrary);
+
+        if (pluginIni.good()) { spdlog::info("Found manifest") }
+
+        if (pluginLibFile.good())
+        {
+            spdlog::info("Found plugin DLL");
+            Load(pluginLibrary);
+        }
     }
 
     if (mPluginList.size() == 0) { spdlog::warn("No plugins found."); }

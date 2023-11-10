@@ -154,7 +154,7 @@ macro(add_dependency_custom dir include)
 endmacro()
 
 add_dependency_custom(./submodules/libSceFios2 ./submodules/libSceFios2)
-add_dependency_custom(./submodules/inipp ./submodules/inipp)
+add_dependency_custom(./submodules/inifile-cpp ./submodules/inifile-cpp/include)
 add_dependency_custom(./submodules/fmt ./submodules/fmt/include)
 
 set(SPDLOG_FMT_EXTERNAL ON)
@@ -204,6 +204,7 @@ add_custom_command(
     OUTPUT ${PROJECT_SOURCE_DIR}/metadata/metadata.h
     COMMAND "$<TARGET_FILE:ReLauncher>" "${NMS_EXE_PATH}"
             "$<TARGET_FILE:Heridium>"
+    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
     DEPENDS Heridium ReLauncher
 )
 

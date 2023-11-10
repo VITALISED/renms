@@ -23,6 +23,7 @@
 #include <iat/fios.h>
 #include <memory/thread.h>
 #include <plugins/fsm.h>
+#include <plugins/plugin.h>
 
 DWORD WINAPI MainThread(LPVOID lpReserved)
 {
@@ -37,6 +38,8 @@ DWORD WINAPI MainThread(LPVOID lpReserved)
     renms::CreateTargetDirectories();
     renms::CreateWarningHooks();
     renms::CreateFSMGcApplicationHooks();
+
+    renms::PluginManager lPluginManager = renms::PluginManager();
 
     renms::ResumeModuleThread(renms::GetNMSModuleHandle());
 

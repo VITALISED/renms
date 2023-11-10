@@ -19,6 +19,6 @@
 [submodule "submodules/libSceFios2"]
 	path = submodules/libSceFios2
 	url = https://github.com/VITALISED/libSceFios2.git
-[submodule "submodules/inipp"]
-	path = submodules/inipp
-	url = https://github.com/mcmtroffaes/inipp.git
+[submodule "submodules/inifile-cpp"]
+	path = submodules/inifile-cpp
+	url = https://github.com/Rookfighter/inifile-cpp.git

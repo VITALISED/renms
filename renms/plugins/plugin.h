@@ -27,7 +27,6 @@ RENMS_BEGIN
 class PluginTemplate
 {
   public:
-    std::string lpacPluginId;
     std::string mpacDisplayName;
     std::string mpacAuthor;
     std::string mpacDescription;
