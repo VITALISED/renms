@@ -37,3 +37,10 @@
 #define SKYSCRAPER_BEGIN namespace nms {
 #define SKYSCRAPER_END };
 // clang-format on
+
+template <unsigned int uiLength>
+class VFT
+{
+  public:
+    maMembers[uiLength];
+};
