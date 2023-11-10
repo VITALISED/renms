@@ -1,5 +1,17 @@
 #include <core/warning.h>
 
+//choose randomly from a list of quippy lines at startup
+std::vector<std::string> startupQuips = {
+    "\"Half baked and ready to roll.\" - tractorbeam",
+    "\"Now with 50% more crashes!\" - tractorbeam",
+    "\"Ready to serve you yet another crash log.\" - tractorbeam",
+    "\"Good luck lol\" - tractorbeam",
+    "\"Still not using cTkMemoryManager!\" - tractorbeam"
+};
+
+int startupQuipOfChoice = rand() % startupQuips.size();
+char* startupQuip = (char*)startupQuips[startupQuipOfChoice].c_str();
+
 uint64_t cTkFileSystem__IsModded__TRAMPOLINE = NULL;
 
 bool cTkFileSystem__IsModded__DETOUR(uint64_t thiscall)
@@ -20,10 +32,9 @@ void cGcApplicationGameModeSelectorState__RenderWarning__DETOUR(
     return PLH::FnCast(
         cGcApplicationGameModeSelectorState__RenderWarning__TRAMPOLINE,
         cGcApplicationGameModeSelectorState__RenderWarning__DETOUR)(
-        thiscall, "You're running ReNMS", "I understand, Click to Continue.",
-        "You may run into various crashes, if you're experiencing issues check the repository for troubleshooting "
-        "tips or open an issue at https://github.com/VITALISED/renms",
-        (char *)"We're not endorsed by Hello Games so please don't send them any Zendesk Tickets, they can't help.",
+        thiscall, "You're running ReNMS", "PRESS ANYTHING TO ACKNOWLEDGE",
+        "You are very likely to run into issues, check the repo for troubleshooting tips. If you know what you're doing, submit an issue to the repo.",
+        startupQuip,
         lfTimeout);
 }
 
