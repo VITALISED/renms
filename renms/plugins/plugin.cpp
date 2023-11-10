@@ -36,14 +36,13 @@ PluginManager::PluginManager()
         path pluginManifest = PluginEntry.path() / "config.ini";
         path pluginLibrary  = PluginEntry.path() / "plugin.dll";
 
-        std::ifstream pluginIni(pluginManifest.string());
-        inipp::Ini<char> ini;
-        ini.parse(pluginIni);
-        // attempt to load the plugin
-        const char *lpacName = "Empty";
-        inipp::get_value(ini.sections["manifest"], "name", lpacName);
-        spdlog::info("Loading plugin: {}", lpacName);
-        Load(pluginLibrary);
+        // std::ifstream pluginIni(pluginManifest.string());
+        // inipp::Ini<char> ini;
+        // ini.parse(pluginIni);
+        // const char *lpacName = "Empty";
+        // inipp::get_value(ini.sections["manifest"], "name", lpacName);
+        // spdlog::info("Loading plugin: {}", lpacName);
+        // Load(pluginLibrary);
     }
 
     if (mPluginList.size() == 0) { spdlog::warn("No plugins found."); }

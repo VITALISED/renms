@@ -22,6 +22,7 @@ add_library(
     "memory/malloc.cpp"
     "plugins/plugin.cpp"
     "plugins/api.cpp"
+    "plugins/fsm.cpp"
     "core/warning.cpp"
     "core/filesystem.cpp"
     "commands/builtin.cpp"
