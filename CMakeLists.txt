@@ -204,7 +204,7 @@ add_custom_command(
     OUTPUT ${PROJECT_SOURCE_DIR}/metadata/metadata.h
     COMMAND "$<TARGET_FILE:ReLauncher>" "${NMS_EXE_PATH}"
             "$<TARGET_FILE:Heridium>"
-    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/metadata
     DEPENDS Heridium ReLauncher
 )
 
