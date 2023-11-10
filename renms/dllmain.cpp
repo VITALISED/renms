@@ -28,7 +28,7 @@ DWORD WINAPI MainThread(LPVOID lpReserved)
     UNREFERENCED_PARAMETER(lpReserved);
 
     CreateLogger("ReNMS");
-    spdlog::info("Attached!");
+    spdlog::info("ReNMS v.{} -- Initializing things...", RENMS_VERSION);
 
     renms::AddBuiltinCommands();
     renms::CreateTextChatHooks();
@@ -37,6 +37,7 @@ DWORD WINAPI MainThread(LPVOID lpReserved)
     renms::CreateWarningHooks();
 
     renms::ResumeModuleThread(renms::GetNMSModuleHandle());
+    spdlog::info("NMS is running.");
 
     return TRUE;
 }

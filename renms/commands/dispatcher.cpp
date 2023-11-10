@@ -76,7 +76,6 @@ bool CommandDispatcher::TryParseCommand(std::string lsCommandName, std::vector<s
 bool CommandDispatcher::StartsWithPrefix(const cTkFixedString<1023, char> *lMessageText)
 {
     if (std::string(lMessageText->macBuffer).rfind("/", 0)) { return false; }
-    spdlog::info("Found command: {}", lMessageText->macBuffer);
 
     return true;
 }
