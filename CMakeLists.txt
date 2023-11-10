@@ -18,7 +18,7 @@ cmake_minimum_required(VERSION 3.15)
 project(
     renms
     LANGUAGES C CXX
-    VERSION 0.0.1
+    VERSION 0.3
 )
 
 # Set the output directory properly.
@@ -224,6 +224,7 @@ target_precompile_headers(
 )
 
 target_compile_definitions(renms PRIVATE RENMS FIOS_TYPES_ONLY)
+target_compile_definitions(renms PUBLIC RENMS_VERSION="${PROJECT_VERSION}")
 set_target_properties(renms PROPERTIES OUTPUT_NAME renms)
 
 target_include_directories(
@@ -253,10 +254,9 @@ target_include_directories(
 target_link_libraries(Heridium PRIVATE spdlog fmt PolyHook_2)
 
 # ==================================================================================================
-# Install
+# Launcher
 
-# --------------------------------------------------------------------------------------------------
-# Launch renms (Make sure the previous installer's leftovers are uninstalled first!)
+# Make sure the past installer's leftovers are uninstalled first!
 add_custom_target(
     renms_launch
     COMMAND $<TARGET_FILE:ReLauncher> ${NMS_EXE_PATH} $<TARGET_FILE:renms>
