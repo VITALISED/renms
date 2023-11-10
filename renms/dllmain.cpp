@@ -24,6 +24,7 @@
 #include <memory/thread.h>
 #include <plugins/fsm.h>
 #include <plugins/plugin.h>
+#include <core/config.h>
 
 DWORD WINAPI MainThread(LPVOID lpReserved)
 {
@@ -31,6 +32,8 @@ DWORD WINAPI MainThread(LPVOID lpReserved)
 
     CreateLogger("ReNMS");
     spdlog::info("Attached!");
+
+    gConfigSettings = renms::ConfigFile::ConfigFile();
 
     renms::AddBuiltinCommands();
     renms::CreateTextChatHooks();

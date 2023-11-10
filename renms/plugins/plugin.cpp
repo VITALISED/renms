@@ -23,7 +23,6 @@ RENMS_BEGIN
 
 PluginManager::PluginManager()
 {
-
     // Populate the list with everything that's in the plugins folder
     path nmsPath      = current_path();
     path PluginFolder = nmsPath / "RENMS/plugins";
@@ -34,10 +33,24 @@ PluginManager::PluginManager()
         path pluginManifest = PluginEntry.path() / "config.ini";
         path pluginLibrary  = PluginEntry.path() / "plugin.dll";
 
-        std::ifstream pluginIni(pluginManifest);
+        std::ifstream pluginIniFile(pluginManifest);
         std::ifstream pluginLibFile(pluginLibrary);
 
-        if (pluginIni.good()) { spdlog::info("Found manifest") }
+        if (pluginIniFile.good())
+        {
+            spdlog::info("Found manifest");
+            ini::IniFile pluginIni;
+            pluginIni.decode(pluginIniFile);
+
+            std::string lsName        = pluginIni["manifest"]["name"].as<std::string>();
+            std::string lsAuthor      = pluginIni["manifest"]["author"].as<std::string>();
+            std::string lsDescription = pluginIni["manifest"]["description"].as<std::string>();
+
+            spdlog::info("-----------PLUGIN INFORMATION-----------");
+            spdlog::info(lsName);
+            spdlog::info(lsAuthor);
+            spdlog::info(lsDescription);
+        }
 
         if (pluginLibFile.good())
         {
@@ -62,6 +75,7 @@ void PluginManager::Load(std::filesystem::path PluginPath)
     // Execute plugin main
     PluginMain_t pluginEntry = reinterpret_cast<PluginMain_t>(GetProcAddress(PluginHandle, "PluginMain"));
     if (pluginEntry) { pluginEntry(); }
+    else { spdlog::error("Failed to load plugin: Couldn't find: void RENMS_ENTRY PluginMain()"); }
 }
 
 RENMS_END

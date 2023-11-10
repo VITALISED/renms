@@ -24,6 +24,7 @@ add_library(
     "plugins/api.cpp"
     "plugins/fsm.cpp"
     "core/warning.cpp"
+    "core/config.cpp"
     "core/filesystem.cpp"
     "commands/builtin.cpp"
     "commands/commands.cpp"
