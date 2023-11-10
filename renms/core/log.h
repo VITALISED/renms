@@ -12,7 +12,7 @@ inline std::shared_ptr<spdlog::sinks::stdout_color_sink_mt> ConsoleSink()
 };
 inline std::shared_ptr<spdlog::sinks::rotating_file_sink_mt> FileSink()
 {
-    return std::make_shared<spdlog::sinks::rotating_file_sink_mt>("renms.log", MAX_LOG_FILESIZE, 3);
+    return std::make_shared<spdlog::sinks::rotating_file_sink_mt>("RENMS/Logs/renms.log", MAX_LOG_FILESIZE, 3);
 };
 
 #ifdef _DEBUG
@@ -33,7 +33,7 @@ inline void CreateLogger(const char *lpacLoggerName)
     std::shared_ptr<spdlog::sinks::stdout_color_sink_mt> console_sink = ConsoleSink();
 
     SetConsoleSinkParams(console_sink);
-    file_sink->set_level(spdlog::level::debug);
+    file_sink->set_level(spdlog::level::trace);
     spdlog::set_default_logger(
         std::make_shared<spdlog::logger>(lpacLoggerName, spdlog::sinks_init_list({console_sink, file_sink})));
 };
