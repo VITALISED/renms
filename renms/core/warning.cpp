@@ -16,7 +16,9 @@ uint64_t cTkFileSystem__IsModded__TRAMPOLINE = NULL;
 
 bool cTkFileSystem__IsModded__DETOUR(uint64_t thiscall)
 {
-    return true;
+    if (gConfigSettings.mbShowWarning) return true;
+
+    return false;
 }
 
 PLH::x64Detour cTkFileSystem__IsModded__HOOK(

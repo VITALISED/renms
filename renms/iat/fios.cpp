@@ -34,7 +34,7 @@ uint64_t sceFiosInitialize__TRAMPOLINE = NULL;
 
 void WINAPI sceFiosInitialize__DETOUR(SceFiosParams lParams)
 {
-    spdlog::info("sceFiosInitialize");
+    spdlog::info("sceFiosInitialize: Initializing sceFios");
     return PLH::FnCast(sceFiosInitialize__TRAMPOLINE, sceFiosInitialize__DETOUR)(lParams);
 }
 
@@ -102,6 +102,8 @@ uint64_t sceFiosFileRead__TRAMPOLINE = NULL;
 __int64 WINAPI sceFiosFileRead__DETOUR(
     uint64_t lAttr, const char *lpacFilename, void *lpData, SceFiosSize liSize, SceFiosOffset liOffset)
 {
+    spdlog::trace("sceFiosFileRead: Reading File: {}", lpacFilename);
+
     return PLH::FnCast(sceFiosFileRead__TRAMPOLINE, sceFiosFileRead__DETOUR)(
         lAttr, lpacFilename, lpData, liSize, liOffset);
 }
@@ -115,10 +117,13 @@ PLH::IatHook sceFiosFileRead__HOOK(
 uint64_t sceFiosArchiveMountSync__TRAMPOLINE = NULL;
 
 __int64 WINAPI sceFiosArchiveMountSync__DETOUR(
-    uint64_t lAttr, uint64_t unk1, uint64_t unk2, const char *lpMountPoint, uint64_t unk3[2], uint64_t unk4)
+    const void *attr, SceFiosFH *fh, const char *path, const char *mount_point, SceFiosBuffer mount_buffer,
+    void *params)
 {
+    spdlog::info("sceFiosArchiveMountSync: Mounting Archive: {}{}", mount_point, path);
+
     return PLH::FnCast(sceFiosArchiveMountSync__TRAMPOLINE, sceFiosArchiveMountSync__DETOUR)(
-        lAttr, unk1, unk2, lpMountPoint, unk3, unk4);
+        attr, fh, path, mount_point, mount_buffer, params);
 }
 
 PLH::IatHook sceFiosArchiveMountSync__HOOK(
@@ -147,6 +152,8 @@ uint64_t sceFiosFileReadSync__TRAMPOLINE = NULL;
 void WINAPI
 sceFiosFileReadSync__DETOUR(__int64 unk1, const char *lpacFilename, void *lpData, __int64 unk2, SceFiosOffset liOffset)
 {
+    spdlog::trace("sceFiosFileReadSync: Reading file: {}", lpacFilename);
+
     return PLH::FnCast(sceFiosFileReadSync__TRAMPOLINE, sceFiosFileReadSync__DETOUR)(
         unk1, lpacFilename, lpData, unk2, liOffset);
 }
@@ -226,6 +233,7 @@ uint64_t sceFiosDHOpenSync__TRAMPOLINE = NULL;
 
 uint64_t WINAPI sceFiosDHOpenSync__DETOUR(uint64_t unk1, uint64_t unk2, const char *lpacArchiveRoot, void *lpData)
 {
+    spdlog::info("sceFiosDHOpenSync: Loading Archive Directory: {}", lpacArchiveRoot);
     return PLH::FnCast(sceFiosDHOpenSync__TRAMPOLINE, sceFiosDHOpenSync__DETOUR)(unk1, unk2, lpacArchiveRoot, lpData);
 }
 
@@ -239,6 +247,8 @@ uint64_t sceFiosDHOpen__TRAMPOLINE = NULL;
 
 uint64_t WINAPI sceFiosDHOpen__DETOUR(uint64_t unk1, uint64_t unk2, const char *lpacArchiveRoot, void *lpData)
 {
+    spdlog::info("sceFiosDHOpen: Loading Archive Directory: {}", lpacArchiveRoot);
+
     return PLH::FnCast(sceFiosDHOpen__TRAMPOLINE, sceFiosDHOpen__DETOUR)(unk1, unk2, lpacArchiveRoot, lpData);
 }
 

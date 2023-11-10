@@ -22,6 +22,9 @@
 #include <core/warning.h>
 #include <iat/fios.h>
 #include <memory/thread.h>
+#include <plugins/fsm.h>
+#include <plugins/plugin.h>
+#include <core/config.h>
 
 DWORD WINAPI MainThread(LPVOID lpReserved)
 {
@@ -30,11 +33,16 @@ DWORD WINAPI MainThread(LPVOID lpReserved)
     CreateLogger("ReNMS");
     spdlog::info("ReNMS v.{} -- Initializing things...", RENMS_VERSION);
 
+    gConfigSettings = renms::ConfigFile::ConfigFile();
+
     renms::AddBuiltinCommands();
     renms::CreateTextChatHooks();
     renms::CreateFiosHooks();
     renms::CreateTargetDirectories();
     renms::CreateWarningHooks();
+    renms::CreateFSMGcApplicationHooks();
+
+    renms::PluginManager lPluginManager = renms::PluginManager();
 
     renms::ResumeModuleThread(renms::GetNMSModuleHandle());
     spdlog::info("NMS is running.");

@@ -29,9 +29,7 @@ message(STATUS "Binaries will be placed in: ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
 # privately linked, and since it isn't available on windows systems by default,
 # it fails as it can't find the library.
 if(CMAKE_CROSSCOMPILING)
-    set(CMAKE_EXE_LINKER_FLAGS
-        "${CMAKE_EXE_LINKER_FLAGS} -static"
-    )
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static")
     message(
         STATUS
             "Crosscompiling setup detected, linking libstdc++ and libgcc statically."
@@ -143,17 +141,20 @@ macro(add_dependency_custom dir include)
         )
     endif()
 
-
     if(EXISTS "${CMAKE_SOURCE_DIR}/${dir}/CMakeLists.txt")
         add_subdirectory(${dir} SYSTEM)
-        set_source_files_properties(DIRECTORY ${dir} PROPERTIES COMPILE_FLAGS "-w")
-        set_source_files_properties(DIRECTORY ${dir} PROPERTIES LINKER_FLAGS "-w")
+        set_source_files_properties(
+            DIRECTORY ${dir} PROPERTIES COMPILE_FLAGS "-w"
+        )
+        set_source_files_properties(
+            DIRECTORY ${dir} PROPERTIES LINKER_FLAGS "-w"
+        )
     endif()
     include_directories(${CMAKE_SOURCE_DIR}/${include} SYSTEM)
 endmacro()
 
 add_dependency_custom(./submodules/libSceFios2 ./submodules/libSceFios2)
-add_dependency_custom(./submodules/inipp ./submodules/inipp)
+add_dependency_custom(./submodules/inifile-cpp ./submodules/inifile-cpp/include)
 add_dependency_custom(./submodules/fmt ./submodules/fmt/include)
 
 set(SPDLOG_FMT_EXTERNAL ON)
@@ -201,7 +202,9 @@ add_custom_target(resdk DEPENDS ${PROJECT_SOURCE_DIR}/metadata/metadata.h)
 
 add_custom_command(
     OUTPUT ${PROJECT_SOURCE_DIR}/metadata/metadata.h
-    COMMAND "$<TARGET_FILE:ReLauncher>" "${NMS_EXE_PATH}" "$<TARGET_FILE:Heridium>"
+    COMMAND "$<TARGET_FILE:ReLauncher>" "${NMS_EXE_PATH}"
+            "$<TARGET_FILE:Heridium>"
+    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/metadata
     DEPENDS Heridium ReLauncher
 )
 
