@@ -44,7 +44,7 @@ template <unsigned int uiLength>
 class VFT
 {
   public:
-    maMembers[uiLength];
+    void *maMembers[uiLength];
 };
 
 SKYSCRAPER_END
