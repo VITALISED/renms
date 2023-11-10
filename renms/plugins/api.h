@@ -26,7 +26,7 @@ typedef decltype(PluginUpdate) *PluginUpdate_t;
 renmshook_t RENMS_API CreateHook(uint64_t lpTarget, uint64_t lpDetour, uint64_t lpTrampoline);
 bool RENMS_API DispatchHook(renmshook_t lpHook);
 uint64_t RENMS_API GetGcApplication();
-// int RENMS_API BroadcastMessage(const cTkFixedString<1023, char> *lsMessageBody, bool lbSystemMessage);
+int RENMS_API BroadcastMessage(const nms::cTkFixedString<1023, char> *lsMessageBody, bool lbSystemMessage);
 
 // re-exported from PLH
 
