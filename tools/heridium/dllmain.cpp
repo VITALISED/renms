@@ -29,6 +29,9 @@
 DWORD WINAPI MainThread(LPVOID lpReserved)
 {
     UNREFERENCED_PARAMETER(lpReserved);
+    
+    CreateLogger("Heridium");
+    spdlog::info("Hello from Heridium!");
 
     heridium::AnalysisInit();
     return TRUE;
@@ -56,13 +59,7 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserv
         AllocConsole();
         DisableThreadLibraryCalls(hModule);
 
-        CreateLogger("Heridium");
-
-        spdlog::info("Hello from Heridium!");
-
-        spdlog::debug("Starting MainThread...");
         CreateThread(nullptr, 0, MainThread, hModule, 0, nullptr);
-        spdlog::debug("Starting WindowCheckThread...");
         CreateThread(nullptr, 0, WindowCheckThread, hModule, 0, nullptr);
 
         break;

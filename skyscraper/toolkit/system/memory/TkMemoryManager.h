@@ -21,6 +21,7 @@
 
 #include <toolkit/system/TkCSMutex.h>
 #include <toolkit/system/memory/TkLocklessPoolAlloc.h>
+#include <toolkit/utilities/TkString.h>
 
 SKYSCRAPER_BEGIN
 
