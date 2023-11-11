@@ -18,14 +18,14 @@
 #pragma once
 
 // general types
+#include <application/GcGameConfigCache.h>
 #include <skyscraper.h>
 #include <toolkit/maths/utilities/spatial/TkSampleDistribution.h>
 #include <toolkit/system/TkCSMutex.h>
 #include <toolkit/system/timer/TkStopwatch.h>
-#include <toolkit/utilities/fsm/TkFSM.h>
-#include <toolkit/utilities/containers/TkVector.h>
 #include <toolkit/utilities/TkString.h>
-#include <application/GcGameConfigCache.h>
+#include <toolkit/utilities/containers/TkVector.h>
+#include <toolkit/utilities/fsm/TkFSM.h>
 
 // metadata
 #include <metadata/source/gamestate/gcgamemode.meta.h>
@@ -50,14 +50,16 @@
 #include <reality/GcRealityManager.h>
 
 // other
-#include <simulation/GcSimulation.h>
-#include <gamestate/GcGameState.h>
 #include <application/GcFirstBootContext.h>
+#include <gamestate/GcGameState.h>
+#include <simulation/GcSimulation.h>
 
 SKYSCRAPER_BEGIN
 
 class cGcApplication : public cTkFSM
 {
+    VFT<5> *__vftable;
+
     struct Data
     {
         cGcFirstBootContext mFirstBootContext;
@@ -121,7 +123,7 @@ class cGcApplication : public cTkFSM
     bool mbHasFocus;
     bool mbQuitRequested;
     bool mResumeFromSuspendSave;
-    cTkVector<cTkFixedString<128,char> > mAssertMessage;
+    cTkVector<cTkFixedString<128, char>> mAssertMessage;
     cTkCSMutex mAssertMessageLock;
 };
 

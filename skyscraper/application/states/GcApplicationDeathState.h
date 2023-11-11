@@ -17,12 +17,12 @@
 
 #pragma once
 
-#include <skyscraper.h>
 #include <application/states/GcApplicationState.h>
-#include <toolkit/utilities/TkStrongType.h>
-#include <toolkit/utilities/containers/TkVector.h>
 #include <graphics/ngui/GcNGui.h>
 #include <metadata/source/gamestate/gcinventoryelement.meta.h>
+#include <skyscraper.h>
+#include <toolkit/utilities/TkStrongType.h>
+#include <toolkit/utilities/containers/TkVector.h>
 
 SKYSCRAPER_BEGIN
 
@@ -30,10 +30,11 @@ class cGcApplicationDeathState : public cGcApplicationState
 {
     typedef cGcAsyncLoadOps::Operation Phase;
 
-    TkStrongType<int,TkStrongTypeIDs::TkResHandleID> mPipelineResource;
+    VFT<8> *__vftable;
+    TkStrongType<int, TkStrongTypeIDs::TkResHandleID> mPipelineResource;
     cTkVector<bool> maPreviousPipelineStageState;
-    cTkFixedString<512,char> mDeathQuote;
-    cTkFixedString<512,char> mDeathAuthor;
+    cTkFixedString<512, char> mDeathQuote;
+    cTkFixedString<512, char> mDeathAuthor;
     int miDeathQuoteIndex;
     cTkVector3 mDeathPosition;
     cTkVector<cGcInventoryElement> mTrashedItems;

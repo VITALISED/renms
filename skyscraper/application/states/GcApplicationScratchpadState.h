@@ -17,17 +17,17 @@
 
 #pragma once
 
-#include <skyscraper.h>
 #include <application/states/GcApplicationState.h>
-#include <toolkit/maths/geometry/TkSphere.h>
-#include <toolkit/utilities/containers/TkVector.h>
-#include <toolkit/graphics/2d/texture/TkDynamicTexture.h>
-#include <simulation/solarsystem/asteroid/GcAsteroidLayout.h>
-#include <simulation/GcPresetDualPMap.h>
-#include <simulation/GcPresetTerrainTexture.h>
 #include <metadata/source/simulation/solarsystem/asteroids/gcasteroidgeneratorring.meta.h>
 #include <metadata/source/simulation/solarsystem/asteroids/gcasteroidgeneratorslab.meta.h>
 #include <metadata/source/simulation/solarsystem/asteroids/gcasteroidgeneratorsurround.meta.h>
+#include <simulation/GcPresetDualPMap.h>
+#include <simulation/GcPresetTerrainTexture.h>
+#include <simulation/solarsystem/asteroid/GcAsteroidLayout.h>
+#include <skyscraper.h>
+#include <toolkit/graphics/2d/texture/TkDynamicTexture.h>
+#include <toolkit/maths/geometry/TkSphere.h>
+#include <toolkit/utilities/containers/TkVector.h>
 
 SKYSCRAPER_BEGIN
 
@@ -61,7 +61,7 @@ class cGcApplicationScratchpadState : public cGcApplicationState
         cTkColour mBGColour;
         cTkVector<cGcPresetDualPMap> mPmaps;
         cTkVector<cGcPresetTerrainTexture> mTerrainTextures;
-        std::array<cTkColour,19> maTerrainColours;
+        std::array<cTkColour, 19> maTerrainColours;
         int miCurrentTerrainTextureSmall;
         cTkSmartResHandle mUITextureRes;
         cTkSmartResHandle mUIMaskTextureRes;
@@ -76,6 +76,7 @@ class cGcApplicationScratchpadState : public cGcApplicationState
         cTkVector3 mvDebugRenderOffset;
     };
 
+    VFT<8> *__vftable;
     std::unique_ptr<cGcApplicationScratchpadState::CustomData> mCustomData;
     std::unique_ptr<cGcApplicationScratchpadState::StateData> mStateData;
 };
