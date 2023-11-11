@@ -6,7 +6,12 @@ std::vector<std::string> startupQuips = {
     "\"Now with 50% more crashes!\" - tractorbeam",
     "\"Ready to serve you yet another crash log.\" - tractorbeam",
     "\"Good luck lol\" - tractorbeam",
-    "\"Still not using cTkMemoryManager!\" - tractorbeam"
+    "\"Still not hooking cTkMemoryManager!\" - tractorbeam",
+    "\"Also try Starfield!\" - tractorbeam",
+    "\"What do you mean 'it works on my machine?'\" - tractorbeam",
+    "\"You guys have been hooking?\" - tractorbeam",
+    "\"I read something about a hooker in the logs.\" - tractorbeam",
+    "\"I'd like two number nines, a number nine large, a number six with extra dip, a number seven, two number forty-fives, one with cheese, and a large soda.\" - tractorbeam, supposedly"
 };
 
 char* randomQuip()
