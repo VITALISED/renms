@@ -52,8 +52,8 @@ int main(int argc, char **argv)
 
         if (argc < 2)
         {
-            nmsPath = launcherPath.parent_path();
-            nmsPath /= "NMS.exe";
+            nmsPath = launcherPath.parent_path() / "NMS.exe";
+            dllPath = launcherPath.parent_path() / "renms.dll";
         } else {
             nmsPath = argv[1];
             dllPath = argv[2];
