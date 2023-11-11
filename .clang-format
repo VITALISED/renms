@@ -15,17 +15,19 @@ AlwaysBreakTemplateDeclarations: 'Yes'
 SortIncludes: true
 IncludeBlocks: Regroup
 IncludeCategories:
+      # Sort primary headers renms.h, skyscraper.h and heridium.h
     - Regex:           '<(renms.h|skyscraper.h|heridium.h)>'
       Priority:        1
       # External headers in <> with extension or /
     - Regex: '<[-\w\/-_]+[\.\/][-\w\/-_]+>'
       Priority: 2
+      # Metadata headers
     - Regex: '<[-\w\/-_]+[\.meta\/][-\w\/-_]+>'
       Priority: 3
-    # Standard headers in <>
+      # STL headers
     - Regex: '<[-\w\/-_]+>'
       Priority: 4
-    # Local headers in ""
+      # Local headers in ""
     - Regex: '"[-\w\/-_]*"'
       Priority: 5
 
