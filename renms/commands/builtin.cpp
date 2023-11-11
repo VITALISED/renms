@@ -23,7 +23,7 @@ void EchoCommandDispatch(std::vector<std::string> *laArgs)
 
     strcpy_s(lpacMessageBody->macBuffer, 1023, lsAccumulated.c_str());
 
-    BroadcastMessage(const_cast<const nms::cTkFixedString<1023, char> *>(lpacMessageBody), false);
+    // BroadcastMessage(const_cast<const nms::cTkFixedString<1023, char> *>(lpacMessageBody), false);
 
     spdlog::info(lsAccumulated);
 

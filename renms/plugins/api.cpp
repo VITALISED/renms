@@ -1,6 +1,5 @@
-#include <plugins/api.h>
-
 #include <memory/memory.h>
+#include <plugins/api.h>
 #include <polyhook2/Detour/x64Detour.hpp>
 
 uint64_t RENMS_API GetGcApplication()
@@ -34,14 +33,14 @@ FnCastTo RENMS_API FnCast(void *fnToCast, FnCastTo)
     return (FnCastTo)fnToCast;
 }
 
-int BroadcastMessage(const cTkFixedString<1023, char> *lsMessageBody, bool lbSystemMessage)
-{
-    typedef int (*cGcTextChatManager__Say)(
-        uint64_t thiscall, const nms::cTkFixedString<1023, char> *lsMessageBody, bool lbSystemMessage);
+// int BroadcastMessage(const cTkFixedString<1023, char> *lsMessageBody, bool lbSystemMessage)
+// {
+//     typedef int (*cGcTextChatManager__Say)(
+//         uint64_t thiscall, const nms::cTkFixedString<1023, char> *lsMessageBody, bool lbSystemMessage);
 
-    cGcTextChatManager__Say lpSayFn =
-        reinterpret_cast<cGcTextChatManager__Say>(renms::RelToAbsolute(GCTEXTCHATMANAGER_SAY));
+//     cGcTextChatManager__Say lpSayFn =
+//         reinterpret_cast<cGcTextChatManager__Say>(renms::RelToAbsolute(GCTEXTCHATMANAGER_SAY));
 
-    // TODO: gcapplication -> data -> gcnetworkmanager -> gctextchatmanager :dread:
-    return lpSayFn(reinterpret_cast<uint64_t>(NULL), lsMessageBody, lbSystemMessage);
-}
+//     // TODO: gcapplication -> data -> gcnetworkmanager -> gctextchatmanager :dread:
+//     return lpSayFn(reinterpret_cast<uint64_t>(NULL), lsMessageBody, lbSystemMessage);
+// }

@@ -19,15 +19,15 @@
 
 #ifdef RENMS
 
-#include <array>
 #include <core/framework.h>
 #include <core/log.h>
 #include <fmt/format.h>
-#include <plugins/api.h>
 #include <polyhook2/Detour/NatDetour.hpp>
 #include <polyhook2/Enums.hpp>
 #include <polyhook2/IHook.hpp>
 #include <polyhook2/PE/IatHook.hpp>
+
+#include <array>
 #include <string>
 #include <vector>
 

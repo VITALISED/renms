@@ -73,18 +73,7 @@ std::string HeridiumCXXFile::FindIncludePathForClass(const char *lpacClassName)
 
     for (std::pair<const char *, const char *> lItem : gClassPaths)
     {
-        if (lsKey == lItem.first)
-        {
-            std::string lsSecond = lItem.second;
-
-            size_t liPos = lsSecond.find("source/");
-
-            if (liPos != std::string::npos) { return lsSecond.substr(strlen("source/")); }
-
-            liPos = lsSecond.find("toolkit/");
-
-            if (liPos != std::string::npos) { return lsSecond.substr(strlen("toolkit/")); }
-        }
+        if (lsKey == lItem.first) { return std::string(lItem.second); }
     }
 
     return "?";

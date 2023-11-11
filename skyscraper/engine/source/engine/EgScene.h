@@ -18,8 +18,16 @@
 #pragma once
 
 #include <skyscraper.h>
+
 #include <toolkit/attachments/TkHandle.h>
+#include <toolkit/resources/TkResourceDescriptor.h>
+#include <toolkit/resources/TkSmartResHandle.h>
+#include <toolkit/system/memory/TkRefCounted.h>
+#include <toolkit/utilities/containers/TkVector.h>
+
 #include <string>
+
+#include <toolkit/attachments/tkattachmentdata.meta.h>
 
 SKYSCRAPER_BEGIN
 
@@ -32,20 +40,20 @@ struct EgRenderQueueHandle
 class cEgNodeAttachment
 {
     TkHandle mNode;
-    
+
     virtual ~cEgNodeAttachment();
     virtual void OnUpdate();
 };
 
 class cEgSceneNode
 {
-    cEgSceneNode_vtbl *__vftable /*VFT*/;
+    VFT<22> *__vftable;
     TkHandle mLookupHandle;
     unsigned int muNameHash;
     cTkSmartResHandle mResHandle;
     unsigned int muNetworkId;
-    cTkSharedPtr<std::basic_string<char,std::char_traits<char>,std::allocator<char> > > msName;
-    cTkSharedPtr<cTkResourceDescriptor const > mpAltId;
+    cTkSharedPtr<std::string> msName;
+    cTkSharedPtr<cTkResourceDescriptor const> mpAltId;
     cEgNodeAttachment *mpNodeAttachment;
     cTkSlotAlloc *mpAllocator;
     int miIsMaster;
@@ -53,18 +61,18 @@ class cEgSceneNode
 
 class cEgSceneNodeTemplate
 {
-    cEgSceneNodeTemplate_vtbl *__vftable;
-    __declspec(align(16)) int miType;
+    VFT<7> *__vftable;
+    int miType;
     unsigned int muNameHash;
     cTkSharedPtr<std::string> msName;
-    cTkSharedPtr<cTkResourceDescriptor const > mpDescriptor;
+    cTkSharedPtr<cTkResourceDescriptor const> mpDescriptor;
     cTkVector3 mTranslation;
     cTkVector3 mRotation;
     cTkVector3 mScale;
     cTkAttachmentData *mpAttachment;
     cEgSceneNode *mpParent;
     TkHandle mHandle;
-    std::vector<cEgSceneNodeTemplate *,TkSTLAllocatorShim<cEgSceneNodeTemplate *,8,-1> > mChildren;
+    cTkVector<cEgSceneNodeTemplate *> mChildren;
 };
 
 SKYSCRAPER_END
