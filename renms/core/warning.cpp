@@ -16,7 +16,7 @@ uint64_t cTkFileSystem__IsModded__TRAMPOLINE = NULL;
 
 bool cTkFileSystem__IsModded__DETOUR(uint64_t thiscall)
 {
-    if (gConfigSettings.mbShowWarning) return true;
+    if (renms::config::bShowWarning) return true;
 
     return false;
 }

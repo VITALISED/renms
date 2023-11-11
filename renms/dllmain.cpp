@@ -30,11 +30,10 @@ DWORD WINAPI MainThread(LPVOID lpReserved)
 {
     UNREFERENCED_PARAMETER(lpReserved);
 
-    CreateLogger("ReNMS");
+    CreateLogger("\033[31mReNMS\033[0m");
     spdlog::info("ReNMS v.{} -- Initializing things...", RENMS_VERSION);
 
-    gConfigSettings = renms::ConfigFile::ConfigFile();
-
+    renms::config::init();
     renms::AddBuiltinCommands();
     renms::CreateTextChatHooks();
     renms::CreateFiosHooks();

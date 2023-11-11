@@ -1,21 +1,15 @@
 #pragma once
-
 #include <filesystem>
-#include <inicpp.h>
 #include <renms.h>
-
-using namespace std::filesystem;
 
 RENMS_BEGIN
 
-class ConfigFile
+namespace config
 {
-  public:
-    bool mbShowWarning;
+    extern bool bShowWarning;
 
-    ConfigFile();
+    void init();
+    void generate(std::filesystem::path configPath);
 };
 
 RENMS_END
-
-extern renms::ConfigFile gConfigSettings;

@@ -210,7 +210,7 @@ add_custom_command(
     COMMAND "$<TARGET_FILE:ReLauncher>" "${NMS_EXE_PATH}"
             "$<TARGET_FILE:Heridium>"
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/metadata
-    DEPENDS Heridium ReLauncher
+    DEPENDS Heridium
 )
 
 # --------------------------------------------------------------------------------------------------
@@ -220,12 +220,6 @@ add_custom_command(
 # renms settings
 add_dependencies(renms resdk Heridium ReLauncher)
 target_link_libraries(renms fmt PolyHook_2 spdlog)
-
-target_precompile_headers(
-    renms PRIVATE ${PROJECT_SOURCE_DIR}/renms/renms.h PRIVATE
-    ${PROJECT_SOURCE_DIR}/skyscraper/skyscraper.h
-    # PRIVATE ${PROJECT_SOURCE_DIR}/metadata/metadata.h
-)
 
 target_compile_definitions(renms PRIVATE RENMS FIOS_TYPES_ONLY)
 target_compile_definitions(renms PUBLIC RENMS_VERSION="${PROJECT_VERSION}")
@@ -258,7 +252,7 @@ target_include_directories(
 target_link_libraries(Heridium PRIVATE spdlog fmt PolyHook_2)
 
 # ==================================================================================================
-# Launcher
+# Launch target
 
 # Make sure the past installer's leftovers are uninstalled first!
 add_custom_target(
