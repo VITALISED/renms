@@ -9,8 +9,15 @@ std::vector<std::string> startupQuips = {
     "\"Still not using cTkMemoryManager!\" - tractorbeam"
 };
 
-int startupQuipOfChoice = rand() % startupQuips.size();
-char* startupQuip = (char*)startupQuips[startupQuipOfChoice].c_str();
+char* randomQuip()
+{
+    srand(time(NULL));
+    int startupQuipOfChoice = 0;
+    startupQuipOfChoice = rand() % startupQuips.size();
+    return (char*)startupQuips[startupQuipOfChoice].c_str();
+}
+
+auto startupQuip = randomQuip();
 
 uint64_t cTkFileSystem__IsModded__TRAMPOLINE = NULL;
 
