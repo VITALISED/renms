@@ -18,10 +18,11 @@
 #pragma once
 
 #include <skyscraper.h>
+
 #include <graphics/ngui/NGuiInputType.h>
-#include <toolkit/graphics/ngui/TkNGuiDraggable.h>
+#include <toolkit/graphics/2d/ngui/TkNGuiDraggable.h>
+#include <toolkit/graphics/2d/ngui/TkNGuiElementID.h>
 #include <toolkit/utilities/containers/TkVector.h>
-#include <toolkit/graphics/ngui/TkNGuiElementID.h>
 
 SKYSCRAPER_BEGIN
 
@@ -31,6 +32,23 @@ enum eNGuiInputButtonState
     eButton_Released,
     eButton_Pressed,
     eButton_Held,
+};
+
+enum eNGuiInputType
+{
+    eInput_RightDragged    = -8,
+    eInput_RightPressed    = -7,
+    eInput_RightHeld       = -6,
+    eInput_Hover           = -5,
+    eInput_Dragged         = -4,
+    eInput_TouchPressReady = -3,
+    eInput_Pressed         = -2,
+    eInput_Held            = -1,
+    eInput_None            = 0,
+    eInput_Released        = 1,
+    eInput_Click           = 2,
+    eInput_RightReleased   = 3,
+    eInput_RightClick      = 4,
 };
 
 class cTkNGuiInput
@@ -57,8 +75,8 @@ class cTkNGuiInput
     eNGuiInputButtonState meDiscoveryUploadButtonState;
     bool mbCursorIsMouse;
     bool mbPadOnly;
-    cTkVector<std::pair<cTkNGuiElementID, eNGuiInputType> > maElementsPressed;
-    cTkVector<std::pair<cTkNGuiElementID, eNGuiInputType> > maElementsPressed2;
+    cTkVector<std::pair<cTkNGuiElementID, eNGuiInputType>> maElementsPressed;
+    cTkVector<std::pair<cTkNGuiElementID, eNGuiInputType>> maElementsPressed2;
     int KeyMap[19];
     bool KeyCtrl;
     bool KeyShift;

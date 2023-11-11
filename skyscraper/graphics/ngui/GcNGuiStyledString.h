@@ -18,21 +18,23 @@
 #pragma once
 
 #include <skyscraper.h>
-#include <graphics/ngui/NGuiInputType.h>
+
 #include <graphics/hud/GcPunctuationDelay.h>
-#include <toolkit/graphics/ngui/TkNGuiTextStyle.h>
+#include <graphics/ngui/NGuiInputType.h>
 #include <toolkit/data/TkMetaData.h>
+#include <toolkit/graphics/ngui/TkNGuiTextStyle.h>
 #include <toolkit/maths/numeric/generic/TkVector2Generic.h>
-#include <toolkit/utilities/containers/TkVector.h>
 #include <toolkit/utilities/containers/TkUnorderedMap.h>
-#include <metadata/source/reality/gcalienmood.meta.h>
-#include <metadata/source/simulation/ecosystem/npcs/gcnpcproptype.meta.h>
+#include <toolkit/utilities/containers/TkVector.h>
+
+#include <reality/gcalienmood.meta.h>
+#include <simulation/ecosystem/npcs/gcnpcproptype.meta.h>
 
 SKYSCRAPER_BEGIN
 
 class cGcNGuiStyledString
 {
-public:
+  public:
     struct SpecialStyle
     {
         bool mbPlaying;
@@ -65,8 +67,7 @@ public:
             int miEnd;
         };
 
-        union LayoutCustomData
-        {
+        union LayoutCustomData {
             unsigned int mAudioID;
             eMood meMood;
             eNPCProp meProp;
@@ -78,8 +79,7 @@ public:
             float mfY;
         };
 
-        union LayoutInstructionArgs
-        {
+        union LayoutInstructionArgs {
             cGcNGuiStyledString::LayoutInstruction::StringSegment mStringSegment;
             cGcNGuiStyledString::LayoutInstruction::CursorLocation mCursorLocation;
         };
@@ -102,9 +102,11 @@ public:
     struct StyledStringLayout
     {
         cTkNGuiTextStyle mBaseTextStyle;
-        cTkUnorderedMap<TkID<128>, cGcNGuiStyledString::SpecialStyle, TkIDUnorderedMap::Hash128 ,std::equal_to<TkID<128> > > mTextStyles;
+        cTkUnorderedMap<
+            TkID<128>, cGcNGuiStyledString::SpecialStyle, TkIDUnorderedMap::Hash128, std::equal_to<TkID<128>>>
+            mTextStyles;
         cTkVector<cGcNGuiStyledString::LayoutInstruction> maStyleInstructions;
-        cTkVector<TkID<128> > mStyleStack;
+        cTkVector<TkID<128>> mStyleStack;
         float mfScrollOffset;
         float mfCurrentOffset;
         float mfStartTime;

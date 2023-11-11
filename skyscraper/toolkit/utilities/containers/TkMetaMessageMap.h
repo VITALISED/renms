@@ -18,14 +18,26 @@
 #pragma once
 
 #include <skyscraper.h>
+
 #include <toolkit/utilities/containers/TkStackVector.h>
 
 SKYSCRAPER_BEGIN
 
-template <int I>
+template <typename T>
+class cTkMetaMessageWrapperTemplated
+{
+    const T *mpInstance;
+    unsigned __int64 mu64Hash;
+};
+
+template <int unk>
 class cTkMetaMessageMap
 {
-    robin_hood::detail::Table<false, 80, unsigned __int64, cTkStackVector<std::function<void __cdecl(cTkMetaMessageWrapperTemplated<void> const &)>, I>,robin_hood::hash<unsigned __int64,void>,std::equal_to<unsigned __int64> > mSubscriptionMap;
+    robin_hood::detail::Table<
+        false, 80, unsigned __int64,
+        cTkStackVector<std::function<void __cdecl(cTkMetaMessageWrapperTemplated<void> const &)>>,
+        robin_hood::hash<unsigned __int64, void>, std::equal_to<unsigned __int64>>
+        mSubscriptionMap;
 };
 
 SKYSCRAPER_END

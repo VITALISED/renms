@@ -167,6 +167,11 @@ add_dependency_custom(
 add_dependency_custom(
     ./submodules/Vulkan-Headers ./submodules/Vulkan-Headers/include
 )
+add_dependency_custom(
+    ./submodules/VulkanMemoryAllocator
+    ./submodules/VulkanMemoryAllocator/include
+)
+add_dependency_custom(./submodules/stb ./submodules/stb)
 
 # ==================================================================================================
 # Targets.

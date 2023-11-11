@@ -17,14 +17,15 @@
 
 #pragma once
 
+#include <skyscraper.h>
+
 #include <application/states/GcApplicationState.h>
 #include <atlas/WinHttpTask.h>
 #include <graphics/ngui/GcNGuiGraphic.h>
 #include <graphics/ngui/GcNGuiLayer.h>
 #include <graphics/ngui/GcNGuiTextSpecial.h>
-#include <skyscraper.h>
 #include <toolkit/audio/wwise/TkAudioManagerWwise.h>
-#include <toolkit/graphics/ngui/TkNGuiInput.h>
+#include <toolkit/graphics/2d/ngui/TkNGuiInput.h>
 #include <toolkit/system/TkUserServiceNotifications.h>
 #include <toolkit/utilities/containers/TkVector.h>
 

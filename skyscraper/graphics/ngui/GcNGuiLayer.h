@@ -20,25 +20,26 @@
 #include <skyscraper.h>
 
 #include <graphics/ngui/GcNGuiElement.h>
-#include <toolkit/utilities/containers/TkVector.h>
-#include <toolkit/utilities/containers/TkLinearHashTable.h>
+#include <toolkit/graphics/2d/ngui/TkHashedNGuiElement.h>
 #include <toolkit/maths/numeric/generic/TkVector2Generic.h>
-#include <toolkit/graphics/ngui/TkHashedNGuiElement.h>
-#include <metadata/toolkit/ngui/tknguigraphicstyledata.meta.h>
-#include <metadata/source/graphics/ngui/metadata/gcnguilayerdata.meta.h>
+#include <toolkit/utilities/containers/TkLinearHashTable.h>
+#include <toolkit/utilities/containers/TkVector.h>
+
+#include <graphics/ngui/metadata/gcnguilayerdata.meta.h>
+#include <toolkit/ngui/tknguigraphicstyledata.meta.h>
 
 SKYSCRAPER_BEGIN
 
 class cGcNGuiLayer : public cGcNGuiElement
 {
-    cTkVector<cGcNGuiElement*> mapElements;
-    cTkVector<cGcNGuiLayer*> mapLayerElements;
+    cTkVector<cGcNGuiElement *> mapElements;
+    cTkVector<cGcNGuiLayer *> mapLayerElements;
     cTkVector<cTkVector2> maPinnedPositions;
     cTkNGuiGraphicStyleData mPreviousGraphicsStyle;
     void (*mpRenderFunction)(void *);
     void *mpRenderFunctionData;
     cGcNGuiLayerData *mpLayerData;
-    cTkLinearHashTable<cTkHashedNGuiElement, cGcNGuiElement*, cTkHashedNGuiElement> *mpElementHashTable;
+    cTkLinearHashTable<cTkHashedNGuiElement, cGcNGuiElement *, cTkHashedNGuiElement> *mpElementHashTable;
     unsigned __int64 muUniqueID;
     bool mbExpanded;
 };

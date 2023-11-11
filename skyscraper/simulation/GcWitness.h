@@ -18,9 +18,11 @@
 #pragma once
 
 #include <skyscraper.h>
+
 #include <simulation/GcTrackArrowTypes.h>
 #include <toolkit/attachments/TkAttachment.h>
-#include <metadata/source/simulation/ecosystem/creatures/behaviours/data/gcprimaryaxis.meta.h>
+
+#include <simulation/ecosystem/creatures/behaviours/data/gcprimaryaxis.meta.h>
 
 SKYSCRAPER_BEGIN
 

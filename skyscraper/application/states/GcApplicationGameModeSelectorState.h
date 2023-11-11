@@ -17,6 +17,8 @@
 
 #pragma once
 
+#include <skyscraper.h>
+
 #include <application/states/GcApplicationState.h>
 #include <atlas/WinHttpTask.h>
 #include <gamestate/GcGameStatePersistence.h>
@@ -26,15 +28,15 @@
 #include <graphics/ngui/GcNGuiText.h>
 #include <graphics/ngui/GcNGuiTextSpecial.h>
 #include <graphics/ngui/ScrollBarState.h>
-#include <gamestate/gcgamemode.meta.h>
-#include <user/gcdifficultypresettype.meta.h>
-#include <user/gcdifficultysettingsdata.meta.h>
-#include <skyscraper.h>
 #include <system/GcModManager.h>
-#include <toolkit/graphics/ngui/TkNGuiInput.h>
+#include <toolkit/graphics/2d/ngui/TkNGuiInput.h>
 #include <toolkit/maths/numeric/TkSmoothCD.h>
 #include <toolkit/system/pc/TkStoragePersistent.h>
 #include <toolkit/utilities/containers/TkVector.h>
+
+#include <gamestate/gcgamemode.meta.h>
+#include <user/gcdifficultypresettype.meta.h>
+#include <user/gcdifficultysettingsdata.meta.h>
 
 SKYSCRAPER_BEGIN
 

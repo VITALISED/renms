@@ -18,16 +18,18 @@
 #pragma once
 
 #include <skyscraper.h>
+
 #include <graphics/ngui/GcNGuiElement.h>
-#include <metadata/toolkit/ngui/tknguitextstyledata.meta.h>
-#include <metadata/toolkit/ngui/tknguigraphicstyledata.meta.h>
-#include <metadata/source/graphics/ngui/metadata/gcnguitextdata.meta.h>
+
+#include <graphics/ngui/metadata/gcnguitextdata.meta.h>
+#include <toolkit/ngui/tknguigraphicstyledata.meta.h>
+#include <toolkit/ngui/tknguitextstyledata.meta.h>
 
 SKYSCRAPER_BEGIN
 
 class cGcNGuiText : cGcNGuiElement
 {
-    cTkFixedString<128,char> mLocBlinkText;
+    cTkFixedString<128, char> mLocBlinkText;
     cTkNGuiTextStyleData mPreviousTextStyle;
     cTkNGuiGraphicStyleData mPreviousGraphicStyle;
     cGcNGuiTextData *mpTextData;
