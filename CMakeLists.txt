@@ -232,10 +232,9 @@ set_target_properties(renms PROPERTIES OUTPUT_NAME renms)
 
 target_include_directories(
     renms
-    PUBLIC ${PROJECT_SOURCE_DIR}/renms
+    PUBLIC ${PROJECT_SOURCE_DIR}
     PUBLIC ${PROJECT_SOURCE_DIR}/skyscraper
-    PUBLIC ${PROJECT_SOURCE_DIR}/metadata/source
-    PUBLIC ${PROJECT_SOURCE_DIR}/metadata/toolkit
+    PUBLIC ${PROJECT_SOURCE_DIR}/metadata
 )
 
 # --------------------------------------------------------------------------------------------------

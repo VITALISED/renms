@@ -17,20 +17,10 @@
 
 #pragma once
 
-// general types
-#include <application/GcGameConfigCache.h>
 #include <skyscraper.h>
-#include <toolkit/maths/utilities/spatial/TkSampleDistribution.h>
-#include <toolkit/system/TkCSMutex.h>
-#include <toolkit/system/timer/TkStopwatch.h>
-#include <toolkit/utilities/TkString.h>
-#include <toolkit/utilities/containers/TkVector.h>
-#include <toolkit/utilities/fsm/TkFSM.h>
 
-// metadata
-#include <metadata/source/gamestate/gcgamemode.meta.h>
-
-// states
+#include <application/GcFirstBootContext.h>
+#include <application/GcGameConfigCache.h>
 #include <application/states/GcApplicationAmbientGameState.h>
 #include <application/states/GcApplicationBootState.h>
 #include <application/states/GcApplicationCoreServicesState.h>
@@ -45,14 +35,17 @@
 #include <application/states/GcApplicationSmokeTestState.h>
 #include <application/states/GcApplicationTitleScreenState.h>
 #include <application/states/GcApplicationUGCBaseViewerState.h>
-
-// managers
+//#include <gamestate/GcGameState.h>
 #include <reality/GcRealityManager.h>
-
-// other
-#include <application/GcFirstBootContext.h>
-#include <gamestate/GcGameState.h>
 #include <simulation/GcSimulation.h>
+#include <toolkit/maths/utilities/spatial/TkSampleDistribution.h>
+#include <toolkit/system/TkCSMutex.h>
+#include <toolkit/system/timer/TkStopwatch.h>
+#include <toolkit/utilities/TkString.h>
+#include <toolkit/utilities/containers/TkVector.h>
+#include <toolkit/utilities/fsm/TkFSM.h>
+
+#include <gamestate/gcgamemode.meta.h>
 
 SKYSCRAPER_BEGIN
 
@@ -65,28 +58,28 @@ class cGcApplication : public cTkFSM
         cGcFirstBootContext mFirstBootContext;
         cTkMcQmcLFSRStore mTkMcQmcLFSRStore;
         cGcRealityManager mRealityManager;
-        cGcGameState mGameState;
-        cGcSeasonalData mSeasonalData;
-        cGcSimulation mSimulation;
-        cGcHUDManager mHUDManager;
-        cGcFrontendManager mFrontendManager;
-        cGcInWorldUIManager mInWorldUIManager;
-        cGcCameraManager mCameraManager;
-        cGcGraphicsManager mGraphicsManager;
-        cTkInputManager *mpInputManager;
-        cGcInputRemap mInputRemap;
-        cGcVibrationManager mVibrationManager;
-        cTkTimeManager mTimeManager;
-        cTkDebugRenderer mDebugRenderer;
-        cGcDebugEditor mDebugEditor;
-        cGcNGuiManager mNGuiManager;
-        cGcAudioManager mAudioManager;
-        cGcAtlasManager mAtlasManager;
-        cGcNetworkManager mNetworkManager;
-        cGcResourceManager mResourceManager;
-        cGcGalaxyMap mGalaxyMap;
-        cGcGameAnalytics mGameAnalytics;
-        cGcActivitiesTracker mActivitiesTracker;
+        // cGcGameState mGameState;
+        // cGcSeasonalData mSeasonalData;
+        // cGcSimulation mSimulation;
+        // cGcHUDManager mHUDManager;
+        // cGcFrontendManager mFrontendManager;
+        // cGcInWorldUIManager mInWorldUIManager;
+        // cGcCameraManager mCameraManager;
+        // cGcGraphicsManager mGraphicsManager;
+        // cTkInputManager *mpInputManager;
+        // cGcInputRemap mInputRemap;
+        // cGcVibrationManager mVibrationManager;
+        // cTkTimeManager mTimeManager;
+        // cTkDebugRenderer mDebugRenderer;
+        // cGcDebugEditor mDebugEditor;
+        // cGcNGuiManager mNGuiManager;
+        // cGcAudioManager mAudioManager;
+        // cGcAtlasManager mAtlasManager;
+        // cGcNetworkManager mNetworkManager;
+        // cGcResourceManager mResourceManager;
+        // cGcGalaxyMap mGalaxyMap;
+        // cGcGameAnalytics mGameAnalytics;
+        // cGcActivitiesTracker mActivitiesTracker;
     };
 
     cGcApplication::Data *mpData;

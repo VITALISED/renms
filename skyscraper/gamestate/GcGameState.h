@@ -18,12 +18,13 @@
 #pragma once
 
 #include <skyscraper.h>
-#include <gamestate/GcPlayerState.h>
+
 #include <gamestate/GcPlayerShipOwnership.h>
+#include <gamestate/GcPlayerState.h>
 #include <gamestate/GcPlayerVehicleOwnership.h>
 #include <networking/GcRpcCallBase.h>
-#include <metadata/source/gamestate/gcplayerspawnstatedata.meta.h>
 
+#include <gamestate/gcplayerspawnstatedata.meta.h>
 
 SKYSCRAPER_BEGIN
 
@@ -59,7 +60,7 @@ class cGcGameState
     cGcSettlementStateManager mSettlementStateManager;
     float mfSaveStateDisplayTime;
     unsigned char meSaveStateLastResult[4];
-     __int64 miLastSaveOperationTimestamp;
+    __int64 miLastSaveOperationTimestamp;
     bool mbRestoreRequested;
     GcGameStatePersistence::SpecificSave::Type meRestoreType;
     cGcPersistentInteractionsManager mSavedInteractionsManager;

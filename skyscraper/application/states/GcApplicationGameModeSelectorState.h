@@ -26,9 +26,9 @@
 #include <graphics/ngui/GcNGuiText.h>
 #include <graphics/ngui/GcNGuiTextSpecial.h>
 #include <graphics/ngui/ScrollBarState.h>
-#include <metadata/source/gamestate/gcgamemode.meta.h>
-#include <metadata/source/user/gcdifficultypresettype.meta.h>
-#include <metadata/source/user/gcdifficultysettingsdata.meta.h>
+#include <gamestate/gcgamemode.meta.h>
+#include <user/gcdifficultypresettype.meta.h>
+#include <user/gcdifficultysettingsdata.meta.h>
 #include <skyscraper.h>
 #include <system/GcModManager.h>
 #include <toolkit/graphics/ngui/TkNGuiInput.h>

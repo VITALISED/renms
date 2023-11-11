@@ -18,12 +18,12 @@
 #pragma once
 
 #include <application/states/GcApplicationState.h>
-#include <metadata/source/simulation/solarsystem/asteroids/gcasteroidgeneratorring.meta.h>
-#include <metadata/source/simulation/solarsystem/asteroids/gcasteroidgeneratorslab.meta.h>
-#include <metadata/source/simulation/solarsystem/asteroids/gcasteroidgeneratorsurround.meta.h>
 #include <simulation/GcPresetDualPMap.h>
 #include <simulation/GcPresetTerrainTexture.h>
 #include <simulation/solarsystem/asteroid/GcAsteroidLayout.h>
+#include <simulation/solarsystem/asteroids/gcasteroidgeneratorring.meta.h>
+#include <simulation/solarsystem/asteroids/gcasteroidgeneratorslab.meta.h>
+#include <simulation/solarsystem/asteroids/gcasteroidgeneratorsurround.meta.h>
 #include <skyscraper.h>
 #include <toolkit/graphics/2d/texture/TkDynamicTexture.h>
 #include <toolkit/maths/geometry/TkSphere.h>
