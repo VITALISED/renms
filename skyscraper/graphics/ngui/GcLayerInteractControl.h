@@ -18,10 +18,11 @@
 #pragma once
 
 #include <skyscraper.h>
-#include <toolkit/graphics/ngui/TkNGuiInput.h>
-#include <toolkit/audio/wwise/TkAudioManagerWwise.h>
+
 #include <graphics/ngui/GcNGuiLayer.h>
 #include <simulation/player/GcPlayer.h>
+#include <toolkit/audio/wwise/TkAudioManagerWwise.h>
+#include <toolkit/graphics/2d/ngui/TkNGuiInput.h>
 
 SKYSCRAPER_BEGIN
 

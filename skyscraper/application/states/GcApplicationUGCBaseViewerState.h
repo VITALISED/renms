@@ -17,14 +17,15 @@
 
 #pragma once
 
+#include <skyscraper.h>
+
 #include <application/states/GcApplicationGameModeSelectorState.h>
 #include <application/states/GcApplicationState.h>
 #include <engine/source/engine/EgTexture.h>
 #include <graphics/ngui/GcLayerInteractControl.h>
 #include <graphics/ngui/GcNGuiLayer.h>
 #include <graphics/ngui/GcNGuiTextSpecial.h>
-#include <skyscraper.h>
-#include <toolkit/graphics/ngui/TkNGuiInput.h>
+#include <toolkit/graphics/2d/ngui/TkNGuiInput.h>
 #include <toolkit/utilities/containers/TkVector.h>
 
 SKYSCRAPER_BEGIN

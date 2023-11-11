@@ -22,3 +22,9 @@
 [submodule "submodules/inifile-cpp"]
 	path = submodules/inifile-cpp
 	url = https://github.com/Rookfighter/inifile-cpp.git
+[submodule "submodules/VulkanMemoryAllocator"]
+	path = submodules/VulkanMemoryAllocator
+	url = https://github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator.git
+[submodule "submodules/stb"]
+	path = submodules/stb
+	url = https://github.com/nothings/stb.git
