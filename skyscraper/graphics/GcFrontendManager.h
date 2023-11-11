@@ -2,12 +2,126 @@
 
 #include <skyscraper.h>
 
+#include <graphics/frontend/components/GcFrontendTextInput.h>
+#include <graphics/ngui/GcNGuiLayer.h>
+#include <graphics/ngui/GcNGuiStyledString.h>
+#include <networking/GcTextChatManager.h>
+#include <toolkit/attachments/TkAttachment.h>
 #include <toolkit/data/TkMetaData.h>
 #include <toolkit/graphics/2d/ngui/TkNGuiInput.h>
 #include <toolkit/system/TkISystemEventHandler.h>
 #include <toolkit/utilities/TkString.h>
+#include <toolkit/utilities/containers/TkVector.h>
 
 SKYSCRAPER_BEGIN
+
+class cGcFrontendBackgroundEffect
+{
+    cGcNGuiLayer *mpLayer;
+    cTkVector2 mMousePos;
+};
+
+// I hate this with a passion, WHY ISNT THIS METADATA HG!!!!!!!!!!!!
+enum eFrontendPage
+{
+    EFrontendPage_None = 0xFFFFFFFF,
+    EFrontendPage_Suit,
+    EFrontendPage_Ship,
+    EFrontendPage_Vehicle,
+    EFrontendPage_Freighter,
+    EFrontendPage_Weapon,
+    EFrontendPage_Discovery,
+    EFrontendPage_Journey,
+    EFrontendPage_MissionLog,
+    EFrontendPage_Wiki,
+    EFrontendPage_Catalogue,
+    EFrontendPage_InfoPortal,
+    EFrontendPage_Season,
+    EFrontendPage_Options,
+    EFrontendPage_Switcher,
+    EFrontendPage_Controls,
+    EFrontendPage_Network,
+    EFrontendPage_NetworkPlayers,
+    EFrontendPage_NetworkManageFriends,
+    EFrontendPage_NetworkManageBlocked,
+    EFrontendPage_Difficulty,
+    EFrontendPage_Credits,
+    EFrontendPage_Redeem,
+    EFrontendPage_Interact,
+    EFrontendPage_InteractDialog,
+    EFrontendPage_InteractConsole,
+    EFrontendPage_InteractShip,
+    EFrontendPage_Trade,
+    EFrontendPage_TechTrade,
+    EFrontendPage_BuildingTrade,
+    EFrontendPage_SpecialsTrade,
+    EFrontendPage_MissionList,
+    EFrontendPage_MissionHandInList,
+    EFrontendPage_MissionRenounce,
+    EFrontendPage_MissionDescription,
+    EFrontendPage_BuyScreen,
+    EFrontendPage_CompareScreen,
+    EFrontendPage_DisplayTech,
+    EFrontendPage_DisplayProduct,
+    EFrontendPage_DisplayPatchNotes,
+    EFrontendPage_FreighterTransferScreen,
+    EFrontendPage_InventoryTransferScreen,
+    EFrontendPage_Message,
+    EFrontendPage_PhotoMode,
+    EFrontendPage_ReportBase,
+    EFrontendPage_PhotoBaseForUpload,
+    EFrontendPage_BaseUpload,
+    EFrontendPage_BasePartsMenu,
+    EFrontendPage_BasePartPalette,
+    EFrontendPage_Popup,
+    EFrontendPage_Maintenance,
+    EFrontendPage_Portal,
+    EFrontendPage_PortalRunes,
+    EFrontendPage_PortalActivate,
+    EFrontendPage_PortalUaDisplay,
+    EFrontendPage_Refiner,
+    EFrontendPage_SystemHoover,
+    EFrontendPage_EggMachine,
+    EFrontendPage_VehicleRace,
+    EFrontendPage_ManageFleet,
+    EFrontendPage_ManageExpeditions,
+    EFrontendPage_ExpeditionDebrief,
+    EFrontendPage_FrigateDetails,
+    EFrontendPage_FrigateCaptain,
+    EFrontendPage_ExpeditionDetails,
+    EFrontendPage_ExpeditionSelection,
+    EFrontendPage_ExpeditionOutfitting,
+    EFrontendPage_Customisation,
+    EFrontendPage_Teleporter,
+    EFrontendPage_Teleporter_Nexus,
+    EFrontendPage_ByteBeat,
+    EFrontendPage_BaseGridPart,
+    EFrontendPage_UnlockItemTree,
+    EFrontendPage_CreatureFeeder,
+    EFrontendPage_CreatureHarvester,
+    EFrontendPage_Multiplayer_MissionList,
+    EFrontendPage_Multiplayer_MissionDescription,
+    EFrontendPage_CraftingTree,
+    EFrontendPage_ByteBeatSwitch,
+    EFrontendPage_RadialInteraction,
+    EFrontendPage_Pet,
+    EFrontendPage_IntermediateInteraction,
+    EFrontendPage_ByteBeatLibrary,
+    EFrontendPage_SettlementHub,
+    EFrontendPage_SettlementJudgement,
+    EFrontendPage_RocketLockerInventory,
+    EFrontendPage_SquadronRecruitment,
+    EFrontendPage_SquadronManagement,
+    EFrontendPage_SquadronPilotDetails,
+    EFrontendPage_NumPages,
+};
+
+enum eShipOperation
+{
+    EShipOperation_None,
+    EShipOperation_Teleport,
+    EShipOperation_Full,
+};
 
 class cGcFrontendManager : public cTkISystemEventHandler
 {
@@ -49,9 +163,7 @@ class cGcFrontendManager : public cTkISystemEventHandler
     cGcFrontendTextInput mFrontEndTextInput;
     cGcTextChatInput mTextChatInput;
     cTkNGuiInput mGameGuiInput;
-    std::vector<
-        cGcNGuiStyledString::LayoutInstruction, TkSTLAllocatorShim<cGcNGuiStyledString::LayoutInstruction, 8, -1>>
-        maTextInstructions;
+    cTkVector<cGcNGuiStyledString::LayoutInstruction> maTextInstructions;
     cGcFrontendBackgroundEffect mBackgroundEffect;
     cGcNGuiLayer mFrontendRoot;
     cGcNGuiLayer mPCOSK;

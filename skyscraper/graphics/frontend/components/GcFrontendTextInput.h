@@ -2,6 +2,7 @@
 
 #include <skyscraper.h>
 
+#include <toolkit/graphics/2d/ngui/TkNGui.h>
 #include <toolkit/utilities/TkString.h>
 
 SKYSCRAPER_BEGIN

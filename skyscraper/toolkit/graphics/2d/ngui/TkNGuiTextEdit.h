@@ -8,7 +8,9 @@
 
 SKYSCRAPER_BEGIN
 
-struct cTkNGuiTextEditState
+class cTkNGuiEditor;
+
+class cTkNGuiTextEditState
 {
     VFT<1> *__vftable;
     cTkFixedString<512, char> macEditedText;

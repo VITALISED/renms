@@ -8,6 +8,7 @@
 #include <toolkit/maths/numeric/generic/TkVector2Generic.h>
 #include <toolkit/utilities/containers/TkVector.h>
 #include <toolkit/graphics/2d/ngui/tknguila
+#include <toolkit/graphics/2d/ngui/TkNGuiLayer.h>
 
 #include <toolkit/ngui/tknguiforcedstyle.meta.h>
 
@@ -39,7 +40,7 @@ struct cTkNGui
     cTkVector<cTkVector<cTkNGuiGraphicStyleEntry>> maGraphicStyleArray;
     cTkVector<cTkVector<cTkNGuiGraphicStyleEntry>> maTextStyleArray;
     robin_hood::detail::Table<
-        1, 80, unsigned __int64, unsigned int, robin_hood::hash<unsigned __int64, void>,
+        true, 80, unsigned __int64, unsigned int, robin_hood::hash<unsigned __int64, void>,
         std::equal_to<unsigned __int64>, -1>
         maIDUseCounts;
     bool mbForceSpecialtextRebuild;

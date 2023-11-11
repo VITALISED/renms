@@ -1,6 +1,5 @@
 #pragma once
 
-#include <application/GcApplication.h>
 #include <toolkit/utilities/TkString.h>
 
 typedef uint64_t renmshook_t;
