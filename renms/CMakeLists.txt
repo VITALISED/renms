@@ -19,7 +19,6 @@ add_library(
     renms SHARED
     ${RENMS_HEADERS}
     "dllmain.cpp"
-    "memory/malloc.cpp"
     "plugins/plugin.cpp"
     "plugins/api.cpp"
     "plugins/fsm.cpp"

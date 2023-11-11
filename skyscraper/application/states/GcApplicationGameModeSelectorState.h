@@ -17,24 +17,24 @@
 
 #pragma once
 
-#include <skyscraper.h>
-#include <atlas/WinHttpTask.h>
 #include <application/states/GcApplicationState.h>
-#include <toolkit/utilities/containers/TkVector.h>
-#include <toolkit/graphics/ngui/TkNGuiInput.h>
+#include <atlas/WinHttpTask.h>
 #include <gamestate/GcGameStatePersistence.h>
-#include <graphics/ngui/GcNGuiLayer.h>
-#include <graphics/ngui/GcNGuiTextSpecial.h>
-#include <graphics/ngui/GcNGuiText.h>
-#include <graphics/ngui/GcNGuiGraphic.h>
 #include <graphics/ngui/GcLayerInteractControl.h>
+#include <graphics/ngui/GcNGuiGraphic.h>
+#include <graphics/ngui/GcNGuiLayer.h>
+#include <graphics/ngui/GcNGuiText.h>
+#include <graphics/ngui/GcNGuiTextSpecial.h>
 #include <graphics/ngui/ScrollBarState.h>
-#include <toolkit/system/pc/TkStoragePersistent.h>
-#include <toolkit/maths/numeric/TkSmoothCD.h>
+#include <gamestate/gcgamemode.meta.h>
+#include <user/gcdifficultypresettype.meta.h>
+#include <user/gcdifficultysettingsdata.meta.h>
+#include <skyscraper.h>
 #include <system/GcModManager.h>
-#include <metadata/source/user/gcdifficultypresettype.meta.h>
-#include <metadata/source/user/gcdifficultysettingsdata.meta.h>
-#include <metadata/source/gamestate/gcgamemode.meta.h>
+#include <toolkit/graphics/ngui/TkNGuiInput.h>
+#include <toolkit/maths/numeric/TkSmoothCD.h>
+#include <toolkit/system/pc/TkStoragePersistent.h>
+#include <toolkit/utilities/containers/TkVector.h>
 
 SKYSCRAPER_BEGIN
 
@@ -52,12 +52,12 @@ enum eModeSelectPreset
 
 namespace ModeSelectorPhase
 {
-    typedef WinHttpTask::State::Enum Enum;
+typedef WinHttpTask::State::Enum Enum;
 }
 
 class cGcApplicationGameModeSelectorState : public cGcApplicationState
 {
-public:
+  public:
     enum DisplayState
     {
         EHostJoinSelection,
@@ -91,7 +91,7 @@ public:
     };
 
     template <typename T, unsigned int liCount>
-    struct EnumIconResources/*<enum eModeSelectPreset,7>*/
+    struct EnumIconResources /*<enum eModeSelectPreset,7>*/
     {
         cTkSmartResHandle mResources[liCount];
     };
@@ -156,6 +156,7 @@ public:
         cTkSmoothCD<float> mfHighlightAlpha;
     };
 
+    VFT<8> *__vftable;
     cGcNGuiLayer *mpSelectorUIRoot;
     cGcNGuiLayer *mpDeletionWarningUIRoot;
     cGcNGuiLayer *mpSlotUIRoot;
@@ -179,10 +180,11 @@ public:
     float mfStatusTextClearCountdown;
     float mfSlotWidth;
     cGcNGuiLayer *mpHoverLayer;
-    cGcApplicationGameModeSelectorState::EnumIconResources<ePresetGameMode,7> mSmallGameModeIcons;
-    cGcApplicationGameModeSelectorState::EnumIconResources<eModeSelectPreset,7> mModeSelectPresetIcons;
-    cGcApplicationGameModeSelectorState::EnumIconResources<eModeSelectPreset,7> mModeSelectPresetBackgrounds;
-    cGcApplicationGameModeSelectorState::EnumIconResources<eModeSelectPreset,7> mModeSelectPresetDesaturatedBackgrounds;
+    cGcApplicationGameModeSelectorState::EnumIconResources<ePresetGameMode, 7> mSmallGameModeIcons;
+    cGcApplicationGameModeSelectorState::EnumIconResources<eModeSelectPreset, 7> mModeSelectPresetIcons;
+    cGcApplicationGameModeSelectorState::EnumIconResources<eModeSelectPreset, 7> mModeSelectPresetBackgrounds;
+    cGcApplicationGameModeSelectorState::EnumIconResources<eModeSelectPreset, 7>
+        mModeSelectPresetDesaturatedBackgrounds;
     cTkSmartResHandle mIconWarning;
     cGcApplicationGameModeSelectorState::WarningDlgComponents mWarningDlgComponents;
     cGcAsyncLoadOps mAsyncLoadOps;
@@ -209,18 +211,18 @@ public:
     bool mbCompletedBefore;
     float mfCursorSizeNormalised;
     bool mbCursorHoverActive;
-    cTkFixedString<128,char> msMPHostName;
-    cTkFixedString<256,char> msMPOtherPlayers;
-    cTkFixedString<64,char> msMPGameMode;
+    cTkFixedString<128, char> msMPHostName;
+    cTkFixedString<256, char> msMPOtherPlayers;
+    cTkFixedString<64, char> msMPGameMode;
     bool mbSkippedStartScreen;
     bool mbShowingOKCancelDialog;
-    std::function<void __cdecl(bool,bool)> mOnCancelDialogClosedCallbackFn;
+    std::function<void __cdecl(bool, bool)> mOnCancelDialogClosedCallbackFn;
     bool mbVRModeSelected;
     float mfAutoJoinDelay;
-    TkStrongType<int,TkStrongTypeIDs::TkResHandleID> mPipelineResource;
+    TkStrongType<int, TkStrongTypeIDs::TkResHandleID> mPipelineResource;
     cTkVector<bool> maPreviousPipelineStageState;
-    std::array<cGcApplicationGameModeSelectorState::SlotComponents,5> mSaveSlotComponents;
-    std::array<cGcApplicationGameModeSelectorState::SlotComponents,7> mModeSlotComponents;
+    std::array<cGcApplicationGameModeSelectorState::SlotComponents, 5> mSaveSlotComponents;
+    std::array<cGcApplicationGameModeSelectorState::SlotComponents, 7> mModeSlotComponents;
     cTkVector<GcGameStatePersistence::StorageSlotInformation> mSlotSaveStates;
     ScrollBarState mSaveSlotsScrollBarState;
     int miSlotsScrollStartIndex;

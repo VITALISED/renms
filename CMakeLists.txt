@@ -217,13 +217,9 @@ add_dependencies(renms resdk Heridium ReLauncher)
 target_link_libraries(renms fmt PolyHook_2 spdlog)
 
 target_precompile_headers(
-    renms
-    PRIVATE
-    ${PROJECT_SOURCE_DIR}/renms/renms.h
-    PRIVATE
+    renms PRIVATE ${PROJECT_SOURCE_DIR}/renms/renms.h PRIVATE
     ${PROJECT_SOURCE_DIR}/skyscraper/skyscraper.h
-    PRIVATE
-    ${PROJECT_SOURCE_DIR}/metadata/metadata.h
+    # PRIVATE ${PROJECT_SOURCE_DIR}/metadata/metadata.h
 )
 
 target_compile_definitions(renms PRIVATE RENMS FIOS_TYPES_ONLY)
@@ -232,10 +228,10 @@ set_target_properties(renms PROPERTIES OUTPUT_NAME renms)
 
 target_include_directories(
     renms
+    PUBLIC ${PROJECT_SOURCE_DIR}
     PUBLIC ${PROJECT_SOURCE_DIR}/renms
     PUBLIC ${PROJECT_SOURCE_DIR}/skyscraper
-    PUBLIC ${PROJECT_SOURCE_DIR}/metadata/source
-    PUBLIC ${PROJECT_SOURCE_DIR}/metadata/toolkit
+    PUBLIC ${PROJECT_SOURCE_DIR}/metadata
 )
 
 # --------------------------------------------------------------------------------------------------

@@ -17,21 +17,20 @@
 
 #pragma once
 
+#include <metadata/source/user/gcblocklistpersistence.meta.h>
 #include <skyscraper.h>
 #include <toolkit/system/memory/pools/TkMemoryPool.h>
-#include <metadata/source/user/gcblocklistpersistence.meta.h>
 
 SKYSCRAPER_BEGIN
 
 class cGcBlockList
 {
-	struct Data : AutoPooled<EMemoryPool_Network>
-	{
-		cGcBlockListPersistence* mBlockListArray;
-	};
+    struct Data : AutoPooled<EMemoryPool_Network>
+    {
+        cGcBlockListPersistence *mBlockListArray;
+    };
 
-	cGcBlockList::Data* mpData;
+    cGcBlockList::Data *mpData;
 };
-
 
 SKYSCRAPER_END

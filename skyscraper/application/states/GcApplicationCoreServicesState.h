@@ -17,19 +17,20 @@
 
 #pragma once
 
-#include <skyscraper.h>
 #include <application/states/GcApplicationState.h>
 #include <atlas/WinHttpTask.h>
+#include <skyscraper.h>
 
 SKYSCRAPER_BEGIN
 
 namespace CoreSrvLoadPhase
 {
-    typedef WinHttpTask::State::Enum Enum;
+typedef WinHttpTask::State::Enum Enum;
 };
 
 class cGcApplicationCoreServicesState : public cGcApplicationState
 {
+    VFT<8> *__vftable;
     CoreSrvLoadPhase::Enum mPhase;
 };
 

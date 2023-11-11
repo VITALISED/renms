@@ -17,24 +17,23 @@
 
 #pragma once
 
-#include <skyscraper.h>
 #include <application/states/GcApplicationState.h>
-#include <graphics/ngui/GcNGuiLayer.h>
-#include <graphics/ngui/GcNGuiGraphic.h>
-#include <graphics/ngui/GcNGuiTextSpecial.h>
-#include <toolkit/graphics/ngui/TkNGuiInput.h>
-#include <toolkit/utilities/containers/TkVector.h>
 #include <atlas/WinHttpTask.h>
+#include <graphics/ngui/GcNGuiGraphic.h>
+#include <graphics/ngui/GcNGuiLayer.h>
+#include <graphics/ngui/GcNGuiTextSpecial.h>
+#include <skyscraper.h>
 #include <toolkit/audio/wwise/TkAudioManagerWwise.h>
+#include <toolkit/graphics/ngui/TkNGuiInput.h>
 #include <toolkit/system/TkUserServiceNotifications.h>
+#include <toolkit/utilities/containers/TkVector.h>
 
 SKYSCRAPER_BEGIN
 
 namespace TitleScreenPhase
 {
-    typedef WinHttpTask::State::Enum Enum;
+typedef WinHttpTask::State::Enum Enum;
 }
-
 
 class cGcApplicationTitleScreenState : public cGcApplicationState, public ITkUserServiceNotifications
 {
@@ -43,6 +42,7 @@ class cGcApplicationTitleScreenState : public cGcApplicationState, public ITkUse
         TkAudioObject mAudioObject;
     };
 
+    VFT<8> *__vftable;
     cGcNGuiLayer *mpTitleUIRoot;
     cGcNGuiLayer *mpUserDetails;
     cGcNGuiTextSpecial *mpPlayerName;
@@ -52,7 +52,7 @@ class cGcApplicationTitleScreenState : public cGcApplicationState, public ITkUse
     TitleScreenPhase::Enum mPhase;
     cTkNGuiInput mTitleGuiInput;
     float mfAppearFade;
-    TkStrongType<int,TkStrongTypeIDs::TkResHandleID> mPipelineResource;
+    TkStrongType<int, TkStrongTypeIDs::TkResHandleID> mPipelineResource;
     cTkVector<bool> maPreviousPipelineStageState;
 };
 

@@ -22,7 +22,7 @@ void printDebug(std::string input)
 #ifdef _DEBUG
     std::cout << "[ ReLauncher ] " << input << std::endl;
 #else
-    UNREFERENCED_PARAMETER(input)
+    UNREFERENCED_PARAMETER(input);
 #endif
 }
 
@@ -54,11 +54,13 @@ int main(int argc, char **argv)
         {
             nmsPath = launcherPath.parent_path() / "NMS.exe";
             dllPath = launcherPath.parent_path() / "renms.dll";
-        } else {
+        }
+        else
+        {
             nmsPath = argv[1];
             dllPath = argv[2];
         }
-        
+
         CheckPath(nmsPath);
         CheckPath(dllPath);
 
