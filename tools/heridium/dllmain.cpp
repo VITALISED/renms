@@ -30,7 +30,7 @@ DWORD WINAPI MainThread(LPVOID lpReserved)
 {
     UNREFERENCED_PARAMETER(lpReserved);
     
-    CreateLogger("Heridium");
+    CreateLogger("\033[96mHeridium\033[0m");
     spdlog::info("Hello from Heridium!");
 
     heridium::AnalysisInit();
