@@ -18,26 +18,46 @@
 #pragma once
 
 #include <skyscraper.h>
-#include <simulation/player/GcPlayerCommon.h>
-#include <simulation/player/GcPlayerThirdPerson.h>
-#include <simulation/player/GcPlayerImpact.h>
-#include <simulation/player/attachments/GcPlayerWeapon.h>
+
+#include <graphics/camera/behaviours/GcCameraBehaviourFirstPerson.h>
 #include <simulation/CharacterPhysicsDisabledReasons.h>
 #include <simulation/GcWarpJumpTarget.h>
-#include <simulation/player/GcPlayerAim.h>
+#include <simulation/components/gameplay/GcGrabbableComponent.h>
 #include <simulation/player/GcPersonalTeleporter.h>
+#include <simulation/player/GcPlayerAim.h>
+#include <simulation/player/GcPlayerCommon.h>
+#include <simulation/player/GcPlayerEmoteProp.h>
 #include <simulation/player/GcPlayerHazard.h>
-#include <graphics/camera/behaviours/GcCameraBehaviourFirstPerson.h>
+#include <simulation/player/GcPlayerImpact.h>
+#include <simulation/player/GcPlayerInteract.h>
+#include <simulation/player/GcPlayerRespawn.h>
+#include <simulation/player/GcPlayerThirdPerson.h>
+#include <simulation/player/attachments/GcPlayerWeapon.h>
+#include <simulation/player/controllers/GcPlayerLadderClimb.h>
+#include <toolkit/maths/geometry/TkPhysRelVec3.h>
 #include <toolkit/simulation/physics/havok/TkRigidBody.h>
-#include <toolkit/utilities/containers/TkVector.h>
+#include <toolkit/utilities/containers/TkDeque.h>
 #include <toolkit/utilities/containers/TkUnorderedMap.h>
-#include <metadata/source/gamestate/gcteleportendpoint.meta.h>
+#include <toolkit/utilities/containers/TkVector.h>
+
+#include <gamestate/gcteleportendpoint.meta.h>
+#include <reality/gcalienrace.meta.h>
+#include <simulation/ecosystem/creatures/gccreaturetypes.meta.h>
 
 SKYSCRAPER_BEGIN
 
+enum eEmoteState
+{
+    EEmoteState_None,
+    EEmoteState_Playing,
+    EEmoteState_Playing_Sit,
+};
+
 class cGcPlayer : public cGcPlayerCommon
 {
-public:
+  public:
+    typedef cGcPlayerEmoteProp::eState eRocketBootsState;
+
     enum eRocketBootsDoubleTapState
     {
         None,
@@ -47,24 +67,57 @@ public:
         FEEDBACK_PEN_DOUBLETAP,
     };
 
-    //this shit is so real
+    enum eCharacterMode
+    {
+        ECharacterMode_FirstPerson,
+        ECharacterMode_ThirdPerson,
+    };
+
+    enum eStaminaState
+    {
+        EStamina_Available,
+        EStamina_Recovering,
+    };
+
+    struct FootstepOnDistanceTravel
+    {
+        cTkPhysRelVec3 mLastUsedPosition;
+        float mfTriggerDistance;
+        float mfTriggerDistanceSqr;
+        bool mbValidDistance;
+        bool mbValidPosition;
+    };
+
+    struct cGcSummonPetData
+    {
+        int miIndex;
+        float mfAdultScale;
+        float mfGrowthProgress;
+        cTkMatrix34 mSpawnMat;
+        eCreatureType meCreatureType;
+        cTkSeed mBoneScaleSeed;
+        bool mbHasFur;
+        cTkSmartResHandle mPetResource;
+    };
+
+    // this shit is so real
     typedef cGcPlayer::eRocketBootsDoubleTapState WarpTargetMode;
     typedef cGcPlayer::eRocketBootsDoubleTapState eCreatureRideState;
     typedef cGcPlayer::eRocketBootsDoubleTapState eFreeJetpackSurface;
 
-    cTkRigidBody* lpGrabbedBody;
-    cGcPlayerThirdPerson* mpThirdPerson;
-    cGcCameraBehaviourFirstPerson* mpCamera;
-    cGcPlayerController* mpController;
-    cTkHavokCharacterController* mpPhysicsController;
+    cTkRigidBody *lpGrabbedBody;
+    cGcPlayerThirdPerson *mpThirdPerson;
+    cGcCameraBehaviourFirstPerson *mpCamera;
+    cGcPlayerController *mpController;
+    cTkHavokCharacterController *mpPhysicsController;
     cTkAttachmentPtr mpExternalControlAttachment;
     eCharacterPhysicsDisabledReasons muGravityDisabledReasons;
     eCharacterPhysicsDisabledReasons muCollisionDisabledReasons;
     cTkAttachmentPtr mpGrabbedBy;
     float mfLastGrabbedTime;
     float mfGrabEscapeTimer;
-    cGcPlayerEffectsComponent* mpEffectsComponent;
-    cGcPlayerFullBodyIKComponent* mpIkComponent;
+    cGcPlayerEffectsComponent *mpEffectsComponent;
+    cGcPlayerFullBodyIKComponent *mpIkComponent;
     cTkPhysRelMat34 mGraphicsMatrix;
     cTkVector3 mPosition;
     cTkVector<cGcPlayerImpact> maProjectileImpacts;
@@ -171,10 +224,10 @@ public:
     float mfStamina;
     float mfTurnAccelerator;
     bool mbIsTransitioning;
-    cTkAttachment* mpAttachment;
+    cTkAttachment *mpAttachment;
     cTkSmartResHandle mAnimHeadSceneRes;
     TkHandle mAnimHeadSceneNode;
-    cTkAnimationComponent* mpAnimHeadAnimation;
+    cTkAnimationComponent *mpAnimHeadAnimation;
     cTkAnimLayerHandle mHeadAnimLayer;
     cTkMatrix34 mAnimHeadBaseTrans;
     cTkMatrix34 mHeadMatrixWhenMovementStarted;
@@ -222,7 +275,7 @@ public:
     TkAudioID mCurrentSwimAudioEvent;
     TkID<128> mDebugDamageType;
     TkHandle mDeathDropNode;
-    std::deque<cTkAttachmentPtr, TkSTLAllocatorShim<cTkAttachmentPtr, 8, -1> > maFriendlyCreatures;
+    cTkDeque<cTkAttachmentPtr> maFriendlyCreatures;
     cTkVector<cTkAttachmentPtr> maPredatorsAttacking;
     float mfTimeSicePredatorAttacked;
     cGcPlayer::FootstepOnDistanceTravel mLadderFootsteps;
@@ -234,7 +287,7 @@ public:
     int meRequestedFilter;
     cGcPlayer::eCharacterMode meCharacterMode;
     cGcPlayer::eCharacterMode meRequestedCharacterMode;
-    cTkVector<std::pair<TkID<128>, cGcPlayer::eCharacterMode> > maCharacterModeOverrides;
+    cTkVector<std::pair<TkID<128>, cGcPlayer::eCharacterMode>> maCharacterModeOverrides;
     CharacterSlopeState mCurrentSlopeState;
     float mfTimeInCurrentSlopeState;
     cTkMatrix34 maRealignmentTransform[2];

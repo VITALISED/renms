@@ -23,14 +23,14 @@ SKYSCRAPER_BEGIN
 
 namespace TkStrongTypeIDs
 {
-    struct TkResHandleID;
-    struct cTkNGuiFontHandleID;
-}
+struct TkResHandleID;
+struct cTkNGuiFontHandleID;
+} // namespace TkStrongTypeIDs
 
 template <typename T, class StrongTypeID>
 class TkStrongType
 {
-public:
+  public:
     T mValue;
 };
 

@@ -23,8 +23,18 @@ SKYSCRAPER_BEGIN
 
 class cTkClassPoolHandle
 {
-	int miArrayIndex;
-	int miUniqueID;
+    int miArrayIndex;
+    int miUniqueID;
+};
+
+template <typename T, int liAmount>
+class cTkClassPool
+{
+    T maPool[liAmount];
+    int maiUniqueIds[liAmount];
+    int maiRoster[liAmount];
+    int miRosterPartition;
+    int miUniqueIDGenerator;
 };
 
 SKYSCRAPER_END

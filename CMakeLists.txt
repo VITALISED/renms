@@ -18,8 +18,40 @@ cmake_minimum_required(VERSION 3.15)
 project(
     renms
     LANGUAGES C CXX
-    VERSION 0.0.1
+    VERSION 0.3
 )
+
+# Set the output directory properly.
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin")
+message(STATUS "Binaries will be placed in: ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
+
+# Fix an issue with windows gnu systems where the c++std libs don't get
+# privately linked, and since it isn't available on windows systems by default,
+# it fails as it can't find the library.
+if(CMAKE_CROSSCOMPILING)
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static")
+    message(
+        STATUS
+            "Crosscompiling setup detected, linking libstdc++ and libgcc statically."
+    )
+endif()
+
+# Fix another issue where this dll can't be statically linked on windows, and
+# must be copied to the output directory.
+if(CMAKE_CROSSCOMPILING)
+    find_path(WINPTHREAD_PATH NAMES libwinpthread-1.dll)
+    if(NOT WINPTHREAD_PATH)
+        message(
+            WARNING
+                "libwinpthread-1.dll not found! You may get an error while running ReLauncher.exe."
+        )
+    else()
+        message(STATUS "libwinpthread-1.dll found at ${WINPTHREAD_PATH}")
+        file(COPY ${WINPTHREAD_PATH}/libwinpthread-1.dll
+             DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
+        )
+    endif()
+endif()
 
 # Fix a dumb problem with certain setups where it adds "lib" to the front of the
 # library name.
@@ -35,7 +67,11 @@ endif()
 # ==================================================================================================
 # First checks.
 
-if(CMAKE_BUILD_TYPE STREQUAL "")
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    add_definitions(-DDEBUG -D_DEBUG)
+endif()
+
+if(CMAKE_BUILD_TYPE STREQUAL "" OR CMAKE_BUILD_TYPE STREQUAL "None")
     set(CMAKE_BUILD_TYPE "Release")
 endif()
 
@@ -68,6 +104,7 @@ It must be the directory that contains NMS.exe. See the BUILD.md for why it need
 endif()
 
 get_filename_component(NMS_EXE_PATH "${NMS_EXE_PATH}" ABSOLUTE)
+get_filename_component(NMS_BIN_PATH "${NMS_EXE_PATH}" DIRECTORY)
 if(NOT EXISTS "${NMS_EXE_PATH}" AND NOT SKIP_NMS_CHECK)
     message(
         FATAL_ERROR
@@ -88,7 +125,7 @@ endif()
 # ==================================================================================================
 # Dependencies.
 
-# set Polyhook to use our dynamic runtime
+# set Polyhook to use our runtime
 if(MSVC)
     set(POLYHOOK_BUILD_STATIC_RUNTIME OFF)
 endif()
@@ -96,19 +133,33 @@ endif()
 macro(add_dependency_custom dir include)
     message(STATUS "Adding dependency: ${dir} (${include})")
 
-    if(NOT EXISTS "${CMAKE_SOURCE_DIR}/${dir}/CMakeLists.txt")
+    file(GLOB_RECURSE HEADERS "${CMAKE_SOURCE_DIR}/${dir}/*.h")
+    if(HEADERS STREQUAL "")
         execute_process(
             COMMAND git submodule update --init --recursive ${dir}
             WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
         )
     endif()
 
-    add_subdirectory(${dir})
-    include_directories(${CMAKE_SOURCE_DIR}/${include})
+    if(EXISTS "${CMAKE_SOURCE_DIR}/${dir}/CMakeLists.txt")
+        add_subdirectory(${dir} SYSTEM)
+        set_source_files_properties(
+            DIRECTORY ${dir} PROPERTIES COMPILE_FLAGS "-w"
+        )
+        set_source_files_properties(
+            DIRECTORY ${dir} PROPERTIES LINKER_FLAGS "-w"
+        )
+    endif()
+    include_directories(${CMAKE_SOURCE_DIR}/${include} SYSTEM)
 endmacro()
 
-add_dependency_custom(./submodules/spdlog ./submodules/spdlog/include)
+add_dependency_custom(./submodules/libSceFios2 ./submodules/libSceFios2)
+add_dependency_custom(./submodules/inifile-cpp ./submodules/inifile-cpp/include)
 add_dependency_custom(./submodules/fmt ./submodules/fmt/include)
+
+set(SPDLOG_FMT_EXTERNAL ON)
+set(SPDLOG_BUILD_SHARED OFF)
+add_dependency_custom(./submodules/spdlog ./submodules/spdlog/include)
 add_dependency_custom(./submodules/PolyHook2_0 ./submodules/PolyHook2_0)
 add_dependency_custom(
     ./submodules/robin-hood-hashing ./submodules/robin-hood-hashing/src/include
@@ -116,20 +167,19 @@ add_dependency_custom(
 add_dependency_custom(
     ./submodules/Vulkan-Headers ./submodules/Vulkan-Headers/include
 )
+add_dependency_custom(
+    ./submodules/VulkanMemoryAllocator
+    ./submodules/VulkanMemoryAllocator/include
+)
+add_dependency_custom(./submodules/stb ./submodules/stb)
 
 # ==================================================================================================
-# Compiler setup.
+# Targets.
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_C_STANDARD 17)
 set(CMAKE_C_STANDARD_REQUIRED ON)
-
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin")
-message(STATUS "Binaries will be placed in: ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
-
-# ==================================================================================================
-# Targets.
 
 add_subdirectory(renms)
 add_subdirectory(skyscraper)
@@ -149,50 +199,38 @@ add_custom_target(
 )
 
 # --------------------------------------------------------------------------------------------------
-# MetadataClasses - Generates the metadata classes for renms.
+# resdk - Generates the metadata classes for renms, giving it enough headers to
+# make plugins for it.
 make_directory(${PROJECT_SOURCE_DIR}/metadata)
 
-add_custom_target(
-    MetadataClasses DEPENDS ${PROJECT_SOURCE_DIR}/metadata/metadata.h
-)
+add_custom_target(resdk DEPENDS ${PROJECT_SOURCE_DIR}/metadata/metadata.h)
 
 add_custom_command(
     OUTPUT ${PROJECT_SOURCE_DIR}/metadata/metadata.h
-    COMMAND "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/heridiumLauncher.exe"
-            "${NMS_EXE_PATH}"
+    COMMAND "$<TARGET_FILE:ReLauncher>" "${NMS_EXE_PATH}"
+            "$<TARGET_FILE:Heridium>"
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/metadata
-    DEPENDS Heridium heridiumLauncher
+    DEPENDS Heridium
 )
 
 # --------------------------------------------------------------------------------------------------
-# renms_proxy settings
-set_target_properties(renms_proxy PROPERTIES OUTPUT_NAME libSceFios2)
+# renms_proxy settings (None needed)
 
 # --------------------------------------------------------------------------------------------------
 # renms settings
-add_dependencies(renms MetadataClasses Heridium heridiumLauncher)
+add_dependencies(renms resdk Heridium ReLauncher)
 target_link_libraries(renms fmt PolyHook_2 spdlog)
 
-target_precompile_headers(
-    renms
-    PRIVATE
-    ${PROJECT_SOURCE_DIR}/renms/renms.h
-    PRIVATE
-    ${PROJECT_SOURCE_DIR}/skyscraper/skyscraper.h
-    PRIVATE
-    ${PROJECT_SOURCE_DIR}/metadata/metadata.h
-)
-
-target_compile_definitions(renms PRIVATE RENMS)
+target_compile_definitions(renms PRIVATE RENMS FIOS_TYPES_ONLY)
+target_compile_definitions(renms PUBLIC RENMS_VERSION="${PROJECT_VERSION}")
 set_target_properties(renms PROPERTIES OUTPUT_NAME renms)
 
 target_include_directories(
     renms
+    PUBLIC ${PROJECT_SOURCE_DIR}
     PUBLIC ${PROJECT_SOURCE_DIR}/renms
     PUBLIC ${PROJECT_SOURCE_DIR}/skyscraper
-    PUBLIC ${PROJECT_SOURCE_DIR}/metadata/source
-    PUBLIC ${PROJECT_SOURCE_DIR}/metadata/toolkit
-    PUBLIC ${PROJECT_SOURCE_DIR}/submodules/spdlog/include
+    PUBLIC ${PROJECT_SOURCE_DIR}/metadata
 )
 
 # --------------------------------------------------------------------------------------------------
@@ -202,7 +240,7 @@ target_include_directories(
 )
 
 # --------------------------------------------------------------------------------------------------
-# heridiumLauncher settings (No settings needed)
+# ReLauncher settings (No settings needed)
 
 # --------------------------------------------------------------------------------------------------
 # Heridium settings
@@ -212,3 +250,14 @@ target_include_directories(
     Heridium PUBLIC ${CMAKE_SOURCE_DIR}/skyscraper ${CMAKE_SOURCE_DIR}/renms
 )
 target_link_libraries(Heridium PRIVATE spdlog fmt PolyHook_2)
+
+# ==================================================================================================
+# Launch target
+
+# Make sure the past installer's leftovers are uninstalled first!
+add_custom_target(
+    renms_launch
+    COMMAND $<TARGET_FILE:ReLauncher> ${NMS_EXE_PATH} $<TARGET_FILE:renms>
+    WORKING_DIRECTORY ${NMS_BIN_PATH}
+    DEPENDS renms ReLauncher
+)

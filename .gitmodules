@@ -16,3 +16,15 @@
 [submodule "submodules/PolyHook2_0"]
 	path = submodules/PolyHook2_0
 	url = https://github.com/stevemk14ebr/PolyHook_2_0.git
+[submodule "submodules/libSceFios2"]
+	path = submodules/libSceFios2
+	url = https://github.com/VITALISED/libSceFios2.git
+[submodule "submodules/inifile-cpp"]
+	path = submodules/inifile-cpp
+	url = https://github.com/Rookfighter/inifile-cpp.git
+[submodule "submodules/VulkanMemoryAllocator"]
+	path = submodules/VulkanMemoryAllocator
+	url = https://github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator.git
+[submodule "submodules/stb"]
+	path = submodules/stb
+	url = https://github.com/nothings/stb.git

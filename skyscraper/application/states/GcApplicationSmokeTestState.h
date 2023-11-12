@@ -17,17 +17,18 @@
 
 #pragma once
 
-#include <skyscraper.h>
 #include <application/states/GcApplicationSimulationState.h>
-#include <toolkit/maths/geometry/TkPhysRelMat34.h>
-#include <toolkit/graphics/TkColour.h>
-#include <toolkit/maths/numeric/TkSmoothCD.h>
 #include <simulation/GcSmokeTestScenario.h>
+#include <skyscraper.h>
+#include <toolkit/graphics/TkColour.h>
+#include <toolkit/maths/geometry/TkPhysRelMat34.h>
+#include <toolkit/maths/numeric/TkSmoothCD.h>
 
 SKYSCRAPER_BEGIN
 
 class cGcApplicationSmokeTestState : public cGcApplicationSimulationState
 {
+    VFT<11> *__vftable;
     cTkPhysRelMat34 mTransformForMovement;
     cTkPhysRelMat34 mTransformForLookAt;
     int miCurrentPlanet;

@@ -16,31 +16,47 @@
 */
 
 #include "plugin.h"
-#include <filesystem>
-#include <windows.h>
+
 using namespace std::filesystem;
 
 RENMS_BEGIN
 
 PluginManager::PluginManager()
 {
-
     // Populate the list with everything that's in the plugins folder
     path nmsPath      = current_path();
     path PluginFolder = nmsPath / "RENMS/plugins";
 
-    if (!is_directory(PluginFolder)) create_directories(PluginFolder);
-
     for (directory_entry PluginEntry : directory_iterator(PluginFolder))
     {
-        if (!PluginEntry.is_regular_file()) continue;
-        path Plugin = PluginEntry;
+        if (!PluginEntry.is_directory()) continue;
+        path pluginManifest = PluginEntry.path() / "config.ini";
+        path pluginLibrary  = PluginEntry.path() / "plugin.dll";
 
-        if (Plugin.filename().extension() != "rn") continue;
+        std::ifstream pluginIniFile(pluginManifest);
+        std::ifstream pluginLibFile(pluginLibrary);
 
-        // attempt to load the plugin
-        spdlog::info("Loading plugin: {}", Plugin.filename().string());
-        Load(Plugin);
+        if (pluginIniFile.good())
+        {
+            spdlog::info("Found manifest");
+            ini::IniFile pluginIni;
+            pluginIni.decode(pluginIniFile);
+
+            std::string lsName        = pluginIni["manifest"]["name"].as<std::string>();
+            std::string lsAuthor      = pluginIni["manifest"]["author"].as<std::string>();
+            std::string lsDescription = pluginIni["manifest"]["description"].as<std::string>();
+
+            spdlog::info("-----------PLUGIN INFORMATION-----------");
+            spdlog::info(lsName);
+            spdlog::info(lsAuthor);
+            spdlog::info(lsDescription);
+        }
+
+        if (pluginLibFile.good())
+        {
+            spdlog::info("Found plugin DLL");
+            Load(pluginLibrary);
+        }
     }
 
     if (mPluginList.size() == 0) { spdlog::warn("No plugins found."); }
@@ -56,7 +72,10 @@ void PluginManager::Load(std::filesystem::path PluginPath)
         return;
     }
 
-    // Execute the plugin's OnLoad function
+    // Execute plugin main
+    PluginMain_t pluginEntry = reinterpret_cast<PluginMain_t>(GetProcAddress(PluginHandle, "PluginMain"));
+    if (pluginEntry) { pluginEntry(); }
+    else { spdlog::error("Failed to load plugin: Couldn't find: void RENMS_ENTRY PluginMain()"); }
 }
 
 RENMS_END

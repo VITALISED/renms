@@ -17,18 +17,19 @@
 
 #pragma once
 
-#include <skyscraper.h>
 #include <application/states/GcApplicationState.h>
-#include <toolkit/system/timer/TkStopwatch.h>
-#include <toolkit/maths/numeric/generic/TkMatrix34Generic.h>
+#include <simulation/solarsystem/planet/GcUserdataPrimaryPlanetChange.h>
+#include <skyscraper.h>
 #include <toolkit/graphics/2d/ui/objects/text/Tk2dText.h>
 #include <toolkit/graphics/2d/ui/objects/text/Tk2dTextPreset.h>
-#include <simulation/solarsystem/planet/GcUserdataPrimaryPlanetChange.h>
+#include <toolkit/maths/numeric/generic/TkMatrix34Generic.h>
+#include <toolkit/system/timer/TkStopwatch.h>
 
 SKYSCRAPER_BEGIN
 
 class cGcApplicationSimulationState : public cGcApplicationState
 {
+    VFT<11> *__vftable;
     cTkStopwatch mSimThreadTimer;
     cTkStopwatch mSimUpdateTimer;
     cTkStopwatch mSyncPointTimer;
@@ -56,7 +57,7 @@ class cGcApplicationSimulationState : public cGcApplicationState
     float mfTimestep;
     cTk2dText mFramerateText;
     cTk2dTextPreset mTextPreset;
-    cTkFixedString<128,wchar_t> macFramerateTextBuffer;
+    cTkFixedString<128, wchar_t> macFramerateTextBuffer;
     cGcUserdataPrimaryPlanetChange mChangePlanetData;
     int miPrepareToPauseFrame;
     bool mChangePlanetRequested;
@@ -65,7 +66,7 @@ class cGcApplicationSimulationState : public cGcApplicationState
     bool mbFirstBootPrepare;
     float mfResetVRCameraTimer;
     cTkSmartResHandle mCloudsPipelineRes;
-    cTkFixedString<32,wchar_t> mFramerateString;
+    cTkFixedString<32, wchar_t> mFramerateString;
     void *mThreadSyncStartedEvent;
     void *mCullingStartedEvent;
 };

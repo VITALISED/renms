@@ -18,56 +18,57 @@
 #pragma once
 
 #include <skyscraper.h>
-#include <metadata/source/gamestate/gcgamemode.meta.h>
-#include <metadata/source/simulation/environment/gcplanetlife.meta.h>
+
+#include <gamestate/gcgamemode.meta.h>
+#include <simulation/environment/gcplanetlife.meta.h>
 
 SKYSCRAPER_BEGIN
 
 enum eBootLoadDelay
 {
-  EBootLoadDelay_LoadAll,
-  EBootLoadDelay_WaitForPlanet,
-  EBootLoadDelay_WaitForNothing,
-  EBootLoadDelay_NumTypes,
+    EBootLoadDelay_LoadAll,
+    EBootLoadDelay_WaitForPlanet,
+    EBootLoadDelay_WaitForNothing,
+    EBootLoadDelay_NumTypes,
 };
 
 enum eGameStateMode
 {
-  EGameStateMode_LoadPreset,
-  EGameStateMode_UserStorage,
-  EGameStateMode_FreshStart,
-  EGameStateMode_NumTypes,
+    EGameStateMode_LoadPreset,
+    EGameStateMode_UserStorage,
+    EGameStateMode_FreshStart,
+    EGameStateMode_NumTypes,
 };
 
 enum eSolarSystemBoot
 {
-  ESolarSystemBoot_FromSettings,
-  ESolarSystemBoot_Generate,
-  ESolarSystemBoot_NumTypes,
+    ESolarSystemBoot_FromSettings,
+    ESolarSystemBoot_Generate,
+    ESolarSystemBoot_NumTypes,
 };
 
 enum eBootMode
 {
-  EBootMode_MinimalSolarSystem,
-  EBootMode_SolarSystem,
-  EBootMode_GalaxyMap,
-  EBootMode_SmokeTest,
-  EBootMode_SmokeTestGalaxyMap,
-  EBootMode_Scratchpad,
-  EBootMode_UnitTest,
-  EBootMode_NumTypes,
+    EBootMode_MinimalSolarSystem,
+    EBootMode_SolarSystem,
+    EBootMode_GalaxyMap,
+    EBootMode_SmokeTest,
+    EBootMode_SmokeTestGalaxyMap,
+    EBootMode_Scratchpad,
+    EBootMode_UnitTest,
+    EBootMode_NumTypes,
 };
 
 enum ePlayerSpawnLocationOverride
 {
-  EPlayerSpawnLocationOverride_None,
-  EPlayerSpawnLocationOverride_FromSettings,
-  EPlayerSpawnLocationOverride_Space,
-  EPlayerSpawnLocationOverride_SpaceStation,
-  EPlayerSpawnLocationOverride_RandomPlanet,
-  EPlayerSpawnLocationOverride_GameStartPlanet,
-  EPlayerSpawnLocationOverride_SpecificLocation,
-  EPlayerSpawnLocationOverride_NumTypes,
+    EPlayerSpawnLocationOverride_None,
+    EPlayerSpawnLocationOverride_FromSettings,
+    EPlayerSpawnLocationOverride_Space,
+    EPlayerSpawnLocationOverride_SpaceStation,
+    EPlayerSpawnLocationOverride_RandomPlanet,
+    EPlayerSpawnLocationOverride_GameStartPlanet,
+    EPlayerSpawnLocationOverride_SpecificLocation,
+    EPlayerSpawnLocationOverride_NumTypes,
 };
 
 class cGcGameConfigCache

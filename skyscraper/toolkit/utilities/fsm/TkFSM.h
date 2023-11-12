@@ -25,18 +25,19 @@ SKYSCRAPER_BEGIN
 
 class cTkFSM
 {
+    VFT<5> *__vftable;
     const cTkFSMStateOffset *mpOffsetTable;
     cTkFSMState *mpState;
     TkID<128> mRequestedChangeNewState;
     const void *mpRequestedChangeUserData;
     bool mbRequestedChangeForceRestart;
 
-    virtual ~cTkFSM();
-    virtual void Construct(const cTkFSMStateOffset *, const TkID<128> *);
-    virtual void Update(float);
-    virtual void Destruct();
-    virtual void StatePrepare(cTkFSMState *, const void *);
-    virtual void StateRelease(cTkFSMState *, const void *);
+    // virtual ~cTkFSM();
+    // virtual void Construct(const cTkFSMStateOffset *, const TkID<128> *);
+    // virtual void Update(float);
+    // virtual void Destruct();
+    // virtual void StatePrepare(cTkFSMState *, const void *);
+    // virtual void StateRelease(cTkFSMState *, const void *);
 };
 
 SKYSCRAPER_END

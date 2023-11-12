@@ -18,20 +18,21 @@
 #pragma once
 
 #include <skyscraper.h>
-#include <application/states/GcApplicationState.h>
+
 #include <application/states/GcApplicationGameModeSelectorState.h>
+#include <application/states/GcApplicationState.h>
+#include <engine/source/engine/EgTexture.h>
+#include <graphics/ngui/GcLayerInteractControl.h>
 #include <graphics/ngui/GcNGuiLayer.h>
 #include <graphics/ngui/GcNGuiTextSpecial.h>
-#include <graphics/ngui/GcLayerInteractControl.h>
-#include <toolkit/graphics/ngui/TkNGuiInput.h>
+#include <toolkit/graphics/2d/ngui/TkNGuiInput.h>
 #include <toolkit/utilities/containers/TkVector.h>
-#include <engine/source/engine/EgTexture.h>
 
 SKYSCRAPER_BEGIN
 
 namespace UGCBaseViewerSelectorPhase
 {
-    typedef WinHttpTask::State::Enum Enum;
+typedef WinHttpTask::State::Enum Enum;
 }
 
 class cGcApplicationUGCBaseViewerState : public cGcApplicationState
@@ -75,7 +76,7 @@ class cGcApplicationUGCBaseViewerState : public cGcApplicationState
         cTkSmartResHandle mpTextureResourceHandle;
         cEgTextureResource *mpTexResource;
         bool mbEmptySlot;
-        cTkFixedString<256,char> mPreviewImageName;
+        cTkFixedString<256, char> mPreviewImageName;
     };
 
     struct WarningDlgComponents
@@ -95,6 +96,7 @@ class cGcApplicationUGCBaseViewerState : public cGcApplicationState
         int miTimestamp;
     };
 
+    VFT<8> *__vftable;
     cGcNGuiLayer *mpNextPageLayer;
     cGcNGuiLayer *mpPreviousPageLayer;
     cGcNGuiLayer *mpSelectorUIRoot;
@@ -107,9 +109,9 @@ class cGcApplicationUGCBaseViewerState : public cGcApplicationState
     float mfSlotWidth;
     cGcNGuiLayer *mpHoverLayer;
     cGcApplicationUGCBaseViewerState::IconResources mIconResources;
-    std::array<cGcApplicationUGCBaseViewerState::SlotComponents,5> mSlotComponents;
+    std::array<cGcApplicationUGCBaseViewerState::SlotComponents, 5> mSlotComponents;
     cGcApplicationUGCBaseViewerState::WarningDlgComponents mWarningDlgComponents;
-    std::array<cGcApplicationUGCBaseViewerState::SlotSaveDataState,3> mSlotSaveStates;
+    std::array<cGcApplicationUGCBaseViewerState::SlotSaveDataState, 3> mSlotSaveStates;
     cGcAsyncLoadOps mAsyncLoadOps;
     cGcLayerInteractControl *mpLayerInteractControl;
     cTkNGuiInput mSelectorGuiInput;

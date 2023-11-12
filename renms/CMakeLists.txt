@@ -13,11 +13,23 @@
 # You should have received a copy of the GNU General Public License along with
 # this program.  If not, see <https://www.gnu.org/licenses/>.
 
-file(GLOB_RECURSE RENMS_HEADERS ${PROJECT_SOURCE_DIR}/renms/ "*.h", "*.tpp")
+file(GLOB_RECURSE RENMS_HEADERS ${PROJECT_SOURCE_DIR}/renms/ "*.h" "*.tpp")
 
 add_library(
-    renms SHARED ${RENMS_HEADERS} "dllmain.cpp" "memory/malloc.cpp"
-                 "plugins/plugin.cpp" "plugins/api.cpp" "core/warning.cpp"
+    renms SHARED
+    ${RENMS_HEADERS}
+    "dllmain.cpp"
+    "plugins/plugin.cpp"
+    "plugins/api.cpp"
+    "plugins/fsm.cpp"
+    "core/warning.cpp"
+    "core/config.cpp"
+    "core/filesystem.cpp"
+    "commands/builtin.cpp"
+    "commands/commands.cpp"
+    "commands/dispatcher.cpp"
+    "iat/fios.cpp"
+    "iat/iat_callback.cpp"
 )
 
 add_subdirectory(proxy)

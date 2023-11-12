@@ -16,15 +16,36 @@
 */
 
 #include "renms.h"
+#include <commands/builtin.h>
+#include <commands/dispatcher.h>
+#include <core/filesystem.h>
 #include <core/warning.h>
+#include <iat/fios.h>
+#include <memory/thread.h>
+#include <plugins/fsm.h>
+#include <plugins/plugin.h>
+#include <core/config.h>
 
 DWORD WINAPI MainThread(LPVOID lpReserved)
 {
     UNREFERENCED_PARAMETER(lpReserved);
 
-    CreateLogger();
-    spdlog::info("renms attached :)");
+    CreateLogger("\033[31mReNMS\033[0m");
+    spdlog::info("ReNMS v.{} -- Initializing things...", RENMS_VERSION);
+
+    renms::config::init();
+    renms::AddBuiltinCommands();
+    renms::CreateTextChatHooks();
+    renms::CreateFiosHooks();
+    renms::CreateTargetDirectories();
     renms::CreateWarningHooks();
+    renms::CreateFSMGcApplicationHooks();
+
+    renms::PluginManager lPluginManager = renms::PluginManager();
+
+    renms::ResumeModuleThread(renms::GetNMSModuleHandle());
+    spdlog::info("NMS is running.");
+
     return TRUE;
 }
 

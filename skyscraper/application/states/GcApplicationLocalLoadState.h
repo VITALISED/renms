@@ -17,25 +17,26 @@
 
 #pragma once
 
-#include <skyscraper.h>
 #include <application/states/GcApplicationState.h>
 #include <atlas/WinHttpTask.h>
 #include <engine/source/engine/EgMain.h>
-#include <toolkit/maths/numeric/generic/TkMatrix34Generic.h>
 #include <simulation/player/GcPlayer.h>
 #include <simulation/player/GcPlayerRespawn.h>
+#include <skyscraper.h>
+#include <toolkit/maths/numeric/generic/TkMatrix34Generic.h>
 
 SKYSCRAPER_BEGIN
 
 namespace LocalLoadPhase
 {
-    typedef WinHttpTask::State::Enum Enum;   
+typedef WinHttpTask::State::Enum Enum;
 }
 
 class cGcApplicationLocalLoadState : public cGcApplicationState
 {
     typedef cGcPlayer::eRocketBootsDoubleTapState SaveRestoreMode;
 
+    VFT<8> *__vftable;
     cGcPlayerRespawn::RespawnReason meLoadReason;
     bool mColdBoot;
     bool mbWarpingToNewGalaxy;

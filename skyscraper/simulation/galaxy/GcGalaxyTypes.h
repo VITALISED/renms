@@ -19,6 +19,11 @@
 
 #include <skyscraper.h>
 
+#include <toolkit/graphics/TkColour.h>
+
+#include <simulation/galaxy/gcgalaxystarattributesdata.meta.h>
+#include <simulation/galaxy/gcgalaxyvoxelattributesdata.meta.h>
+
 SKYSCRAPER_BEGIN
 
 class cGcGalacticVoxelCoordinate
@@ -34,6 +39,15 @@ class cGcGalacticSolarSystemAddress
     cGcGalacticVoxelCoordinate mVoxelCoordinate;
     unsigned __int16 mSolarIndex;
     unsigned __int16 mIteration;
+};
+
+class cGcGalaxyAttributesAtAddress
+{
+    cGcGalaxyVoxelAttributesData mVoxel;
+    cTkColour mVoxelPrimaryColour;
+    cTkColour mVoxelSecondaryColour;
+    cGcGalaxyStarAttributesData mStar;
+    bool mbValid;
 };
 
 SKYSCRAPER_END

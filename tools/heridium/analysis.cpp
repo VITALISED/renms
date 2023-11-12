@@ -59,7 +59,9 @@ void cTkMetaData__Register__DETOUR(
         lCopyFunction, lCreateFunction, lHashFunction, lDestroyFunction);
 }
 
-PLH::x64Detour cTkMetaData__Register__HOOK((uint64_t)renms::RelToAbsolute(0x248ABC0), (uint64_t)cTkMetaData__Register__DETOUR, &cTkMetaData__Register__TRAMPOLINE);
+PLH::x64Detour cTkMetaData__Register__HOOK(
+    (uint64_t)renms::RelToAbsolute(0x248ABC0), (uint64_t)cTkMetaData__Register__DETOUR,
+    &cTkMetaData__Register__TRAMPOLINE);
 
 HERIDIUM_BEGIN
 
@@ -69,7 +71,7 @@ void AnalysisInit()
 
     cTkMetaData__Register__HOOK.hook();
 
-    renms::ResumeModuleThread(MODULE_BASE);
+    renms::ResumeModuleThread(renms::GetNMSModuleHandle());
 }
 
 HERIDIUM_END

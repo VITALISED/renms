@@ -17,8 +17,8 @@
 
 #pragma once
 
-#include <skyscraper.h>
 #include <engine/source/engine/EgScene.h>
+#include <skyscraper.h>
 #include <toolkit/maths/geometry/TkPhysRelMat34.h>
 #include <toolkit/maths/numeric/generic/TkMatrix44Generic.h>
 #include <toolkit/resources/TkSmartResHandle.h>
@@ -28,7 +28,7 @@ SKYSCRAPER_BEGIN
 
 class cGcAsyncLoadOps
 {
-public:
+  public:
     enum Operation
     {
         DrainFileIO,
@@ -39,11 +39,12 @@ public:
 
 namespace ApplicationStateEvents
 {
-    typedef WinHttpTask::State::Enum Enum;
+typedef WinHttpTask::State::Enum Enum;
 }
 
 class cGcApplicationState : public cTkFSMState
 {
+    VFT<8> *__vftable;
     cTkPhysRelMat34 mStereoCameraMatrices[2];
     cTkPhysRelMat34 mStereoPrevCameraMatrices[2];
     cTkSmartResHandle mShadowsPipelineRes;

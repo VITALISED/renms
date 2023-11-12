@@ -17,14 +17,12 @@
 
 #include "winprocess.h"
 
-#define HERIDIUM_LIB "Heridium.dll"
-
 void printDebug(std::string input)
 {
 #ifdef _DEBUG
-    std::cout << input << std::endl;
+    std::cout << "[ ReLauncher ] " << input << std::endl;
 #else
-    UNREFERENCED_PARAMETER(input)
+    UNREFERENCED_PARAMETER(input);
 #endif
 }
 
@@ -49,28 +47,34 @@ int main(int argc, char **argv)
                                      "with a negative number of arguments)");
         }
 
-        std::filesystem::path launcherPath, nmsPath, heridiumPath;
+        std::filesystem::path launcherPath, nmsPath, dllPath;
         launcherPath = argv[0];
 
         if (argc < 2)
         {
-            nmsPath = launcherPath.parent_path();
-            nmsPath /= "NMS.exe";
+            nmsPath = launcherPath.parent_path() / "NMS.exe";
+            dllPath = launcherPath.parent_path() / "renms.dll";
         }
         else
+        {
             nmsPath = argv[1];
+            dllPath = argv[2];
+        }
 
-        heridiumPath = launcherPath.parent_path();
-        heridiumPath /= HERIDIUM_LIB;
         CheckPath(nmsPath);
-        CheckPath(heridiumPath);
+        CheckPath(dllPath);
 
-        printDebug("Loading NMS.exe...\n");
+        printDebug("Paths found:");
+        printDebug("NMS Executable..... " + nmsPath.string());
+        printDebug("DLL Injectee....... " + dllPath.string());
+        printDebug("Current Directory.. " + std::filesystem::current_path().string());
+
+        printDebug("Loading NMS.exe...");
         auto nmsProcess = CreateProcessFrozen(argv[1]);
-        printDebug("Injecting the DLL...\n");
-        InjectDLL(heridiumPath, nmsProcess.hProcess);
+        printDebug("Injecting " + dllPath.filename().string() + "...");
+        InjectDLL(dllPath, nmsProcess.hProcess);
 
-        printDebug("Injection successful!\n");
+        printDebug("Injection successful!");
         // Wait for NMS.exe to get closed
         WaitForSingleObject(nmsProcess.hProcess, INFINITE);
         CloseHandle(nmsProcess.hProcess);
@@ -79,7 +83,7 @@ int main(int argc, char **argv)
     }
     catch (std::exception &e)
     {
-        std::cout << "Error! " << e.what() << std::endl;
+        std::cout << "[ ReLauncher ] Error! " << e.what() << std::endl;
         exit(1);
     }
 }
