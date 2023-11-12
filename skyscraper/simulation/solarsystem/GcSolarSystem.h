@@ -4,10 +4,15 @@
 
 #include <gamestate/GcDiscoveryCommon.h>
 #include <simulation/galaxy/GcGalaxyTypes.h>
+#include <simulation/particles/GcParticleManager.h>
 #include <simulation/solarsystem/GcSolarSystemAsteroidFields.h>
+#include <simulation/solarsystem/GcSolarSystemGenerator.h>
 #include <simulation/solarsystem/GcWarpEffect.h>
+#include <simulation/solarsystem/asteroid/GcAsteroidManager.h>
 #include <simulation/solarsystem/planet/GcPlanet.h>
+#include <simulation/solarsystem/planet/GcPlanetGenerator.h>
 #include <toolkit/system/TkAddNodesHandle.h>
+#include <toolkit/system/TkIterationState.h>
 
 #include <gamestate/gcplayerspawnstatedata.meta.h>
 #include <simulation/galaxy/gcgalaxystaranomaly.meta.h>
@@ -15,6 +20,13 @@
 #include <simulation/solarsystem/gcsolarsystemdata.meta.h>
 
 SKYSCRAPER_BEGIN
+
+struct DiscoveryAutoSync
+{
+    bool lbActive;
+    int liIntervalInSeconds;
+    unsigned __int64 lu64LastSyncTime;
+};
 
 const struct cGcSolarSystem
 {

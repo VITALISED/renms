@@ -3,14 +3,16 @@
 #include <skyscraper.h>
 
 #include <simulation/galaxy/GcGalaxyTypes.h>
+#include <simulation/solarsystem/GcSolarSystemAsteroidFields.h>
 #include <simulation/solarsystem/GcSolarSystemGenerator.h>
 #include <simulation/solarsystem/planet/GcPlanet.h>
 #include <toolkit/simulation/TkSeed.h>
 #include <toolkit/utilities/TkString.h>
 #include <toolkit/utilities/containers/TkVector.h>
 
-#include <simulation/environment/gcbuildingdensity.meta.h>
+#include <simulation/environment/gcbuildingdensitylevels.meta.h>
 #include <simulation/environment/weather/gcweatheroptions.meta.h>
+#include <simulation/solarsystem/gcsolarsystemdata.meta.h>
 #include <simulation/solarsystem/planet/gcbiomesubtype.meta.h>
 #include <simulation/solarsystem/planet/gcbiometype.meta.h>
 #include <simulation/solarsystem/planet/gcplanetdataresourcehint.meta.h>

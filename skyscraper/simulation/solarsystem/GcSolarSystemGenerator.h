@@ -17,6 +17,8 @@ struct cGcSolarSystemGeometry
     cTkStackVector<cTkSphere> mPlanetExclusion;
 };
 
+class cGcSolarSystem;
+
 class cGcSolarSystemGenerator
 {
   public:
