@@ -6,11 +6,23 @@ std::vector<std::string> startupQuips = {
     "\"Now with 50% more crashes!\" - tractorbeam",
     "\"Ready to serve you yet another crash log.\" - tractorbeam",
     "\"Good luck lol\" - tractorbeam",
-    "\"Still not using cTkMemoryManager!\" - tractorbeam"
+    "\"Still not hooking cTkMemoryManager!\" - tractorbeam",
+    "\"Also try Starfield!\" - tractorbeam",
+    "\"What do you mean 'it works on my machine?'\" - tractorbeam",
+    "\"You guys have been hooking?\" - tractorbeam",
+    "\"I read something about a hooker in the logs.\" - tractorbeam",
+    "\"I'd like two number nines, a number nine large, a number six with extra dip, a number seven, two number forty-fives, one with cheese, and a large soda.\" - tractorbeam, supposedly"
 };
 
-int startupQuipOfChoice = rand() % startupQuips.size();
-char* startupQuip = (char*)startupQuips[startupQuipOfChoice].c_str();
+char* randomQuip()
+{
+    srand(time(NULL));
+    int startupQuipOfChoice = 0;
+    startupQuipOfChoice = rand() % startupQuips.size();
+    return (char*)startupQuips[startupQuipOfChoice].c_str();
+}
+
+auto startupQuip = randomQuip();
 
 uint64_t cTkFileSystem__IsModded__TRAMPOLINE = NULL;
 
