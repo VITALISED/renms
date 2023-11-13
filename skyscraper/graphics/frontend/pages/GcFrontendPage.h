@@ -2,6 +2,7 @@
 
 #include <skyscraper.h>
 
+#include <graphics/frontend/pages/data/GcDiscoveryPageData.h>
 #include <toolkit/graphics/utilities/TkModelResourceRenderer.h>
 #include <toolkit/maths/numeric/generic/TkVector2Generic.h>
 #include <toolkit/utilities/TkStrongType.h>
