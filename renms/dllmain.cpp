@@ -15,16 +15,17 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#include "renms.h"
 #include <commands/builtin.h>
 #include <commands/dispatcher.h>
+#include <core/config.h>
 #include <core/filesystem.h>
 #include <core/warning.h>
 #include <iat/fios.h>
 #include <memory/thread.h>
 #include <plugins/fsm.h>
 #include <plugins/plugin.h>
-#include <core/config.h>
+
+#include "renms.h"
 
 DWORD WINAPI MainThread(LPVOID lpReserved)
 {

@@ -1,29 +1,5 @@
 #include <core/warning.h>
 
-//choose randomly from a list of quippy lines at startup
-std::vector<std::string> startupQuips = {
-    "\"Half baked and ready to roll.\" - tractorbeam",
-    "\"Now with 50% more crashes!\" - tractorbeam",
-    "\"Ready to serve you yet another crash log.\" - tractorbeam",
-    "\"Good luck lol\" - tractorbeam",
-    "\"Still not hooking cTkMemoryManager!\" - tractorbeam",
-    "\"Also try Starfield!\" - tractorbeam",
-    "\"What do you mean 'it works on my machine?'\" - tractorbeam",
-    "\"You guys have been hooking?\" - tractorbeam",
-    "\"I read something about a hooker in the logs.\" - tractorbeam",
-    "\"I'd like two number nines, a number nine large, a number six with extra dip, a number seven, two number forty-fives, one with cheese, and a large soda.\" - tractorbeam, supposedly"
-};
-
-char* randomQuip()
-{
-    srand(time(NULL));
-    int startupQuipOfChoice = 0;
-    startupQuipOfChoice = rand() % startupQuips.size();
-    return (char*)startupQuips[startupQuipOfChoice].c_str();
-}
-
-auto startupQuip = randomQuip();
-
 uint64_t cTkFileSystem__IsModded__TRAMPOLINE = NULL;
 
 bool cTkFileSystem__IsModded__DETOUR(uint64_t thiscall)
@@ -47,8 +23,9 @@ void cGcApplicationGameModeSelectorState__RenderWarning__DETOUR(
         cGcApplicationGameModeSelectorState__RenderWarning__TRAMPOLINE,
         cGcApplicationGameModeSelectorState__RenderWarning__DETOUR)(
         thiscall, "You're running ReNMS", "PRESS ANYTHING TO ACKNOWLEDGE",
-        "You are very likely to run into issues, check the repo for troubleshooting tips. If you know what you're doing, submit an issue to the repo.",
-        startupQuip,
+        "ReNMS is extremely unstable. If you encounter issues check the repository for tips or to open an issue. "
+        "(https://github.com/VITALISED/renms)",
+        const_cast<char *>("We're not endorsed by Hello Games. Please don't send them any Zendesk Tickets."),
         lfTimeout);
 }
 

@@ -29,6 +29,16 @@ inline void SetConsoleSinkParams(std::shared_ptr<spdlog::sinks::stdout_color_sin
 
 inline void CreateLogger(const char *lpacLoggerName)
 {
+    HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+    if (hOut != INVALID_HANDLE_VALUE)
+    {
+        DWORD dwMode = 0;
+        GetConsoleMode(hOut, &dwMode);
+
+        dwMode |= 0x0004;
+        SetConsoleMode(hOut, dwMode);
+    }
+
     std::shared_ptr<spdlog::sinks::rotating_file_sink_mt> file_sink   = FileSink();
     std::shared_ptr<spdlog::sinks::stdout_color_sink_mt> console_sink = ConsoleSink();
 

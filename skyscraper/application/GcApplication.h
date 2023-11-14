@@ -35,7 +35,7 @@
 #include <application/states/GcApplicationSmokeTestState.h>
 #include <application/states/GcApplicationTitleScreenState.h>
 #include <application/states/GcApplicationUGCBaseViewerState.h>
-//#include <gamestate/GcGameState.h>
+// #include <gamestate/GcGameState.h>
 #include <reality/GcRealityManager.h>
 #include <simulation/GcSimulation.h>
 #include <toolkit/maths/utilities/spatial/TkSampleDistribution.h>
@@ -58,28 +58,28 @@ class cGcApplication : public cTkFSM
         cGcFirstBootContext mFirstBootContext;
         cTkMcQmcLFSRStore mTkMcQmcLFSRStore;
         cGcRealityManager mRealityManager;
-        // cGcGameState mGameState;
-        // cGcSeasonalData mSeasonalData;
-        // cGcSimulation mSimulation;
-        // cGcHUDManager mHUDManager;
-        // cGcFrontendManager mFrontendManager;
-        // cGcInWorldUIManager mInWorldUIManager;
-        // cGcCameraManager mCameraManager;
-        // cGcGraphicsManager mGraphicsManager;
-        // cTkInputManager *mpInputManager;
-        // cGcInputRemap mInputRemap;
-        // cGcVibrationManager mVibrationManager;
-        // cTkTimeManager mTimeManager;
-        // cTkDebugRenderer mDebugRenderer;
-        // cGcDebugEditor mDebugEditor;
-        // cGcNGuiManager mNGuiManager;
-        // cGcAudioManager mAudioManager;
-        // cGcAtlasManager mAtlasManager;
-        // cGcNetworkManager mNetworkManager;
-        // cGcResourceManager mResourceManager;
-        // cGcGalaxyMap mGalaxyMap;
-        // cGcGameAnalytics mGameAnalytics;
-        // cGcActivitiesTracker mActivitiesTracker;
+        cGcGameState mGameState;
+        cGcSeasonalData mSeasonalData;
+        cGcSimulation mSimulation;
+        cGcHUDManager mHUDManager;
+        cGcFrontendManager mFrontendManager;
+        cGcInWorldUIManager mInWorldUIManager;
+        cGcCameraManager mCameraManager;
+        cGcGraphicsManager mGraphicsManager;
+        cTkInputManager *mpInputManager;
+        cGcInputRemap mInputRemap;
+        cGcVibrationManager mVibrationManager;
+        cTkTimeManager mTimeManager;
+        cTkDebugRenderer mDebugRenderer;
+        cGcDebugEditor mDebugEditor;
+        cGcNGuiManager mNGuiManager;
+        cGcAudioManager mAudioManager;
+        cGcAtlasManager mAtlasManager;
+        cGcNetworkManager mNetworkManager;
+        cGcResourceManager mResourceManager;
+        cGcGalaxyMap mGalaxyMap;
+        cGcGameAnalytics mGameAnalytics;
+        cGcActivitiesTracker mActivitiesTracker;
     };
 
     cGcApplication::Data *mpData;
