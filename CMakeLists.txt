@@ -221,8 +221,8 @@ add_custom_command(
 
 # --------------------------------------------------------------------------------------------------
 # renms settings
-add_dependencies(renms resdk Heridium ReLauncher)
-target_link_libraries(renms fmt PolyHook_2 spdlog pybind11::embed)
+add_dependencies(renms resdk Heridium ReLauncher skyscraper)
+target_link_libraries(renms fmt PolyHook_2 spdlog pybind11::embed skyscraper)
 
 target_compile_definitions(renms PRIVATE RENMS FIOS_TYPES_ONLY)
 target_compile_definitions(renms PUBLIC RENMS_VERSION="${PROJECT_VERSION}")
@@ -239,7 +239,8 @@ target_include_directories(
 # --------------------------------------------------------------------------------------------------
 # skyscraper settings
 target_include_directories(
-    renms_skyscraper PRIVATE ${CMAKE_SOURCE_DIR} ${CMAKE_SOURCE_DIR}/skyscraper
+    skyscraper PRIVATE ${CMAKE_SOURCE_DIR} ${CMAKE_SOURCE_DIR}/skyscraper
+                       ${CMAKE_SOURCE_DIR}/metadata
 )
 
 # --------------------------------------------------------------------------------------------------
