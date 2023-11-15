@@ -29,7 +29,7 @@ inline void SetConsoleSinkParams(std::shared_ptr<spdlog::sinks::stdout_color_sin
 
 constexpr const char *GetScriptLoggerName()
 {
-    return "SCRIPT";
+    return "\033[33mSCRIPT\033[0m";
 }
 
 inline void CreateLogger(const char *lpacLoggerName)

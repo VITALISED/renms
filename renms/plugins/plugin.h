@@ -37,7 +37,6 @@ class Plugin
     std::string mpacDescription;
     LPVOID mpPluginMain;
     LPVOID mpPluginUpdate;
-    std::string msPythonEntryScript;
 };
 
 class PluginManager

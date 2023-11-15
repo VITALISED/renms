@@ -38,12 +38,11 @@ PluginManager::PluginManager()
 
         Plugin *lpPlugin = new Plugin();
 
-        lpPlugin->mpacAuthor          = "Someone";
-        lpPlugin->mpacDescription     = "A plugin for ReNMS";
-        lpPlugin->mpacDisplayName     = "Unnamed Plugin";
-        lpPlugin->mpPluginMain        = NULL;
-        lpPlugin->mpPluginUpdate      = NULL;
-        lpPlugin->msPythonEntryScript = "";
+        lpPlugin->mpacAuthor      = "Someone";
+        lpPlugin->mpacDescription = "A plugin for ReNMS";
+        lpPlugin->mpacDisplayName = "Unnamed Plugin";
+        lpPlugin->mpPluginMain    = NULL;
+        lpPlugin->mpPluginUpdate  = NULL;
 
         if (pluginIniFile.good())
         {
@@ -100,7 +99,13 @@ void PluginManager::Load(std::filesystem::path PluginPath, Plugin *lpPlugin)
 
     // Execute plugin main
     PluginMain_t pluginEntry = reinterpret_cast<PluginMain_t>(GetProcAddress(PluginHandle, "PluginMain"));
-    if (pluginEntry) { pluginEntry(); }
+
+    if (pluginEntry)
+    {
+        pluginEntry();
+        lpPlugin->mpPluginMain = reinterpret_cast<LPVOID>(pluginEntry);
+    }
+
     else { spdlog::error("Failed to load plugin: Couldn't find: void RENMS_ENTRY PluginMain()"); }
 }
 
