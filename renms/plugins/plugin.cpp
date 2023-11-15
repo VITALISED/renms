@@ -57,6 +57,10 @@ PluginManager::PluginManager()
             spdlog::info("Found plugin DLL");
             Load(pluginLibrary);
         }
+
+        path lGameDataPath = PluginEntry.path() / "GAMEDATA";
+
+        if (exists(lGameDataPath)) { HandleGamedata(lGameDataPath); }
     }
 
     if (mPluginList.size() == 0) { spdlog::warn("No plugins found."); }
@@ -76,6 +80,18 @@ void PluginManager::Load(std::filesystem::path PluginPath)
     PluginMain_t pluginEntry = reinterpret_cast<PluginMain_t>(GetProcAddress(PluginHandle, "PluginMain"));
     if (pluginEntry) { pluginEntry(); }
     else { spdlog::error("Failed to load plugin: Couldn't find: void RENMS_ENTRY PluginMain()"); }
+}
+
+void PluginManager::HandleGamedata(std::filesystem::path lPluginPath)
+{
+    for (directory_entry lFileEntry : recursive_directory_iterator(lPluginPath))
+    {
+        if (!lFileEntry.is_directory()) { spdlog::info("File {}", lFileEntry.path().string()); }
+
+        std::ifstream lFile(lFileEntry.path());
+
+        std::size_t lFileSize = file_size(lFileEntry.path());
+    }
 }
 
 RENMS_END

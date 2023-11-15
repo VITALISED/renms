@@ -17,10 +17,13 @@
 
 #pragma once
 
-#include <filesystem>
+#include <renms.h>
+
 #include <inicpp.h>
 #include <plugins/api.h>
-#include <renms.h>
+
+#include <filesystem>
+#include <limits>
 #include <string>
 
 RENMS_BEGIN
@@ -39,6 +42,7 @@ class PluginManager
     std::vector<void *> mPluginList;
 
     PluginManager();
+    void HandleGamedata(std::filesystem::path lPluginPath);
     void Load(std::filesystem::path PluginPath);
     void Unload(std::filesystem::path PluginPath);
     void Reload(std::filesystem::path PluginPath);

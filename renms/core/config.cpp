@@ -5,8 +5,10 @@ using namespace renms::config;
 
 RENMS_BEGIN
 
-//Defaults
+// Defaults
 bool config::bShowWarning = true;
+std::vector<std::pair<std::string, std::pair<void *, uint64_t>>> config::aModFileOverrides =
+    std::vector<std::pair<std::string, std::pair<void *, uint64_t>>>();
 
 void config::init()
 {
@@ -19,16 +21,13 @@ void config::init()
         generate(settingsFilePath);
         spdlog::warn("No config found, one has been generated at {}", settingsFilePath.string());
         return;
-    } else
-    {
-        spdlog::info("Config found at {}", settingsFilePath.string());
     }
+    else { spdlog::info("Config found at {}", settingsFilePath.string()); }
 
     ini::IniFile pluginIni;
     pluginIni.decode(settingsIniFile);
 
-    if (pluginIni["settings"].contains("show_warning"))
-        bShowWarning = pluginIni["settings"]["show_warning"].as<bool>();
+    if (pluginIni["settings"].contains("show_warning")) bShowWarning = pluginIni["settings"]["show_warning"].as<bool>();
 }
 
 void config::generate(path configPath)
@@ -38,6 +37,11 @@ void config::generate(path configPath)
 
     std::ofstream settingsIniFile(configPath);
     pluginIni.encode(settingsIniFile);
+}
+
+void config::AddModFileOverride(std::pair<std::string, std::pair<void *, uint64_t>> lOverride)
+{
+    renms::config::aModFileOverrides.push_back(lOverride);
 }
 
 RENMS_END
