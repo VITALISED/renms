@@ -24,6 +24,7 @@
 #include <memory/thread.h>
 #include <plugins/fsm.h>
 #include <plugins/plugin.h>
+#include <scripts/python.h>
 
 #include "renms.h"
 
@@ -35,6 +36,7 @@ DWORD WINAPI MainThread(LPVOID lpReserved)
     spdlog::info("ReNMS v.{} -- Initializing things...", RENMS_VERSION);
 
     renms::config::init();
+    renms::CreateScriptEnvironment();
     renms::AddBuiltinCommands();
     renms::CreateTextChatHooks();
     renms::CreateFiosHooks();

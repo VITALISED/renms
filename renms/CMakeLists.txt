@@ -30,6 +30,7 @@ add_library(
     "commands/dispatcher.cpp"
     "iat/fios.cpp"
     "iat/iat_callback.cpp"
+    "scripts/python.cpp"
 )
 
 add_subdirectory(proxy)

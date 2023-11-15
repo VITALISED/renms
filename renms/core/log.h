@@ -27,6 +27,11 @@ inline void SetConsoleSinkParams(std::shared_ptr<spdlog::sinks::stdout_color_sin
 };
 #endif //_DEBUG
 
+constexpr const char *GetScriptLoggerName()
+{
+    return "SCRIPT";
+}
+
 inline void CreateLogger(const char *lpacLoggerName)
 {
     HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -46,4 +51,8 @@ inline void CreateLogger(const char *lpacLoggerName)
     file_sink->set_level(spdlog::level::trace);
     spdlog::set_default_logger(
         std::make_shared<spdlog::logger>(lpacLoggerName, spdlog::sinks_init_list({console_sink, file_sink})));
+
+    auto lScriptLogger =
+        std::make_shared<spdlog::logger>(GetScriptLoggerName(), spdlog::sinks_init_list({console_sink, file_sink}));
+    spdlog::register_logger(lScriptLogger);
 };

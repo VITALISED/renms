@@ -222,7 +222,7 @@ add_custom_command(
 # --------------------------------------------------------------------------------------------------
 # renms settings
 add_dependencies(renms resdk Heridium ReLauncher)
-target_link_libraries(renms fmt PolyHook_2 spdlog)
+target_link_libraries(renms fmt PolyHook_2 spdlog pybind11::embed)
 
 target_compile_definitions(renms PRIVATE RENMS FIOS_TYPES_ONLY)
 target_compile_definitions(renms PUBLIC RENMS_VERSION="${PROJECT_VERSION}")
