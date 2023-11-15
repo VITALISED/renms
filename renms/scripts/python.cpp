@@ -30,4 +30,16 @@ void CreateScriptEnvironment()
     }
 }
 
+void ExecutePythonFile(path lFilePath)
+{
+    try
+    {
+        py::eval_file(lFilePath.string());
+    }
+    catch (py::error_already_set const &pythonErr)
+    {
+        spdlog::error(pythonErr.what());
+    }
+}
+
 RENMS_END

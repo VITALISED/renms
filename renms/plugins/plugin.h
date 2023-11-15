@@ -21,6 +21,7 @@
 
 #include <inicpp.h>
 #include <plugins/api.h>
+#include <scripts/python.h>
 
 #include <filesystem>
 #include <limits>
@@ -28,22 +29,26 @@
 
 RENMS_BEGIN
 
-class PluginTemplate
+class Plugin
 {
   public:
     std::string mpacDisplayName;
     std::string mpacAuthor;
     std::string mpacDescription;
+    LPVOID mpPluginMain;
+    LPVOID mpPluginUpdate;
+    std::string msPythonEntryScript;
 };
 
 class PluginManager
 {
   public:
-    std::vector<void *> mPluginList;
+    std::vector<Plugin *> mPluginList;
 
     PluginManager();
     void HandleGamedata(std::filesystem::path lPluginPath);
-    void Load(std::filesystem::path PluginPath);
+    void HandleScripts(std::filesystem::path lScriptPath);
+    void Load(std::filesystem::path PluginPath, Plugin *lpPlugin);
     void Unload(std::filesystem::path PluginPath);
     void Reload(std::filesystem::path PluginPath);
 };

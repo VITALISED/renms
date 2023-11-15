@@ -36,6 +36,15 @@ PluginManager::PluginManager()
         std::ifstream pluginIniFile(pluginManifest);
         std::ifstream pluginLibFile(pluginLibrary);
 
+        Plugin *lpPlugin = new Plugin();
+
+        lpPlugin->mpacAuthor          = "Someone";
+        lpPlugin->mpacDescription     = "A plugin for ReNMS";
+        lpPlugin->mpacDisplayName     = "Unnamed Plugin";
+        lpPlugin->mpPluginMain        = NULL;
+        lpPlugin->mpPluginUpdate      = NULL;
+        lpPlugin->msPythonEntryScript = "";
+
         if (pluginIniFile.good())
         {
             spdlog::info("Found manifest");
@@ -46,6 +55,10 @@ PluginManager::PluginManager()
             std::string lsAuthor      = pluginIni["manifest"]["author"].as<std::string>();
             std::string lsDescription = pluginIni["manifest"]["description"].as<std::string>();
 
+            lpPlugin->mpacAuthor      = lsAuthor;
+            lpPlugin->mpacDescription = lsDescription;
+            lpPlugin->mpacDisplayName = lsName;
+
             spdlog::info("-----------PLUGIN INFORMATION-----------");
             spdlog::info(lsName);
             spdlog::info(lsAuthor);
@@ -55,18 +68,27 @@ PluginManager::PluginManager()
         if (pluginLibFile.good())
         {
             spdlog::info("Found plugin DLL");
-            Load(pluginLibrary);
+            Load(pluginLibrary, lpPlugin);
         }
 
         path lGameDataPath = PluginEntry.path() / "GAMEDATA";
-
         if (exists(lGameDataPath)) { HandleGamedata(lGameDataPath); }
+
+        path lScriptPath = PluginEntry.path() / "scripts";
+        if (exists(lScriptPath)) { HandleScripts(lScriptPath); }
+
+        mPluginList.push_back(lpPlugin);
     }
 
     if (mPluginList.size() == 0) { spdlog::warn("No plugins found."); }
 }
 
-void PluginManager::Load(std::filesystem::path PluginPath)
+void PluginManager::HandleScripts(std::filesystem::path lScriptsPath)
+{
+    if (exists(lScriptsPath / "main.py")) { ExecutePythonFile(lScriptsPath / "main.py"); }
+}
+
+void PluginManager::Load(std::filesystem::path PluginPath, Plugin *lpPlugin)
 {
     // Load the plugin DLL
     HMODULE PluginHandle = LoadLibraryW((LPCWSTR)PluginPath.string().c_str());
