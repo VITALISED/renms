@@ -19,6 +19,7 @@
 
 #include <renms.h>
 
+#include <core/config.h>
 #include <inicpp.h>
 #include <plugins/api.h>
 #include <scripts/python.h>

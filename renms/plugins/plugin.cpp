@@ -113,11 +113,22 @@ void PluginManager::HandleGamedata(std::filesystem::path lPluginPath)
 {
     for (directory_entry lFileEntry : recursive_directory_iterator(lPluginPath))
     {
-        if (!lFileEntry.is_directory()) { spdlog::info("File {}", lFileEntry.path().string()); }
+        if (lFileEntry.is_directory()) { continue; }
 
-        std::ifstream lFile(lFileEntry.path());
-
+        std::ifstream *lFile  = new std::ifstream(lFileEntry.path());
         std::size_t lFileSize = file_size(lFileEntry.path());
+
+        std::pair<void *, uint64_t> lFileDataAndSize = std::pair<void *, uint64_t>();
+        lFileDataAndSize.first                       = reinterpret_cast<void *>(lFile);
+        lFileDataAndSize.second                      = lFileSize;
+
+        std::pair<std::string, std::pair<void *, uint64_t>> lOverride =
+            std::pair<std::string, std::pair<void *, uint64_t>>();
+
+        lOverride.first  = lPluginPath.string();
+        lOverride.second = lFileDataAndSize;
+
+        renms::config::AddModFileOverride(lOverride);
     }
 }
 
