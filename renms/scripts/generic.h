@@ -11,7 +11,9 @@ class ScriptGeneric
     std::string msTypeId;
     void *mpVal;
 
-    ScriptGeneric(size_t liSize, std::string lsTypeId) : miSize(liSize), msTypeId(lsTypeId) {}
+    ScriptGeneric(size_t liSize, std::string lsTypeId, void *lpVal) : miSize(liSize), msTypeId(lsTypeId), mpVal(lpVal)
+    {
+    }
 };
 
 template <typename T>
