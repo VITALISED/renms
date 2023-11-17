@@ -104,14 +104,13 @@ __int64 WINAPI sceFiosFileRead__DETOUR(
 {
     spdlog::trace("sceFiosFileRead: Reading File: {}", lpacFilename);
 
-    // for (std::pair<std::string, std::pair<void *, uint64_t>> lOverride : renms::config::aModFileOverrides)
-    // {
-    //     if (std::filesystem::path(lOverride.first).compare(lpacFilename))
-    //     {
-    //         spdlog::info(lOverride.first);
-    //         spdlog::info(lpacFilename);
-    //     }
-    // }
+    for (std::pair<std::string, std::pair<void *, uint64_t>> lOverride : renms::config::aModFileOverrides)
+    {
+        if (std::filesystem::path(lOverride.first).compare(lpacFilename) == 0)
+        {
+            spdlog::info("Overriding File {}", lOverride.first);
+        }
+    }
 
     return PLH::FnCast(sceFiosFileRead__TRAMPOLINE, sceFiosFileRead__DETOUR)(
         lAttr, lpacFilename, lpData, liSize, liOffset);

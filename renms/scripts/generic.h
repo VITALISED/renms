@@ -20,6 +20,12 @@ template <typename T>
 T script_cast(ScriptGeneric castee)
 {
     if (castee.miSize == sizeof(T) && typeid(T) == castee.msTypeId) { return *reinterpret_cast<T>(castee.mpVal); }
+
+#if defined(_DEBUG)
+    spdlog::error("Can't cast to {} (from {})", typeid(T), castee.msTypeId);
+#endif
+
+    return NULL;
 }
 
 RENMS_END

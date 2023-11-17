@@ -115,6 +115,9 @@ void PluginManager::HandleGamedata(std::filesystem::path lPluginPath)
     {
         if (lFileEntry.is_directory()) { continue; }
 
+        std::pair<std::string, std::pair<void *, uint64_t>> lOverride =
+            std::pair<std::string, std::pair<void *, uint64_t>>();
+
         std::ifstream *lFile  = new std::ifstream(lFileEntry.path());
         std::size_t lFileSize = file_size(lFileEntry.path());
 
@@ -122,10 +125,16 @@ void PluginManager::HandleGamedata(std::filesystem::path lPluginPath)
         lFileDataAndSize.first                       = reinterpret_cast<void *>(lFile);
         lFileDataAndSize.second                      = lFileSize;
 
-        std::pair<std::string, std::pair<void *, uint64_t>> lOverride =
-            std::pair<std::string, std::pair<void *, uint64_t>>();
+        std::string PluginPathStr = lFileEntry.path().string();
+        size_t PluginGamedataPos  = PluginPathStr.find("GAMEDATA");
+        std::string GamePath      = std::filesystem::current_path().string();
+        size_t GamePathNoBinPos   = GamePath.find_last_of("BINARIES");
+        std::string GamePathNoBin = GamePath.substr(0, GamePathNoBinPos);
+        std::string FullPath      = GamePathNoBin.append(PluginPathStr.substr(PluginGamedataPos));
 
-        lOverride.first  = lPluginPath.string();
+        std::transform(FullPath.begin(), FullPath.end(), FullPath.begin(), toupper);
+
+        lOverride.first  = FullPath;
         lOverride.second = lFileDataAndSize;
 
         renms::config::AddModFileOverride(lOverride);
