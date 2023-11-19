@@ -22,14 +22,14 @@ add_library(
     "plugins/plugin.cpp"
     "plugins/api.cpp"
     "plugins/fsm.cpp"
+    "plugins/manager.cpp"
     "core/warning.cpp"
     "core/config.cpp"
     "core/filesystem.cpp"
     "commands/builtin.cpp"
     "commands/commands.cpp"
     "commands/dispatcher.cpp"
-    "iat/fios.cpp"
-    "iat/iat_callback.cpp"
+    "fios/fios.cpp"
     "scripts/python.cpp"
 )
 

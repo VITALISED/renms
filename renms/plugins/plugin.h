@@ -19,38 +19,24 @@
 
 #include <renms.h>
 
-#include <core/config.h>
-#include <inicpp.h>
 #include <plugins/api.h>
 #include <scripts/python.h>
 
-#include <filesystem>
-#include <limits>
-#include <string>
+#define PLUGIN_EXT "plugin.dll"
 
 RENMS_BEGIN
 
 class Plugin
 {
   public:
-    std::string mpacDisplayName;
-    std::string mpacAuthor;
-    std::string mpacDescription;
-    LPVOID mpPluginMain;
-    LPVOID mpPluginUpdate;
-};
+    std::string msDisplayName;
+    std::string msAuthor;
+    std::string msDescription;
+    fs::path mPluginPath;
 
-class PluginManager
-{
-  public:
-    std::vector<Plugin *> mPluginList;
-
-    PluginManager();
-    void HandleGamedata(std::filesystem::path lPluginPath);
-    void HandleScripts(std::filesystem::path lScriptPath);
-    void Load(std::filesystem::path PluginPath, Plugin *lpPlugin);
-    void Unload(std::filesystem::path PluginPath);
-    void Reload(std::filesystem::path PluginPath);
+    Plugin(std::string lsDisplayName, std::string lsAuthor, std::string lsDescription, fs::path lPluginPath);
+    void LoadExecutable();
+    void LoadScripts();
 };
 
 RENMS_END

@@ -18,10 +18,12 @@
 #pragma once
 
 #include <skyscraper.h>
+
 #include <engine/source/engine/EgScene.h>
-#include <toolkit/utilities/TkArray.h>
 #include <toolkit/simulation/components/TkComponent.h>
-#include <metadata/toolkit/attachments/tkattachmentdata.meta.h>
+#include <toolkit/utilities/TkArray.h>
+
+#include <toolkit/attachments/tkattachmentdata.meta.h>
 
 SKYSCRAPER_BEGIN
 

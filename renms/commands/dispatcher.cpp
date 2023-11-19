@@ -2,51 +2,41 @@
 
 extern renms::CommandDispatcher gCommandDispatcher = renms::CommandDispatcher();
 
-uint64_t cGcTextChatInput__ParseTextForCommands__TRAMPOLINE = NULL;
+RENMS_HOOK(
+    cGcTextChatInput__ParseTextForCommands, renms::RelToAbsolute(0x804E70), void,
+    (uint64_t thiscall, const cTkFixedString<1023, char> *lMessageText) {
+        if (!renms::CommandDispatcher::StartsWithPrefix(lMessageText))
+            return RENMS_CAST(cGcTextChatInput__ParseTextForCommands, thiscall, lMessageText);
 
-void cGcTextChatInput__ParseTextForCommands__DETOUR(uint64_t thiscall, const cTkFixedString<1023, char> *lMessageText)
-{
-    if (!renms::CommandDispatcher::StartsWithPrefix(lMessageText))
-        return PLH::FnCast(
-            cGcTextChatInput__ParseTextForCommands__TRAMPOLINE,
-            cGcTextChatInput__ParseTextForCommands__DETOUR)(thiscall, lMessageText);
+        std::string lsNoPrefixCommand = lMessageText->macBuffer;
+        lsNoPrefixCommand.erase(0, 1);
 
-    std::string lsNoPrefixCommand = lMessageText->macBuffer;
-    lsNoPrefixCommand.erase(0, 1);
+        size_t lFirstSpace               = lsNoPrefixCommand.find_first_of(' ');
+        std::string lsCommandName        = lsNoPrefixCommand;
+        std::vector<std::string> *laArgs = new std::vector<std::string>();
 
-    size_t lFirstSpace               = lsNoPrefixCommand.find_first_of(' ');
-    std::string lsCommandName        = lsNoPrefixCommand;
-    std::vector<std::string> *laArgs = new std::vector<std::string>();
-
-    if (lFirstSpace != std::string::npos)
-    {
-        lsCommandName = lsNoPrefixCommand.substr(0, lFirstSpace);
-        std::stringstream lssCommandStream(lsNoPrefixCommand.substr(lFirstSpace, std::string::npos));
-        std::string lsBuffer;
-
-        while (std::getline(lssCommandStream, lsBuffer, ' '))
+        if (lFirstSpace != std::string::npos)
         {
-            if (!lsBuffer.empty()) { laArgs->push_back(lsBuffer); }
+            lsCommandName = lsNoPrefixCommand.substr(0, lFirstSpace);
+            std::stringstream lssCommandStream(lsNoPrefixCommand.substr(lFirstSpace, std::string::npos));
+            std::string lsBuffer;
+
+            while (std::getline(lssCommandStream, lsBuffer, ' '))
+            {
+                if (!lsBuffer.empty()) { laArgs->push_back(lsBuffer); }
+            }
         }
-    }
 
-    if (gCommandDispatcher.TryParseCommand(lsCommandName, laArgs)) return;
+        if (gCommandDispatcher.TryParseCommand(lsCommandName, laArgs)) return;
 
-    return PLH::FnCast(
-        cGcTextChatInput__ParseTextForCommands__TRAMPOLINE,
-        cGcTextChatInput__ParseTextForCommands__DETOUR)(thiscall, lMessageText);
-}
-
-PLH::x64Detour cGcTextChatInput__ParseTextForCommands__HOOK(
-    reinterpret_cast<uint64_t>(renms::RelToAbsolute(0x804E70)),
-    reinterpret_cast<uint64_t>(cGcTextChatInput__ParseTextForCommands__DETOUR),
-    &cGcTextChatInput__ParseTextForCommands__TRAMPOLINE);
+        return RENMS_CAST(cGcTextChatInput__ParseTextForCommands, thiscall, lMessageText);
+    });
 
 RENMS_BEGIN
 
 void CreateTextChatHooks()
 {
-    cGcTextChatInput__ParseTextForCommands__HOOK.hook();
+    RENMS_DISPATCH_HOOK(cGcTextChatInput__ParseTextForCommands);
 }
 
 CommandDispatcher::CommandDispatcher()
@@ -78,21 +68,6 @@ bool CommandDispatcher::StartsWithPrefix(const cTkFixedString<1023, char> *lMess
     if (std::string(lMessageText->macBuffer).rfind("/", 0)) { return false; }
 
     return true;
-}
-
-bool CommandDispatcher::IsStockCommand(const cTkFixedString<1023, char> *lMessageText)
-{
-    if (strstr(lMessageText->macBuffer, "/g")) return true;
-    if (strstr(lMessageText->macBuffer, "/group")) return true;
-    if (strstr(lMessageText->macBuffer, "/l")) return true;
-    if (strstr(lMessageText->macBuffer, "/local")) return true;
-    if (strstr(lMessageText->macBuffer, "/whisper")) return true;
-    if (strstr(lMessageText->macBuffer, "/join")) return true;
-    if (strstr(lMessageText->macBuffer, "/leave")) return true;
-    if (strstr(lMessageText->macBuffer, "/invite")) return true;
-    if (strstr(lMessageText->macBuffer, "/kick")) return true;
-
-    return false;
 }
 
 RENMS_END

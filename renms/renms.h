@@ -17,7 +17,7 @@
 
 #pragma once
 
-#ifdef RENMS
+#if defined(RENMS)
 
 #include <core/framework.h>
 #include <core/log.h>
@@ -28,10 +28,13 @@
 #include <polyhook2/PE/IatHook.hpp>
 
 #include <array>
+#include <filesystem>
 #include <string>
 #include <vector>
 
-#endif // RENMS
+namespace fs = std::filesystem;
+
+#endif // defined(RENMS)
 
 // clang-format off
 #define RENMS_BEGIN namespace renms {
@@ -39,6 +42,6 @@
 // clang-format on
 
 // Plugin API for developers
-#ifndef RENMS
+#if !defined(RENMS)
 #include "plugins/api.h"
-#endif
+#endif //! defined(RENMS)

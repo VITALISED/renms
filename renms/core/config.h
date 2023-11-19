@@ -1,19 +1,20 @@
 #pragma once
+
 #include <renms.h>
 
-#include <filesystem>
+#include <inicpp.h>
+#include <plugins/manager.h>
 
 RENMS_BEGIN
 
 namespace config
 {
 
-extern bool bShowWarning;
-extern std::vector<std::pair<std::string, std::pair<void *, uint64_t>>> aModFileOverrides;
+extern bool gShouldShowWarning;
+extern PluginManager *gPluginManager;
 
-void init();
-void generate(std::filesystem::path configPath);
-void AddModFileOverride(std::pair<std::string, std::pair<void *, uint64_t>> lOverride);
+void Init();
+void Generate(fs::path configPath);
 
 }; // namespace config
 

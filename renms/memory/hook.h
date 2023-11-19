@@ -1,33 +1,34 @@
 #pragma once
 
-#include <memory/memory.h>
 #include <renms.h>
+
+#include <memory/memory.h>
 
 RENMS_BEGIN
 
-#define RENMS_HOOK(name, offset, detour)                                     \
-    auto name##_fnCastRes = PLH::FnCast(offset, detour);                     \
-    renms::HookController<decltype(name##_fnCastRes), PLH::NatDetour> name = \
-        renms::HookController<decltype(name##_fnCastRes), PLH::NatDetour>(   \
-            PLH::HookType::Detour, reinterpret_cast<uint64_t>(offset), reinterpret_cast<uint64_t>(detour))
-
-#define RENMS_CALLORIGINAL(name, ...) PLH::FnCast(name.mpHookTrampoline, name.mpDetour)(__VA_ARGS__)
-
-template <typename Fn, typename HookClass>
-class HookController
+inline std::string replace_hookid(std::string lsName)
 {
-    uint64_t mpOffset;
+    size_t liPos = lsName.find("__");
 
-  public:
-    using type = Fn;
+    if (liPos != std::string::npos) { return lsName.replace(liPos, 2, "::"); }
 
-    PLH::HookType mHookType;
-    Fn mpDetour;
-    HookClass mHook;
-    uint64_t mpHookTrampoline;
-    HookController(PLH::HookType lHookType, uint64_t lpOffset, uint64_t lpDetour);
-    bool Dispatch();
-    bool Remove();
-};
+    return lsName;
+}
+
+#define RENMS_CAST(name, ...) PLH::FnCast(name##__TRAMPOLINE, name##__DETOUR)(__VA_ARGS__)
+
+#define RENMS_HOOK(name, offset, return_type, detour_fn)              \
+    uint64_t name##__TRAMPOLINE = NULL;                               \
+    return_type name##__DETOUR detour_fn PLH::x64Detour name##__HOOK( \
+        reinterpret_cast<uint64_t>(offset), reinterpret_cast<uint64_t>(name##__DETOUR), &name##__TRAMPOLINE)
+
+#define RENMS_IAT_HOOK(name, module, return_type, detour_fn)        \
+    uint64_t name##__TRAMPOLINE = NULL;                             \
+    return_type name##__DETOUR detour_fn PLH::IatHook name##__HOOK( \
+        module, #name, reinterpret_cast<uint64_t>(name##__DETOUR), &name##__TRAMPOLINE, L"NMS.exe");
+
+#define RENMS_DISPATCH_HOOK(name)                                                          \
+    if (name##__HOOK.hook()) { spdlog::info("Enabling hook: {}", replace_hookid(#name)); } \
+    else { spdlog::error("Failed to enable hook: {}", replace_hookid(#name)); }
 
 RENMS_END
