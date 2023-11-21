@@ -13,6 +13,7 @@
 # You should have received a copy of the GNU General Public License along with
 # this program.  If not, see <https://www.gnu.org/licenses/>.
 
+# old way of doing things
 # @tractorbeam: everyone point and laugh at the cmake noob
 
 # file(GLOB_RECURSE APPLICATION_SOURCES "./application" "*.cpp" "*.h")
@@ -48,17 +49,28 @@
 
 # new way of doing things
 
+include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+include_directories(${PROJECT_SOURCE_DIR}/metadata)
+
+add_library(
+    skyscraper STATIC
+    skyscraper.h
+)
+
 add_subdirectory(application)
 add_subdirectory(atlas)
 add_subdirectory(engine)
 add_subdirectory(simulation)
 add_subdirectory(toolkit)
 
-add_library(
-    skyscraper STATIC
-    $<TARGET_OBJECTS:skyscraper_application>
-    $<TARGET_OBJECTS:skyscraper_atlas>
-    $<TARGET_OBJECTS:skyscraper_engine>
-    $<TARGET_OBJECTS:skyscraper_simulation>
-    $<TARGET_OBJECTS:skyscraper_toolkit>
+target_link_libraries(skyscraper PUBLIC
+    skyscraper_application
+    skyscraper_atlas
+    skyscraper_engine
+    skyscraper_simulation
+    skyscraper_toolkit
 )
+
+add_dependencies(skyscraper_application resdk)
+add_dependencies(skyscraper_engine resdk)
+add_dependencies(skyscraper_toolkit_graphics_shader resdk)
