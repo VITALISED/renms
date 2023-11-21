@@ -19,23 +19,35 @@
 
 #include <skyscraper.h>
 
-#include <toolkit/system/memory/TkMemoryManager.h>
+#include <graphics/ngui/GcNGuiLayer.h>
+#include <simulation/player/GcPlayer.h>
+#include <toolkit/audio/wwise/TkAudioManagerWwise.h>
+#include <toolkit/graphics/2d/ngui/TkNGuiInput.h>
 
 SKYSCRAPER_BEGIN
 
-namespace TkIDUnorderedMap
+class cGcLayerInteractControl
 {
-struct Hash128
-{};
+  public:
+    enum eConfirmState
+    {
+        EConfirmState_None,
+        EConfirmState_Confirming,
+        EConfirmState_Confirmed,
+    };
 
-struct Hash256
-{};
-} // namespace TkIDUnorderedMap
+    typedef cGcPlayer::eRocketBootsDoubleTapState WhichButton;
 
-template <
-    class Key, class T, class Hash = std::hash<Key>, class KeyEqual = std::equal_to<Key>,
-    class Allocator = TkSTLAllocatorShim<std::pair<const Key, T>>>
-class cTkUnorderedMap : public std::unordered_map<T, TkSTLAllocatorShim<T>>
-{};
+    cTkNGuiInput *mpNGuiInput;
+    cGcNGuiLayer *mpConfirm;
+    float mfConfirmTime;
+    cGcLayerInteractControl::eConfirmState meConfirmState;
+    cGcLayerInteractControl::WhichButton meWhichButton;
+    cGcNGuiLayer *mpHoverButton;
+    TkAudioObject mAudioObject;
+    bool mbPlayingHoldAudio;
+    bool mbPlayingHoldAudioThisFrame;
+    bool mbSlow;
+};
 
 SKYSCRAPER_END

@@ -27,7 +27,6 @@
 #include <graphics/ngui/GcNGuiLayer.h>
 #include <graphics/ngui/GcNGuiText.h>
 #include <graphics/ngui/GcNGuiTextSpecial.h>
-#include <graphics/ngui/ScrollBarState.h>
 #include <system/GcModManager.h>
 #include <toolkit/graphics/2d/ngui/TkNGuiInput.h>
 #include <toolkit/maths/numeric/TkSmoothCD.h>
@@ -93,7 +92,7 @@ class cGcApplicationGameModeSelectorState : public cGcApplicationState
     };
 
     template <typename T, unsigned int liCount>
-    struct EnumIconResources /*<enum eModeSelectPreset,7>*/
+    struct EnumIconResources
     {
         cTkSmartResHandle mResources[liCount];
     };
@@ -158,7 +157,6 @@ class cGcApplicationGameModeSelectorState : public cGcApplicationState
         cTkSmoothCD<float> mfHighlightAlpha;
     };
 
-    VFT<8> *__vftable;
     cGcNGuiLayer *mpSelectorUIRoot;
     cGcNGuiLayer *mpDeletionWarningUIRoot;
     cGcNGuiLayer *mpSlotUIRoot;
@@ -240,6 +238,15 @@ class cGcApplicationGameModeSelectorState : public cGcApplicationState
     float mfCloudResultTimer;
     cGcApplicationGameModeSelectorState::DisplayState meScreenToReturnToFromOptionsScreen;
     cGcApplicationGameModeSelectorState::CloudSaveUpdateState meCloudSaveUpdateState;
+
+    ~cGcApplicationGameModeSelectorState();
+    void Construct();
+    void Prepare(cTkFSMState *, const void *);
+    void Update(float);
+    void Event(unsigned int, const void *);
+    void Release(cTkFSMState *, const void *);
+    void Destruct();
+    void Render(EgRenderParity::List);
 };
 
 SKYSCRAPER_END

@@ -18,15 +18,27 @@
 #pragma once
 
 #include <skyscraper.h>
-#include <metadata/toolkit/ngui/tknguitextstyledata.meta.h>
+
+#include <graphics/ngui/GcNGuiStyledString.h>
+#include <graphics/ngui/GcNGuiText.h>
+#include <toolkit/system/memory/TkMemoryManager.h>
 
 SKYSCRAPER_BEGIN
 
-class cTkNGuiTextStyle
+class cGcNGuiTextSpecial : public cGcNGuiText
 {
-    cTkNGuiTextStyleData mDefault;
-    cTkNGuiTextStyleData mHighlight;
-    cTkNGuiTextStyleData mActive;
+  public:
+    cGcNGuiStyledString::StyledStringLayout mStyledStringLayout;
+    std::string msDisplayString;
+    bool mbBigString;
+    bool mbUpdateLayout;
+
+    ~cGcNGuiTextSpecial();
+    void Render();
+    int GetType() { return NULL; }
+    void EditElement();
+    void SetNeedsUpdate();
+    eNGuiEditorIcons GetSceneTreeIcon();
 };
 
 SKYSCRAPER_END

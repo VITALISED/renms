@@ -4,7 +4,7 @@
 
 nms::cGcApplication *GetGcApplication()
 {
-    return reinterpret_cast<cGcApplication *>(renms::RelToAbsolute(GCAPPLICATION));
+    return reinterpret_cast<nms::cGcApplication *>(renms::RelToAbsolute(GCAPPLICATION));
 }
 
 renmshook_t RENMS_API CreateHook(uint64_t lpTarget, uint64_t lpDetour, uint64_t lpTrampoline)
