@@ -156,7 +156,10 @@ add_dependency_custom(
 add_dependency_custom(./submodules/stb ./submodules/stb)
 
 set(PYBIND11_FINDPYTHON ON)
-add_dependency_custom(./submodules/pybind11 ./submodules/pybind11/include)
+add_dependency_custom(
+    ./submodules/rapidxml
+    ./submodules/rapidxml
+)
 
 # ==================================================================================================
 # Targets.
