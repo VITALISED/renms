@@ -182,10 +182,10 @@ add_custom_target(resdk DEPENDS ${PROJECT_SOURCE_DIR}/metadata/metadata.h)
 
 add_custom_command(
     OUTPUT ${PROJECT_SOURCE_DIR}/metadata/metadata.h
-    COMMAND "$<TARGET_FILE:ReLauncher>" "${NMS_EXE_PATH}"
-            "$<TARGET_FILE:Heridium>"
+    COMMAND "$<TARGET_FILE:relauncher>" "${NMS_EXE_PATH}"
+            "$<TARGET_FILE:heridium>"
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/metadata
-    DEPENDS Heridium
+    DEPENDS heridium
 )
 
 # --------------------------------------------------------------------------------------------------
@@ -200,7 +200,7 @@ target_include_directories(
 
 # --------------------------------------------------------------------------------------------------
 # renms settings
-add_dependencies(renms resdk Heridium ReLauncher skyscraper)
+add_dependencies(renms resdk heridium relauncher skyscraper)
 target_link_libraries(renms skyscraper fmt PolyHook_2 spdlog pybind11::embed)
 
 target_compile_definitions(renms PRIVATE RENMS FIOS_TYPES_ONLY)
@@ -215,16 +215,16 @@ target_include_directories(
     PUBLIC ${PROJECT_SOURCE_DIR}/metadata
 )
 # --------------------------------------------------------------------------------------------------
-# ReLauncher settings (No settings needed)
+# relauncher settings (No settings needed)
 
 # --------------------------------------------------------------------------------------------------
-# Heridium settings
-target_compile_definitions(Heridium PRIVATE RENMS)
+# heridium settings
+target_compile_definitions(heridium PRIVATE RENMS)
 
 target_include_directories(
-    Heridium PUBLIC ${CMAKE_SOURCE_DIR}/skyscraper ${CMAKE_SOURCE_DIR}/renms
+    heridium PUBLIC ${CMAKE_SOURCE_DIR}/skyscraper ${CMAKE_SOURCE_DIR}/renms
 )
-target_link_libraries(Heridium PRIVATE spdlog fmt PolyHook_2 skyscraper)
+target_link_libraries(heridium PRIVATE spdlog fmt PolyHook_2 skyscraper)
 
 # ==================================================================================================
 # Launch target
@@ -232,7 +232,7 @@ target_link_libraries(Heridium PRIVATE spdlog fmt PolyHook_2 skyscraper)
 # Make sure the past installer's leftovers are uninstalled first!
 add_custom_target(
     renms_launch
-    COMMAND $<TARGET_FILE:ReLauncher> ${NMS_EXE_PATH} $<TARGET_FILE:renms>
+    COMMAND $<TARGET_FILE:relauncher> ${NMS_EXE_PATH} $<TARGET_FILE:renms>
     WORKING_DIRECTORY ${NMS_BIN_PATH}
-    DEPENDS renms ReLauncher
+    DEPENDS renms relauncher
 )

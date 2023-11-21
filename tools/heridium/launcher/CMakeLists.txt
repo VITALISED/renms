@@ -14,7 +14,7 @@
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-add_executable(ReLauncher
+add_executable(relauncher
     "main.cpp"
     "winprocess.cpp"
 )
