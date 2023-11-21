@@ -135,27 +135,55 @@ macro(add_dependency_custom dir include)
     include_directories(${CMAKE_SOURCE_DIR}/${include} SYSTEM)
 endmacro()
 
-add_dependency_custom(./submodules/libSceFios2 ./submodules/libSceFios2)
-add_dependency_custom(./submodules/inifile-cpp ./submodules/inifile-cpp/include)
-add_dependency_custom(./submodules/fmt ./submodules/fmt/include)
+add_dependency_custom(
+    ./submodules/libSceFios2 
+    ./submodules/libSceFios2
+)
+add_dependency_custom(
+    ./submodules/inifile-cpp 
+    ./submodules/inifile-cpp/include
+)
+add_dependency_custom(
+    ./submodules/fmt 
+    ./submodules/fmt/include
+)
 
 set(SPDLOG_FMT_EXTERNAL ON)
 set(SPDLOG_BUILD_SHARED OFF)
-add_dependency_custom(./submodules/spdlog ./submodules/spdlog/include)
-add_dependency_custom(./submodules/PolyHook2_0 ./submodules/PolyHook2_0)
 add_dependency_custom(
-    ./submodules/robin-hood-hashing ./submodules/robin-hood-hashing/src/include
+    ./submodules/spdlog
+    ./submodules/spdlog/include
 )
+
 add_dependency_custom(
-    ./submodules/Vulkan-Headers ./submodules/Vulkan-Headers/include
+    ./submodules/PolyHook2_0
+    ./submodules/PolyHook2_0
+)
+
+add_dependency_custom(
+    ./submodules/robin-hood-hashing
+    ./submodules/robin-hood-hashing/src/include
+)
+
+add_dependency_custom(
+    ./submodules/Vulkan-Headers
+    ./submodules/Vulkan-Headers/include
 )
 add_dependency_custom(
     ./submodules/VulkanMemoryAllocator
     ./submodules/VulkanMemoryAllocator/include
 )
-add_dependency_custom(./submodules/stb ./submodules/stb)
+add_dependency_custom(
+    ./submodules/stb
+    ./submodules/stb
+)
 
 set(PYBIND11_FINDPYTHON ON)
+add_dependency_custom(
+    ./submodules/pybind11
+    ./submodules/pybind11/include
+)
+
 add_dependency_custom(
     ./submodules/rapidxml
     ./submodules/rapidxml
