@@ -184,8 +184,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_C_STANDARD 17)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 
-add_subdirectory(renms)
 add_subdirectory(skyscraper)
+add_subdirectory(renms)
 add_subdirectory(tools)
 
 # --------------------------------------------------------------------------------------------------
@@ -217,12 +217,19 @@ add_custom_command(
 )
 
 # --------------------------------------------------------------------------------------------------
+# skyscraper settings
+target_include_directories(
+    skyscraper PRIVATE ${CMAKE_SOURCE_DIR} ${CMAKE_SOURCE_DIR}/skyscraper
+                       ${CMAKE_SOURCE_DIR}/metadata
+)
+
+# --------------------------------------------------------------------------------------------------
 # renms_proxy settings (None needed)
 
 # --------------------------------------------------------------------------------------------------
 # renms settings
 add_dependencies(renms resdk Heridium ReLauncher skyscraper)
-target_link_libraries(renms fmt PolyHook_2 spdlog pybind11::embed skyscraper)
+target_link_libraries(renms skyscraper fmt PolyHook_2 spdlog pybind11::embed)
 
 target_compile_definitions(renms PRIVATE RENMS FIOS_TYPES_ONLY)
 target_compile_definitions(renms PUBLIC RENMS_VERSION="${PROJECT_VERSION}")
@@ -235,14 +242,6 @@ target_include_directories(
     PUBLIC ${PROJECT_SOURCE_DIR}/skyscraper
     PUBLIC ${PROJECT_SOURCE_DIR}/metadata
 )
-
-# --------------------------------------------------------------------------------------------------
-# skyscraper settings
-target_include_directories(
-    skyscraper PRIVATE ${CMAKE_SOURCE_DIR} ${CMAKE_SOURCE_DIR}/skyscraper
-                       ${CMAKE_SOURCE_DIR}/metadata
-)
-
 # --------------------------------------------------------------------------------------------------
 # ReLauncher settings (No settings needed)
 
@@ -253,7 +252,7 @@ target_compile_definitions(Heridium PRIVATE RENMS)
 target_include_directories(
     Heridium PUBLIC ${CMAKE_SOURCE_DIR}/skyscraper ${CMAKE_SOURCE_DIR}/renms
 )
-target_link_libraries(Heridium PRIVATE spdlog fmt PolyHook_2)
+target_link_libraries(Heridium PRIVATE spdlog fmt PolyHook_2 skyscraper)
 
 # ==================================================================================================
 # Launch target

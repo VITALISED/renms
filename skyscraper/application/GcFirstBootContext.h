@@ -18,16 +18,17 @@
 #pragma once
 
 #include <skyscraper.h>
+
 #include <atlas/WinHttpTask.h>
-#include <toolkit/simulation/TkSeed.h>
 #include <simulation/galaxy/GcGalaxyTypes.h>
+#include <toolkit/simulation/TkSeed.h>
 
 SKYSCRAPER_BEGIN
 
 struct SystemSeed
 {
-    unsigned __int64 mu64Hash1;
-    unsigned __int64 mu64Hash2;
+    uint64_t mu64Hash1;
+    uint64_t mu64Hash2;
 };
 
 class cGcFirstBootContext
@@ -46,8 +47,8 @@ class cGcFirstBootContext
     SystemSeed mSystemSeed;
     cTkSeed mStarSeed;
     cGcGalacticVoxelCoordinate mBootCoordinate;
-    int miDestinationIndex;
-    unsigned __int64 mResultSpawnUA;
+    int32_t miDestinationIndex;
+    uint64_t mResultSpawnUA;
 };
 
 SKYSCRAPER_END

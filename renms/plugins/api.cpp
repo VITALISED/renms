@@ -2,9 +2,9 @@
 #include <plugins/api.h>
 #include <polyhook2/Detour/x64Detour.hpp>
 
-uint64_t RENMS_API GetGcApplication()
+nms::cGcApplication *GetGcApplication()
 {
-    return reinterpret_cast<uint64_t>(renms::RelToAbsolute(GCAPPLICATION));
+    return reinterpret_cast<cGcApplication *>(renms::RelToAbsolute(GCAPPLICATION));
 }
 
 renmshook_t RENMS_API CreateHook(uint64_t lpTarget, uint64_t lpDetour, uint64_t lpTrampoline)
@@ -32,15 +32,3 @@ FnCastTo RENMS_API FnCast(void *fnToCast, FnCastTo)
 {
     return (FnCastTo)fnToCast;
 }
-
-// int BroadcastMessage(const cTkFixedString<1023, char> *lsMessageBody, bool lbSystemMessage)
-// {
-//     typedef int (*cGcTextChatManager__Say)(
-//         uint64_t thiscall, const nms::cTkFixedString<1023, char> *lsMessageBody, bool lbSystemMessage);
-
-//     cGcTextChatManager__Say lpSayFn =
-//         reinterpret_cast<cGcTextChatManager__Say>(renms::RelToAbsolute(GCTEXTCHATMANAGER_SAY));
-
-//     // TODO: gcapplication -> data -> gcnetworkmanager -> gctextchatmanager :dread:
-//     return lpSayFn(reinterpret_cast<uint64_t>(NULL), lsMessageBody, lbSystemMessage);
-// }

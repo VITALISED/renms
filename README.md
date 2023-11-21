@@ -2,9 +2,7 @@
 
 ## Overview
 
-renms is a No Man's Sky SDK toolchain. The goal of the project is to provide (eventual) cross platform modding support through hooking No Man's Sky's finite state machines (GcApplication for e.g).
-
-We provide various modules, right now the *dumper* project contains *Heridium*, our metadata class dumper along with an automated build chain to make use pretty straightforward. Along with this, *skyscraper* contains manually reversed classes and reimplementations of various No Man's Sky objects.
+renms is a No Man's Sky SDK featuring a top down (not yet complete, soontm) type framework for working with any NMS (or frankly Skyscraper in general if they ever use the engine again). Supports a Python scripting framework which you can use to run our stuff embedded or to use monkeyman's [NMS.py](https://github.com/monkeyman192/NMS.py) instead. If you're more technical and like messing around with memory in a real man's language we also have dynamic library loading supported too.
 
 ## Building
 
@@ -12,8 +10,19 @@ See [BUILD.md](docs/BUILD.md) for instructions.
 
 ## Development State
 
-Project is currently unfinished as of writing (about 2/3 roughly into reversing the entirety of GcApplication), if you're interested in developing for the platform or are a Mac/Console user who might want to help maintain a platform for their OS please get in touch! You can message us on Discord (either @vitalised or @tractorbeam).
+Project currently only builds for Fractal on GOG (for obvious reasons). Will be ported to OSX (yes I'll add archive mounting from FS) at some point eventually when I get my Mac's charging cable. Supporting future versions of NMS is planned sometime after the 2023 expected expedition redux missions.
 
-This is also based mostly off the Fractal debug build so even when we reach a working state there will be extra time needed to port to more modern versions.
+We mostly live unofficially in the [No Man's Sky Retro discord](https://discord.gg/tEYNuMmAvR) but please don't come here for tech support. Open an issue or message us on Discord directly at @vitalised or @tractorbeam
 
-### Quote the No Man's Sky developers back before Visions, "More to come."
+## Contributing / Plugin Dev
+
+Contributions are always welcome, there are more types in this engine than planets in the bloody game. We're also always down to support extra platforms too if you have the know-how as well.
+
+Documentation for plugins isn't planned for some time, mostly because it's too time consuming when there are so many types to reverse.
+
+If all this type cut-and-paste stuff is too boring for you to feel bothered to contribute to, we're also looking for shader-smart people to help reverse NMS' Horde3d shader parser. (see [this file](https://github.com/horde3d/Horde3D/blob/master/Horde3D/Source/Horde3DEngine/egShader.cpp#L495) for some context.)
+
+## Some useful links
+
+* [Horde3D](https://github.com/horde3d/Horde3D/)
+* [Somewhat recent NMS shader source](https://github.com/EthanRDoesMC/NMS-ShaderCode)

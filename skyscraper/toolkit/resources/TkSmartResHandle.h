@@ -18,14 +18,22 @@
 #pragma once
 
 #include <skyscraper.h>
+
 #include <toolkit/utilities/TkStrongType.h>
 
 SKYSCRAPER_BEGIN
 
 class cTkSmartResHandle
 {
-public:
-	TkStrongType<int, TkStrongTypeIDs::TkResHandleID> miInternalHandle;
+  public:
+    TkStrongType<int, TkStrongTypeIDs::TkResHandleID> miInternalHandle;
+};
+
+template <typename T>
+class cTkTypedSmartResHandle
+{
+    cTkSmartResHandle mHandle;
+    T *mpPointer;
 };
 
 SKYSCRAPER_END

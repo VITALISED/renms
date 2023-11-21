@@ -23,9 +23,12 @@ SKYSCRAPER_BEGIN
 
 template <typename T>
 class cTkLinearHashTableHash
-{ };
+{};
 
-template<typename K, typename V, typename H>
+struct cTkHashTableHashPassthrough
+{};
+
+template <typename K, typename V, typename H>
 class cTkLinearHashTable
 {
     class cTkListNode

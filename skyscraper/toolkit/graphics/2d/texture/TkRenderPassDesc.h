@@ -19,6 +19,8 @@
 
 #include <skyscraper.h>
 
+#include <vulkan/vulkan.h>
+
 SKYSCRAPER_BEGIN
 
 struct TkRenderPassDesc
@@ -28,7 +30,7 @@ struct TkRenderPassDesc
     VkAttachmentReference lDepthRef;
     VkSubpassDescription lSubpass;
     VkSubpassDependency lDepthBarrier;
-    struct VkImageView_T *lFbAttachments[16];
+    VkImageView_T *lFbAttachments[16];
     VkRenderPassCreateInfo lRenderPassInfo;
     VkFramebufferCreateInfo lFramebufInfo;
 };

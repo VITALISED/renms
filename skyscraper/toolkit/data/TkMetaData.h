@@ -19,7 +19,6 @@
 
 #include <skyscraper.h>
 
-#include <toolkit/attachments/TkHandle.h>
 #include <toolkit/data/TkClassPointer.h>
 #include <toolkit/data/TkMetaDataClasses.h>
 #include <toolkit/graphics/TkColour.h>
@@ -29,22 +28,30 @@
 #include <toolkit/resources/TkSmartResHandle.h>
 #include <toolkit/simulation/TkSeed.h>
 #include <toolkit/system/memory/pools/TkLinearMemoryPool.h>
+#include <toolkit/utilities/engine/TkEngineUtils.h>
 #include <toolkit/voxel/TkHalfVectors.h>
 
 SKYSCRAPER_BEGIN
 
-template <unsigned int uiSize>
+template <int32_t liSize>
 union TkID {
     TkID() {}
 
     TkID(const char *lpacString)
     {
         // uses hashes pretty sure, gonna have to figure out spookyhash later
-        strcpy_s(mChars, uiSize, lpacString);
+        strcpy_s(mChars, liSize, lpacString);
     }
 
-    char mChars[uiSize / 8];
-    unsigned __int64 mUInt64[uiSize / 64];
+    char mChars[liSize / 8];
+    uint64_t mUInt64[liSize / 64];
+};
+
+template <int32_t liSize>
+struct TkIDHashed
+{
+    TkID<liSize> mID;
+    uint64_t mHash;
 };
 
 class cTkMetaDataFunctionLookup

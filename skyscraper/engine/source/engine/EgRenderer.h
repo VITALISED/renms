@@ -23,12 +23,12 @@ SKYSCRAPER_BEGIN
 
 namespace EgRenderParity
 {
-    enum List
-    {
-        Single,
-        EvenRender,
-        OddRender,
-    };
-}
+enum List
+{
+    Single,
+    EvenRender,
+    OddRender,
+};
+} // namespace EgRenderParity
 
 SKYSCRAPER_END

@@ -18,45 +18,47 @@
 #pragma once
 
 #include <skyscraper.h>
-#include <toolkit/utilities/TkString.h>
-#include <toolkit/utilities/TkStrongType.h>
-#include <atomic>
-#include <toolkit/utilities/containers/TkVector.h>
-#include <set>
+
 #include <toolkit/resources/TkResourceDescriptor.h>
 #include <toolkit/resources/TkSmartResHandle.h>
+#include <toolkit/utilities/TkString.h>
+#include <toolkit/utilities/TkStrongType.h>
+#include <toolkit/utilities/containers/TkVector.h>
+
+#include <atomic>
+#include <set>
 
 SKYSCRAPER_BEGIN
 
 class cTkResource
 {
-    int miType;
+    int32_t miType;
     cTkFixedString<256, char> msName;
-    int mxFlags;
-    int mAsyncOpHandle;
-    TkStrongType<int, TkStrongTypeIDs::TkResHandleID> mHandle;
-	std::atomic<unsigned int> muRefCount;
-	std::atomic<bool> mbLoaded;
-	bool mbNoQuery;
-	bool mbError;
-	bool mbReplaceWithDefault;
-	bool mbLazyDelete;
-	bool mbPersistent;
-	cTkVector<TkStrongType<int, TkStrongTypeIDs::TkResHandleID> > mSubResources;
-	std::set<cTkSmartResHandle> mOwnedResources;
-	cTkResourceDescriptor mDescriptor;
-	unsigned __int16 muHotRequestNumber;
+    int32_t mxFlags;
+    int32_t mAsyncOpHandle;
+    TkStrongType<int32_t, TkStrongTypeIDs::TkResHandleID> mHandle;
+    std::atomic<uint32_t> muRefCount;
+    std::atomic<bool> mbLoaded;
+    bool mbNoQuery;
+    bool mbError;
+    bool mbReplaceWithDefault;
+    bool mbLazyDelete;
+    bool mbPersistent;
+    cTkVector<TkStrongType<int32_t, TkStrongTypeIDs::TkResHandleID>> mSubResources;
+    std::set<cTkSmartResHandle> mOwnedResources;
+    cTkResourceDescriptor mDescriptor;
+    uint16_t muHotRequestNumber;
 
-	virtual ~cTkResource();
-	virtual bool IsLoaded();
-	virtual void SetDescriptor(const cTkResourceDescriptor *lpDescriptor);
-	virtual int GetDataSize();
-	virtual bool OnResourceLoaded();
-	virtual unsigned int GetDeletionFrameDelay();
-	virtual cTkResource *Clone();
-	virtual void CloneInternal(const cTkResource *lpResource);
-	virtual void Release();
-	virtual bool Equals(const char *lpacName, const cTkResourceDescriptor *lpDescriptor, int liType);
+    virtual ~cTkResource();
+    virtual bool IsLoaded();
+    virtual void SetDescriptor(const cTkResourceDescriptor *lpDescriptor);
+    virtual int32_t GetDataSize()            = 0;
+    virtual bool OnResourceLoaded()          = 0;
+    virtual uint32_t GetDeletionFrameDelay() = 0;
+    virtual cTkResource *Clone()             = 0;
+    virtual void CloneInternal(const cTkResource *lpResource);
+    virtual void Release() = 0;
+    virtual bool Equals(const char *lpacName, const cTkResourceDescriptor *lpDescriptor, int32_t liType);
 };
 
 SKYSCRAPER_END

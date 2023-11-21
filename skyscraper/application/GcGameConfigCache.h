@@ -77,7 +77,7 @@ class cGcGameConfigCache
     bool mbSkipIntro;
     bool mbSkipPlanetDiscoverOnBoot;
     ePresetGameMode meNewSaveGameMode;
-    int miForceSaveSlot;
+    int32_t miForceSaveSlot;
     bool mbForceLatestSaveSlot;
     bool mbSpawnPirates;
     bool mbSpawnRobots;
@@ -89,9 +89,9 @@ class cGcGameConfigCache
     eSolarSystemBoot meSolarSystemBoot;
     eBootMode meBootMode;
     ePlayerSpawnLocationOverride mePlayerLocationOverride;
-    unsigned __int64 mMultiplayerUAOverride;
-    unsigned __int64 mUDAOverride[2];
-    unsigned __int64 mUAOverride;
+    uint64_t mMultiplayerUAOverride;
+    uint64_t mUDAOverride[2];
+    uint64_t mUAOverride;
 };
 
 SKYSCRAPER_END
