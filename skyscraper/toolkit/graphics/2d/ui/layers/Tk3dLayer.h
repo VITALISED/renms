@@ -18,31 +18,38 @@
 #pragma once
 
 #include <skyscraper.h>
+
 #include <toolkit/graphics/2d/ui/layers/Tk2dLayer.h>
+#include <toolkit/maths/geometry/TkPhysRelVec3.h>
 #include <toolkit/maths/numeric/generic/TkVector3Generic.h>
 
 SKYSCRAPER_BEGIN
 
 class cTk3dLayer : public cTk2dLayer
 {
-	enum eDepthTest
-	{
-		EDepthTest_None,
-		EDepthTest_Normal,
-		EDepthTest_Inverse,
-	};
+    enum eDepthTest
+    {
+        EDepthTest_None,
+        EDepthTest_Normal,
+        EDepthTest_Inverse,
+    };
 
-	cTkVector3 mWorldPosition;
-	cTkVector4 mScreenPosition;
-	cTkVector4 mScreenPositionLeft;
-	cTkVector4 mScreenPositionRight;
-	float mfScreenDepth;
-	float mfDefaultDistToCamera;
-	float mfMinScale;
-	float mfMaxScale;
-	cTk3dLayer::eDepthTest meTestZ;
-	bool mbEnable3d;
-	bool mbScale3d;
+    cTkVector3 mWorldPosition;
+    cTkVector4 mScreenPosition;
+    cTkVector4 mScreenPositionLeft;
+    cTkVector4 mScreenPositionRight;
+    float mfScreenDepth;
+    float mfDefaultDistToCamera;
+    float mfMinScale;
+    float mfMaxScale;
+    cTk3dLayer::eDepthTest meTestZ;
+    bool mbEnable3d;
+    bool mbScale3d;
+
+    virtual void ConstructDynamicSize(const cTkVector3 *, const cTkVector2 *);
+    virtual void Construct(const cTkVector3 *, const cTkVector2 *, const cTkVector2 *);
+    virtual void SetPosition(const cTkPhysRelVec3 *);
+    virtual void SetPosition(const cTkVector3 *);
 };
 
 SKYSCRAPER_END

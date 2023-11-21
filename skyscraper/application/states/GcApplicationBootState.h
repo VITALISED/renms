@@ -17,14 +17,21 @@
 
 #pragma once
 
-#include <application/states/GcApplicationState.h>
 #include <skyscraper.h>
+
+#include <application/states/GcApplicationState.h>
 
 SKYSCRAPER_BEGIN
 
 class cGcApplicationBootState : public cGcApplicationState
 {
-    VFT<8> *__vftable;
+  public:
+    void Construct();
+    void Destruct();
+    void Prepare(cTkFSMState *, const void *);
+    void Update(float);
+    void Release(cTkFSMState *, const void *);
+    void Render();
 };
 
 SKYSCRAPER_END

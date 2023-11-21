@@ -19,23 +19,26 @@
 
 #include <skyscraper.h>
 
-#include <toolkit/system/memory/TkMemoryManager.h>
+#include <graphics/ngui/GcNGuiElement.h>
+
+#include <graphics/ngui/metadata/gcnguigraphicdata.meta.h>
 
 SKYSCRAPER_BEGIN
 
-namespace TkIDUnorderedMap
+class cGcNGuiGraphic : public cGcNGuiElement
 {
-struct Hash128
-{};
+  public:
+    cGcNGuiGraphicData *mpGraphicData;
+    cTkNGuiGraphicStyleData mPreviousGraphicsStyle;
 
-struct Hash256
-{};
-} // namespace TkIDUnorderedMap
-
-template <
-    class Key, class T, class Hash = std::hash<Key>, class KeyEqual = std::equal_to<Key>,
-    class Allocator = TkSTLAllocatorShim<std::pair<const Key, T>>>
-class cTkUnorderedMap : public std::unordered_map<T, TkSTLAllocatorShim<T>>
-{};
+    ~cGcNGuiGraphic();
+    void Render();
+    int GetType() { return NULL; }
+    void EditElement();
+    bool SelectableInEditor();
+    void AttachMetadata(cTkClassPointer *);
+    eNGuiEditorIcons GetSceneTreeIcon();
+    void GetSceneTreeText(cTkFixedString<128, char> *);
+};
 
 SKYSCRAPER_END

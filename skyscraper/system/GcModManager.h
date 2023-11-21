@@ -21,26 +21,40 @@
 
 #include <toolkit/utilities/TkString.h>
 
+#include <gamestate/gcmodsettingsinfo.meta.h>
+
 SKYSCRAPER_BEGIN
 
-class cTkNGuiUndoable
+// this class is pretty cool actually
+class cGcModManager
 {
-    virtual ~cTkNGuiUndoable();
-    virtual void Undo();
-    virtual void Do();
-    virtual bool End();
-    virtual void GetData();
-    virtual const char ToString();
-    virtual unsigned int Icon();
-    cTkFixedString<64, char> mDescription;
-};
+  public:
+    enum eModState
+    {
+        EModState_Installed,
+        EModState_NotCached,
+        EModState_Downloading,
+        EModState_NeedsUpdate,
+        EModState_MissingDependencies,
+        EModState_Unavailable,
+    };
 
-template <typename T>
-class cTkNGuiTypeUndoable : public cTkNGuiUndoable
-{
-    T mFrom;
-    T mTo;
-    T *mpValue;
+    struct ModInfo
+    {
+        cGcModSettingsInfo mSavedData;
+        cTkFixedString<1024, char> mThumbailPath;
+        cTkFixedString<256, char> mMountPath;
+        int miOverlayID;
+        cGcModManager::eModState meState;
+        bool mbActive;
+        bool mbHasGlobals;
+        bool mbHasBaseParts;
+        bool mbHasLoc;
+        bool mbNeedsMounting;
+        bool mbWorkshopMod;
+        bool mbSubscribedInWorkshop;
+        bool mbUsesCustomSaveDir;
+    };
 };
 
 SKYSCRAPER_END

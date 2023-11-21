@@ -32,6 +32,8 @@ std::string HeridiumCXXFile::DoEnumLookup(cTkMetaDataMember *lpCurrentMember)
 {
     HM_BEGIN_BUFFER;
 
+    HM_NAMESPACE_BEGIN;
+
     HM_ENUM_BEGIN(lpCurrentMember->mpacName);
 
     for (int i = 0; i < lpCurrentMember->miNumEnumMembers; i++)
@@ -42,12 +44,16 @@ std::string HeridiumCXXFile::DoEnumLookup(cTkMetaDataMember *lpCurrentMember)
 
     HM_ENUM_END;
 
+    HM_NAMESPACE_END;
+
     return HM_BUFFER;
 }
 
 std::string HeridiumCXXFile::DoFlagLookup(cTkMetaDataMember *lpCurrentMember)
 {
     HM_BEGIN_BUFFER;
+
+    HM_NAMESPACE_BEGIN;
 
     HM_FLAG_BEGIN(lpCurrentMember->mpacName);
 
@@ -61,6 +67,8 @@ std::string HeridiumCXXFile::DoFlagLookup(cTkMetaDataMember *lpCurrentMember)
     }
 
     HM_FLAG_END;
+
+    HM_NAMESPACE_END;
 
     return HM_BUFFER;
 }
@@ -144,6 +152,8 @@ void HeridiumCXXFile::WriteHeaderFile()
     HM_PRELUDE;
 
     HM_PUSHSTRING(this->DoHeaderFirstPass());
+
+    HM_NAMESPACE_BEGIN;
 
     HM_CLASS_BEGIN(this->mpMetaDataClass->mpacName);
 
@@ -250,6 +260,8 @@ void HeridiumCXXFile::WriteHeaderFile()
     }
 
     HM_CLASS_END;
+
+    HM_NAMESPACE_END;
 
     const char *lFinal = HM_BUFFER_CSTR;
 

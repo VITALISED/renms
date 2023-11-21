@@ -17,12 +17,18 @@
 
 #pragma once
 
-#include <toolkit/graphics/ngui/TkNGuiUndoable.h>
+#include <skyscraper.h>
 
-template <typename T>
-class cTkNGuiTypeUndoable : public cTkNGuiUndoable
+SKYSCRAPER_BEGIN
+
+enum ePunctuationDelays
 {
-    T mFrom;
-    T mTo;
-    T *mpValue;
+    EPunctuationDelays_Default,
+    EPunctuationDelays_Gek,
+    EPunctuationDelays_Korvax,
+    EPunctuationDelays_Vykeen,
+    EPunctuationDelays_FourthRace,
+    EPunctuationDelays_NumTypes,
 };
+
+SKYSCRAPER_END

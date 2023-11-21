@@ -252,7 +252,7 @@ target_compile_definitions(Heridium PRIVATE RENMS)
 target_include_directories(
     Heridium PUBLIC ${CMAKE_SOURCE_DIR}/skyscraper ${CMAKE_SOURCE_DIR}/renms
 )
-target_link_libraries(Heridium PRIVATE spdlog fmt PolyHook_2 skyscraper)
+target_link_libraries(Heridium PRIVATE spdlog fmt PolyHook_2)
 
 # ==================================================================================================
 # Launch target

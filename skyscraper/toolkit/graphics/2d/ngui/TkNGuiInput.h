@@ -19,9 +19,9 @@
 
 #include <skyscraper.h>
 
-#include <graphics/ngui/NGuiInputType.h>
 #include <toolkit/graphics/2d/ngui/TkNGuiDraggable.h>
 #include <toolkit/graphics/2d/ngui/TkNGuiElementID.h>
+#include <toolkit/maths/numeric/generic/TkVector2Generic.h>
 #include <toolkit/utilities/containers/TkVector.h>
 
 SKYSCRAPER_BEGIN
@@ -51,6 +51,15 @@ enum eNGuiInputType
     eInput_RightClick      = 4,
 };
 
+struct ScrollBarState
+{
+    int32_t miNumEntries;
+    int32_t miCurrentStartIndex;
+    int32_t miEntriesPerPage;
+    cTkVector2 mfLastSeenPos;
+    cTkVector2 mfLastSeenSize;
+};
+
 class cTkNGuiInput
 {
     bool mbControlHeld;
@@ -77,12 +86,12 @@ class cTkNGuiInput
     bool mbPadOnly;
     cTkVector<std::pair<cTkNGuiElementID, eNGuiInputType>> maElementsPressed;
     cTkVector<std::pair<cTkNGuiElementID, eNGuiInputType>> maElementsPressed2;
-    int KeyMap[19];
+    int32_t KeyMap[19];
     bool KeyCtrl;
     bool KeyShift;
     bool KeyAlt;
     bool maKeysDown[512];
-    char maInputCharacters[17];
+    int8_t maInputCharacters[17];
     bool mbPadActive;
     ITkNGuiDraggable *mpDragObject;
 };

@@ -2,7 +2,7 @@
 
 ## Overview
 
-renms is a No Man's Sky SDK featuring a top down (not yet complete, soontm) type framework for working with any NMS (or frankly Skyscraper in general if they ever use the engine again). Supports a Python scripting framework which you can use to run our stuff embedded or to use monkeyman's [NMS.py](https://github.com/monkeyman192/NMS.py) instead. If you're more technical and like messing around with memory in a real man's language we also have dynamic library loading supported too.
+renms is a No Man's Sky SDK featuring a top down (not yet complete, soontm) type framework for working with NMS (or frankly Skyscraper in general if they ever use the engine again). Supports a Python scripting framework which you can use to run our stuff embedded or to use monkeyman's [NMS.py](https://github.com/monkeyman192/NMS.py) instead. If you're more technical and like messing around with memory in a real man's language we also have dynamic library loading supported too.
 
 ## Building
 

@@ -17,20 +17,22 @@
 
 #pragma once
 
-#include <application/states/GcApplicationState.h>
-#include <gamestate/gcinventoryelement.meta.h>
-#include <graphics/ngui/GcNGui.h>
 #include <skyscraper.h>
+
+#include <application/states/GcApplicationState.h>
+#include <graphics/ngui/GcNGuiManager.h>
 #include <toolkit/utilities/TkStrongType.h>
 #include <toolkit/utilities/containers/TkVector.h>
+
+#include <gamestate/gcinventoryelement.meta.h>
 
 SKYSCRAPER_BEGIN
 
 class cGcApplicationDeathState : public cGcApplicationState
 {
+  public:
     typedef cGcAsyncLoadOps::Operation Phase;
 
-    VFT<8> *__vftable;
     TkStrongType<int, TkStrongTypeIDs::TkResHandleID> mPipelineResource;
     cTkVector<bool> maPreviousPipelineStageState;
     cTkFixedString<512, char> mDeathQuote;
@@ -54,6 +56,13 @@ class cGcApplicationDeathState : public cGcApplicationState
     bool mbPlayerCrashingOnPlanetFromShip;
     bool mbPlayerWasInAbandonedFreighter;
     bool mbFirstUpdate;
+
+    ~cGcApplicationDeathState();
+    void Construct();
+    void Prepare(cTkFSMState *, const void *);
+    void Update(float);
+    void Release(cTkFSMState *, const void *);
+    void Render(EgRenderParity::List);
 };
 
 SKYSCRAPER_END
