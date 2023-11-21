@@ -39,6 +39,16 @@ endif()
 # ==================================================================================================
 # First checks.
 
+# Check if this is being added as a subdirectory.
+if(NOT CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
+    message(
+        FATAL_ERROR
+"renms is not meant to be added as a subdirectory! Unfortunately, you'll have to \
+stick with copying your project into renms's renms/plugins folder to build. Sorry for \
+the inconvenience!"
+    )
+endif()
+
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     add_definitions(-DDEBUG -D_DEBUG)
 endif()
