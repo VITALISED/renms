@@ -37,7 +37,7 @@ struct FloatLimits
 
 class cTkMetaDataEnumLookup
 {
-public:
+  public:
     __int64 miValue;
     const char *mpacName;
 };
@@ -46,7 +46,7 @@ class cTkMetaDataClass;
 
 class cTkMetaDataMember
 {
-public:
+  public:
     enum eType
     {
         EType_Unspecified,
@@ -111,7 +111,7 @@ public:
 
 class cTkMetaDataClass
 {
-public:
+  public:
     const char *mpacName;
     const unsigned __int64 muNameHash;
     const unsigned __int64 muTemplateHash;

@@ -1,40 +1,45 @@
 #include <core/config.h>
-#include <inicpp.h>
-using namespace std::filesystem;
-using namespace renms::config;
 
 RENMS_BEGIN
 
-//Defaults
-bool config::bShowWarning = true;
+bool config::gShouldShowWarning       = true;
+PluginManager *config::gPluginManager = NULL;
 
-void config::init()
+void config::Init()
 {
-    path nmsPath          = current_path();
-    path settingsFilePath = nmsPath / "RENMS/settings.ini";
-    std::ifstream settingsIniFile(settingsFilePath);
-
-    if (!settingsIniFile.good())
-    {
-        generate(settingsFilePath);
-        spdlog::warn("No config found, one has been generated at {}", settingsFilePath.string());
-        return;
-    } else
-    {
-        spdlog::info("Config found at {}", settingsFilePath.string());
-    }
-
+    fs::path lNNSPath          = fs::current_path();
+    fs::path lSettingsFilePath = lNNSPath / "RENMS/settings.ini";
+    std::ifstream lSettingsIniFile(lSettingsFilePath);
     ini::IniFile pluginIni;
-    pluginIni.decode(settingsIniFile);
+
+    bool lbCreatePluginManager = true;
+
+    if (!lSettingsIniFile.good())
+    {
+        Generate(lSettingsFilePath);
+        spdlog::warn("No config found, one has been generated at {}", lSettingsFilePath.string());
+        return;
+    }
+    else { spdlog::info("Config found at {}", lSettingsFilePath.string()); }
+
+    pluginIni.decode(lSettingsIniFile);
 
     if (pluginIni["settings"].contains("show_warning"))
-        bShowWarning = pluginIni["settings"]["show_warning"].as<bool>();
+        gShouldShowWarning = pluginIni["settings"]["show_warning"].as<bool>();
+
+    if (pluginIni["settings"].contains("disable_plugins")) lbCreatePluginManager = false;
+
+    if (lbCreatePluginManager) { gPluginManager = new PluginManager(); }
 }
 
-void config::generate(path configPath)
+void config::Generate(path configPath)
 {
     ini::IniFile pluginIni;
-    pluginIni["settings"]["show_warning"] = bShowWarning;
+
+    // Defaults
+
+    pluginIni["settings"]["show_warning"]    = true;
+    pluginIni["settings"]["disable_plugins"] = false;
 
     std::ofstream settingsIniFile(configPath);
     pluginIni.encode(settingsIniFile);

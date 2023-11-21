@@ -18,7 +18,9 @@
 #pragma once
 
 #include <skyscraper.h>
+
 #include <toolkit/graphics/2d/texture/TkRenderPassDesc.h>
+#include <vulkan/vulkan.h>
 
 SKYSCRAPER_BEGIN
 
@@ -26,14 +28,14 @@ class cTkGnmxContext
 {
     TkRenderPassDesc mRenderPassDesc;
     VkRenderPassBeginInfo mBeginPassInfo;
-    struct VkRenderPass_T *mCurrentRenderPass;
-    struct VkFramebuffer_T *mCurrentFramebuffer;
+    VkRenderPass_T *mCurrentRenderPass;
+    VkFramebuffer_T *mCurrentFramebuffer;
     cTkGnmxContext *mpParentContext;
     VkClearValue mClears[16];
     bool mbClearQueued;
-    struct VkCommandBuffer_T *mCommandList;
-    struct VkCommandPool_T *mCommandAllocator;
-    unsigned int mCommandListType;
+    VkCommandBuffer_T *mCommandList;
+    VkCommandPool_T *mCommandAllocator;
+    uint32_t mCommandListType;
     bool mbRootSigSet;
     bool mbInitialStateSet;
     bool mbCommandListOpen;

@@ -18,8 +18,10 @@
 #pragma once
 
 #include <skyscraper.h>
-#include <metadata/toolkit/scene/materials/tkmaterialsampler.meta.h>
+
 #include <toolkit/graphics/2d/texture/TkTextureStreamFuncs.h>
+
+#include <metadata/toolkit/scene/materials/tkmaterialsampler.meta.h>
 
 SKYSCRAPER_BEGIN
 
@@ -42,7 +44,7 @@ enum eTkTextureReductionMode
 
 class cTkTextureBase
 {
-public:
+  public:
     enum eTexFormat
     {
         Unknown,
@@ -99,28 +101,28 @@ public:
     eTkTextureReductionMode meTextureReductionMode;
     bool mbIsSRGB;
     bool mbIsShadowMap;
-    int miWidth;
-    int miHeight;
-    int miDepth;
-    __int16 miNumMips;
-    __int16 miAnisotropy;
-    int miDataSize;
-    int miMemorySize;
-    __int16 miMipStatsCounterIndex[4];
-    int miFinestResidentPixelCount;
-    int miFinestMipVisible;
-    int miNumClampedPixels;
-    int miLastFetchedFrame;
-    int miFileStartOffset;
+    int32_t miWidth;
+    int32_t miHeight;
+    int32_t miDepth;
+    int16_t miNumMips;
+    int16_t miAnisotropy;
+    int32_t miDataSize;
+    int32_t miMemorySize;
+    int16_t miMipStatsCounterIndex[4];
+    int32_t miFinestResidentPixelCount;
+    int32_t miFinestMipVisible;
+    int32_t miNumClampedPixels;
+    int32_t miLastFetchedFrame;
+    int32_t miFileStartOffset;
     const cTkTextureStreamFuncs *mpStreamFuncs;
     void *mStreamFuncContext;
-    int miMipZeroSize;
-    int miEvictedSize;
-    __int16 miEvictableMips;
-    __int16 miEvictedMips;
+    int32_t miMipZeroSize;
+    int32_t miEvictedSize;
+    int16_t miEvictableMips;
+    int16_t miEvictedMips;
     bool mbAllocatedFromStreamingStore;
     bool mbAllocatedWithMipBias;
-    unsigned __int8 miEvictionCountdown;
+    uint8_t miEvictionCountdown;
 };
 
 SKYSCRAPER_END

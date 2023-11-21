@@ -18,6 +18,7 @@
 #pragma once
 
 #include <skyscraper.h>
+
 #include <toolkit/graphics/2d/texture/TkTextureBase.h>
 #include <toolkit/graphics/2d/texture/vulkan/TkDeviceMemory.h>
 
@@ -26,28 +27,28 @@ SKYSCRAPER_BEGIN
 class cTkTexture : public cTkTextureBase
 {
     void *mpTextureData;
-    struct VkImage_T *mTexture;
+    VkImage_T *mTexture;
     VkImageCreateInfo mImageDesc;
     TkDeviceMemory mTextureMemory;
-    struct VkImageView_T *maTextureSrvMips[14];
+    VkImageView_T *maTextureSrvMips[14];
     VkImageLayout maResourceState[14];
     bool mbDepthOnly;
-    struct VkImageView_T *muTextureSrv;
-    struct VkImageView_T *muTextureUav;
-    struct VkSampler_T *muSampler;
+    VkImageView_T *muTextureSrv;
+    VkImageView_T *muTextureUav;
+    VkSampler_T *muSampler;
     float mfLodClamp;
-    unsigned __int16 *mMapping;
-    unsigned __int16 mEvictableMipPageCount[16];
-    unsigned __int16 mMipStartPage[16];
-    unsigned __int64 mTailOffset;
-    unsigned __int64 mTailArrayStride;
-    unsigned __int16 miUltraMips;
-    unsigned __int16 miDetailableMips;
+    uint16_t *mMapping;
+    uint16_t mEvictableMipPageCount[16];
+    uint16_t mMipStartPage[16];
+    uint64_t mTailOffset;
+    uint64_t mTailArrayStride;
+    uint16_t miUltraMips;
+    uint16_t miDetailableMips;
     float mfLodBias;
-    int miNumPages;
-    int miEvictedPages;
-    __int16 miMipZeroPages;
-    __int16 miMipZeroUnusedPages;
+    int32_t miNumPages;
+    int32_t miEvictedPages;
+    int16_t miMipZeroPages;
+    int16_t miMipZeroUnusedPages;
     bool mbIsPartiallyResident;
 };
 

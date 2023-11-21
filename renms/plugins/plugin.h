@@ -17,31 +17,26 @@
 
 #pragma once
 
-#include <filesystem>
-#include <inicpp.h>
-#include <plugins/api.h>
 #include <renms.h>
-#include <string>
+
+#include <plugins/api.h>
+#include <scripts/python.h>
+
+#define PLUGIN_EXT "plugin.dll"
 
 RENMS_BEGIN
 
-class PluginTemplate
+class Plugin
 {
   public:
-    std::string mpacDisplayName;
-    std::string mpacAuthor;
-    std::string mpacDescription;
-};
+    std::string msDisplayName;
+    std::string msAuthor;
+    std::string msDescription;
+    fs::path mPluginPath;
 
-class PluginManager
-{
-  public:
-    std::vector<void *> mPluginList;
-
-    PluginManager();
-    void Load(std::filesystem::path PluginPath);
-    void Unload(std::filesystem::path PluginPath);
-    void Reload(std::filesystem::path PluginPath);
+    Plugin(std::string lsDisplayName, std::string lsAuthor, std::string lsDescription, fs::path lPluginPath);
+    void LoadExecutable();
+    void LoadScripts();
 };
 
 RENMS_END

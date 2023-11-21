@@ -18,27 +18,23 @@
 #pragma once
 
 #include <skyscraper.h>
+
 #include <toolkit/utilities/TkArray.h>
 
 SKYSCRAPER_BEGIN
 
-template <unsigned int size, typename T>
+template <int liSize, typename T>
 class cTkFixedString
 {
-public:
-	cTkFixedString()
-    { };
-
-	cTkFixedString(const char *lpacBuffer)
-	{
-		this->Copy(lpacBuffer);
-	}
-
-	void Copy(const char *lpacBuffer);
-	T macBuffer[size];
+  public:
+    cTkFixedString() {}
+    cTkFixedString(const char *lpacBuffer) { this->Copy(lpacBuffer); }
+    void Copy(const char *lpacBuffer) { strcpy_s(macBuffer, liSize, lpacBuffer); }
+    T macBuffer[liSize];
 };
 
 class cTkDynamicString : public cTkDynamicArray<char>
-{ };
+{
+};
 
 SKYSCRAPER_END

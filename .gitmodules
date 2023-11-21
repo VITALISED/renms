@@ -28,3 +28,9 @@
 [submodule "submodules/stb"]
 	path = submodules/stb
 	url = https://github.com/nothings/stb.git
+[submodule "submodules/rang"]
+	path = submodules/rang
+	url = https://github.com/agauniyal/rang.git
+[submodule "submodules/pybind11"]
+	path = submodules/pybind11
+	url = https://github.com/pybind/pybind11.git

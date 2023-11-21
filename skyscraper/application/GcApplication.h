@@ -21,23 +21,20 @@
 
 #include <application/GcFirstBootContext.h>
 #include <application/GcGameConfigCache.h>
-#include <application/states/GcApplicationAmbientGameState.h>
-#include <application/states/GcApplicationBootState.h>
-#include <application/states/GcApplicationCoreServicesState.h>
-#include <application/states/GcApplicationDeathState.h>
-#include <application/states/GcApplicationGalacticMapState.h>
-#include <application/states/GcApplicationGameModeSelectorState.h>
-#include <application/states/GcApplicationGlobalLoadState.h>
-#include <application/states/GcApplicationLocalLoadState.h>
-#include <application/states/GcApplicationScratchpadState.h>
-#include <application/states/GcApplicationShutdownState.h>
-#include <application/states/GcApplicationSimulationState.h>
-#include <application/states/GcApplicationSmokeTestState.h>
-#include <application/states/GcApplicationTitleScreenState.h>
-#include <application/states/GcApplicationUGCBaseViewerState.h>
-//#include <gamestate/GcGameState.h>
-#include <reality/GcRealityManager.h>
-#include <simulation/GcSimulation.h>
+// #include <application/states/GcApplicationAmbientGameState.h>
+// #include <application/states/GcApplicationBootState.h>
+// #include <application/states/GcApplicationCoreServicesState.h>
+// #include <application/states/GcApplicationDeathState.h>
+// #include <application/states/GcApplicationGalacticMapState.h>
+// #include <application/states/GcApplicationGameModeSelectorState.h>
+// #include <application/states/GcApplicationGlobalLoadState.h>
+// #include <application/states/GcApplicationLocalLoadState.h>
+// #include <application/states/GcApplicationScratchpadState.h>
+// #include <application/states/GcApplicationShutdownState.h>
+// #include <application/states/GcApplicationSimulationState.h>
+// #include <application/states/GcApplicationSmokeTestState.h>
+// #include <application/states/GcApplicationTitleScreenState.h>
+// #include <application/states/GcApplicationUGCBaseViewerState.h>
 #include <toolkit/maths/utilities/spatial/TkSampleDistribution.h>
 #include <toolkit/system/TkCSMutex.h>
 #include <toolkit/system/timer/TkStopwatch.h>
@@ -51,13 +48,11 @@ SKYSCRAPER_BEGIN
 
 class cGcApplication : public cTkFSM
 {
-    VFT<5> *__vftable;
-
     struct Data
     {
-        cGcFirstBootContext mFirstBootContext;
-        cTkMcQmcLFSRStore mTkMcQmcLFSRStore;
-        cGcRealityManager mRealityManager;
+        // cGcFirstBootContext mFirstBootContext;
+        // cTkMcQmcLFSRStore mTkMcQmcLFSRStore;
+        // cGcRealityManager mRealityManager;
         // cGcGameState mGameState;
         // cGcSeasonalData mSeasonalData;
         // cGcSimulation mSimulation;
@@ -80,10 +75,11 @@ class cGcApplication : public cTkFSM
         // cGcGalaxyMap mGalaxyMap;
         // cGcGameAnalytics mGameAnalytics;
         // cGcActivitiesTracker mActivitiesTracker;
+        uintptr_t stubby;
     };
 
     cGcApplication::Data *mpData;
-    unsigned int muPlayerSaveSlot;
+    uint32_t muPlayerSaveSlot;
     ePresetGameMode meGameMode;
     ePresetGameMode meSeasonalGameMode;
     bool mbSavingEnabled;
@@ -92,21 +88,21 @@ class cGcApplication : public cTkFSM
     cTkStopwatch mRenderTimer;
     long double mLastRenderTimeMS;
     long double mfStartTime;
-    int miLoadBalancingTimeout;
-    cGcApplicationBootState mApplicationBootState;
-    cGcApplicationCoreServicesState mApplicationCoreServicesState;
-    cGcApplicationGlobalLoadState mApplicationGlobalLoadState;
-    cGcApplicationLocalLoadState mApplicationLocalLoadState;
-    cGcApplicationSimulationState mApplicationSimulationState;
-    cGcApplicationShutdownState mApplicationShutdownState;
-    cGcApplicationGalacticMapState mApplicationGalacticMapState;
-    cGcApplicationSmokeTestState mApplicationSmokeTestState;
-    cGcApplicationAmbientGameState mApplicationAmbientGameState;
-    cGcApplicationDeathState mApplicationDeathState;
-    cGcApplicationScratchpadState mApplicationScratchpadState;
-    cGcApplicationGameModeSelectorState mApplicationGameModeSelectorState;
-    cGcApplicationTitleScreenState mApplicationTitleScreenState;
-    cGcApplicationUGCBaseViewerState mApplicationUGCBaseViewerState;
+    int32_t miLoadBalancingTimeout;
+    // cGcApplicationBootState mApplicationBootState;
+    // cGcApplicationCoreServicesState mApplicationCoreServicesState;
+    // cGcApplicationGlobalLoadState mApplicationGlobalLoadState;
+    // cGcApplicationLocalLoadState mApplicationLocalLoadState;
+    // cGcApplicationSimulationState mApplicationSimulationState;
+    // cGcApplicationShutdownState mApplicationShutdownState;
+    // cGcApplicationGalacticMapState mApplicationGalacticMapState;
+    // cGcApplicationSmokeTestState mApplicationSmokeTestState;
+    // cGcApplicationAmbientGameState mApplicationAmbientGameState;
+    // cGcApplicationDeathState mApplicationDeathState;
+    // cGcApplicationScratchpadState mApplicationScratchpadState;
+    // cGcApplicationGameModeSelectorState mApplicationGameModeSelectorState;
+    // cGcApplicationTitleScreenState mApplicationTitleScreenState;
+    // cGcApplicationUGCBaseViewerState mApplicationUGCBaseViewerState;
     float mfResetVRCameraTimer;
     bool mbPaused;
     bool mbTkPaused;
@@ -118,6 +114,13 @@ class cGcApplication : public cTkFSM
     bool mResumeFromSuspendSave;
     cTkVector<cTkFixedString<128, char>> mAssertMessage;
     cTkCSMutex mAssertMessageLock;
+
+    ~cGcApplication();
+    void Construct();
+    void Update();
+    void Destruct();
+    void StatePrepare(cTkFSMState *, const void *);
+    void StateRelease(cTkFSMState *, const void *);
 };
 
 SKYSCRAPER_END

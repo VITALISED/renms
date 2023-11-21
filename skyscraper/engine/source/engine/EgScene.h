@@ -19,15 +19,17 @@
 
 #include <skyscraper.h>
 
-#include <toolkit/attachments/TkHandle.h>
+#include <engine/source/engine/EgGeometry.h>
+#include <engine/source/engine/EgMaterial.h>
+#include <toolkit/maths/geometry/TkAABB.h>
 #include <toolkit/resources/TkResourceDescriptor.h>
 #include <toolkit/resources/TkSmartResHandle.h>
 #include <toolkit/system/memory/TkRefCounted.h>
 #include <toolkit/utilities/containers/TkVector.h>
-
-#include <string>
+#include <toolkit/utilities/engine/TkEngineUtils.h>
 
 #include <toolkit/attachments/tkattachmentdata.meta.h>
+#include <toolkit/scene/tkscenenodeattributedata.meta.h>
 
 SKYSCRAPER_BEGIN
 
@@ -42,12 +44,12 @@ class cEgNodeAttachment
     TkHandle mNode;
 
     virtual ~cEgNodeAttachment();
-    virtual void OnUpdate();
+    virtual void OnUpdate() = 0;
 };
 
 class cEgSceneNode
 {
-    VFT<22> *__vftable;
+  public:
     TkHandle mLookupHandle;
     unsigned int muNameHash;
     cTkSmartResHandle mResHandle;
@@ -57,11 +59,48 @@ class cEgSceneNode
     cEgNodeAttachment *mpNodeAttachment;
     cTkSlotAlloc *mpAllocator;
     int miIsMaster;
+
+    virtual ~cEgSceneNode();
+    virtual void ParseRefAttrib(cTkSceneNodeAttributeData *);
+    virtual int GetParameterInt(int);
+    virtual void SetParameterInt(int, int);
+    virtual float GetParameterFloat(int, int);
+    virtual void SetParameterFloat(int, int, float);
+    virtual cTkVector3 *GetParameterVec3(cTkVector3 *result, int, int);
+    virtual void SetParameterVec3(int, int, const cTkVector3 *);
+    virtual const char *GetParameterStr(int);
+    virtual void SetParameterStr(int, const char *);
+    virtual void GetVisibleBBox(cEgBoundingBox *);
+    virtual unsigned int CalculateLodLevel(const cTkVector3 *);
+    virtual bool CanAttach(cEgSceneNode *);
+    virtual bool CheckIntersection(const cTkVector3 *, const cTkVector3 *, cTkVector3 *);
+    virtual int GetClassOverride();
+    virtual void Update();
+    virtual bool PreAsyncUpdate();
+    virtual void AsyncUpdate();
+    virtual void PostAsyncUpdate();
+    virtual void OnAttach(cEgSceneNode *);
+    virtual void OnDetach(cEgSceneNode *);
+    virtual void PreTransferRenderData();
+    virtual void OnDetachInstanceAware(cEgSceneNode *);
+};
+
+class cEgModelNode;
+
+class cEgRenderableSceneNode : public cEgSceneNode
+{
+  public:
+    cTkTypedSmartResHandle<cEgMaterialResource> mpMaterialResource;
+    cEgModelNode *mpParentModel;
+    int miRenderLayer;
+
+    virtual ~cEgRenderableSceneNode();
+    virtual void OnAttach(cEgSceneNode *);
+    virtual void OnDetach(cEgSceneNode *);
 };
 
 class cEgSceneNodeTemplate
 {
-    VFT<7> *__vftable;
     int miType;
     unsigned int muNameHash;
     cTkSharedPtr<std::string> msName;
@@ -73,6 +112,15 @@ class cEgSceneNodeTemplate
     cEgSceneNode *mpParent;
     TkHandle mHandle;
     cTkVector<cEgSceneNodeTemplate *> mChildren;
+
+    virtual ~cEgSceneNodeTemplate();
+    virtual void SetName(const char *);
+    virtual void GatherMaterials(cTkVector<TkStrongType<int, TkStrongTypeIDs::TkResHandleID>> *);
+    virtual void GatherData(cTkVector<cTkAttachmentData *> *);
+    virtual cTkAABB *GetBoundingBox(
+        cTkAABB *result, const cTkResourceDescriptor *, cEgGeometryResource *, const cTkMatrix34 *, bool, bool);
+    virtual bool IsGeometryStreamedIn(cEgGeometryResource *, cEgResource *);
+    virtual bool IsLoaded();
 };
 
 SKYSCRAPER_END

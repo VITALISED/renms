@@ -4,6 +4,8 @@
 
 This is really easy. See the `config-template.cmake`? Copy it into a file called `config.cmake`, and change any values you think need changed (at the very least NMS_EXE_PATH must be changed). Then sync the submodules, configure, and build. If it's in the shell:
 
+You'll also need a copy of Python 3 on path for pybind11.
+
 ```sh
 mkdir build && cd build
 cmake ..
@@ -34,7 +36,7 @@ cmake ..
 
 ### Dependencies
 
-All this requires is Cmake, a build system (like Ninja or Gnu Make), and your choice of C/C++ compiler flavour. Everything else is managed by cmake.
+All this requires is Cmake, Python 3, a build system (like Ninja or Gnu Make), and your choice of C/C++ compiler flavour. Everything else is managed by cmake.
 
 ## Compiling
 
@@ -48,6 +50,6 @@ This is why we use cmake. After all of this is done and generated, this is the e
 
 ### "Why does it need to know where No Man's Sky is?"
 
-It's not your average run-of-the-mill build process. Due to the immense number of classes (>2000) it's difficult to track them without bogging the repo down (along with the various potential legal repurcussions of shipping stripped code directly from the exe). Luckily, the extraction and building of these headers can be automagically pulled from No Man's Sky using Heridium by attaching it to the running executable and extracting them all when it loads. Even better, this all happens at compile time without any extra input from you, aside from the path to the NMS.exe in the config.cmake.
+It's not your average run-of-the-mill build process. Due to the immense number of classes (>2000) it's difficult to track them without bogging the repo down (along with the various potential legal repurcussions of shipping stripped code directly from the binary). Luckily, the extraction and building of these headers can be automagically pulled from No Man's Sky using Heridium by attaching it to the running executable and extracting them all when it loads. Even better, this all happens at compile time without any extra input from you, aside from the path to the NMS.exe in the config.cmake.
 
 <sup><sub>-tractorbeam & VITALISED wrote this-</sub></sup>

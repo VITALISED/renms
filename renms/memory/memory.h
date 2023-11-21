@@ -101,7 +101,7 @@ inline LPVOID ScanPattern(std::vector<int> *lpPattern)
 
 inline DWORD_PTR SignatureScan(const char *lpacSignature)
 {
-    reinterpret_cast<DWORD_PTR>(ScanPattern(IDAPatternToVec(lpacSignature)));
+    return reinterpret_cast<DWORD_PTR>(ScanPattern(IDAPatternToVec(lpacSignature)));
 }
 
 RENMS_END

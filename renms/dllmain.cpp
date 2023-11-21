@@ -15,16 +15,17 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#include "renms.h"
+#include <renms.h>
+
 #include <commands/builtin.h>
 #include <commands/dispatcher.h>
+#include <core/config.h>
 #include <core/filesystem.h>
 #include <core/warning.h>
-#include <iat/fios.h>
+#include <fios/fios.h>
 #include <memory/thread.h>
 #include <plugins/fsm.h>
-#include <plugins/plugin.h>
-#include <core/config.h>
+#include <scripts/python.h>
 
 DWORD WINAPI MainThread(LPVOID lpReserved)
 {
@@ -32,8 +33,8 @@ DWORD WINAPI MainThread(LPVOID lpReserved)
 
     CreateLogger("\033[31mReNMS\033[0m");
     spdlog::info("ReNMS v.{} -- Initializing things...", RENMS_VERSION);
-
-    renms::config::init();
+    renms::CreateScriptEnvironment();
+    renms::config::Init();
     renms::AddBuiltinCommands();
     renms::CreateTextChatHooks();
     renms::CreateFiosHooks();
@@ -41,7 +42,7 @@ DWORD WINAPI MainThread(LPVOID lpReserved)
     renms::CreateWarningHooks();
     renms::CreateFSMGcApplicationHooks();
 
-    renms::PluginManager lPluginManager = renms::PluginManager();
+    // renms::PluginManager lPluginManager = renms::PluginManager();
 
     renms::ResumeModuleThread(renms::GetNMSModuleHandle());
     spdlog::info("NMS is running.");

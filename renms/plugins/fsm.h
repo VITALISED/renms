@@ -1,9 +1,10 @@
 #pragma once
 
-#include <memory/memory.h>
+#include <renms.h>
+
+#include <memory/hook.h>
 #include <memory/vtable.h>
 #include <plugins/api.h>
-#include <renms.h>
 
 RENMS_BEGIN
 

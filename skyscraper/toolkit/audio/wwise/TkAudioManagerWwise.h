@@ -23,7 +23,7 @@ SKYSCRAPER_BEGIN
 
 struct TkAudioID
 {
-    const char* mpacName;
+    const char *mpacName;
     unsigned int muID;
     bool mbValid;
 };
@@ -31,6 +31,11 @@ struct TkAudioID
 struct TkAudioObject
 {
     unsigned __int64 mID;
+};
+
+class ITkAudioStream
+{
+    VFT<2> *__vftable;
 };
 
 SKYSCRAPER_END

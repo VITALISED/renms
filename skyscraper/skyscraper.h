@@ -17,6 +17,10 @@
 
 #pragma once
 
+#include <robin_hood.h>
+#include <vulkan/vulkan.h>
+#include <windows.h> //see toolkit/system/TkCSMutex.h
+
 #include <array>
 #include <atomic>
 #include <cmath>
@@ -27,24 +31,14 @@
 #include <functional>
 #include <map>
 #include <memory>
-#include <robin_hood.h>
 #include <string>
 #include <unordered_map>
-#include <vulkan/vulkan.h>
-#include <windows.h> //see toolkit/system/TkCSMutex.h
 
 // clang-format off
 #define SKYSCRAPER_BEGIN namespace nms {
 #define SKYSCRAPER_END };
 // clang-format on
 
-SKYSCRAPER_BEGIN
-
-template <unsigned int uiLength>
-class VFT
-{
-  public:
-    void *maMembers[uiLength];
-};
-
-SKYSCRAPER_END
+#define EMPTY_CALL()            return NULL
+#define EMPTY_CALL_VOID()       return
+#define EMPTY_CALL_DESTRUCTOR() ;

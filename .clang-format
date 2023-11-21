@@ -13,6 +13,10 @@ AllowShortIfStatementsOnASingleLine: WithoutElse
 AllowShortLoopsOnASingleLine: 'true'
 AlwaysBreakTemplateDeclarations: 'Yes'
 SortIncludes: true
+BreakBeforeBraces: Custom
+BraceWrapping:
+      SplitEmptyFunction: false
+      SplitEmptyRecord: false
 IncludeBlocks: Regroup
 IncludeCategories:
       # Sort primary headers renms.h, skyscraper.h and heridium.h

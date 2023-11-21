@@ -17,8 +17,9 @@
 
 #pragma once
 
-#include <engine/source/engine/EgScene.h>
 #include <skyscraper.h>
+
+#include <engine/source/engine/EgScene.h>
 #include <toolkit/maths/geometry/TkPhysRelMat34.h>
 #include <toolkit/maths/numeric/generic/TkMatrix44Generic.h>
 #include <toolkit/resources/TkSmartResHandle.h>

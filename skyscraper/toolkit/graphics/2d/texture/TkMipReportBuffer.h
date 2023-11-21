@@ -19,23 +19,25 @@
 
 #include <skyscraper.h>
 
+#include <vulkan/vulkan.h>
+
 SKYSCRAPER_BEGIN
 
 struct TkMipReportBuffer
 {
     struct TextureQueries
     {
-        unsigned __int64 compute_pixhit;
-        int count;
-        unsigned __int16 bookmarks[256][2];
+        uint64_t compute_pixhit;
+        int32_t count;
+        uint16_t bookmarks[256][2];
     };
 
-    struct VkQueryPool_T *queryheap;
-    struct VkFence_T *fenceValue;
-    struct VkDeviceMemory_T *memory;
-    struct VkBuffer_T *buffer;
-    unsigned __int64 *mOutBufferMapped;
-    int miNumQueries;
+    VkQueryPool_T *queryheap;
+    VkFence_T *fenceValue;
+    VkDeviceMemory_T *memory;
+    VkBuffer_T *buffer;
+    uint64_t *mOutBufferMapped;
+    int32_t miNumQueries;
     TkMipReportBuffer::TextureQueries per_texture[257];
 };
 

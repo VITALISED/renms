@@ -23,18 +23,18 @@ SKYSCRAPER_BEGIN
 
 namespace WinHttpTask
 {
-	struct State
-	{
-		enum Enum
-		{
-			Invalid,
-			Working,
-			Complete,
-			Failed,
-			__EnumTerminator,
-			Unspecified,
-		};
-	};
-}
+struct State
+{
+    enum Enum
+    {
+        Invalid,
+        Working,
+        Complete,
+        Failed,
+        __EnumTerminator,
+        Unspecified,
+    };
+};
+} // namespace WinHttpTask
 
 SKYSCRAPER_END
