@@ -69,7 +69,7 @@ endif()
 if(NOT DEFINED RENMS_CONFIG_VERSION OR RENMS_CONFIG_VERSION LESS 3)
     message(
         WARNING
-            "Your config.cmake is out of date! Chances are it'll still build fine, but I highly \
+"Your config.cmake is out of date! Chances are it'll still build fine, but I highly \
 suggest checking out the config-template.cmake and updating your config.cmake."
     )
 
@@ -78,7 +78,7 @@ endif()
 if(NOT DEFINED NMS_EXE_PATH AND NOT SKIP_NMS_CHECK)
     message(
         FATAL_ERROR
-            "NMS_EXE_PATH not defined!\n\
+"NMS_EXE_PATH not defined!\n\
 Look inside the config.cmake for the option, and set it's exact path. \
 It must be the directory that contains NMS.exe. See the BUILD.md for why it needs to know this."
     )
@@ -90,7 +90,7 @@ get_filename_component(NMS_BIN_PATH "${NMS_EXE_PATH}" DIRECTORY)
 if(NOT EXISTS "${NMS_EXE_PATH}" AND NOT SKIP_NMS_CHECK)
     message(
         FATAL_ERROR
-            "NMS_EXE_PATH either isn't a valid directory or doesn't contain NMS.exe!\n\
+"NMS_EXE_PATH either isn't a valid directory or doesn't contain NMS.exe!\n\
 Look inside the config.cmake for the option, and set it's exact path. \
 It must be the directory that contains NMS.exe. See the BUILD.md for why it needs to know this."
     )
@@ -224,6 +224,7 @@ target_include_directories(
     PUBLIC ${PROJECT_SOURCE_DIR}/skyscraper
     PUBLIC ${PROJECT_SOURCE_DIR}/metadata
 )
+
 # --------------------------------------------------------------------------------------------------
 # relauncher settings (No settings needed)
 
