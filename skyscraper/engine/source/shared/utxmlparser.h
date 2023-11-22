@@ -13,7 +13,7 @@ SKYSCRAPER_BEGIN
 
 #include <cstring>
 
-#include "rapidxml.h"
+#include <rapidxml.hpp>
 
 #ifdef RAPIDXML_NO_EXCEPTIONS
 inline void rapidxml::parse_error_handler(const char *what, void *where)

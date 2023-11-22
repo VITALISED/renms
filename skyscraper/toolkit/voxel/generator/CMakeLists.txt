@@ -13,18 +13,12 @@
 # You should have received a copy of the GNU General Public License along with
 # this program.  If not, see <https://www.gnu.org/licenses/>.
 
-add_library(
-    heridium SHARED
-    "analysis.cpp"
-    "analysis.h"
-    "cpp/header.cpp"
-    "cpp/lang.h"
-    "cpp/lex.h"
-    "cpp/notation.h"
-    "cpp/source.cpp"
-    "dllmain.cpp"
-    "heridium.cpp"
-    "heridium.h"
-)
+add_subdirectory(basic)
 
-add_subdirectory(launcher)
+file(GLOB HEADERS *.h)
+
+add_library(skyscraper_toolkit_voxel_generator INTERFACE)
+
+target_link_libraries(skyscraper_toolkit_voxel_generator INTERFACE
+    skyscraper_toolkit_voxel_generator_basic
+)

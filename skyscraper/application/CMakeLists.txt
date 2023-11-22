@@ -13,18 +13,11 @@
 # You should have received a copy of the GNU General Public License along with
 # this program.  If not, see <https://www.gnu.org/licenses/>.
 
-add_library(
-    heridium SHARED
-    "analysis.cpp"
-    "analysis.h"
-    "cpp/header.cpp"
-    "cpp/lang.h"
-    "cpp/lex.h"
-    "cpp/notation.h"
-    "cpp/source.cpp"
-    "dllmain.cpp"
-    "heridium.cpp"
-    "heridium.h"
-)
+add_subdirectory(states)
 
-add_subdirectory(launcher)
+file(GLOB HEADERS *.h)
+
+add_library(skyscraper_application STATIC
+    GcApplication.cpp
+    ${HEADERS}
+)

@@ -13,18 +13,28 @@
 # You should have received a copy of the GNU General Public License along with
 # this program.  If not, see <https://www.gnu.org/licenses/>.
 
-add_library(
-    heridium SHARED
-    "analysis.cpp"
-    "analysis.h"
-    "cpp/header.cpp"
-    "cpp/lang.h"
-    "cpp/lex.h"
-    "cpp/notation.h"
-    "cpp/source.cpp"
-    "dllmain.cpp"
-    "heridium.cpp"
-    "heridium.h"
+add_subdirectory(animation)
+add_subdirectory(attachments)
+add_subdirectory(audio)
+add_subdirectory(data)
+add_subdirectory(graphics)
+add_subdirectory(resources)
+add_subdirectory(system)
+add_subdirectory(utilities)
+add_subdirectory(voxel)
+
+add_library(skyscraper_toolkit STATIC
+    dummy.h
 )
 
-add_subdirectory(launcher)
+target_link_libraries(skyscraper_toolkit PUBLIC
+    skyscraper_toolkit_animation
+    skyscraper_toolkit_attachments
+    skyscraper_toolkit_audio
+    skyscraper_toolkit_data
+    skyscraper_toolkit_graphics
+    skyscraper_toolkit_resources
+    skyscraper_toolkit_system
+    skyscraper_toolkit_utilities
+    skyscraper_toolkit_voxel
+)

@@ -13,18 +13,22 @@
 # You should have received a copy of the GNU General Public License along with
 # this program.  If not, see <https://www.gnu.org/licenses/>.
 
-add_library(
-    heridium SHARED
-    "analysis.cpp"
-    "analysis.h"
-    "cpp/header.cpp"
-    "cpp/lang.h"
-    "cpp/lex.h"
-    "cpp/notation.h"
-    "cpp/source.cpp"
-    "dllmain.cpp"
-    "heridium.cpp"
-    "heridium.h"
+file(GLOB HEADERS *.h)
+
+add_subdirectory(filesystem)
+add_subdirectory(memory)
+add_subdirectory(pc)
+add_subdirectory(thread)
+add_subdirectory(timer)
+
+add_library(skyscraper_toolkit_system STATIC
+    ${HEADERS}
 )
 
-add_subdirectory(launcher)
+target_link_libraries(skyscraper_toolkit_system PUBLIC
+    skyscraper_toolkit_system_filesystem
+    skyscraper_toolkit_system_memory
+    skyscraper_toolkit_system_pc
+    skyscraper_toolkit_system_thread
+    skyscraper_toolkit_system_timer
+)
