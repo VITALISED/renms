@@ -13,6 +13,8 @@
 # You should have received a copy of the GNU General Public License along with
 # this program.  If not, see <https://www.gnu.org/licenses/>.
 
-file(GLOB HEADERS *.h)
+file(GLOB_RECURSE HEADERS "*.h")
 
-add_library(skyscraper_application_states INTERFACE ${HEADERS})
+add_library(skyscraper_gamestate STATIC ${HEADERS})
+
+set_target_properties(skyscraper_gamestate PROPERTIES LINKER_LANGUAGE CXX)

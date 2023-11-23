@@ -13,11 +13,10 @@
 # You should have received a copy of the GNU General Public License along with
 # this program.  If not, see <https://www.gnu.org/licenses/>.
 
-add_subdirectory(states)
-
-file(GLOB HEADERS *.h)
+file(GLOB_RECURSE HEADERS *.h)
+file(GLOB_RECURSE SOURCES *.cpp)
 
 add_library(skyscraper_application STATIC
-    GcApplication.cpp
     ${HEADERS}
+    ${SOURCES}
 )

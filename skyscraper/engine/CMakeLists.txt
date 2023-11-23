@@ -13,6 +13,7 @@
 # You should have received a copy of the GNU General Public License along with
 # this program.  If not, see <https://www.gnu.org/licenses/>.
 
-add_subdirectory(source)
+file(GLOB_RECURSE SOURCES "*.cpp")
+file(GLOB_RECURSE HEADERS "*.h")
 
-target_link_libraries(skyscraper_engine INTERFACE skyscraper_engine_source_shared)
+add_library(skyscraper_engine STATIC ${SOURCES} ${HEADERS})

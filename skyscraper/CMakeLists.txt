@@ -60,6 +60,8 @@ add_library(
 add_subdirectory(application)
 add_subdirectory(atlas)
 add_subdirectory(engine)
+add_subdirectory(gamestate)
+add_subdirectory(graphics)
 add_subdirectory(simulation)
 add_subdirectory(toolkit)
 
@@ -67,6 +69,8 @@ target_link_libraries(skyscraper PUBLIC
     skyscraper_application
     skyscraper_atlas
     skyscraper_engine
+    skyscraper_gamestate
+    skyscraper_graphics
     skyscraper_simulation
     skyscraper_toolkit
 )

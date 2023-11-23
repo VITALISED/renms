@@ -13,10 +13,7 @@
 # You should have received a copy of the GNU General Public License along with
 # this program.  If not, see <https://www.gnu.org/licenses/>.
 
-file(GLOB HEADERS *.h)
-file(GLOB SOURCES *.cpp)
+file(GLOB_RECURSE SOURCES "*.cpp")
+file(GLOB_RECURSE HEADERS "*.h")
 
-add_library(skyscraper_engine STATIC
-    ${HEADERS}
-    ${SOURCES}
-)
+add_library(skyscraper_graphics STATIC ${SOURCES} ${HEADERS})

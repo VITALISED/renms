@@ -2,9 +2,7 @@
 
 ## "I want it now!"
 
-This is really easy. See the `config-template.cmake`? Copy it into a file called `config.cmake`, and change any values you think need changed (at the very least NMS_EXE_PATH must be changed). Then sync the submodules, configure, and build. If it's in the shell:
-
-You'll also need a copy of Python 3 on path for pybind11.
+This is really easy. First, make sure python is installed on your system. Second, see the `config-template.cmake`? Copy it into a file called `config.cmake`, and change any values you think need changed (at the very least NMS_EXE_PATH must be changed). It should find Python on its own. After that, configure and build. If it's in the shell:
 
 ```sh
 mkdir build && cd build
