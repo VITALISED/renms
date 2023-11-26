@@ -43,7 +43,7 @@ endif()
 if(NOT CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
     message(
         FATAL_ERROR
-"renms is not meant to be added as a subdirectory! Unfortunately, you'll have to \
+            "renms is not meant to be added as a subdirectory! Unfortunately, you'll have to \
 stick with copying your project into renms's renms/plugins folder to build. Sorry for \
 the inconvenience!"
     )
@@ -54,7 +54,10 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
 endif()
 
 if(CMAKE_BUILD_TYPE STREQUAL "" OR CMAKE_BUILD_TYPE STREQUAL "None")
-    set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose the type of build." FORCE)
+    set(CMAKE_BUILD_TYPE
+        "Release"
+        CACHE STRING "Choose the type of build." FORCE
+    )
 endif()
 
 if(EXISTS "${CMAKE_SOURCE_DIR}/config.cmake")
@@ -69,7 +72,7 @@ endif()
 if(NOT DEFINED RENMS_CONFIG_VERSION OR RENMS_CONFIG_VERSION LESS 3)
     message(
         WARNING
-"Your config.cmake is out of date! Chances are it'll still build fine, but I highly \
+            "Your config.cmake is out of date! Chances are it'll still build fine, but I highly \
 suggest checking out the config-template.cmake and updating your config.cmake."
     )
 
@@ -78,7 +81,7 @@ endif()
 if(NOT DEFINED NMS_EXE_PATH AND NOT SKIP_NMS_CHECK)
     message(
         FATAL_ERROR
-"NMS_EXE_PATH not defined!\n\
+            "NMS_EXE_PATH not defined!\n\
 Look inside the config.cmake for the option, and set it's exact path. \
 It must be the directory that contains NMS.exe. See the BUILD.md for why it needs to know this."
     )
@@ -90,7 +93,7 @@ get_filename_component(NMS_BIN_PATH "${NMS_EXE_PATH}" DIRECTORY)
 if(NOT EXISTS "${NMS_EXE_PATH}" AND NOT SKIP_NMS_CHECK)
     message(
         FATAL_ERROR
-"NMS_EXE_PATH either isn't a valid directory or doesn't contain NMS.exe!\n\
+            "NMS_EXE_PATH either isn't a valid directory or doesn't contain NMS.exe!\n\
 Look inside the config.cmake for the option, and set it's exact path. \
 It must be the directory that contains NMS.exe. See the BUILD.md for why it needs to know this."
     )
@@ -135,59 +138,33 @@ macro(add_dependency_custom dir include)
     include_directories(${CMAKE_SOURCE_DIR}/${include} SYSTEM)
 endmacro()
 
-add_dependency_custom(
-    ./submodules/libSceFios2 
-    ./submodules/libSceFios2
-)
-add_dependency_custom(
-    ./submodules/inifile-cpp 
-    ./submodules/inifile-cpp/include
-)
-add_dependency_custom(
-    ./submodules/fmt 
-    ./submodules/fmt/include
-)
+add_dependency_custom(./submodules/libSceFios2 ./submodules/libSceFios2)
+add_dependency_custom(./submodules/inifile-cpp ./submodules/inifile-cpp/include)
+add_dependency_custom(./submodules/fmt ./submodules/fmt/include)
 
 set(SPDLOG_FMT_EXTERNAL ON)
 set(SPDLOG_BUILD_SHARED OFF)
+add_dependency_custom(./submodules/spdlog ./submodules/spdlog/include)
+
+add_dependency_custom(./submodules/PolyHook2_0 ./submodules/PolyHook2_0)
+
 add_dependency_custom(
-    ./submodules/spdlog
-    ./submodules/spdlog/include
+    ./submodules/robin-hood-hashing ./submodules/robin-hood-hashing/src/include
 )
 
 add_dependency_custom(
-    ./submodules/PolyHook2_0
-    ./submodules/PolyHook2_0
-)
-
-add_dependency_custom(
-    ./submodules/robin-hood-hashing
-    ./submodules/robin-hood-hashing/src/include
-)
-
-add_dependency_custom(
-    ./submodules/Vulkan-Headers
-    ./submodules/Vulkan-Headers/include
+    ./submodules/Vulkan-Headers ./submodules/Vulkan-Headers/include
 )
 add_dependency_custom(
     ./submodules/VulkanMemoryAllocator
     ./submodules/VulkanMemoryAllocator/include
 )
-add_dependency_custom(
-    ./submodules/stb
-    ./submodules/stb
-)
+add_dependency_custom(./submodules/stb ./submodules/stb)
 
 set(PYBIND11_FINDPYTHON ON)
-add_dependency_custom(
-    ./submodules/pybind11
-    ./submodules/pybind11/include
-)
+add_dependency_custom(./submodules/pybind11 ./submodules/pybind11/include)
 
-add_dependency_custom(
-    ./submodules/rapidxml
-    ./submodules/rapidxml
-)
+add_dependency_custom(./submodules/rapidxml ./submodules/rapidxml)
 
 # ==================================================================================================
 # Targets.
@@ -266,15 +243,9 @@ target_compile_definitions(heridium PRIVATE RENMS)
 target_include_directories(
     heridium PUBLIC ${CMAKE_SOURCE_DIR}/skyscraper ${CMAKE_SOURCE_DIR}/renms
 )
-# Some of skyscraper's stuff requires the metadata that heridium generates, so we need to include
-# only the bit of skyscraper that heridium needs.
-target_link_libraries(heridium PRIVATE
-    spdlog
-    fmt
-    PolyHook_2
-    skyscraper_toolkit_utilities_containers
-    skyscraper_toolkit_data
-)
+# Some of skyscraper's stuff requires the metadata that heridium generates, so
+# we need to include only the bit of skyscraper that heridium needs.
+target_link_libraries(heridium PRIVATE spdlog fmt PolyHook_2)
 
 # ==================================================================================================
 # Launch target

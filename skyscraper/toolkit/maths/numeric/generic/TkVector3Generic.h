@@ -30,8 +30,8 @@ class cTkVector3
     __m128 mVal;
 
     cTkVector3();
-    // this is assuming the unused float is at the end of the XMM register, which I think it is
     cTkVector3(float lfX, float lfY, float lfZ) { this->mVal = _mm_set_ps(lfX, lfY, lfZ, 0.0f); }
+    float operator[](uint64_t liIndex) { return this->mVal.m128_f32[liIndex]; }
 };
 
 SKYSCRAPER_END
