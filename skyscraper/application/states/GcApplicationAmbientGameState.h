@@ -17,14 +17,22 @@
 
 #pragma once
 
-#include <application/states/GcApplicationState.h>
 #include <skyscraper.h>
+
+#include <application/states/GcApplicationState.h>
 
 SKYSCRAPER_BEGIN
 
 class cGcApplicationAmbientGameState : public cGcApplicationState
 {
-    VFT<8> *__vftable;
+  public:
+    void Construct();
+    void Prepare(cTkFSMState *, const void *);
+    void Update(float);
+    void Event(unsigned int, const void *);
+    void Release(cTkFSMState *, const void *);
+    void ThreadedUpdate();
+    bool ThreadSyncPoint();
 };
 
 SKYSCRAPER_END

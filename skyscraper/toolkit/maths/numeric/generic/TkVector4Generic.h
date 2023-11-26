@@ -19,23 +19,19 @@
 
 #include <skyscraper.h>
 
+#include <xmmintrin.h>
+
 SKYSCRAPER_BEGIN
 
+// We think cTkVector4 (and also cTkVector3) are manually optimised SSE objects. We could also be wrong but who knows.
 class cTkVector4
 {
-public:
-	cTkVector4()
-	{ }
+  public:
+    __m128 mVal;
 
-	cTkVector4(float lfX, float lfY, float lfZ, float lfW)
-	{
-		this->mfX = lfX;
-		this->mfY = lfY;
-		this->mfZ = lfZ;
-		this->mfW = lfW;
-	}
-
-	float mfX, mfY, mfZ, mfW;
+    cTkVector4();
+    cTkVector4(float lfX, float lfY, float lfZ, float lfW) { this->mVal = _mm_set_ps(lfX, lfY, lfZ, lfW); }
+    float operator[](uint64_t liIndex) { return this->mVal.m128_f32[liIndex]; }
 };
 
 SKYSCRAPER_END

@@ -18,6 +18,7 @@
 #pragma once
 
 #include <skyscraper.h>
+
 #include <toolkit/utilities/TkString.h>
 
 SKYSCRAPER_BEGIN
@@ -31,7 +32,15 @@ class cTkNGuiUndoable
     virtual void GetData();
     virtual const char ToString();
     virtual unsigned int Icon();
-    cTkFixedString<64,char> mDescription;
+    cTkFixedString<64, char> mDescription;
+};
+
+template <typename T>
+class cTkNGuiTypeUndoable : public cTkNGuiUndoable
+{
+    T mFrom;
+    T mTo;
+    T *mpValue;
 };
 
 SKYSCRAPER_END

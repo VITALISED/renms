@@ -14,7 +14,7 @@
 # this program.  If not, see <https://www.gnu.org/licenses/>.
 
 add_library(
-    Heridium SHARED
+    heridium SHARED
     "analysis.cpp"
     "analysis.h"
     "cpp/header.cpp"

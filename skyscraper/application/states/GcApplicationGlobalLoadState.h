@@ -17,9 +17,10 @@
 
 #pragma once
 
+#include <skyscraper.h>
+
 #include <application/states/GcApplicationState.h>
 #include <atlas/WinHttpTask.h>
-#include <skyscraper.h>
 
 SKYSCRAPER_BEGIN
 
@@ -30,9 +31,22 @@ typedef WinHttpTask::State::Enum Enum;
 
 class cGcApplicationGlobalLoadState : public cGcApplicationState
 {
-    VFT<8> *__vftable;
+  public:
     cGcAsyncLoadOps mAsyncLoadOps;
     GlobalLoadPhase::Enum mPhase;
+
+    // ~cGcApplicationGlobalLoadState();
+    // virtual void Construct();
+    // virtual void Prepare(cTkFSMState *, const void *);
+    // virtual void Update(float);
+    // virtual void Event(unsigned int, const void *);
+    // virtual void Release(cTkFSMState *, const void *);
+    // virtual void Destruct();
+    // virtual void Render(EgRenderParity::List);
+    // virtual bool SupportsEvenOddRendering();
+    // virtual void ThreadedUpdate();
+    // virtual bool ThreadSyncPoint();
+    // virtual void BuildRenderQueue();
 };
 
 SKYSCRAPER_END

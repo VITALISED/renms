@@ -20,7 +20,7 @@
 void printDebug(std::string input)
 {
 #ifdef _DEBUG
-    std::cout << "[ ReLauncher ] " << input << std::endl;
+    std::cout << "[ relauncher ] " << input << std::endl;
 #else
     UNREFERENCED_PARAMETER(input);
 #endif
@@ -83,7 +83,7 @@ int main(int argc, char **argv)
     }
     catch (std::exception &e)
     {
-        std::cout << "[ ReLauncher ] Error! " << e.what() << std::endl;
+        std::cout << "[ relauncher ] Error! " << e.what() << std::endl;
         exit(1);
     }
 }

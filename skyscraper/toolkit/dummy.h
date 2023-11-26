@@ -15,14 +15,4 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#pragma once
-
-#include <toolkit/graphics/ngui/TkNGuiUndoable.h>
-
-template <typename T>
-class cTkNGuiTypeUndoable : public cTkNGuiUndoable
-{
-    T mFrom;
-    T mTo;
-    T *mpValue;
-};
+//This does nothing, exists just to appease cmake

@@ -29,14 +29,15 @@ class cTkFSM;
 class cTkFSMStateOffset
 {
     TkID<128> mID;
-    unsigned __int64 mnOffset;
+    uint64_t mnOffset;
 };
 
 class cTkFSMState
 {
+  public:
     TkID<128> mID;
     cTkFSM *mpFSM;
-    unsigned __int64 mu64StateTimingStart;
+    uint64_t mu64StateTimingStart;
 
     virtual ~cTkFSMState();
     virtual void Construct();

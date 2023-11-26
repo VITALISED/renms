@@ -17,9 +17,10 @@
 
 #pragma once
 
+#include <skyscraper.h>
+
 #include <application/states/GcApplicationState.h>
 #include <atlas/WinHttpTask.h>
-#include <skyscraper.h>
 
 SKYSCRAPER_BEGIN
 
@@ -30,8 +31,12 @@ typedef WinHttpTask::State::Enum Enum;
 
 class cGcApplicationCoreServicesState : public cGcApplicationState
 {
-    VFT<8> *__vftable;
     CoreSrvLoadPhase::Enum mPhase;
+    void Construct();
+    void Destruct();
+    void Prepare(cTkFSMState *, const void *);
+    void Update(float);
+    void Release(cTkFSMState *, const void *);
 };
 
 SKYSCRAPER_END

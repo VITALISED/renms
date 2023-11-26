@@ -45,7 +45,7 @@ typedef WinHttpTask::State::Enum Enum;
 
 class cGcApplicationState : public cTkFSMState
 {
-    VFT<8> *__vftable;
+  public:
     cTkPhysRelMat34 mStereoCameraMatrices[2];
     cTkPhysRelMat34 mStereoPrevCameraMatrices[2];
     cTkSmartResHandle mShadowsPipelineRes;
@@ -62,6 +62,11 @@ class cGcApplicationState : public cTkFSMState
     cTkMatrix44 mMainPrevViewMatrix;
     cTkPhysRelMat34 mPrevCameraMatrix;
     cTkPhysRelMat34 mCameraMatrix;
+
+    virtual ~cGcApplicationState();
+    virtual void ThreadedUpdate();
+    virtual bool ThreadSyncPoint();
+    virtual void BuildRenderQueue();
 };
 
 SKYSCRAPER_END

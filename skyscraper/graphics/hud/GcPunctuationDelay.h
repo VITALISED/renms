@@ -15,15 +15,20 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#include "TkVector2Generic.h"
+#pragma once
+
+#include <skyscraper.h>
 
 SKYSCRAPER_BEGIN
 
-float cTkVector2::GetLength()
+enum ePunctuationDelays
 {
-    float fVal = (this->mfX * this->mfX) + (this->mfY * this->mfY);
-
-    return sqrtf(fVal);
-}
+    EPunctuationDelays_Default,
+    EPunctuationDelays_Gek,
+    EPunctuationDelays_Korvax,
+    EPunctuationDelays_Vykeen,
+    EPunctuationDelays_FourthRace,
+    EPunctuationDelays_NumTypes,
+};
 
 SKYSCRAPER_END

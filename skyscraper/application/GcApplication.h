@@ -21,12 +21,12 @@
 
 #include <application/GcFirstBootContext.h>
 #include <application/GcGameConfigCache.h>
-// #include <application/states/GcApplicationAmbientGameState.h>
-// #include <application/states/GcApplicationBootState.h>
+#include <application/states/GcApplicationAmbientGameState.h>
+#include <application/states/GcApplicationBootState.h>
 // #include <application/states/GcApplicationCoreServicesState.h>
-// #include <application/states/GcApplicationDeathState.h>
+#include <application/states/GcApplicationDeathState.h>
 // #include <application/states/GcApplicationGalacticMapState.h>
-// #include <application/states/GcApplicationGameModeSelectorState.h>
+#include <application/states/GcApplicationGameModeSelectorState.h>
 // #include <application/states/GcApplicationGlobalLoadState.h>
 // #include <application/states/GcApplicationLocalLoadState.h>
 // #include <application/states/GcApplicationScratchpadState.h>
@@ -89,7 +89,7 @@ class cGcApplication : public cTkFSM
     long double mLastRenderTimeMS;
     long double mfStartTime;
     int32_t miLoadBalancingTimeout;
-    // cGcApplicationBootState mApplicationBootState;
+    cGcApplicationBootState mApplicationBootState;
     // cGcApplicationCoreServicesState mApplicationCoreServicesState;
     // cGcApplicationGlobalLoadState mApplicationGlobalLoadState;
     // cGcApplicationLocalLoadState mApplicationLocalLoadState;
@@ -97,10 +97,10 @@ class cGcApplication : public cTkFSM
     // cGcApplicationShutdownState mApplicationShutdownState;
     // cGcApplicationGalacticMapState mApplicationGalacticMapState;
     // cGcApplicationSmokeTestState mApplicationSmokeTestState;
-    // cGcApplicationAmbientGameState mApplicationAmbientGameState;
-    // cGcApplicationDeathState mApplicationDeathState;
+    cGcApplicationAmbientGameState mApplicationAmbientGameState;
+    cGcApplicationDeathState mApplicationDeathState;
     // cGcApplicationScratchpadState mApplicationScratchpadState;
-    // cGcApplicationGameModeSelectorState mApplicationGameModeSelectorState;
+    cGcApplicationGameModeSelectorState mApplicationGameModeSelectorState;
     // cGcApplicationTitleScreenState mApplicationTitleScreenState;
     // cGcApplicationUGCBaseViewerState mApplicationUGCBaseViewerState;
     float mfResetVRCameraTimer;

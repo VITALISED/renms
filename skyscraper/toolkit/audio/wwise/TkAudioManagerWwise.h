@@ -33,9 +33,20 @@ struct TkAudioObject
     unsigned __int64 mID;
 };
 
+class cTkAudioStreamFormat
+{
+    unsigned int miSampleRate;
+    bool mbStereo;
+    unsigned int miBitsPerSample;
+    unsigned int miBytesPerFrame;
+    bool mbFloatData;
+};
+
 class ITkAudioStream
 {
-    VFT<2> *__vftable;
+    virtual ~ITkAudioStream();
+    virtual void GetAudioStreamFormat(cTkAudioStreamFormat *);
+    virtual void GetAudioStreamData(const unsigned int, unsigned int *);
 };
 
 SKYSCRAPER_END

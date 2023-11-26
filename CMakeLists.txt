@@ -25,34 +25,6 @@ project(
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin")
 message(STATUS "Binaries will be placed in: ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
 
-# Fix an issue with windows gnu systems where the c++std libs don't get
-# privately linked, and since it isn't available on windows systems by default,
-# it fails as it can't find the library.
-if(CMAKE_CROSSCOMPILING)
-    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static")
-    message(
-        STATUS
-            "Crosscompiling setup detected, linking libstdc++ and libgcc statically."
-    )
-endif()
-
-# Fix another issue where this dll can't be statically linked on windows, and
-# must be copied to the output directory.
-if(CMAKE_CROSSCOMPILING)
-    find_path(WINPTHREAD_PATH NAMES libwinpthread-1.dll)
-    if(NOT WINPTHREAD_PATH)
-        message(
-            WARNING
-                "libwinpthread-1.dll not found! You may get an error while running ReLauncher.exe."
-        )
-    else()
-        message(STATUS "libwinpthread-1.dll found at ${WINPTHREAD_PATH}")
-        file(COPY ${WINPTHREAD_PATH}/libwinpthread-1.dll
-             DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
-        )
-    endif()
-endif()
-
 # Fix a dumb problem with certain setups where it adds "lib" to the front of the
 # library name.
 set(CMAKE_STATIC_LIBRARY_PREFIX "")
@@ -67,12 +39,25 @@ endif()
 # ==================================================================================================
 # First checks.
 
+# Check if this is being added as a subdirectory.
+if(NOT CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
+    message(
+        FATAL_ERROR
+            "renms is not meant to be added as a subdirectory! Unfortunately, you'll have to \
+stick with copying your project into renms's renms/plugins folder to build. Sorry for \
+the inconvenience!"
+    )
+endif()
+
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     add_definitions(-DDEBUG -D_DEBUG)
 endif()
 
 if(CMAKE_BUILD_TYPE STREQUAL "" OR CMAKE_BUILD_TYPE STREQUAL "None")
-    set(CMAKE_BUILD_TYPE "Release")
+    set(CMAKE_BUILD_TYPE
+        "Release"
+        CACHE STRING "Choose the type of build." FORCE
+    )
 endif()
 
 if(EXISTS "${CMAKE_SOURCE_DIR}/config.cmake")
@@ -160,10 +145,13 @@ add_dependency_custom(./submodules/fmt ./submodules/fmt/include)
 set(SPDLOG_FMT_EXTERNAL ON)
 set(SPDLOG_BUILD_SHARED OFF)
 add_dependency_custom(./submodules/spdlog ./submodules/spdlog/include)
+
 add_dependency_custom(./submodules/PolyHook2_0 ./submodules/PolyHook2_0)
+
 add_dependency_custom(
     ./submodules/robin-hood-hashing ./submodules/robin-hood-hashing/src/include
 )
+
 add_dependency_custom(
     ./submodules/Vulkan-Headers ./submodules/Vulkan-Headers/include
 )
@@ -175,6 +163,8 @@ add_dependency_custom(./submodules/stb ./submodules/stb)
 
 set(PYBIND11_FINDPYTHON ON)
 add_dependency_custom(./submodules/pybind11 ./submodules/pybind11/include)
+
+add_dependency_custom(./submodules/rapidxml ./submodules/rapidxml)
 
 # ==================================================================================================
 # Targets.
@@ -210,10 +200,10 @@ add_custom_target(resdk DEPENDS ${PROJECT_SOURCE_DIR}/metadata/metadata.h)
 
 add_custom_command(
     OUTPUT ${PROJECT_SOURCE_DIR}/metadata/metadata.h
-    COMMAND "$<TARGET_FILE:ReLauncher>" "${NMS_EXE_PATH}"
-            "$<TARGET_FILE:Heridium>"
+    COMMAND "$<TARGET_FILE:relauncher>" "${NMS_EXE_PATH}"
+            "$<TARGET_FILE:heridium>"
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/metadata
-    DEPENDS Heridium
+    DEPENDS heridium
 )
 
 # --------------------------------------------------------------------------------------------------
@@ -228,7 +218,7 @@ target_include_directories(
 
 # --------------------------------------------------------------------------------------------------
 # renms settings
-add_dependencies(renms resdk Heridium ReLauncher skyscraper)
+add_dependencies(renms resdk heridium relauncher skyscraper)
 target_link_libraries(renms skyscraper fmt PolyHook_2 spdlog pybind11::embed)
 
 target_compile_definitions(renms PRIVATE RENMS FIOS_TYPES_ONLY)
@@ -242,17 +232,20 @@ target_include_directories(
     PUBLIC ${PROJECT_SOURCE_DIR}/skyscraper
     PUBLIC ${PROJECT_SOURCE_DIR}/metadata
 )
-# --------------------------------------------------------------------------------------------------
-# ReLauncher settings (No settings needed)
 
 # --------------------------------------------------------------------------------------------------
-# Heridium settings
-target_compile_definitions(Heridium PRIVATE RENMS)
+# relauncher settings (No settings needed)
+
+# --------------------------------------------------------------------------------------------------
+# heridium settings
+target_compile_definitions(heridium PRIVATE RENMS)
 
 target_include_directories(
-    Heridium PUBLIC ${CMAKE_SOURCE_DIR}/skyscraper ${CMAKE_SOURCE_DIR}/renms
+    heridium PUBLIC ${CMAKE_SOURCE_DIR}/skyscraper ${CMAKE_SOURCE_DIR}/renms
 )
-target_link_libraries(Heridium PRIVATE spdlog fmt PolyHook_2 skyscraper)
+# Some of skyscraper's stuff requires the metadata that heridium generates, so
+# we need to include only the bit of skyscraper that heridium needs.
+target_link_libraries(heridium PRIVATE spdlog fmt PolyHook_2)
 
 # ==================================================================================================
 # Launch target
@@ -260,7 +253,7 @@ target_link_libraries(Heridium PRIVATE spdlog fmt PolyHook_2 skyscraper)
 # Make sure the past installer's leftovers are uninstalled first!
 add_custom_target(
     renms_launch
-    COMMAND $<TARGET_FILE:ReLauncher> ${NMS_EXE_PATH} $<TARGET_FILE:renms>
+    COMMAND $<TARGET_FILE:relauncher> ${NMS_EXE_PATH} $<TARGET_FILE:renms>
     WORKING_DIRECTORY ${NMS_BIN_PATH}
-    DEPENDS renms ReLauncher
+    DEPENDS renms relauncher
 )

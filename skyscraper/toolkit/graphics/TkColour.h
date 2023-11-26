@@ -18,18 +18,20 @@
 #pragma once
 
 #include <skyscraper.h>
+
 #include <toolkit/maths/numeric/generic/TkVector4Generic.h>
 
 SKYSCRAPER_BEGIN
 
 class cTkColour : public cTkVector4
 {
-public:
-	cTkColour() : cTkVector4()
-    { };
+  public:
+    cTkColour();
 
-	cTkColour(float r, float g, float b, float a) : cTkVector4(r, g, b, a)
-    { };
+    cTkColour(uint8_t luiR, uint8_t luiG, uint8_t luiB, uint8_t luiA)
+    {
+        _mm_set_ps(luiR / 255.0f, luiG / 255.0f, luiB / 255.0f, luiA / 255.0f);
+    }
 };
 
 SKYSCRAPER_END

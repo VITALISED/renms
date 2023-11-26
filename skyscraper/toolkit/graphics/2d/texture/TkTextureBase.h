@@ -21,7 +21,7 @@
 
 #include <toolkit/graphics/2d/texture/TkTextureStreamFuncs.h>
 
-#include <metadata/toolkit/scene/materials/tkmaterialsampler.meta.h>
+#include <toolkit/scene/materials/tkmaterialsampler.meta.h>
 
 SKYSCRAPER_BEGIN
 
