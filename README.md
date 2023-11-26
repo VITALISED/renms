@@ -1,8 +1,12 @@
-# renms
+# ReNMS
 
 ## Overview
 
-renms is a No Man's Sky SDK featuring a top down (not yet complete, soontm) type framework for working with NMS (or frankly Skyscraper in general if they ever use the engine again). Supports a Python scripting framework which you can use to run our stuff embedded or to use monkeyman's [NMS.py](https://github.com/monkeyman192/NMS.py) instead. If you're more technical and like messing around with memory in a real man's language we also have dynamic library loading supported too.
+ReNMS is a No Man's Sky SDK featuring a high-level type framework for working with NMS (or frankly the Skyscraper engine in general if it's ever planned on being reused). Supports a Python scripting framework which you can use to run our SDK embedded or to use monkeyman's [NMS.py](https://github.com/monkeyman192/NMS.py) if you prefer. If you're more technical and like messing around with memory in a real man's language we also have dynamic library loading supported too, although it's not super field tested yet (please get in touch!!!).
+
+## Installing
+
+There are no current prebuilt binaries, this will change when we reach a more stable state. You can of course build the project yourself.
 
 ## Building
 
@@ -10,7 +14,7 @@ See [BUILD.md](docs/BUILD.md) for instructions.
 
 ## Development State
 
-Project currently only builds for Fractal on GOG (for obvious reasons). Will be ported to OSX (yes I'll add archive mounting from FS) at some point eventually when I get my Mac's charging cable. Supporting future versions of NMS is planned sometime after the 2023 expected expedition redux missions.
+The project currently only builds for Fractal 4.13 on GOG. Will be ported to OSX (yes I'll add archive mounting from FS) at some point. Supporting future versions of NMS is planned sometime after the 2023 expected expedition redux missions.
 
 We mostly live unofficially in the [No Man's Sky Retro discord](https://discord.gg/tEYNuMmAvR) but please don't come here for tech support. Open an issue or message us on Discord directly at @vitalised or @tractorbeam
 
