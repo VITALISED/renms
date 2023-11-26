@@ -19,11 +19,19 @@
 
 #include <skyscraper.h>
 
+#include <xmmintrin.h>
+
 SKYSCRAPER_BEGIN
 
+// We think cTkVector3 (and also cTkVector4) are manually optimised SSE objects. We could also be wrong but who knows.
 class cTkVector3
 {
-    float mfX, mfY, mfZ;
+  public:
+    __m128 mVal;
+
+    cTkVector3();
+    // this is assuming the unused float is at the end of the XMM register, which I think it is
+    cTkVector3(float lfX, float lfY, float lfZ) { this->mVal = _mm_set_ps(lfX, lfY, lfZ, 0.0f); }
 };
 
 SKYSCRAPER_END
