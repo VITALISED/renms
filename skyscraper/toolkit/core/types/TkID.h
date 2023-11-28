@@ -9,10 +9,15 @@ SKYSCRAPER_BEGIN
 template <uint32_t Size>
 union TkID {
     TkID();
-
     TkID(const char *lpacString) { strcpy_s(mChars, Size, lpacString); }
-
     uint64_t CalcHash();
+    TkID<Size> operator=(const char *lpString)
+    {
+        if (!lpString) return this;
+
+        strcpy_s(mChars, Size, lpString);
+        return this;
+    }
 
     char mChars[Size / 8];
     uint64_t mUInt64[Size / 64];

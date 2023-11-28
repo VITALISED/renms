@@ -9,8 +9,8 @@ uint64_t TkID<Size>::CalcHash()
 
     for (int i = 0; i < sizeof(this.mChars); i++)
     {
-        hash ^= this->mChars[i];
-        hash *= TK_FNV_PRIME;
+        hashVal ^= this->mChars[i];
+        hashVal *= TK_FNV_PRIME;
     }
 
     return hashVal;
