@@ -56,7 +56,7 @@ class cGcApplicationTitleScreenState : public cGcApplicationState, public ITkUse
     TkStrongType<int, TkStrongTypeIDs::TkResHandleID> mPipelineResource;
     cTkVector<bool> maPreviousPipelineStageState;
 
-    virtual ~cGcApplicationTitleScreenState();
+    virtual ~cGcApplicationTitleScreenState() { EMPTY_CALL_DESTRUCTOR(); }
     virtual void Construct();
     virtual void Prepare(cTkFSMState *, const void *);
     virtual void Update(float);
