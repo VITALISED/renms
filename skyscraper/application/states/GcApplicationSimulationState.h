@@ -17,9 +17,9 @@
 
 #pragma once
 
-#include <application/states/GcApplicationState.h>
-#include <simulation/solarsystem/planet/GcUserdataPrimaryPlanetChange.h>
 #include <skyscraper.h>
+
+#include <application/states/GcApplicationState.h>
 #include <toolkit/graphics/2d/ui/objects/text/Tk2dText.h>
 #include <toolkit/graphics/2d/ui/objects/text/Tk2dTextPreset.h>
 #include <toolkit/maths/numeric/generic/TkMatrix34Generic.h>
@@ -27,9 +27,16 @@
 
 SKYSCRAPER_BEGIN
 
+class cGcUserdataPrimaryPlanetChange
+{
+    ApplicationStateEvents::Enum mCheck;
+    int mNewPrimaryPlanetIndex;
+    bool mImmediate;
+};
+
 class cGcApplicationSimulationState : public cGcApplicationState
 {
-    VFT<11> *__vftable;
+  public:
     cTkStopwatch mSimThreadTimer;
     cTkStopwatch mSimUpdateTimer;
     cTkStopwatch mSyncPointTimer;
@@ -69,6 +76,11 @@ class cGcApplicationSimulationState : public cGcApplicationState
     cTkFixedString<32, wchar_t> mFramerateString;
     void *mThreadSyncStartedEvent;
     void *mCullingStartedEvent;
+
+    virtual bool SupportsEvenOddRendering();
+    virtual void ThreadedUpdate();
+    virtual bool ThreadSyncPoint();
+    virtual void BuildRenderQueue();
 };
 
 SKYSCRAPER_END

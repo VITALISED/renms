@@ -91,10 +91,10 @@ class cGcApplicationGameModeSelectorState : public cGcApplicationState
         ERandom,
     };
 
-    template <typename T, unsigned int liCount>
+    template <typename T, uint32_t Count>
     struct EnumIconResources
     {
-        cTkSmartResHandle mResources[liCount];
+        cTkSmartResHandle mResources[Count];
     };
 
     struct WarningDlgComponents
@@ -239,14 +239,14 @@ class cGcApplicationGameModeSelectorState : public cGcApplicationState
     cGcApplicationGameModeSelectorState::DisplayState meScreenToReturnToFromOptionsScreen;
     cGcApplicationGameModeSelectorState::CloudSaveUpdateState meCloudSaveUpdateState;
 
-    ~cGcApplicationGameModeSelectorState();
-    void Construct();
-    void Prepare(cTkFSMState *, const void *);
-    void Update(float);
-    void Event(unsigned int, const void *);
-    void Release(cTkFSMState *, const void *);
-    void Destruct();
-    void Render(EgRenderParity::List);
+    virtual ~cGcApplicationGameModeSelectorState() { EMPTY_CALL_DESTRUCTOR(); }
+    virtual void Construct();
+    virtual void Prepare(cTkFSMState *, const void *);
+    virtual void Update(float);
+    virtual void Event(unsigned int, const void *);
+    virtual void Release(cTkFSMState *, const void *);
+    virtual void Destruct();
+    virtual void Render(EgRenderParity::List);
 };
 
 SKYSCRAPER_END

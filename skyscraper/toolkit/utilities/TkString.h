@@ -30,11 +30,11 @@ class cTkFixedString
     cTkFixedString() {}
     cTkFixedString(const char *lpacBuffer) { this->Copy(lpacBuffer); }
     void Copy(const char *lpacBuffer) { strcpy_s(macBuffer, liSize, lpacBuffer); }
+
     T macBuffer[liSize];
 };
 
 class cTkDynamicString : public cTkDynamicArray<char>
-{
-};
+{};
 
 SKYSCRAPER_END

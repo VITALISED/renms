@@ -26,12 +26,12 @@ SKYSCRAPER_BEGIN
 class cGcApplicationBootState : public cGcApplicationState
 {
   public:
-    void Construct();
-    void Destruct();
-    void Prepare(cTkFSMState *, const void *);
-    void Update(float);
-    void Release(cTkFSMState *, const void *);
-    void Render();
+    virtual void Construct();
+    virtual void Destruct();
+    virtual void Prepare(cTkFSMState *, const void *);
+    virtual void Update(float);
+    virtual void Release(cTkFSMState *, const void *);
+    virtual void Render();
 };
 
 SKYSCRAPER_END

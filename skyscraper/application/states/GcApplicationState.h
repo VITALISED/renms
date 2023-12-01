@@ -63,7 +63,7 @@ class cGcApplicationState : public cTkFSMState
     cTkPhysRelMat34 mPrevCameraMatrix;
     cTkPhysRelMat34 mCameraMatrix;
 
-    virtual ~cGcApplicationState();
+    virtual ~cGcApplicationState() { EMPTY_CALL_DESTRUCTOR(); }
     virtual void ThreadedUpdate();
     virtual bool ThreadSyncPoint();
     virtual void BuildRenderQueue();

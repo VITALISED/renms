@@ -96,7 +96,6 @@ class cGcApplicationUGCBaseViewerState : public cGcApplicationState
         int miTimestamp;
     };
 
-    VFT<8> *__vftable;
     cGcNGuiLayer *mpNextPageLayer;
     cGcNGuiLayer *mpPreviousPageLayer;
     cGcNGuiLayer *mpSelectorUIRoot;

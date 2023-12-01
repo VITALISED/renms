@@ -26,13 +26,13 @@ SKYSCRAPER_BEGIN
 class cGcApplicationAmbientGameState : public cGcApplicationState
 {
   public:
-    void Construct();
-    void Prepare(cTkFSMState *, const void *);
-    void Update(float);
-    void Event(unsigned int, const void *);
-    void Release(cTkFSMState *, const void *);
-    void ThreadedUpdate();
-    bool ThreadSyncPoint();
+    virtual void Construct();
+    virtual void Prepare(cTkFSMState *, const void *);
+    virtual void Update(float);
+    virtual void Event(unsigned int, const void *);
+    virtual void Release(cTkFSMState *, const void *);
+    virtual void ThreadedUpdate();
+    virtual bool ThreadSyncPoint();
 };
 
 SKYSCRAPER_END

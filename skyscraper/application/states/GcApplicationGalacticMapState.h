@@ -26,19 +26,20 @@ SKYSCRAPER_BEGIN
 
 class cGcApplicationGalacticMapState : public cGcApplicationState
 {
+  public:
     bool mabMoveActive[2];
     cTkMatrix34 maMoveOrigin[2];
     bool mbRequestNextGalaxy;
     bool mbMultiplayer;
 
-    ~cGcApplicationGalacticMapState();
-    void Construct();
-    void Prepare(cTkFSMState *, const void *);
-    void Update(float);
-    void Event(unsigned int, const void *);
-    void Release(cTkFSMState *, const void *);
-    void Destruct();
-    void Render(EgRenderParity::List);
+    virtual ~cGcApplicationGalacticMapState();
+    virtual void Construct();
+    virtual void Prepare(cTkFSMState *, const void *);
+    virtual void Update(float);
+    virtual void Event(unsigned int, const void *);
+    virtual void Release(cTkFSMState *, const void *);
+    virtual void Destruct();
+    virtual void Render(EgRenderParity::List);
 };
 
 SKYSCRAPER_END

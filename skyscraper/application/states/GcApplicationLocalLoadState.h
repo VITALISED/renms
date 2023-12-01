@@ -17,12 +17,13 @@
 
 #pragma once
 
+#include <skyscraper.h>
+
 #include <application/states/GcApplicationState.h>
 #include <atlas/WinHttpTask.h>
 #include <engine/source/engine/EgMain.h>
 #include <simulation/player/GcPlayer.h>
 #include <simulation/player/GcPlayerRespawn.h>
-#include <skyscraper.h>
 #include <toolkit/maths/numeric/generic/TkMatrix34Generic.h>
 
 SKYSCRAPER_BEGIN
@@ -34,9 +35,9 @@ typedef WinHttpTask::State::Enum Enum;
 
 class cGcApplicationLocalLoadState : public cGcApplicationState
 {
+  public:
     typedef cGcPlayer::eRocketBootsDoubleTapState SaveRestoreMode;
 
-    VFT<8> *__vftable;
     cGcPlayerRespawn::RespawnReason meLoadReason;
     bool mColdBoot;
     bool mbWarpingToNewGalaxy;
@@ -44,10 +45,10 @@ class cGcApplicationLocalLoadState : public cGcApplicationState
     bool mbForceRespawnAsFreshStart;
     cGcApplicationLocalLoadState::SaveRestoreMode meSaveRestoreMode;
     LocalLoadPhase::Enum mPhase;
-    int mPrelaunchCountdown;
-    int mRepeatingPhaseCounter;
+    int32_t mPrelaunchCountdown;
+    int32_t mRepeatingPhaseCounter;
     Engine::cEgShaderCompilationState *mpShaderCompilationState;
-    unsigned __int64 mLoadTimerStartSystemTime;
+    uint64_t mLoadTimerStartSystemTime;
     cTkMatrix34 mSavedCameraMatrix;
     cTkPhysRelMat34 mLastFrameCameraMatrix;
     cTkVector3 mRenderOffset;
@@ -56,6 +57,14 @@ class cGcApplicationLocalLoadState : public cGcApplicationState
     float mfSavedFoVAdj;
     float mfSavedFoVAdjDist;
     float mfShaderLoadDisplayMsg;
+
+    virtual void Construct();
+    virtual void Prepare(cTkFSMState *, const void *);
+    virtual void Update(float);
+    virtual void Event(unsigned int, const void *);
+    virtual void Release(cTkFSMState *, const void *);
+    virtual void Destruct();
+    virtual void Render(EgRenderParity::List);
 };
 
 SKYSCRAPER_END

@@ -38,12 +38,12 @@ typedef WinHttpTask::State::Enum Enum;
 
 class cGcApplicationTitleScreenState : public cGcApplicationState, public ITkUserServiceNotifications
 {
+  public:
     struct State
     {
         TkAudioObject mAudioObject;
     };
 
-    VFT<8> *__vftable;
     cGcNGuiLayer *mpTitleUIRoot;
     cGcNGuiLayer *mpUserDetails;
     cGcNGuiTextSpecial *mpPlayerName;

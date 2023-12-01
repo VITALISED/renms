@@ -11,6 +11,7 @@ union TkID {
     TkID();
     TkID(const char *lpacString) { strcpy_s(mChars, Size, lpacString); }
     uint64_t CalcHash();
+    bool IsNull() { return !this->mUInt64[0] && !this->mUInt64[1]; }
     TkID<Size> operator=(const char *lpString)
     {
         if (!lpString) return this;
