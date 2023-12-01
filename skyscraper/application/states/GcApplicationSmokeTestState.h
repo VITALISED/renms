@@ -56,6 +56,14 @@ class cGcApplicationSmokeTestState : public cGcApplicationSimulationState
     // cGcSmokeTestScenario *mpSmokeTestScenario;
     // cGcSmokeTestScenario *mpSmokeTestCycleScenario;
     cTkVector<float> mafLowMemoryWatermarks;
+
+    virtual ~cGcApplicationSmokeTestState() { EMPTY_CALL_DESTRUCTOR(); }
+    virtual void Construct();
+    virtual void Prepare(cTkFSMState *, const void *);
+    virtual void Update(float);
+    virtual void Render(EgRenderParity::List);
+    virtual void ThreadedUpdate();
+    virtual bool ThreadSyncPoint();
 };
 
 SKYSCRAPER_END
