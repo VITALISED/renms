@@ -38,10 +38,10 @@ class ITkUserServiceNotifications
         std::string mNonce;
     };
 
-    virtual ~ITkUserServiceNotifications()                                                                  = 0;
-    virtual void AuthenticationTokenArrived(const uint64_t, const ITkUserServiceNotifications::AuthToken *) = 0;
-    virtual void AuthenticationTokenFailed(const uint64_t)                                                  = 0;
-    virtual void ServiceStateChanged()                                                                      = 0;
+    virtual ~ITkUserServiceNotifications();
+    virtual void AuthenticationTokenArrived(const uint64_t, const ITkUserServiceNotifications::AuthToken *);
+    virtual void AuthenticationTokenFailed(const uint64_t);
+    virtual void ServiceStateChanged();
 };
 
 SKYSCRAPER_END
