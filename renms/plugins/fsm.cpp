@@ -1,8 +1,10 @@
 #include <plugins/fsm.h>
 
 RENMS_HOOK(
-    cGcApplication__Update, renms::RelToAbsolute(0x19AF10), void,
-    (uint64_t thiscall) { return RENMS_CAST(cGcApplication__Update, thiscall); });
+    cGcApplication__Update, renms::RelToAbsolute(0x19AF10), void, (nms::cGcApplication * thiscall) {
+        spdlog::info(thiscall->mbFullyBooted);
+        return RENMS_CAST(cGcApplication__Update, thiscall);
+    });
 
 RENMS_BEGIN
 

@@ -126,35 +126,21 @@ class cGcApplicationGameModeSelectorState : public cGcApplicationState
     {
         cGcNGuiLayer *mpSlot;
         cGcNGuiLayer *mpChoiceRoot;
-        cGcNGuiGraphic *mpIcon;
-        cGcNGuiTextSpecial *mpModeTitle;
-        cGcNGuiTextSpecial *mpSubtitle;
-        cGcNGuiGraphic *mpBackground;
-        cGcNGuiGraphic *mpBackgroundDesaturated;
-        cGcNGuiGraphic *mpBackgroundLocked;
-        cGcNGuiLayer *mpHighlightLayer;
-        cGcNGuiLayer *mpSeasonLayer;
-        cGcNGuiTextSpecial *mpSeasonHeaderText;
-        cGcNGuiTextSpecial *mpSeasonTimeText;
-        cGcNGuiGraphic *mpSeasonTimeBackground;
-        cGcNGuiGraphic *mpSeasonTimeLowBackground;
-        cGcNGuiTextSpecial *mpSeasonDescText;
-        cGcNGuiTextSpecial *mpSeasonTitleText;
-        cGcNGuiText *mpSlotTitle;
-        cGcNGuiLayer *mpTwoLineSlot;
-        cGcNGuiText *mpTwoLineSlotTitle;
-        cGcNGuiText *mpSlotSummary;
-        cGcNGuiText *mpGameModeFinger;
-        cGcNGuiLayer *mpLayerSaveContainer;
-        cGcNGuiLayer *mpLayerSaveBlank;
-        cGcNGuiLayer *mpLayerSaveOK;
-        cGcNGuiTextSpecial *mpSaveTimeText;
-        cGcNGuiLayer *mpLayerPlayContainer;
-        cGcNGuiLayer *mpLayerPlayBlank;
-        cGcNGuiLayer *mpLayerPlayOK;
-        cGcNGuiTextSpecial *mpPlayTimeText;
-        cGcNGuiLayer *mpDisabled;
-        cTkSmoothCD<float> mfHighlightAlpha;
+        cGcNGuiTextSpecial *mpTitle;
+        cGcNGuiTextSpecial *mpUserName;
+        cGcNGuiText *mpDesc;
+        cGcNGuiTextSpecial *mpDesc2;
+        cGcNGuiGraphic *mpModeIcon;
+        cGcNGuiGraphic *mpScreenshotImage;
+        cGcNGuiLayer *mpStarsContainer;
+        cGcNGuiGraphic *mpStarsIcons[5];
+        cGcNGuiLayer *mpExtraContainer;
+        cGcNGuiGraphic *mpExtraIcon;
+        ePresetGameMode meMode;
+        cTkSmartResHandle mpTextureResourceHandle;
+        cEgTextureResource *mpTexResource;
+        bool mbEmptySlot;
+        cTkFixedString<256, char> mPreviewImageName;
     };
 
     cGcNGuiLayer *mpSelectorUIRoot;
@@ -169,9 +155,6 @@ class cGcApplicationGameModeSelectorState : public cGcApplicationState
     cGcNGuiLayer *mpError;
     cGcNGuiLayer *mpPatchNotesBox;
     cGcNGuiLayer *mpOKCancelDialog;
-    cGcNGuiLayer *mpModManagerUIRoot;
-    cGcNGuiLayer *mpModSaveManagerUIRoot;
-    cTkVector<bool> mCustomSavesDeletionSelectionState;
     cGcNGuiLayer *mpCustomDifficultyUIRoot;
     cGcNGuiLayer *mpOptionsUIRoot;
     cGcNGuiLayer *mpCreditsUIRoot;
@@ -180,10 +163,10 @@ class cGcApplicationGameModeSelectorState : public cGcApplicationState
     float mfStatusTextClearCountdown;
     float mfSlotWidth;
     cGcNGuiLayer *mpHoverLayer;
-    cGcApplicationGameModeSelectorState::EnumIconResources<ePresetGameMode, 7> mSmallGameModeIcons;
-    cGcApplicationGameModeSelectorState::EnumIconResources<eModeSelectPreset, 7> mModeSelectPresetIcons;
-    cGcApplicationGameModeSelectorState::EnumIconResources<eModeSelectPreset, 7> mModeSelectPresetBackgrounds;
-    cGcApplicationGameModeSelectorState::EnumIconResources<eModeSelectPreset, 7>
+    cGcApplicationGameModeSelectorState::EnumIconResources<enum ePresetGameMode, 7> mSmallGameModeIcons;
+    cGcApplicationGameModeSelectorState::EnumIconResources<enum eModeSelectPreset, 7> mModeSelectPresetIcons;
+    cGcApplicationGameModeSelectorState::EnumIconResources<enum eModeSelectPreset, 7> mModeSelectPresetBackgrounds;
+    cGcApplicationGameModeSelectorState::EnumIconResources<enum eModeSelectPreset, 7>
         mModeSelectPresetDesaturatedBackgrounds;
     cTkSmartResHandle mIconWarning;
     cGcApplicationGameModeSelectorState::WarningDlgComponents mWarningDlgComponents;
@@ -226,7 +209,6 @@ class cGcApplicationGameModeSelectorState : public cGcApplicationState
     cTkVector<GcGameStatePersistence::StorageSlotInformation> mSlotSaveStates;
     ScrollBarState mSaveSlotsScrollBarState;
     int miSlotsScrollStartIndex;
-    cTkVector<cGcModManager::ModInfo> mLoadedModsInfo;
     cTkStoragePersistent::LowSpaceWarningData mLowSpaceWarningData;
     float mfLowSpaceSkipDelay;
     bool mbFirstBoot;

@@ -52,9 +52,6 @@ class cGcApplicationSmokeTestState : public cGcApplicationSimulationState
     bool mbFinished;
     bool mbIsCompleted;
     bool mbIsExiting;
-    // these aren't used in release.
-    // cGcSmokeTestScenario *mpSmokeTestScenario;
-    // cGcSmokeTestScenario *mpSmokeTestCycleScenario;
     cTkVector<float> mafLowMemoryWatermarks;
 
     virtual ~cGcApplicationSmokeTestState() { EMPTY_CALL_DESTRUCTOR(); }

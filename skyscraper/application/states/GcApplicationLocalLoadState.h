@@ -19,7 +19,7 @@
 
 #include <skyscraper.h>
 
-#include <application/states/GcApplicationState.h>
+#include <application/states/GcApplicationBaseLoadingState.h>
 #include <atlas/WinHttpTask.h>
 #include <engine/source/engine/EgMain.h>
 #include <simulation/player/GcPlayer.h>
@@ -33,7 +33,7 @@ namespace LocalLoadPhase
 typedef WinHttpTask::State::Enum Enum;
 }
 
-class cGcApplicationLocalLoadState : public cGcApplicationState
+class cGcApplicationLocalLoadState : public cGcApplicationBaseLoadingState
 {
   public:
     typedef cGcPlayer::eRocketBootsDoubleTapState SaveRestoreMode;

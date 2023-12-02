@@ -19,6 +19,7 @@
 
 #include <skyscraper.h>
 
+#include <engine/source/engine/EgMain.h>
 #include <engine/source/engine/EgScene.h>
 #include <toolkit/maths/geometry/TkPhysRelMat34.h>
 #include <toolkit/maths/numeric/generic/TkMatrix44Generic.h>
@@ -36,6 +37,9 @@ class cGcAsyncLoadOps
         DrainShaders,
         DrainTasks,
     };
+
+    cTkStackVector<cGcAsyncLoadOps::Operation, 4> mMidPhaseOps;
+    Engine::cEgShaderCompilationState *mpShaderCompilationState;
 };
 
 namespace ApplicationStateEvents

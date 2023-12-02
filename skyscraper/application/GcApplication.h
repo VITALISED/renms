@@ -48,6 +48,7 @@ SKYSCRAPER_BEGIN
 
 class cGcApplication : public cTkFSM
 {
+  public:
     struct Data
     {
         // cGcFirstBootContext mFirstBootContext;
