@@ -51,8 +51,8 @@ class cGcApplication : public cTkFSM
   public:
     struct Data
     {
-        // cGcFirstBootContext mFirstBootContext;
-        // cTkMcQmcLFSRStore mTkMcQmcLFSRStore;
+        cGcFirstBootContext mFirstBootContext;
+        cTkMcQmcLFSRStore mTkMcQmcLFSRStore;
         // cGcRealityManager mRealityManager;
         // cGcGameState mGameState;
         // cGcSeasonalData mSeasonalData;
