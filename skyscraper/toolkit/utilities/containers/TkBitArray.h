@@ -22,17 +22,12 @@ template <typename T, bool Dynamic, unsigned int Size>
 class cTkBitArray
 {
   public:
-    // enum eTkStatic
-    // {
-    //     eDefault,
-    // };
+    enum eTkStatic
+    {
+        eDefault,
+    };
 
-    // enum eTkDynamic
-    // {
-    //     eDefault,
-    // };
-
-    // using type = eTkStatic;
+    using type = eTkStatic;
 
     cTkBitArrayStorage<T, Size> mStorage;
 };
@@ -41,17 +36,12 @@ template <typename T, unsigned int Size>
 class cTkBitArray<T, false, Size>
 {
   public:
-    // enum eTkStatic
-    // {
-    //     eDefault,
-    // };
+    enum eTkDynamic
+    {
+        eDefault,
+    };
 
-    // enum eTkDynamic
-    // {
-    //     eDefault,
-    // };
-
-    // using type = eTkDynamic;
+    using type = eTkDynamic;
 
     cTkBitArrayStorage<T, 0> mStorage;
 };
