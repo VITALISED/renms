@@ -4,14 +4,10 @@
 
 SKYSCRAPER_BEGIN
 
-#define TKBITARRAY_SIZE(size) ((size / 8) < 16 ? 1 : size / 8)
-
 template <typename Key, unsigned int Size>
 class cTkBitArrayStorage
 {
-    constexpr int GetSize(unsigned int liSize) { return TKBITARRAY_SIZE(liSize); }
-
-    Key mArray[GetSize(Size)];
+    Key mArray[Size / 64];
 };
 
 template <typename Key>
@@ -42,7 +38,7 @@ class cTkBitArray
 };
 
 template <typename T, unsigned int Size>
-class cTkBitArray<T, true, Size>
+class cTkBitArray<T, false, Size>
 {
   public:
     // enum eTkStatic
