@@ -25,7 +25,7 @@
               "not to modify this.\n\n#pragma once\n#include <toolkit/data/TkMetaData.h>\n\n"
 #define HM_NAMESPACE_BEGIN       buffer += "SKYSCRAPER_BEGIN\n";
 #define HM_NAMESPACE_END         buffer += "SKYSCRAPER_END\n";
-#define HM_CLASS_BEGIN(lpacName) buffer.append("class ").append(lpacName).append("\n{\n").append("    public:\n")
+#define HM_CLASS_BEGIN(lpacName) buffer.append("class ").append(lpacName).append("\n{\n").append("  public:\n")
 #define HM_CLASS_END             buffer.append("};\n")
 #define HM_INDENT                buffer += "    "
 #define HM_SEMI                  buffer += ";\n"
@@ -46,8 +46,8 @@
 #define HM_ENUMNOTATION(lpacName) std::string("E").append(lpacName).c_str()
 #define HM_FLAGNOTATION(lpacName) std::string("F").append(lpacName).c_str()
 
-#define HM_ENUM_BEGIN(lpacName)                                           \
-    buffer.append("enum ").append(HM_ENUMNAME(lpacName)).append("\n{\n"); \
+#define HM_ENUM_BEGIN(lpacName, lsType)                                                                \
+    buffer.append("enum ").append(HM_ENUMNAME(lpacName)).append(" : ").append(lsType).append("\n{\n"); \
     const char *__enum_id = lpacName
 #define HM_ENUM_VAL(lpacName, liValue)        \
     HM_INDENT;                                \
@@ -59,8 +59,8 @@
         .append(",\n")
 #define HM_ENUM_END buffer.append("};\n")
 
-#define HM_FLAG_BEGIN(lpacName)                                           \
-    buffer.append("enum ").append(HM_FLAGNAME(lpacName)).append("\n{\n"); \
+#define HM_FLAG_BEGIN(lpacName, lsType)                                                                \
+    buffer.append("enum ").append(HM_FLAGNAME(lpacName)).append(" : ").append(lsType).append("\n{\n"); \
     const char *__flag_id = lpacName
 #define HM_FLAG_VAL(lpacName, liValue)        \
     HM_INDENT;                                \

@@ -37,6 +37,7 @@ typedef WinHttpTask::State::Enum Enum;
 
 class cGcApplicationUGCBaseViewerState : public cGcApplicationState
 {
+  public:
     typedef cGcApplicationGameModeSelectorState::DisplayState DisplayState;
 
     struct State
@@ -96,7 +97,6 @@ class cGcApplicationUGCBaseViewerState : public cGcApplicationState
         int miTimestamp;
     };
 
-    VFT<8> *__vftable;
     cGcNGuiLayer *mpNextPageLayer;
     cGcNGuiLayer *mpPreviousPageLayer;
     cGcNGuiLayer *mpSelectorUIRoot;
@@ -125,6 +125,13 @@ class cGcApplicationUGCBaseViewerState : public cGcApplicationState
     unsigned int miLastUGCSubscriptionsCount;
     unsigned int miUGCPage;
     cTkVector<unsigned int> mUGCSubscriptionIdLookups;
+
+    virtual ~cGcApplicationUGCBaseViewerState() { EMPTY_CALL_DESTRUCTOR(); }
+    virtual void Construct();
+    virtual void Prepare(cTkFSMState *, const void *);
+    virtual void Update(float);
+    virtual void Release(cTkFSMState *, const void *);
+    virtual void Render(EgRenderParity::List);
 };
 
 SKYSCRAPER_END

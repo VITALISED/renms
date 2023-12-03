@@ -19,7 +19,7 @@
 
 #include <skyscraper.h>
 
-#include <application/states/GcApplicationState.h>
+#include <application/states/GcApplicationBaseLoadingState.h>
 #include <atlas/WinHttpTask.h>
 
 SKYSCRAPER_BEGIN
@@ -29,14 +29,15 @@ namespace CoreSrvLoadPhase
 typedef WinHttpTask::State::Enum Enum;
 };
 
-class cGcApplicationCoreServicesState : public cGcApplicationState
+class cGcApplicationCoreServicesState : public cGcApplicationBaseLoadingState
 {
+  public:
     CoreSrvLoadPhase::Enum mPhase;
-    void Construct();
-    void Destruct();
-    void Prepare(cTkFSMState *, const void *);
-    void Update(float);
-    void Release(cTkFSMState *, const void *);
+    virtual void Construct();
+    virtual void Destruct();
+    virtual void Prepare(cTkFSMState *, const void *);
+    virtual void Update(float);
+    virtual void Release(cTkFSMState *, const void *);
 };
 
 SKYSCRAPER_END

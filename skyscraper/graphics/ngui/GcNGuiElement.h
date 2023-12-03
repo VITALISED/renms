@@ -383,7 +383,7 @@ class cGcNGuiLayer;
 class cGcNGuiElement : public ITkNGuiDraggable
 {
   public:
-    enum eLayoutChangeEvent
+    enum eLayoutChangeEvent : char
     {
         ELayoutChange_Nothing,
         ELayoutChange_PositionMode,
@@ -414,7 +414,6 @@ class cGcNGuiElement : public ITkNGuiDraggable
     cGcNGuiElement::eLayoutChangeEvent meLayoutChangeEvent;
     eNGuiAnimationEvent meRequestAnim;
     cGcNGuiElement::sGcNGuiElementAnimSettings mAnim;
-    bool mbSelectedToEdit;
 
     virtual void Render();
     virtual int GetType() { return NULL; }

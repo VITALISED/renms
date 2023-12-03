@@ -23,8 +23,16 @@ SKYSCRAPER_BEGIN
 
 class cTkMatrix44
 {
-    union
+  public:
+    cTkMatrix44(const float *floatArray16)
     {
+        // for(int i = 0; i < 4; i++)
+        // {
+        //     int idx = 4 * i;
+        // }
+    }
+
+    union {
         float c[4][4];
         float x[16];
     };

@@ -57,12 +57,12 @@ class cGcApplicationDeathState : public cGcApplicationState
     bool mbPlayerWasInAbandonedFreighter;
     bool mbFirstUpdate;
 
-    ~cGcApplicationDeathState();
-    void Construct();
-    void Prepare(cTkFSMState *, const void *);
-    void Update(float);
-    void Release(cTkFSMState *, const void *);
-    void Render(EgRenderParity::List);
+    virtual ~cGcApplicationDeathState();
+    virtual void Construct();
+    virtual void Prepare(cTkFSMState *, const void *);
+    virtual void Update(float);
+    virtual void Release(cTkFSMState *, const void *);
+    virtual void Render(EgRenderParity::List);
 };
 
 SKYSCRAPER_END

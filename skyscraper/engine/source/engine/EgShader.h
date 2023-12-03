@@ -216,6 +216,14 @@ class cEgSMShaderContext
 
 class cEgShaderResource : public cEgResource
 {
+  public:
+    struct CombinationCompilationTask
+    {
+        cEgShaderResource *mpResource;
+        int miContextIndex;
+        uint64_t mxComboMask;
+    };
+
     cTkVector<cEgShaderContext> mContexts;
     cTkLinearHashTable<uint64_t, uint32_t, cTkHashTableHashPassthrough> mContextLookup;
     cTkVector<cEgShaderSampler> mSamplers;

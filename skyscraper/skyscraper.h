@@ -39,6 +39,8 @@
 #define SKYSCRAPER_END };
 // clang-format on
 
+#define ALIGN(size) __declspec(align(16))
+
 #define EMPTY_CALL()            return NULL
 #define EMPTY_CALL_VOID()       return
 #define EMPTY_CALL_DESTRUCTOR() ;

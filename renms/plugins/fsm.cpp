@@ -1,8 +1,17 @@
 #include <plugins/fsm.h>
 
+int gTicker = 0;
+
+void HandleGcApplicationUpdate(nms::cGcApplication *lGcApplication)
+{
+    spdlog::info(lGcApplication->mbFullyBooted);
+}
+
 RENMS_HOOK(
-    cGcApplication__Update, renms::RelToAbsolute(0x19AF10), void,
-    (uint64_t thiscall) { return RENMS_CAST(cGcApplication__Update, thiscall); });
+    cGcApplication__Update, renms::RelToAbsolute(0x19AF10), void, (nms::cGcApplication * thiscall) {
+        HandleGcApplicationUpdate(GetGcApplication());
+        return RENMS_CAST(cGcApplication__Update, thiscall);
+    });
 
 RENMS_BEGIN
 

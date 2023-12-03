@@ -1,0 +1,12 @@
+#pragma once
+
+#include <skyscraper.h>
+
+SKYSCRAPER_BEGIN
+
+#define TK_FNV_PRIME        0x100000001B3
+#define TK_FNV_OFFSET_BASIS 0xCBF29CE484222325
+
+#define TK_SPOOKY_SEED 0x72C085E2EE7C6F27
+
+SKYSCRAPER_END

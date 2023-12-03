@@ -91,10 +91,10 @@ class cGcApplicationGameModeSelectorState : public cGcApplicationState
         ERandom,
     };
 
-    template <typename T, unsigned int liCount>
+    template <typename T, uint32_t Count>
     struct EnumIconResources
     {
-        cTkSmartResHandle mResources[liCount];
+        cTkSmartResHandle mResources[Count];
     };
 
     struct WarningDlgComponents
@@ -115,8 +115,6 @@ class cGcApplicationGameModeSelectorState : public cGcApplicationState
         cGcApplicationGameModeSelectorState::MultiplayerState mMultplayerState;
         int miChosenIndex;
         int miFriendsPage;
-        int miModsPage;
-        int miModsSavesManagerPage;
         float mfConfirmationValue;
         bool mbWaitingOnInputGap;
         bool mbPlayingHoldAudio;
@@ -169,9 +167,6 @@ class cGcApplicationGameModeSelectorState : public cGcApplicationState
     cGcNGuiLayer *mpError;
     cGcNGuiLayer *mpPatchNotesBox;
     cGcNGuiLayer *mpOKCancelDialog;
-    cGcNGuiLayer *mpModManagerUIRoot;
-    cGcNGuiLayer *mpModSaveManagerUIRoot;
-    cTkVector<bool> mCustomSavesDeletionSelectionState;
     cGcNGuiLayer *mpCustomDifficultyUIRoot;
     cGcNGuiLayer *mpOptionsUIRoot;
     cGcNGuiLayer *mpCreditsUIRoot;
@@ -180,10 +175,10 @@ class cGcApplicationGameModeSelectorState : public cGcApplicationState
     float mfStatusTextClearCountdown;
     float mfSlotWidth;
     cGcNGuiLayer *mpHoverLayer;
-    cGcApplicationGameModeSelectorState::EnumIconResources<ePresetGameMode, 7> mSmallGameModeIcons;
-    cGcApplicationGameModeSelectorState::EnumIconResources<eModeSelectPreset, 7> mModeSelectPresetIcons;
-    cGcApplicationGameModeSelectorState::EnumIconResources<eModeSelectPreset, 7> mModeSelectPresetBackgrounds;
-    cGcApplicationGameModeSelectorState::EnumIconResources<eModeSelectPreset, 7>
+    cGcApplicationGameModeSelectorState::EnumIconResources<enum ePresetGameMode, 7> mSmallGameModeIcons;
+    cGcApplicationGameModeSelectorState::EnumIconResources<enum eModeSelectPreset, 7> mModeSelectPresetIcons;
+    cGcApplicationGameModeSelectorState::EnumIconResources<enum eModeSelectPreset, 7> mModeSelectPresetBackgrounds;
+    cGcApplicationGameModeSelectorState::EnumIconResources<enum eModeSelectPreset, 7>
         mModeSelectPresetDesaturatedBackgrounds;
     cTkSmartResHandle mIconWarning;
     cGcApplicationGameModeSelectorState::WarningDlgComponents mWarningDlgComponents;
@@ -226,7 +221,6 @@ class cGcApplicationGameModeSelectorState : public cGcApplicationState
     cTkVector<GcGameStatePersistence::StorageSlotInformation> mSlotSaveStates;
     ScrollBarState mSaveSlotsScrollBarState;
     int miSlotsScrollStartIndex;
-    cTkVector<cGcModManager::ModInfo> mLoadedModsInfo;
     cTkStoragePersistent::LowSpaceWarningData mLowSpaceWarningData;
     float mfLowSpaceSkipDelay;
     bool mbFirstBoot;
@@ -239,14 +233,14 @@ class cGcApplicationGameModeSelectorState : public cGcApplicationState
     cGcApplicationGameModeSelectorState::DisplayState meScreenToReturnToFromOptionsScreen;
     cGcApplicationGameModeSelectorState::CloudSaveUpdateState meCloudSaveUpdateState;
 
-    ~cGcApplicationGameModeSelectorState();
-    void Construct();
-    void Prepare(cTkFSMState *, const void *);
-    void Update(float);
-    void Event(unsigned int, const void *);
-    void Release(cTkFSMState *, const void *);
-    void Destruct();
-    void Render(EgRenderParity::List);
+    virtual ~cGcApplicationGameModeSelectorState() { EMPTY_CALL_DESTRUCTOR(); }
+    virtual void Construct();
+    virtual void Prepare(cTkFSMState *, const void *);
+    virtual void Update(float);
+    virtual void Event(unsigned int, const void *);
+    virtual void Release(cTkFSMState *, const void *);
+    virtual void Destruct();
+    virtual void Render(EgRenderParity::List);
 };
 
 SKYSCRAPER_END

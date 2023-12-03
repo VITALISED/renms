@@ -17,9 +17,9 @@
 
 #pragma once
 
-#include <application/states/GcApplicationSimulationState.h>
-#include <simulation/GcSmokeTestScenario.h>
 #include <skyscraper.h>
+
+#include <application/states/GcApplicationSimulationState.h>
 #include <toolkit/graphics/TkColour.h>
 #include <toolkit/maths/geometry/TkPhysRelMat34.h>
 #include <toolkit/maths/numeric/TkSmoothCD.h>
@@ -28,7 +28,7 @@ SKYSCRAPER_BEGIN
 
 class cGcApplicationSmokeTestState : public cGcApplicationSimulationState
 {
-    VFT<11> *__vftable;
+  public:
     cTkPhysRelMat34 mTransformForMovement;
     cTkPhysRelMat34 mTransformForLookAt;
     int miCurrentPlanet;
@@ -52,9 +52,15 @@ class cGcApplicationSmokeTestState : public cGcApplicationSimulationState
     bool mbFinished;
     bool mbIsCompleted;
     bool mbIsExiting;
-    cGcSmokeTestScenario *mpSmokeTestScenario;
-    cGcSmokeTestScenario *mpSmokeTestCycleScenario;
     cTkVector<float> mafLowMemoryWatermarks;
+
+    virtual ~cGcApplicationSmokeTestState() { EMPTY_CALL_DESTRUCTOR(); }
+    virtual void Construct();
+    virtual void Prepare(cTkFSMState *, const void *);
+    virtual void Update(float);
+    virtual void Render(EgRenderParity::List);
+    virtual void ThreadedUpdate();
+    virtual bool ThreadSyncPoint();
 };
 
 SKYSCRAPER_END

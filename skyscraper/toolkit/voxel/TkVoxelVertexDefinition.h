@@ -23,19 +23,19 @@ SKYSCRAPER_BEGIN
 
 class cTkVoxel
 {
-	unsigned __int16 mPack_Edit1_Mat4_Secmat4_Tex6;
-	unsigned __int16 mPack_Density16;
-	unsigned __int16 mPack_TileBlend16;
+    uint16_t mPack_Edit1_Mat4_Secmat4_Tex6;
+    uint16_t mPack_Density16;
+    uint16_t mPack_TileBlend16;
 };
 
 class cTkVoxelArray
 {
-	cTkVoxel* mpaVoxels;
-	int miSizeX;
-	int miSizeY;
-	int miSizeZ;
-	int miSizeZY;
-	unsigned int muVoxelMaterialMask;
+    cTkVoxel *mpaVoxels;
+    int32_t miSizeX;
+    int32_t miSizeY;
+    int32_t miSizeZ;
+    int32_t miSizeZY;
+    uint32_t muVoxelMaterialMask;
 };
 
 SKYSCRAPER_END

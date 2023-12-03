@@ -17,9 +17,11 @@
 
 #pragma once
 
-#include "../heridium.h"
-#include <cassert>
 #include <toolkit/data/TkMetaDataClasses.h>
+
+#include <cassert>
+
+#include "../heridium.h"
 
 using namespace nms;
 

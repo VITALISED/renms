@@ -17,17 +17,18 @@
 
 #pragma once
 
-#include <application/states/GcApplicationState.h>
-#include <simulation/GcPresetDualPMap.h>
-#include <simulation/GcPresetTerrainTexture.h>
-#include <simulation/solarsystem/asteroid/GcAsteroidLayout.h>
-#include <simulation/solarsystem/asteroids/gcasteroidgeneratorring.meta.h>
-#include <simulation/solarsystem/asteroids/gcasteroidgeneratorslab.meta.h>
-#include <simulation/solarsystem/asteroids/gcasteroidgeneratorsurround.meta.h>
 #include <skyscraper.h>
+
+#include <application/states/GcApplicationState.h>
+#include <simulation/solarsystem/asteroid/GcAsteroidPatternGenerator.h>
 #include <toolkit/graphics/2d/texture/TkDynamicTexture.h>
 #include <toolkit/maths/geometry/TkSphere.h>
 #include <toolkit/utilities/containers/TkVector.h>
+
+#include <simulation/solarsystem/asteroids/gcasteroidgeneratorring.meta.h>
+#include <simulation/solarsystem/asteroids/gcasteroidgeneratorslab.meta.h>
+#include <simulation/solarsystem/asteroids/gcasteroidgeneratorsurround.meta.h>
+#include <simulation/solarsystem/planet/gcplanetweathercolourdata.meta.h>
 
 SKYSCRAPER_BEGIN
 
@@ -39,8 +40,30 @@ struct HDRConfig
     float mfHDROffset;
 };
 
+class cGcPresetDualPMap
+{
+    cTkSmartResHandle mFront;
+    cTkSmartResHandle mBack;
+    TkStrongType<int, TkStrongTypeIDs::cTkNGuiFontHandleID> mPreview;
+    cGcPlanetWeatherColourData mWeather;
+    float mfIntensity;
+    cTkVector3 mLightDirection;
+    cTkFixedString<32, char> mName;
+};
+
+class cGcPresetTerrainTexture
+{
+    cTkSmartResHandle mTerrainMaterial;
+    cTkSmartResHandle mTextureDiffuseRes;
+    cTkSmartResHandle mTextureNormalRes;
+    std::array<cTkColour, 20> maAverageColour;
+    cTkFixedString<32, char> mName;
+    cTkFixedString<128, char> mFilename;
+};
+
 class cGcApplicationScratchpadState : public cGcApplicationState
 {
+  public:
     struct CustomData
     {
         float mfAsteroidSize;
@@ -76,9 +99,17 @@ class cGcApplicationScratchpadState : public cGcApplicationState
         cTkVector3 mvDebugRenderOffset;
     };
 
-    VFT<8> *__vftable;
     std::unique_ptr<cGcApplicationScratchpadState::CustomData> mCustomData;
     std::unique_ptr<cGcApplicationScratchpadState::StateData> mStateData;
+
+    virtual ~cGcApplicationScratchpadState() { EMPTY_CALL_DESTRUCTOR(); }
+    virtual void Construct();
+    virtual void Prepare(cTkFSMState *, const void *);
+    virtual void Update(float);
+    virtual void Event(unsigned int, const void *);
+    virtual void Release(cTkFSMState *, const void *);
+    virtual void Destruct();
+    virtual void Render(EgRenderParity::List);
 };
 
 SKYSCRAPER_END

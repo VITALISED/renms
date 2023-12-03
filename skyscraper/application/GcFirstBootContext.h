@@ -33,6 +33,7 @@ struct SystemSeed
 
 class cGcFirstBootContext
 {
+  public:
     typedef WinHttpTask::State::Enum State;
 
     enum GenerationMode

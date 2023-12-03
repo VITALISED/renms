@@ -19,7 +19,7 @@
 
 #include <skyscraper.h>
 
-#include <toolkit/attachments/TkHandle.h>
+#include <toolkit/core/types/TkTypes.h>
 #include <toolkit/graphics/TkColour.h>
 #include <toolkit/maths/numeric/generic/TkMatrix34Generic.h>
 #include <toolkit/maths/numeric/generic/TkVector3Generic.h>

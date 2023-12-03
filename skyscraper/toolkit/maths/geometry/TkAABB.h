@@ -18,13 +18,16 @@
 #pragma once
 
 #include <skyscraper.h>
+
 #include <toolkit/maths/numeric/generic/TkVector3Generic.h>
 
 SKYSCRAPER_BEGIN
 
 class cTkAABB
 {
-
+  public:
+    cTkVector3 mMin;
+    cTkVector3 mMax;
 };
 
 SKYSCRAPER_END

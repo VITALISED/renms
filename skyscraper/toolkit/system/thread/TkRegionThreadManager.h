@@ -23,9 +23,9 @@ SKYSCRAPER_BEGIN
 
 struct TkJobHandle
 {
-	int miQueue;
-	int miIndex;
-	unsigned __int64 muCount;
+    int32_t miQueue;
+    int32_t miIndex;
+    uint64_t muCount;
 };
 
 SKYSCRAPER_END

@@ -38,12 +38,12 @@ typedef WinHttpTask::State::Enum Enum;
 
 class cGcApplicationTitleScreenState : public cGcApplicationState, public ITkUserServiceNotifications
 {
+  public:
     struct State
     {
         TkAudioObject mAudioObject;
     };
 
-    VFT<8> *__vftable;
     cGcNGuiLayer *mpTitleUIRoot;
     cGcNGuiLayer *mpUserDetails;
     cGcNGuiTextSpecial *mpPlayerName;
@@ -55,6 +55,16 @@ class cGcApplicationTitleScreenState : public cGcApplicationState, public ITkUse
     float mfAppearFade;
     TkStrongType<int, TkStrongTypeIDs::TkResHandleID> mPipelineResource;
     cTkVector<bool> maPreviousPipelineStageState;
+
+    virtual ~cGcApplicationTitleScreenState() { EMPTY_CALL_DESTRUCTOR(); }
+    virtual void Construct();
+    virtual void Prepare(cTkFSMState *, const void *);
+    virtual void Update(float);
+    virtual void Event(unsigned int, const void *);
+    virtual void Release(cTkFSMState *, const void *);
+    virtual void Destruct();
+    virtual void Render(EgRenderParity::List);
+    virtual void ServiceStateChanged();
 };
 
 SKYSCRAPER_END

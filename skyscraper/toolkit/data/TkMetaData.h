@@ -19,6 +19,7 @@
 
 #include <skyscraper.h>
 
+#include <toolkit/core/types/TkTypes.h>
 #include <toolkit/data/TkClassPointer.h>
 #include <toolkit/data/TkMetaDataClasses.h>
 #include <toolkit/graphics/TkColour.h>
@@ -28,31 +29,9 @@
 #include <toolkit/resources/TkSmartResHandle.h>
 #include <toolkit/simulation/TkSeed.h>
 #include <toolkit/system/memory/pools/TkLinearMemoryPool.h>
-#include <toolkit/utilities/engine/TkEngineUtils.h>
 #include <toolkit/voxel/TkHalfVectors.h>
 
 SKYSCRAPER_BEGIN
-
-template <int32_t liSize>
-union TkID {
-    TkID() {}
-
-    TkID(const char *lpacString)
-    {
-        // uses hashes pretty sure, gonna have to figure out spookyhash later
-        strcpy_s(mChars, liSize, lpacString);
-    }
-
-    char mChars[liSize / 8];
-    uint64_t mUInt64[liSize / 64];
-};
-
-template <int32_t liSize>
-struct TkIDHashed
-{
-    TkID<liSize> mID;
-    uint64_t mHash;
-};
 
 class cTkMetaDataFunctionLookup
 {
@@ -60,12 +39,12 @@ class cTkMetaDataFunctionLookup
     const cTkMetaDataClass *mpClassMetadata;
     void (*mCreateDefaultFunction)(cTkClassPointer *, cTkLinearMemoryPool *);
     void (*mRenderFunction)(cTkClassPointer *);
-    void (*mFixingFunction)(cTkClassPointer *, bool, unsigned __int64);
+    void (*mFixingFunction)(cTkClassPointer *, bool, uint64_t);
     void (*mValidateDataFunction)(cTkClassPointer *);
     bool (*mEqualsFunction)(const cTkClassPointer *, const cTkClassPointer *);
     void (*mCopyFunction)(cTkClassPointer *, const cTkClassPointer *);
     cTkClassPointer *(*mCreatePtrFunction)(cTkClassPointer *result);
-    unsigned __int64 (*mHashFunction)(const cTkClassPointer *, unsigned __int64, bool);
+    uint64_t (*mHashFunction)(const cTkClassPointer *, uint64_t, bool);
     void (*mDestroyFunction)(cTkClassPointer *);
 };
 

@@ -16,7 +16,9 @@ See [BUILD.md](docs/BUILD.md) for instructions.
 
 The project currently only builds for Fractal 4.13 on GOG. Will be ported to OSX (yes I'll add archive mounting from FS) at some point. Supporting future versions of NMS is planned sometime after the 2023 expected expedition redux missions.
 
-We mostly live unofficially in the [No Man's Sky Retro discord](https://discord.gg/tEYNuMmAvR) but please don't come here for tech support. Open an issue or message us on Discord directly at @vitalised or @tractorbeam
+Toolkit types are in a fairly usable state, minus some mystery containers and miscellaneous rarely used data structures. Most of the work spent right now is getting GcApplication to play nice.
+
+We mostly live unofficially in the [No Man's Sky Retro discord](https://discord.gg/tEYNuMmAvR) but please don't come here for tech support. You can join our new somewhat official discord if you'd like to get in touch directly, or are just interested in development [here](https://discord.gg/SbEQFsJxNV)
 
 ## Contributing / Plugin Dev
 
