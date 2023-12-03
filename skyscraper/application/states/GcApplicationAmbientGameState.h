@@ -19,11 +19,11 @@
 
 #include <skyscraper.h>
 
-#include <application/states/GcApplicationState.h>
+#include <application/states/GcApplicationSimulationState.h>
 
 SKYSCRAPER_BEGIN
 
-class cGcApplicationAmbientGameState : public cGcApplicationState
+class cGcApplicationAmbientGameState : public cGcApplicationSimulationState
 {
   public:
     virtual void Construct();

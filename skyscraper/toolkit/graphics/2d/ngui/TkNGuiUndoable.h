@@ -25,6 +25,9 @@ SKYSCRAPER_BEGIN
 
 class cTkNGuiUndoable
 {
+  public:
+    cTkFixedString<64, char> mDescription;
+
     virtual ~cTkNGuiUndoable();
     virtual void Undo();
     virtual void Do();
@@ -32,12 +35,12 @@ class cTkNGuiUndoable
     virtual void GetData();
     virtual const char ToString();
     virtual unsigned int Icon();
-    cTkFixedString<64, char> mDescription;
 };
 
 template <typename T>
 class cTkNGuiTypeUndoable : public cTkNGuiUndoable
 {
+  public:
     T mFrom;
     T mTo;
     T *mpValue;
