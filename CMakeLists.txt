@@ -213,6 +213,10 @@ target_include_directories(
                        ${CMAKE_SOURCE_DIR}/metadata
 )
 
+if(MSVC)
+    target_compile_options(skyscraper PRIVATE "/wd26451")
+endif()
+
 # --------------------------------------------------------------------------------------------------
 # renms_proxy settings (None needed)
 
