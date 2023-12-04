@@ -27,17 +27,18 @@ class cTkDynamicArray
   public:
     union cTkDynamicArrayPointer {
         T *mpaArray;
-        __int64 miOffset;
+        int64_t miOffset;
     };
     cTkDynamicArray<T>::cTkDynamicArrayPointer mArray;
     int miSize;
     bool mbAllocatedFromData;
-    unsigned __int8 macMagicPad[3];
+    uint8_t macMagicPad[3];
 };
 
 template <typename T, unsigned int size>
 class cTkFixedArray
 {
+  public:
     T maArray[size];
 };
 

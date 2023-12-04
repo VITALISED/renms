@@ -1,3 +1,4 @@
+# -- Doxygen
 find_package(Doxygen REQUIRED)
 file(GLOB_RECURSE METADATA_HEADERS "../metadata" "*.h")
 file(GLOB_RECURSE SKYSCRAPER_HEADERS "../skyscraper" "*.h")
@@ -22,3 +23,21 @@ add_custom_command(
 )
 
 add_custom_target(Doxygen ALL DEPENDS ${DOXYGEN_INDEX_FILE})
+
+# -- Sphinx
+
+find_package(Sphinx REQUIRED)
+
+set(SPHINX_SOURCE ${CMAKE_CURRENT_SOURCE_DIR})
+set(SPHINX_BUILD ${CMAKE_CURRENT_BINARY_DIR}/docs/sphinx)
+
+add_custom_target(
+    Sphinx ALL
+    COMMAND
+        ${SPHINX_EXECUTABLE} -b html
+        # Tell Breathe where to find the Doxygen output
+        -Dbreathe_projects.ReNMS=${DOXYGEN_OUTPUT_DIR}/xml ${SPHINX_SOURCE}
+        ${SPHINX_BUILD}
+    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+    COMMENT "Generating documentation with Sphinx"
+)

@@ -4,11 +4,10 @@
 
 #include <toolkit/graphics/2d/ngui/NGuiAnimationEvent.h>
 #include <toolkit/graphics/2d/ngui/TkNGuiInput.h>
+#include <toolkit/graphics/2d/ngui/TkNGuiLayer.h>
 #include <toolkit/graphics/2d/ngui/TkNGuiStyleEntry.h>
 #include <toolkit/maths/numeric/generic/TkVector2Generic.h>
 #include <toolkit/utilities/containers/TkVector.h>
-#include <toolkit/graphics/2d/ngui/tknguila
-#include <toolkit/graphics/2d/ngui/TkNGuiLayer.h>
 
 #include <toolkit/ngui/tknguiforcedstyle.meta.h>
 
@@ -23,7 +22,6 @@ struct cTkUiDataMap
 
 struct cTkNGui
 {
-    VFT<4> *__vftable;
     cTkVector<eNGuiInputType> mInputStack;
     float mafFrameInverseMatrix[6];
     eNGuiInputType meLastInput;
@@ -41,7 +39,7 @@ struct cTkNGui
     cTkVector<cTkVector<cTkNGuiGraphicStyleEntry>> maTextStyleArray;
     robin_hood::detail::Table<
         true, 80, unsigned __int64, unsigned int, robin_hood::hash<unsigned __int64, void>,
-        std::equal_to<unsigned __int64>, -1>
+        std::equal_to<unsigned __int64>>
         maIDUseCounts;
     bool mbForceSpecialtextRebuild;
     bool mbRebuildSpecialText;
