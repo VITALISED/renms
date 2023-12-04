@@ -214,7 +214,7 @@ target_include_directories(
 )
 
 if(MSVC)
-    target_compile_options(skyscraper PRIVATE "/wd26451")
+    target_compile_options(skyscraper PRIVATE "/wd4369")
 endif()
 
 # --------------------------------------------------------------------------------------------------
@@ -236,6 +236,10 @@ target_include_directories(
     PUBLIC ${PROJECT_SOURCE_DIR}/skyscraper
     PUBLIC ${PROJECT_SOURCE_DIR}/metadata
 )
+
+if(MSVC)
+    target_compile_options(renms PRIVATE "/wd4369")
+endif()
 
 # --------------------------------------------------------------------------------------------------
 # relauncher settings (No settings needed)
