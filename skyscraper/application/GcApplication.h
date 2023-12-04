@@ -35,9 +35,12 @@
 #include <application/states/GcApplicationSmokeTestState.h>
 #include <application/states/GcApplicationTitleScreenState.h>
 #include <application/states/GcApplicationUGCBaseViewerState.h>
+#include <reality/GcRealityManager.h>
+#include <system/input/GcVibrationManager.h>
 #include <toolkit/maths/utilities/spatial/TkSampleDistribution.h>
 #include <toolkit/system/TkCSMutex.h>
 #include <toolkit/system/timer/TkStopwatch.h>
+#include <toolkit/system/timer/TkTimeManager.h>
 #include <toolkit/utilities/TkString.h>
 #include <toolkit/utilities/containers/TkVector.h>
 #include <toolkit/utilities/fsm/TkFSM.h>
@@ -49,34 +52,33 @@ SKYSCRAPER_BEGIN
 class cGcApplication : public cTkFSM
 {
   public:
-    struct Data
+    struct ALIGN(16) Data
     {
         cGcFirstBootContext mFirstBootContext;
         cTkMcQmcLFSRStore mTkMcQmcLFSRStore;
-        // cGcRealityManager mRealityManager;
-        // cGcGameState mGameState;
-        // cGcSeasonalData mSeasonalData;
-        // cGcSimulation mSimulation;
-        // cGcHUDManager mHUDManager;
-        // cGcFrontendManager mFrontendManager;
-        // cGcInWorldUIManager mInWorldUIManager;
-        // cGcCameraManager mCameraManager;
-        // cGcGraphicsManager mGraphicsManager;
-        // cTkInputManager *mpInputManager;
-        // cGcInputRemap mInputRemap;
-        // cGcVibrationManager mVibrationManager;
-        // cTkTimeManager mTimeManager;
-        // cTkDebugRenderer mDebugRenderer;
-        // cGcDebugEditor mDebugEditor;
-        // cGcNGuiManager mNGuiManager;
-        // cGcAudioManager mAudioManager;
-        // cGcAtlasManager mAtlasManager;
-        // cGcNetworkManager mNetworkManager;
-        // cGcResourceManager mResourceManager;
-        // cGcGalaxyMap mGalaxyMap;
-        // cGcGameAnalytics mGameAnalytics;
-        // cGcActivitiesTracker mActivitiesTracker;
-        uintptr_t stubby;
+        cGcRealityManager mRealityManager;
+        /*cGcGameState*/ char mGameState[0x43C560];
+        /*cGcSeasonalData*/ char mSeasonalData[0x69F0];
+        /*cGcSimulation*/ char mSimulation[0x25F7C0];
+        /*cGcHUDManager*/ char mHUDManager[0x145270];
+        /*cGcFrontendManager*/ char mFrontendManager[0x81E00];
+        /*cGcInWorldUIManager*/ char mInWorldUIManager[0x4A320];
+        /*cGcCameraManager*/ char mCameraManager[0x2B60];
+        /*cGcGraphicsManager*/ char mGraphicsManager[0x1603E0];
+        /*cTkInputManager*/ char *mpInputManager[0x1C80];
+        /*cGcInputRemap*/ char mInputRemap[0x950];
+        cGcVibrationManager mVibrationManager;
+        cTkTimeManager mTimeManager;
+        /*cTkDebugRenderer*/ char mDebugRenderer[0x108];
+        /*cGcDebugEditor*/ char mDebugEditor[0x9B0];
+        /*cGcNGuiManager*/ char mNGuiManager[0x768];
+        /*cGcAudioManager*/ char mAudioManager[0xB90];
+        /*cGcAtlasManager*/ char mAtlasManager[0xC0];
+        /*cGcNetworkManager*/ char mNetworkManager[0x21AB0];
+        /*cGcResourceManager*/ char mResourceManager[0x170];
+        /*cGcGalaxyMap*/ char mGalaxyMap[0x18];
+        /*cGcGameAnalytics*/ char mGameAnalytics[0x1F0];
+        /*cGcActivitiesTracker*/ char mActivitiesTracker[0x50];
     };
 
     cGcApplication::Data *mpData;

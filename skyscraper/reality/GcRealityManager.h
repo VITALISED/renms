@@ -2,20 +2,24 @@
 
 #include <skyscraper.h>
 
+#include <reality/GcNameGenerator.h>
 #include <toolkit/utilities/containers/TkUnorderedMap.h>
 #include <toolkit/utilities/containers/TkVector.h>
 
 #include <gameplay/gccombateffectstable.meta.h>
 #include <gamestate/playerdata/gcplayertitle.meta.h>
 #include <gamestate/trading/gcitemcosttable.meta.h>
+#include <reality/gcalienspeechtable.meta.h>
 #include <reality/gcconsumableitemtable.meta.h>
 #include <reality/gccosttable.meta.h>
+#include <reality/gcdialogclearancetable.meta.h>
 #include <reality/gcdiscoveryrewardlookuptable.meta.h>
 #include <reality/gcinventorytable.meta.h>
 #include <reality/gclegacyitemtable.meta.h>
 #include <reality/gcmaintenancegroupstable.meta.h>
 #include <reality/gcplayerdamagetable.meta.h>
 #include <reality/gcplayertitledata.meta.h>
+#include <reality/gcproceduralproductcategory.meta.h>
 #include <reality/gcproceduralproducttable.meta.h>
 #include <reality/gcproceduraltechnologytable.meta.h>
 #include <reality/gcproducttable.meta.h>
@@ -33,6 +37,7 @@
 #include <reality/gcunlockableseasonrewards.meta.h>
 #include <reality/gcunlockabletrees.meta.h>
 #include <reality/gcunlockabletwitchrewards.meta.h>
+#include <simulation/galaxy/gcgalaxyinfoicons.meta.h>
 #include <simulation/missions/gcmissiontable.meta.h>
 #include <simulation/missions/scheduling/gcmissioncommunitydata.meta.h>
 #include <simulation/missions/scheduling/gcmissionschedulestable.meta.h>
@@ -43,9 +48,47 @@
 
 SKYSCRAPER_BEGIN
 
+enum eMissionTable
+{
+    EMissionTable_Main,
+    EMissionTable_NPC,
+    EMissionTable_Wiki,
+    EMissionTable_Core,
+    EMissionTable_Tutorial,
+    EMissionTable_AtlasPath,
+    EMissionTable_Recurring,
+    EMissionTable_Fleet,
+    EMissionTable_Water,
+    EMissionTable_Multiplayer,
+    EMissionTable_BaseComputer,
+    EMissionTable_Community,
+    EMissionTable_PlanetProc,
+    EMissionTable_SpecialDialog,
+    EMissionTable_SpacePOI,
+    EMissionTable_Seasonal,
+    EMissionTable_SentinelsAndSettlements,
+    EMissionTable_Pirates,
+    EMissionTable_StatStories,
+    EMissionTable_Mods,
+    EMissionTable_NumTables,
+};
+
+struct PuzzleOptionOverride
+{
+    const cGcAlienPuzzleEntry *mpPuzzle;
+    int miOptionIndex;
+    cGcAlienPuzzleOption mOverride;
+};
+
 class cGcRealityManager
 {
   public:
+    struct MissionLookup
+    {
+        cGcGenericMissionSequence *mpMission;
+        eMissionTable meTable;
+    };
+
     cGcRealityManagerData *mpData;
     cGcSubstanceTable *mpSubstanceTable;
     cGcTechnologyTable *mpTechnologyTable;
@@ -89,7 +132,7 @@ class cGcRealityManager
     cTkUnorderedMap<TkID<128>, cGcTechnology *, TkIDUnorderedMap::Hash128> mTechnologyIDMap;
     cTkUnorderedMap<TkID<128>, cGcProceduralTechnologyData *, TkIDUnorderedMap::Hash128> mProcTechnologyIDMap;
     cTkUnorderedMap<TkID<128>, cGcProductData *, TkIDUnorderedMap::Hash128> mProductIDMap;
-    cTkUnorderedMap<TkID<128>, enum eProceduralProductCategory, TkIDUnorderedMap::Hash128> mProcProductIDMap;
+    cTkUnorderedMap<TkID<128>, eProceduralProductCategory, TkIDUnorderedMap::Hash128> mProcProductIDMap;
     robin_hood::detail::Table<
         true, 80, unsigned int, TkID<128>, robin_hood::hash<unsigned int, void>, std::equal_to<unsigned int>>
         mHashedTechIDMap;

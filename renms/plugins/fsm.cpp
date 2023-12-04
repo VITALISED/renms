@@ -4,7 +4,15 @@ int gTicker = 0;
 
 void HandleGcApplicationUpdate(nms::cGcApplication *lGcApplication)
 {
-    spdlog::info(lGcApplication->mbFullyBooted);
+    // spdlog::info(lGcApplication->mpData->mRealityManager.mpData->macCombatEffectsTable.macBuffer);
+    if (lGcApplication->mpData)
+    {
+        if (lGcApplication->mpData->mRealityManager.maDynamicHazardProtectionIcons.data() != NULL)
+        {
+            spdlog::info(
+                lGcApplication->mpData->mRealityManager.maDynamicHazardProtectionIcons.back().macFilename.macBuffer);
+        }
+    }
 }
 
 RENMS_HOOK(
