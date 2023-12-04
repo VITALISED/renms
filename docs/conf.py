@@ -36,10 +36,15 @@ exhale_args = {
 templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
+# Tell sphinx what the primary language being documented is.
+primary_domain = "cpp"
+
+# Tell sphinx what the pygments highlight language should be.
+highlight_language = "cpp"
 
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_theme = 'furo'
+html_theme = 'sphinx_rtd_theme'
 html_static_path = ['_static']
