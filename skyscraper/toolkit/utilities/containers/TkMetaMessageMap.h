@@ -19,7 +19,7 @@
 
 #include <skyscraper.h>
 
-#include <toolkit/utilities/containers/TkStackVector.h>
+#include <toolkit/utilities/containers/TkStackContainer.h>
 
 SKYSCRAPER_BEGIN
 
@@ -27,16 +27,16 @@ template <typename T>
 class cTkMetaMessageWrapperTemplated
 {
     const T *mpInstance;
-    unsigned __int64 mu64Hash;
+    uint64_t mu64Hash;
 };
 
-template <int unk>
+template <int Size>
 class cTkMetaMessageMap
 {
     robin_hood::detail::Table<
-        false, 80, unsigned __int64,
-        cTkStackVector<std::function<void __cdecl(cTkMetaMessageWrapperTemplated<void> const &)>>,
-        robin_hood::hash<unsigned __int64, void>, std::equal_to<unsigned __int64>>
+        false, 80, uint64_t,
+        cTkStackVector<std::function<void __cdecl(cTkMetaMessageWrapperTemplated<void> const &)>, Size>,
+        robin_hood::hash<uint64_t, void>, std::equal_to<uint64_t>>
         mSubscriptionMap;
 };
 

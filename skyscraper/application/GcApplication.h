@@ -35,6 +35,7 @@
 #include <application/states/GcApplicationSmokeTestState.h>
 #include <application/states/GcApplicationTitleScreenState.h>
 #include <application/states/GcApplicationUGCBaseViewerState.h>
+#include <atlas/GcAtlasManager.h>
 #include <reality/GcRealityManager.h>
 #include <system/input/GcVibrationManager.h>
 #include <toolkit/maths/utilities/spatial/TkSampleDistribution.h>
@@ -73,7 +74,7 @@ class cGcApplication : public cTkFSM
         /*cGcDebugEditor*/ char mDebugEditor[0x9B0];
         /*cGcNGuiManager*/ char mNGuiManager[0x768];
         /*cGcAudioManager*/ char mAudioManager[0xB90];
-        /*cGcAtlasManager*/ char mAtlasManager[0xC0];
+        cGcAtlasManager mAtlasManager;
         /*cGcNetworkManager*/ char mNetworkManager[0x21AB0];
         /*cGcResourceManager*/ char mResourceManager[0x170];
         /*cGcGalaxyMap*/ char mGalaxyMap[0x18];

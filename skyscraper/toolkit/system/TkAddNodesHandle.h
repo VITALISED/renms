@@ -18,6 +18,7 @@
 #pragma once
 
 #include <skyscraper.h>
+
 #include <toolkit/attachments/TkAttachment.h>
 
 SKYSCRAPER_BEGIN
@@ -33,15 +34,15 @@ class TkAddNodesHandle
 
     enum eState
     {
-        //Empty?
+        // Empty?
     };
 
-    TkStrongType<int,TkStrongTypeIDs::TkResHandleID> mSceneGraphResource;
+    TkStrongType<int, TkStrongTypeIDs::TkResHandleID> mSceneGraphResource;
     TkHandle mParentNode;
     TkHandle mNode;
     TkHandle mLastAddedNode;
     std::shared_ptr<TkAddNodesHandle> mpAddReferencedResourceHandle;
-    unsigned __int64 mu64Timeout;
+    uint64_t mu64Timeout;
     cEgSceneNodeTemplate *mpLastAddedTemplate;
     cTkAttachment *mpCurrentAttachment;
     int miCount;
