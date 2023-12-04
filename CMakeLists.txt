@@ -177,6 +177,7 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 add_subdirectory(skyscraper)
 add_subdirectory(renms)
 add_subdirectory(tools)
+add_subdirectory(docs)
 
 # --------------------------------------------------------------------------------------------------
 # uberclean - A completely thorough clean that removes EVERYTHING that isn't

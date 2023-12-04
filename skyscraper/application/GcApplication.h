@@ -50,6 +50,9 @@
 
 SKYSCRAPER_BEGIN
 
+/**
+ * A singleton managing most of the game's heap allocated structures and other singletons.
+ */
 class cGcApplication : public cTkFSM
 {
   public:
