@@ -408,3 +408,8 @@ NMS.exe
 # It makes a folder in the root of the project when we use Heridium
 # and sometimes we forget to remove it.
 RayRod's Multiverse/
+
+# Documentation
+docs/doxygen/*
+docs/_build/*
+docs/api/*

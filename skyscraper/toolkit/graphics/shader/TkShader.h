@@ -1,3 +1,24 @@
+/**
+ * @file TkShader.h
+ * @author VITALISED & Contributors
+ * @since 2023-12-05
+ *
+ * Copyright (C) 2023  VITALISED & Contributors
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 #pragma once
 
 #include <skyscraper.h>
@@ -15,12 +36,12 @@ struct TkShaderModule
 
 struct TkShaderBufferHandle
 {
-    unsigned __int16 muSize;
-    unsigned __int16 muOffset;
-    __int8 miFragmentSlot : 8;
-    __int8 miVertexSlot : 6;
-    __int8 mbIsPerFrame : 1;
-    __int8 mbIsCustomPerMaterial : 1;
+    uint16_t muSize;
+    uint16_t muOffset;
+    int8_t miFragmentSlot : 8;
+    int8_t miVertexSlot : 6;
+    int8_t mbIsPerFrame : 1;
+    int8_t mbIsCustomPerMaterial : 1;
 };
 
 class cTkVertexAttributeMapping
@@ -71,8 +92,8 @@ class cTkShader : public cTkShaderBase
   public:
     struct D3D12_INPUT_ELEMENT_DESC_MINIMAL
     {
-        unsigned __int8 Location;
-        unsigned __int8 SemanticIndex;
+        uint8_t Location;
+        uint8_t SemanticIndex;
     };
 
     cTkVertexAttributeMapping mVertexAttributeMap;
@@ -85,13 +106,13 @@ class cTkShader : public cTkShaderBase
     unsigned int mShaderInputsHash;
     unsigned int mInputElementCount;
     cTkShader::D3D12_INPUT_ELEMENT_DESC_MINIMAL mInputElementDesc[24];
-    unsigned __int8 mInputElementLocationMap[24];
-    unsigned __int8 mInputElementSemanticIdMap[24];
+    uint8_t mInputElementLocationMap[24];
+    uint8_t mInputElementSemanticIdMap[24];
     unsigned int mUsedSamplerBitfield;
     unsigned int mUsedStorageBitfield;
     unsigned int muPerFrameUniformHash;
-    unsigned __int16 muTotalSize;
-    unsigned __int16 muTotalSizePerFrame;
+    uint16_t muTotalSize;
+    uint16_t muTotalSizePerFrame;
     bool mbVertexShaderReadsTextures;
     bool mbNeedsHighLayout;
     bool mbAllocated;

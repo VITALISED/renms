@@ -32,8 +32,8 @@ std::string HeridiumCXXFile::GetEnumSizeType(int liType)
 {
     switch (liType)
     {
-    case 1: return "char";
-    case 4: return "int";
+    case 1: return "uint8_t";
+    case 4: return "uint32_t";
     default: spdlog::error("Unhandled type size {}", liType); return "?";
     }
 }
@@ -41,8 +41,6 @@ std::string HeridiumCXXFile::GetEnumSizeType(int liType)
 std::string HeridiumCXXFile::DoEnumLookup(cTkMetaDataMember *lpCurrentMember)
 {
     HM_BEGIN_BUFFER;
-
-    HM_NAMESPACE_BEGIN;
 
     HM_ENUM_BEGIN(lpCurrentMember->mpacName, this->GetEnumSizeType(lpCurrentMember->miSize));
 
@@ -54,16 +52,12 @@ std::string HeridiumCXXFile::DoEnumLookup(cTkMetaDataMember *lpCurrentMember)
 
     HM_ENUM_END;
 
-    HM_NAMESPACE_END;
-
     return HM_BUFFER;
 }
 
 std::string HeridiumCXXFile::DoFlagLookup(cTkMetaDataMember *lpCurrentMember)
 {
     HM_BEGIN_BUFFER;
-
-    HM_NAMESPACE_BEGIN;
 
     HM_FLAG_BEGIN(lpCurrentMember->mpacName, this->GetEnumSizeType(lpCurrentMember->miSize));
 
@@ -77,8 +71,6 @@ std::string HeridiumCXXFile::DoFlagLookup(cTkMetaDataMember *lpCurrentMember)
     }
 
     HM_FLAG_END;
-
-    HM_NAMESPACE_END;
 
     return HM_BUFFER;
 }
@@ -100,6 +92,8 @@ std::string HeridiumCXXFile::FindIncludePathForClass(const char *lpacClassName)
 std::string HeridiumCXXFile::DoHeaderFirstPass()
 {
     HM_BEGIN_BUFFER;
+
+    HM_BEGIN_ENUM_BUFFER;
 
     for (int i = 0; i < this->mpMetaDataClass->miNumMembers; i++)
     {
@@ -133,7 +127,7 @@ std::string HeridiumCXXFile::DoHeaderFirstPass()
         }
     }
 
-    HM_PUSHSTRING("\n");
+    if (this->mbAddedInclude) { HM_PUSHSTRING("\n"); }
 
     return HM_BUFFER;
 }
@@ -165,14 +159,12 @@ void HeridiumCXXFile::WriteHeaderFile()
 
     HM_NAMESPACE_BEGIN;
 
+    HM_PUSHSTRING(this->msEnumBuffer);
+
     HM_CLASS_BEGIN(this->mpMetaDataClass->mpacName);
 
-    // hashes
-    HM_MEMBER_VAL(
-        "static const unsigned long long", "muNameHash", fmt::format("0x{:X}", this->mpMetaDataClass->muNameHash));
-    HM_MEMBER_VAL(
-        "static const unsigned long long", "muTemplateHash",
-        fmt::format("0x{:X}", this->mpMetaDataClass->muTemplateHash));
+    TYPEDEF_ENUM_VAL("mu64ClassNameHash", fmt::format("0x{:X}", this->mpMetaDataClass->muNameHash));
+    TYPEDEF_ENUM_VAL("mu64TemplateHash", fmt::format("0x{:X}", this->mpMetaDataClass->muTemplateHash));
 
     HM_PUSHSTRING("\n");
 

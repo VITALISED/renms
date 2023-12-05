@@ -1,4 +1,4 @@
-# Copyright (C) 2023  VITALISED, tractorbeam
+# Copyright (C) 2023  VITALISED & Contributors
 #
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -21,122 +21,71 @@ project(
     VERSION 0.3
 )
 
-# Set the output directory properly.
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin")
-message(STATUS "Binaries will be placed in: ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
+# ==================================================================================================
+# Includes
 
-# Fix a dumb problem with certain setups where it adds "lib" to the front of the
-# library name.
-set(CMAKE_STATIC_LIBRARY_PREFIX "")
-set(CMAKE_SHARED_LIBRARY_PREFIX "")
+set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 
-# Fix a problem with Ninja where it doesn't place a newline and the first cmake
-# output is on the same line as Ninja's.
-if(CMAKE_GENERATOR STREQUAL "Ninja")
-    message("")
+include(AddSubmoduleDependency)
+include(ConfigParser)
+include(PrefixSourceFile)
+
+# ==================================================================================================
+# Local features
+
+if(${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_CURRENT_SOURCE_DIR})
+
+    # Set the output directory properly.
+    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin")
+    message(
+        STATUS "Binaries will be placed in: ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}"
+    )
+
+    # Fix a problem with Ninja where it doesn't place a newline and the first
+    # cmake output is on the same line as Ninja's.
+    if(CMAKE_GENERATOR STREQUAL "Ninja")
+        message("")
+    endif()
+
+    if(CMAKE_BUILD_TYPE STREQUAL "" OR CMAKE_BUILD_TYPE STREQUAL "None")
+        set(CMAKE_BUILD_TYPE
+            "Release"
+            CACHE STRING "Choose the type of build." FORCE
+        )
+    endif()
+
+    # ==============================================================================================
+    # Config Stuff
+    if(EXISTS "${CMAKE_SOURCE_DIR}/config.cmake")
+        include(${CMAKE_SOURCE_DIR}/config.cmake)
+    else()
+        message(
+            FATAL_ERROR
+                "No config.cmake found! Check out the config-template.cmake."
+        )
+    endif()
+
+    parse_config_values_renms()
+    # ==============================================================================================
+
+else()
+    include(DefaultConfig)
 endif()
 
 # ==================================================================================================
 # First checks.
 
-# Check if this is being added as a subdirectory.
-if(NOT CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
-    message(
-        FATAL_ERROR
-            "renms is not meant to be added as a subdirectory! Unfortunately, you'll have to \
-stick with copying your project into renms's renms/plugins folder to build. Sorry for \
-the inconvenience!"
-    )
-endif()
-
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     add_definitions(-DDEBUG -D_DEBUG)
-endif()
-
-if(CMAKE_BUILD_TYPE STREQUAL "" OR CMAKE_BUILD_TYPE STREQUAL "None")
-    set(CMAKE_BUILD_TYPE
-        "Release"
-        CACHE STRING "Choose the type of build." FORCE
-    )
-endif()
-
-if(EXISTS "${CMAKE_SOURCE_DIR}/config.cmake")
-    include(./config.cmake)
-else()
-    message(
-        FATAL_ERROR
-            "No config.cmake found! Check out the config-template.cmake."
-    )
-endif()
-
-if(NOT DEFINED RENMS_CONFIG_VERSION OR RENMS_CONFIG_VERSION LESS 3)
-    message(
-        WARNING
-            "Your config.cmake is out of date! Chances are it'll still build fine, but I highly \
-suggest checking out the config-template.cmake and updating your config.cmake."
-    )
-
-endif()
-
-if(NOT DEFINED NMS_EXE_PATH AND NOT SKIP_NMS_CHECK)
-    message(
-        FATAL_ERROR
-            "NMS_EXE_PATH not defined!\n\
-Look inside the config.cmake for the option, and set it's exact path. \
-It must be the directory that contains NMS.exe. See the BUILD.md for why it needs to know this."
-    )
-
-endif()
-
-get_filename_component(NMS_EXE_PATH "${NMS_EXE_PATH}" ABSOLUTE)
-get_filename_component(NMS_BIN_PATH "${NMS_EXE_PATH}" DIRECTORY)
-if(NOT EXISTS "${NMS_EXE_PATH}" AND NOT SKIP_NMS_CHECK)
-    message(
-        FATAL_ERROR
-            "NMS_EXE_PATH either isn't a valid directory or doesn't contain NMS.exe!\n\
-Look inside the config.cmake for the option, and set it's exact path. \
-It must be the directory that contains NMS.exe. See the BUILD.md for why it needs to know this."
-    )
-
-elseif(NOT SKIP_NMS_CHECK)
-    message(STATUS "NMS Executable found: ${NMS_EXE_PATH}")
-else()
-    message(
-        STATUS
-            "NMS.exe check skipped! Unless you already extracted all the metadata, the build will fail! Be warned!"
-    )
 endif()
 
 # ==================================================================================================
 # Dependencies.
 
-# set Polyhook to use our runtime
+# set Polyhook to use dynamic runtime
 if(MSVC)
     set(POLYHOOK_BUILD_STATIC_RUNTIME OFF)
 endif()
-
-macro(add_dependency_custom dir include)
-    message(STATUS "Adding dependency: ${dir} (${include})")
-
-    file(GLOB_RECURSE HEADERS "${CMAKE_SOURCE_DIR}/${dir}/*.h")
-    if(HEADERS STREQUAL "")
-        execute_process(
-            COMMAND git submodule update --init --recursive ${dir}
-            WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-        )
-    endif()
-
-    if(EXISTS "${CMAKE_SOURCE_DIR}/${dir}/CMakeLists.txt")
-        add_subdirectory(${dir} SYSTEM)
-        set_source_files_properties(
-            DIRECTORY ${dir} PROPERTIES COMPILE_FLAGS "-w"
-        )
-        set_source_files_properties(
-            DIRECTORY ${dir} PROPERTIES LINKER_FLAGS "-w"
-        )
-    endif()
-    include_directories(${CMAKE_SOURCE_DIR}/${include} SYSTEM)
-endmacro()
 
 add_dependency_custom(./submodules/libSceFios2 ./submodules/libSceFios2)
 add_dependency_custom(./submodules/inifile-cpp ./submodules/inifile-cpp/include)
@@ -177,6 +126,27 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 add_subdirectory(skyscraper)
 add_subdirectory(renms)
 add_subdirectory(tools)
+add_subdirectory(docs)
+
+file(GLOB_RECURSE RENMS_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/renms/*.cpp
+     ${CMAKE_CURRENT_SOURCE_DIR}/renms/*.h
+)
+
+foreach(SOURCE_ITEM ${RENMS_SOURCES})
+    add_sources_prefix_renms(${SOURCE_ITEM})
+endforeach()
+
+file(GLOB_RECURSE SKYSCRAPER_SOURCES
+     ${CMAKE_CURRENT_SOURCE_DIR}/skyscraper/*.cpp
+     ${CMAKE_CURRENT_SOURCE_DIR}/skyscraper/*.h
+)
+
+foreach(SOURCE_ITEM ${SKYSCRAPER_SOURCES})
+    add_sources_prefix_renms(${SOURCE_ITEM})
+endforeach()
+
+# No library prefixes, useful for cross-compiling users
+set_target_properties(renms heridium PROPERTIES PREFIX "")
 
 # --------------------------------------------------------------------------------------------------
 # uberclean - A completely thorough clean that removes EVERYTHING that isn't
@@ -187,30 +157,40 @@ add_custom_target(
     COMMAND git submodule deinit --all -f
     COMMAND ${CMAKE_COMMAND} -E remove_directory
             ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
-    COMMAND ${CMAKE_COMMAND} -E remove_directory ${PROJECT_SOURCE_DIR}/metadata
-    COMMAND ${CMAKE_COMMAND} -E remove_directory ${PROJECT_SOURCE_DIR}/build
+    COMMAND ${CMAKE_COMMAND} -E remove_directory
+            ${CMAKE_CURRENT_SOURCE_DIR}/metadata
+    COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_CURRENT_SOURCE_DIR}/bin
+    COMMAND ${CMAKE_COMMAND} -E remove_directory
+            ${CMAKE_CURRENT_SOURCE_DIR}/docs/doxygen/html
+    COMMAND ${CMAKE_COMMAND} -E remove_directory
+            ${CMAKE_CURRENT_SOURCE_DIR}/docs/doxygen/latex
+    COMMAND ${CMAKE_COMMAND} -E remove_directory
+            ${CMAKE_CURRENT_SOURCE_DIR}/docs/doxygen/xml
+    COMMAND ${CMAKE_COMMAND} -E remove_directory
+            ${CMAKE_CURRENT_SOURCE_DIR}/build
 )
 
 # --------------------------------------------------------------------------------------------------
 # resdk - Generates the metadata classes for renms, giving it enough headers to
 # make plugins for it.
-make_directory(${PROJECT_SOURCE_DIR}/metadata)
+make_directory(${CMAKE_CURRENT_SOURCE_DIR}/metadata)
 
-add_custom_target(resdk DEPENDS ${PROJECT_SOURCE_DIR}/metadata/metadata.h)
+add_custom_target(resdk DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/metadata/metadata.h)
 
 add_custom_command(
-    OUTPUT ${PROJECT_SOURCE_DIR}/metadata/metadata.h
+    OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/metadata/metadata.h
     COMMAND "$<TARGET_FILE:relauncher>" "${NMS_EXE_PATH}"
             "$<TARGET_FILE:heridium>"
-    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/metadata
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/metadata
     DEPENDS heridium
 )
 
 # --------------------------------------------------------------------------------------------------
 # skyscraper settings
 target_include_directories(
-    skyscraper PRIVATE ${CMAKE_SOURCE_DIR} ${CMAKE_SOURCE_DIR}/skyscraper
-                       ${CMAKE_SOURCE_DIR}/metadata
+    skyscraper
+    PRIVATE ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/skyscraper
+            ${CMAKE_CURRENT_SOURCE_DIR}/metadata
 )
 
 # --------------------------------------------------------------------------------------------------
@@ -227,10 +207,10 @@ set_target_properties(renms PROPERTIES OUTPUT_NAME renms)
 
 target_include_directories(
     renms
-    PUBLIC ${PROJECT_SOURCE_DIR}
-    PUBLIC ${PROJECT_SOURCE_DIR}/renms
-    PUBLIC ${PROJECT_SOURCE_DIR}/skyscraper
-    PUBLIC ${PROJECT_SOURCE_DIR}/metadata
+    PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
+    PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/renms
+    PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/skyscraper
+    PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/metadata
 )
 
 # --------------------------------------------------------------------------------------------------
@@ -241,7 +221,8 @@ target_include_directories(
 target_compile_definitions(heridium PRIVATE RENMS)
 
 target_include_directories(
-    heridium PUBLIC ${CMAKE_SOURCE_DIR}/skyscraper ${CMAKE_SOURCE_DIR}/renms
+    heridium PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/skyscraper
+                    ${CMAKE_CURRENT_SOURCE_DIR}/renms
 )
 # Some of skyscraper's stuff requires the metadata that heridium generates, so
 # we need to include only the bit of skyscraper that heridium needs.

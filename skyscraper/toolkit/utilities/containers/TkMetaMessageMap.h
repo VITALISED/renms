@@ -1,25 +1,29 @@
-/*
-    Copyright (C) 2023  VITALISED, tractorbeam
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <https://www.gnu.org/licenses/>.
-*/
+/**
+ * @file TkMetaMessageMap.h
+ * @author VITALISED & Contributors
+ * @since 2023-12-05
+ * 
+ * Copyright (C) 2023  VITALISED & Contributors
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
 
 #pragma once
 
 #include <skyscraper.h>
 
-#include <toolkit/utilities/containers/TkStackVector.h>
+#include <toolkit/utilities/containers/TkStackContainer.h>
 
 SKYSCRAPER_BEGIN
 
@@ -27,16 +31,16 @@ template <typename T>
 class cTkMetaMessageWrapperTemplated
 {
     const T *mpInstance;
-    unsigned __int64 mu64Hash;
+    uint64_t mu64Hash;
 };
 
-template <int unk>
+template <int Size>
 class cTkMetaMessageMap
 {
     robin_hood::detail::Table<
-        false, 80, unsigned __int64,
-        cTkStackVector<std::function<void __cdecl(cTkMetaMessageWrapperTemplated<void> const &)>>,
-        robin_hood::hash<unsigned __int64, void>, std::equal_to<unsigned __int64>>
+        false, 80, uint64_t,
+        cTkStackVector<std::function<void __cdecl(cTkMetaMessageWrapperTemplated<void> const &)>, Size>,
+        robin_hood::hash<uint64_t, void>, std::equal_to<uint64_t>>
         mSubscriptionMap;
 };
 
