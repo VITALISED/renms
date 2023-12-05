@@ -163,12 +163,8 @@ void HeridiumCXXFile::WriteHeaderFile()
 
     HM_CLASS_BEGIN(this->mpMetaDataClass->mpacName);
 
-    // hashes
-    HM_MEMBER_VAL(
-        "static const unsigned long long", "muNameHash", fmt::format("0x{:X}", this->mpMetaDataClass->muNameHash));
-    HM_MEMBER_VAL(
-        "static const unsigned long long", "muTemplateHash",
-        fmt::format("0x{:X}", this->mpMetaDataClass->muTemplateHash));
+    TYPEDEF_ENUM_VAL("mu64ClassNameHash", fmt::format("0x{:X}", this->mpMetaDataClass->muNameHash));
+    TYPEDEF_ENUM_VAL("mu64TemplateHash", fmt::format("0x{:X}", this->mpMetaDataClass->muTemplateHash));
 
     HM_PUSHSTRING("\n");
 

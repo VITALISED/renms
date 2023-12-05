@@ -1,5 +1,5 @@
 /**
- * @file TkArray.h
+ * @file TkString.cpp
  * @author VITALISED & Contributors
  * @since 2023-12-05
  * 
@@ -19,31 +19,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#pragma once
-
-#include <skyscraper.h>
+#include <toolkit/utilities/string/TkString.h>
 
 SKYSCRAPER_BEGIN
-
-template <typename T>
-class cTkDynamicArray
-{
-  public:
-    union cTkDynamicArrayPointer {
-        T *mpaArray;
-        int64_t miOffset;
-    };
-    cTkDynamicArray<T>::cTkDynamicArrayPointer mArray;
-    int miSize;
-    bool mbAllocatedFromData;
-    uint8_t macMagicPad[3];
-};
-
-template <typename T, unsigned int size>
-class cTkFixedArray
-{
-  public:
-    T maArray[size];
-};
 
 SKYSCRAPER_END

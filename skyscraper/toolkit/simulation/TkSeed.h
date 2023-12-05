@@ -28,7 +28,7 @@ SKYSCRAPER_BEGIN
 class cTkSeed
 {
   public:
-    unsigned __int64 mu64SeedValue;
+    uint64_t mu64SeedValue;
     bool mbValid;
 };
 

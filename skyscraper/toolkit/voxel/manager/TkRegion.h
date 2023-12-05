@@ -27,7 +27,7 @@
 #include <toolkit/graphics/TkColour.h>
 #include <toolkit/maths/numeric/generic/TkMatrix34Generic.h>
 #include <toolkit/maths/numeric/generic/TkVector3Generic.h>
-#include <toolkit/resources/TkSmartResHandle.h>
+#include <toolkit/resources/TkResource.h>
 #include <toolkit/utilities/TkString.h>
 #include <toolkit/voxel/TkVoxelVertexDefinition.h>
 #include <toolkit/voxel/manager/TkRegionMap.h>
