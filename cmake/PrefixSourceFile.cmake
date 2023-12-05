@@ -1,6 +1,6 @@
-# this function: iterates all files, gets their name component, checks if
-# they've already been prepended with relevant infos then prepends the docstring
-# and configures any relevant values
+# this function checks if the current source file has @file, if not prepends the
+# current source file prelude specified below and replaces all values surrounded
+# in @
 macro(add_sources_prefix_renms SOURCE_FILE_RENMS)
     message(${SOURCE_FILE_RENMS})
 
