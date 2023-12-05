@@ -33,7 +33,7 @@ std::string HeridiumCXXFile::GetEnumSizeType(int liType)
     switch (liType)
     {
     case 1: return "char";
-    case 4: return "int";
+    case 4: return "unsigned int";
     default: spdlog::error("Unhandled type size {}", liType); return "?";
     }
 }
