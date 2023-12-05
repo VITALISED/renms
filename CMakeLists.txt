@@ -132,8 +132,17 @@ file(GLOB_RECURSE RENMS_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/renms/*.cpp
      ${CMAKE_CURRENT_SOURCE_DIR}/renms/*.h
 )
 
-foreach(ITEMGUH ${RENMS_SOURCES})
-    add_sources_prefix_renms(${ITEMGUH})
+foreach(SOURCE_ITEM ${RENMS_SOURCES})
+    add_sources_prefix_renms(${SOURCE_ITEM})
+endforeach()
+
+file(GLOB_RECURSE SKYSCRAPER_SOURCES
+     ${CMAKE_CURRENT_SOURCE_DIR}/skyscraper/*.cpp
+     ${CMAKE_CURRENT_SOURCE_DIR}/skyscraper/*.h
+)
+
+foreach(SOURCE_ITEM ${SKYSCRAPER_SOURCES})
+    add_sources_prefix_renms(${SOURCE_ITEM})
 endforeach()
 
 # No library prefixes, useful for cross-compiling users
