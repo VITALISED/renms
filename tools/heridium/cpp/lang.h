@@ -27,6 +27,8 @@ class HeridiumCXXFile
     const char *mpacFileLocation;
     const cTkMetaDataClass *mpMetaDataClass;
     std::vector<const char *> mDefinedTypes;
+    std::string msEnumBuffer;
+    bool mbAddedInclude;
 
   public:
     std::string FindIncludePathForClass(const char *lpacClassName);
