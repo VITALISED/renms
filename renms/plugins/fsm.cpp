@@ -4,7 +4,7 @@ int gTicker = 0;
 
 void HandleGcApplicationUpdate(nms::cGcApplication *lGcApplication)
 {
-    // spdlog::info(lGcApplication->mpData->mRealityManager.mpData->macCombatEffectsTable.macBuffer);
+    /* spdlog::info(lGcApplication->mpData->mRealityManager.mpData->macCombatEffectsTable.macBuffer);
     if (lGcApplication->mpData)
     {
         if (lGcApplication->mpData->mRealityManager.maDynamicHazardProtectionIcons.data() != NULL)
@@ -12,7 +12,7 @@ void HandleGcApplicationUpdate(nms::cGcApplication *lGcApplication)
             spdlog::info(
                 lGcApplication->mpData->mRealityManager.maDynamicHazardProtectionIcons.back().macFilename.macBuffer);
         }
-    }
+    }*/
 }
 
 RENMS_HOOK(
