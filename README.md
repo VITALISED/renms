@@ -4,6 +4,8 @@
 
 ReNMS is a No Man's Sky SDK featuring a high-level type framework for working with NMS (or frankly the Skyscraper engine in general if it's ever planned on being reused). Supports a Python scripting framework which you can use to run our SDK embedded or to use monkeyman's [NMS.py](https://github.com/monkeyman192/NMS.py) if you prefer. If you're more technical and like messing around with memory in a real man's language we also have dynamic library loading supported too, although it's not super field tested yet (please get in touch!!!).
 
+![customised mod warning](docs/banner_a.png)
+
 ## Installing
 
 There are no current prebuilt binaries, this will change when we reach a more stable state. You can of course build the project yourself.
