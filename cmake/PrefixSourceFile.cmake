@@ -31,7 +31,7 @@ function(AddSourcePrefixes SOURCES)
 
         string(FIND ${TEXT} "* @file" TEXT_SUBSTR_POS)
 
-        if(${TEXT_SUBSTR_POS} == -1)
+        if(${TEXT_SUBSTR_POS} EQUAL -1)
             get_filename_component(SOURCE_NAME ${SOURCE_FILE} NAME)
 
             string(PREPEND TEXT ${RENMS_FILE_PREFIX_STR})
