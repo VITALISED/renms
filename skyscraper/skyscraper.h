@@ -17,6 +17,10 @@
 
 #pragma once
 
+#if (_ITERATOR_DEBUG_LEVEL > 0)
+#pragma warning("You're compiling skyscraper structures in Debug. STL containers will be the wrong size.")
+#endif
+
 #include <robin_hood.h>
 #include <vulkan/vulkan.h>
 #include <windows.h> //see toolkit/system/TkCSMutex.h
