@@ -35,7 +35,7 @@ set(SPHINX_BUILD ${CMAKE_CURRENT_BINARY_DIR}/docs/sphinx)
 add_custom_target(
     Sphinx ALL
     COMMAND
-        ${SPHINX_EXECUTABLE} -b html
+        ${SPHINX_EXECUTABLE} -j auto -b html
         # Tell Breathe where to find the Doxygen output
         -Dbreathe_projects.ReNMS=${DOXYGEN_OUTPUT_DIR}/xml ${SPHINX_SOURCE}
         ${SPHINX_BUILD}

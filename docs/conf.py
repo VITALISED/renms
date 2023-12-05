@@ -26,7 +26,7 @@ exhale_args = {
     # Heavily encouraged optional argument (see docs)
     "rootFileTitle":         "Metadata and Internal",
     # Suggested optional arguments
-    "createTreeView":        True,
+    "createTreeView":        False,
     # TIP: if using the sphinx-bootstrap-theme, you need
     # "treeViewIsBootstrap": True,
     # "exhaleExecutesDoxygen": True,
@@ -41,7 +41,6 @@ primary_domain = "cpp"
 
 # Tell sphinx what the pygments highlight language should be.
 highlight_language = "cpp"
-
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output

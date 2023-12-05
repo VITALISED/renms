@@ -1,12 +1,24 @@
-RENMS_FILE_PREFIX_STR = "\
+# this function: iterates all files, gets their name component, checks if
+# they've already been prepended with relevant infos then prepends the docstring
+# and configures any relevant values
+macro(add_sources_prefix_renms SOURCE_FILE_RENMS)
+    message(${SOURCE_FILE_RENMS})
+
+    file(READ ${SOURCE_FILE_RENMS} TEXT)
+
+    if(NOT TEXT MATCHES "@file")
+        get_filename_component(SOURCE_NAME_RENMS ${SOURCE_FILE_RENMS} NAME)
+
+        string(
+            CONCAT
+                OUTPUT_SOURCE_RENMS
+                "\
 /**\n\
- * @file @SOURCE_NAME@\n\
+ * @file @SOURCE_NAME_RENMS@\n\
  * @author VITALISED & Contributors\n\
- * @date @SOURCE_DATE@\n\
+ * @since @SOURCE_DATE@\n\
  * \n\
- * \n\
- * \n\
- * Copyright (C) 2023  VITALISED & Contributors\n\
+ * Copyright (C) @SOURCE_YEAR@  VITALISED & Contributors\n\
  * \n\
  * This program is free software: you can redistribute it and/or modify\n\
  * it under the terms of the GNU General Public License as published by\n\
@@ -21,26 +33,24 @@ RENMS_FILE_PREFIX_STR = "\
  * You should have received a copy of the GNU General Public License\n\
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.\n\
  */\n\n"
+                "${TEXT}"
+        )
 
+        string(REPLACE @SOURCE_NAME_RENMS@ ${SOURCE_NAME_RENMS}
+                       OUTPUT_SOURCE_RENMS "${OUTPUT_SOURCE_RENMS}"
+        )
 
-# this function: iterates all files, gets their name component, checks if they've already been prepended with relevant infos
-# then prepends the docstring and configures any relevant values
-function(AddSourcePrefixes SOURCES)
-    foreach(SOURCE_FILE ${SOURCES})
-        file(READ ${SOURCE_FILE} TEXT)
+        string(TIMESTAMP SOURCE_DATE "%Y-%m-%d")
+        string(REPLACE @SOURCE_DATE@ ${SOURCE_DATE} OUTPUT_SOURCE_RENMS
+                       "${OUTPUT_SOURCE_RENMS}"
+        )
 
-        string(FIND ${TEXT} "* @file" TEXT_SUBSTR_POS)
+        string(TIMESTAMP SOURCE_YEAR "%Y")
+        string(REPLACE @SOURCE_YEAR@ ${SOURCE_YEAR} OUTPUT_SOURCE_RENMS
+                       "${OUTPUT_SOURCE_RENMS}"
+        )
 
-        if(${TEXT_SUBSTR_POS} EQUAL -1)
-            get_filename_component(SOURCE_NAME ${SOURCE_FILE} NAME)
-
-            string(PREPEND TEXT ${RENMS_FILE_PREFIX_STR})
-
-            file(WRITE ${SOURCE_FILE} ${TEXT})
-
-            string(TIMESTAMP SOURCE_DATE "%Y-%m-%d")
-
-            configure_file(${SOURCE_FILE} ${SOURCE_FILE} @ONLY)
-        endif()
-    endforeach()
-endfunction()
+        message(${OUTPUT_SOURCE_RENMS})
+        file(WRITE ${SOURCE_FILE_RENMS} "${OUTPUT_SOURCE_RENMS}")
+    endif()
+endmacro()
