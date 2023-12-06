@@ -24,15 +24,46 @@
 #include <skyscraper.h>
 
 #include <graphics/camera/behaviours/GcCameraBehaviourFirstPerson.h>
+#include <simulation/player/GcCharacterSit.h>
+#include <simulation/player/GcPersonalTeleporter.h>
 #include <simulation/player/GcPlayerCommon.h>
+#include <simulation/player/GcPlayerEmoteProp.h>
+#include <simulation/player/GcPlayerHazard.h>
 #include <simulation/player/GcPlayerImpact.h>
+#include <simulation/player/GcPlayerInteract.h>
+#include <simulation/player/GcPlayerLadderClimb.h>
+#include <simulation/player/GcPlayerRespawn.h>
 #include <simulation/player/GcPlayerThirdPerson.h>
+#include <simulation/player/attachments/GcPlayerAim.h>
+#include <simulation/player/attachments/GcPlayerCommunicator.h>
 #include <simulation/player/attachments/GcPlayerWeapon.h>
 #include <simulation/spaceship/GcSpaceShipWarp.h>
 #include <toolkit/simulation/physics/havok/TkRigidBody.h>
+#include <toolkit/utilities/containers/TkDeque.h>
 #include <toolkit/utilities/containers/TkUnorderedMap.h>
+#include <toolkit/utilities/containers/TkVector.h>
+
+#include <simulation/ecosystem/creatures/gccreaturetypes.meta.h>
 
 SKYSCRAPER_BEGIN
+
+enum eEmoteState
+{
+    EEmoteState_None,
+    EEmoteState_Playing,
+    EEmoteState_Playing_Sit,
+};
+
+struct sGrabbedObjectInfo
+{
+    cTkPhysRelMat34 mGrabMatrix;
+    const /*cGcGrabbableComponent*/ uintptr_t *mpGrabbedComponent;
+    float mfMovementCompletion;
+    int miDataIndex;
+    bool mbIsAttached;
+    bool mbGrabToggleActive;
+    float mfGrabTime;
+};
 
 class cGcPlayer : public cGcPlayerCommon
 {
@@ -45,6 +76,56 @@ class cGcPlayer : public cGcPlayerCommon
         SingleTap,
         DoubleTap,
     };
+
+    enum eStaminaState
+    {
+        EStamina_Available,
+        EStamina_Recovering,
+    };
+
+    enum PlayerMode
+    {
+        Unknown,
+        InShip,
+        OnSurface,
+    };
+
+    enum eRocketBootsState
+    {
+        Inactive,
+        WindUp,
+        Boost,
+        Drift,
+        Landing,
+    };
+
+    enum eCharacterMode
+    {
+        ECharacterMode_FirstPerson,
+        ECharacterMode_ThirdPerson,
+    };
+
+    struct FootstepOnDistanceTravel
+    {
+        cTkPhysRelVec3 mLastUsedPosition;
+        float mfTriggerDistance;
+        float mfTriggerDistanceSqr;
+        bool mbValidDistance;
+        bool mbValidPosition;
+    };
+
+    struct cGcSummonPetData
+    {
+        int miIndex;
+        float mfAdultScale;
+        float mfGrowthProgress;
+        cTkMatrix34 mSpawnMat;
+        eCreatureType meCreatureType;
+        cTkSeed mBoneScaleSeed;
+        bool mbHasFur;
+        cTkSmartResHandle mPetResource;
+    };
+
     cTkRigidBody *lpGrabbedBody;
     cGcPlayerThirdPerson *mpThirdPerson;
     cGcCameraBehaviourFirstPerson *mpCamera;
@@ -215,22 +296,19 @@ class cGcPlayer : public cGcPlayerCommon
     TkAudioID mCurrentSwimAudioEvent;
     TkID<128> mDebugDamageType;
     TkHandle mDeathDropNode;
-    std::deque<cTkAttachmentPtr, TkSTLAllocatorShim<cTkAttachmentPtr, 8, -1>> maFriendlyCreatures;
-    std::vector<cTkAttachmentPtr, TkSTLAllocatorShim<cTkAttachmentPtr, 8, -1>> maPredatorsAttacking;
+    cTkDeque<cTkAttachmentPtr> maFriendlyCreatures;
+    cTkVector<cTkAttachmentPtr> maPredatorsAttacking;
     float mfTimeSicePredatorAttacked;
     cGcPlayer::FootstepOnDistanceTravel mLadderFootsteps;
     float mfDisabledTimer;
     float mfTimeUntilBodyRealignment;
-    unsigned __int8 muiCheckFallenThroughFloorCounter;
+    uint8_t muiCheckFallenThroughFloorCounter;
     cGcPlayerCommunicator mCommunicator;
     int meSavedFilter;
     int meRequestedFilter;
     cGcPlayer::eCharacterMode meCharacterMode;
     cGcPlayer::eCharacterMode meRequestedCharacterMode;
-    std::vector<
-        std::pair<TkID<128>, enum cGcPlayer::eCharacterMode>,
-        TkSTLAllocatorShim<std::pair<TkID<128>, enum cGcPlayer::eCharacterMode>, 8, -1>>
-        maCharacterModeOverrides;
+    cTkVector<std::pair<TkID<128>, enum cGcPlayer::eCharacterMode>> maCharacterModeOverrides;
     uint8_t mCurrentSlopeState[4];
     float mfTimeInCurrentSlopeState;
     cTkMatrix34 maRealignmentTransform[2];
@@ -244,8 +322,8 @@ class cGcPlayer : public cGcPlayerCommon
     float mafGrabTimer[2];
     bool mabClenchingFist[2];
     sGrabbedObjectInfo maCurrentGrabbable[2];
-    unsigned __int64 mauPointingStartTime[2];
-    unsigned __int64 mauPointingEndTime[2];
+    uint64_t mauPointingStartTime[2];
+    uint64_t mauPointingEndTime[2];
     cTkVector3 mPlayerShift;
     cTkVector3 mFrameShift;
     bool mbPendingFrameShift;
@@ -257,7 +335,7 @@ class cGcPlayer : public cGcPlayerCommon
     cTkPhysRelMat34 mmCurrentTargetPlacement;
     float mfShipRadiusCached;
     float mfFreighterMegaWarpTimer;
-    unsigned __int64 mu64LastAutoSaveTimeStamp;
+    uint64_t mu64LastAutoSaveTimeStamp;
     cGcPlayer::cGcSummonPetData mSummonPetData;
 };
 
