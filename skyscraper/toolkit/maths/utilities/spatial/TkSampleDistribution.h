@@ -28,10 +28,7 @@ SKYSCRAPER_BEGIN
 class cTkMcQmcLFSR
 {
   public:
-    cTkMcQmcLFSR(const uint32_t luiPeriod) : muiPeriod(luiPeriod)
-    {
-        // TODO: handle "Primitive Polynomials"
-    }
+    cTkMcQmcLFSR(const uint32_t luiPeriod);
 
     const unsigned int muiPeriod;
     std::array<unsigned int, 32> mauiF;
