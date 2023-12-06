@@ -1,5 +1,5 @@
 /**
- * @file GcScanManager.h
+ * @file GcHUDTrackArrow.h
  * @author VITALISED & Contributors
  * @since 2023-12-06
  *
@@ -23,25 +23,35 @@
 
 #include <skyscraper.h>
 
-#include <simulation/environment/scanning/GcScanEvenManager.h>
-#include <simulation/environment/scanning/GcScanner.h>
-
-#include <graphics/camera/effects/gccameraaerialviewdata.meta.h>
-
 SKYSCRAPER_BEGIN
 
-class cGcScanManager
+enum eGcTrackArrowTypes : __int32
 {
-  public:
-    cGcScanner mScanner;
-    cGcMarkerList mMarkerList;
-    cGcScanEventManager *mpScanEventManager;
-    cTkVector<cGcMarkerPoint> maFilteredMarkers;
-    cTkVector<cGcMarkerPoint::eType> maMarkedPrimaryMarkerTypes;
-    cGcCameraAerialViewData *mpRequestArielCamData;
-    bool mbRequestArielHasPosition;
-    cTkVector3 mRequestArielPosition;
-    bool mbSuppressMarkers;
+    ETrackArrow_WantedCombat,
+    ETrackArrow_WantedHunting,
+    ETrackArrow_Investigate,
+    ETrackArrow_Predator,
+    ETrackArrow_HazardHot,
+    ETrackArrow_HazardCold,
+    ETrackArrow_HazardRadiation,
+    ETrackArrow_HazardToxic,
+    ETrackArrow_ShipsArriving,
+    ETrackArrow_PiratesArriving,
+    ETrackArrow_PoliceArriving,
+    ETrackArrow_Ship,
+    ETrackArrow_PrimaryShip,
+    ETrackArrow_SecondaryShip,
+    ETrackArrow_Freighter,
+    ETrackArrow_Missile,
+    ETrackArrow_Building,
+    ETrackArrow_Friend,
+    ETrackArrow_FriendScared,
+    ETrackArrow_FriendSearching,
+    ETrackArrow_NetworkPlayer,
+    ETrackArrow_Fiend,
+    ETrackArrow_Repair,
+    ETrackArrow_Summoning,
+    ETrackArrow_NumTypes,
 };
 
 SKYSCRAPER_END

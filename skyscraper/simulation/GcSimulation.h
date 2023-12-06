@@ -25,6 +25,7 @@
 
 #include <simulation/environment/scanning/GcScanManager.h>
 #include <simulation/player/GcPlayerRespawn.h>
+#include <simulation/spaceship/GcSpaceShipWarp.h>
 #include <toolkit/core/types/TkHandle.h>
 #include <toolkit/simulation/physics/havok/TkRigidBody.h>
 #include <toolkit/system/TkIterationState.h>

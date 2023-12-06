@@ -1,5 +1,5 @@
 /**
- * @file GcScanManager.h
+ * @file GcOwnerConcept.h
  * @author VITALISED & Contributors
  * @since 2023-12-06
  *
@@ -23,25 +23,12 @@
 
 #include <skyscraper.h>
 
-#include <simulation/environment/scanning/GcScanEvenManager.h>
-#include <simulation/environment/scanning/GcScanner.h>
-
-#include <graphics/camera/effects/gccameraaerialviewdata.meta.h>
+#include <toolkit/attachments/TkAttachment.h>
+#include <toolkit/utilities/containers/TkMetaMessageSink.h>
 
 SKYSCRAPER_BEGIN
 
-class cGcScanManager
-{
-  public:
-    cGcScanner mScanner;
-    cGcMarkerList mMarkerList;
-    cGcScanEventManager *mpScanEventManager;
-    cTkVector<cGcMarkerPoint> maFilteredMarkers;
-    cTkVector<cGcMarkerPoint::eType> maMarkedPrimaryMarkerTypes;
-    cGcCameraAerialViewData *mpRequestArielCamData;
-    bool mbRequestArielHasPosition;
-    cTkVector3 mRequestArielPosition;
-    bool mbSuppressMarkers;
-};
+class cGcOwnerConcept : public cTkMetaMessageSink<cTkAttachmentPtr>
+{};
 
 SKYSCRAPER_END

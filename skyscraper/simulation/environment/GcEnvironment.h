@@ -1,5 +1,5 @@
 /**
- * @file GcScanManager.h
+ * @file GcEnvironment.h
  * @author VITALISED & Contributors
  * @since 2023-12-06
  *
@@ -23,25 +23,32 @@
 
 #include <skyscraper.h>
 
-#include <simulation/environment/scanning/GcScanEvenManager.h>
-#include <simulation/environment/scanning/GcScanner.h>
-
-#include <graphics/camera/effects/gccameraaerialviewdata.meta.h>
-
 SKYSCRAPER_BEGIN
 
-class cGcScanManager
+namespace EnvironmentLocation
 {
-  public:
-    cGcScanner mScanner;
-    cGcMarkerList mMarkerList;
-    cGcScanEventManager *mpScanEventManager;
-    cTkVector<cGcMarkerPoint> maFilteredMarkers;
-    cTkVector<cGcMarkerPoint::eType> maMarkedPrimaryMarkerTypes;
-    cGcCameraAerialViewData *mpRequestArielCamData;
-    bool mbRequestArielHasPosition;
-    cTkVector3 mRequestArielPosition;
-    bool mbSuppressMarkers;
+
+enum Enum
+{
+    Invalid,
+    Space,
+    Space_SpaceStation,
+    Planet,
+    Planet_InShip,
+    Planet_InVehicle,
+    Planet_Underwater,
+    Planet_Underground,
+    Planet_Building,
+    Freighter,
+    FreighterAbandoned,
+    Frigate,
+    Space_SpaceBase,
+    Space_Nexus,
+    Space_Anomaly,
+    __EnumTerminator,
+    Unspecified,
 };
+
+} // namespace EnvironmentLocation
 
 SKYSCRAPER_END
