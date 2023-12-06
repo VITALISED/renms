@@ -2,19 +2,19 @@
  * @file TkNodeAnimationControllerEngine.h
  * @author VITALISED & Contributors
  * @since 2023-12-05
- * 
+ *
  * Copyright (C) 2023  VITALISED & Contributors
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
@@ -26,8 +26,7 @@
 #include <toolkit/data/TkMetaData.h>
 #include <toolkit/maths/numeric/TkQuaternion.h>
 #include <toolkit/system/timer/TkClock.h>
-#include <toolkit/utilities/TkArray.h>
-#include <toolkit/utilities/containers/TkStackVector.h>
+#include <toolkit/utilities/containers/TkStackContainer.h>
 #include <toolkit/utilities/containers/TkUnorderedMap.h>
 #include <toolkit/utilities/containers/TkVector.h>
 
@@ -74,9 +73,9 @@ class cTkAnimationBlend
         EBlendType_2dAdd       = E2dBlendBit + 2,
     };
 
-    cTkStackVector<short> mIndices;
-    __int16 miNumWeights;
-    __int16 miBlendIndex;
+    cTkStackVector<short, 4> mIndices;
+    int16_t miNumWeights;
+    int16_t miBlendIndex;
     cTkAnimationBlend::eBlendType mBlendType;
 };
 
@@ -88,7 +87,7 @@ class cTkAnimationBlendWeight
     float mfWeight;
     float mfWeightVel;
     bool mbIgnoreParamStruct;
-    unsigned __int8 miMemberOffset;
+    uint8_t miMemberOffset;
 };
 
 class cTkAnimationInstance
@@ -102,8 +101,8 @@ class cTkAnimationInstance
     const cTkMetaDataMember *mpPhaseInput;
     cTkSmartResHandle mpAnimation;
     int miAnimIndex;
-    __int16 miAnimMapping;
-    __int16 miAdditiveBaseMapping;
+    int16_t miAnimMapping;
+    int16_t miAdditiveBaseMapping;
     float mfStartTime;
     float mfUnitTime;
     float mfSpeed;
@@ -133,7 +132,7 @@ class cTkAnimationLayer
 {
     cTkVector<cTkAnimationBlend> maBlends;
     cTkVector<cTkAnimationBlendWeight> maWeights;
-    cTkStackVector<cTkAnimationInstance> maInstance;
+    cTkStackVector<cTkAnimationInstance, 1> maInstance;
     cTkAnimationWeight mWeight;
     cTkAnimationLayer *mpBlendingOverLayer;
     eAnimLayerState meState;
@@ -144,9 +143,9 @@ class cTkAnimationLayer
     int miUniqueId;
     struct
     {
-        __int8 mbReplicate : 1;
-        __int8 mbCanBeRemovedEvenIfControl : 1;
-        __int8 mbMirrored : 1;
+        int8_t mbReplicate : 1;
+        int8_t mbCanBeRemovedEvenIfControl : 1;
+        int8_t mbMirrored : 1;
     } mFlags;
 };
 

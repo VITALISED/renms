@@ -24,10 +24,13 @@
 #include <skyscraper.h>
 
 #include <toolkit/networking/TkReplicatedVariableArray.h>
+#include <toolkit/networking/TkUserIdBase.h>
 
 SKYSCRAPER_BEGIN
 
 class cTkAttachment;
+
+class cGcNetworkSerializer;
 
 class cTkComponent
 {
@@ -52,7 +55,7 @@ class cTkComponent
     virtual void UpdatePostPhysics(float);
     virtual void UpdateRender(float);
     virtual void Render();
-    virtual bool NetSerialize(cGcNetworkSerializer *, unsigned __int64);
+    virtual bool NetSerialize(cGcNetworkSerializer *, uint64_t);
     virtual bool NetSerializeOnInit(cGcNetworkSerializer *);
     virtual bool CanTransferOwnership();
     virtual bool AmInterestedInOwnership();
@@ -60,7 +63,7 @@ class cTkComponent
     virtual bool ShouldAbandon();
     virtual bool OnOwnershipTransfer(const cTkUserIdBase<cTkFixedString<64, char>> *);
     virtual void RenderNGui();
-    virtual unsigned __int64 GetTypeNameHash64();
+    virtual uint64_t GetTypeNameHash64();
     virtual void OnAttached();
     virtual void Prepare();
     virtual void Release();
