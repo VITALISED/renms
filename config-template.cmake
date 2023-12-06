@@ -13,7 +13,7 @@
 # You should have received a copy of the GNU General Public License along with
 # this program.  If not, see <https://www.gnu.org/licenses/>.
 
-set(RENMS_CONFIG_VERSION 3)
+set(RENMS_CONFIG_VERSION 4)
 
 # Sorry for having it in a seperate file instead of having the option stuff be a
 # part of the main CMakeLists.txt, but it's just to make sure these settings
