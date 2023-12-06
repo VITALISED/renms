@@ -48,7 +48,8 @@ class TkHandle
 
     TkHandle *Root(TkHandle *result)
     {
-        result->miLookup = 0x40000;
+        //Used to be 0x40000, but that overflowed to zero. May need to be 0x3FFFF, but I'm not sure.
+        result->miLookup = 0;
         return result;
     }
 

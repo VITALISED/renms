@@ -148,6 +148,11 @@ endforeach()
 # No library prefixes, useful for cross-compiling users
 set_target_properties(renms heridium PROPERTIES PREFIX "")
 
+# Make sure warnings about conversion from NULL to a pointer are disabled with non-MSVC compilers.
+if (NOT DEFINED MSVC)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-conversion-null")
+endif()
+
 # --------------------------------------------------------------------------------------------------
 # uberclean - A completely thorough clean that removes EVERYTHING that isn't
 # included in the repo, including submodules. Useful for debugging build issues.
@@ -159,7 +164,8 @@ add_custom_target(
             ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
     COMMAND ${CMAKE_COMMAND} -E remove_directory
             ${CMAKE_CURRENT_SOURCE_DIR}/metadata
-    COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_CURRENT_SOURCE_DIR}/bin
+    COMMAND ${CMAKE_COMMAND} -E remove_directory
+            ${CMAKE_CURRENT_SOURCE_DIR}/bin
     COMMAND ${CMAKE_COMMAND} -E remove_directory
             ${CMAKE_CURRENT_SOURCE_DIR}/docs/doxygen/html
     COMMAND ${CMAKE_COMMAND} -E remove_directory

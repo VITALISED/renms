@@ -35,7 +35,11 @@ class cTkVector3
 
     cTkVector3();
     cTkVector3(float lfX, float lfY, float lfZ) { this->mVal = _mm_set_ps(lfX, lfY, lfZ, 0.0f); }
+    #ifdef _MSC_VER
     float operator[](uint64_t liIndex) { return this->mVal.m128_f32[liIndex]; }
+    #else
+    float operator[](uint64_t liIndex) { return this->mVal[liIndex]; }
+    #endif
 };
 
 SKYSCRAPER_END
