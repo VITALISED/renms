@@ -27,7 +27,7 @@ SKYSCRAPER_BEGIN
 
 class cTkMcQmcLFSR
 {
-    const unsigned int muiPeriod;
+    const unsigned int muiPeriod = NULL;
     std::array<unsigned int, 32> mauiF;
 };
 
