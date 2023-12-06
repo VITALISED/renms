@@ -210,8 +210,6 @@ target_include_directories(
 # --------------------------------------------------------------------------------------------------
 # renms settings
 
-message(${SKIP_NMS_CHECK})
-
 if(NOT ${SKIP_NMS_CHECK})
     add_dependencies(renms resdk heridium relauncher)
 endif()
