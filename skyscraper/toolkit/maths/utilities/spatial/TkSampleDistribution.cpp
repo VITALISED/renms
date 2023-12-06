@@ -19,6 +19,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+// the specific implementations for the file were taken from https://github.com/lgruen/mcqmclfsr, thanks
+// im too lazy to read papers
+
 #include <toolkit/maths/utilities/spatial/TkSampleDistribution.h>
 
 SKYSCRAPER_BEGIN

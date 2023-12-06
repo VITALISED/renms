@@ -25,6 +25,7 @@
 #pragma warning("You're compiling skyscraper structures in Debug. STL containers will be the wrong size.")
 #endif
 
+#include <havok_stubs.h>
 #include <robin_hood.h>
 #include <vulkan/vulkan.h>
 #include <windows.h> //see toolkit/system/TkCSMutex.h
