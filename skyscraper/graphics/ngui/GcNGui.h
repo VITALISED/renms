@@ -1,7 +1,7 @@
 /**
- * @file TkAttachment.h
+ * @file GcNGui.h
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2023-12-06
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -23,27 +23,27 @@
 
 #include <skyscraper.h>
 
-#include <engine/source/engine/EgScene.h>
-#include <toolkit/simulation/components/TkComponent.h>
-#include <toolkit/utilities/containers/TkBitArray.h>
-
-#include <toolkit/attachments/tkattachmentdata.meta.h>
+#include <graphics/ngui/GcNGuiLayer.h>
+#include <toolkit/graphics/2d/ngui/TkNGuiInput.h>
+#include <toolkit/graphics/2d/ui/layers/Tk3dLayer.h>
+#include <toolkit/graphics/2d/ui/objects/Tk2dImage.h>
+#include <toolkit/maths/numeric/generic/TkVector2Generic.h>
 
 SKYSCRAPER_BEGIN
 
-class cTkAttachmentPtr
-{
-    __int64 miUniqueID;
-};
-
-class cTkAttachment : public cEgNodeAttachment
+class cGcNGui
 {
   public:
-    cTkAttachmentData *mpData;
-    cTkComponent *mpComponents;
-    const char *mpacName;
-    cTkBitArray<uint64_t, true, 128> mHasComponentMask;
-    int64_t miUniqueID;
+    cGcNGuiLayer mRoot;
+    cTkNGuiInput mInput;
+    bool mbUseInput;
+    float mfPixelRatio;
+    bool mbFullscreen;
+    cTkVector2 mCustomSize;
+    bool mbHasCustomSize;
+    bool mbIsInWorld;
+    cTk3dLayer mTk3dLayer;
+    cTk2dImage mTk2dImage;
 };
 
 SKYSCRAPER_END

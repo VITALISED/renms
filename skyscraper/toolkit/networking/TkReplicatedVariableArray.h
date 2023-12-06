@@ -30,6 +30,7 @@ SKYSCRAPER_BEGIN
 
 class cTkReplicatedVariableArray
 {
+  public:
     cTkVector<cTkReplicatedVariableBase *> mapReplicatedVariables;
 };
 

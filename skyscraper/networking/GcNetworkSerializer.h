@@ -1,7 +1,7 @@
 /**
- * @file TkAttachment.h
+ * @file GcNetworkSerializer.h
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2023-12-06
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -23,27 +23,20 @@
 
 #include <skyscraper.h>
 
-#include <engine/source/engine/EgScene.h>
-#include <toolkit/simulation/components/TkComponent.h>
-#include <toolkit/utilities/containers/TkBitArray.h>
-
-#include <toolkit/attachments/tkattachmentdata.meta.h>
+#include <toolkit/utilities/string/TkString.h>
 
 SKYSCRAPER_BEGIN
 
-class cTkAttachmentPtr
-{
-    __int64 miUniqueID;
-};
-
-class cTkAttachment : public cEgNodeAttachment
+class cGcNetworkSerializer
 {
   public:
-    cTkAttachmentData *mpData;
-    cTkComponent *mpComponents;
-    const char *mpacName;
-    cTkBitArray<uint64_t, true, 128> mHasComponentMask;
-    int64_t miUniqueID;
+    uint8_t *macBuffer;
+    unsigned int muCurrentBit;
+    unsigned int muLastFinishedBit;
+    unsigned int muBufferSize;
+    unsigned int muCurrentReadWriteByte;
+    uint8_t meCurrentAction[4];
+    cTkFixedString<64, char> mSenderId;
 };
 
 SKYSCRAPER_END

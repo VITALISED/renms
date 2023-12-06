@@ -1,7 +1,7 @@
 /**
- * @file TkAttachment.h
+ * @file GcNetworkRpcCall.h
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2023-12-06
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -23,27 +23,22 @@
 
 #include <skyscraper.h>
 
-#include <engine/source/engine/EgScene.h>
-#include <toolkit/simulation/components/TkComponent.h>
-#include <toolkit/utilities/containers/TkBitArray.h>
-
-#include <toolkit/attachments/tkattachmentdata.meta.h>
+#include <networking/GcNetworkRpcId.h>
+#include <networking/messages/GcNetworkRpcMessage.h>
 
 SKYSCRAPER_BEGIN
 
-class cTkAttachmentPtr
-{
-    __int64 miUniqueID;
-};
+class cGcNetworkPlayer;
 
-class cTkAttachment : public cEgNodeAttachment
+class cGcRpcCallBase
 {
   public:
-    cTkAttachmentData *mpData;
-    cTkComponent *mpComponents;
-    const char *mpacName;
-    cTkBitArray<uint64_t, true, 128> mHasComponentMask;
-    int64_t miUniqueID;
+    cGcNetworkRpcId mID;
+
+    virtual ~cGcRpcCallBase();
+    virtual void Update(float);
+    virtual void ProcessRemoteCall(cGcNetworkRpcMessage *, cGcNetworkPlayer *);
+    virtual void ProcessResponse(cGcNetworkRpcMessage *, cGcNetworkPlayer *);
 };
 
 SKYSCRAPER_END

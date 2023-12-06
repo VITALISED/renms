@@ -23,6 +23,7 @@
 
 #include <skyscraper.h>
 
+#include <simulation/environment/scanning/GcScanManager.h>
 #include <simulation/player/GcPlayerRespawn.h>
 #include <toolkit/core/types/TkHandle.h>
 #include <toolkit/simulation/physics/havok/TkRigidBody.h>
