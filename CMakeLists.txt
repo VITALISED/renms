@@ -159,7 +159,8 @@ add_custom_target(
             ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
     COMMAND ${CMAKE_COMMAND} -E remove_directory
             ${CMAKE_CURRENT_SOURCE_DIR}/metadata
-    COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_CURRENT_SOURCE_DIR}/bin
+    COMMAND ${CMAKE_COMMAND} -E remove_directory
+            ${CMAKE_CURRENT_SOURCE_DIR}/bin
     COMMAND ${CMAKE_COMMAND} -E remove_directory
             ${CMAKE_CURRENT_SOURCE_DIR}/docs/doxygen/html
     COMMAND ${CMAKE_COMMAND} -E remove_directory
