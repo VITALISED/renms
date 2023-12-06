@@ -28,7 +28,7 @@ SKYSCRAPER_BEGIN
 template <typename Key, unsigned int Size>
 class cTkBitArrayStorage
 {
-    Key mArray[(Size / 64) ? 1 : (Size / 64)];
+    Key mArray[(Size / 64) <= 1 ? 1 : (Size / 64)];
 };
 
 template <typename Key>
