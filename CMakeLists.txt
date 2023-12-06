@@ -193,6 +193,7 @@ add_custom_command(
 
 # --------------------------------------------------------------------------------------------------
 # skyscraper settings
+add_dependencies(skyscraper resdk)
 target_include_directories(
     skyscraper
     PRIVATE ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/skyscraper
