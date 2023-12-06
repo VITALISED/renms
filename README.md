@@ -12,7 +12,7 @@ There are no current prebuilt binaries, this will change when we reach a more st
 
 ## Building
 
-See [BUILD.md](docs/BUILD.md) for instructions.
+See [BUILD.md](BUILD.md) for instructions.
 
 ## Development State
 
@@ -34,3 +34,4 @@ If all this type cut-and-paste stuff is too boring for you to feel bothered to c
 
 * [Horde3D](https://github.com/horde3d/Horde3D/)
 * [Somewhat recent NMS shader source](https://github.com/EthanRDoesMC/NMS-ShaderCode)
+* 
