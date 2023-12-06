@@ -5,7 +5,7 @@ macro(add_sources_prefix_renms SOURCE_FILE_RENMS)
     file(READ ${SOURCE_FILE_RENMS} TEXT)
 
     if(NOT TEXT MATCHES "@file")
-        message(Licensing file ${SOURCE_FILE_RENMS})
+        message("Applying license to file ${SOURCE_FILE_RENMS}")
         get_filename_component(SOURCE_NAME_RENMS ${SOURCE_FILE_RENMS} NAME)
 
         string(
@@ -49,7 +49,6 @@ macro(add_sources_prefix_renms SOURCE_FILE_RENMS)
                        "${OUTPUT_SOURCE_RENMS}"
         )
 
-        message(${OUTPUT_SOURCE_RENMS})
         file(WRITE ${SOURCE_FILE_RENMS} "${OUTPUT_SOURCE_RENMS}")
     endif()
 endmacro()

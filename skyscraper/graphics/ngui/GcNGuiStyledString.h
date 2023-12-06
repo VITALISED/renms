@@ -107,7 +107,7 @@ class cGcNGuiStyledString
     {
         cTkNGuiTextStyle mBaseTextStyle;
         cTkUnorderedMap<
-            TkID<128>, cGcNGuiStyledString::SpecialStyle, TkIDUnorderedMap::Hash128, std::equal_to<TkID<128>>>
+            TkID<128>, cGcNGuiStyledString::SpecialStyle*, TkIDUnorderedMap::Hash128, std::equal_to<TkID<128>>>
             mTextStyles;
         cTkVector<cGcNGuiStyledString::LayoutInstruction> maStyleInstructions;
         cTkVector<TkID<128>> mStyleStack;

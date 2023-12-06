@@ -1,5 +1,7 @@
 # ReNMS
 
+[![Hits-of-Code](https://hitsofcode.com/github/VITALISED/renms?branch=main)](https://hitsofcode.com/github/VITALISED/renms/view?branch=main)
+
 ## Overview
 
 ReNMS is a No Man's Sky SDK featuring a high-level type framework for working with NMS (or frankly the Skyscraper engine in general if it's ever planned on being reused). Supports a Python scripting framework which you can use to run our SDK embedded or to use monkeyman's [NMS.py](https://github.com/monkeyman192/NMS.py) if you prefer. If you're more technical and like messing around with memory in a real man's language we also have dynamic library loading supported too, although it's not super field tested yet (please get in touch!!!).
@@ -12,7 +14,7 @@ There are no current prebuilt binaries, this will change when we reach a more st
 
 ## Building
 
-See [BUILD.md](docs/BUILD.md) for instructions.
+See [BUILD.md](BUILD.md) for instructions.
 
 ## Development State
 
@@ -34,3 +36,4 @@ If all this type cut-and-paste stuff is too boring for you to feel bothered to c
 
 * [Horde3D](https://github.com/horde3d/Horde3D/)
 * [Somewhat recent NMS shader source](https://github.com/EthanRDoesMC/NMS-ShaderCode)
+* 

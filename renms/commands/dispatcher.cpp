@@ -21,7 +21,7 @@
 
 #include <commands/dispatcher.h>
 
-extern renms::CommandDispatcher gCommandDispatcher = renms::CommandDispatcher();
+renms::CommandDispatcher gCommandDispatcher = renms::CommandDispatcher();
 
 RENMS_HOOK(
     cGcTextChatInput__ParseTextForCommands, renms::RelToAbsolute(0x804E70), void,

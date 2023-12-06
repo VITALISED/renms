@@ -1,7 +1,7 @@
 /**
- * @file TkVector4Generic.h
+ * @file havok_stubs.h
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2023-12-06
  * 
  * Copyright (C) 2023  VITALISED & Contributors
  * 
@@ -21,25 +21,21 @@
 
 #pragma once
 
-#include <skyscraper.h>
-
 #include <xmmintrin.h>
 
-SKYSCRAPER_BEGIN
-
-// We think cTkVector4 (and also cTkVector3) are manually optimised SSE objects. We could also be wrong but who knows.
-class cTkVector4
+struct hkVector4f
 {
-  public:
-    __m128 mVal;
-
-    cTkVector4();
-    cTkVector4(float lfX, float lfY, float lfZ, float lfW) { this->mVal = _mm_set_ps(lfX, lfY, lfZ, lfW); }
-    #ifdef _MSC_VER
-    float operator[](uint64_t liIndex) { return this->mVal.m128_f32[liIndex]; }
-    #else
-    float operator[](uint64_t liIndex) { return this->mVal[liIndex]; }
-    #endif
+    __m128 m_quad;
 };
 
-SKYSCRAPER_END
+struct hkQuaternionf
+{
+    hkVector4f m_vec;
+};
+
+struct hknpMassDistribution
+{
+    hkVector4f m_centerOfMassAndVolume;
+    hkQuaternionf m_majorAxisSpace;
+    hkVector4f m_inertiaTensor;
+};

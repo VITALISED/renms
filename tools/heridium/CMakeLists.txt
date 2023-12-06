@@ -27,4 +27,6 @@ add_library(
     "heridium.h"
 )
 
+target_compile_definitions(heridium PRIVATE D_NMS_VER=${NMS_BUILD})
+
 add_subdirectory(launcher)

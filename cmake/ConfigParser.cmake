@@ -1,6 +1,6 @@
 function(parse_config_values_renms)
 
-    if(NOT DEFINED RENMS_CONFIG_VERSION OR RENMS_CONFIG_VERSION LESS 3)
+    if(NOT DEFINED RENMS_CONFIG_VERSION OR RENMS_CONFIG_VERSION LESS 4)
         message(
             WARNING
                 "Your config.cmake is out of date! Chances are it'll still build fine, but I highly \
@@ -35,6 +35,13 @@ It must be the directory that contains NMS.exe. See the BUILD.md for why it need
         message(
             STATUS
                 "NMS.exe check skipped! Unless you already extracted all the metadata, the build will fail! Be warned!"
+        )
+    endif()
+
+    if(NOT DEFINED NMS_BUILD AND NOT SKIP_NMS_CHECK)
+        message(
+            FATAL_ERROR
+                "NMS_BUILD isn't specified, this means metadata cannot generate properly."
         )
     endif()
 

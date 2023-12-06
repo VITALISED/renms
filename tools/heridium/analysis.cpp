@@ -52,7 +52,7 @@ void cTkMetaData__Register__DETOUR(
 
     spdlog::info(lPath);
 
-    HeridiumCXXFile(lPath.c_str(), lpClassMetadata);
+    HeridiumCXXFile(lPath, lpClassMetadata);
 
     return PLH::FnCast(cTkMetaData__Register__TRAMPOLINE, cTkMetaData__Register__DETOUR)(
         lpClassMetadata, lDefaultFunction, lFixingFunction, lValidateFunction, lEqualsFunction, lRenderFunction,

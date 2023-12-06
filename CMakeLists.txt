@@ -148,6 +148,12 @@ endforeach()
 # No library prefixes, useful for cross-compiling users
 set_target_properties(renms heridium PROPERTIES PREFIX "")
 
+# Make sure warnings about conversion from NULL to a pointer are disabled with
+# non-MSVC compilers.
+if(NOT DEFINED MSVC)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-conversion-null")
+endif()
+
 # --------------------------------------------------------------------------------------------------
 # uberclean - A completely thorough clean that removes EVERYTHING that isn't
 # included in the repo, including submodules. Useful for debugging build issues.
@@ -187,6 +193,11 @@ add_custom_command(
 
 # --------------------------------------------------------------------------------------------------
 # skyscraper settings
+
+if(NOT ${SKIP_NMS_CHECK})
+    add_dependencies(skyscraper resdk)
+endif()
+
 target_include_directories(
     skyscraper
     PRIVATE ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/skyscraper
@@ -198,7 +209,13 @@ target_include_directories(
 
 # --------------------------------------------------------------------------------------------------
 # renms settings
-add_dependencies(renms resdk heridium relauncher skyscraper)
+
+if(NOT ${SKIP_NMS_CHECK})
+    add_dependencies(renms resdk heridium relauncher)
+endif()
+
+add_dependencies(renms skyscraper)
+
 target_link_libraries(renms skyscraper fmt PolyHook_2 spdlog pybind11::embed)
 
 target_compile_definitions(renms PRIVATE RENMS FIOS_TYPES_ONLY)
