@@ -147,6 +147,8 @@ endforeach()
 
 # No library prefixes, useful for cross-compiling users
 set_target_properties(renms heridium PROPERTIES PREFIX "")
+
+# Make sure warnings about conversion from NULL to a pointer are disabled with non-MSVC compilers.
 if (NOT DEFINED MSVC)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-conversion-null")
 endif()
