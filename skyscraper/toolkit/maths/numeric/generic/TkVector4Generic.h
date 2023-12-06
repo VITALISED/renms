@@ -35,7 +35,11 @@ class cTkVector4
 
     cTkVector4();
     cTkVector4(float lfX, float lfY, float lfZ, float lfW) { this->mVal = _mm_set_ps(lfX, lfY, lfZ, lfW); }
+    #ifdef _MSC_VER
     float operator[](uint64_t liIndex) { return this->mVal.m128_f32[liIndex]; }
+    #else
+    float operator[](uint64_t liIndex) { return this->mVal[liIndex]; }
+    #endif
 };
 
 SKYSCRAPER_END
