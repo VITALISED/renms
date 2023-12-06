@@ -148,8 +148,9 @@ endforeach()
 # No library prefixes, useful for cross-compiling users
 set_target_properties(renms heridium PROPERTIES PREFIX "")
 
-# Make sure warnings about conversion from NULL to a pointer are disabled with non-MSVC compilers.
-if (NOT DEFINED MSVC)
+# Make sure warnings about conversion from NULL to a pointer are disabled with
+# non-MSVC compilers.
+if(NOT DEFINED MSVC)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-conversion-null")
 endif()
 
@@ -164,8 +165,7 @@ add_custom_target(
             ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
     COMMAND ${CMAKE_COMMAND} -E remove_directory
             ${CMAKE_CURRENT_SOURCE_DIR}/metadata
-    COMMAND ${CMAKE_COMMAND} -E remove_directory
-            ${CMAKE_CURRENT_SOURCE_DIR}/bin
+    COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_CURRENT_SOURCE_DIR}/bin
     COMMAND ${CMAKE_COMMAND} -E remove_directory
             ${CMAKE_CURRENT_SOURCE_DIR}/docs/doxygen/html
     COMMAND ${CMAKE_COMMAND} -E remove_directory
@@ -193,7 +193,11 @@ add_custom_command(
 
 # --------------------------------------------------------------------------------------------------
 # skyscraper settings
-add_dependencies(skyscraper resdk)
+
+if(NOT ${SKIP_NMS_CHECK})
+    add_dependencies(skyscraper resdk)
+endif()
+
 target_include_directories(
     skyscraper
     PRIVATE ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/skyscraper
@@ -205,7 +209,15 @@ target_include_directories(
 
 # --------------------------------------------------------------------------------------------------
 # renms settings
-add_dependencies(renms resdk heridium relauncher skyscraper)
+
+message(${SKIP_NMS_CHECK})
+
+if(NOT ${SKIP_NMS_CHECK})
+    add_dependencies(renms resdk heridium relauncher)
+endif()
+
+add_dependencies(renms skyscraper)
+
 target_link_libraries(renms skyscraper fmt PolyHook_2 spdlog pybind11::embed)
 
 target_compile_definitions(renms PRIVATE RENMS FIOS_TYPES_ONLY)
