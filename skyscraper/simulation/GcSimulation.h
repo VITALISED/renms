@@ -23,10 +23,16 @@
 
 #include <skyscraper.h>
 
+#include <simulation/player/GcPlayerRespawn.h>
 #include <toolkit/core/types/TkHandle.h>
 #include <toolkit/simulation/physics/havok/TkRigidBody.h>
+#include <toolkit/system/TkIterationState.h>
 #include <toolkit/system/thread/TkLockFreeQueue.h>
+#include <toolkit/system/timer/TkClock.h>
 #include <toolkit/utilities/containers/TkVector.h>
+#include <toolkit/utilities/string/TkString.h>
+
+#include <reality/gcrewardjourneythroughcentre.meta.h>
 
 SKYSCRAPER_BEGIN
 
@@ -37,6 +43,11 @@ class cGcSimulation
     {
         cTkRigidBodyPtr mDestroyed;
         cTkRigidBodyPtr mDestroyer;
+    };
+
+    struct sGroupNodeActivation
+    {
+        bool mabGroupNodeActivation[13];
     };
 
     cTkInplaceLockFreeQueue<cGcSimulation::DestructionPair, 1024> gDestroyedInstanceQueue;
@@ -63,15 +74,14 @@ class cGcSimulation
     cGcPlayerRespawn mPlayerRespawn;
     TkHandle mSimulationRootNode;
     TkHandle maGroupNodes[13];
-    std::vector<cGcSimulation::sGroupNodeActivation, TkSTLAllocatorShim<cGcSimulation::sGroupNodeActivation, 1, -1>>
-        mGroupNodeActivationStack;
+    cTkVector<cGcSimulation::sGroupNodeActivation> mGroupNodeActivationStack;
     TkIterationState<1> mPrepareIterationState;
     bool mbTransitionFromGalacticMap;
     bool mbRequestGalaxyMap;
     bool mbSimulationPrepared;
     bool mbSimulationInLoadPhase;
-    unsigned __int64 mCurrentUA;
-    unsigned __int64 mCurrentUDA[2];
+    uint64_t mCurrentUA;
+    uint64_t mCurrentUDA[2];
     cTkClock mMissionClock;
 };
 SKYSCRAPER_END

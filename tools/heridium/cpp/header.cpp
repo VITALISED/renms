@@ -20,10 +20,11 @@
 #include "../paths.h"
 #include "lang.h"
 
-HeridiumCXXFile::HeridiumCXXFile(const char *lpacFileLocation, const cTkMetaDataClass *lpMetaDataClass)
-    : mTargetFile(lpacFileLocation), mpMetaDataClass(lpMetaDataClass)
+HeridiumCXXFile::HeridiumCXXFile(std::string lpacFileLocation, const cTkMetaDataClass *lpMetaDataClass)
+    : mpMetaDataClass(lpMetaDataClass), mTargetFile(lpacFileLocation)
 {
-    this->mDefinedTypes = std::vector<const char *>();
+    this->mpacFileLocation = lpacFileLocation;
+    this->mDefinedTypes    = std::vector<const char *>();
     this->WriteHeaderFile();
     // this->WriteSourceFile();
 }
@@ -145,15 +146,17 @@ std::string HeridiumCXXFile::GetInnerType(cTkMetaDataMember *lpCurrentMember)
 
 void HeridiumCXXFile::WriteHeaderFile()
 {
-    if (!this->mTargetFile.is_open())
-    {
-        spdlog::error("Failed to open file for writing: {}", this->mpacFileLocation);
-        return;
-    }
-
     HM_BEGIN_BUFFER;
 
-    HM_PRELUDE;
+    auto now       = std::chrono::system_clock::now();
+    auto in_time_t = std::chrono::system_clock::to_time_t(now);
+
+    std::stringstream ss;
+    ss << std::put_time(std::localtime(&in_time_t), "%Y-%m-%d");
+    std::string lsFile    = std::filesystem::path(this->mpacFileLocation).filename().string();
+    std::string lsDateStr = ss.str();
+
+    HM_PRELUDE(lsFile, lsDateStr, D_NMS_VER);
 
     HM_PUSHSTRING(this->DoHeaderFirstPass());
 

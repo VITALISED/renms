@@ -24,7 +24,7 @@
 class HeridiumCXXFile
 {
     std::ofstream mTargetFile;
-    const char *mpacFileLocation;
+    std::string mpacFileLocation;
     const cTkMetaDataClass *mpMetaDataClass;
     std::vector<const char *> mDefinedTypes;
     std::string msEnumBuffer;
@@ -40,5 +40,5 @@ class HeridiumCXXFile
     void WriteHeaderFile();
     void WriteSourceFile();
 
-    HeridiumCXXFile(const char *lpacFileLocation, const cTkMetaDataClass *lpMetaDataClass);
+    HeridiumCXXFile(std::string lpacFileLocation, const cTkMetaDataClass *lpMetaDataClass);
 };
