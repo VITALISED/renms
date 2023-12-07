@@ -23,6 +23,7 @@
 
 #include <skyscraper.h>
 
+#include <simulation/environment/regiondata/terrain/GcRegionTerrain.h>
 #include <simulation/environment/weather/GcWeatherEffectInstance.h>
 #include <simulation/environment/weather/GcWeatherHazardGiftManager.h>
 #include <toolkit/maths/numeric/TkSmoothCD.h>
@@ -74,6 +75,13 @@ class cGcSky
         int miResourceIndexOffset;
         float mfTimeLeft;
         bool mbFirstInCluster;
+    };
+
+    struct RegionUpdate
+    {
+        cTkVector3 mvRegionPosition;
+        uint64_t mauiLastRegionUpdateTime[4];
+        bool mbKeep;
     };
 
     cGcWeatherHazardGiftManager mWeatherHazardGiftManager;

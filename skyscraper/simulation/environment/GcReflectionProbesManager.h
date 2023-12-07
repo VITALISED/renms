@@ -1,5 +1,5 @@
 /**
- * @file GcRegion.h
+ * @file GcReflectionProbesManager.h
  * @author VITALISED & Contributors
  * @since 2023-12-07
  *
@@ -23,27 +23,33 @@
 
 #include <skyscraper.h>
 
-#include <toolkit/system/thread/TkRegionThreadManager.h>
-#include <toolkit/voxel/manager/TkRegion.h>
+#include <toolkit/core/types/TkHandle.h>
+#include <toolkit/resources/TkResource.h>
 
 SKYSCRAPER_BEGIN
 
-class cGcRegionBase : public cTkRegion
+class cGcReflectionProbesManager
 {
   public:
-    class cGcUnmapStreamData
-    {
-      public:
-        TkJobHandle mToken;
-        TkHandle mNode;
-        cTkSmartResHandle mResource;
-        int miTileBlendStart;
-        bool mbValid;
-    };
-
-    std::array<cGcRegionBase::cGcUnmapStreamData, 5> maUnmapStreamData;
-
-    virtual ~cGcRegionBase() { EMPTY_CALL_DESTRUCTOR(); }
+    uint8_t mePhase[1];
+    int maProbeSamplersIndices[8];
+    int miProbeIndex;
+    int miProbeRenderIndex;
+    int miTileIndex;
+    TkHandle mParentNode;
+    cTkVector<TkHandle> maProbeNodesAll;
+    TkHandle maProbeNodes[8];
+    cTkSmartResHandle maProbeCubemapRes[8];
+    cTkSmartResHandle mProbeCubemapFlat;
+    cTkSmartResHandle mProbeCubemapTile;
+    cTkSmartResHandle mProbeSceneRes;
+    cTkSmartResHandle mProbeMaterialRes;
+    cTkSmartResHandle mSSRShaderRes;
+    cTkSmartResHandle mSSRMaterialRes;
+    cTkSmartResHandle mPostProcessShaderRes;
+    cTkSmartResHandle mProbePipelineTileRes;
+    cTkSmartResHandle mProbePipelineBlurRes;
+    cTkSmartResHandle mProbePipelineCubeRes;
 };
 
 SKYSCRAPER_END

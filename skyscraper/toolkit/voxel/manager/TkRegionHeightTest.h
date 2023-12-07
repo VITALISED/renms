@@ -1,5 +1,5 @@
 /**
- * @file GcRegion.h
+ * @file TkRegionHeightTest.h
  * @author VITALISED & Contributors
  * @since 2023-12-07
  *
@@ -23,27 +23,20 @@
 
 #include <skyscraper.h>
 
-#include <toolkit/system/thread/TkRegionThreadManager.h>
-#include <toolkit/voxel/manager/TkRegion.h>
+#include <toolkit/maths/numeric/generic/TkVector3Generic.h>
+#include <toolkit/voxel/manager/TkVoxel.h>
 
 SKYSCRAPER_BEGIN
 
-class cGcRegionBase : public cTkRegion
+class cTkRegionHeightResult
 {
   public:
-    class cGcUnmapStreamData
-    {
-      public:
-        TkJobHandle mToken;
-        TkHandle mNode;
-        cTkSmartResHandle mResource;
-        int miTileBlendStart;
-        bool mbValid;
-    };
-
-    std::array<cGcRegionBase::cGcUnmapStreamData, 5> maUnmapStreamData;
-
-    virtual ~cGcRegionBase() { EMPTY_CALL_DESTRUCTOR(); }
+    cTkVector3 mPosition;
+    cTkVector3 mNormal;
+    eVoxelType meMaterial;
+    eVoxelType meSecondaryMaterial;
+    float mfSlopeValue;
+    float mfRatio;
 };
 
 SKYSCRAPER_END

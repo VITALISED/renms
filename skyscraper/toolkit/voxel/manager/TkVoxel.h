@@ -1,5 +1,5 @@
 /**
- * @file GcRegion.h
+ * @file TkVoxel.h
  * @author VITALISED & Contributors
  * @since 2023-12-07
  *
@@ -23,27 +23,22 @@
 
 #include <skyscraper.h>
 
-#include <toolkit/system/thread/TkRegionThreadManager.h>
-#include <toolkit/voxel/manager/TkRegion.h>
-
 SKYSCRAPER_BEGIN
 
-class cGcRegionBase : public cTkRegion
+enum eVoxelType
 {
-  public:
-    class cGcUnmapStreamData
-    {
-      public:
-        TkJobHandle mToken;
-        TkHandle mNode;
-        cTkSmartResHandle mResource;
-        int miTileBlendStart;
-        bool mbValid;
-    };
-
-    std::array<cGcRegionBase::cGcUnmapStreamData, 5> maUnmapStreamData;
-
-    virtual ~cGcRegionBase() { EMPTY_CALL_DESTRUCTOR(); }
+    EVoxel_Air,
+    EVoxel_Base,
+    EVoxel_Rock,
+    EVoxel_Mountain,
+    EVoxel_Underwater,
+    EVoxel_Cave,
+    EVoxel_Dirt,
+    EVoxel_Liquid,
+    EVoxel_Substance_Res1,
+    EVoxel_Substance_Res2,
+    EVoxel_Substance_Res3,
+    EVoxel_Num,
 };
 
 SKYSCRAPER_END
