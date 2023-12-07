@@ -23,6 +23,7 @@
 
 #include <skyscraper.h>
 
+#include <simulation/ecosystem/GcEcosystem.h>
 #include <simulation/environment/scanning/GcScanManager.h>
 #include <simulation/particles/GcParticleManager.h>
 #include <simulation/player/GcPlayer.h>

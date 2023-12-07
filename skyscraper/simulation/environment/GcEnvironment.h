@@ -222,6 +222,13 @@ class cGcPlayerEnvironment
     float mfAsteroidFieldStateTime;
 };
 
+class cGcTempPortalRenderData
+{
+  public:
+    cTkSmartResHandle mPipeline;
+    cTkSmartResHandle maRenderTextures[2];
+};
+
 class cGcEnvironment
 {
   public:
