@@ -28,6 +28,7 @@
 #include <toolkit/utilities/containers/TkVector.h>
 #include <toolkit/utilities/string/TkString.h>
 
+#include <reality/gcdiscoveryowner.meta.h>
 #include <reality/gcdiscoverytype.meta.h>
 
 SKYSCRAPER_BEGIN
@@ -35,7 +36,26 @@ SKYSCRAPER_BEGIN
 namespace DiscoveryResolver
 {
 
-typedef int NameAndOwnerResult;
+struct NameAndOwnerResult
+{
+    enum NameResultDetail
+    {
+        Undiscovered_UsingGeneratedName,
+        Discovered_UsingGeneratedName_NoCustomName,
+        Discovered_Remote_UsingGeneratedName_UGCIsLockedDown,
+        Discovered_Remote_UsingGeneratedName_CustomNameFailedProfanityFilter,
+        Discovered_Remote_UsingGeneratedName_DiscoveryHiddenOrBlocked,
+        Discovered_UsingCustomName,
+        Invalid,
+    };
+
+    DiscoveryResolver::NameAndOwnerResult::NameResultDetail meNameResultDetail;
+    cTkFixedString<127, char> mDisplayName;
+    cTkFixedString<127, char> mLocalisedDisplayName;
+    uint8_t meOwnershipResult[4];
+    cGcDiscoveryOwner mOwnership;
+    bool mbOwnedByCurrentPlayer;
+};
 
 struct DiscoveryInfo
 {
