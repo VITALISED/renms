@@ -24,7 +24,7 @@
 #include <skyscraper.h>
 
 #include <gamestate/GcDiscoverySearch.h>
-#include <graphics/ngui/GcNGui.h>
+#include <graphics/ngui/GcNGuiManager.h>
 #include <graphics/ngui/GcNGuiText.h>
 #include <simulation/environment/scanning/GcRegionHotspots.h>
 #include <simulation/environment/scanning/GcSimpleScanEffect.h>

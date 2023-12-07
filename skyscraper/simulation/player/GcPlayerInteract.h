@@ -24,7 +24,7 @@
 #include <skyscraper.h>
 
 #include <graphics/hud/elements/GcHUDMarker.h>
-#include <graphics/ngui/GcNGui.h>
+#include <graphics/ngui/GcNGuiManager.h>
 #include <simulation/environment/scanning/GcSimpleScanEffect.h>
 #include <toolkit/attachments/TkAttachment.h>
 #include <toolkit/audio/wwise/TkAudioManagerWwise.h>

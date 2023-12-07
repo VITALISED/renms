@@ -36,7 +36,7 @@ SKYSCRAPER_BEGIN
 template <int Length>
 struct AnimLookup
 {
-    cTkAnimationComponent *mpAnim;
+    /*cTkAnimationComponent*/ uintptr_t *mpAnim;
     cTkAnimInstanceHandle maAnimHandles[Length];
 };
 

@@ -41,6 +41,7 @@
 #include <application/states/GcApplicationUGCBaseViewerState.h>
 #include <atlas/GcAtlasManager.h>
 #include <reality/GcRealityManager.h>
+#include <simulation/GcSimulation.h>
 #include <system/input/GcVibrationManager.h>
 #include <toolkit/maths/utilities/spatial/TkSampleDistribution.h>
 #include <toolkit/system/TkCSMutex.h>
@@ -67,7 +68,7 @@ class cGcApplication : public cTkFSM
         cGcRealityManager mRealityManager;
         /*cGcGameState*/ char mGameState[0x43C560];
         /*cGcSeasonalData*/ char mSeasonalData[0x69F0];
-        /*cGcSimulation*/ char mSimulation[0x25F7C0];
+        cGcSimulation mSimulation;
         /*cGcHUDManager*/ char mHUDManager[0x145270];
         /*cGcFrontendManager*/ char mFrontendManager[0x81E00];
         /*cGcInWorldUIManager*/ char mInWorldUIManager[0x4A320];

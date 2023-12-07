@@ -44,6 +44,8 @@ class cTkAttachment : public cEgNodeAttachment
     const char *mpacName;
     cTkBitArray<uint64_t, true, 128> mHasComponentMask;
     int64_t miUniqueID;
+
+    virtual ~cTkAttachment() { EMPTY_CALL_DESTRUCTOR(); }
 };
 
 SKYSCRAPER_END

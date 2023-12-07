@@ -23,7 +23,7 @@
 
 #include <skyscraper.h>
 
-#include <toolkit/audio/wwise/TkAudioManagerWwise.h>/
+#include <toolkit/audio/wwise/TkAudioManagerWwise.h>
 #include <toolkit/maths/geometry/TkPhysRelVec3.h>
 #include <toolkit/utilities/containers/TkBitArray.h>
 

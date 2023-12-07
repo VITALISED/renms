@@ -176,15 +176,15 @@ class cTkAnimCommand
 
 class cTkNodeAnimationController
 {
-    cTkStackVector<cTkAnimCommand> mCommandBuffer;
-    cTkStackVector<unsigned int> mActiveStages;
+    cTkStackVector<cTkAnimCommand, 16> mCommandBuffer;
+    cTkStackVector<unsigned int, 16> mActiveStages;
     bool mbDirty;
-    cTkBitArray<unsigned int, 32> mAnimChannelBitArray;
+    cTkBitArray<unsigned int, true, 32> mAnimChannelBitArray;
     std::array<cTkAnimationLayer, 16> maAnimLayer;
     TkHandle mModelNode;
     cTkAnimationData **mpaAnimData;
     cTkSmartResHandle *mpaAnimResources;
-    __int16 *mpaAnimMappings;
+    int16_t *mpaAnimMappings;
     int miNumAnimations;
     cTkAnimBlendTree *mpaTreeData;
     int miNumTrees;

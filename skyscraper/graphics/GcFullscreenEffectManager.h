@@ -1,5 +1,5 @@
 /**
- * @file GcEffectList.h
+ * @file GcFullscreenEffectManager.h
  * @author VITALISED & Contributors
  * @since 2023-12-07
  *
@@ -23,24 +23,30 @@
 
 #include <skyscraper.h>
 
-#include <simulation/particles/GcExplosion.h>
-#include <toolkit/utilities/containers/TkClassPool.h>
+#include <graphics/gcscreenfilters.meta.h>
+#include <graphics/gcscreenfiltertable.meta.h>
 
 SKYSCRAPER_BEGIN
 
-class EffectInstance
-{
-    TkHandle mNodeHandle;
-    cGcExplosion *mpExplosion;
-    const cGcExplosionData *mpExplosionData;
-};
-
-template <typename T, int Amount>
-class cGcEffectList
+class cGcFullscreenEffectManager
 {
   public:
-    cTkClassPool<T, Amount> mProjectiles;
-    int Number;
+    cTkSmartResHandle mDebugMaterial;
+    cTkSmartResHandle mPostProcessMaterial;
+    cTkSmartResHandle mLensFlareMaterial;
+    cTkSmartResHandle mDepthOfFieldMaterial;
+    cTkSmartResHandle mUIMaterial;
+    int mDepthOfFieldNewBokehStage;
+    int mDepthOfFieldBokehStage;
+    int mDepthOfFieldBlurStage;
+    int mCloudsStage;
+    int maSSR_Stages[6];
+    cTkSmartResHandle maLUTTextureResHandle[82];
+    eScreenFilter maeActiveFilters[4];
+    float mafFilterStrengths[4];
+    float mafFilterDistances[4];
+    float mafHdrAdjusts[4];
+    cGcScreenFilterTable *mpFilterTable;
 };
 
 SKYSCRAPER_END

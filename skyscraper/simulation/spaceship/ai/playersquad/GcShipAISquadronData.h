@@ -1,5 +1,5 @@
 /**
- * @file GcEffectList.h
+ * @file GcShipAISquadronData.h
  * @author VITALISED & Contributors
  * @since 2023-12-07
  *
@@ -23,24 +23,26 @@
 
 #include <skyscraper.h>
 
-#include <simulation/particles/GcExplosion.h>
+#include <simulation/player/GcPlayerExperienceDirector.h>
+#include <toolkit/attachments/TkAttachment.h>
 #include <toolkit/utilities/containers/TkClassPool.h>
+#include <toolkit/utilities/containers/TkRosterPool.h>
+#include <toolkit/utilities/string/TkString.h>
+
+#include <reality/gcrealitycommonfactions.meta.h>
+#include <simulation/gcspaceshipclasses.meta.h>
+#include <simulation/spaceship/ai/gcaispaceshiproles.meta.h>
 
 SKYSCRAPER_BEGIN
 
-class EffectInstance
-{
-    TkHandle mNodeHandle;
-    cGcExplosion *mpExplosion;
-    const cGcExplosionData *mpExplosionData;
-};
-
-template <typename T, int Amount>
-class cGcEffectList
+class cGcAIShipSquad
 {
   public:
-    cTkClassPool<T, Amount> mProjectiles;
-    int Number;
+    cTkFixedString<256, char> mName;
+    cTkClassPoolHandle mHandle;
+    cTkRosterPool<cGcAIShipSpawn, 128> maShips;
+    bool mbManaged;
+    bool mbHasSentEngagedMessage;
 };
 
 SKYSCRAPER_END

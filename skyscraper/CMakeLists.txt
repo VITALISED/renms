@@ -28,7 +28,8 @@ file(GLOB_RECURSE REALITY_SOURCES "./reality" "*.cpp" "*.h")
 file(GLOB_RECURSE SIMULATION_SOURCES "./simulation" "*.cpp" "*.h")
 file(GLOB_RECURSE SYSTEM_SOURCES "./system" "*.cpp" "*.h")
 file(GLOB_RECURSE TOOLKIT_SOURCES "./tookit" "*.cpp" "*.h")
-file(GLOB_RECURSE UTILITIES_SOURCES "./utilities" "*.cpp" "*.h")
+file(GLOB_RECURSE RESOURCES_SOURCES "./utilities" "*.cpp" "*.h")
+file(GLOB_RECURSE UTILITIES_SOURCES "./resources" "*.cpp" "*.h")
 
 add_library(
     skyscraper STATIC
@@ -44,5 +45,6 @@ add_library(
     ${SIMULATION_SOURCES}
     ${SYSTEM_SOURCES}
     ${TOOLKIT_SOURCES}
+    ${RESOURCES_SOURCES}
     ${UTILITIES_SOURCES}
 )

@@ -23,7 +23,7 @@
 
 #include <skyscraper.h>
 
-#include <graphics/ngui/GcNGui.h>
+#include <graphics/ngui/GcNGuiManager.h>
 #include <simulation/environment/scanning/GcSimpleScanEffect.h>
 #include <simulation/player/GcWeapon.h>
 #include <toolkit/animation/engine/TkNodeAnimationControllerEngine.h>
