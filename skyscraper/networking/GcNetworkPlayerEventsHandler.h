@@ -1,7 +1,7 @@
 /**
- * @file GcNetworkConstants.h
+ * @file GcNetworkPlayerEventsHandler.h
  * @author VITALISED & Contributors
- * @since 2023-12-06
+ * @since 2023-12-07
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -23,36 +23,19 @@
 
 #include <skyscraper.h>
 
+#include <networking/GcNetworkConstants.h>
+#include <networking/GcNetworkPlayerState.h>
+
 SKYSCRAPER_BEGIN
 
-class cGcNetworkConstants
+class cGcNetworkPlayer;
+
+class INetworkPlayerEventsHandler
 {
   public:
-    enum OnlinePlatformType : uint8_t
-    {
-        Generic,
-        GOG,
-        PlayStation,
-        Steam,
-        XboxLive,
-        GenericKBM,
-        Nintendo,
-        NumOnlinePlatformTypes,
-    };
-
-    enum TransmissionChannels
-    {
-        Unreliable,
-        Reliable,
-        Count,
-    };
-
-    enum LobbyType : uint8_t
-    {
-        Gameplay,
-        Fireteam,
-        NumLobbyTypes,
-    };
+    virtual void OnMultiplayerSessionStarting(cGcNetworkConstants::LobbyType);
+    virtual void OnMultiplayerSessionFinished(cGcNetworkConstants::LobbyType);
+    virtual void OnNetworkPlayerStateEvent(cGcNetworkPlayer *, eGcNetworkPlayerStateEvent);
 };
 
 SKYSCRAPER_END

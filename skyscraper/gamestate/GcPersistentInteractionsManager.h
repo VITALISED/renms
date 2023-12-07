@@ -1,7 +1,7 @@
 /**
- * @file GcNetworkConstants.h
+ * @file GcPersistentInteractionsManager.h
  * @author VITALISED & Contributors
- * @since 2023-12-06
+ * @since 2023-12-07
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -25,33 +25,15 @@
 
 SKYSCRAPER_BEGIN
 
-class cGcNetworkConstants
+struct GcPersistencyHandle
 {
-  public:
-    enum OnlinePlatformType : uint8_t
-    {
-        Generic,
-        GOG,
-        PlayStation,
-        Steam,
-        XboxLive,
-        GenericKBM,
-        Nintendo,
-        NumOnlinePlatformTypes,
-    };
-
-    enum TransmissionChannels
-    {
-        Unreliable,
-        Reliable,
-        Count,
-    };
-
-    enum LobbyType : uint8_t
-    {
-        Gameplay,
-        Fireteam,
-        NumLobbyTypes,
+    union {
+        struct
+        {
+            uint32_t miLookup : 21;
+            uint32_t miIncrementor : 11;
+        };
+        uint32_t miLookupInt;
     };
 };
 

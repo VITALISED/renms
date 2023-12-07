@@ -1,7 +1,7 @@
 /**
- * @file GcNetworkConstants.h
+ * @file GcBaseBuildingManagerTypes.h
  * @author VITALISED & Contributors
- * @since 2023-12-06
+ * @since 2023-12-07
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -23,36 +23,19 @@
 
 #include <skyscraper.h>
 
+#include <gamestate/GcPersistentInteractionsManager.h>
+
 SKYSCRAPER_BEGIN
 
-class cGcNetworkConstants
+struct BaseIndex
 {
-  public:
-    enum OnlinePlatformType : uint8_t
-    {
-        Generic,
-        GOG,
-        PlayStation,
-        Steam,
-        XboxLive,
-        GenericKBM,
-        Nintendo,
-        NumOnlinePlatformTypes,
-    };
+    uint16_t mValue;
+};
 
-    enum TransmissionChannels
-    {
-        Unreliable,
-        Reliable,
-        Count,
-    };
-
-    enum LobbyType : uint8_t
-    {
-        Gameplay,
-        Fireteam,
-        NumLobbyTypes,
-    };
+struct sBaseObjectHandle
+{
+    GcPersistencyHandle mBufferHandle;
+    BaseIndex muBaseIndex;
 };
 
 SKYSCRAPER_END
