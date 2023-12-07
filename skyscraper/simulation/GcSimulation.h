@@ -24,9 +24,11 @@
 #include <skyscraper.h>
 
 #include <simulation/environment/scanning/GcScanManager.h>
+#include <simulation/particles/GcParticleManager.h>
 #include <simulation/player/GcPlayer.h>
 #include <simulation/player/GcPlayerExperienceDirector.h>
 #include <simulation/player/GcPlayerRespawn.h>
+#include <simulation/scenemanager/GcSceneManager.h>
 #include <simulation/spaceship/GcSpaceShipWarp.h>
 #include <toolkit/core/types/TkHandle.h>
 #include <toolkit/simulation/physics/havok/TkRigidBody.h>

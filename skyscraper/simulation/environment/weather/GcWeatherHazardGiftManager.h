@@ -1,5 +1,5 @@
 /**
- * @file GcEffectList.h
+ * @file GcWeatherHazardGiftManager.h
  * @author VITALISED & Contributors
  * @since 2023-12-07
  *
@@ -23,24 +23,17 @@
 
 #include <skyscraper.h>
 
-#include <simulation/particles/GcExplosion.h>
-#include <toolkit/utilities/containers/TkClassPool.h>
+#include <toolkit/core/types/TkHandle.h>
+#include <toolkit/utilities/containers/TkVector.h>
 
 SKYSCRAPER_BEGIN
 
-class EffectInstance
-{
-    TkHandle mNodeHandle;
-    cGcExplosion *mpExplosion;
-    const cGcExplosionData *mpExplosionData;
-};
-
-template <typename T, int Amount>
-class cGcEffectList
+class cGcWeatherHazardGiftManager
 {
   public:
-    cTkClassPool<T, Amount>;
-    int Number;
+    cTkVector<TkHandle> maGifts;
+    cTkVector<uint64_t> maGiftSpawnTimes;
+    int miNextGiftToProcess;
 };
 
 SKYSCRAPER_END

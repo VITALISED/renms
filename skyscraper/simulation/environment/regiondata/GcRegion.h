@@ -1,5 +1,5 @@
 /**
- * @file GcEffectList.h
+ * @file GcRegion.h
  * @author VITALISED & Contributors
  * @since 2023-12-07
  *
@@ -23,24 +23,11 @@
 
 #include <skyscraper.h>
 
-#include <simulation/particles/GcExplosion.h>
-#include <toolkit/utilities/containers/TkClassPool.h>
-
 SKYSCRAPER_BEGIN
 
-class EffectInstance
+struct __cppobj cGcRegionBase : cTkRegion
 {
-    TkHandle mNodeHandle;
-    cGcExplosion *mpExplosion;
-    const cGcExplosionData *mpExplosionData;
-};
-
-template <typename T, int Amount>
-class cGcEffectList
-{
-  public:
-    cTkClassPool<T, Amount>;
-    int Number;
+    std::array<cGcRegionBase::cGcUnmapStreamData, 5> maUnmapStreamData;
 };
 
 SKYSCRAPER_END

@@ -51,4 +51,65 @@ enum Enum
 
 } // namespace EnvironmentLocation
 
+class cGcEnvironment
+{
+  public:
+    TkIterationState<1> mTextureCreationIterationState;
+    cTkSmartResHandle mWaterReflectionTextureRes;
+    cTkSmartResHandle mWaterReflectionPipelineRes;
+    cTkSmartResHandle mDualPMapPipelineRes;
+    cTkSmartResHandle mMainPipeline;
+    cTkSmartResHandle mCausticDisplacementTex;
+    cTkSmartResHandle mCausticMapTex;
+    cTkSmartResHandle mUberShader;
+    cTkSmartResHandle mLightShader;
+    cTkSmartResHandle mWaterShader;
+    cTkSmartResHandle mSkyShader;
+    cTkSmartResHandle mTerrainShader;
+    cTkSmartResHandle mIBLShader;
+    cTkSmartResHandle mParticleShader;
+    cTkSmartResHandle mPStreamShader;
+    cTkSmartResHandle mShaderMillParticleShader;
+    cTkSmartResHandle mShaderMillUberShader;
+    cTkSmartResHandle mUIScreenShader;
+    cTkSmartResHandle mDualPMapResFront;
+    cTkSmartResHandle mDualPMapResBack;
+    cTkSmartResHandle mIBLMapResFront;
+    cTkSmartResHandle mIBLMapResBack;
+    cTkSmartResHandle mIBLMapIndoorResFront;
+    cTkSmartResHandle mIBLMapIndoorResBack;
+    cTkSmartResHandle mTerrainColourRes;
+    cTkSmartResHandle mIBLPipelineRes;
+    cTkSmartResHandle mDepthOfFieldMat;
+    cTkSmartResHandle mIBLMaterial;
+    bool mbIsUsingDynamicDualPmap;
+    cGcSky mSky;
+    bool mbCloudsEnabled;
+    int miCloudsIndex;
+    int miCloudsBlurIndex;
+    int miCloudsCopyIndex;
+    int miParticleIndex;
+    int miReflectionWaterFromAboveIndex;
+    int miReflectionWaterFromBelowIndex;
+    int miMainWaterFromAboveIndex;
+    int miMainWaterFromBelowIndex;
+    int miDepthReprojectWFAIndex;
+    int miDepthReprojectIndex;
+    int miVolumetricsIndex;
+    int miNumDualPMips;
+    float mfShadowLength;
+    cTkVector4 mShadowSplit;
+    float mfShadowLengthTarget;
+    float mfShadowSplit1Target;
+    float mfShadowSplit2Target;
+    cGcEnvironment::eShadowState meShadowState;
+    cGcPlayerEnvironment mPlayerEnvironment;
+    cGcPlayerEnvironment mPlayerEnvironmentPreviousFrame;
+    cTkRaycastJob mGeometryProbeJob;
+    float mfMinPixelCullForShadows;
+    cTkVector3 mLightingOriginPosition;
+    cGcReflectionProbesManager mReflectionProbesManager;
+    cGcTempPortalRenderData mPortalRenderData;
+}
+
 SKYSCRAPER_END

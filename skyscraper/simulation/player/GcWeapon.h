@@ -44,6 +44,18 @@ class cGcMuzzleFlash
     eRemoteWeaponType meRemoteWeaponType;
 };
 
+class cGcAvailableWeapons
+{
+  public:
+    class cGcAvailableWeaponInfo
+    {
+      public:
+        cTkSmartResHandle mWeaponResource;
+        bool mbIsSecret;
+    };
+    cTkVector<cGcAvailableWeapons::cGcAvailableWeaponInfo> maAvailableWeapons;
+};
+
 class cGcWeapon
 {
   public:
