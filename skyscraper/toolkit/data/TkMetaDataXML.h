@@ -24,6 +24,8 @@
 #include <skyscraper.h>
 
 #include <engine/source/shared/utxmlparser.h>
+#include <toolkit/data/TkClassPointer.h>
+#include <toolkit/system/memory/pools/TkLinearMemoryPool.h>
 #include <toolkit/utilities/string/TkString.h>
 
 SKYSCRAPER_BEGIN

@@ -57,16 +57,7 @@
 #define HM_NAMESPACE_END   buffer += "SKYSCRAPER_END\n";
 #define HM_CLASS_BEGIN(lpacName)                                         \
     buffer.append("/**\n * @class ").append(lpacName).append("\n */\n"); \
-    buffer.append("class ")                                              \
-        .append(lpacName)                                                \
-        .append(" : cTkMetaData::Registrar<")                            \
-        .append(lpacName)                                                \
-        .append(">,")                                                    \
-        .append(" cTkMetaDataXML::Registrar<")                           \
-        .append(lpacName)                                                \
-        .append(">")                                                     \
-        .append("\n{\n")                                                 \
-        .append("  public:\n")
+    buffer.append("class ").append(lpacName).append("\n{\n").append("  public:\n")
 #define HM_CLASS_END   buffer.append("};\n\n")
 #define HM_INDENT      buffer += "    "
 #define HM_SEMI        buffer += ";\n"
@@ -135,10 +126,10 @@
         .append(",\n")
 #define HM_FLAG_END this->msEnumBuffer.append("};\n\n")
 
-#define HM_METADATA_CLASS                                   \
-    HM_INDENT;                                              \
-    HM_INDENT;                                              \
-    buffer.append("const cTkMetaDataClass mClassMetadata"); \
+#define HM_METADATA_CLASS                                                     \
+    HM_INDENT;                                                                \
+    HM_INDENT;                                                                \
+    buffer.append("NO_UNIQUE_ADDRESS const cTkMetaDataClass mClassMetadata"); \
     HM_SEMI;
 
 #define HM_DEFINED_MEMBER(lpacType, lpacMember)             \
@@ -176,7 +167,7 @@
 #define HM_META_MEMBER(lpacMember)                                       \
     HM_INDENT;                                                           \
     HM_INDENT;                                                           \
-    buffer.append("cTkMetaDataMember mMember_");                         \
+    buffer.append("NO_UNIQUE_ADDRESS class cTkMetaDataMember mMember_"); \
     buffer.append(heridium::CXX_GetNotationForMember(lpacMember.mType)); \
     buffer.append(lpacMember.mpacName);                                  \
     HM_SEMI
