@@ -60,14 +60,14 @@ class cGcNetworkBaseImageManager
 
     struct sSaveSnapshot
     {
-        cTkSmartResHandle *mTextureResource;
+        cTkSmartResHandle &mTextureResource;
         cGcNetworkBaseImageManager::sSnapshotHandle mSnapshotHandle;
         bool mbReady;
     };
 
     uint16_t muiCurrentPendingRequests;
     robin_hood::detail::Table<
-        true, 80, unsigned int, cGcNetworkBaseImageManager::BaseImageRequest, robin_hood::hash<unsigned int, void>,
+        false, 80, unsigned int, cGcNetworkBaseImageManager::BaseImageRequest, robin_hood::hash<unsigned int, void>,
         std::equal_to<unsigned int>>
         mRequestsMap;
     unsigned int muiSaveTextureIndex;

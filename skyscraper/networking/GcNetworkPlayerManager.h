@@ -43,6 +43,7 @@ class cGcNetworkPlayerManager
   public:
     class cGcNetworkPlayerArrayBase
     {
+      public:
         robin_hood::detail::Table<
             false, 80, cTkUserIdBase<cTkFixedString<64, char>>, std::shared_ptr<cGcNetworkAddress>,
             robin_hood::hash<cTkUserIdBase<cTkFixedString<64, char>>, void>,
@@ -57,10 +58,13 @@ class cGcNetworkPlayerManager
     };
 
     template <typename T, int Length, typename U>
-    class cGcNetworkPlayerArray
+    class cGcNetworkPlayerArray : public cGcNetworkPlayerArrayBase
     {
+      public:
         class std::array<std::unique_ptr<T>, Length> maNetworkPlayers;
         U mReplicatedPlayerState;
+
+        virtual ~cGcNetworkPlayerArray() { EMPTY_CALL_DESTRUCTOR(); };
     };
 
     struct sGcEventHandlerData
