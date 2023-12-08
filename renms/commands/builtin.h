@@ -33,6 +33,7 @@
 
 RENMS_BEGIN
 
+void TeleportCommandDispatch(std::vector<std::string> *laArgs);
 void EchoCommandDispatch(std::vector<std::string> *laArgs);
 void TestCommandDispatch(std::vector<std::string> *laArgs);
 void AddBuiltinCommands();
