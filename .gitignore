@@ -6,6 +6,7 @@ NMS.exe
 
 /.vscode/*
 /.vs/*
+/.cache/*
 
 # @RayRod, Sorry for accidentally pushing some of your assets.
 # It makes a folder in the root of the project when we use Heridium
