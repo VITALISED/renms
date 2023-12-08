@@ -57,9 +57,18 @@ class cTkMetaData
 {
   public:
     template <typename T>
-    class Registrar
+    struct Registrar
     {
       public:
+        static void ClassPointerCreateDefault(cTkClassPointer *, cTkLinearMemoryPool *);
+        static void ClassPointerRender(cTkClassPointer *);
+        static void ClassPointerFix(cTkClassPointer *, bool, uint64_t);
+        static void ClassPointerValidate(cTkClassPointer *);
+        static bool ClassPointerEquals(const cTkClassPointer *, const cTkClassPointer *);
+        static void ClassPointerCopy(cTkClassPointer *, const cTkClassPointer *);
+        static cTkClassPointer *ClassPointerCreate(cTkClassPointer *result);
+        static uint64_t ClassPointerGenerateHash(const cTkClassPointer *, uint64_t, bool);
+        static void ClassPointerDestroy(cTkClassPointer *);
     };
 };
 

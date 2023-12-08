@@ -2,19 +2,19 @@
  * @file TkAttachment.h
  * @author VITALISED & Contributors
  * @since 2023-12-05
- * 
+ *
  * Copyright (C) 2023  VITALISED & Contributors
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
@@ -25,7 +25,7 @@
 
 #include <engine/source/engine/EgScene.h>
 #include <toolkit/simulation/components/TkComponent.h>
-#include <toolkit/utilities/TkArray.h>
+#include <toolkit/utilities/containers/TkBitArray.h>
 
 #include <toolkit/attachments/tkattachmentdata.meta.h>
 
@@ -38,11 +38,14 @@ class cTkAttachmentPtr
 
 class cTkAttachment : public cEgNodeAttachment
 {
+  public:
     cTkAttachmentData *mpData;
     cTkComponent *mpComponents;
     const char *mpacName;
-    cTkBitArray<unsigned __int64, 128> mHasComponentMask;
-    __int64 miUniqueID;
+    cTkBitArray<uint64_t, true, 128> mHasComponentMask;
+    int64_t miUniqueID;
+
+    virtual ~cTkAttachment() { EMPTY_CALL_DESTRUCTOR(); }
 };
 
 SKYSCRAPER_END

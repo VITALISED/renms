@@ -43,6 +43,7 @@
 #include <string>
 #include <unordered_map>
 
+
 // clang-format off
 #define SKYSCRAPER_BEGIN namespace nms {
 #define SKYSCRAPER_END };
@@ -50,8 +51,10 @@
 
 #ifdef _MSC_VER
 #define ALIGN(size) __declspec(align(size))
+#define NO_UNIQUE_ADDRESS [[msvc::no_unique_address]]
 #else
 #define ALIGN(size) __attribute__((aligned(size)))
+#define NO_UNIQUE_ADDRESS [[no_unique_address]]
 #endif
 
 #define EMPTY_CALL()            return NULL

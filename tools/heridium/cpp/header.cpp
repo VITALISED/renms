@@ -166,10 +166,13 @@ void HeridiumCXXFile::WriteHeaderFile()
 
     HM_CLASS_BEGIN(this->mpMetaDataClass->mpacName);
 
-    TYPEDEF_ENUM_VAL("mu64ClassNameHash", fmt::format("0x{:X}", this->mpMetaDataClass->muNameHash));
-    TYPEDEF_ENUM_VAL("mu64TemplateHash", fmt::format("0x{:X}", this->mpMetaDataClass->muTemplateHash));
+    TYPEDEF_ENUM_VAL("ClassNameHash", fmt::format("0x{:X}", this->mpMetaDataClass->muNameHash));
 
     HM_PUSHSTRING("\n");
+
+    HM_UNION_BEGIN;
+
+    HM_STRUCT_BEGIN;
 
     for (int i = 0; i < this->mpMetaDataClass->miNumMembers; i++)
     {
@@ -265,6 +268,18 @@ void HeridiumCXXFile::WriteHeaderFile()
         default: break;
         }
     }
+
+    HM_STRUCT_END;
+
+    for (int i = 0; i < this->mpMetaDataClass->miNumMembers; i++)
+    {
+        cTkMetaDataMember currentMember = this->mpMetaDataClass->maMembers[i];
+        HM_META_MEMBER(currentMember);
+    }
+
+    HM_METADATA_CLASS;
+
+    HM_UNION_END;
 
     HM_CLASS_END;
 

@@ -46,10 +46,11 @@ struct EgRenderQueueHandle
 
 class cEgNodeAttachment
 {
+  public:
     TkHandle mNode;
 
     virtual ~cEgNodeAttachment();
-    virtual void OnUpdate() = 0;
+    virtual void OnUpdate();
 };
 
 class cEgSceneNode
