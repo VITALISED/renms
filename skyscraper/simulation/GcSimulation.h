@@ -23,7 +23,7 @@
 
 #include <skyscraper.h>
 
-#include <graphics/GcFullScreenEffectManager.h>
+#include <graphics/GcFullscreenEffectManager.h>
 #include <simulation/ecosystem/GcEcosystem.h>
 #include <simulation/environment/scanning/GcScanManager.h>
 #include <simulation/particles/GcParticleManager.h>
