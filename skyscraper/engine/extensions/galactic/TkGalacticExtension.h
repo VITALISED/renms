@@ -1,7 +1,7 @@
 /**
- * @file renms.h
+ * @file TkGalacticExtension.h
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2023-12-09
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -21,34 +21,28 @@
 
 #pragma once
 
-#if defined(RENMS)
+#include <skyscraper.h>
 
-#include <core/framework.h>
-#include <core/log.h>
-#include <fmt/format.h>
-#include <nanoflann.hpp>
-#include <polyhook2/Detour/NatDetour.hpp>
-#include <polyhook2/Enums.hpp>
-#include <polyhook2/IHook.hpp>
-#include <polyhook2/PE/IatHook.hpp>
+SKYSCRAPER_BEGIN
 
-#include <algorithm>
-#include <array>
-#include <filesystem>
-#include <limits>
-#include <string>
-#include <vector>
+namespace TkGalactic
+{
 
-namespace fs = std::filesystem;
+struct ParticleInstanceData
+{
+    float mfSize;
+    float mfRandom1;
+    float mfRandom2;
+    float mfX;
+    float mfY;
+    float mfZ;
+    float mfW;
+    float mfR;
+    float mfG;
+    float mfB;
+    float mfA;
+};
 
-#endif // defined(RENMS)
+} // namespace TkGalactic
 
-// clang-format off
-#define RENMS_BEGIN namespace renms {
-#define RENMS_END }
-// clang-format on
-
-// Plugin API for developers
-#if !defined(RENMS)
-#include "plugins/api.h"
-#endif //! defined(RENMS)
+SKYSCRAPER_END

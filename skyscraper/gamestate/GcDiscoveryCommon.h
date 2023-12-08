@@ -1,7 +1,7 @@
 /**
- * @file renms.h
+ * @file GcDiscoveryCommon.h
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2023-12-09
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -21,34 +21,37 @@
 
 #pragma once
 
-#if defined(RENMS)
+#include <skyscraper.h>
 
-#include <core/framework.h>
-#include <core/log.h>
-#include <fmt/format.h>
-#include <nanoflann.hpp>
-#include <polyhook2/Detour/NatDetour.hpp>
-#include <polyhook2/Enums.hpp>
-#include <polyhook2/IHook.hpp>
-#include <polyhook2/PE/IatHook.hpp>
+#include <toolkit/system/memory/pools/TkMemoryPool.h>
 
-#include <algorithm>
-#include <array>
-#include <filesystem>
-#include <limits>
-#include <string>
-#include <vector>
+#include <reality/gcdiscoverytype.meta.h>
 
-namespace fs = std::filesystem;
+SKYSCRAPER_BEGIN
 
-#endif // defined(RENMS)
+class cGcDiscoveryPayload : AutoPooled<19>
+{
+  public:
+    unsigned int kuSignificantElements;
+    std::array<uint64_t, 5> mau64Storage;
+    unsigned int muNumElements;
+};
 
-// clang-format off
-#define RENMS_BEGIN namespace renms {
-#define RENMS_END }
-// clang-format on
+class cGcDiscoveryData : AutoPooled<19>
+{
+  public:
+    uint64_t mUniverseAddress;
+    cGcDiscoveryPayload mu64Payload;
+    eDiscoveryType meType;
+};
 
-// Plugin API for developers
-#if !defined(RENMS)
-#include "plugins/api.h"
-#endif //! defined(RENMS)
+template <int Amount>
+class cGcDiscoveryDataRing
+{
+    std::array<cGcDiscoveryData, Amount> mDataBuffer;
+    std::array<uint64_t, Amount> mHashBuffer;
+    unsigned int muWriteIndex;
+    unsigned int muValidItems;
+};
+
+SKYSCRAPER_END

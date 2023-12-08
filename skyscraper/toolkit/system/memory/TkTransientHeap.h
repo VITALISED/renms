@@ -1,7 +1,7 @@
 /**
- * @file renms.h
+ * @file TkTransientHeap.h
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2023-12-09
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -21,34 +21,27 @@
 
 #pragma once
 
-#if defined(RENMS)
+#include <skyscraper.h>
 
-#include <core/framework.h>
-#include <core/log.h>
-#include <fmt/format.h>
-#include <nanoflann.hpp>
-#include <polyhook2/Detour/NatDetour.hpp>
-#include <polyhook2/Enums.hpp>
-#include <polyhook2/IHook.hpp>
-#include <polyhook2/PE/IatHook.hpp>
+#include <toolkit/utilities/containers/TkVector.h>
 
-#include <algorithm>
-#include <array>
-#include <filesystem>
-#include <limits>
-#include <string>
-#include <vector>
+SKYSCRAPER_BEGIN
 
-namespace fs = std::filesystem;
+class cTkTransientHeap
+{
+  public:
+    struct Heap
+    {
+        uint8_t *mHeap;
+        uint64_t mHeapUse;
+        uint64_t mHeapSize;
+    };
 
-#endif // defined(RENMS)
+    int mMemoryPool;
+    cTkVector<cTkTransientHeap::Heap *> mHeapList;
+    cTkTransientHeap::Heap *mCurrentHeap;
+    unsigned int mHeapWalkIdx;
+    uint64_t mSubHeapSize;
+};
 
-// clang-format off
-#define RENMS_BEGIN namespace renms {
-#define RENMS_END }
-// clang-format on
-
-// Plugin API for developers
-#if !defined(RENMS)
-#include "plugins/api.h"
-#endif //! defined(RENMS)
+SKYSCRAPER_END

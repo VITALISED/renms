@@ -101,12 +101,11 @@ class cGcApplication : public cTkFSM
         cGcNGuiManager mNGuiManager;     // stub
         cGcAudioManager mAudioManager;   // stub
         cGcAtlasManager mAtlasManager;
-        cGcNetworkManager mNetworkManager;       // stub
+        cGcNetworkManager mNetworkManager;
         cGcResourceManager mResourceManager;     // stub
         cGcGalaxyMap mGalaxyMap;                 // stub
         cGcGameAnalytics mGameAnalytics;         // stub
         cGcActivitiesTracker mActivitiesTracker; // stub
-        char __pad__[0x10];
     };
 
     cGcApplication::Data *mpData;

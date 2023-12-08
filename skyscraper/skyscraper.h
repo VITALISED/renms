@@ -26,10 +26,12 @@
 #endif
 
 #include <havok_stubs.h>
+#include <nanoflann.hpp>
 #include <robin_hood.h>
 #include <vulkan/vulkan.h>
 #include <windows.h> //see toolkit/system/TkCSMutex.h
 
+#include <algorithm>
 #include <array>
 #include <atomic>
 #include <cmath>
@@ -38,11 +40,11 @@
 #include <deque>
 #include <forward_list>
 #include <functional>
+#include <limits>
 #include <map>
 #include <memory>
 #include <string>
 #include <unordered_map>
-
 
 // clang-format off
 #define SKYSCRAPER_BEGIN namespace nms {
@@ -50,10 +52,10 @@
 // clang-format on
 
 #ifdef _MSC_VER
-#define ALIGN(size) __declspec(align(size))
+#define ALIGN(size)       __declspec(align(size))
 #define NO_UNIQUE_ADDRESS [[msvc::no_unique_address]]
 #else
-#define ALIGN(size) __attribute__((aligned(size)))
+#define ALIGN(size)       __attribute__((aligned(size)))
 #define NO_UNIQUE_ADDRESS [[no_unique_address]]
 #endif
 

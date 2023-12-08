@@ -37,3 +37,6 @@
 [submodule "submodules/rapidxml"]
 	path = submodules/rapidxml
 	url = https://github.com/timniederhausen/rapidxml
+[submodule "submodules/nanoflann"]
+	path = submodules/nanoflann
+	url = https://github.com/jlblancoc/nanoflann.git

@@ -1,7 +1,7 @@
 /**
- * @file renms.h
+ * @file GcDiscoveryManager.h
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2023-12-09
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -21,34 +21,20 @@
 
 #pragma once
 
-#if defined(RENMS)
+#include <skyscraper.h>
 
-#include <core/framework.h>
-#include <core/log.h>
-#include <fmt/format.h>
-#include <nanoflann.hpp>
-#include <polyhook2/Detour/NatDetour.hpp>
-#include <polyhook2/Enums.hpp>
-#include <polyhook2/IHook.hpp>
-#include <polyhook2/PE/IatHook.hpp>
+#include <gamestate/GcDiscoveryCommon.h>
 
-#include <algorithm>
-#include <array>
-#include <filesystem>
-#include <limits>
-#include <string>
-#include <vector>
+#include <gamestate/gcuniverseaddressdata.meta.h>
 
-namespace fs = std::filesystem;
+SKYSCRAPER_BEGIN
 
-#endif // defined(RENMS)
+class IDiscoveryManagerEventHandler
+{
+  public:
+    virtual void DiscoveryQueryCompleted(
+        const cGcUniverseAddressData *, const eDiscoveryType, const bool, const uint64_t);
+    virtual void DiscoveryDataSubmitted(const cGcDiscoveryData *);
+};
 
-// clang-format off
-#define RENMS_BEGIN namespace renms {
-#define RENMS_END }
-// clang-format on
-
-// Plugin API for developers
-#if !defined(RENMS)
-#include "plugins/api.h"
-#endif //! defined(RENMS)
+SKYSCRAPER_END

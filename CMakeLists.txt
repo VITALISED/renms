@@ -115,6 +115,8 @@ add_dependency_custom(./submodules/pybind11 ./submodules/pybind11/include)
 
 add_dependency_custom(./submodules/rapidxml ./submodules/rapidxml)
 
+add_dependency_custom(./submodules/nanoflann ./submodules/nanoflann/include)
+
 # ==================================================================================================
 # Targets.
 

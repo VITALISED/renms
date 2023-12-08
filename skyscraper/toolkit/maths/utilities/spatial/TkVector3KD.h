@@ -1,7 +1,7 @@
 /**
- * @file renms.h
+ * @file TkVector3KD.h
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2023-12-09
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -21,34 +21,35 @@
 
 #pragma once
 
-#if defined(RENMS)
+#include <skyscraper.h>
 
-#include <core/framework.h>
-#include <core/log.h>
-#include <fmt/format.h>
-#include <nanoflann.hpp>
-#include <polyhook2/Detour/NatDetour.hpp>
-#include <polyhook2/Enums.hpp>
-#include <polyhook2/IHook.hpp>
-#include <polyhook2/PE/IatHook.hpp>
+#include <toolkit/maths/numeric/generic/TkVector3Generic.h>
+#include <toolkit/utilities/containers/TkVector.h>
 
-#include <algorithm>
-#include <array>
-#include <filesystem>
-#include <limits>
-#include <string>
-#include <vector>
+SKYSCRAPER_BEGIN
 
-namespace fs = std::filesystem;
+template <int unk>
+class cTkVector3KD
+{
+  public:
+    struct Float3
+    {
+        float mX;
+        float mY;
+        float mZ;
+    };
 
-#endif // defined(RENMS)
+    cTkVector<cTkVector3KD<unk>::Float3> mvPoints;
+    cTkVector3 mBBoxMin;
+    cTkVector3 mBBoxMax;
+    bool mbBBoxValid;
+};
 
-// clang-format off
-#define RENMS_BEGIN namespace renms {
-#define RENMS_END }
-// clang-format on
+template <typename T, int unk>
+class cTkVector3MetaKD : public cTkVector3KD<unk>
+{
+  public:
+    cTkVector<T> mvMetadata;
+};
 
-// Plugin API for developers
-#if !defined(RENMS)
-#include "plugins/api.h"
-#endif //! defined(RENMS)
+SKYSCRAPER_END
