@@ -4,7 +4,7 @@ macro(add_dependency_custom dir include)
     file(GLOB_RECURSE HEADERS "${CMAKE_CURRENT_SOURCE_DIR}/${dir}/*.h")
     if(HEADERS STREQUAL "")
         execute_process(
-            COMMAND git submodule update --init --recursive ${dir}
+            COMMAND git submodule update --init --recursive --depth 1 ${dir}
             WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
         )
     endif()
