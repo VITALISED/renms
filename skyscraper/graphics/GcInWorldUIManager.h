@@ -1,7 +1,7 @@
 /**
- * @file GcNGuiManager.h
+ * @file GcInWorldUIManager.h
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2023-12-08
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -23,30 +23,11 @@
 
 #include <skyscraper.h>
 
-#include <graphics/ngui/GcNGuiLayer.h>
-#include <toolkit/graphics/2d/ui/layers/Tk3dLayer.h>
-#include <toolkit/graphics/2d/ui/objects/Tk2dImage.h>
-
 SKYSCRAPER_BEGIN
 
-class cGcNGui
+class cGcInWorldUIManager
 {
-  public:
-    cGcNGuiLayer mRoot;
-    cTkNGuiInput mInput;
-    bool mbUseInput;
-    float mfPixelRatio;
-    bool mbFullscreen;
-    cTkVector2 mCustomSize;
-    bool mbHasCustomSize;
-    bool mbIsInWorld;
-    cTk3dLayer mTk3dLayer;
-    cTk2dImage mTk2dImage;
-};
-
-class cGcNGuiManager
-{
-    char __pad__[0x0768];
+    char __pad__[0x4a320];
 };
 
 SKYSCRAPER_END

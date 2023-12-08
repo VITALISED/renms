@@ -28,7 +28,12 @@ int gTicker = 0;
 void HandleGcApplicationUpdate(nms::cGcApplication *lGcApplication)
 {
     if (lGcApplication->mpData->mSimulation.mPlayer.mbMoving)
-        spdlog::info(lGcApplication->mpData->mSimulation.mPlayer.mbMoving);
+    {
+        spdlog::info(
+            "{}, {}, {}", lGcApplication->mpData->mSimulation.mPlayer.mPosition[0],
+            lGcApplication->mpData->mSimulation.mPlayer.mPosition[1],
+            lGcApplication->mpData->mSimulation.mPlayer.mPosition[2]);
+    }
 }
 
 RENMS_HOOK(

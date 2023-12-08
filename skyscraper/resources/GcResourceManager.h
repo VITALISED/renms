@@ -55,4 +55,9 @@ class cGcResourceCustomisation
     const eColourAlt kReplicatedColourAlts[3];
 };
 
+class cGcResourceManager
+{
+    char __pad__[0x0170];
+};
+
 SKYSCRAPER_END
