@@ -413,3 +413,4 @@ RayRod's Multiverse/
 docs/doxygen/*
 docs/_build/*
 docs/api/*
+/CMakeSettings.json
