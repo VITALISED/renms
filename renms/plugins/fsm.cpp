@@ -34,18 +34,11 @@ void HandleGcApplicationUpdate(nms::cGcApplication *lGcApplication)
     }
 }
 
-RENMS_HOOK(cGcApplication__Update, renms::RelToAbsolute(0x19AF10), void, [](nms::cGcApplication *thiscall) {
-    HandleGcApplicationUpdate(GetGcApplication());
-    return RENMS_CAST(cGcApplication__Update, GetGcApplication());
-});
-
-uint64_t cGcApplication__Update__TRAMPOLINE = 0;
-std::function<void()> cGcApplication__UpdateDETOUR[](nms::cGcApplication *thiscall)
-{
-    HandleGcApplicationUpdate(GetGcApplication());
-    return PLH::FnCast(cGcApplication__Update__TRAMPOLINE, cGcApplication__Update__DETOUR)(GetGcApplication());
-}
-reinterpret_cast<uint64_t>(offset), reinterpret_cast<uint64_t>(cGcApplication__Update__DETOUR), &cGcApplication__Update__TRAMPOLINE);
+RENMS_HOOK(
+    cGcApplication__Update, renms::RelToAbsolute(0x19AF10), void, (nms::cGcApplication * thiscall) {
+        HandleGcApplicationUpdate(GetGcApplication());
+        return RENMS_CAST(cGcApplication__Update, GetGcApplication());
+    });
 
 RENMS_BEGIN
 

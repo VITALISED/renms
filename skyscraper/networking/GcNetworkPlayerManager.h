@@ -81,14 +81,21 @@ class cGcNetworkPlayerManager
         cTkFixedString<64, char> mPlatformId;
     };
 
-    cGcRpcCallBase *PLHS;
-    cGcRpcCallBase *PLWM;
-    cGcRpcCallBase *PLWR;
-    cGcRpcCallBase *PLWF;
-    cGcRpcCallBase *PLRS;
-    cGcRpcCallBase *PEFF;
-    cGcRpcCallBase *PPFX;
-    cGcRpcCallBase *PRDL;
+    union {
+        cTkUserIdBase<cTkFixedString<64, char>> SelfHostPlayerId;
+        struct
+        {
+            cGcRpcCallBase *PLHS;
+            cGcRpcCallBase *PLWM;
+            cGcRpcCallBase *PLWR;
+            cGcRpcCallBase *PLWF;
+            cGcRpcCallBase *PLRS;
+            cGcRpcCallBase *PEFF;
+            cGcRpcCallBase *PPFX;
+            cGcRpcCallBase *PRDL;
+        };
+    };
+
     cGcRpcCallBase *PLTD;
     cGcRpcCallBase *PLNA;
     cGcRpcCallBase *PLCF;

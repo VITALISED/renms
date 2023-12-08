@@ -37,36 +37,44 @@ SKYSCRAPER_BEGIN
 class cGcNetworkPlayerReplicatedState
 {
   public:
-    cTkReplicatedVariablePlayer<cTkUserIdBase<cTkFixedString<64, char>>> mSessionOwner;
-    cTkReplicatedVariablePlayer<uint64_t> muiConnectionTimeUTC;
-    cTkReplicatedVariablePlayer<uint64_t> muiTimeEnteredMatchmakingUA;
-    cTkReplicatedVariablePlayer<unsigned char> miPlayerBannerIcon;
-    cTkReplicatedVariablePlayer<unsigned char> miPlayerBannerMainColour;
-    cTkReplicatedVariablePlayer<unsigned char> miPlayerBannerBackgroundColour;
-    cTkReplicatedVariablePlayer<enum eInventoryClass> mePlayerBannerShipClass;
-    cTkReplicatedVariablePlayer<TkID<128>> mJetpackEffect;
-    std::array<cTkReplicatedVariablePlayer<unsigned int>, 32> maMaxIndices;
-    cTkReplicatedVariablePlayer<cTkFixedString<128, char>> mPlayerName;
-    cTkReplicatedVariablePlayer<cGcLobbyId> mOtherLobbyId;
-    cTkReplicatedVariablePlayer<uint64_t> mUA;
-    cTkReplicatedVariablePlayer<uint64_t> mSystemUA;
-    cTkReplicatedVariablePlayer<TkID<128>> mTitleId;
-    cTkReplicatedVariablePlayer<uint64_t> mMatchmakingUA;
-    cTkReplicatedVariablePlayer<bool> mbBusyInAMenuOrInteraction;
-    cTkReplicatedVariablePlayer<bool> mbNeedsSmallLobby;
-    cTkReplicatedVariablePlayer<bool> mbCreatingOtherLobby;
-    cTkReplicatedVariablePlayer<bool> mbInSmallOtherLobby;
-    cTkReplicatedVariablePlayer<cTkFixedString<64, char>> mQueueName;
-    cTkReplicatedVariablePlayer<cTkFixedString<64, char>> mTicketId;
-    cTkReplicatedVariablePlayer<cTkFixedString<4, char>> mDevice;
-    cTkReplicatedVariablePlayer<enum ePrivilegeState> meFireteamJoinability;
-    cTkReplicatedVariablePlayer<cTkFixedString<64, char>> mNativeSessionId;
-    cTkReplicatedVariablePlayer<cGcSettlementState> mCurrentSettlement;
-    cTkReplicatedVariablePlayer<cGcDifficultySettingsReplicatedState> mDifficultySettings;
-    cGcNetworkPlayer *mpOwner;
-    cGcNetworkConstants::LobbyType meLobbyType;
-    float mfTimeToNextMessage;
+    union {
+        struct
+        {
+            cTkReplicatedVariablePlayer<cTkUserIdBase<cTkFixedString<64, char>>> mSessionOwner;
+            cTkReplicatedVariablePlayer<uint64_t> muiConnectionTimeUTC;
+            cTkReplicatedVariablePlayer<uint64_t> muiTimeEnteredMatchmakingUA;
+            cTkReplicatedVariablePlayer<unsigned char> miPlayerBannerIcon;
+            cTkReplicatedVariablePlayer<unsigned char> miPlayerBannerMainColour;
+            cTkReplicatedVariablePlayer<unsigned char> miPlayerBannerBackgroundColour;
+            cTkReplicatedVariablePlayer<enum eInventoryClass> mePlayerBannerShipClass;
+            cTkReplicatedVariablePlayer<TkID<128>> mJetpackEffect;
+            std::array<cTkReplicatedVariablePlayer<unsigned int>, 32> maMaxIndices;
+            cTkReplicatedVariablePlayer<cTkFixedString<128, char>> mPlayerName;
+            cTkReplicatedVariablePlayer<cGcLobbyId> mOtherLobbyId;
+            cTkReplicatedVariablePlayer<uint64_t> mUA;
+            cTkReplicatedVariablePlayer<uint64_t> mSystemUA;
+            cTkReplicatedVariablePlayer<TkID<128>> mTitleId;
+            cTkReplicatedVariablePlayer<uint64_t> mMatchmakingUA;
+            cTkReplicatedVariablePlayer<bool> mbBusyInAMenuOrInteraction;
+            cTkReplicatedVariablePlayer<bool> mbNeedsSmallLobby;
+            cTkReplicatedVariablePlayer<bool> mbCreatingOtherLobby;
+            cTkReplicatedVariablePlayer<bool> mbInSmallOtherLobby;
+            cTkReplicatedVariablePlayer<cTkFixedString<64, char>> mQueueName;
+            cTkReplicatedVariablePlayer<cTkFixedString<64, char>> mTicketId;
+            cTkReplicatedVariablePlayer<cTkFixedString<4, char>> mDevice;
+            cTkReplicatedVariablePlayer<enum ePrivilegeState> meFireteamJoinability;
+            cTkReplicatedVariablePlayer<cTkFixedString<64, char>> mNativeSessionId;
+            cTkReplicatedVariablePlayer<cGcSettlementState> mCurrentSettlement;
+            cTkReplicatedVariablePlayer<cGcDifficultySettingsReplicatedState> mDifficultySettings;
+            cGcNetworkPlayer *mpOwner;
+            cGcNetworkConstants::LobbyType meLobbyType;
+            float mfTimeToNextMessage;
+        };
+        const float mfTimeBetweenMessages;
+    };
     cTkReplicatedVariableArray maReplicatedVariables;
+
+    ~cGcNetworkPlayerReplicatedState() { EMPTY_CALL_DESTRUCTOR(); }
 };
 
 SKYSCRAPER_END

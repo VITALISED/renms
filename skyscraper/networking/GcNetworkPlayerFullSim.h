@@ -25,6 +25,7 @@
 
 #include <networking/GcNetworkPlayer.h>
 #include <networking/GcNetworkPlayerFullSim.h>
+#include <networking/GcNetworkWeapon.h>
 #include <simulation/environment/scanning/GcMarkerPoint.h>
 #include <toolkit/networking/TkNetworkId.h>
 
@@ -77,6 +78,8 @@ class cGcNetworkPlayerFullSim : public cGcNetworkPlayer
     bool mbIsValidCreatureAttackTarget;
     cTkVector3 mGrabbedByPosition;
     cTkBitArray<uint64_t, 1, 11> mMPMissionEligibility;
+
+    virtual ~cGcNetworkPlayerFullSim() { EMPTY_CALL_DESTRUCTOR(); };
 };
 
 SKYSCRAPER_END

@@ -29,6 +29,6 @@ class cGcNetworkAddress
 {
   public:
     virtual bool operator==(const cGcNetworkAddress *);
-}
+};
 
 SKYSCRAPER_END

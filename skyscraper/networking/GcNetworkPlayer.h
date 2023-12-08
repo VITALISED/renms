@@ -67,6 +67,8 @@ class cGcNetworkPlayer : public cGcPlayerCommon
     bool mbFriendOfLocal;
     cTkFixedString<64, char> mPlatformId;
     std::list<std::shared_ptr<cGcNetworkMessage>> mPendingMessages;
+
+    ~cGcNetworkPlayer() { EMPTY_CALL_DESTRUCTOR(); }
 };
 
 SKYSCRAPER_END

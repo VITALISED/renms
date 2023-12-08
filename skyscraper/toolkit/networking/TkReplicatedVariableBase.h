@@ -26,18 +26,26 @@
 SKYSCRAPER_BEGIN
 
 class cGcNetworkPlayer;
+class cGcNetworkSerializer;
 
 class cTkReplicatedVariableBase
 {
-    std::function<bool __cdecl(cGcNetworkPlayer *)> mShouldReplicate;
+  public:
+    std::function<bool(cGcNetworkPlayer *)> mShouldReplicate;
     bool mbChanged;
+
+    virtual bool SerializeOrDeserialize(cGcNetworkSerializer *);
+    virtual void Construct();
+    virtual bool IsLocalPlayerEntityOwner();
+    virtual bool IsOwned();
 };
 
 template <typename T>
 class cTkReplicatedVariableTemplated : public cTkReplicatedVariableBase
 {
+  public:
     T mValue;
-    std::function<void __cdecl(T const &, T const &)> mOnReceiveChange;
+    std::function<void(T const &, T const &)> mOnReceiveChange;
 };
 
 SKYSCRAPER_END

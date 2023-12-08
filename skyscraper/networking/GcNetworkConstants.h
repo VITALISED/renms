@@ -59,7 +59,7 @@ class cGcNetworkConstants
         Onfoot,
         InShip,
         InVehicle,
-        Count,
+        _Count,
     };
 };
 

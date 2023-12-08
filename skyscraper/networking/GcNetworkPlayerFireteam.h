@@ -31,6 +31,8 @@ class cGcNetworkPlayerFireteam : public cGcNetworkPlayer
 {
   public:
     float mfTimeSinceLastUpdateRecvd;
+
+    virtual ~cGcNetworkPlayerFireteam() { EMPTY_CALL_DESTRUCTOR(); };
 };
 
 SKYSCRAPER_END

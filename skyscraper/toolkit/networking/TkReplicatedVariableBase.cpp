@@ -1,7 +1,7 @@
 /**
- * @file TkReplicatedVariablePlayer.h
+ * @file TkReplicatedVariableBase.cpp
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2023-12-08
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -19,20 +19,28 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#pragma once
-
-#include <skyscraper.h>
-
 #include <toolkit/networking/TkReplicatedVariableBase.h>
-#include <toolkit/networking/TkUserIdBase.h>
-#include <toolkit/utilities/string/TkString.h>
 
 SKYSCRAPER_BEGIN
 
-template <typename T>
-class cTkReplicatedVariablePlayer : public cTkReplicatedVariableTemplated<T>
+bool cTkReplicatedVariableBase::SerializeOrDeserialize(cGcNetworkSerializer *)
 {
-    bool mbIsLocallyOwned;
-};
+    EMPTY_CALL();
+}
+
+void cTkReplicatedVariableBase::Construct()
+{
+    EMPTY_CALL_VOID();
+}
+
+bool cTkReplicatedVariableBase::IsLocalPlayerEntityOwner()
+{
+    EMPTY_CALL();
+}
+
+bool cTkReplicatedVariableBase::IsOwned()
+{
+    EMPTY_CALL();
+}
 
 SKYSCRAPER_END
