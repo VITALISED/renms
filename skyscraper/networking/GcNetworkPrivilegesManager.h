@@ -1,7 +1,7 @@
 /**
- * @file GcNetworkConstants.h
+ * @file GcNetworkPrivilegesManager.h
  * @author VITALISED & Contributors
- * @since 2023-12-06
+ * @since 2023-12-08
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -23,44 +23,35 @@
 
 #include <skyscraper.h>
 
+#include <networking/GcNetworkPlayerEventsHandler.h>
+#include <networking/GcNetworkRpcCall.h>
+#include <toolkit/networking/TkUserIdBase.h>
+#include <toolkit/utilities/containers/TkVector.h>
+
 SKYSCRAPER_BEGIN
 
-class cGcNetworkConstants
+enum ePrivilegeState : uint8_t
+{
+    EPrivilegeState_Nobody,
+    EPrivilegeState_FriendsOnly,
+    EPrivilegeState_FriendsOrFireTeamOnly,
+    EPrivilegeState_Anybody,
+    EPrivilegeState_NumTypes,
+};
+
+class cGcNetworkPrivilegesManager : public INetworkPlayerEventsHandler
 {
   public:
-    enum OnlinePlatformType : uint8_t
+    struct Privileges
     {
-        Generic,
-        GOG,
-        PlayStation,
-        Steam,
-        XboxLive,
-        GenericKBM,
-        Nintendo,
-        NumOnlinePlatformTypes,
+        cTkUserIdBase<cTkFixedString<64, char>> mOwner;
+        ePrivilegeState maStates[9];
     };
 
-    enum TransmissionChannels
-    {
-        Unreliable,
-        Reliable,
-        Count,
-    };
-
-    enum LobbyType : uint8_t
-    {
-        Gameplay,
-        Fireteam,
-        NumLobbyTypes,
-    };
-
-    enum PlayerMovementState
-    {
-        Onfoot,
-        InShip,
-        InVehicle,
-        Count,
-    };
+    cGcRpcCallBase *PRVU;
+    cGcNetworkPrivilegesManager::Privileges mPrivileges;
+    cTkVector<cGcNetworkPrivilegesManager::Privileges> maRemotePrivileges;
+    bool mbRequiresBroadcast;
 };
 
 SKYSCRAPER_END

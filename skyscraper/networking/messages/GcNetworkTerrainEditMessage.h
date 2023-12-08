@@ -1,7 +1,7 @@
 /**
- * @file GcNetworkConstants.h
+ * @file GcNetworkTerrainEditMessage.h
  * @author VITALISED & Contributors
- * @since 2023-12-06
+ * @since 2023-12-08
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -23,44 +23,28 @@
 
 #include <skyscraper.h>
 
+#include <networking/messages/GcNetworkMessage.h>
+
+#include <gamestate/gcuniverseaddressdata.meta.h>
+
 SKYSCRAPER_BEGIN
 
-class cGcNetworkConstants
+class cGcNetworkTerrainEditMessage : public cGcNetworkMessage
 {
   public:
-    enum OnlinePlatformType : uint8_t
+    enum eDataType
     {
-        Generic,
-        GOG,
-        PlayStation,
-        Steam,
-        XboxLive,
-        GenericKBM,
-        Nintendo,
-        NumOnlinePlatformTypes,
+        EDataType_NormalEdits,
+        EDataType_UndoneEdits,
+        EDataType_EditsUndo,
+        EDataType_NumTypes,
     };
-
-    enum TransmissionChannels
-    {
-        Unreliable,
-        Reliable,
-        Count,
-    };
-
-    enum LobbyType : uint8_t
-    {
-        Gameplay,
-        Fireteam,
-        NumLobbyTypes,
-    };
-
-    enum PlayerMovementState
-    {
-        Onfoot,
-        InShip,
-        InVehicle,
-        Count,
-    };
+    cGcUniverseAddressData mUniverseAddress;
+    cTkVector3 mAnchorPosition;
+    cGcNetworkTerrainEditMessage::eDataType meDataType;
+    int miEditsCount;
+    cTkFixedArray<int, 220> maiEditPositions;
+    cTkFixedArray<char, 220> maEditData;
 };
 
 SKYSCRAPER_END

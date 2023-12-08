@@ -24,6 +24,7 @@
 #include <xmmintrin.h>
 
 #include <cstdint>
+#include <queue>
 
 struct hkVector4f
 {

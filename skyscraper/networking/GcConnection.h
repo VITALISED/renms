@@ -1,7 +1,7 @@
 /**
- * @file GcNetworkConstants.h
+ * @file GcConnection.h
  * @author VITALISED & Contributors
- * @since 2023-12-06
+ * @since 2023-12-08
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -23,44 +23,27 @@
 
 #include <skyscraper.h>
 
+#include <networking/GcNetworkAddress.h>
+#include <networking/messages/GcNetworkMessage.h>
+
 SKYSCRAPER_BEGIN
 
-class cGcNetworkConstants
+class cGcNetworkPlayer;
+
+class cGcConnection
 {
   public:
-    enum OnlinePlatformType : uint8_t
-    {
-        Generic,
-        GOG,
-        PlayStation,
-        Steam,
-        XboxLive,
-        GenericKBM,
-        Nintendo,
-        NumOnlinePlatformTypes,
-    };
-
-    enum TransmissionChannels
-    {
-        Unreliable,
-        Reliable,
-        Count,
-    };
-
-    enum LobbyType : uint8_t
-    {
-        Gameplay,
-        Fireteam,
-        NumLobbyTypes,
-    };
-
-    enum PlayerMovementState
-    {
-        Onfoot,
-        InShip,
-        InVehicle,
-        Count,
-    };
+    virtual void Construct();
+    virtual void Prepare();
+    virtual void Release();
+    virtual void Destruct();
+    virtual void Listen();
+    virtual void Update(float);
+    virtual int SendMessageA(
+        const std::shared_ptr<cGcNetworkMessage> *, std::array<std::shared_ptr<cGcNetworkAddress>, 32>,
+        cGcNetworkConstants::TransmissionChannels, cGcNetworkConstants::LobbyType);
+    virtual void ConnectToPlayer(cGcNetworkPlayer *);
+    virtual void DisconnectPlayer(cGcNetworkPlayer *);
 };
 
 SKYSCRAPER_END

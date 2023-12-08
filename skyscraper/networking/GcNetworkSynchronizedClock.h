@@ -1,7 +1,7 @@
 /**
- * @file GcNetworkConstants.h
+ * @file GcNetworkSynchronizedClock.h
  * @author VITALISED & Contributors
- * @since 2023-12-06
+ * @since 2023-12-08
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -23,44 +23,16 @@
 
 #include <skyscraper.h>
 
+#include <networking/GcNetworkPlayerEventsHandler.h>
+
 SKYSCRAPER_BEGIN
 
-class cGcNetworkConstants
+class cGcNetworkSynchronizedClock : public INetworkPlayerEventsHandler
 {
   public:
-    enum OnlinePlatformType : uint8_t
-    {
-        Generic,
-        GOG,
-        PlayStation,
-        Steam,
-        XboxLive,
-        GenericKBM,
-        Nintendo,
-        NumOnlinePlatformTypes,
-    };
-
-    enum TransmissionChannels
-    {
-        Unreliable,
-        Reliable,
-        Count,
-    };
-
-    enum LobbyType : uint8_t
-    {
-        Gameplay,
-        Fireteam,
-        NumLobbyTypes,
-    };
-
-    enum PlayerMovementState
-    {
-        Onfoot,
-        InShip,
-        InVehicle,
-        Count,
-    };
+    int64_t miClockDelta;
+    float mfTimeSinceLastTimeRequest;
+    std::deque<int64_t> mDeltaQueue;
 };
 
 SKYSCRAPER_END

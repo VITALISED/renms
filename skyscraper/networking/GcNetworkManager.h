@@ -23,11 +23,52 @@
 
 #include <skyscraper.h>
 
+#include <networking/GcConnection.h>
+#include <networking/GcMonumentManager.h>
+#include <networking/GcNetworkBandwidthMonitor.h>
+#include <networking/GcNetworkBaseBuildingManager.h>
+#include <networking/GcNetworkBaseImageManager.h>
+#include <networking/GcNetworkCreatureManager.h>
+#include <networking/GcNetworkIdManager.h>
+#include <networking/GcNetworkInteractionBufferManager.h>
+#include <networking/GcNetworkInteractionManager.h>
+#include <networking/GcNetworkLockManager.h>
+#include <networking/GcNetworkMessageManager.h>
+#include <networking/GcNetworkPlayerManager.h>
+#include <networking/GcNetworkPrivilegesManager.h>
+#include <networking/GcNetworkReplicatedEntityManager.h>
+#include <networking/GcNetworkRpcManager.h>
+#include <networking/GcNetworkSynchronizedClock.h>
+#include <networking/GcNetworkTerrainEditsManager.h>
+#include <networking/GcTextChatManager.h>
+#include <networking/GcVoiceChat.h>
+
 SKYSCRAPER_BEGIN
 
 class cGcNetworkManager
 {
-    char __pad__[0x21ab0];
+  public:
+    cGcConnection *mpConnection;
+    cGcNetworkMessageManager mMessageManager;
+    cGcNetworkPlayerManager mPlayerManager;
+    cGcMatchmaking *mpMatchmaking;
+    cGcNetworkInteractionManager mInteractionManager;
+    cGcMonumentManager mMonumentManager;
+    cGcVoiceChat *mpVoiceChat;
+    cGcTextChatManager mTextChatManager;
+    cGcNetworkTerrainEditsManager mTerrainEditsManager;
+    cGcNetworkBaseBuildingManager mBaseBuildingManager;
+    cGcNetworkReplicatedEntityManager mReplicatedEntityManager;
+    cGcNetworkSynchronizedClock mNetworkSychronizedClock;
+    cGcNetworkRpcManager mRpcManager;
+    cGcNetworkInteractionBufferManager mInteractionBufferManager;
+    cGcNetworkIdManager mNetworkIdManager;
+    cGcNetworkCreatureManager mCreatureManager;
+    cGcNetworkLockManager mNetworkLockManager;
+    cGcNetworkBandwidthMonitor mBandwidthMonitor;
+    cGcNetworkPrivilegesManager mPrivilegesManager;
+    cGcNetworkBaseImageManager mBaseImageManager;
+    bool mbPrepared;
 };
 
 SKYSCRAPER_END

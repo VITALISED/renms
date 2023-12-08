@@ -29,8 +29,8 @@
 DWORD WINAPI MainThread(LPVOID lpReserved)
 {
     UNREFERENCED_PARAMETER(lpReserved);
-    
-    CreateLogger("\033[96mHeridium\033[0m");
+
+    CreateLogger("\033[38;2;158;237;255mHeridium\033[0m");
     spdlog::info("Hello from Heridium!");
 
     heridium::AnalysisInit();

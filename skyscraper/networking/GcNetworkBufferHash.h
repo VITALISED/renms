@@ -1,7 +1,7 @@
 /**
- * @file GcNetworkConstants.h
+ * @file GcNetworkBufferHash.h
  * @author VITALISED & Contributors
- * @since 2023-12-06
+ * @since 2023-12-08
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -23,44 +23,30 @@
 
 #include <skyscraper.h>
 
+#include <toolkit/utilities/containers/TkVector.h>
+
 SKYSCRAPER_BEGIN
 
-class cGcNetworkConstants
+struct sHashValue
+{
+    uint16_t muHashValue;
+    int16_t miTimeStamp;
+};
+
+class cGcNetworkBufferHash
 {
   public:
-    enum OnlinePlatformType : uint8_t
-    {
-        Generic,
-        GOG,
-        PlayStation,
-        Steam,
-        XboxLive,
-        GenericKBM,
-        Nintendo,
-        NumOnlinePlatformTypes,
-    };
+    const int kiChunkSize;
+    int miChunkHashOffset;
+    cTkVector<sHashValue> maChunkHashValues;
+    uint64_t mu64Timestamp;
+    bool mbInitialised;
 
-    enum TransmissionChannels
-    {
-        Unreliable,
-        Reliable,
-        Count,
-    };
-
-    enum LobbyType : uint8_t
-    {
-        Gameplay,
-        Fireteam,
-        NumLobbyTypes,
-    };
-
-    enum PlayerMovementState
-    {
-        Onfoot,
-        InShip,
-        InVehicle,
-        Count,
-    };
+    virtual ~cGcNetworkBufferHash();
+    virtual sHashValue *GetHashValue(sHashValue *result, unsigned int);
+    virtual uint64_t GetHashTimestamp();
+    virtual uint16_t GenerateHashValue(int);
+    virtual void OnHashOffsetChanged(int);
 };
 
 SKYSCRAPER_END

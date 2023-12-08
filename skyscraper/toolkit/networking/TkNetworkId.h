@@ -1,7 +1,7 @@
 /**
- * @file GcNetworkConstants.h
+ * @file TkNetworkId.h
  * @author VITALISED & Contributors
- * @since 2023-12-06
+ * @since 2023-12-08
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -21,46 +21,21 @@
 
 #pragma once
 
-#include <skyscraper.h>
+#include <toolkit/networking/TkNetworkId.h>
 
 SKYSCRAPER_BEGIN
 
-class cGcNetworkConstants
+class cTkNetworkId
 {
   public:
-    enum OnlinePlatformType : uint8_t
-    {
-        Generic,
-        GOG,
-        PlayStation,
-        Steam,
-        XboxLive,
-        GenericKBM,
-        Nintendo,
-        NumOnlinePlatformTypes,
-    };
-
-    enum TransmissionChannels
-    {
-        Unreliable,
-        Reliable,
-        Count,
-    };
-
-    enum LobbyType : uint8_t
-    {
-        Gameplay,
-        Fireteam,
-        NumLobbyTypes,
-    };
-
-    enum PlayerMovementState
-    {
-        Onfoot,
-        InShip,
-        InVehicle,
-        Count,
-    };
+    union {
+        struct
+        {
+            uint32_t mCreator : 5;
+            uint32_t mObjectId : 27;
+        };
+        uint32_t mUniqueId;
+    } mOpaqueId;
 };
 
 SKYSCRAPER_END

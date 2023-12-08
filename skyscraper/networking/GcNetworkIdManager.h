@@ -1,7 +1,7 @@
 /**
- * @file GcNetworkConstants.h
+ * @file GcNetworkIdManager.h
  * @author VITALISED & Contributors
- * @since 2023-12-06
+ * @since 2023-12-08
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -23,44 +23,29 @@
 
 #include <skyscraper.h>
 
+#include <networking/GcNetworkPlayerEventsHandler.h>
+#include <networking/GcNetworkRpcCall.h>
+#include <toolkit/networking/TkNetworkId.h>
+
 SKYSCRAPER_BEGIN
 
-class cGcNetworkConstants
+class cGcNetworkIdManager : public INetworkPlayerEventsHandler
 {
   public:
-    enum OnlinePlatformType : uint8_t
+    struct RemotePlayerBiggestId
     {
-        Generic,
-        GOG,
-        PlayStation,
-        Steam,
-        XboxLive,
-        GenericKBM,
-        Nintendo,
-        NumOnlinePlatformTypes,
+        unsigned int mLastIdUsed;
     };
 
-    enum TransmissionChannels
-    {
-        Unreliable,
-        Reliable,
-        Count,
-    };
-
-    enum LobbyType : uint8_t
-    {
-        Gameplay,
-        Fireteam,
-        NumLobbyTypes,
-    };
-
-    enum PlayerMovementState
-    {
-        Onfoot,
-        InShip,
-        InVehicle,
-        Count,
-    };
+    unsigned int miCurrentObjectId;
+    unsigned int miCurrentMyOwnerId;
+    cGcNetworkIdManager::RemotePlayerBiggestId mPlayerBiggestIds[32];
+    cGcRpcCallBase *IDOW;
+    cGcRpcCallBase *IDRO;
+    cGcRpcCallBase *OWCH;
+    cGcRpcCallBase *PLIU;
+    cGcRpcCallBase *PMEU;
+    std::list<std::pair<cTkNetworkId, uint64_t>> mRecentlyAbandonedEntities;
 };
 
 SKYSCRAPER_END
