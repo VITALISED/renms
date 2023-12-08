@@ -271,13 +271,13 @@ void HeridiumCXXFile::WriteHeaderFile()
 
     HM_STRUCT_END;
 
-    for (int i = 0; i < this->mpMetaDataClass->miNumMembers; i++)
-    {
-        cTkMetaDataMember currentMember = this->mpMetaDataClass->maMembers[i];
-        HM_META_MEMBER(currentMember);
-    }
+    // for (int i = 0; i < this->mpMetaDataClass->miNumMembers; i++)
+    // {
+    //     cTkMetaDataMember currentMember = this->mpMetaDataClass->maMembers[i];
+    //     HM_META_MEMBER(currentMember);
+    // }
 
-    HM_METADATA_CLASS;
+    // HM_METADATA_CLASS;
 
     HM_UNION_END;
 
