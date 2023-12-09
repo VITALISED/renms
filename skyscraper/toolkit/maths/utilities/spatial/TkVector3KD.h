@@ -28,7 +28,7 @@
 
 SKYSCRAPER_BEGIN
 
-template <int unk>
+template <int MemPoolIdx>
 class cTkVector3KD
 {
   public:
@@ -39,14 +39,17 @@ class cTkVector3KD
         float mZ;
     };
 
-    cTkVector<cTkVector3KD<unk>::Float3> mvPoints;
+    cTkVector<cTkVector3KD<MemPoolIdx>::Float3> mvPoints;
     cTkVector3 mBBoxMin;
     cTkVector3 mBBoxMax;
     bool mbBBoxValid;
+
+    virtual void clear();
+    virtual void reserve(uint64_t);
 };
 
-template <typename T, int unk>
-class cTkVector3MetaKD : public cTkVector3KD<unk>
+template <typename T, int MemPoolIdx>
+class cTkVector3MetaKD : public cTkVector3KD<MemPoolIdx>
 {
   public:
     cTkVector<T> mvMetadata;
