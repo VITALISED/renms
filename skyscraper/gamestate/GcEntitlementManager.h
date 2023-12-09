@@ -1,5 +1,5 @@
 /**
- * @file GcGameKnowledge.h
+ * @file GcEntitlementManager.h
  * @author VITALISED & Contributors
  * @since 2023-12-09
  *
@@ -23,27 +23,14 @@
 
 #include <skyscraper.h>
 
-#include <simulation/galaxy/gcgalaxywaypoint.meta.h>
+#include <entitlements/gcentitlementrewardstable.meta.h>
 
 SKYSCRAPER_BEGIN
 
-class IKnowledgeEventHandler
+class cGcEntitlementManager
 {
   public:
-    virtual void KnowledgeRevisionWaypointsChanged();
-};
-
-class cGcGameKnowledge
-{
-  public:
-    struct Data
-    {
-        cTkStackVector<cGcGalaxyWaypoint, 8> mWaypoints;
-        cTkStackVector<IKnowledgeEventHandler *, 2> mEventHandlers;
-    };
-
-    cGcGameKnowledge::Data *mpData;
-    cTkStackVector<IKnowledgeEventHandler *, 2> mCachedHandlers;
+    cGcEntitlementRewardsTable *mpEntitlementRewardsTable;
 };
 
 SKYSCRAPER_END

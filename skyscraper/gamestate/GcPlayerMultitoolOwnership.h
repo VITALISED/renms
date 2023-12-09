@@ -1,5 +1,5 @@
 /**
- * @file GcGameKnowledge.h
+ * @file GcPlayerMultitoolOwnership.h
  * @author VITALISED & Contributors
  * @since 2023-12-09
  *
@@ -23,27 +23,34 @@
 
 #include <skyscraper.h>
 
-#include <simulation/galaxy/gcgalaxywaypoint.meta.h>
+#include <gamestate/GcInventoryStore.h>
+#include <toolkit/graphics/utilities/TkModelResourceRenderer.h>
+
+#include <simulation/weapons/gcplayerweapons.meta.h>
 
 SKYSCRAPER_BEGIN
 
-class IKnowledgeEventHandler
+class cGcPlayerMultitoolOwnership
 {
   public:
-    virtual void KnowledgeRevisionWaypointsChanged();
-};
-
-class cGcGameKnowledge
-{
-  public:
-    struct Data
+    struct sMultitoolInfo
     {
-        cTkStackVector<cGcGalaxyWaypoint, 8> mWaypoints;
-        cTkStackVector<IKnowledgeEventHandler *, 2> mEventHandlers;
+        cGcInventoryStore mInventory;
+        cTkSmartResHandle mResource;
+        cTkFixedString<32, char> mCustomName;
+        eWeaponMode mePrimaryMode;
+        eWeaponMode meSecondaryMode;
+        bool mbIsLarge;
+        bool mbUseLegacyColours;
+        cTkSeed mSeed;
     };
 
-    cGcGameKnowledge::Data *mpData;
-    cTkStackVector<IKnowledgeEventHandler *, 2> mCachedHandlers;
+    cGcPlayerMultitoolOwnership::sMultitoolInfo maMultitools[6];
+    cTkModelResourceRenderer maThumbnailRenderers[6];
+    TkHandle mThumbnailsGroup;
+    int miPrimaryToolIndex;
+    int miRequestedMultitoolIndex;
+    bool mbReadyWeapon;
 };
 
 SKYSCRAPER_END

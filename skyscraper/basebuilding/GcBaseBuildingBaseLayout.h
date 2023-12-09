@@ -1,5 +1,5 @@
 /**
- * @file GcGameKnowledge.h
+ * @file GcBaseBuildingBaseLayout.h
  * @author VITALISED & Contributors
  * @since 2023-12-09
  *
@@ -23,27 +23,24 @@
 
 #include <skyscraper.h>
 
-#include <simulation/galaxy/gcgalaxywaypoint.meta.h>
+#include <toolkit/maths/utilities/spatial/TkVector3KD.h>
 
 SKYSCRAPER_BEGIN
 
-class IKnowledgeEventHandler
+class cGcBaseBuildingBaseLayout
 {
   public:
-    virtual void KnowledgeRevisionWaypointsChanged();
-};
-
-class cGcGameKnowledge
-{
-  public:
-    struct Data
-    {
-        cTkStackVector<cGcGalaxyWaypoint, 8> mWaypoints;
-        cTkStackVector<IKnowledgeEventHandler *, 2> mEventHandlers;
-    };
-
-    cGcGameKnowledge::Data *mpData;
-    cTkStackVector<IKnowledgeEventHandler *, 2> mCachedHandlers;
+    uint64_t mBaseUA;
+    cTkVector3 mBasePosition;
+    cTkVector3 mBaseUp;
+    cTkVector3MetaKD<float, -1> mBaseObjectSpheres;
+    nanoflann::KDTreeSingleIndexAdaptor<
+        nanoflann::L2_Simple_Adaptor<float, cTkVector3MetaKD<float, -1>, float>, cTkVector3MetaKD<float, -1>, 3,
+        uint64_t>
+        mBaseObjectsTree;
+    float mfBaseRadiusSqr;
+    bool mbTreeNeedsRebuild;
+    float mfTreeRebuildTimer;
 };
 
 SKYSCRAPER_END

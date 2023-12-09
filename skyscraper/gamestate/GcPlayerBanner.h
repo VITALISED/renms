@@ -1,5 +1,5 @@
 /**
- * @file GcGameKnowledge.h
+ * @file GcPlayerBanner.h
  * @author VITALISED & Contributors
  * @since 2023-12-09
  *
@@ -23,27 +23,18 @@
 
 #include <skyscraper.h>
 
-#include <simulation/galaxy/gcgalaxywaypoint.meta.h>
+#include <reality/gcinventoryclass.meta.h>
 
 SKYSCRAPER_BEGIN
 
-class IKnowledgeEventHandler
+class cGcPlayerBanner
 {
   public:
-    virtual void KnowledgeRevisionWaypointsChanged();
-};
-
-class cGcGameKnowledge
-{
-  public:
-    struct Data
-    {
-        cTkStackVector<cGcGalaxyWaypoint, 8> mWaypoints;
-        cTkStackVector<IKnowledgeEventHandler *, 2> mEventHandlers;
-    };
-
-    cGcGameKnowledge::Data *mpData;
-    cTkStackVector<IKnowledgeEventHandler *, 2> mCachedHandlers;
+    uint8_t miIconIndex;
+    uint8_t miMainColourIndex;
+    uint8_t miBackgroundColourIndex;
+    eInventoryClass meShipClass;
+    TkID<128> mTitleId;
 };
 
 SKYSCRAPER_END

@@ -1,5 +1,5 @@
 /**
- * @file GcGameKnowledge.h
+ * @file GcBaseLinkGroups.h
  * @author VITALISED & Contributors
  * @since 2023-12-09
  *
@@ -23,27 +23,30 @@
 
 #include <skyscraper.h>
 
-#include <simulation/galaxy/gcgalaxywaypoint.meta.h>
+#include <toolkit/utilities/containers/TkVector.h>
 
 SKYSCRAPER_BEGIN
 
-class IKnowledgeEventHandler
+class cGcBaseLinkMap
 {
   public:
-    virtual void KnowledgeRevisionWaypointsChanged();
-};
-
-class cGcGameKnowledge
-{
-  public:
-    struct Data
+    struct sLinkSocket
     {
-        cTkStackVector<cGcGalaxyWaypoint, 8> mWaypoints;
-        cTkStackVector<IKnowledgeEventHandler *, 2> mEventHandlers;
+        uint16_t miLinkIndex;
+        char miDependentIndex;
     };
 
-    cGcGameKnowledge::Data *mpData;
-    cTkStackVector<IKnowledgeEventHandler *, 2> mCachedHandlers;
+    struct sObjectLinkData
+    {
+        cTkVector<cGcBaseLinkMap::sLinkSocket> mLinks;
+        cTkVector<cTkVector<unsigned short>> mDependentLinks;
+        uint16_t miBufferIndex;
+        uint16_t miDependantLinksStart;
+        uint16_t miSetNext;
+    };
+
+    cTkVector<cGcBaseLinkMap::sObjectLinkData> mLinkObjects;
+    cTkVector<unsigned short> mLinkObjectInstanceLookup;
 };
 
 SKYSCRAPER_END

@@ -1,5 +1,5 @@
 /**
- * @file GcGameKnowledge.h
+ * @file GcGraveManager.h
  * @author VITALISED & Contributors
  * @since 2023-12-09
  *
@@ -23,27 +23,30 @@
 
 #include <skyscraper.h>
 
-#include <simulation/galaxy/gcgalaxywaypoint.meta.h>
+#include <toolkit/system/memory/pools/TkMemoryPool.h>
+
+#include <atlas/gcatlasdiscovery.meta.h>
 
 SKYSCRAPER_BEGIN
 
-class IKnowledgeEventHandler
+class cGcGrave
 {
   public:
-    virtual void KnowledgeRevisionWaypointsChanged();
+    cGcAtlasDiscovery mDiscovery;
+    TkHandle mNodeHandle;
 };
 
-class cGcGameKnowledge
+class cGcGraveManager
 {
   public:
-    struct Data
+    struct Data : AutoPooled<5>
     {
-        cTkStackVector<cGcGalaxyWaypoint, 8> mWaypoints;
-        cTkStackVector<IKnowledgeEventHandler *, 2> mEventHandlers;
+        std::vector<uint64_t> mRequestsInFlight;
+        std::vector<cGcGrave> mRemoteGraves;
+        cTkSmartResHandle mBeaconRes;
     };
 
-    cGcGameKnowledge::Data *mpData;
-    cTkStackVector<IKnowledgeEventHandler *, 2> mCachedHandlers;
+    cGcGraveManager::Data *mpData;
 };
 
 SKYSCRAPER_END

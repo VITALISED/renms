@@ -1,5 +1,5 @@
 /**
- * @file GcGameKnowledge.h
+ * @file GcPlanetMappingManager.h
  * @author VITALISED & Contributors
  * @since 2023-12-09
  *
@@ -23,27 +23,26 @@
 
 #include <skyscraper.h>
 
-#include <simulation/galaxy/gcgalaxywaypoint.meta.h>
+#include <toolkit/utilities/containers/TkVector.h>
+
+#include <simulation/solarsystem/planet/gcplanetarymappingdata.meta.h>
 
 SKYSCRAPER_BEGIN
 
-class IKnowledgeEventHandler
+struct MappingDataInternal
 {
-  public:
-    virtual void KnowledgeRevisionWaypointsChanged();
+    cGcPlanetaryMappingData mMappingData;
+    uint16_t mu16SectionPerSide;
+    uint16_t mu16PolesPerSection;
+    int miMinSectionIndex;
+    int miMaxSectionIndex;
+    cTkDynamicArray<unsigned short> maDiscoveredState;
 };
 
-class cGcGameKnowledge
+class cGcPlanetMappingManager
 {
   public:
-    struct Data
-    {
-        cTkStackVector<cGcGalaxyWaypoint, 8> mWaypoints;
-        cTkStackVector<IKnowledgeEventHandler *, 2> mEventHandlers;
-    };
-
-    cGcGameKnowledge::Data *mpData;
-    cTkStackVector<IKnowledgeEventHandler *, 2> mCachedHandlers;
+    cTkVector<MappingDataInternal> mMappingInternal;
 };
 
 SKYSCRAPER_END

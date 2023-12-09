@@ -1,5 +1,5 @@
 /**
- * @file GcGameKnowledge.h
+ * @file GcCloudSaveManager.h
  * @author VITALISED & Contributors
  * @since 2023-12-09
  *
@@ -23,27 +23,32 @@
 
 #include <skyscraper.h>
 
-#include <simulation/galaxy/gcgalaxywaypoint.meta.h>
+#include <toolkit/utilities/string/TkString.h>
 
 SKYSCRAPER_BEGIN
 
-class IKnowledgeEventHandler
+class cGcGameState;
+
+struct TkCloudDataInfo
 {
-  public:
-    virtual void KnowledgeRevisionWaypointsChanged();
+    uint64_t mUploadTimestamp;
+    cTkFixedString<512, char> mMetaDataJson;
 };
 
-class cGcGameKnowledge
+class cGcCloudSaveManager
 {
   public:
-    struct Data
-    {
-        cTkStackVector<cGcGalaxyWaypoint, 8> mWaypoints;
-        cTkStackVector<IKnowledgeEventHandler *, 2> mEventHandlers;
-    };
-
-    cGcGameKnowledge::Data *mpData;
-    cTkStackVector<IKnowledgeEventHandler *, 2> mCachedHandlers;
+    cGcGameState *mpGameState;
+    std::function<void(bool)> mpOnCompletionCallback;
+    uint64_t mTempJsonFile;
+    uint64_t mTempLZ4File;
+    nms_rapidjson::GenericDocument<
+        nms_rapidjson::UTF8<char>, nms_rapidjson::MemoryPoolAllocator<nms_rapidjson::CrtAllocator>,
+        nms_rapidjson::CrtAllocator>
+        mJsonDocument;
+    char *mpStreamBuffer;
+    TkCloudDataInfo mCloudDataInfo;
+    bool mbCancelTransferRequested;
 };
 
 SKYSCRAPER_END

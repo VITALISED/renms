@@ -23,11 +23,122 @@
 
 #include <skyscraper.h>
 
+#include <basebuilding/GcSettlementStateManager.h>
+#include <gamestate/GcCloudSaveManager.h>
+#include <gamestate/GcDifficultySettings.h>
+#include <gamestate/GcDiscoveryManager.h>
+#include <gamestate/GcEntitlementManager.h>
+#include <gamestate/GcGameKnowledge.h>
+#include <gamestate/GcGameStatePersistence.h>
+#include <gamestate/GcGraveManager.h>
+#include <gamestate/GcMPMissionTracker.h>
+#include <gamestate/GcMsgBeaconManager.h>
+#include <gamestate/GcPersistentInteractionsManager.h>
+#include <gamestate/GcPlayerCreatureOwnership.h>
+#include <gamestate/GcPlayerDiscoveryHelper.h>
+#include <gamestate/GcPlayerFleetManager.h>
+#include <gamestate/GcPlayerFreighterOwnership.h>
+#include <gamestate/GcPlayerMultitoolOwnership.h>
+#include <gamestate/GcPlayerShipOwnership.h>
+#include <gamestate/GcPlayerSquadronOwnership.h>
+#include <gamestate/GcPlayerState.h>
+#include <gamestate/GcPlayerVehicleOwnership.h>
+#include <gamestate/GcStatsManager.h>
+#include <gamestate/GcTelemetryManager.h>
+#include <gamestate/GcUserSeenItemsState.h>
+#include <gamestate/GcUserSettings.h>
+#include <gamestate/GcWonderManager.h>
+#include <networking/GcNetworkRpcCall.h>
+#include <online/GcRichPresence.h>
+#include <simulation/solarsystem/planet/GcPlanetMappingManager.h>
+
+#include <gamestate/gcinventorystorebalance.meta.h>
+
 SKYSCRAPER_BEGIN
 
 class cGcGameState
 {
-    char __pad__[0x43c560];
+  public:
+    enum LastSaveResult
+    {
+        Unknown,
+        Successful,
+        Failed,
+    };
+
+    struct SaveThreadData
+    {
+        cGcGameState *mpGameState;
+        GcGameStatePersistence::SpecificSave::Type meSaveReason;
+        bool mbShowMessage;
+        bool mbFullSave;
+        cGcPlayerStateData mPlayerStateDataToSave;
+        unsigned int muiSaveMaskFlagsToRemove;
+    };
+
+    cGcRpcCallBase *RRIT;
+    cGcRpcCallBase *RRCE;
+    cGcRpcCallBase *RRBB;
+    TkHandle mGameStateGroupNode;
+    cGcPlayerState mPlayerState;
+    cGcPlayerSpawnStateData mSavedSpawnState;
+    cGcPlayerShipOwnership mPlayerShipOwnership;
+    cGcPlayerVehicleOwnership mPlayerVehicleOwnership;
+    cGcPlayerCreatureOwnership mPlayerCreatureOwnership;
+    cGcPlayerMultitoolOwnership mPlayerMultitoolOwnership;
+    cGcPlayerFreighterOwnership mPlayerFreighterOwnership[4];
+    cGcPlayerFleetManager mPlayerFleetManager[4];
+    cGcPlayerSquadronOwnership mPlayerSquadronOwnership;
+    cGcGameKnowledge mGameKnowledge;
+    cGcDiscoveryManager mDiscoveryManager;
+    cGcWonderManager mWonderManager;
+    cGcGraveManager mGraveManager;
+    cGcMsgBeaconManager mMsgBeaconManager;
+    cGcPlayerDiscoveryHelper mPlayerDiscoveryHelper;
+    cGcStatsManager mStatsManager;
+    cGcTelemetryManager mTelemetryManager;
+    cGcUserSettings mUserSettings;
+    cGcUserSeenItemsState mUserSeenItemsState;
+    cGcDifficultySettings mDifficultySettings;
+    cGcMPMissionTracker mMPMissionTracker;
+    cGcEntitlementManager mEntitlementManager;
+    cGcPlanetMappingManager mPlanetMappingManager;
+    cGcSettlementStateManager mSettlementStateManager;
+    float mfSaveStateDisplayTime;
+    cGcGameState::LastSaveResult meSaveStateLastResult;
+    uint64_t miLastSaveOperationTimestamp;
+    bool mbRestoreRequested;
+    GcGameStatePersistence::SpecificSave::Type meRestoreType;
+    cGcPersistentInteractionsManager mSavedInteractionsManager;
+    bool mbPendingProgressWrite;
+    bool mbDelayedMicroSave;
+    bool mbPendingDifficultySave;
+    bool mbRestartAllInactiveSeasonalMissions;
+    GcGameStatePersistence::eSaveVersion mePatchVersion;
+    bool mbPatchAffectsLoading;
+    cTkSmartResHandle mWarpTunnelRes;
+    cTkSmartResHandle mTeleportTunnelRes;
+    cTkSmartResHandle mBlackHoleTunnelRes;
+    cTkSmartResHandle mPortalTunnelRes;
+    cTkSmartResHandle mPlaceMarkerRes;
+    cGcInventoryStoreBalance mInventoryStoreBalance;
+    cGcRichPresence mPlayerRichPresence;
+    bool mbSingleMultiPositionInSync;
+    bool mbSaveCompletedThisFrame;
+    float mfStartedSaveTime;
+    cGcGameState::SaveThreadData *mpSaveThreadData;
+    unsigned int mSaveThreadId;
+    void *mSaveRequestNewEvent;
+    void *mSaveThreadExitedEvent;
+    bool mbSaveThreadRequestExit;
+    bool mbPendingAsyncSaveRequest;
+    GcGameStatePersistence::SpecificSave::Type mePendingAsyncSaveRequestReason;
+    bool mbPendingAsyncSaveRequestShowMessage;
+    float mfUpgradeMessageFilterTimer;
+    bool mbNetworkClientLoad;
+    bool mbLastDeathTriggeredSlotSelect;
+    bool mbWaitingForSeasonalGameMode;
+    cGcCloudSaveManager mCloudSaveManager;
 };
 
 SKYSCRAPER_END

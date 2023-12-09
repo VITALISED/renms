@@ -1,7 +1,7 @@
 /**
- * @file GcGameKnowledge.h
+ * @file GcNetworkSyncMessages.h
  * @author VITALISED & Contributors
- * @since 2023-12-09
+ * @since 2023-12-08
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -23,27 +23,30 @@
 
 #include <skyscraper.h>
 
-#include <simulation/galaxy/gcgalaxywaypoint.meta.h>
+#include <networking/GcNetworkBufferHash.h>
+#include <networking/messages/GcNetworkMessage.h>
 
 SKYSCRAPER_BEGIN
 
-class IKnowledgeEventHandler
+class cGcNetworkSyncMessage : public cGcNetworkMessage
 {
   public:
-    virtual void KnowledgeRevisionWaypointsChanged();
+    uint16_t mu16HashOffset;
+    uint64_t mu64HashTimestamp;
+    uint16_t mHashIndex;
+    sHashValue mHashValue;
+    int miDataCount;
 };
 
-class cGcGameKnowledge
+class cGcNetworkHashMessage : public cGcNetworkMessage
 {
   public:
-    struct Data
-    {
-        cTkStackVector<cGcGalaxyWaypoint, 8> mWaypoints;
-        cTkStackVector<IKnowledgeEventHandler *, 2> mEventHandlers;
-    };
-
-    cGcGameKnowledge::Data *mpData;
-    cTkStackVector<IKnowledgeEventHandler *, 2> mCachedHandlers;
+    uint16_t mu16HashOffset;
+    uint64_t mu64HashTimestamp;
+    uint16_t mBufferHashesTotal;
+    uint8_t mHashesCount;
+    uint16_t maHashIndexes[100];
+    sHashValue maHashValues[100];
 };
 
 SKYSCRAPER_END

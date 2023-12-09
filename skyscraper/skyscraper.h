@@ -27,6 +27,8 @@
 
 #include <havok_stubs.h>
 #include <nanoflann.hpp>
+#include <rapidjson/document.h>
+#include <rapidjson/rapidjson.h>
 #include <robin_hood.h>
 #include <vulkan/vulkan.h>
 #include <windows.h> //see toolkit/system/TkCSMutex.h
@@ -45,6 +47,8 @@
 #include <memory>
 #include <string>
 #include <unordered_map>
+
+namespace nms_rapidjson = rapidjson;
 
 // clang-format off
 #define SKYSCRAPER_BEGIN namespace nms {

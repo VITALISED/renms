@@ -1,7 +1,7 @@
 /**
- * @file GcNetworkSyncMessage.h
+ * @file GcPlayerNPCWorkers.h
  * @author VITALISED & Contributors
- * @since 2023-12-08
+ * @since 2023-12-09
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -23,19 +23,24 @@
 
 #include <skyscraper.h>
 
-#include <networking/GcNetworkBufferHash.h>
-#include <networking/messages/GcNetworkMessage.h>
+#include <basebuilding/GcBaseBuildingManagerTypes.h>
+
+#include <utilities/data/gcresourceelement.meta.h>
 
 SKYSCRAPER_BEGIN
 
-class cGcNetworkSyncMessage : public cGcNetworkMessage
+class cGcPlayerNPCWorkers
 {
   public:
-    uint16_t mu16HashOffset;
-    uint64_t mu64HashTimestamp;
-    uint16_t mHashIndex;
-    sHashValue mHashValue;
-    int miDataCount;
+    struct WorkerStationInfo
+    {
+        bool mbWorkerHired;
+        BaseIndex muWorkerIndex;
+        cGcResourceElement mWorkerResourceData;
+        cTkSeed mNPCInteractionSeed;
+    };
+
+    cGcPlayerNPCWorkers::WorkerStationInfo maWorkerStations[5];
 };
 
 SKYSCRAPER_END

@@ -1,5 +1,5 @@
 /**
- * @file GcGameKnowledge.h
+ * @file GcTradingSupplyBuffer.h
  * @author VITALISED & Contributors
  * @since 2023-12-09
  *
@@ -23,27 +23,18 @@
 
 #include <skyscraper.h>
 
-#include <simulation/galaxy/gcgalaxywaypoint.meta.h>
+#include <toolkit/utilities/containers/TkVector.h>
+
+#include <gamestate/gctradingsupplydata.meta.h>
 
 SKYSCRAPER_BEGIN
 
-class IKnowledgeEventHandler
+class cGcTradingSupplyBuffer
 {
   public:
-    virtual void KnowledgeRevisionWaypointsChanged();
-};
-
-class cGcGameKnowledge
-{
-  public:
-    struct Data
-    {
-        cTkStackVector<cGcGalaxyWaypoint, 8> mWaypoints;
-        cTkStackVector<IKnowledgeEventHandler *, 2> mEventHandlers;
-    };
-
-    cGcGameKnowledge::Data *mpData;
-    cTkStackVector<IKnowledgeEventHandler *, 2> mCachedHandlers;
+    int miDebugCurrentPage;
+    int miCurrentIndex;
+    cTkVector<cGcTradingSupplyData> maTradingData;
 };
 
 SKYSCRAPER_END

@@ -23,6 +23,15 @@
 
 #include <skyscraper.h>
 
+#include <gamestate/GcBaseBuildingGlobalBuffer.h>
+#include <gamestate/GcPersistentInteractionBuffer.h>
+#include <gamestate/GcPlayerBasePersistentBuffer.h>
+#include <gamestate/GcTerrainEditsPersistentBuffer.h>
+#include <gamestate/GcTradingSupplyBuffer.h>
+#include <simulation/galaxy/GcGalaxyTypes.h>
+
+#include <gamestate/gcmaintenancecontainer.meta.h>
+
 SKYSCRAPER_BEGIN
 
 struct GcPersistencyHandle
@@ -35,6 +44,43 @@ struct GcPersistencyHandle
         };
         uint32_t miLookupInt;
     };
+};
+
+class cGcMaintenanceBuffer : public cGcVariablePersistentInteractionBuffer<cGcMaintenanceContainer>
+{};
+
+struct sVisitedSystem
+{
+    cGcGalacticVoxelCoordinate mVoxel;
+    int16_t miSystemIndex;
+    uint16_t miPlanetsVisited;
+};
+
+class cGcVisitedSystemsBuffer
+{
+    cTkFixedArray<sVisitedSystem, 512> mVisitedSystems;
+    int miCurrentPosition;
+    int miVisitedSystemsCount;
+};
+
+class cGcPersistentInteractionsManager
+{
+  public:
+    cGcBaseBuildingGlobalBuffer mBaseBuildingBuffer;
+    cTkVector<cGcPlayerBasePersistentBuffer> maPersistentBaseBuffers;
+    cGcPersistentInteractionBuffer mDistressSignalBuffer;
+    cGcPersistentInteractionBuffer mCrateBuffer;
+    cGcPersistentInteractionBuffer mDestructableBuffer;
+    cGcPersistentInteractionBuffer mCostBuffer;
+    cGcPersistentInteractionBuffer mBuildingBuffer;
+    cGcPersistentInteractionBuffer mCreatureBuffer;
+    cGcPersistentInteractionBuffer mPersonalBuffer;
+    cGcPersistentInteractionBuffer mFireteamSyncBuffer;
+    cGcTerrainEditsPersistentBuffer mTerrainEditBuffer;
+    cGcTradingSupplyBuffer mTradingSupplyBuffer;
+    cGcMaintenanceBuffer mMaintenanceBuffer;
+    cGcMaintenanceBuffer mPersonalMaintenanceBuffer;
+    cGcVisitedSystemsBuffer mVisitedSystemsBuffer;
 };
 
 SKYSCRAPER_END

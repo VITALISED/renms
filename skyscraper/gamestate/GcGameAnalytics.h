@@ -23,11 +23,69 @@
 
 #include <skyscraper.h>
 
+#include <atlas/transport/GcAtlasTransport.h>
+#include <networking/GcNetworkPlayerEventsHandler.h>
+#include <toolkit/data/TkDocumentWriterJSON.h>
+#include <toolkit/networking/TkUserIdBase.h>
+#include <toolkit/utilities/string/TkStringAssembler.h>
+
 SKYSCRAPER_BEGIN
 
-class cGcGameAnalytics
+class cGcStatsManager;
+
+class cGcGameAnalytics : INetworkPlayerEventsHandler
 {
-    char __pad__[0x01f0];
+  public:
+    enum ConnectionState
+    {
+        E_OK,
+        E_Init_Failed,
+        E_Invalid_User,
+        E_Session_Failed,
+    };
+
+    struct Pending
+    {
+        cTkFixedString<128, char> mKey;
+        int mValue;
+        bool mIsProgression;
+        bool mStageIsComplete;
+        bool mIsLevelledStat;
+    };
+
+    struct ValidPlayer
+    {
+        cGcNetworkPlayer *mpPlayer;
+        uint8_t meState[4];
+        std::string mDevice;
+    };
+
+    cGcStatsManager *mpStatsManager;
+    cGcAtlasTransport *mpTransport;
+    cTkStringAssembler *mpStringAssembler;
+    cTkDocumentWriterJSON *mpDocWriter;
+    cTkUserIdBase<uint64_t> mLocalUserId;
+    cTkFixedString<128, char> mSessionId;
+    int mSessionNum;
+    int mTimestampOffset;
+    bool mbRequestUploadAll;
+    bool mbPendingUploadAll;
+    cTkFixedString<32, char> mBuildId;
+    cTkFixedString<32, char> mTelemetryVersion;
+    int mSessionStartTime;
+    cTkFixedString<128, char> mFireteamSessionId;
+    int mFireteamSessionStartTime;
+    int mFireteamSessionNum;
+    std::vector<cGcGameAnalytics::Pending> maPending;
+    bool mbActualDataToUpload;
+    bool mbEnableGameAnalyticsUpload;
+    cGcGameAnalytics::ConnectionState meConnectionState;
+    cTkStringAssembler *mpCrossplayStringAssembler;
+    cTkDocumentWriterJSON *mpCrossplayDocWriter;
+    bool mbInFireteamSession;
+    int64_t miMatchmakingVersion;
+    cTkVector<cGcGameAnalytics::ValidPlayer> mValidPlayers;
+    std::map<std::string, int> mCrossplayDeviceSessionTimes;
 };
 
 SKYSCRAPER_END

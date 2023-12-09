@@ -23,8 +23,15 @@
 
 #include <skyscraper.h>
 
+#include <toolkit/core/types/TkHandle.h>
+#include <toolkit/core/types/TkID.h>
 #include <toolkit/data/TkMetaData.h>
 #include <toolkit/data/TkMetaDataXML.h>
+#include <toolkit/maths/numeric/generic/TkMatrix34Generic.h>
+#include <toolkit/maths/numeric/generic/TkMatrix44Generic.h>
+#include <toolkit/maths/numeric/generic/TkVector2Generic.h>
+#include <toolkit/maths/numeric/generic/TkVector3Generic.h>
+#include <toolkit/maths/numeric/generic/TkVector4Generic.h>
 #include <toolkit/utilities/string/TkString.h>
 
 SKYSCRAPER_BEGIN

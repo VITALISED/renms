@@ -102,9 +102,9 @@ class cGcApplication : public cTkFSM
         cGcAudioManager mAudioManager;   // stub
         cGcAtlasManager mAtlasManager;
         cGcNetworkManager mNetworkManager;
-        cGcResourceManager mResourceManager;     // stub
-        cGcGalaxyMap mGalaxyMap;                 // stub
-        cGcGameAnalytics mGameAnalytics;         // stub
+        cGcResourceManager mResourceManager; // stub
+        cGcGalaxyMap mGalaxyMap;
+        cGcGameAnalytics mGameAnalytics;
         cGcActivitiesTracker mActivitiesTracker; // stub
     };
 

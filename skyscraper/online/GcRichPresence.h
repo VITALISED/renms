@@ -1,5 +1,5 @@
 /**
- * @file GcGameKnowledge.h
+ * @file GcRichPresence.h
  * @author VITALISED & Contributors
  * @since 2023-12-09
  *
@@ -23,27 +23,16 @@
 
 #include <skyscraper.h>
 
-#include <simulation/galaxy/gcgalaxywaypoint.meta.h>
+#include <gamestate/GcStatsManager.h>
 
 SKYSCRAPER_BEGIN
 
-class IKnowledgeEventHandler
+class cGcRichPresence : public IStatWatcher
 {
   public:
-    virtual void KnowledgeRevisionWaypointsChanged();
-};
-
-class cGcGameKnowledge
-{
-  public:
-    struct Data
-    {
-        cTkStackVector<cGcGalaxyWaypoint, 8> mWaypoints;
-        cTkStackVector<IKnowledgeEventHandler *, 2> mEventHandlers;
-    };
-
-    cGcGameKnowledge::Data *mpData;
-    cTkStackVector<IKnowledgeEventHandler *, 2> mCachedHandlers;
+    bool mbOnPlanet;
+    bool mbStormActive;
+    bool mbPlayerOutside;
 };
 
 SKYSCRAPER_END

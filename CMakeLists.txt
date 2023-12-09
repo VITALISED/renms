@@ -117,6 +117,8 @@ add_dependency_custom(./submodules/rapidxml ./submodules/rapidxml)
 
 add_dependency_custom(./submodules/nanoflann ./submodules/nanoflann/include)
 
+add_dependency_custom(./submodules/rapidjson ./submodules/rapidjson/include)
+
 # ==================================================================================================
 # Targets.
 

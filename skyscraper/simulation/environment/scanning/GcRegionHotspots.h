@@ -35,6 +35,13 @@ class cGcRegionHotspots
         EHotspotCategory_Mineral = 1,
         EHotspotCategory_Gas     = 2,
     };
+
+    struct sHotspotHandle
+    {
+        uint16_t miLatitude;
+        uint16_t miLongitude;
+        uint16_t miIndex;
+    };
 };
 
 SKYSCRAPER_END

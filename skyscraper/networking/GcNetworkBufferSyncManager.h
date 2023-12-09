@@ -25,7 +25,7 @@
 
 #include <networking/GcNetworkPlayerEventsHandler.h>
 #include <networking/GcNetworkSynchronisedBuffer.h>
-#include <networking/messages/GcNetworkSyncMessage.h>
+#include <networking/messages/GcNetworkSyncMessages.h>
 #include <toolkit/networking/TkUserIdBase.h>
 #include <toolkit/utilities/containers/TkDeque.h>
 #include <toolkit/utilities/random/TkPersonalRNG.h>

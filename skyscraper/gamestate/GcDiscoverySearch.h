@@ -33,6 +33,18 @@
 
 SKYSCRAPER_BEGIN
 
+namespace GcDiscoverySearchConstraints
+{
+
+class ConstraintBase : AutoPooled<19>
+{
+  public:
+    virtual ~ConstraintBase();
+    virtual bool Accept(const cGcDiscoveryRecord *);
+};
+
+} // namespace GcDiscoverySearchConstraints
+
 namespace DiscoveryResolver
 {
 
@@ -80,5 +92,39 @@ struct DiscoveryInfo
 };
 
 } // namespace DiscoveryResolver
+
+class cGcDiscoverySearch : AutoPooled<19>
+{
+  public:
+    enum SortMode
+    {
+        Unsorted,
+        TimestampOldestFirst,
+        TimestampNewestFirst,
+    };
+
+    enum RunState
+    {
+        Invalid,
+        Prepared,
+        Ready,
+        Running,
+        Complete,
+    };
+
+    cTkStackVector<GcDiscoverySearchConstraints::ConstraintBase *, 5> mConstraints;
+    cTkVector<cGcDiscoveryRecord const *> mResult;
+    cGcDiscoverySearch::RunState meRunState;
+    unsigned int muMaxResults;
+    cGcDiscoverySearch::SortMode meSortMode;
+    bool mbIncludeHidden;
+};
+
+struct DiscoverySearchContext
+{
+    cGcDiscoverySearch *mpCurrentSearch;
+    cTkVector<cGcDiscoveryRecord const *> mRecordsToSort;
+    cGcDiscoveryStoreImpl<DefaultDiscoveryDataHashing, 19>::ConstIterator *mpIterator;
+};
 
 SKYSCRAPER_END

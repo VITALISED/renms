@@ -1,5 +1,5 @@
 /**
- * @file GcGameKnowledge.h
+ * @file GcPlayerLogBook.h
  * @author VITALISED & Contributors
  * @since 2023-12-09
  *
@@ -23,27 +23,21 @@
 
 #include <skyscraper.h>
 
-#include <simulation/galaxy/gcgalaxywaypoint.meta.h>
+#include <toolkit/utilities/containers/TkVector.h>
+#include <toolkit/utilities/string/TkString.h>
 
 SKYSCRAPER_BEGIN
 
-class IKnowledgeEventHandler
+struct LogBookMessage
 {
-  public:
-    virtual void KnowledgeRevisionWaypointsChanged();
+    int miTimeStamp;
+    cTkFixedString<128, char> msLogMessage;
 };
 
-class cGcGameKnowledge
+class cGcPlayerLogBook
 {
   public:
-    struct Data
-    {
-        cTkStackVector<cGcGalaxyWaypoint, 8> mWaypoints;
-        cTkStackVector<IKnowledgeEventHandler *, 2> mEventHandlers;
-    };
-
-    cGcGameKnowledge::Data *mpData;
-    cTkStackVector<IKnowledgeEventHandler *, 2> mCachedHandlers;
+    cTkVector<LogBookMessage> mPlayerLogs;
 };
 
 SKYSCRAPER_END

@@ -30,13 +30,41 @@
 
 SKYSCRAPER_BEGIN
 
-typedef int AtlasRequestResult;
+enum AtlasRequestResult
+{
+    NotReady,
+    Success,
+    Failed_ManualCancellation,
+    Failed_TimedOut,
+    Failed_InvalidDataReceived,
+    Failed_CompletionError,
+    Failed_BadRequest,
+    Failed_RateLimited,
+};
+
+enum ePackageType
+{
+    EPackageType_Unknown,
+    EPackageType_Discovery,
+    EPackageType_Message,
+    EPackageType_NumTypes,
+};
 
 class cGcAtlasShared
 {
   public:
     uint64_t mu64ClientUserdata;
     virtual ~cGcAtlasShared();
+};
+
+class cGcAtlasSendReport : public cGcAtlasShared
+{
+  public:
+    ePackageType mePackageType;
+    cTkFixedString<64, char> macRID;
+    cGcUniverseAddressData mUniverseAddress;
+    cTkFixedString<32, char> macRL;
+    cTkFixedString<32, char> macRC;
 };
 
 class cGcAtlasRecvVoxel : public cGcAtlasShared

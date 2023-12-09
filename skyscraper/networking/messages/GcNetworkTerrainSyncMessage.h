@@ -23,7 +23,7 @@
 
 #include <skyscraper.h>
 
-#include <networking/messages/GcNetworkSyncMessage.h>
+#include <networking/messages/GcNetworkSyncMessages.h>
 #include <toolkit/networking/TkUserIdBase.h>
 
 #include <gamestate/gcuniverseaddressdata.meta.h>
