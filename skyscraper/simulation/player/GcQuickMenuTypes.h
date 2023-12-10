@@ -157,6 +157,7 @@ class cGcAnalogueMenuNavigator
 class cGcQuickMenuState
 {
   public:
+    const int kiMaxTips;
     cGcAnalogueMenuNavigator mAnalogueMenuNav;
     cTkFixedString<512, char> mErrorID;
     cTkColour mErrorColour;
