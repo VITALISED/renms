@@ -89,11 +89,11 @@ class cGcApplication : public cTkFSM
         cGcSimulation mSimulation;
         cGcHUDManager mHUDManager;
         cGcFrontendManager mFrontendManager;
-        cGcInWorldUIManager mInWorldUIManager; // stub
-        cGcCameraManager mCameraManager;       // stub
-        cGcGraphicsManager mGraphicsManager;   // stub
-        cTkInputManager *mpInputManager;       // stub
-        cGcInputRemap mInputRemap;             // stub
+        cGcInWorldUIManager mInWorldUIManager;
+        cGcCameraManager mCameraManager;
+        cGcGraphicsManager mGraphicsManager; // stub
+        cTkInputManager *mpInputManager;     // stub
+        cGcInputRemap mInputRemap;           // stub
         cGcVibrationManager mVibrationManager;
         cTkTimeManager mTimeManager;
         cTkDebugRenderer mDebugRenderer; // stub
@@ -102,7 +102,7 @@ class cGcApplication : public cTkFSM
         cGcAudioManager mAudioManager;   // stub
         cGcAtlasManager mAtlasManager;
         cGcNetworkManager mNetworkManager;
-        cGcResourceManager mResourceManager; // stub
+        cGcResourceManager mResourceManager;
         cGcGalaxyMap mGalaxyMap;
         cGcGameAnalytics mGameAnalytics;
         cGcActivitiesTracker mActivitiesTracker;

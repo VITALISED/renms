@@ -1,7 +1,7 @@
 /**
- * @file TkCollision.h
+ * @file GcCameraBehaviourGalacticLookAt.h
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2023-12-11
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -23,18 +23,27 @@
 
 #include <skyscraper.h>
 
+#include <toolkit/graphics/camera/behaviours/TkCameraBehaviour.h>
+
 SKYSCRAPER_BEGIN
 
-// TODO: Fix havok stuff
-class cTkCollision
+class cGcCameraBehaviourGalacticLookAt : public cTkCameraBehaviour
 {
   public:
-    uintptr_t mpBaseShape;
-    char mBaseTransform[0x40];
-    char mapRefMeshKeys[0x10];
-    int miNumShapes;
-    int miNumStaticShapes;
-    int miNumMeshVerts;
+    enum Mode
+    {
+        Still,
+        BeginLookAt,
+        LookingAt,
+        EndLookAt,
+    };
+
+    cTkVector3 mLookTarget;
+    cTkVector3 mDistantTarget;
+    cTkMatrix34 mCameraMatrix;
+    cTkVector3 mfOffset;
+    float mfLookAtCounter;
+    cGcCameraBehaviourGalacticLookAt::Mode meCameraMode;
 };
 
 SKYSCRAPER_END

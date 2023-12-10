@@ -1,7 +1,7 @@
 /**
- * @file TkCollision.h
+ * @file TkHavokProxyCharacterController.h
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2023-12-11
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -23,18 +23,30 @@
 
 #include <skyscraper.h>
 
+#include <toolkit/simulation/physics/havok/TkCollision.h>
+#include <toolkit/simulation/physics/havok/TkPhysicsConstraint.h>
+
 SKYSCRAPER_BEGIN
 
-// TODO: Fix havok stuff
-class cTkCollision
+class cTkHavokProxyCharacterController : public hknpAction
 {
   public:
-    uintptr_t mpBaseShape;
-    char mBaseTransform[0x40];
-    char mapRefMeshKeys[0x10];
-    int miNumShapes;
-    int miNumStaticShapes;
-    int miNumMeshVerts;
+    cTkCollision mCollision;
+    /*hknpCharacterProxy**/ uintptr_t mpProxy;
+    cTkPhysicsConstraint *mpConstraint;
+    hkRefPtr<hknpConvexShape> mpBulletShape;
+    hknpBodyId mBodyId;
+    cTkVector3 mTargetVelocity;
+    cTkVector3 mPushVelocity;
+    float mfPushVelocityDecay;
+    bool mbOnGround;
+    float mfMaxSlopeAngle;
+    float mfStepHeight;
+    float mfGravity;
+    bool mbInWorld;
+    uint16_t miFilterGroup;
+    uint16_t miFilterMask;
+    bool mbStepping;
 };
 
 SKYSCRAPER_END

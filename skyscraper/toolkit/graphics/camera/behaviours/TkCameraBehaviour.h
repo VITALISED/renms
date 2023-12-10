@@ -24,9 +24,10 @@
 #include <skyscraper.h>
 
 #include <toolkit/graphics/camera/TkCamera.h>
-#include <toolkit/graphics/camera/TkCameraManager.h>
 
 SKYSCRAPER_BEGIN
+
+class cTkCameraManager;
 
 class cTkCameraBehaviour
 {

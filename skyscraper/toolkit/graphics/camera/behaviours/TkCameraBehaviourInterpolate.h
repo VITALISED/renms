@@ -1,7 +1,7 @@
 /**
- * @file TkCollision.h
+ * @file TkCameraBevaiourInterpolate.h
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2023-12-11
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -23,18 +23,17 @@
 
 #include <skyscraper.h>
 
+#include <toolkit/graphics/camera/behaviours/TkCameraBehaviourTimeBased.h>
+
 SKYSCRAPER_BEGIN
 
-// TODO: Fix havok stuff
-class cTkCollision
+class cTkCameraBehaviourInterpolate : public cTkCameraBehaviourTimeBased
 {
   public:
-    uintptr_t mpBaseShape;
-    char mBaseTransform[0x40];
-    char mapRefMeshKeys[0x10];
-    int miNumShapes;
-    int miNumStaticShapes;
-    int miNumMeshVerts;
+    cTkCameraManager *mpManager;
+    cTkCameraBehaviour *mapBehaviour[2];
+    cTkCamera mCamera[2];
+    int maeBehaviours[2];
 };
 
 SKYSCRAPER_END

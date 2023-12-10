@@ -23,6 +23,7 @@
 
 #include <xmmintrin.h>
 
+#include <atomic>
 #include <cstdint>
 #include <queue>
 
@@ -94,4 +95,20 @@ struct hknpConvexShape : hknpShape
     hknpConvexHull m_hull;
     hkHalf16 m_maxAllowedPenetration;
     uintptr_t m_mutationSignals;
+};
+
+struct hkBaseObject
+{
+    virtual void stubby();
+};
+
+struct hkReferencedObject : hkBaseObject
+{
+    unsigned __int64 m_sizeAndFlags;
+    std::atomic<unsigned __int64> m_refCount;
+};
+
+struct hknpAction : hkReferencedObject
+{
+    unsigned __int64 m_userData;
 };

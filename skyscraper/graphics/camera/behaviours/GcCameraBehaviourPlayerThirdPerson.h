@@ -1,7 +1,7 @@
 /**
- * @file TkCollision.h
+ * @file GcCameraBehaviourPlayerThirdPerson.h
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2023-12-11
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -23,18 +23,14 @@
 
 #include <skyscraper.h>
 
+#include <graphics/camera/behaviours/GcCameraBehaviourThirdPerson.h>
+
 SKYSCRAPER_BEGIN
 
-// TODO: Fix havok stuff
-class cTkCollision
+class cGcCameraBehaviourPlayerThirdPerson : public cGcCameraBehaviourThirdPerson
 {
   public:
-    uintptr_t mpBaseShape;
-    char mBaseTransform[0x40];
-    char mapRefMeshKeys[0x10];
-    int miNumShapes;
-    int miNumStaticShapes;
-    int miNumMeshVerts;
+    bool mbCheckCollisions;
 };
 
 SKYSCRAPER_END

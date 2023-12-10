@@ -1,7 +1,7 @@
 /**
- * @file TkCollision.h
+ * @file GcCameraBehaviourFly.h
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2023-12-11
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -23,18 +23,27 @@
 
 #include <skyscraper.h>
 
+#include <toolkit/graphics/camera/behaviours/TkCameraBehaviourFly.h>
+
 SKYSCRAPER_BEGIN
 
-// TODO: Fix havok stuff
-class cTkCollision
+class cGcCameraBehaviourFly : public cTkCameraBehaviourFly
 {
   public:
-    uintptr_t mpBaseShape;
-    char mBaseTransform[0x40];
-    char mapRefMeshKeys[0x10];
-    int miNumShapes;
-    int miNumStaticShapes;
-    int miNumMeshVerts;
+    enum eDebugCamMode
+    {
+        EDebugCamMode_Normal,
+        EDebugCamMode_AIShip,
+        EDebugCamMode_AutoMove,
+    };
+
+    cTkPhysRelMat34 mDebugCameraSpace;
+    cGcCameraBehaviourFly::eDebugCamMode meMode;
+    cTkMatrix34 mFocusOffset;
+    cTkVector3 mLastValidUp;
+    int miDebugPlayerJumper;
+    cTkPhysRelMat34 mSmoothCameraMatix;
+    int miSpeedFactor;
 };
 
 SKYSCRAPER_END

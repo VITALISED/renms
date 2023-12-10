@@ -1,7 +1,7 @@
 /**
- * @file TkCollision.h
+ * @file GcCameraBehaviourFollowTarget.h
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2023-12-11
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -23,18 +23,33 @@
 
 #include <skyscraper.h>
 
+#include <toolkit/core/types/TkHandle.h>
+#include <toolkit/graphics/camera/behaviours/TkCameraBehaviour.h>
+#include <toolkit/utilities/containers/TkStackContainer.h>
+
 SKYSCRAPER_BEGIN
 
-// TODO: Fix havok stuff
-class cTkCollision
+class cGcCameraBehaviourFollowTarget : public cTkCameraBehaviour
 {
   public:
-    uintptr_t mpBaseShape;
-    char mBaseTransform[0x40];
-    char mapRefMeshKeys[0x10];
-    int miNumShapes;
-    int miNumStaticShapes;
-    int miNumMeshVerts;
+    enum Event
+    {
+        AnimationFinished,
+    };
+
+    struct CameraLook
+    {
+        float mfCurrentX;
+        float mfCurrentY;
+        float mfRateX;
+        float mfRateY;
+    };
+
+    cTkPhysRelMat34 mMatrix;
+    cGcCameraBehaviourFollowTarget::CameraLook mCameraLook;
+    cTkVector2 mRightStick;
+    cTkStackVector<cGcCameraBehaviourFollowTarget::Event, 4> maEvents;
+    TkHandle mTarget;
 };
 
 SKYSCRAPER_END
