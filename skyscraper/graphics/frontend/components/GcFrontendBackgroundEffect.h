@@ -1,7 +1,7 @@
 /**
- * @file TkISystemEventHandler.h
+ * @file GcFrontendBackgroundEffect.h
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2023-12-10
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -23,15 +23,15 @@
 
 #include <skyscraper.h>
 
+#include <graphics/ngui/GcNGuiLayer.h>
+
 SKYSCRAPER_BEGIN
 
-class cTkISystemEventHandler
+class cGcFrontendBackgroundEffect
 {
   public:
-    virtual void BackgroundExecutionChanged(bool);
-    virtual void SystemUIOverlayChange(bool);
-    virtual void ShareMenuOpened();
-    virtual void SystemPlayModeChanged();
+    cGcNGuiLayer *mpLayer;
+    cTkVector2 mMousePos;
 };
 
 SKYSCRAPER_END

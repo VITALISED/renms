@@ -87,8 +87,8 @@ class cGcApplication : public cTkFSM
         cGcGameState mGameState;
         cGcSeasonalData mSeasonalData;
         cGcSimulation mSimulation;
-        cGcHUDManager mHUDManager;             // stub
-        cGcFrontendManager mFrontendManager;   // stub
+        cGcHUDManager mHUDManager;
+        cGcFrontendManager mFrontendManager;
         cGcInWorldUIManager mInWorldUIManager; // stub
         cGcCameraManager mCameraManager;       // stub
         cGcGraphicsManager mGraphicsManager;   // stub

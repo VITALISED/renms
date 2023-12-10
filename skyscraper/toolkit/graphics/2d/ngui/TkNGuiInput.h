@@ -64,6 +64,20 @@ struct ScrollBarState
     cTkVector2 mfLastSeenSize;
 };
 
+struct TextScrollBarState
+{
+    float mfCurrentScrollOffsetPercentage;
+    float mfTextOnScreenPercentage;
+    int miCurrentPage;
+    int miMaxPageIndex;
+    bool mbInactive;
+    bool mbFirstUpdateAfterReset;
+    bool mbMoveToPreviousPage;
+    bool mbMoveToNextPage;
+    bool mbNewTextSet;
+    bool mbForceScrollToBottom;
+};
+
 class cTkNGuiInput
 {
   public:

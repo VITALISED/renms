@@ -1,7 +1,7 @@
 /**
- * @file TkISystemEventHandler.h
+ * @file GcCreatureBehaviour.h
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2023-12-10
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -23,15 +23,19 @@
 
 #include <skyscraper.h>
 
+#include <toolkit/core/types/TkID.h>
+
 SKYSCRAPER_BEGIN
 
-class cTkISystemEventHandler
+class cGcIdleAnimList
 {
   public:
-    virtual void BackgroundExecutionChanged(bool);
-    virtual void SystemUIOverlayChange(bool);
-    virtual void ShareMenuOpened();
-    virtual void SystemPlayModeChanged();
+    TkID<128> mCurrentIdle;
+    TkID<128> maIdles[10];
+    int miNumIdles;
+    TkID<128> maIdlesShuffled[10];
+    int miNumIdlesShuffledRemaining;
+    bool mbHasNonEatIdles;
 };
 
 SKYSCRAPER_END

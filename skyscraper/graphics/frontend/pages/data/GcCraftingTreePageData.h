@@ -1,7 +1,7 @@
 /**
- * @file TkISystemEventHandler.h
+ * @file GcCraftingTreePageData.h
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2023-12-10
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -23,15 +23,24 @@
 
 #include <skyscraper.h>
 
+#include <graphics/frontend/pages/GcFrontendPageEnum.h>
+
+#include <gamestate/gcinventoryelement.meta.h>
+#include <gamestate/gcinventoryindex.meta.h>
+#include <reality/gcinventorytype.meta.h>
+
 SKYSCRAPER_BEGIN
 
-class cTkISystemEventHandler
+class cGcCraftingTreePageData
 {
   public:
-    virtual void BackgroundExecutionChanged(bool);
-    virtual void SystemUIOverlayChange(bool);
-    virtual void ShareMenuOpened();
-    virtual void SystemPlayModeChanged();
+    eFrontendPage meReturnPage;
+    cGcInventoryType mType;
+    TkID<128> mId;
+    uint8_t meInventory[4];
+    cGcInventoryIndex mInventoryIndex;
+    cGcInventoryElement mHighlightElement;
+    bool mbNeedsRefresh;
 };
 
 SKYSCRAPER_END

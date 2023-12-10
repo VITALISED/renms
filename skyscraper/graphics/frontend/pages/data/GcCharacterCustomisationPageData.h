@@ -1,7 +1,7 @@
 /**
- * @file TkISystemEventHandler.h
+ * @file GcCharacterCustomisationPageData.h
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2023-12-10
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -23,15 +23,24 @@
 
 #include <skyscraper.h>
 
+#include <gamestate/GcPlayerBanner.h>
+#include <resources/GcResourceManager.h>
+
 SKYSCRAPER_BEGIN
 
-class cTkISystemEventHandler
+class cGcCharacterCustomisationPageData
 {
   public:
-    virtual void BackgroundExecutionChanged(bool);
-    virtual void SystemUIOverlayChange(bool);
-    virtual void ShareMenuOpened();
-    virtual void SystemPlayModeChanged();
+    int miSelectedGroup;
+    cTkVector2 mvCameraVelocity;
+    cGcResourceCustomisation mResourceCustomisation;
+    cGcPlayerBanner mBannerToEdit;
+    TkID<128> mJetpackEffect;
+    TkID<128> mFreighterEngineEffect;
+    int miTitlePageIndex;
+    int miFirstTitleIndex;
+    bool mbMultipleUnlockedTitles;
+    bool mbSelectingTitle;
 };
 
 SKYSCRAPER_END

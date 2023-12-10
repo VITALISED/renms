@@ -1,7 +1,7 @@
 /**
- * @file TkISystemEventHandler.h
+ * @file GcMissionPageData.h
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2023-12-10
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -25,13 +25,13 @@
 
 SKYSCRAPER_BEGIN
 
-class cTkISystemEventHandler
+class cGcMissionPageData
 {
   public:
-    virtual void BackgroundExecutionChanged(bool);
-    virtual void SystemUIOverlayChange(bool);
-    virtual void ShareMenuOpened();
-    virtual void SystemPlayModeChanged();
+    bool mbReset;
+    int miCurrentSecMissionPage;
+    float mfTimeSinceLastTransition;
+    bool mbAutoScrollDone;
 };
 
 SKYSCRAPER_END

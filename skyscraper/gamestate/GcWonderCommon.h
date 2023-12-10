@@ -1,7 +1,7 @@
 /**
- * @file TkISystemEventHandler.h
+ * @file GcWonderCommon.h
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2023-12-10
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -23,15 +23,15 @@
 
 #include <skyscraper.h>
 
+#include <wiki/gcwondertype.meta.h>
+
 SKYSCRAPER_BEGIN
 
-class cTkISystemEventHandler
+class cGcWonderHandle
 {
   public:
-    virtual void BackgroundExecutionChanged(bool);
-    virtual void SystemUIOverlayChange(bool);
-    virtual void ShareMenuOpened();
-    virtual void SystemPlayModeChanged();
+    eWonderType meType;
+    int miCategory;
 };
 
 SKYSCRAPER_END

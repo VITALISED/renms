@@ -1,7 +1,7 @@
 /**
- * @file TkISystemEventHandler.h
+ * @file GcFrontendPageEggMachine.h
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2023-12-11
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -25,13 +25,10 @@
 
 SKYSCRAPER_BEGIN
 
-class cTkISystemEventHandler
+class cGcFrontendPageEggMachine
 {
   public:
-    virtual void BackgroundExecutionChanged(bool);
-    virtual void SystemUIOverlayChange(bool);
-    virtual void ShareMenuOpened();
-    virtual void SystemPlayModeChanged();
+    float mfEggModifyStartTime;
 };
 
 SKYSCRAPER_END

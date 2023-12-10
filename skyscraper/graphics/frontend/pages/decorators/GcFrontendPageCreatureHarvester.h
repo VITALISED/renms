@@ -1,7 +1,7 @@
 /**
- * @file TkISystemEventHandler.h
+ * @file GcFrontendPageCreatureHarvester.h
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2023-12-11
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -23,15 +23,11 @@
 
 #include <skyscraper.h>
 
+#include <graphics/frontend/pages/GcFrontendPage.h>
+
 SKYSCRAPER_BEGIN
 
-class cTkISystemEventHandler
-{
-  public:
-    virtual void BackgroundExecutionChanged(bool);
-    virtual void SystemUIOverlayChange(bool);
-    virtual void ShareMenuOpened();
-    virtual void SystemPlayModeChanged();
-};
+class cGcFrontendPageCreatureHarvester : public cGcFrontendPage
+{};
 
 SKYSCRAPER_END

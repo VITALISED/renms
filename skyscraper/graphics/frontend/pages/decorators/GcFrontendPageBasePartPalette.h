@@ -1,7 +1,7 @@
 /**
- * @file TkISystemEventHandler.h
+ * @file GcFrontendPageBasePartPalette.h
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2023-12-11
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -23,15 +23,23 @@
 
 #include <skyscraper.h>
 
+#include <toolkit/core/types/TkHandle.h>
+#include <toolkit/utilities/containers/TkBitArray.h>
+
 SKYSCRAPER_BEGIN
 
-class cTkISystemEventHandler
+class cGcFrontendPageBasePartPalette
 {
   public:
-    virtual void BackgroundExecutionChanged(bool);
-    virtual void SystemUIOverlayChange(bool);
-    virtual void ShareMenuOpened();
-    virtual void SystemPlayModeChanged();
+    TkHandle maLightNodes[4];
+    cTkBitArray<uint64_t, 1, 128> mAvailablePalettes;
+    cTkBitArray<unsigned int, 1, 32> mAvailableMaterials;
+    uint8_t mu8ObjectPaletteIndex;
+    uint8_t mu8SelectedPaletteIndex;
+    uint8_t mu8ObjectMaterialIndex;
+    uint8_t mu8SelectedMaterialIndex;
+    bool mbPaletteChanged;
+    bool mbMaterialChanged;
 };
 
 SKYSCRAPER_END

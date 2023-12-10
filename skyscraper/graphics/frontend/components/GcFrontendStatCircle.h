@@ -1,7 +1,7 @@
 /**
- * @file TkISystemEventHandler.h
+ * @file GcFrontendStatCircle.h
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2023-12-10
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -23,15 +23,21 @@
 
 #include <skyscraper.h>
 
+#include <graphics/ngui/GcNGuiLayer.h>
+
+#include <reality/gcstatsgroup.meta.h>
+
 SKYSCRAPER_BEGIN
 
-class cTkISystemEventHandler
+class cGcFrontendStatCircle
 {
   public:
-    virtual void BackgroundExecutionChanged(bool);
-    virtual void SystemUIOverlayChange(bool);
-    virtual void ShareMenuOpened();
-    virtual void SystemPlayModeChanged();
+    cGcNGuiLayer *mpLayer;
+    const cGcStatsGroup *mpStats;
+    std::array<float, 189> mValues;
+    std::array<float, 189> mValuesNoBonus;
+    float mfWidth;
+    float mfAnim;
 };
 
 SKYSCRAPER_END

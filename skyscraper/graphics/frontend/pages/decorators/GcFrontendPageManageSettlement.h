@@ -1,7 +1,7 @@
 /**
- * @file TkISystemEventHandler.h
+ * @file GcFrontendPageManageSettlement.h
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2023-12-11
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -23,15 +23,32 @@
 
 #include <skyscraper.h>
 
+#include <graphics/hud/elements/GcHUDMarker.h>
+#include <toolkit/utilities/containers/TkVector.h>
+
+#include <gamestate/gcinventoryindex.meta.h>
+#include <gamestate/gcsettlementstate.meta.h>
+
 SKYSCRAPER_BEGIN
 
-class cTkISystemEventHandler
+class cGcBuilding;
+
+class cGcFrontendPageManageSettlement
 {
   public:
-    virtual void BackgroundExecutionChanged(bool);
-    virtual void SystemUIOverlayChange(bool);
-    virtual void ShareMenuOpened();
-    virtual void SystemPlayModeChanged();
+    const cGcBuilding *mpMonumentBuilding;
+    cGcSettlementState *mpSettlementState;
+    cTkSeed mSetlementSeed;
+    cTkFixedArray<int, 7> maiStatValues;
+    cTkFixedArray<cGcMarkerRenderData, 7> maStatsFill;
+    cTkVector<cGcInventoryIndex> mProductionSlotIndexes;
+    TkID<128> mSettlementCostId;
+    bool mbNeedsSetup;
+    bool mbPendingCleanUp;
+    bool mbTriggeredByReward;
+    bool mbSettlementHasOwner;
+    bool mbSettlementOwned;
+    bool mbSettlementHasDebt;
 };
 
 SKYSCRAPER_END

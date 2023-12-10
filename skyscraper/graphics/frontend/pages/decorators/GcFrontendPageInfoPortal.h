@@ -1,7 +1,7 @@
 /**
- * @file TkISystemEventHandler.h
+ * @file GcFrontendPageInfoPortal.h
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2023-12-11
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -23,15 +23,21 @@
 
 #include <skyscraper.h>
 
+#include <toolkit/utilities/containers/TkVector.h>
+
 SKYSCRAPER_BEGIN
 
-class cTkISystemEventHandler
+class cGcFrontendPageInfoPortal
 {
   public:
-    virtual void BackgroundExecutionChanged(bool);
-    virtual void SystemUIOverlayChange(bool);
-    virtual void ShareMenuOpened();
-    virtual void SystemPlayModeChanged();
+    cTkVector<int> maiCatalogueTotalCount;
+    cTkVector<int> maiCatalogueUnlockedCount;
+    int miSelectedWikiCatIdx;
+    int miSelectedWikiTopicIdx;
+    int miRandomMilestoneIdx;
+    int miRandomFallbackMilestoneIdx;
+    long double mfLastGuideTopicChangeTime;
+    long double mfLastMilestonesChangeTime;
 };
 
 SKYSCRAPER_END

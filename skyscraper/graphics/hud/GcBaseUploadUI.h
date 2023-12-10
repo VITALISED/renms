@@ -1,7 +1,7 @@
 /**
- * @file TkISystemEventHandler.h
+ * @file GcBaseUploadUI.h
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2023-12-10
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -23,15 +23,19 @@
 
 #include <skyscraper.h>
 
+#include <graphics/ngui/GcNGuiGraphic.h>
+
 SKYSCRAPER_BEGIN
 
-class cTkISystemEventHandler
+class cGcBaseUploadUI
 {
   public:
-    virtual void BackgroundExecutionChanged(bool);
-    virtual void SystemUIOverlayChange(bool);
-    virtual void ShareMenuOpened();
-    virtual void SystemPlayModeChanged();
+    cGcNGuiGraphic *mpScreenshotImage;
+    bool mbRenamingTitle;
+    bool mbBaseAdminScreenshotTaken;
+    bool mbEnqueueSaveAndUploadBase;
+    bool mbAwaitingReconnect;
+    bool mbUGCStarted;
 };
 
 SKYSCRAPER_END

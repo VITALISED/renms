@@ -1,7 +1,7 @@
 /**
- * @file TkISystemEventHandler.h
+ * @file GcFrontendPagePortalRunes.h
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2023-12-11
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -23,15 +23,17 @@
 
 #include <skyscraper.h>
 
+#include <graphics/frontend/pages/GcFrontendPage.h>
+
 SKYSCRAPER_BEGIN
 
-class cTkISystemEventHandler
+class cGcFrontendPagePortalRunes : public cGcFrontendPage
 {
   public:
-    virtual void BackgroundExecutionChanged(bool);
-    virtual void SystemUIOverlayChange(bool);
-    virtual void ShareMenuOpened();
-    virtual void SystemPlayModeChanged();
+    cTkSmartResHandle maRuneIconHandles[16];
+    cTkSmartResHandle maStoneRuneIconHandles[16];
+    cTkVector<signed char> mai8RuneIndices;
+    int miCurrentTargetIndex;
 };
 
 SKYSCRAPER_END

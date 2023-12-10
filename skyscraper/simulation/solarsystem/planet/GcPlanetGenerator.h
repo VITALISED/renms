@@ -1,7 +1,7 @@
 /**
- * @file TkISystemEventHandler.h
+ * @file GcPlanetGenerator.h
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2023-12-10
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -23,15 +23,20 @@
 
 #include <skyscraper.h>
 
+#include <simulation/environment/gcobjectspawndata.meta.h>
+
 SKYSCRAPER_BEGIN
 
-class cTkISystemEventHandler
+class cGcPlanetObjectSpawnData
 {
   public:
-    virtual void BackgroundExecutionChanged(bool);
-    virtual void SystemUIOverlayChange(bool);
-    virtual void ShareMenuOpened();
-    virtual void SystemPlayModeChanged();
+    cGcObjectSpawnData *mpSpawnData;
+    cGcResourceElement mResource;
+    cTkDynamicArray<cGcResourceElement> maAltResources;
+    cGcTerrainTileType mTileType;
+    bool mbAllowLimiting;
+    int miCachedCollisionNodeCount;
+    bool mbEnabled;
 };
 
 SKYSCRAPER_END

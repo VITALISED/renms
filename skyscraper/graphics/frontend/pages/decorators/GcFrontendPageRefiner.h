@@ -1,7 +1,7 @@
 /**
- * @file TkISystemEventHandler.h
+ * @file GcFrontendPageRefiner.h
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2023-12-11
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -23,15 +23,18 @@
 
 #include <skyscraper.h>
 
+#include <graphics/hud/elements/GcHUDMarker.h>
+
 SKYSCRAPER_BEGIN
 
-class cTkISystemEventHandler
+class cGcFrontendPageRefiner
 {
   public:
-    virtual void BackgroundExecutionChanged(bool);
-    virtual void SystemUIOverlayChange(bool);
-    virtual void ShareMenuOpened();
-    virtual void SystemPlayModeChanged();
+    cTkVector2 mInputPos;
+    cTkVector2 mOutputPos;
+    cGcMarkerRenderData mBeginDial;
+    cGcMarkerRenderData mProgressDial;
+    bool mbSwitchToInventoryTransfer;
 };
 
 SKYSCRAPER_END

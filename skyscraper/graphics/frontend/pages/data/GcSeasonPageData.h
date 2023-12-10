@@ -1,7 +1,7 @@
 /**
- * @file TkISystemEventHandler.h
+ * @file GcSeasonPageData.h
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2023-12-10
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -23,15 +23,31 @@
 
 #include <skyscraper.h>
 
+#include <toolkit/utilities/containers/TkVector.h>
+
+#include <graphics/ngui/metadata/gcnguispecialtextstyledata.meta.h>
+
 SKYSCRAPER_BEGIN
 
-class cTkISystemEventHandler
+class cGcSeasonPageData
 {
   public:
-    virtual void BackgroundExecutionChanged(bool);
-    virtual void SystemUIOverlayChange(bool);
-    virtual void ShareMenuOpened();
-    virtual void SystemPlayModeChanged();
+    int miExpeditionDistance;
+    int miSystemsDiscovered;
+    float mfDistanceWalked;
+    int miNanites;
+    int miMoney;
+    cTkVector<float> mafInitialRingPositions;
+    cTkVector<float> mafInitialStarPositions;
+    cTkVector<float> mafInitialStarSizes;
+    cGcNGuiSpecialTextStyleData *mpProgressStyleData;
+    long double mfStageChangeStartTime;
+    long double mfStageChangeTime;
+    int miPreviousStageIndex;
+    int miStageIndex;
+    int miNextStageIndex;
+    bool mbShowingLatestStage;
+    int mbShowingFinalStage;
 };
 
 SKYSCRAPER_END

@@ -1,7 +1,7 @@
 /**
- * @file TkISystemEventHandler.h
+ * @file GcStoriesPageData.h
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2023-12-10
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -23,15 +23,32 @@
 
 #include <skyscraper.h>
 
+#include <toolkit/data/TkMetaDataClasses.h>
+#include <toolkit/graphics/2d/ngui/TkNGuiInput.h>
+#include <toolkit/utilities/containers/TkVector.h>
+
 SKYSCRAPER_BEGIN
 
-class cTkISystemEventHandler
+class cGcStoriesPageData
 {
   public:
-    virtual void BackgroundExecutionChanged(bool);
-    virtual void SystemUIOverlayChange(bool);
-    virtual void ShareMenuOpened();
-    virtual void SystemPlayModeChanged();
+    struct sGcUnlockedStoryInfo
+    {
+        cTkDynamicArray<int> maiUnlockedBranch;
+        int miUnlockedIdx;
+        bool mbIdxIsBitmask;
+        bool mbSeenLastEntry;
+    };
+
+    int miCurrentCategory;
+    int miCurrentTopicPage;
+    int miCurrentStoryPage;
+    int miCurrentStoryPageSection;
+    cTkVector<cTkFixedString<8192, char>> maCurentPageSecionsText;
+    float mfTimeSinceLastTransition;
+    cTkFixedArray<cTkDynamicArray<cGcStoriesPageData::sGcUnlockedStoryInfo>, 8> maiUnlockedStoryIndex;
+    cTkFixedArray<int, 8> maiCategoryUnseenCount;
+    TextScrollBarState mTextScrollBarState;
 };
 
 SKYSCRAPER_END

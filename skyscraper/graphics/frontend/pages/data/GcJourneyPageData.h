@@ -1,7 +1,7 @@
 /**
- * @file TkISystemEventHandler.h
+ * @file GcJourneyPageData.h
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2023-12-10
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -23,15 +23,21 @@
 
 #include <skyscraper.h>
 
+#include <toolkit/graphics/2d/ngui/TkNGuiInput.h>
+
+#include <journey/gcjourney.meta.h>
+
 SKYSCRAPER_BEGIN
 
-class cTkISystemEventHandler
+class cGcJourneyPageData
 {
   public:
-    virtual void BackgroundExecutionChanged(bool);
-    virtual void SystemUIOverlayChange(bool);
-    virtual void ShareMenuOpened();
-    virtual void SystemPlayModeChanged();
+    cGcJourney *mpJourney;
+    TextScrollBarState mTextScrollBarState;
+    int miCurrentCategory;
+    int miCategoriesCount;
+    float mfTimeSinceLastTransition;
+    int miPinnedJourneyMilestone;
 };
 
 SKYSCRAPER_END
