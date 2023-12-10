@@ -46,10 +46,10 @@ class cGcGalaxyVoxelCache
     cTkVector<cGcGalaxyVoxel *> mActiveVoxels;
     cTkStackVector<cGcGalaxyVoxelCache::VoxelRetirement, 4> mVoxelRetirementCache;
     cTkVector3MetaKD<unsigned __int64, 23> mSpatialDB;
-    nanoflann::KDTreeSingleIndexAdaptor<
-        nanoflann::L2_Simple_Adaptor<float, cTkVector3MetaKD<uint64_t, 23>, float>, cTkVector3MetaKD<uint64_t, 23>, 3,
-        uint64_t>
-        mSpatialTree;
+    // nanoflann::KDTreeSingleIndexAdaptor<
+    //     nanoflann::L2_Simple_Adaptor<float, cTkVector3MetaKD<uint64_t, 23>, float>, cTkVector3MetaKD<uint64_t, 23>,
+    //     3, uint64_t> mSpatialTree;
+    nanoflann::KDTreeSingleIndexAdaptor mSpatialTree;
     std::atomic<bool> mabSpatialBuilding;
     std::atomic<bool> mabSpatialValid;
     cGcGalacticVoxelCoordinate mLastSpatialGC;

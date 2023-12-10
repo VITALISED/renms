@@ -26,7 +26,8 @@
 #endif
 
 #include <havok_stubs.h>
-#include <nanoflann.hpp>
+// #include <nanoflann.hpp>
+#include <nanoflann_stubs.h>
 #include <rapidjson/document.h>
 #include <rapidjson/rapidjson.h>
 #include <robin_hood.h>

@@ -58,9 +58,10 @@ class cGcPersistentInteractionBuffer : public cGcNetworkSynchronisedBuffer
     cTkDynamicArray<cGcInteractionData> maBufferData;
     int miCurrentPos;
     cTkVector3MetaKD<int, -1> mSavedInteractionsDB;
-    nanoflann::KDTreeSingleIndexAdaptor<
-        nanoflann::L2_Simple_Adaptor<float, cTkVector3MetaKD<int, -1>, float>, cTkVector3MetaKD<int, -1>, 3, uint64_t>
-        mTree;
+    // nanoflann::KDTreeSingleIndexAdaptor<
+    //     nanoflann::L2_Simple_Adaptor<float, cTkVector3MetaKD<int, -1>, float>, cTkVector3MetaKD<int, -1>, 3,
+    //     uint64_t> mTree;
+    nanoflann::KDTreeSingleIndexAdaptor mTree;
     int miNGuiOffset;
     float mfTimeSinceLastSavedInteraction;
     float mfFurthestPointDistance;

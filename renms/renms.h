@@ -26,7 +26,7 @@
 #include <core/framework.h>
 #include <core/log.h>
 #include <fmt/format.h>
-#include <nanoflann.hpp>
+// #include <nanoflann.hpp>
 #include <polyhook2/Detour/NatDetour.hpp>
 #include <polyhook2/Enums.hpp>
 #include <polyhook2/IHook.hpp>
