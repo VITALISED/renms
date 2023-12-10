@@ -74,7 +74,7 @@
 SKYSCRAPER_BEGIN
 
 /**
- * A singleton managing most of the game's heap allocated structures and other singletons.
+ * A singleton managing most of the game's heap allocated structures and other classes.
  */
 class cGcApplication : public cTkFSM
 {
@@ -84,8 +84,8 @@ class cGcApplication : public cTkFSM
         cGcFirstBootContext mFirstBootContext;
         cTkMcQmcLFSRStore mTkMcQmcLFSRStore;
         cGcRealityManager mRealityManager;
-        cGcGameState mGameState;       // stub
-        cGcSeasonalData mSeasonalData; // stub
+        cGcGameState mGameState;
+        cGcSeasonalData mSeasonalData;
         cGcSimulation mSimulation;
         cGcHUDManager mHUDManager;             // stub
         cGcFrontendManager mFrontendManager;   // stub

@@ -23,11 +23,29 @@
 
 #include <skyscraper.h>
 
+#include <toolkit/utilities/containers/TkVector.h>
+
+#include <gamestate/gcplayerstatedata.meta.h>
+
 SKYSCRAPER_BEGIN
 
 class cGcSeasonalData
 {
-    char __pad__[0x69F0];
+  public:
+    cGcSeasonalGameModeData mData;
+    cGcSeasonalGameModeData mLatestSeasonServerData;
+    int miCachedServerSeasonId;
+    uint64_t mu64CachedServerSeasonStartTime;
+    uint64_t mu64CachedServerSeasonEndTime;
+    uint64_t mu64CachedServerSeasonDataHash;
+    int miCachedServerNextSeasonId;
+    uint64_t mu64CachedServerNextSeasonStartTime;
+    cTkVector<std::pair<void(__cdecl *)(void *), void *>> mDataDownloadedCallbacks;
+    bool mbWaitingForDataToDownload;
+    bool mbDataDownloadFailed;
+    bool mbDataAvailable;
+    bool mbDataLocked;
+    bool mbServerDataAvailable;
 };
 
 SKYSCRAPER_END
