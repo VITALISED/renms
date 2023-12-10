@@ -1,7 +1,7 @@
 /**
- * @file GcActivitiesTracker.h
+ * @file GcActivitiesManager.h
  * @author VITALISED & Contributors
- * @since 2023-12-08
+ * @since 2023-12-11
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -23,22 +23,12 @@
 
 #include <skyscraper.h>
 
-#include <online/activities/GcActivitiesManager.h>
-#include <simulation/environment/GcEnvironment.h>
-#include <toolkit/utilities/containers/TkVector.h>
-
 SKYSCRAPER_BEGIN
 
-class cGcActivitiesTracker
+class cGcActivitiesManager
 {
   public:
-    cGcActivitiesManager *mpManager;
-    cTkVector<TkID<128>> maTrackedStatIds;
-    cTkVector<bool> mabPristines;
-    unsigned int mxActiveFlags;
-    unsigned int mxStickyFlags;
-    bool mbWasInShip;
-    EnvironmentLocation::Enum meLastEnvironmentLocation;
+    bool mbHasPendingActivityLaunch;
 };
 
 SKYSCRAPER_END

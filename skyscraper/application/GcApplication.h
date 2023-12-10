@@ -105,7 +105,7 @@ class cGcApplication : public cTkFSM
         cGcResourceManager mResourceManager; // stub
         cGcGalaxyMap mGalaxyMap;
         cGcGameAnalytics mGameAnalytics;
-        cGcActivitiesTracker mActivitiesTracker; // stub
+        cGcActivitiesTracker mActivitiesTracker;
     };
 
     cGcApplication::Data *mpData;
