@@ -51,15 +51,15 @@ class cGcMsgBeacon : AutoPooled<5>
 
     enum DisplayNameState
     {
-        Unchecked,
-        Processing,
+        _Unchecked,
+        _Processing,
         Done,
     };
 
     enum PermissionState
     {
-        Unchecked,
-        Processing,
+        __Unchecked,
+        __Processing,
         DoneAndPassed,
         DoneAndBlocked,
     };

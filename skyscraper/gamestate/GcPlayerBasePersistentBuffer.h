@@ -49,6 +49,8 @@ class cGcPlayerBasePersistentBuffer : public cGcNetworkSynchronisedBuffer
         uint16_t muiLinkIndex;
         uint16_t muiGridIndex;
         const cGcBaseBuildingEntry *mpBuildingEntry;
+
+        ~PlayerBasePersistentData() { EMPTY_CALL_DESTRUCTOR(); }
     };
 
     struct sStats

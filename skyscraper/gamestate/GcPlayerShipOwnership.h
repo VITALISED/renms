@@ -61,7 +61,12 @@ class cGcPlayerShipOwnership
         TkHandle mShipNode;
     };
 
-    std::unordered_map<int, std::function<void(cTkMatrix34 const &)>> mNewSpaceshipSpawnCallbacks;
+    union {
+        const int kiMaxShips;
+        int mNextSpaceshipSpawnCallbacksHandle;
+        std::unordered_map<int, std::function<void(cTkMatrix34 const &)>> mNewSpaceshipSpawnCallbacks;
+    };
+
     TkHandle mGroupRootNode;
     cGcPlayerShipOwnership::sGcShipData mShips[12];
     cTkMatrix34 mPlayerShipTMWhenLastDestroyed;

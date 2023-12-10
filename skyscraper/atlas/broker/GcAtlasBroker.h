@@ -32,7 +32,7 @@ SKYSCRAPER_BEGIN
 
 enum AtlasRequestResult
 {
-    NotReady,
+    _NotReady,
     Success,
     Failed_ManualCancellation,
     Failed_TimedOut,

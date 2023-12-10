@@ -24,6 +24,7 @@
 #include <skyscraper.h>
 
 #include <gamestate/GcFleetExpedition.h>
+#include <gamestate/GcFleetFrigate.h>
 #include <networking/GcNetworkPlayerEventsHandler.h>
 #include <toolkit/networking/TkUserIdBase.h>
 #include <toolkit/utilities/containers/TkClassPool.h>

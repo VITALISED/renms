@@ -23,6 +23,7 @@
 
 #include <skyscraper.h>
 
+#include <toolkit/attachments/TkAttachment.h>
 #include <toolkit/core/types/TkHandle.h>
 #include <toolkit/maths/geometry/TkAABB.h>
 #include <toolkit/maths/geometry/TkPhysRelMat34.h>
@@ -61,6 +62,7 @@ enum EModelResourceRendererSyncStage
 
 class cTkModelResourceRenderer
 {
+  public:
     int miShowLod;
     void (*mAllowedComponentsCallback)();
     void (*mAttachmentPrepareCallback)(cTkAttachment *);
@@ -105,7 +107,6 @@ class cTkModelResourceRenderer
     cTkVector<cTkFixedString<128, char>> mNodeNameActivationList;
     cTkVector<cTkFixedString<128, char>> mNodeNameDeactivationList;
     cTkVector<int> mNodeTypeDeactivationList;
-    cTkFixedString<128, char> mName_dbg;
 };
 
 SKYSCRAPER_END

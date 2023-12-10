@@ -29,24 +29,14 @@
 #include <toolkit/networking/TkUserIdBase.h>
 #include <toolkit/utilities/string/TkString.h>
 
-SKYSCRAPER_BEGIN
+#include <gamestate/basebuilding/gcpersistentbbobjectdata.meta.h>
 
-class cGcPersistentBBObjectData
-{
-  public:
-    uint64_t mu64Timestamp;
-    TkID<128> mObjectID;
-    uint64_t mu64GalacticAddress;
-    uint64_t mu64RegionSeed;
-    uint64_t mu64UserData;
-    cTkVector3 mPosition;
-    cTkVector3 mUp;
-    cTkVector3 mAt;
-};
+SKYSCRAPER_BEGIN
 
 template <typename T>
 class PersistentData
 {
+  public:
     T mData;
     uint16_t miInc;
 
@@ -58,7 +48,9 @@ class cGcBaseBuildingPersistentBuffer : public cGcNetworkSynchronisedBuffer
 {
   public:
     struct BaseBuildingPersistentData : PersistentData<cGcPersistentBBObjectData>
-    {};
+    {
+        ~BaseBuildingPersistentData() { EMPTY_CALL_DESTRUCTOR(); }
+    };
 
     cTkVector<cGcBaseBuildingPersistentBuffer::BaseBuildingPersistentData> maBaseBuildingObjects;
     robin_hood::detail::Table<

@@ -39,13 +39,6 @@ class IStatWatcher
     virtual void StatChanged(const TkID<128> *, int64_t);
 };
 
-class IStatVariantWatcher
-{
-    virtual void VariantChanged(const TkID<128> *, const cGcStatDefinition *, Stat::AvgStat);
-    virtual void VariantChanged(const TkID<128> *, const cGcStatDefinition *, float);
-    virtual void VariantChanged(const TkID<128> *, const cGcStatDefinition *, int);
-};
-
 struct Stat
 {
   public:
@@ -61,6 +54,13 @@ struct Stat
         Stat::AvgStat mAvgValue;
     };
     Stat::StatValue mValue;
+};
+
+class IStatVariantWatcher
+{
+    virtual void VariantChanged(const TkID<128> *, const cGcStatDefinition *, Stat::AvgStat);
+    virtual void VariantChanged(const TkID<128> *, const cGcStatDefinition *, float);
+    virtual void VariantChanged(const TkID<128> *, const cGcStatDefinition *, int);
 };
 
 struct StatListener

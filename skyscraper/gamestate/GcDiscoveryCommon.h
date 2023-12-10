@@ -80,6 +80,7 @@ class cGcDiscoveryRecord : AutoPooled<19>
 template <typename Hash, int MemPoolIdx>
 class cGcDiscoveryStoreImpl : AutoPooled<19>
 {
+  public:
     struct ConstIterator
     {
         // std::const_iterator<std::_Vector_val<std::_Simple_types<robin_hood::detail::Table<

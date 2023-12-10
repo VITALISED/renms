@@ -26,15 +26,32 @@
 #include <networking/GcNetworkSynchronisedBuffer.h>
 #include <networking/messages/GcNetworkSyncMessages.h>
 #include <toolkit/maths/utilities/spatial/TkVector3KD.h>
+#include <toolkit/networking/TkUserIdBase.h>
 
 #include <gamestate/interactions/gcinteractionbuffertype.meta.h>
 #include <gamestate/interactions/gcinteractiondata.meta.h>
 
 SKYSCRAPER_BEGIN
 
+class cGcNetworkPlayer;
+
 class cGcPersistentInteractionBuffer : public cGcNetworkSynchronisedBuffer
 {
   public:
+    union {
+        const int kiDistressSignalMaxBufferSize;
+        const int kiCrateMaxBufferSize;
+        const int kiDestructableMaxBufferSize;
+        const int kiCostMaxBufferSize;
+        const int kiBuildingMaxBufferSize;
+        const int kiCreatureMaxBufferSize;
+        const int kiMaintenanceMaxBufferSize;
+        const int kiPersonalMaxBufferSize;
+        const int kiPersonalMaintenanceMaxBufferSize;
+        const int kiFireteamSyncMaxBufferSize;
+        const int kiNGuiPageSize;
+    };
+
     int miLastBufferIndex;
     uint64_t muCurrentAddress;
     eInteractionBufferType meType;
@@ -53,7 +70,7 @@ class cGcPersistentInteractionBuffer : public cGcNetworkSynchronisedBuffer
     bool mbTreeHasData;
     bool mbTreeNeedsRebuild;
 
-    virtual ~cGcPersistentInteractionBuffer();
+    virtual ~cGcPersistentInteractionBuffer() { EMPTY_CALL_DESTRUCTOR(); }
     virtual sHashValue *GetHashValue(sHashValue *result, unsigned int);
     virtual uint64_t GetHashTimestamp();
     virtual uint16_t GenerateHashValue(int);
