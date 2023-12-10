@@ -29,7 +29,7 @@ namespace UnorderedMapHashes
 {
 template <typename T>
 struct Hash
-{}
+{};
 } // namespace UnorderedMapHashes
 
 SKYSCRAPER_END

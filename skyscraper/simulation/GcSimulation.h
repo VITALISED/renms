@@ -23,7 +23,18 @@
 
 #include <skyscraper.h>
 
+#include <graphics/GcFullscreenEffectManager.h>
+#include <simulation/ecosystem/GcEcosystem.h>
+#include <simulation/environment/scanning/GcScanManager.h>
+#include <simulation/particles/GcParticleManager.h>
+#include <simulation/player/GcPlayer.h>
+#include <simulation/player/GcPlayerExperienceDirector.h>
 #include <simulation/player/GcPlayerRespawn.h>
+#include <simulation/projectiles/GcProjectileManager.h>
+#include <simulation/scenemanager/GcSceneManager.h>
+#include <simulation/solarsystem/npcs/GcNPCManager.h>
+#include <simulation/spaceship/GcSpaceShipWarp.h>
+#include <simulation/spaceship/ai/GcAISpaceshipManager.h>
 #include <toolkit/core/types/TkHandle.h>
 #include <toolkit/simulation/physics/havok/TkRigidBody.h>
 #include <toolkit/system/TkIterationState.h>
@@ -64,8 +75,8 @@ class cGcSimulation
     cGcAISpaceshipManager mAISpaceshipManager;
     cGcNPCManager mNPCManager;
     cGcFullscreenEffectManager mFullscreenEffectManager;
-    cGcSolarSystem *mpSolarSystem;
-    cGcSolarSystemDirector *mpSolarSystemDirector;
+    /*cGcSolarSystem*/ uintptr_t *mpSolarSystem;
+    /*cGcSolarSystemDirector*/ uintptr_t *mpSolarSystemDirector;
     cGcSpaceshipWarp mWarp;
     cTkPhysRelVec3 mPortalMarkerPosition;
     eCentreJourneyDestination meRequestCentreJourney;

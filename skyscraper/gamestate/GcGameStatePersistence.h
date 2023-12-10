@@ -98,6 +98,21 @@ struct StorageSlotInformation
     cTkFixedString<128, char> macSaveSummary;
 };
 
-}; // namespace GcGameStatePersistence
+struct SpecificSave
+{
+    enum Type
+    {
+        Current         = 0,
+        Previous        = 1,
+        Max             = 2,
+        CauseAuto       = 65,
+        CausePlayer     = 80,
+        CauseAutoMicro  = 77,
+        CauseDifficulty = 68,
+        CauseDebugTools = 80,
+    };
+};
+
+} // namespace GcGameStatePersistence
 
 SKYSCRAPER_END

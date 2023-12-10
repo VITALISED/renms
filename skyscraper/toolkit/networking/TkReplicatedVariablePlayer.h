@@ -30,7 +30,7 @@
 SKYSCRAPER_BEGIN
 
 template <typename T>
-class cTkReplicatedVariablePlayer : public cTkReplicatedVariableTemplated<cTkUserIdBase<cTkFixedString<64, char>>>
+class cTkReplicatedVariablePlayer : public cTkReplicatedVariableTemplated<T>
 {
     bool mbIsLocallyOwned;
 };

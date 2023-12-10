@@ -28,7 +28,7 @@
 SKYSCRAPER_BEGIN
 
 template <typename T>
-class cTkReplicatedVariable : cTkReplicatedVariableTemplated<T>
+class cTkReplicatedVariable : public cTkReplicatedVariableTemplated<T>
 {
   public:
     cTkComponent *mpOwner;

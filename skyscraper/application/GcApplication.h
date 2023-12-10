@@ -40,22 +40,41 @@
 #include <application/states/GcApplicationTitleScreenState.h>
 #include <application/states/GcApplicationUGCBaseViewerState.h>
 #include <atlas/GcAtlasManager.h>
+#include <audio/GcAudioManager.h>
+#include <gamestate/GcGameAnalytics.h>
+#include <gamestate/GcGameState.h>
+#include <gamestate/GcSeasonalData.h>
+#include <graphics/GcFrontendManager.h>
+#include <graphics/GcGraphicsManager.h>
+#include <graphics/GcHUDManager.h>
+#include <graphics/GcInWorldUIManager.h>
+#include <graphics/camera/GcCameraManager.h>
+#include <graphics/ngui/GcNGuiManager.h>
+#include <networking/GcNetworkManager.h>
+#include <online/activities/GcActivitiesTracker.h>
 #include <reality/GcRealityManager.h>
+#include <resources/GcResourceManager.h>
+#include <simulation/GcSimulation.h>
+#include <simulation/galaxy/GcGalaxyMap.h>
+#include <system/input/GcInput.h>
 #include <system/input/GcVibrationManager.h>
+#include <toolkit/graphics/debug/TkDebugRenderer.h>
 #include <toolkit/maths/utilities/spatial/TkSampleDistribution.h>
 #include <toolkit/system/TkCSMutex.h>
+#include <toolkit/system/input/TkInputManager.h>
 #include <toolkit/system/timer/TkStopwatch.h>
 #include <toolkit/system/timer/TkTimeManager.h>
 #include <toolkit/utilities/containers/TkVector.h>
 #include <toolkit/utilities/fsm/TkFSM.h>
 #include <toolkit/utilities/string/TkString.h>
+#include <utilities/debug/GcDebugEditor.h>
 
 #include <gamestate/gcgamemode.meta.h>
 
 SKYSCRAPER_BEGIN
 
 /**
- * A singleton managing most of the game's heap allocated structures and other singletons.
+ * A singleton managing most of the game's heap allocated structures and other classes.
  */
 class cGcApplication : public cTkFSM
 {
@@ -65,28 +84,28 @@ class cGcApplication : public cTkFSM
         cGcFirstBootContext mFirstBootContext;
         cTkMcQmcLFSRStore mTkMcQmcLFSRStore;
         cGcRealityManager mRealityManager;
-        /*cGcGameState*/ char mGameState[0x43C560];
-        /*cGcSeasonalData*/ char mSeasonalData[0x69F0];
-        /*cGcSimulation*/ char mSimulation[0x25F7C0];
-        /*cGcHUDManager*/ char mHUDManager[0x145270];
-        /*cGcFrontendManager*/ char mFrontendManager[0x81E00];
-        /*cGcInWorldUIManager*/ char mInWorldUIManager[0x4A320];
-        /*cGcCameraManager*/ char mCameraManager[0x2B60];
-        /*cGcGraphicsManager*/ char mGraphicsManager[0x1603E0];
-        /*cTkInputManager*/ char *mpInputManager[0x1C80];
-        /*cGcInputRemap*/ char mInputRemap[0x950];
+        cGcGameState mGameState;
+        cGcSeasonalData mSeasonalData;
+        cGcSimulation mSimulation;
+        cGcHUDManager mHUDManager;             // stub
+        cGcFrontendManager mFrontendManager;   // stub
+        cGcInWorldUIManager mInWorldUIManager; // stub
+        cGcCameraManager mCameraManager;       // stub
+        cGcGraphicsManager mGraphicsManager;   // stub
+        cTkInputManager *mpInputManager;       // stub
+        cGcInputRemap mInputRemap;             // stub
         cGcVibrationManager mVibrationManager;
         cTkTimeManager mTimeManager;
-        /*cTkDebugRenderer*/ char mDebugRenderer[0x108];
-        /*cGcDebugEditor*/ char mDebugEditor[0x9B0];
-        /*cGcNGuiManager*/ char mNGuiManager[0x768];
-        /*cGcAudioManager*/ char mAudioManager[0xB90];
+        cTkDebugRenderer mDebugRenderer; // stub
+        cGcDebugEditor mDebugEditor;     // stub
+        cGcNGuiManager mNGuiManager;     // stub
+        cGcAudioManager mAudioManager;   // stub
         cGcAtlasManager mAtlasManager;
-        /*cGcNetworkManager*/ char mNetworkManager[0x21AB0];
-        /*cGcResourceManager*/ char mResourceManager[0x170];
-        /*cGcGalaxyMap*/ char mGalaxyMap[0x18];
-        /*cGcGameAnalytics*/ char mGameAnalytics[0x1F0];
-        /*cGcActivitiesTracker*/ char mActivitiesTracker[0x50];
+        cGcNetworkManager mNetworkManager;
+        cGcResourceManager mResourceManager; // stub
+        cGcGalaxyMap mGalaxyMap;
+        cGcGameAnalytics mGameAnalytics;
+        cGcActivitiesTracker mActivitiesTracker; // stub
     };
 
     cGcApplication::Data *mpData;

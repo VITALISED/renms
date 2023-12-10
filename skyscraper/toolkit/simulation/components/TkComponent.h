@@ -2,19 +2,19 @@
  * @file TkComponent.h
  * @author VITALISED & Contributors
  * @since 2023-12-05
- * 
+ *
  * Copyright (C) 2023  VITALISED & Contributors
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
@@ -24,13 +24,17 @@
 #include <skyscraper.h>
 
 #include <toolkit/networking/TkReplicatedVariableArray.h>
+#include <toolkit/networking/TkUserIdBase.h>
 
 SKYSCRAPER_BEGIN
 
 class cTkAttachment;
 
+class cGcNetworkSerializer;
+
 class cTkComponent
 {
+  public:
     cTkAttachment *mpAttachment;
     const char *mpacType;
     cTkComponent *mpNext;
@@ -51,7 +55,7 @@ class cTkComponent
     virtual void UpdatePostPhysics(float);
     virtual void UpdateRender(float);
     virtual void Render();
-    virtual bool NetSerialize(cGcNetworkSerializer *, unsigned __int64);
+    virtual bool NetSerialize(cGcNetworkSerializer *, uint64_t);
     virtual bool NetSerializeOnInit(cGcNetworkSerializer *);
     virtual bool CanTransferOwnership();
     virtual bool AmInterestedInOwnership();
@@ -59,7 +63,7 @@ class cTkComponent
     virtual bool ShouldAbandon();
     virtual bool OnOwnershipTransfer(const cTkUserIdBase<cTkFixedString<64, char>> *);
     virtual void RenderNGui();
-    virtual unsigned __int64 GetTypeNameHash64();
+    virtual uint64_t GetTypeNameHash64();
     virtual void OnAttached();
     virtual void Prepare();
     virtual void Release();

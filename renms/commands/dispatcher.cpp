@@ -2,19 +2,19 @@
  * @file dispatcher.cpp
  * @author VITALISED & Contributors
  * @since 2023-12-05
- * 
+ *
  * Copyright (C) 2023  VITALISED & Contributors
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
@@ -23,32 +23,39 @@
 
 renms::CommandDispatcher gCommandDispatcher = renms::CommandDispatcher();
 
+bool HandleTextChatInput(const cTkFixedString<1023, char> *lMessageText)
+{
+    std::string lsNoPrefixCommand = lMessageText->macBuffer;
+    lsNoPrefixCommand.erase(0, 1);
+
+    size_t lFirstSpace               = lsNoPrefixCommand.find_first_of(' ');
+    std::string lsCommandName        = lsNoPrefixCommand;
+    std::vector<std::string> *laArgs = new std::vector<std::string>();
+
+    if (lFirstSpace != std::string::npos)
+    {
+        lsCommandName = lsNoPrefixCommand.substr(0, lFirstSpace);
+        std::stringstream lssCommandStream(lsNoPrefixCommand.substr(lFirstSpace, std::string::npos));
+        std::string lsBuffer;
+
+        while (std::getline(lssCommandStream, lsBuffer, ' '))
+        {
+            if (!lsBuffer.empty()) { laArgs->push_back(lsBuffer); }
+        }
+    }
+
+    if (gCommandDispatcher.TryParseCommand(lsCommandName, laArgs)) return true;
+
+    return false;
+}
+
 RENMS_HOOK(
     cGcTextChatInput__ParseTextForCommands, renms::RelToAbsolute(0x804E70), void,
     (uint64_t thiscall, const cTkFixedString<1023, char> *lMessageText) {
         if (!renms::CommandDispatcher::StartsWithPrefix(lMessageText))
             return RENMS_CAST(cGcTextChatInput__ParseTextForCommands, thiscall, lMessageText);
 
-        std::string lsNoPrefixCommand = lMessageText->macBuffer;
-        lsNoPrefixCommand.erase(0, 1);
-
-        size_t lFirstSpace               = lsNoPrefixCommand.find_first_of(' ');
-        std::string lsCommandName        = lsNoPrefixCommand;
-        std::vector<std::string> *laArgs = new std::vector<std::string>();
-
-        if (lFirstSpace != std::string::npos)
-        {
-            lsCommandName = lsNoPrefixCommand.substr(0, lFirstSpace);
-            std::stringstream lssCommandStream(lsNoPrefixCommand.substr(lFirstSpace, std::string::npos));
-            std::string lsBuffer;
-
-            while (std::getline(lssCommandStream, lsBuffer, ' '))
-            {
-                if (!lsBuffer.empty()) { laArgs->push_back(lsBuffer); }
-            }
-        }
-
-        if (gCommandDispatcher.TryParseCommand(lsCommandName, laArgs)) return;
+        if (HandleTextChatInput(lMessageText)) { return; };
 
         return RENMS_CAST(cGcTextChatInput__ParseTextForCommands, thiscall, lMessageText);
     });

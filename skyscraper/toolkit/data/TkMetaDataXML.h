@@ -24,6 +24,8 @@
 #include <skyscraper.h>
 
 #include <engine/source/shared/utxmlparser.h>
+#include <toolkit/data/TkClassPointer.h>
+#include <toolkit/system/memory/pools/TkLinearMemoryPool.h>
 #include <toolkit/utilities/string/TkString.h>
 
 SKYSCRAPER_BEGIN
@@ -43,13 +45,12 @@ class cTkMetaDataXML
     typedef cTkMetaDataXMLFunctionLookup *(*GetLookup)(const char *lpacName);
 
     template <class T>
-    class Registrar
+    struct Registrar
     {
       public:
         static void ClassPointerRead(cTkClassPointer *lPtr, XMLNode *lDataNode, cTkLinearMemoryPool *lpAllocator);
         static bool ClassPointerSave(const cTkClassPointer *lPtr, const char *lpacFilename);
         static void ClassPointerWrite(const cTkClassPointer *lPtr, XMLNode *lDataNode, bool lbForceShortForm);
-        void WriteToXMLNode(XMLNode *lDataNode, bool lbForceShortForm, bool lbGlobal);
     };
 };
 

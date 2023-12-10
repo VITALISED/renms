@@ -26,12 +26,14 @@
 #include <commands/commands.h>
 #include <commands/dispatcher.h>
 #include <plugins/api.h>
+#include <toolkit/maths/numeric/generic/TkVector3Generic.h>
 #include <toolkit/utilities/string/TkString.h>
 
 #include <numeric>
 
 RENMS_BEGIN
 
+void TeleportCommandDispatch(std::vector<std::string> *laArgs);
 void EchoCommandDispatch(std::vector<std::string> *laArgs);
 void TestCommandDispatch(std::vector<std::string> *laArgs);
 void AddBuiltinCommands();

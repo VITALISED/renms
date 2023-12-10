@@ -23,7 +23,7 @@ add_custom_command(
     COMMENT "Generating docs"
 )
 
-add_custom_target(Doxygen ALL DEPENDS ${DOXYGEN_INDEX_FILE})
+add_custom_target(Doxygen DEPENDS ${DOXYGEN_INDEX_FILE})
 
 # -- Sphinx
 
@@ -33,7 +33,7 @@ set(SPHINX_SOURCE ${CMAKE_CURRENT_SOURCE_DIR})
 set(SPHINX_BUILD ${CMAKE_CURRENT_BINARY_DIR}/docs/sphinx)
 
 add_custom_target(
-    Sphinx ALL
+    Sphinx
     COMMAND
         ${SPHINX_EXECUTABLE} -j auto -b html
         # Tell Breathe where to find the Doxygen output
@@ -44,3 +44,4 @@ add_custom_target(
 )
 
 add_dependencies(Sphinx Doxygen)
+add_dependencies(Doxygen resdk)

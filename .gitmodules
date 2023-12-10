@@ -37,3 +37,9 @@
 [submodule "submodules/rapidxml"]
 	path = submodules/rapidxml
 	url = https://github.com/timniederhausen/rapidxml
+[submodule "submodules/rapidjson"]
+	path = submodules/rapidjson
+	url = https://github.com/Tencent/rapidjson.git
+[submodule "submodules/hgnanoflann"]
+	path = submodules/hgnanoflann
+	url = https://github.com/VITALISED/hgnanoflann.git
