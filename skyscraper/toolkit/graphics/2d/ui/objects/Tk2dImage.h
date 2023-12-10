@@ -39,6 +39,30 @@ class cTk2dImage : public cTk2dObject
     bool mbVisible;
     bool mbTiledUV;
     bool mbIsRenderTarget;
+
+    virtual void Construct(const cTkVector2 *, const cTkVector2 *, const cTkVector2 *, const cTkColour *);
+    virtual void Prepare();
+    virtual void Update(float);
+    virtual void Render();
+    virtual void Release();
+    virtual void Destruct();
+    virtual void SetPosition(const cTkVector2 *);
+    virtual cTkVector2 *GetPosition(cTkVector2 *result, const cTkVector2 *);
+    virtual cTkVector2 *GetPosition(cTkVector2 *result);
+    virtual cTkVector2 *GetWorldTopLeft(cTkVector2 *result);
+    virtual void SetSize(const cTkVector2 *);
+    virtual cTkVector2 *GetSize(cTkVector2 *result);
+    virtual void SetColour(const cTkColour *);
+    virtual cTkColour *GetColour(cTkColour *result);
+    virtual void SetAlignment(const cTkVector2 *);
+    virtual cTkVector2 *GetAlignment(cTkVector2 *result);
+    virtual bool RemoveAllObjects();
+};
+
+class cTk2dImageEx : public cTk2dImage
+{
+  public:
+    cTkSmartResHandle mResource;
 };
 
 SKYSCRAPER_END

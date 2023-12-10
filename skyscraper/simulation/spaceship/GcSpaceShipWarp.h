@@ -32,6 +32,15 @@
 
 SKYSCRAPER_BEGIN
 
+enum ePulseDriveState
+{
+    EPulseDriveState_None,
+    EPulseDriveState_Charge,
+    EPulseDriveState_Jumping,
+    EPulseDriveState_CrashStop,
+    EPulseDriveState_Cooldown,
+};
+
 class cGcWarpJumpTarget
 {
     cGcGalacticSolarSystemAddress mTargetSystem;
@@ -56,15 +65,6 @@ class cGcSpaceshipWarp
         EWarpState_WarpSlowdown,
         EWarpState_RenderDebug,
         EWarpState_NumStates,
-    };
-
-    enum ePulseDriveState
-    {
-        EPulseDriveState_None,
-        EPulseDriveState_Charge,
-        EPulseDriveState_Jumping,
-        EPulseDriveState_CrashStop,
-        EPulseDriveState_Cooldown,
     };
 
     enum BoostDoubleTap

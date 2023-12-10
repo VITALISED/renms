@@ -58,3 +58,40 @@ struct hknpConstraintId
 {
     uint64_t m_value;
 };
+
+struct hkHalf16
+{
+    __int16 m_value;
+};
+
+struct hknpConvexHull
+{
+    char __pad__[0x30];
+};
+
+struct hknpShapeSignals
+{
+    char __pad__[0x10];
+};
+
+class hknpShape
+{
+  public:
+    uint64_t *typeData;
+    char m_type;
+    char m_dispatchType;
+    char m_flags;
+    unsigned char m_numShapeKeyBits;
+    float m_convexRadius;
+    unsigned __int64 m_userData;
+    char m_properties[0x10];
+
+    virtual void stub();
+};
+
+struct hknpConvexShape : hknpShape
+{
+    hknpConvexHull m_hull;
+    hkHalf16 m_maxAllowedPenetration;
+    uintptr_t m_mutationSignals;
+};
