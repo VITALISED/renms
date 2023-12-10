@@ -25,6 +25,7 @@
 
 #include <engine/source/engine/EgGeometry.h>
 #include <engine/source/engine/EgMaterial.h>
+#include <engine/source/engine/EgScene.h>
 #include <toolkit/core/types/TkHandle.h>
 #include <toolkit/maths/geometry/TkAABB.h>
 #include <toolkit/resources/TkResource.h>
@@ -37,12 +38,6 @@
 #include <toolkit/scene/tkscenenodeattributedata.meta.h>
 
 SKYSCRAPER_BEGIN
-
-struct EgRenderQueueHandle
-{
-    int miQueueId;
-    int miFrameId;
-};
 
 class cEgNodeAttachment
 {
