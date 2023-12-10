@@ -92,8 +92,8 @@ class cGcApplication : public cTkFSM
         cGcInWorldUIManager mInWorldUIManager;
         cGcCameraManager mCameraManager;
         cGcGraphicsManager mGraphicsManager;
-        cTkInputManager *mpInputManager; // stub
-        cGcInputRemap mInputRemap;       // stub
+        cTkInputManager *mpInputManager;
+        cGcInputRemap mInputRemap; // stub
         cGcVibrationManager mVibrationManager;
         cTkTimeManager mTimeManager;
         cTkDebugRenderer mDebugRenderer; // stub
