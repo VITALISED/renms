@@ -28,6 +28,7 @@
 #include <simulation/ecosystem/creatures/behaviours/data/gcprimaryaxis.meta.h>
 #include <simulation/ecosystem/creatures/data/gccreatureswarmdata.meta.h>
 #include <simulation/ecosystem/creatures/gccreaturedata.meta.h>
+#include <simulation/environment/gcterraintiletype.meta.h>
 
 SKYSCRAPER_BEGIN
 
@@ -69,6 +70,69 @@ class cGcCreatureSwarm
     float mfTimer;
     float mfIgnoreTerrainTimer;
     bool mbIgnoreTerrain;
+};
+
+class cGcRegionKnowledge;
+
+struct cGcQuantizedTime
+{
+    int miTime;
+};
+
+class cGcRegionDecoratorCreatures;
+
+class cGcCreatureRoutine
+{
+  public:
+    enum StepType
+    {
+        eRoutineStepPause,
+        eRoutineStepGo,
+        eNumRoutineStepTypes,
+    };
+
+    struct PathCell
+    {
+        const cGcRegionKnowledge *mpKnowledge;
+        cGcQuantizedTime miTime;
+        cGcCreatureRoutine::StepType meType;
+        cTkVector4 mPosition;
+    };
+
+    bool mbIsDead;
+    cTkPhysRelVec3 mvInitialPos;
+    cTkVector3 mvInitialFacing;
+    cTkStackVector<cGcCreatureRoutine::PathCell, 16> maPath;
+    cGcQuantizedTime miPathLength;
+    cTkVector3 mRegionPlanetPos;
+    cTkVector3 mvSavedInteractionPos;
+    cGcQuantizedTime miRoutineOffset;
+    cTkPhysRelVec3 mvRepackInPos;
+    cTkPhysRelVec3 mvRepackOutPos;
+    bool mbWasRepacked;
+    bool mbFemale;
+    bool mbWasBaby;
+    bool mbNeedsToExitSpawnRadius;
+    bool mbActiveInDay;
+    bool mbActiveInNight;
+    TkHandle muCreature;
+    cGcCreatureSwarm *mpSwarm;
+    cGcCreatureSwarmData *mpSwarmData;
+    const cGcRegionDecoratorCreatures *mpOwner;
+    ePrimaryAxis meAxis;
+    eMoveArea meMoveArea;
+    eTileType meTileType;
+    cTkSeed mSeed;
+    float mfRadius;
+    uint64_t mu64CreatureRequestTime;
+    uint64_t mu64RegionId;
+    uint64_t miUniqueId;
+    enum
+    {
+        ETimeOfDay_None,
+        ETimeOfDay_Day,
+        ETimeOfDay_Night,
+    } meLastSeenTimeOfDay;
 };
 
 SKYSCRAPER_END

@@ -152,4 +152,23 @@ class cGcSpaceshipWarp
     cGcSpaceshipWarp::NexusWarpData mNexusWarpData;
 };
 
+class cGcWarpEffect
+{
+  public:
+    TkHandle mBaseNode;
+    int miWarpInFrameCount;
+    cTkMatrix34 mOriginOffset;
+    float mfFrontOffset;
+    float mfBackOffset;
+    cTkPhysRelMat34 mOriginTransform;
+    uint8_t meState[4];
+    uint8_t meRequestedState[4];
+    cTkAttachmentPtr mpAttachment;
+    cTkVector3 mWarpInStart;
+    float mfStartTime;
+    float mfStartSpeed;
+    bool mbWarpEffectPlayed;
+    bool mbFlipWarpDirection;
+};
+
 SKYSCRAPER_END

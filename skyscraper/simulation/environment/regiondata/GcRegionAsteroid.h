@@ -1,7 +1,7 @@
 /**
- * @file TkRegionMap.h
+ * @file GcRegionAsteroid.h
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2023-12-11
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -23,29 +23,23 @@
 
 #include <skyscraper.h>
 
-#include <toolkit/maths/numeric/generic/TkVector3Generic.h>
-
-#include <toolkit/voxel/generator/tkvoxelgeneratordata.meta.h>
+#include <simulation/environment/regiondata/GcRegion.h>
+#include <simulation/environment/regiondecorators/GcRegionDecoratorPhysics.h>
+#include <toolkit/maths/geometry/TkAABB.h>
+#include <toolkit/voxel/manager/TkVoxel.h>
+#include <toolkit/voxel/terrain/TkTerrainVertex.h>
 
 SKYSCRAPER_BEGIN
 
-class cTkRegionMapBase
+class cGcRegionAsteroid : public cGcRegionBase
 {
   public:
-    virtual int GetScaleX();
-    virtual int GetScaleY();
-    virtual int GetScaleZ();
-    virtual cTkVector3 *GetCentre(cTkVector3 *result);
-};
-
-template <int liUnk1, int liUnk2, int liUnk3, int liUnk4, typename T>
-class cTkRegionMap : public cTkRegionMapBase
-{
-    int miScaleX;
-    int miScaleY;
-    int miScaleZ;
-    T mRegion;
-    cTkVoxelGeneratorData *mpGeneratorData;
+    cTkVector3 mOffset;
+    cTkAABB mBoundingBox;
+    cGcRegionDecoratorPhysics mTerrainPhysics;
+    cTkTerrainVertexData *mpMappedStreamTerrain;
+    cTkSeed mSeed;
+    eVoxelType meMineableResourceType;
 };
 
 SKYSCRAPER_END

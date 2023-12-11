@@ -1,7 +1,7 @@
 /**
- * @file TkRegionMap.h
+ * @file GcSolarSystemDirector.h
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2023-12-11
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -23,29 +23,27 @@
 
 #include <skyscraper.h>
 
-#include <toolkit/maths/numeric/generic/TkVector3Generic.h>
-
-#include <toolkit/voxel/generator/tkvoxelgeneratordata.meta.h>
+#include <simulation/solarsystem/routes/GcTradeRoute.h>
+#include <toolkit/utilities/containers/TkClassPool.h>
+#include <toolkit/utilities/containers/TkVector.h>
+#include <toolkit/utilities/random/TkPersonalRNG.h>
 
 SKYSCRAPER_BEGIN
 
-class cTkRegionMapBase
+class cGcSolarSystemDirector
 {
   public:
-    virtual int GetScaleX();
-    virtual int GetScaleY();
-    virtual int GetScaleZ();
-    virtual cTkVector3 *GetCentre(cTkVector3 *result);
-};
-
-template <int liUnk1, int liUnk2, int liUnk3, int liUnk4, typename T>
-class cTkRegionMap : public cTkRegionMapBase
-{
-    int miScaleX;
-    int miScaleY;
-    int miScaleZ;
-    T mRegion;
-    cTkVoxelGeneratorData *mpGeneratorData;
+    cTkPersonalRNG mDirectorRNG;
+    uint64_t mu64BaseRNGSeed;
+    bool mDirectorEnabled;
+    float mfTime;
+    cTkVector<cGcTradeRoute> maRoutes;
+    int miNumVisibleRoutes;
+    cTkClassPoolHandle mTraderSquad;
+    robin_hood::detail::Table<
+        true, 80, /*cGcOutpostComponent*/ uintptr_t *, void,
+        robin_hood::hash</*cGcOutpostComponent*/ uintptr_t *, void>, std::equal_to</*cGcOutpostComponent*/ uintptr_t *>>
+        mPopulatedOutposts;
 };
 
 SKYSCRAPER_END

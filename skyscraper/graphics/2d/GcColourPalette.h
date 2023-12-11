@@ -1,7 +1,7 @@
 /**
- * @file TkRegionMap.h
+ * @file GcColourPalette.h
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2023-12-11
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -23,29 +23,26 @@
 
 #include <skyscraper.h>
 
-#include <toolkit/maths/numeric/generic/TkVector3Generic.h>
+#include <toolkit/utilities/containers/TkVector.h>
 
-#include <toolkit/voxel/generator/tkvoxelgeneratordata.meta.h>
+#include <graphics/2d/gcpalettelist.meta.h>
 
 SKYSCRAPER_BEGIN
 
-class cTkRegionMapBase
+class cGcLegacyColourPalette
 {
   public:
-    virtual int GetScaleX();
-    virtual int GetScaleY();
-    virtual int GetScaleZ();
-    virtual cTkVector3 *GetCentre(cTkVector3 *result);
+    std::array<cTkVector<cGcPaletteList *>, 16> maPalettes;
 };
 
-template <int liUnk1, int liUnk2, int liUnk3, int liUnk4, typename T>
-class cTkRegionMap : public cTkRegionMapBase
+class cGcColourPalette
 {
-    int miScaleX;
-    int miScaleY;
-    int miScaleZ;
-    T mRegion;
-    cTkVoxelGeneratorData *mpGeneratorData;
+  public:
+    std::array<cTkVector<cGcPaletteList *>, 16> maPalettes;
+    float mfSaturationMultiplier[58];
+    float mfValueMultiplier[58];
+    float mfHueMultiplier[58];
+    float mfRGBMultiplier[58];
 };
 
 SKYSCRAPER_END
