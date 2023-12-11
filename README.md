@@ -14,13 +14,13 @@ There are no current prebuilt binaries, this will change when we reach a more st
 
 ## Building
 
-See [BUILD.md](BUILD.md) for instructions.
+See [BUILD.md](BUILD.md) for instructions. (potentially outdated)
 
 ## Development State
 
 The project currently only builds for Fractal 4.13 on GOG. Will be ported to OSX (yes I'll add archive mounting from FS) at some point. Supporting future versions of NMS is planned sometime after the 2023 expected expedition redux missions.
 
-Toolkit types are in a fairly usable state, minus some mystery containers and miscellaneous rarely used data structures. Most of the work spent right now is getting GcApplication to play nice.
+We're currently working on improving the plugin development workflow before porting right now. This shouldn't take too long since we've got all the types we want reversed otherwise.
 
 We mostly live unofficially in the [No Man's Sky Retro discord](https://discord.gg/tEYNuMmAvR) but please don't come here for tech support. You can join our new somewhat official discord if you'd like to get in touch directly, or are just interested in development [here](https://discord.gg/SbEQFsJxNV)
 
@@ -36,4 +36,3 @@ If all this type cut-and-paste stuff is too boring for you to feel bothered to c
 
 * [Horde3D](https://github.com/horde3d/Horde3D/)
 * [Somewhat recent NMS shader source](https://github.com/EthanRDoesMC/NMS-ShaderCode)
-* 
