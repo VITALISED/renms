@@ -38,7 +38,7 @@ typedef uint64_t renmshook_t;
 #define GCTEXTCHATMANAGER_SAY 0x806080
 
 void RENMS_ENTRY PluginMain();
-void RENMS_ENTRY PluginUpdate(float lfTimeStep);
+void RENMS_ENTRY PluginUpdate();
 
 typedef decltype(PluginMain) *PluginMain_t;
 typedef decltype(PluginUpdate) *PluginUpdate_t;

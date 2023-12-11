@@ -23,6 +23,7 @@
 
 #include <skyscraper.h>
 
+#include <toolkit/graphics/2d/ngui/TkNGuiTextEdit.h>
 #include <toolkit/graphics/TkColour.h>
 #include <toolkit/networking/TkUserIdBase.h>
 #include <toolkit/utilities/UnorderedMapHashes.h>
@@ -32,6 +33,19 @@
 #include <gamestate/messages/gcstatusmessagedefinitions.meta.h>
 
 SKYSCRAPER_BEGIN
+
+enum eTextChatCommands
+{
+    None,
+    SwitchToGroupChannel,
+    SwitchToLocalChannel,
+    JoinPlayer,
+    InvitePlayer,
+    KickPlayer,
+    LeaveFireteam,
+    Whisper,
+    NumCommands,
+};
 
 struct PendingMessage
 {
@@ -71,6 +85,26 @@ struct TextChatMessageBuffer
     int miNextMessageInsertIndex;
     int miMessages;
     std::array<DisplayMessage, 10> maMessageBuffer;
+};
+
+class cGcTextChatInput
+{
+  public:
+    struct SCommandLookup
+    {
+        const char *mpcCommandName;
+        const char *mpcShortCommandName;
+    };
+
+    cTkNGuiTextEditState mEditText;
+    cTkFixedString<1023, char> msText;
+    cTkFixedString<1023, char> msInputTextDisplayString;
+    bool mbTextInputActive;
+    bool mbWaitingForNoKeyboardInput;
+    bool mbButtonReleased;
+    eTextChatCommands meCurrentCommand;
+    eTextChatCommands mePendingCommand;
+    const cGcTextChatInput::SCommandLookup *mpLookupTable;
 };
 
 class cGcTextChatManager

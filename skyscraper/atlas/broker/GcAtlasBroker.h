@@ -79,6 +79,32 @@ class cGcIBrokerData : AutoPooled<5>
     virtual ~cGcIBrokerData();
 };
 
+struct AtlasCommunalMissionTier
+{
+    unsigned int luMissionIndex;
+    unsigned int luTierReached;
+};
+
+class cGcAtlasCommunityData
+{
+  public:
+    uint64_t muCurrentCMIndex;
+    uint64_t muCurrentCMStartEpoch;
+    uint64_t muCurrentCMEndEpoch;
+    uint64_t muNextCMStartEpoch;
+    uint64_t muNextCMEndEpoch;
+    uint64_t muMyCMContribution;
+    uint64_t muMaxIndividualContribution;
+    cTkVector<uint64_t> maContributionLevels;
+    uint64_t muCurrentTotalContribution;
+    cTkVector<AtlasCommunalMissionTier> mPreviousTiersReached;
+    unsigned int muSecondsBetweenCmRefreshes;
+    bool mbUpdatePending;
+    bool mbRequestUpdate;
+    uint64_t muTimeOfLastRefresh;
+    uint64_t mRequestHandle;
+};
+
 class AtlasTaskCommon
 {
   public:

@@ -7,4 +7,5 @@ target_include_directories(
     PUBLIC ${CMAKE_SOURCE_DIR}
     PUBLIC ${CMAKE_SOURCE_DIR}/renms
     PUBLIC ${CMAKE_SOURCE_DIR}/skyscraper
+    PUBLIC ${CMAKE_SOURCE_DIR}/metadata
 )

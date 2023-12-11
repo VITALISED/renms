@@ -32,6 +32,8 @@
 #include <simulation/player/GcPlayerRespawn.h>
 #include <simulation/projectiles/GcProjectileManager.h>
 #include <simulation/scenemanager/GcSceneManager.h>
+#include <simulation/solarsystem/GcSolarSystem.h>
+#include <simulation/solarsystem/GcSolarSystemDirector.h>
 #include <simulation/solarsystem/npcs/GcNPCManager.h>
 #include <simulation/spaceship/GcSpaceShipWarp.h>
 #include <simulation/spaceship/ai/GcAISpaceshipManager.h>
@@ -75,8 +77,8 @@ class cGcSimulation
     cGcAISpaceshipManager mAISpaceshipManager;
     cGcNPCManager mNPCManager;
     cGcFullscreenEffectManager mFullscreenEffectManager;
-    /*cGcSolarSystem*/ uintptr_t *mpSolarSystem;
-    /*cGcSolarSystemDirector*/ uintptr_t *mpSolarSystemDirector;
+    cGcSolarSystem *mpSolarSystem;
+    cGcSolarSystemDirector *mpSolarSystemDirector;
     cGcSpaceshipWarp mWarp;
     cTkPhysRelVec3 mPortalMarkerPosition;
     eCentreJourneyDestination meRequestCentreJourney;

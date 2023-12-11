@@ -28,6 +28,18 @@
 
 SKYSCRAPER_BEGIN
 
+class cGcCameraDepthOfField
+{
+  public:
+    bool mbDofEnabled;
+    float mfDofFocusDistance;
+    float mfDofBlend;
+    float mfDofNearPlaneMinInteraction;
+    float mfDofNearPlaneAdjustInteraction;
+    float mfDofFarPlaneInteraction;
+    float mfDOFFarFadeDistanceInteraction;
+};
+
 class cGcPlayerCameraLook
 {
   public:

@@ -41,6 +41,16 @@ enum eFadeType : uint8_t
     CrossFade,
 };
 
+enum eImposterLevelCaptured
+{
+    None_,
+    Early,
+    Basic,
+    WithGeometry,
+    SecondMip,
+    AllTextures,
+};
+
 class cGcFadeNodeBase
 {
   public:
@@ -55,6 +65,58 @@ class cGcFadeNodeBase
     virtual void CheckNodeActivation(bool);
     virtual void SetNodeParamF(float);
     virtual bool Update();
+};
+
+class cGcFadeNodeInstance : public cGcFadeNodeBase
+{
+  public:
+    class cImposterGenerationData
+    {
+      public:
+        cTkFixedString<512, char> msFullPath;
+        TkHandle mNodeToRender;
+        cTkSmartResHandle mNodeToRenderResource;
+        cTkSmartResHandle mPipelineResource;
+        cTkSmartResHandle mPipelineResourceNormals;
+        cTkSmartResHandle mPipelineResourceMasks;
+        int miPipelineSetRenderTargetPipelineStage;
+        int miPipelineNormalsSetRenderTargetPipelineStage;
+        int miPipelineMasksSetRenderTargetPipelineStage;
+        int miPipelineClearRenderTargetPipelineStage;
+        int miPipelineNormalsClearRenderTargetPipelineStage;
+        int miPipelineMasksClearRenderTargetPipelineStage;
+        int miPipelineDrawPipelineStage;
+        int miPipelineNormalsDrawPipelineStage;
+        int miPipelineMasksDrawPipelineStage;
+        cTkSmartResHandle mDxt5DiffuseTexRes;
+        cTkSmartResHandle mDxt5NormalTexRes;
+        cTkSmartResHandle mDxt5MaskTexRes;
+        cTkSmartResHandle mTempMaterialRes;
+        float mfCentreOffset;
+        float mfAspectRatio;
+        float mfDistance;
+        float mfHeight;
+        float mfOriginalHeight;
+        float mfHeightOffset;
+        float mfImposterWidthMultiplier;
+        float mfWidth;
+        float mfImposterFadeDistance;
+        cTkResourceDescriptor mResourceDescriptor;
+        cTkVector<cTkSmartResHandle> *mpImposterResources;
+        int miRefCount;
+        bool mbAbort;
+        int miImposterGenerationStateIndex;
+        eImposterLevelCaptured meImposterLevelToCapture;
+    };
+
+    cTkStackVector<TkHandle, 10> maMeshNodeHandles;
+    TkHandle mTransientRenderNode;
+    int miNumImposterImages;
+    bool mbPrepared;
+    int miWaitingForGeometryStreaming;
+    int miImposterGenerationStateIndex;
+    cGcFadeNodeInstance::cImposterGenerationData *mpGenerationData;
+    cTkVector<cTkSmartResHandle> mImposterResources;
 };
 
 class cGcFadeNode : public cGcFadeNodeBase

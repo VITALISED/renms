@@ -23,11 +23,117 @@
 
 #include <skyscraper.h>
 
+#include <audio/GcAudioAggregates.h>
+#include <audio/GcAudioPulseMusic.h>
+#include <toolkit/audio/TkAudioManager.h>
+#include <toolkit/utilities/containers/TkStackContainer.h>
+#include <toolkit/utilities/containers/TkTFixedFreeList.h>
+#include <toolkit/utilities/containers/TkVector.h>
+
+#include <audio/gcaudiopulsedemo.meta.h>
+#include <audio/gcbasepartaudiolocation.meta.h>
+#include <toolkit/components/physics/tkvolumetriggertype.meta.h>
+
 SKYSCRAPER_BEGIN
 
-class cGcAudioManager
+struct AkAuxSendValue
 {
-    char __pad__[0x0b90];
+    uint64_t listenerID;
+    unsigned int auxBusID;
+    float fControlValue;
 };
 
+class cGcAudioManager : public cTkAudioManager
+{
+  public:
+    enum DopplerMode
+    {
+        Full,
+        IgnoreListenerVelocity,
+    };
+
+    struct PulseMixControl
+    {
+        cTkVector2 mCurrent;
+        cTkVector2 mTarget;
+        cTkVector2 mRate;
+        cGcAudioPulseMusic::SoundScapeType mSoundScapeType;
+        int mSoundScapeVariant;
+        int mShuffledVariantIndex;
+        cTkVector<int> mShuffledVariants;
+        float mOnPlanetTime;
+        float mInSpaceTime;
+        cTkFixedString<256, char> mDebugTextSetVariantReason;
+        float mBuildingInterestTimer;
+        float mMixAttackTime;
+        float mMixDecayTime;
+        float mMixSpeedInterest;
+        float mMixSpeedInterestTarget;
+        float mMixSpeedInterestTargetTimer;
+    };
+
+    struct FootstepToSort
+    {
+        cTkVector3 mPosition;
+        uint64_t mu64ObstructionTag;
+        unsigned int muCreatureClass;
+        float mfDistanceToListenerSqr;
+        float mfSize;
+        bool mbIsRunning;
+    };
+
+    ShorelineAudio mShorelineAudio;
+    cTkVector3 mLastListenerPosDiff;
+    TkAudioObject mManagerAudioObject;
+    TkAudioObject mManagerAudioObjectField3D;
+    TkAudioObject mGameLaunchMusicAudioObject;
+    TkAudioObject mFreighterAmbienceAudioObject;
+    eVolumeTriggerType mFreighterAmbienceVolumeType;
+    eBasePartAudioLocation meFreighterBasePartAudioLocation;
+    TkAudioObject mFrigateAmbienceAudioObject;
+    eVolumeTriggerType mFrigateAmbienceVolumeType;
+    eVolumeTriggerType meLastKnownFrigateAmbienceVolumeType;
+    TkAudioObject mSettlementAmbienceAudioObject;
+    TkAudioObject mUIAudioObject;
+    unsigned int muLoadingBankID;
+    unsigned int muLoadingMusicPlayingID;
+    float mfLoadingUnloadTimer;
+    cTkVector<cGcDopplerRequest> mDopplerRequests;
+    cGcAudioManager::DopplerMode mDopplerMode;
+    bool mbAppFocusCheck;
+    cTkTFixedFreeList<cGcAudioObstructionRequest, 7> *mpObstructionBundleFreeList;
+    cTkStackVector<cGcAudioObstructionRequest *, 64> mObstructionBundleLive;
+    cTkStackVector<cGcAudioObstructionRequest *, 64> mObstructionBundleProbeResultMap;
+    cTkRaycastJob mObstructionProbeJob;
+    uint64_t mu64AmbientBoostLastTime;
+    cGcAudioPulseDemo *mpPulseDemoData;
+    cGcAudioManager::PulseMixControl mPulseMixControl;
+    cGcAudioPulseMusic *mPulseMusic;
+    bool mbRunPulseDemo;
+    cTkVector<cGcAudioManager::FootstepToSort> mFootstepsToSort;
+    std::array<TkAudioObject, 32> mFootstepAudioObjects;
+    uint64_t mFootstepAudioObjectIndex;
+    unsigned int mCurrentLocationID;
+    unsigned int mCurrentInterestID;
+    uint8_t meWeatherOverlayState[4];
+    bool mbThunderFxEnabled;
+    bool mbUseSecondaryListener;
+    cTkMatrix34 mSecondaryListener;
+    cTkVector3 mEffectsZoneCenter;
+    float mfEffectsZoneRecpFalloff;
+    uint8_t meEffectsZoneState[4];
+    AkAuxSendValue mEffectsSendValue;
+    int miLastKnownPlayerEnvironment;
+    float mfEffectsOutdoorReverbAmount;
+    unsigned int muCurrentInteriorRoomSwitch;
+    unsigned int muNexusAmbientSwitch;
+    bool mbCommsChatterEventsActive;
+    bool mbFreighterAmbienceActive;
+    bool mbFrigateAmbienceActive;
+    bool mbSettlementAmbienceActive;
+    bool mbFieldBoundaryEffectActive;
+    bool mbSimulationStateLive;
+    char mbForceEnvironmentUpdateOverFrames;
+    bool mbShowAttenuationSpheres;
+};
 SKYSCRAPER_END

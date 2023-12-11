@@ -1,7 +1,6 @@
-
 if(DEFINED EXAMPLE_BUILD_TYPE)
-    if(${EXAMPLE_BUILD_TYPE} MATCHES "hook_example")
-        add_subdirectory(hook_example)
+    if(${EXAMPLE_BUILD_TYPE} MATCHES "simple_plugin")
+        add_subdirectory(simple_plugin)
     else()
         message(FATAL_ERROR "No example target found!")
     endif()

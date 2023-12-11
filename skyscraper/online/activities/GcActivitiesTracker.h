@@ -23,11 +23,22 @@
 
 #include <skyscraper.h>
 
+#include <online/activities/GcActivitiesManager.h>
+#include <simulation/environment/GcEnvironment.h>
+#include <toolkit/utilities/containers/TkVector.h>
+
 SKYSCRAPER_BEGIN
 
 class cGcActivitiesTracker
 {
-    char __pad__[0x0050];
+  public:
+    cGcActivitiesManager *mpManager;
+    cTkVector<TkID<128>> maTrackedStatIds;
+    cTkVector<bool> mabPristines;
+    unsigned int mxActiveFlags;
+    unsigned int mxStickyFlags;
+    bool mbWasInShip;
+    EnvironmentLocation::Enum meLastEnvironmentLocation;
 };
 
 SKYSCRAPER_END

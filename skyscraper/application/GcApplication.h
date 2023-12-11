@@ -87,25 +87,25 @@ class cGcApplication : public cTkFSM
         cGcGameState mGameState;
         cGcSeasonalData mSeasonalData;
         cGcSimulation mSimulation;
-        cGcHUDManager mHUDManager;             // stub
-        cGcFrontendManager mFrontendManager;   // stub
-        cGcInWorldUIManager mInWorldUIManager; // stub
-        cGcCameraManager mCameraManager;       // stub
-        cGcGraphicsManager mGraphicsManager;   // stub
-        cTkInputManager *mpInputManager;       // stub
-        cGcInputRemap mInputRemap;             // stub
+        cGcHUDManager mHUDManager;
+        cGcFrontendManager mFrontendManager;
+        cGcInWorldUIManager mInWorldUIManager;
+        cGcCameraManager mCameraManager;
+        cGcGraphicsManager mGraphicsManager;
+        cTkInputManager *mpInputManager;
+        cGcInputRemap mInputRemap;
         cGcVibrationManager mVibrationManager;
         cTkTimeManager mTimeManager;
-        cTkDebugRenderer mDebugRenderer; // stub
-        cGcDebugEditor mDebugEditor;     // stub
-        cGcNGuiManager mNGuiManager;     // stub
-        cGcAudioManager mAudioManager;   // stub
+        cTkDebugRenderer mDebugRenderer;
+        cGcDebugEditor mDebugEditor;
+        cGcNGuiManager mNGuiManager;
+        cGcAudioManager mAudioManager; // stub
         cGcAtlasManager mAtlasManager;
         cGcNetworkManager mNetworkManager;
-        cGcResourceManager mResourceManager; // stub
+        cGcResourceManager mResourceManager;
         cGcGalaxyMap mGalaxyMap;
         cGcGameAnalytics mGameAnalytics;
-        cGcActivitiesTracker mActivitiesTracker; // stub
+        cGcActivitiesTracker mActivitiesTracker;
     };
 
     cGcApplication::Data *mpData;

@@ -23,6 +23,8 @@
 
 #include <skyscraper.h>
 
+#include <engine/source/engine/EgMain.h>
+#include <toolkit/utilities/UnorderedMapHashes.h>
 #include <toolkit/utilities/containers/TkVector.h>
 
 #include <simulation/solarsystem/planet/gcplanetcolourdata.meta.h>
@@ -57,7 +59,28 @@ class cGcResourceCustomisation
 
 class cGcResourceManager
 {
-    char __pad__[0x0170];
+    robin_hood::detail::Table<
+        false, 80, cTkFixedString<256, char>, void, UnorderedMapHashes::Hash<cTkFixedString<256, char>>,
+        std::equal_to<cTkFixedString<256, char>>>
+        mFilesToReload;
+    robin_hood::detail::Table<
+        false, 80, cTkFixedString<256, char>, double, UnorderedMapHashes::Hash<cTkFixedString<256, char>>,
+        std::equal_to<cTkFixedString<256, char>>>
+        mShadersToReload;
+    robin_hood::detail::Table<
+        false, 80, cTkFixedString<256, char>, double, UnorderedMapHashes::Hash<cTkFixedString<256, char>>,
+        std::equal_to<cTkFixedString<256, char>>>
+        mShaderSourceToReload;
+    void *mReloadMutex;
+    void *mShaderMutex;
+    void *mReloadAllSemaphore;
+    std::atomic<bool> mbReloadAll;
+    bool mbStopWatching;
+    cTkVector<std::function<void(TkHandle, TkHandle)>> maSceneReloadCallbacks;
+    robin_hood::detail::Table<
+        true, 80, TkHandle, cTkResource *, robin_hood::hash<TkHandle, void>, std::equal_to<TkHandle>>
+        mNodeToSceneMap;
+    Engine::cEgShaderCompilationState *mpShaderCompilationState;
 };
 
 SKYSCRAPER_END

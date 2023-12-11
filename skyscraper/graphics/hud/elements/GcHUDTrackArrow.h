@@ -23,6 +23,12 @@
 
 #include <skyscraper.h>
 
+#include <toolkit/attachments/TkAttachment.h>
+#include <toolkit/audio/wwise/TkAudioManagerWwise.h>
+#include <toolkit/maths/numeric/generic/TkVector2Generic.h>
+#include <toolkit/resources/TkResource.h>
+#include <toolkit/utilities/containers/TkClassPool.h>
+
 SKYSCRAPER_BEGIN
 
 enum eGcTrackArrowTypes : __int32
@@ -52,6 +58,69 @@ enum eGcTrackArrowTypes : __int32
     ETrackArrow_Repair,
     ETrackArrow_Summoning,
     ETrackArrow_NumTypes,
+};
+
+class cGcHUDTrackArrow
+{
+  public:
+    enum eReticuleState
+    {
+        EReticule_Inactive,
+        EReticule_Active,
+        EReticule_Deactivating,
+    };
+
+    cTkVector2 mSize;
+    cTkColour mColour;
+    float mfArrowScale;
+    float mfFadeTime;
+    bool mbFade;
+    cTkSmartResHandle maReticules[24];
+    cTkSmartResHandle maReticuleGlows[24];
+    cTkSmartResHandle maArrows[24];
+    cTkSmartResHandle maArrowGlows[24];
+    cTkSmartResHandle maIcons[24];
+    TkAudioID maAudioPings[24];
+    cTkSmartResHandle mCriticalIcon;
+    cTkSmartResHandle mCriticalGlowIcon;
+    cTkSmartResHandle mDamageGlow;
+    cTkSmartResHandle mEnergyShieldGlow;
+    cTkSmartResHandle mTypeIcon;
+    float mfTypeIconPulse;
+    float mfTypeIconFade;
+    float mafBaseSizes[24];
+    float mafBaseDotSizes[24];
+    eGcTrackArrowTypes meType;
+    cTkSmartResHandle mExternalIcon;
+    cTkAttachmentPtr mpTarget;
+    cTkPhysRelVec3 mFixedTarget;
+    cTkPhysRelVec3 mWorldPos;
+    cTkPhysRelVec3 mProjWorldPos;
+    cTkVector2 mScreenPos;
+    cTkVector2 mReticulePos;
+    float mfAngle;
+    float mfBorderFactor;
+    float mfCentreOffsetMultiplier;
+    cTkColour mHealthColour;
+    cTkColour mHealthCriticalHitColour;
+    float mfHealthBar;
+    float mfIconFade;
+    bool mbUseLabelOffset;
+    cTkColour mEnergyShieldColour;
+    float mfEnergyShieldBar;
+    bool mbFixedTarget;
+    bool mbOnScreen;
+    bool mbUsingSmallIcon;
+    cGcHUDTrackArrow::eReticuleState meReticuleState;
+    float mfReticuleActiveTime;
+    float mfReticuleDeactiveTime;
+    float mfReticuleScale;
+    cTkColour mGlowColour;
+    cTkColour mDamageGlowColour;
+    cTkColour mEnergyShieldGlowColour;
+    cTkFixedString<128, char> mText;
+    cTkClassPoolHandle mTrackArrowHandle;
+    cTkClassPoolHandle mHealthHandle;
 };
 
 SKYSCRAPER_END

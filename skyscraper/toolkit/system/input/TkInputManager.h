@@ -23,11 +23,54 @@
 
 #include <skyscraper.h>
 
+#include <toolkit/system/input/TkInputDeviceManager.h>
+
+#include <toolkit/utilities/input/tkinputvalidation.meta.h>
+
 SKYSCRAPER_BEGIN
 
 class cTkInputManager
 {
-    char __pad__[0x1c80];
-};
+  public:
+    cTkInputDeviceManager mDeviceManager;
+    bool mbInitialised;
+    cTkVector<sTkInputAction> mActions;
+    cTkVector<sTkInputActionSet> mActionSets;
+    cTkVector<sTkInputBindings *> mBindings;
+    sTkInputActionSet *mpSetBeingAdded;
+    sTkInputBindings *mpBindingsBeingAdded;
+    sTkInputBindingsActionSet *mpBindingsActionSetBeingAdded;
+    sTkInputActionSet *mpBindingsActionSetFilter;
+    bool mbIconSizesResolved;
+    std::array<cTkInputPort, 6> maPortArray;
+    std::array<cTkOutputPort, 6> maOutputPortArray;
+    cTkDynamicArray<sTkInputAction *> mapActionLookup;
+    cTkDynamicArray<sTkInputActionSet *> mapActionSetLookup;
+    int miNumActions;
+    int miNumActionSets;
+    ePadType mePrimaryPadType;
+    bool mbLastWasFocused;
+    bool mbLastLockState;
+    std::function<bool(int, float &)> mInterceptAnalogInputCallback;
+    std::function<bool(int, eInputValidation, bool &)> mInterceptButtonInputCallback;
+    bool mbSkipUpdateClickToPlay;
 
+    virtual ~cTkInputManager();
+    virtual void Construct();
+    virtual bool Prepare();
+    virtual void Update(float);
+    virtual bool GetButtonInput(int, eInputValidation, eInputPort);
+    virtual float GetAnalogInput(int, eInputPort);
+    virtual bool GetLastButtonInputWasTouch(eInputPort);
+    virtual void SetTouchInputWaitingForReset(bool, eInputPort);
+    virtual bool HasDigitalActionBound(int, int, eInputPort);
+    virtual bool HasAnalogActionBound(int, int, eInputPort);
+    virtual const TkID<128> *GetDeviceVRViewResetLayerName();
+    virtual eInputButton GetActionButton(int);
+    virtual eInputAxis GetActionAxis(int);
+    virtual const sTkInputDeviceIcon *GetMappedIcon(int, eInputIconType);
+    virtual const cTkVector<sTkInputDeviceChordIcons> *GetChordIcons();
+    virtual void SetActiveActionSet(int);
+    virtual bool ShowRemapScreen();
+};
 SKYSCRAPER_END
