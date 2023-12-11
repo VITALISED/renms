@@ -1,7 +1,7 @@
 /**
- * @file GcInput.h
+ * @file TkRandom.h
  * @author VITALISED & Contributors
- * @since 2023-12-08
+ * @since 2023-12-11
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -23,34 +23,14 @@
 
 #include <skyscraper.h>
 
-#include <toolkit/system/input/TkInputUtils.h>
-
-#include <input/gcactionsets.meta.h>
-#include <input/gcinputactioninfomap.meta.h>
-
 SKYSCRAPER_BEGIN
 
-class cGcInputRemap
+class cTkRandom
 {
   public:
-    struct cGcInputRemapEntry
-    {
-        int miKeyMouseEntryIndex;
-        int miPadEntryIndex;
-    };
-
-    cGcActionSets *mpActionSets;
-    cGcInputActionInfoMap *mpActionInfoMap;
-    int mhKeyboardCustomisation;
-    int mhMouseCustomisation;
-    int mhGamepadCustomisation;
-    std::array<cGcInputRemap::cGcInputRemapEntry, 291> maRemapLookup;
-    bool mbRemappingActive;
-    bool mbRemappedKey;
-    bool mbForceIconRefresh;
-    TkID<128> mActiveButtonConfig;
-    eInputButtonType meCurrentInputMethod;
-    bool mbIconsLoaded;
+    int miHigh;
+    int miLow;
+    int64_t miCounter;
 };
 
 SKYSCRAPER_END

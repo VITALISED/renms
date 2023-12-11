@@ -1,7 +1,7 @@
 /**
- * @file GcInput.h
+ * @file TkDebugEditor.h
  * @author VITALISED & Contributors
- * @since 2023-12-08
+ * @since 2023-12-11
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -23,34 +23,16 @@
 
 #include <skyscraper.h>
 
-#include <toolkit/system/input/TkInputUtils.h>
-
-#include <input/gcactionsets.meta.h>
-#include <input/gcinputactioninfomap.meta.h>
+#include <toolkit/core/types/TkHandle.h>
 
 SKYSCRAPER_BEGIN
 
-class cGcInputRemap
+class cTkDebugEditor
 {
   public:
-    struct cGcInputRemapEntry
-    {
-        int miKeyMouseEntryIndex;
-        int miPadEntryIndex;
-    };
+    TkHandle mSharedSelectedNode;
 
-    cGcActionSets *mpActionSets;
-    cGcInputActionInfoMap *mpActionInfoMap;
-    int mhKeyboardCustomisation;
-    int mhMouseCustomisation;
-    int mhGamepadCustomisation;
-    std::array<cGcInputRemap::cGcInputRemapEntry, 291> maRemapLookup;
-    bool mbRemappingActive;
-    bool mbRemappedKey;
-    bool mbForceIconRefresh;
-    TkID<128> mActiveButtonConfig;
-    eInputButtonType meCurrentInputMethod;
-    bool mbIconsLoaded;
+    virtual bool IsActive();
 };
 
 SKYSCRAPER_END

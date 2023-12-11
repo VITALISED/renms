@@ -1,7 +1,7 @@
 /**
- * @file GcInput.h
+ * @file GcSlot.h
  * @author VITALISED & Contributors
- * @since 2023-12-08
+ * @since 2023-12-11
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -23,34 +23,40 @@
 
 #include <skyscraper.h>
 
-#include <toolkit/system/input/TkInputUtils.h>
+#include <simulation/solarsystem/buildings/wfcbuildings/GcModuleSubset.h>
+#include <toolkit/maths/numeric/TkTuple.h>
 
-#include <input/gcactionsets.meta.h>
-#include <input/gcinputactioninfomap.meta.h>
+#include <simulation/environment/wfcbuildings/decoration/gcwfcdecorationitem.meta.h>
 
 SKYSCRAPER_BEGIN
 
-class cGcInputRemap
+class cGcMap;
+class cGcModule;
+
+struct sSlotDecoration
+{
+    const cGcWFCDecorationItem *mpData;
+    eBlockRotation meRotation;
+    int miSceneIndex;
+    bool mbDisableDecoration;
+};
+
+class cGcSlot
 {
   public:
-    struct cGcInputRemapEntry
-    {
-        int miKeyMouseEntryIndex;
-        int miPadEntryIndex;
-    };
-
-    cGcActionSets *mpActionSets;
-    cGcInputActionInfoMap *mpActionInfoMap;
-    int mhKeyboardCustomisation;
-    int mhMouseCustomisation;
-    int mhGamepadCustomisation;
-    std::array<cGcInputRemap::cGcInputRemapEntry, 291> maRemapLookup;
-    bool mbRemappingActive;
-    bool mbRemappedKey;
-    bool mbForceIconRefresh;
-    TkID<128> mActiveButtonConfig;
-    eInputButtonType meCurrentInputMethod;
-    bool mbIconsLoaded;
+    const cTkIntTuple3<int> mPosition;
+    cGcMap *mMap;
+    cGcModule *mpModule;
+    int miModuleGeometryIndex;
+    uint8_t miAboveTerrain;
+    cGcModuleSubset mModules;
+    float mfEntropy;
+    bool mbEntropyCached;
+    bool mbIsInConstraintPropagationQueue;
+    bool mbIsConnected;
+    bool mbIsFrontier;
+    bool mbReachable;
+    sSlotDecoration mDecoration;
 };
 
 SKYSCRAPER_END

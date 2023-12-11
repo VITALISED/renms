@@ -1,7 +1,7 @@
 /**
- * @file GcInput.h
+ * @file GcNGuiGreenScreen.h
  * @author VITALISED & Contributors
- * @since 2023-12-08
+ * @since 2023-12-11
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -23,34 +23,37 @@
 
 #include <skyscraper.h>
 
-#include <toolkit/system/input/TkInputUtils.h>
-
-#include <input/gcactionsets.meta.h>
-#include <input/gcinputactioninfomap.meta.h>
+#include <graphics/ngui/windows/GcNGuiWindow.h>
+#include <toolkit/core/types/TkHandle.h>
+#include <toolkit/core/types/TkID.h>
+#include <toolkit/graphics/TkColour.h>
+#include <toolkit/maths/numeric/generic/TkVector3Generic.h>
+#include <toolkit/resources/TkResource.h>
 
 SKYSCRAPER_BEGIN
 
-class cGcInputRemap
+class cGcNGuiGreenscreen : public cGcNGuiWindow
 {
   public:
-    struct cGcInputRemapEntry
+    enum eCommand
     {
-        int miKeyMouseEntryIndex;
-        int miPadEntryIndex;
+        eCommand_None,
+        eCommand_Add,
+        eCommand_Remove,
     };
 
-    cGcActionSets *mpActionSets;
-    cGcInputActionInfoMap *mpActionInfoMap;
-    int mhKeyboardCustomisation;
-    int mhMouseCustomisation;
-    int mhGamepadCustomisation;
-    std::array<cGcInputRemap::cGcInputRemapEntry, 291> maRemapLookup;
-    bool mbRemappingActive;
-    bool mbRemappedKey;
-    bool mbForceIconRefresh;
-    TkID<128> mActiveButtonConfig;
-    eInputButtonType meCurrentInputMethod;
-    bool mbIconsLoaded;
+    cTkSmartResHandle mGreenScreenRes;
+    TkHandle mGreenScreen;
+    cTkColour mColour;
+    float mfScale;
+    cTkVector3 mvOffset;
+    float mfRotation;
+    bool mbOverrideCamera;
+    cTkVector3 mvCameraOffset;
+    cTkVector3 mvCameraFocus;
+    float mfCameraRotation;
+    float mfFOV;
+    cGcNGuiGreenscreen::eCommand meCommand;
 };
 
 SKYSCRAPER_END

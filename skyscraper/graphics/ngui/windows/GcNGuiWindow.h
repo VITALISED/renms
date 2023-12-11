@@ -1,7 +1,7 @@
 /**
- * @file GcInput.h
+ * @file GcNGuiWindow.h
  * @author VITALISED & Contributors
- * @since 2023-12-08
+ * @since 2023-12-11
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -23,34 +23,21 @@
 
 #include <skyscraper.h>
 
-#include <toolkit/system/input/TkInputUtils.h>
-
-#include <input/gcactionsets.meta.h>
-#include <input/gcinputactioninfomap.meta.h>
+#include <toolkit/graphics/2d/ngui/TkNGuiElementID.h>
 
 SKYSCRAPER_BEGIN
 
-class cGcInputRemap
+class cGcNGuiWindow
 {
   public:
-    struct cGcInputRemapEntry
-    {
-        int miKeyMouseEntryIndex;
-        int miPadEntryIndex;
-    };
+    cTkNGuiElementID mWindowID;
 
-    cGcActionSets *mpActionSets;
-    cGcInputActionInfoMap *mpActionInfoMap;
-    int mhKeyboardCustomisation;
-    int mhMouseCustomisation;
-    int mhGamepadCustomisation;
-    std::array<cGcInputRemap::cGcInputRemapEntry, 291> maRemapLookup;
-    bool mbRemappingActive;
-    bool mbRemappedKey;
-    bool mbForceIconRefresh;
-    TkID<128> mActiveButtonConfig;
-    eInputButtonType meCurrentInputMethod;
-    bool mbIconsLoaded;
+    virtual void Construct();
+    virtual void Update(float);
+    virtual void EnqueueRender3D();
+    virtual void Render2D();
+    virtual void Destruct();
+    virtual void DoGui();
 };
 
 SKYSCRAPER_END

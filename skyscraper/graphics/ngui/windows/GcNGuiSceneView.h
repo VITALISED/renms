@@ -1,7 +1,7 @@
 /**
- * @file GcInput.h
+ * @file GcNGuiSceneView.h
  * @author VITALISED & Contributors
- * @since 2023-12-08
+ * @since 2023-12-11
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -23,34 +23,34 @@
 
 #include <skyscraper.h>
 
-#include <toolkit/system/input/TkInputUtils.h>
-
-#include <input/gcactionsets.meta.h>
-#include <input/gcinputactioninfomap.meta.h>
+#include <graphics/ngui/windows/GcNGuiWindow.h>
+#include <toolkit/core/types/TkHandle.h>
 
 SKYSCRAPER_BEGIN
 
-class cGcInputRemap
+class cGcNGuiSceneView : public cGcNGuiWindow
 {
   public:
-    struct cGcInputRemapEntry
+    enum eSceneViewActions
     {
-        int miKeyMouseEntryIndex;
-        int miPadEntryIndex;
+        ESceneViewAction_None,
+        ESceneViewAction_Browse,
+        ESceneViewAction_Load,
+        ESceneViewAction_Create,
+        ESceneViewAction_SaveAll,
+        ESceneViewAction_SaveSettings,
+        ESceneViewAction_SaveScene,
+        ESceneViewAction_SaveSolarSystem,
+        ESceneViewAction_SavePlanetScene,
+        ESceneViewAction_SetStartLocation,
     };
 
-    cGcActionSets *mpActionSets;
-    cGcInputActionInfoMap *mpActionInfoMap;
-    int mhKeyboardCustomisation;
-    int mhMouseCustomisation;
-    int mhGamepadCustomisation;
-    std::array<cGcInputRemap::cGcInputRemapEntry, 291> maRemapLookup;
-    bool mbRemappingActive;
-    bool mbRemappedKey;
-    bool mbForceIconRefresh;
-    TkID<128> mActiveButtonConfig;
-    eInputButtonType meCurrentInputMethod;
-    bool mbIconsLoaded;
+    float mfScale;
+    bool mbShowGrid;
+    TkHandle maGridPoints[32][32];
+    TkHandle mBaseNode;
+    cGcNGuiSceneView::eSceneViewActions meNextAction;
+    TkHandle mHighlightNode;
 };
 
 SKYSCRAPER_END

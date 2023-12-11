@@ -1,7 +1,7 @@
 /**
- * @file GcInput.h
+ * @file GcMap.h
  * @author VITALISED & Contributors
- * @since 2023-12-08
+ * @since 2023-12-11
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -23,34 +23,36 @@
 
 #include <skyscraper.h>
 
-#include <toolkit/system/input/TkInputUtils.h>
+#include <toolkit/maths/numeric/TkTuple.h>
+#include <toolkit/simulation/TkSeed.h>
+#include <toolkit/utilities/containers/TkVector.h>
 
-#include <input/gcactionsets.meta.h>
-#include <input/gcinputactioninfomap.meta.h>
+#include <simulation/environment/wfcbuildings/gcfreighterbaseroom.meta.h>
 
 SKYSCRAPER_BEGIN
 
-class cGcInputRemap
-{
-  public:
-    struct cGcInputRemapEntry
-    {
-        int miKeyMouseEntryIndex;
-        int miPadEntryIndex;
-    };
+class cGcSlot;
+class cGcModuleSet;
+class cGcMapLayout;
 
-    cGcActionSets *mpActionSets;
-    cGcInputActionInfoMap *mpActionInfoMap;
-    int mhKeyboardCustomisation;
-    int mhMouseCustomisation;
-    int mhGamepadCustomisation;
-    std::array<cGcInputRemap::cGcInputRemapEntry, 291> maRemapLookup;
-    bool mbRemappingActive;
-    bool mbRemappedKey;
-    bool mbForceIconRefresh;
-    TkID<128> mActiveButtonConfig;
-    eInputButtonType meCurrentInputMethod;
-    bool mbIconsLoaded;
+struct sFreighterRoom
+{
+    const cGcFreighterBaseRoom *mpRoom;
+    cTkVector<cGcSlot const *> maSlots;
+};
+
+class cGcMap
+{
+    const cTkIntTuple3<int> mSize;
+    cGcModuleSet *mModuleSet;
+    const bool mbSymmetric;
+    const bool mbImprovedCoherence;
+    const cGcMapLayout *const mpLayout;
+    cGcSlot **mpaSlots;
+    std::queue<cGcSlot *> mConstraintPropagationQueue;
+    cTkSeed mSeed;
+    cTkSeed mFallbackSeed;
+    cTkVector<sFreighterRoom> maRooms;
 };
 
 SKYSCRAPER_END

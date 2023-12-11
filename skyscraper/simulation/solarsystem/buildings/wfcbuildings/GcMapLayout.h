@@ -1,7 +1,7 @@
 /**
- * @file GcInput.h
+ * @file GcMapLayout.h
  * @author VITALISED & Contributors
- * @since 2023-12-08
+ * @since 2023-12-11
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -23,34 +23,36 @@
 
 #include <skyscraper.h>
 
-#include <toolkit/system/input/TkInputUtils.h>
-
-#include <input/gcactionsets.meta.h>
-#include <input/gcinputactioninfomap.meta.h>
+#include <simulation/solarsystem/buildings/wfcbuildings/GcWFCScenes.h>
+#include <toolkit/maths/numeric/TkTuple.h>
 
 SKYSCRAPER_BEGIN
 
-class cGcInputRemap
+class cGcModule;
+class cGcModuleSet;
+
+struct sModulePreset
+{
+    cGcModule *mModule;
+    const cTkIntTuple3<int> mPosition;
+};
+
+class cGcMapLayout
 {
   public:
-    struct cGcInputRemapEntry
-    {
-        int miKeyMouseEntryIndex;
-        int miPadEntryIndex;
-    };
-
-    cGcActionSets *mpActionSets;
-    cGcInputActionInfoMap *mpActionInfoMap;
-    int mhKeyboardCustomisation;
-    int mhMouseCustomisation;
-    int mhGamepadCustomisation;
-    std::array<cGcInputRemap::cGcInputRemapEntry, 291> maRemapLookup;
-    bool mbRemappingActive;
-    bool mbRemappedKey;
-    bool mbForceIconRefresh;
-    TkID<128> mActiveButtonConfig;
-    eInputButtonType meCurrentInputMethod;
-    bool mbIconsLoaded;
+    const cGcModuleSet *mModuleSet;
+    const float mfRelativeProbability;
+    cGcWFCScene mScene;
+    cTkVector<sModulePreset> mModulePresets;
+    cTkVector<cTkIntTuple3<int>> mSlotsWithDecorationDisabled;
+    cTkVector<cTkIntTuple3<int>> mNonWalkableSlots;
+    cTkIntTuple3<int> mWFCStartPosition;
+    bool mbHasWFCStartPosition;
+    cTkIntTuple3<int> mSize;
+    bool mbSymmetric;
+    bool *mapActiveSlots;
+    cTkSmartResHandle mResHandle;
+    bool mbHasFinishedParsing;
 };
 
 SKYSCRAPER_END

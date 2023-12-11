@@ -1,7 +1,7 @@
 /**
- * @file GcInput.h
+ * @file GcNGuiFileBrowser.h
  * @author VITALISED & Contributors
- * @since 2023-12-08
+ * @since 2023-12-11
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -23,34 +23,25 @@
 
 #include <skyscraper.h>
 
-#include <toolkit/system/input/TkInputUtils.h>
-
-#include <input/gcactionsets.meta.h>
-#include <input/gcinputactioninfomap.meta.h>
+#include <graphics/ngui/GcNGuiModelRenderer.h>
+#include <graphics/ngui/windows/GcNGuiWindow.h>
+#include <toolkit/utilities/containers/TkVector.h>
 
 SKYSCRAPER_BEGIN
 
-class cGcInputRemap
+class cGcNGuiFileBrowser : public cGcNGuiWindow
 {
   public:
-    struct cGcInputRemapEntry
-    {
-        int miKeyMouseEntryIndex;
-        int miPadEntryIndex;
-    };
-
-    cGcActionSets *mpActionSets;
-    cGcInputActionInfoMap *mpActionInfoMap;
-    int mhKeyboardCustomisation;
-    int mhMouseCustomisation;
-    int mhGamepadCustomisation;
-    std::array<cGcInputRemap::cGcInputRemapEntry, 291> maRemapLookup;
-    bool mbRemappingActive;
-    bool mbRemappedKey;
-    bool mbForceIconRefresh;
-    TkID<128> mActiveButtonConfig;
-    eInputButtonType meCurrentInputMethod;
-    bool mbIconsLoaded;
+    cTkMatrix34 mModelMatrix;
+    cTkVector<cTkFixedString<256, char>> maLoadList;
+    bool mbQuickLoad;
+    cTkFixedString<256, char> mCurrentDir;
+    std::array<cGcNGuiModelRenderer, 64> maEntries;
+    cTkVector<cTkFixedString<256, char>> maSubDirs;
+    int miNumEntries;
+    int miNumPages;
+    int miCurrentPage;
+    bool mbShowRecents;
 };
 
 SKYSCRAPER_END

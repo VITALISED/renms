@@ -23,11 +23,70 @@
 
 #include <skyscraper.h>
 
+#include <toolkit/graphics/debug/TkDebugEditor.h>
+#include <toolkit/utilities/containers/TkBitArray.h>
+#include <toolkit/utilities/containers/TkVector.h>
+
 SKYSCRAPER_BEGIN
 
-class cGcDebugEditor
+enum eDebugEditorMode
 {
-    char __pad__[0x09b0];
+    EDebugEditor_Off,
+    EDebugEditor_Edit,
+    EDebugEditor_Play,
+};
+
+class cGcDebugEditor : public cTkDebugEditor
+{
+  public:
+    enum eUndoTypes
+    {
+        EUndoType_None,
+        EUndoType_EditMatrix,
+        EUndoType_AddNode,
+        EUndoType_RemoveNode,
+    };
+
+    enum eViewTypes
+    {
+        EViewTypes_None = -1,
+        EViewTypes_ProcModel,
+        EViewTypes_ToolboxModel,
+        EViewTypes_GameModel,
+        EViewTypes_NumTypes,
+    };
+
+    struct UndoEdit
+    {
+        cGcDebugEditor::eUndoTypes mUndoType;
+        cTkPhysRelMat34 mMatrix;
+        TkHandle mNode;
+        TkStrongType<int, TkStrongTypeIDs::TkResHandleID> mResource;
+        int miNodeID;
+    };
+
+    cTkBitArray<uint64_t, true, 64> mxDebugSections;
+    int maiViewTypeSelectedIndex[3];
+    cGcDebugEditor::eViewTypes meLastKnownViewType;
+    bool mbLastKnownChangedViewType;
+    TkStrongType<int, TkStrongTypeIDs::TkResHandleID> mNewGameModelSelection;
+    TkHandle mViewNode;
+    TkHandle mRootNode;
+    bool mbComputeNodeBB;
+    cTkAABB mViewNodeBB;
+    TkHandle mPreviewNode;
+    float mfPlaceAngle;
+    cTkVector<TkHandle> mPlacedNodes;
+    cTkMatrix34 mPlaceMatrix;
+    float mfPlaceScale;
+    float mfPlaceHeight;
+    bool mbValidPlacePosition;
+    float mfAltPlaceDistance;
+    bool mbPrepared;
+    bool mbUnlockedMouse;
+    eDebugEditorMode meMode;
+    cGcDebugEditor::UndoEdit mUndoEdits[20];
+    int miEditNumber;
 };
 
 SKYSCRAPER_END

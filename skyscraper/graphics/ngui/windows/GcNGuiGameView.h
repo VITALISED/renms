@@ -1,7 +1,7 @@
 /**
- * @file GcInput.h
+ * @file GcNGuiGameView.h
  * @author VITALISED & Contributors
- * @since 2023-12-08
+ * @since 2023-12-11
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -23,34 +23,23 @@
 
 #include <skyscraper.h>
 
-#include <toolkit/system/input/TkInputUtils.h>
-
-#include <input/gcactionsets.meta.h>
-#include <input/gcinputactioninfomap.meta.h>
+#include <graphics/ngui/windows/GcNGuiWindow.h>
+#include <toolkit/core/types/TkTypes.h>
+#include <toolkit/maths/numeric/generic/TkVector2Generic.h>
+#include <toolkit/resources/TkResource.h>
 
 SKYSCRAPER_BEGIN
 
-class cGcInputRemap
+class cGcNGuiGameView : public cGcNGuiWindow
 {
   public:
-    struct cGcInputRemapEntry
-    {
-        int miKeyMouseEntryIndex;
-        int miPadEntryIndex;
-    };
-
-    cGcActionSets *mpActionSets;
-    cGcInputActionInfoMap *mpActionInfoMap;
-    int mhKeyboardCustomisation;
-    int mhMouseCustomisation;
-    int mhGamepadCustomisation;
-    std::array<cGcInputRemap::cGcInputRemapEntry, 291> maRemapLookup;
-    bool mbRemappingActive;
-    bool mbRemappedKey;
-    bool mbForceIconRefresh;
-    TkID<128> mActiveButtonConfig;
-    eInputButtonType meCurrentInputMethod;
-    bool mbIconsLoaded;
+    cTkVector2 mMousePos;
+    cTkVector2 mGameViewSize;
+    cTkSmartResHandle mGameViewTarget;
+    cTkSmartResHandle mPreviousTextureRes;
+    TkStrongType<int, TkStrongTypeIDs::cTkNGuiFontHandleID> mGameViewTargetNvg;
+    bool mbGameViewTargetActive;
+    bool mbResolutionChanged;
 };
 
 SKYSCRAPER_END
