@@ -22,11 +22,7 @@
 #include <core/warning.h>
 
 RENMS_HOOK(
-    cTkFileSystem__IsModded, renms::RelToAbsolute(0x256EC60), bool, (uint64_t thiscall) {
-        if (renms::config::gShouldShowWarning) return true;
-
-        return false;
-    });
+    cTkFileSystem__IsModded, renms::RelToAbsolute(0x256EC60), bool, (uint64_t thiscall) { return true; });
 
 RENMS_HOOK(
     cGcApplicationGameModeSelectorState__RenderWarning, renms::RelToAbsolute(0x1BF7E0), void,
@@ -46,8 +42,11 @@ RENMS_BEGIN
 
 void CreateWarningHooks()
 {
-    RENMS_DISPATCH_HOOK(cGcApplicationGameModeSelectorState__RenderWarning);
-    RENMS_DISPATCH_HOOK(cTkFileSystem__IsModded);
+    if (renms::config::gShouldShowWarning)
+    {
+        RENMS_DISPATCH_HOOK(cGcApplicationGameModeSelectorState__RenderWarning);
+        RENMS_DISPATCH_HOOK(cTkFileSystem__IsModded);
+    }
 }
 
 RENMS_END

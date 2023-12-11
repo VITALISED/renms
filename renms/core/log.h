@@ -68,7 +68,7 @@ inline void CreateLogger(const char *lpacLoggerName)
     std::shared_ptr<spdlog::sinks::rotating_file_sink_mt> file_sink   = FileSink();
     std::shared_ptr<spdlog::sinks::stdout_color_sink_mt> console_sink = ConsoleSink();
 
-    console_sink->set_pattern(" [%n] %v");
+    console_sink->set_pattern(" [%n] [%L] %v");
 
     SetConsoleSinkParams(console_sink);
     file_sink->set_level(spdlog::level::trace);

@@ -25,12 +25,9 @@
 
 void HandleGcApplicationUpdate(nms::cGcApplication *lGcApplication)
 {
-    if (lGcApplication->mpData->mSimulation.mPlayer.mbMoving)
+    for (void *lUpdateCallback : *renms::config::gUpdateCallbacks)
     {
-        spdlog::info(
-            "{}, {}, {}", lGcApplication->mpData->mSimulation.mPlayer.mPosition[0],
-            lGcApplication->mpData->mSimulation.mPlayer.mPosition[1],
-            lGcApplication->mpData->mSimulation.mPlayer.mPosition[2]);
+        reinterpret_cast<PluginUpdate_t>(lUpdateCallback)();
     }
 }
 

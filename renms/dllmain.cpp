@@ -46,8 +46,6 @@ DWORD WINAPI MainThread(LPVOID lpReserved)
     renms::CreateWarningHooks();
     renms::CreateFSMGcApplicationHooks();
 
-    // renms::PluginManager lPluginManager = renms::PluginManager();
-
     renms::ResumeModuleThread(renms::GetNMSModuleHandle());
     spdlog::info("NMS is running.");
 

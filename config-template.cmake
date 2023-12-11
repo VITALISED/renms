@@ -21,6 +21,6 @@ set(RENMS_CONFIG_VERSION 4)
 
 set(SKIP_NMS_CHECK FALSE)
 set(NMS_EXE_PATH "C:/Your/Path/To/NMS/Exe/Dir/Here/NMS.exe")
-set(EXAMPLE_BUILD_TYPE "hook_example") # you can comment this out to not build
-                                       # any examples
+set(EXAMPLE_BUILD_TYPE "simple_plugin") # you can comment this out to not build
+                                        # any examples
 set(NMS_BUILD 123456)
