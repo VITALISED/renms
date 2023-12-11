@@ -98,7 +98,7 @@ class cGcApplication : public cTkFSM
         cTkTimeManager mTimeManager;
         cTkDebugRenderer mDebugRenderer;
         cGcDebugEditor mDebugEditor;
-        cGcNGuiManager mNGuiManager;   // stub
+        cGcNGuiManager mNGuiManager;
         cGcAudioManager mAudioManager; // stub
         cGcAtlasManager mAtlasManager;
         cGcNetworkManager mNetworkManager;
