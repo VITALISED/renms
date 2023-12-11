@@ -49,7 +49,7 @@ void RENMS_ENTRY PluginMain()
 
 void RENMS_ENTRY PluginUpdate()
 {
-    cGcApplication *gApplication = (cGcApplication*)GCAPPLICATION;
+    cGcApplication *gApplication = reinterpret_cast<cGcApplication *>(GetModuleHandleA("NMS.exe") + GCAPPLICATION);
 
     if (gApplication->mpData->mSimulation.mPlayer.mbMoving)
     {
