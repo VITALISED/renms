@@ -115,8 +115,6 @@ add_dependency_custom(./submodules/pybind11 ./submodules/pybind11/include)
 
 add_dependency_custom(./submodules/rapidxml ./submodules/rapidxml)
 
-add_dependency_custom(./submodules/hgnanoflann ./submodules/hgnanoflann/include)
-
 add_dependency_custom(./submodules/rapidjson ./submodules/rapidjson/include)
 
 # ==================================================================================================
@@ -132,20 +130,18 @@ add_subdirectory(renms)
 add_subdirectory(tools)
 add_subdirectory(docs)
 
-file(GLOB_RECURSE RENMS_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/renms/*.cpp
-     ${CMAKE_CURRENT_SOURCE_DIR}/renms/*.h
+file(
+    GLOB_RECURSE
+    SOURCES_TO_ADD_COMMENTS
+    ${CMAKE_CURRENT_SOURCE_DIR}/skyscraper/*.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/skyscraper/*.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/renms/*.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/renms/*.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/tools/heridium/*.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/tools/heridium/*.cpp
 )
 
-foreach(SOURCE_ITEM ${RENMS_SOURCES})
-    add_sources_prefix_renms(${SOURCE_ITEM})
-endforeach()
-
-file(GLOB_RECURSE SKYSCRAPER_SOURCES
-     ${CMAKE_CURRENT_SOURCE_DIR}/skyscraper/*.cpp
-     ${CMAKE_CURRENT_SOURCE_DIR}/skyscraper/*.h
-)
-
-foreach(SOURCE_ITEM ${SKYSCRAPER_SOURCES})
+foreach(SOURCE_ITEM ${SOURCES_TO_ADD_COMMENTS})
     add_sources_prefix_renms(${SOURCE_ITEM})
 endforeach()
 
