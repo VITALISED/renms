@@ -103,10 +103,10 @@ set(CMAKE_C_STANDARD 17)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 
 add_subdirectory(skyscraper)
+add_subdirectory(sdk)
 add_subdirectory(renms)
 add_subdirectory(tools)
 add_subdirectory(docs)
-add_subdirectory(api)
 
 file(
     GLOB_RECURSE
@@ -197,13 +197,8 @@ endif()
 add_dependencies(renms skyscraper)
 
 target_link_libraries(
-    renms
-    skyscraper
-    fmt
-    PolyHook_2
-    spdlog
-    pybind11::embed
-    ${PYTHON_LIBRARIES}
+    renms PRIVATE skyscraper fmt PolyHook_2 spdlog pybind11::embed
+                  ${PYTHON_LIBRARIES}
 )
 target_include_directories(renms PUBLIC ${PYTHON_INCLUDE_DIRS})
 
@@ -217,6 +212,14 @@ target_include_directories(
     PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/renms
     PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/skyscraper
     PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/metadata
+)
+
+target_include_directories(
+    renms_sdk
+    PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
+    PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/skyscraper
+    PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/metadata
+    PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/renms
 )
 
 # --------------------------------------------------------------------------------------------------

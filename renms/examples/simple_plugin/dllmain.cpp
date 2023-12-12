@@ -36,9 +36,10 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#include <renms.h>
+// #include <renms.h>
 
 #include <application/GcApplication.h>
+#include <sdk/core.h>
 #include <spdlog/spdlog.h>
 
 using namespace nms;
@@ -50,21 +51,22 @@ RENMS_ENTRY void PluginMain()
 
 RENMS_ENTRY void PluginUpdate()
 {
-    cGcApplication *gApplication = GetGcApplication();
+    cGcApplication *gApplication = renms_sdk::GetApplication();
 
-    // if (gApplication->mpData->mSimulation.mPlayer.mbMoving)
-    // {
-    float lookX, lookY, lookZ;
-    cTkMatrix34 lPlayerTM = gApplication->mpData->mSimulation.mEnvironment.mPlayerEnvironment.mPlayerTM;
+    if (gApplication->mpData->mSimulation.mPlayer.mbMoving)
+    {
+        float lookX, lookY, lookZ;
+        cTkMatrix34 lPlayerTM = gApplication->mpData->mSimulation.mEnvironment.mPlayerEnvironment.mPlayerTM;
 
-    lookX = atan2(lPlayerTM.mAt[1], lPlayerTM.mAt[2]);
-    lookY = atan2(-lPlayerTM.mAt[0], sqrt(lPlayerTM.mAt[1] * lPlayerTM.mAt[1] + lPlayerTM.mAt[2] * lPlayerTM.mAt[2]));
-    lookZ = atan2(lPlayerTM.mUp[0], lPlayerTM.mRight[0]);
+        lookX = atan2(lPlayerTM.mAt[1], lPlayerTM.mAt[2]);
+        lookY =
+            atan2(-lPlayerTM.mAt[0], sqrt(lPlayerTM.mAt[1] * lPlayerTM.mAt[1] + lPlayerTM.mAt[2] * lPlayerTM.mAt[2]));
+        lookZ = atan2(lPlayerTM.mUp[0], lPlayerTM.mRight[0]);
 
-    lookX = lookX * (180.0 / 3.141592653589793238463);
-    lookY = lookY * (180.0 / 3.141592653589793238463);
-    lookZ = lookZ * (180.0 / 3.141592653589793238463);
+        lookX = lookX * (180.0 / 3.141592653589793238463);
+        lookY = lookY * (180.0 / 3.141592653589793238463);
+        lookZ = lookZ * (180.0 / 3.141592653589793238463);
 
-    spdlog::info("Look Angles {} {} {}", lookX, lookY, lookZ);
-    // }
+        spdlog::info("Look Angles {} {} {}", lookX, lookY, lookZ);
+    }
 }
