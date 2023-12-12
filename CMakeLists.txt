@@ -21,6 +21,8 @@ project(
     VERSION 0.3
 )
 
+find_package(PythonLibs REQUIRED)
+
 # ==================================================================================================
 # Includes
 
@@ -80,7 +82,7 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
 endif()
 
 # ==================================================================================================
-# Dependencies. set(PYBIND11_FINDPYTHON ON)
+# Dependencies.
 find_package(Python3 REQUIRED)
 set(SPDLOG_FMT_EXTERNAL ON)
 set(SPDLOG_BUILD_SHARED OFF)
@@ -190,7 +192,16 @@ endif()
 
 add_dependencies(renms skyscraper)
 
-target_link_libraries(renms skyscraper fmt PolyHook_2 spdlog pybind11::embed)
+target_link_libraries(
+    renms
+    skyscraper
+    fmt
+    PolyHook_2
+    spdlog
+    pybind11::embed
+    ${PYTHON_LIBRARIES}
+)
+target_include_directories(renms PRIVATE ${PYTHON_INCLUDE_DIRS})
 
 target_compile_definitions(renms PRIVATE RENMS FIOS_TYPES_ONLY)
 target_compile_definitions(renms PUBLIC RENMS_VERSION="${PROJECT_VERSION}")
