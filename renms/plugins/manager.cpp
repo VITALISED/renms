@@ -34,11 +34,11 @@ Plugin *PluginManager::CreatePluginFromManifest(fs::path lPluginPath)
         ini::IniFile pluginIni;
         pluginIni.decode(pluginIniFile);
 
-        std::string lsName        = pluginIni["manifest"]["name"].as<std::string>();
-        std::string lsAuthor      = pluginIni["manifest"]["author"].as<std::string>();
-        std::string lsDescription = pluginIni["manifest"]["description"].as<std::string>();
-
-        Plugin *lPlugin = new Plugin(lsName, lsAuthor, lsDescription, lPluginPath);
+        std::string lsName          = pluginIni["manifest"]["name"].as<std::string>();
+        std::string lsAuthor        = pluginIni["manifest"]["author"].as<std::string>();
+        std::string lsDescription   = pluginIni["manifest"]["description"].as<std::string>();
+        std::string lsPluginLibName = pluginIni["manifest"]["library_name"].as<std::string>();
+        Plugin *lPlugin             = new Plugin(lsName, lsAuthor, lsDescription, lPluginPath, lsPluginLibName);
 
         spdlog::info("-----------PLUGIN INFORMATION-----------");
         spdlog::info(lsName);
@@ -59,6 +59,7 @@ PluginManager::PluginManager()
     // Populate the list with everything that's in the plugins folder
     fs::path nmsPath      = fs::current_path();
     fs::path PluginFolder = nmsPath / "RENMS/plugins";
+    this->mPluginList     = std::vector<Plugin *>();
     Plugin *lPlugin       = NULL;
 
     for (fs::directory_entry PluginEntry : fs::directory_iterator(PluginFolder))
@@ -69,7 +70,7 @@ PluginManager::PluginManager()
         if (!lPlugin) continue;
 
         lPlugin->LoadExecutable();
-        lPlugin->LoadScripts();
+        // lPlugin->LoadScripts();
 
         mPluginList.push_back(lPlugin);
     }

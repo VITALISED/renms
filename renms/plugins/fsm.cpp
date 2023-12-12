@@ -23,7 +23,7 @@
 
 #include <format>
 
-void HandleGcApplicationUpdate(nms::cGcApplication *lGcApplication)
+void HandleGcApplicationUpdate(nms::cGcApplication *gApplication)
 {
     for (void *lUpdateCallback : *renms::config::gUpdateCallbacks)
     {

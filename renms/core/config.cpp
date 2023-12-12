@@ -34,7 +34,6 @@ void config::Init()
     fs::path lSettingsFilePath = lNNSPath / "RENMS/settings.ini";
     std::ifstream lSettingsIniFile(lSettingsFilePath);
     ini::IniFile pluginIni;
-    gPluginManager = new PluginManager();
 
     config::gUpdateCallbacks = new std::vector<void *>();
 

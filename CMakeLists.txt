@@ -82,42 +82,11 @@ endif()
 # ==================================================================================================
 # Dependencies.
 
-# set Polyhook to use dynamic runtime
-if(MSVC)
-    set(POLYHOOK_BUILD_STATIC_RUNTIME OFF)
-endif()
-
-add_dependency_custom(./submodules/libSceFios2 ./submodules/libSceFios2)
-add_dependency_custom(./submodules/inifile-cpp ./submodules/inifile-cpp/include)
-add_dependency_custom(./submodules/fmt ./submodules/fmt/include)
-
 set(SPDLOG_FMT_EXTERNAL ON)
 set(SPDLOG_BUILD_SHARED OFF)
-add_dependency_custom(./submodules/spdlog ./submodules/spdlog/include)
+set(POLYHOOK_BUILD_STATIC_RUNTIME OFF)
 
-add_dependency_custom(./submodules/PolyHook2_0 ./submodules/PolyHook2_0)
-
-add_dependency_custom(
-    ./submodules/robin-hood-hashing ./submodules/robin-hood-hashing/src/include
-)
-
-add_dependency_custom(
-    ./submodules/Vulkan-Headers ./submodules/Vulkan-Headers/include
-)
-add_dependency_custom(
-    ./submodules/VulkanMemoryAllocator
-    ./submodules/VulkanMemoryAllocator/include
-)
-add_dependency_custom(./submodules/stb ./submodules/stb)
-
-set(PYBIND11_FINDPYTHON ON)
-add_dependency_custom(./submodules/pybind11 ./submodules/pybind11/include)
-
-add_dependency_custom(./submodules/rapidxml ./submodules/rapidxml)
-
-add_dependency_custom(./submodules/hgnanoflann ./submodules/hgnanoflann/include)
-
-add_dependency_custom(./submodules/rapidjson ./submodules/rapidjson/include)
+invoke_adding_dependencies_renms()
 
 # ==================================================================================================
 # Targets.
@@ -131,21 +100,22 @@ add_subdirectory(skyscraper)
 add_subdirectory(renms)
 add_subdirectory(tools)
 add_subdirectory(docs)
+add_subdirectory(api)
 
-file(GLOB_RECURSE RENMS_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/renms/*.cpp
-     ${CMAKE_CURRENT_SOURCE_DIR}/renms/*.h
+file(
+    GLOB_RECURSE
+    SOURCES_TO_ADD_COMMENTS
+    ${CMAKE_CURRENT_SOURCE_DIR}/skyscraper/*.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/skyscraper/*.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/renms/*.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/renms/*.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/tools/heridium/*.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/tools/heridium/*.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/api/*.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/api/*.cpp
 )
 
-foreach(SOURCE_ITEM ${RENMS_SOURCES})
-    add_sources_prefix_renms(${SOURCE_ITEM})
-endforeach()
-
-file(GLOB_RECURSE SKYSCRAPER_SOURCES
-     ${CMAKE_CURRENT_SOURCE_DIR}/skyscraper/*.cpp
-     ${CMAKE_CURRENT_SOURCE_DIR}/skyscraper/*.h
-)
-
-foreach(SOURCE_ITEM ${SKYSCRAPER_SOURCES})
+foreach(SOURCE_ITEM ${SOURCES_TO_ADD_COMMENTS})
     add_sources_prefix_renms(${SOURCE_ITEM})
 endforeach()
 
@@ -215,7 +185,7 @@ target_include_directories(
 # renms settings
 
 if(NOT ${SKIP_NMS_CHECK})
-    add_dependencies(renms resdk heridium relauncher)
+    add_dependencies(resdk heridium relauncher)
 endif()
 
 add_dependencies(renms skyscraper)
@@ -251,6 +221,8 @@ target_link_libraries(heridium PRIVATE spdlog fmt PolyHook_2)
 
 # ==================================================================================================
 # Launch target
+
+get_filename_component(NMS_BIN_PATH "${NMS_EXE_PATH}" DIRECTORY)
 
 # Make sure the past installer's leftovers are uninstalled first!
 add_custom_target(
