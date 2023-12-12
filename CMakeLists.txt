@@ -80,8 +80,8 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
 endif()
 
 # ==================================================================================================
-# Dependencies.
-
+# Dependencies. set(PYBIND11_FINDPYTHON ON)
+find_package(Python3 REQUIRED)
 set(SPDLOG_FMT_EXTERNAL ON)
 set(SPDLOG_BUILD_SHARED OFF)
 set(POLYHOOK_BUILD_STATIC_RUNTIME OFF)
