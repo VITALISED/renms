@@ -21,7 +21,11 @@ project(
     VERSION 0.3
 )
 
-find_package(PythonLibs REQUIRED)
+find_package(
+    Python3
+    COMPONENTS Development Interpreter
+    REQUIRED
+)
 
 # ==================================================================================================
 # Includes
@@ -201,7 +205,7 @@ target_link_libraries(
     pybind11::embed
     ${PYTHON_LIBRARIES}
 )
-target_include_directories(renms PRIVATE ${PYTHON_INCLUDE_DIRS})
+target_include_directories(renms PUBLIC ${PYTHON_INCLUDE_DIRS})
 
 target_compile_definitions(renms PRIVATE RENMS FIOS_TYPES_ONLY)
 target_compile_definitions(renms PUBLIC RENMS_VERSION="${PROJECT_VERSION}")
