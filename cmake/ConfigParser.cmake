@@ -20,7 +20,6 @@ It must be the directory that contains NMS.exe. See the BUILD.md for why it need
     endif()
 
     get_filename_component(NMS_EXE_PATH "${NMS_EXE_PATH}" ABSOLUTE)
-    get_filename_component(NMS_BIN_PATH "${NMS_EXE_PATH}" DIRECTORY)
     if(NOT EXISTS "${NMS_EXE_PATH}" AND NOT SKIP_NMS_CHECK)
         message(
             FATAL_ERROR

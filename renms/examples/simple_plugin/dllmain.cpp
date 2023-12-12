@@ -39,23 +39,32 @@
 #include <renms.h>
 
 #include <application/GcApplication.h>
+#include <spdlog/spdlog.h>
 
 using namespace nms;
 
-void RENMS_ENTRY PluginMain()
+RENMS_ENTRY void PluginMain()
 {
-    std::printf("Hello from the plugin!\n");
+    spdlog::info("Hello from the plugin!\n");
 }
 
-void RENMS_ENTRY PluginUpdate()
+RENMS_ENTRY void PluginUpdate()
 {
-    cGcApplication *gApplication = reinterpret_cast<cGcApplication *>(GetModuleHandleA("NMS.exe") + GCAPPLICATION);
+    cGcApplication *gApplication = GetGcApplication();
 
-    if (gApplication->mpData->mSimulation.mPlayer.mbMoving)
-    {
-        std::printf(
-            "%e, %e, %e\n", gApplication->mpData->mSimulation.mPlayer.mPosition[0],
-            gApplication->mpData->mSimulation.mPlayer.mPosition[1],
-            gApplication->mpData->mSimulation.mPlayer.mPosition[2]);
-    }
+    // if (gApplication->mpData->mSimulation.mPlayer.mbMoving)
+    // {
+    float lookX, lookY, lookZ;
+    cTkMatrix34 lPlayerTM = gApplication->mpData->mSimulation.mEnvironment.mPlayerEnvironment.mPlayerTM;
+
+    lookX = atan2(lPlayerTM.mAt[1], lPlayerTM.mAt[2]);
+    lookY = atan2(-lPlayerTM.mAt[0], sqrt(lPlayerTM.mAt[1] * lPlayerTM.mAt[1] + lPlayerTM.mAt[2] * lPlayerTM.mAt[2]));
+    lookZ = atan2(lPlayerTM.mUp[0], lPlayerTM.mRight[0]);
+
+    lookX = lookX * (180.0 / 3.141592653589793238463);
+    lookY = lookY * (180.0 / 3.141592653589793238463);
+    lookZ = lookZ * (180.0 / 3.141592653589793238463);
+
+    spdlog::info("Look Angles {} {} {}", lookX, lookY, lookZ);
+    // }
 }

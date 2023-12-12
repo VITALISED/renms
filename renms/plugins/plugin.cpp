@@ -23,8 +23,11 @@
 
 RENMS_BEGIN
 
-Plugin::Plugin(std::string lsDisplayName, std::string lsAuthor, std::string lsDescription, fs::path lPluginPath)
-    : msDisplayName(lsDisplayName), msAuthor(lsAuthor), msDescription(lsDescription), mPluginPath(lPluginPath)
+Plugin::Plugin(
+    std::string lsDisplayName, std::string lsAuthor, std::string lsDescription, fs::path lPluginPath,
+    std::string lPluginLib)
+    : msDisplayName(lsDisplayName), msAuthor(lsAuthor), msDescription(lsDescription), mPluginPath(lPluginPath),
+      msLibraryName(lPluginLib)
 {}
 
 void Plugin::LoadScripts()
@@ -38,7 +41,7 @@ void Plugin::LoadScripts()
 void Plugin::LoadExecutable()
 {
     // Get library
-    fs::path lLibraryPath = this->mPluginPath / PLUGIN_EXT;
+    fs::path lLibraryPath = this->mPluginPath / msLibraryName;
 
     if (!fs::exists(lLibraryPath))
     {
@@ -62,7 +65,9 @@ void Plugin::LoadExecutable()
     else
     {
         spdlog::error(
-            "Failed to load plugin library {}: Couldn't find: void RENMS_ENTRY PluginMain()", this->msDisplayName);
+            "Failed to load plugin library {}: Couldn't find: void RENMS_ENTRY PluginMain(), {}", this->msDisplayName,
+            GetLastError());
+        return;
     }
 
     PluginUpdate_t pluginUpdate = reinterpret_cast<PluginMain_t>(GetProcAddress(PluginHandle, "PluginUpdate"));
