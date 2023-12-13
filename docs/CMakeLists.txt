@@ -1,5 +1,7 @@
 # -- Doxygen
-find_package(Doxygen REQUIRED)
+find_package(Doxygen)
+
+if (DOXYGEN_FOUND)
 
 file(GLOB_RECURSE SKYSCRAPER_SOURCES "../skyscraper" "*.h")
 file(GLOB_RECURSE METADATA_SOURCES "./metadata" "*.h")
@@ -27,7 +29,9 @@ add_custom_target(Doxygen DEPENDS ${DOXYGEN_INDEX_FILE})
 
 # -- Sphinx
 
-find_package(Sphinx REQUIRED)
+find_package(Sphinx)
+
+if (SPHINX_FOUND)
 
 set(SPHINX_SOURCE ${CMAKE_CURRENT_SOURCE_DIR})
 set(SPHINX_BUILD ${CMAKE_CURRENT_BINARY_DIR}/docs/sphinx)
@@ -45,3 +49,17 @@ add_custom_target(
 
 add_dependencies(Sphinx Doxygen)
 add_dependencies(Doxygen resdk)
+
+elseif(NOT SPHINX_FOUND)
+message(WARNING "Sphinx not found, only building partial documentation with Doxygen.")
+
+endif()
+elseif(NOT DOXYGEN_FOUND)
+message(WARNING "Doxygen not found, cannot build documentation")
+
+endif()
+
+message("Due to the size of the metadata, the documentation takes a million years to build."
+        " As a result of that, the documentation is not built by default. If you want to build"
+        " it, specify the Sphynx target. You can also build docs sooner with just Doxygen, but"
+        " it won't be as complete.")
