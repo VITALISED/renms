@@ -55,15 +55,23 @@ if(${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_CURRENT_SOURCE_DIR})
 
     message(STATUS "CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}")
 
-    if(NOT CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
-        message(
-            FATAL_ERROR
-                "CMAKE_BUILD_TYPE must be set to RelWithDebInfo. I hate to do you like this, but"
-                " this is what they built the game with and if the structs aren't exactly the"
-                " same in memory, it won't work. Or it might, but then we have an even bigger"
-                " problem."
-        )
-    endif()
+    #if(NOT CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
+    #    message(
+    #        FATAL_ERROR
+    #            "CMAKE_BUILD_TYPE must be set to RelWithDebInfo. I hate to do you like this, but"
+    #            " this is what they built the game with and if the structs aren't exactly the"
+    #            " same in memory, it won't work. Or it might, but then we have an even bigger"
+    #            " problem."
+    #    )
+    #endif()
+
+    # Temporary fix, see issue #31
+    message(
+        WARNING
+            "Due to a bug in vscode, we won't check if the build type is RelWithDebInfo."
+            " See issue #31 for more info. I trust you haven't ignored this and it's set"
+            " correctly. - tractorbeam"
+    )
 
     # ==============================================================================================
     # Config Stuff
