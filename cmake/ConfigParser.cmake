@@ -14,7 +14,7 @@ suggest checking out the config-template.cmake and updating your config.cmake."
             FATAL_ERROR
                 "NMS_EXE_PATH not defined!\n\
 Look inside the config.cmake for the option, and set it's exact path. \
-It must be the directory that contains NMS.exe. See the BUILD.md for why it needs to know this."
+It must end with NMS.exe. See the BUILD.md for why it needs to know this."
         )
 
     endif()
@@ -23,25 +23,25 @@ It must be the directory that contains NMS.exe. See the BUILD.md for why it need
     if(NOT EXISTS "${NMS_EXE_PATH}" AND NOT SKIP_NMS_CHECK)
         message(
             FATAL_ERROR
-                "NMS_EXE_PATH either isn't a valid directory or doesn't contain NMS.exe!\n\
+                "NMS_EXE_PATH doesn't point to a valid file!\n\
 Look inside the config.cmake for the option, and set it's exact path. \
-It must be the directory that contains NMS.exe. See the BUILD.md for why it needs to know this."
+It must end with NMS.exe. See the BUILD.md for why it needs to know this."
         )
 
     elseif(NOT SKIP_NMS_CHECK)
         message(STATUS "NMS Executable found: ${NMS_EXE_PATH}")
     else()
         message(
-            STATUS
+            WARNING
                 "NMS.exe check skipped! Unless you already extracted all the metadata, the build will fail! Be warned!"
         )
     endif()
 
-    if(NOT DEFINED NMS_BUILD AND NOT SKIP_NMS_CHECK)
-        message(
-            FATAL_ERROR
-                "NMS_BUILD isn't specified, this means metadata cannot generate properly."
-        )
-    endif()
+    #if(NOT DEFINED NMS_BUILD AND NOT SKIP_NMS_CHECK)
+    #    message(
+    #        FATAL_ERROR
+    #            "NMS_BUILD isn't specified, this means metadata cannot generate properly."
+    #    )
+    #endif()
 
 endfunction()
