@@ -92,13 +92,6 @@ else()
 endif()
 
 # ==================================================================================================
-# First checks.
-
-if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-    add_definitions(-DDEBUG -D_DEBUG)
-endif()
-
-# ==================================================================================================
 # Dependencies.
 find_package(Python3 REQUIRED)
 set(SPDLOG_FMT_EXTERNAL ON)
