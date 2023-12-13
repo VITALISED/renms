@@ -53,7 +53,9 @@ if(${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_CURRENT_SOURCE_DIR})
         message("")
     endif()
 
-    if(CMAKE_BUILD_TYPE NOT STREQUAL "RelWithDebInfo")
+    message(STATUS "CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}")
+
+    if(NOT CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
         message(
             FATAL_ERROR
                 "CMAKE_BUILD_TYPE must be set to RelWithDebInfo. I hate to do you like this, but"

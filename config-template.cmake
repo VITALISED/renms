@@ -15,6 +15,11 @@
 
 set(RENMS_CONFIG_VERSION 5)
 
+# This is for convenience when using vscode's cmake tools extension. VSCode,
+# in fact, does not set this sometimes. This won't effect the option if it's
+# already set, so it's safe to leave this here.
+set(CMAKE_BUILD_TYPE RelWithDebInfo)
+
 set(BUILD_EXAMPLES ON)
 set(NMS_EXE_PATH "C:/Your/Path/To/NMS/Exe/Dir/Here/NMS.exe")
 
