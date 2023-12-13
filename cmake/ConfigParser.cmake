@@ -1,6 +1,6 @@
 function(parse_config_values_renms)
 
-    if(NOT DEFINED RENMS_CONFIG_VERSION OR RENMS_CONFIG_VERSION LESS 4)
+    if(NOT DEFINED RENMS_CONFIG_VERSION OR RENMS_CONFIG_VERSION LESS 5)
         message(
             WARNING
                 "Your config.cmake is out of date! Chances are it'll still build fine, but I highly \
