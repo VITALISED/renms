@@ -53,10 +53,13 @@ if(${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_CURRENT_SOURCE_DIR})
         message("")
     endif()
 
-    if(CMAKE_BUILD_TYPE STREQUAL "" OR CMAKE_BUILD_TYPE STREQUAL "None")
-        set(CMAKE_BUILD_TYPE
-            "Release"
-            CACHE STRING "Choose the type of build." FORCE
+    if(CMAKE_BUILD_TYPE NOT STREQUAL "RelWithDebInfo")
+        message(
+            FATAL_ERROR
+                "CMAKE_BUILD_TYPE must be set to RelWithDebInfo. I hate to do you like this, but"
+                " this is what they built the game with and if the structs aren't exactly the"
+                " same in memory, it won't work. Or it might, but then we have an even bigger"
+                " problem."
         )
     endif()
 
