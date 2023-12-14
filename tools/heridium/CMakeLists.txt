@@ -25,6 +25,8 @@ add_library(
     "dllmain.cpp"
     "heridium.cpp"
     "heridium.h"
+    "logger.cpp"
+    "logger.h"
 )
 
 target_compile_definitions(heridium PRIVATE D_NMS_VER=${NMS_BUILD})

@@ -21,8 +21,6 @@
 
 #pragma once
 
-#include <memory/memory.h>
-
 #ifdef RENMS
 #define RENMS_ENTRY __declspec(dllimport)
 #else

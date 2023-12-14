@@ -30,14 +30,6 @@ Plugin::Plugin(
       msLibraryName(lPluginLib)
 {}
 
-void Plugin::LoadScripts()
-{
-    fs::path lScriptsPath = this->mPluginPath / "scripts";
-
-    if (exists(lScriptsPath / "main.py")) { ExecutePythonFile(lScriptsPath / "main.py"); }
-    else { spdlog::info("No scripts found for {}, skipping step.", this->msDisplayName); }
-}
-
 void Plugin::LoadExecutable()
 {
     // Get library

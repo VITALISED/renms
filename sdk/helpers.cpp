@@ -25,7 +25,7 @@ RENMS_SDK_BEGIN
 
 nms::cGcApplication *GetApplication()
 {
-    return reinterpret_cast<nms::cGcApplication *>(renms::RelToAbsolute(GCAPPLICATION));
+    return reinterpret_cast<nms::cGcApplication *>(RelToAbsolute(GCAPPLICATION));
 }
 
 // nms::cTkComponentManager* GetComponentManager()

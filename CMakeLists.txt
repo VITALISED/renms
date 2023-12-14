@@ -55,15 +55,11 @@ if(${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_CURRENT_SOURCE_DIR})
 
     message(STATUS "CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}")
 
-    #if(NOT CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
-    #    message(
-    #        FATAL_ERROR
-    #            "CMAKE_BUILD_TYPE must be set to RelWithDebInfo. I hate to do you like this, but"
-    #            " this is what they built the game with and if the structs aren't exactly the"
-    #            " same in memory, it won't work. Or it might, but then we have an even bigger"
-    #            " problem."
-    #    )
-    #endif()
+    # if(NOT CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo") message( FATAL_ERROR
+    # "CMAKE_BUILD_TYPE must be set to RelWithDebInfo. I hate to do you like
+    # this, but" " this is what they built the game with and if the structs
+    # aren't exactly the" " same in memory, it won't work. Or it might, but then
+    # we have an even bigger" " problem." ) endif()
 
     # Temporary fix, see issue #31
     message(
@@ -203,8 +199,14 @@ endif()
 add_dependencies(renms skyscraper)
 
 target_link_libraries(
-    renms PRIVATE skyscraper fmt PolyHook_2 spdlog pybind11::embed
-                  ${PYTHON_LIBRARIES}
+    renms
+    PRIVATE skyscraper
+            fmt
+            PolyHook_2
+            spdlog
+            pybind11::embed
+            renms_sdk
+            ${PYTHON_LIBRARIES}
 )
 target_include_directories(renms PUBLIC ${PYTHON_INCLUDE_DIRS})
 
@@ -218,6 +220,7 @@ target_include_directories(
     PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/renms
     PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/skyscraper
     PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/metadata
+    PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/sdk
 )
 
 target_include_directories(
@@ -225,15 +228,16 @@ target_include_directories(
     PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
     PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/skyscraper
     PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/metadata
-    PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/renms
 )
+
+target_link_libraries(renms_sdk PUBLIC skyscraper)
 
 # --------------------------------------------------------------------------------------------------
 # relauncher settings (No settings needed)
 
 # --------------------------------------------------------------------------------------------------
 # heridium settings
-target_compile_definitions(heridium PRIVATE RENMS)
+target_compile_definitions(heridium PRIVATE RENMS HERIDIUM)
 
 target_include_directories(
     heridium PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/skyscraper

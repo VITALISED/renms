@@ -1,7 +1,7 @@
 /**
- * @file core.h
+ * @file TkColour.cpp
  * @author VITALISED & Contributors
- * @since 2023-12-12
+ * @since 2023-12-14
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -19,10 +19,15 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#pragma once
+#include <toolkit/graphics/TkColour.h>
 
-#include "helpers.h"
-#include "textchat.h"
+SKYSCRAPER_BEGIN
 
-extern "C" void RENMS_ENTRY PluginMain();
-extern "C" void RENMS_ENTRY PluginUpdate();
+cTkColour::cTkColour(){};
+
+cTkColour::cTkColour(uint8_t luiR, uint8_t luiG, uint8_t luiB, uint8_t luiA)
+{
+    _mm_set_ps(luiR / 255.0f, luiG / 255.0f, luiB / 255.0f, luiA / 255.0f);
+}
+
+SKYSCRAPER_END

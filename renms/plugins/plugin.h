@@ -25,7 +25,6 @@
 
 #include <core/config.h>
 #include <plugins/api.h>
-#include <scripts/python.h>
 
 RENMS_BEGIN
 
@@ -42,7 +41,6 @@ class Plugin
         std::string lsDisplayName, std::string lsAuthor, std::string lsDescription, fs::path lPluginPath,
         std::string lPluginLib);
     void LoadExecutable();
-    void LoadScripts();
 };
 
 RENMS_END

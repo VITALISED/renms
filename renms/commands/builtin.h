@@ -26,6 +26,7 @@
 #include <commands/commands.h>
 #include <commands/dispatcher.h>
 #include <plugins/api.h>
+#include <sdk/textchat.h>
 #include <toolkit/maths/numeric/generic/TkVector3Generic.h>
 #include <toolkit/utilities/string/TkString.h>
 

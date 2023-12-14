@@ -23,6 +23,7 @@ add_library(
     "plugins/api.cpp"
     "plugins/fsm.cpp"
     "plugins/manager.cpp"
+    "logging/logger.cpp"
     "core/warning.cpp"
     "core/config.cpp"
     "core/filesystem.cpp"
@@ -30,7 +31,6 @@ add_library(
     "commands/commands.cpp"
     "commands/dispatcher.cpp"
     "fios/fios.cpp"
-    "scripts/python.cpp"
 )
 
 add_subdirectory(proxy)

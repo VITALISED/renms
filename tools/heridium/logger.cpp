@@ -1,7 +1,7 @@
 /**
- * @file generic.h
+ * @file logger.cpp
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2023-12-15
  * 
  * Copyright (C) 2023  VITALISED & Contributors
  * 
@@ -19,34 +19,30 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#pragma once
+#include "logger.h"
 
-#include <renms.h>
+HERIDIUM_BEGIN
 
-RENMS_BEGIN
-
-class ScriptGeneric
+void CreateLogger()
 {
-  public:
-    size_t miSize;
-    std::string msTypeId;
-    void *mpVal;
-
-    ScriptGeneric(size_t liSize, std::string lsTypeId, void *lpVal) : miSize(liSize), msTypeId(lsTypeId), mpVal(lpVal)
+    // fix ANSI colors
+    HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+    if (hOut != INVALID_HANDLE_VALUE)
     {
+        DWORD dwMode = 0;
+        GetConsoleMode(hOut, &dwMode);
+
+        dwMode |= 0x0004;
+        SetConsoleMode(hOut, dwMode);
     }
-};
 
-template <typename T>
-T script_cast(ScriptGeneric castee)
-{
-    if (castee.miSize == sizeof(T) && typeid(T) == castee.msTypeId) { return *reinterpret_cast<T>(castee.mpVal); }
+    std::shared_ptr<spdlog::sinks::stdout_color_sink_mt> console_sink =
+        std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
 
-#if defined(_DEBUG)
-    spdlog::error("Can't cast to {} (from {})", typeid(T), castee.msTypeId);
-#endif
+    console_sink->set_pattern(" [%n] %v");
 
-    return NULL;
+    spdlog::set_default_logger(std::make_shared<spdlog::logger>(
+        "\033[38;2;158;237;255mHeridium\033[0m", spdlog::sinks_init_list({console_sink})));
 }
 
-RENMS_END
+HERIDIUM_END

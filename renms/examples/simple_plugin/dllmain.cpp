@@ -67,6 +67,6 @@ RENMS_ENTRY void PluginUpdate()
         lookY = lookY * (180.0 / 3.141592653589793238463);
         lookZ = lookZ * (180.0 / 3.141592653589793238463);
 
-        spdlog::info("Look Angles {} {} {}", lookX, lookY, lookZ);
+        // spdlog::info("Look Angles {} {} {}", lookX, lookY, lookZ);
     }
 }

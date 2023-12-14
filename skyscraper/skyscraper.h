@@ -78,7 +78,7 @@ inline LPVOID RelToAbsolute(DWORD_PTR lpRelPtr)
 template <typename Fn>
 Fn VTableStub(uint64_t lFnPtr, Fn)
 {
-    return reinterpret_cast<Fn>(fnToCast);
+    return reinterpret_cast<Fn>(lFnPtr);
 }
 
 SKYSCRAPER_END
