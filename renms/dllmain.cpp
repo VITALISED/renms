@@ -30,7 +30,7 @@
 #include <logging/logger.h>
 #include <memory/thread.h>
 #include <plugins/fsm.h>
-#include <scripts/python.h>
+//#include <scripts/python.h>
 
 DWORD WINAPI MainThread(LPVOID lpReserved)
 {
