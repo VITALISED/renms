@@ -23,13 +23,14 @@
 
 #include <skyscraper.h>
 
+#include <toolkit/data/TkClassPointer.h>
 #include <toolkit/networking/TkReplicatedVariableArray.h>
 #include <toolkit/networking/TkUserIdBase.h>
+#include <toolkit/utilities/string/TkString.h>
 
 SKYSCRAPER_BEGIN
 
 class cTkAttachment;
-
 class cGcNetworkSerializer;
 
 class cTkComponent
@@ -70,6 +71,22 @@ class cTkComponent
     virtual void InitData(cTkClassPointer *);
     virtual void DefaultRenderNGui();
     virtual float GetUpdatePeriod();
+};
+
+class cTkComponentUpdater
+{
+  public:
+    uint64_t miComponentsBufferBaseAddress;
+    int miComponentsBufferStride;
+    int miComponentsBufferElementCount;
+
+    void OnInit(uint64_t, int, int);
+    bool UpdateComponents(cTkComponent **, int16_t *, int, float);
+    bool UpdateComponentsPostPhysics(cTkComponent **, int16_t *, int, float);
+    bool UpdateComponentsRender(cTkComponent **, int16_t *, int, float);
+    void OnComponentAllocate(cTkComponent *);
+    void OnComponentFree(cTkComponent *);
+    bool HasCustomUpdate();
 };
 
 SKYSCRAPER_END

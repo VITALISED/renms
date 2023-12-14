@@ -33,6 +33,7 @@
 
 #define GCAPPLICATION         0x49707E0
 #define GCTEXTCHATMANAGER_SAY 0x806080
+#define TKCOMPONENTMANAGER    0x44BE3E0
 
 // clang-format off
 #define RENMS_SDK_BEGIN namespace renms_sdk {

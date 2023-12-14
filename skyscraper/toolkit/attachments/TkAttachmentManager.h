@@ -1,7 +1,7 @@
 /**
- * @file helpers.h
+ * @file TkAttachmentManager.h
  * @author VITALISED & Contributors
- * @since 2023-12-12
+ * @since 2023-12-14
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -21,13 +21,20 @@
 
 #pragma once
 
-#include <application/GcApplication.h>
+#include <skyscraper.h>
 
-#include "base.h"
+#include <toolkit/attachments/TkAttachment.h>
+#include <toolkit/utilities/containers/TkLinearHashTable.h>
+#include <toolkit/utilities/containers/TkVector.h>
 
-RENMS_SDK_BEGIN
+SKYSCRAPER_BEGIN
 
-nms::cGcApplication *GetApplication();
-// nms::cTkComponentManager *GetComponentManager();
+class cTkAttachmentManager
+{
+  public:
+    cTkAttachment maAttachments[65280];
+    cTkBitAlloc mAllocator;
+    cTkLinearHashTable<TkHandle, cTkVector<cTkAttachment *>, cTkLinearHashTableHash<TkHandle>> mAttachmentLookup;
+};
 
-RENMS_SDK_END
+SKYSCRAPER_END

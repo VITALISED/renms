@@ -33,7 +33,8 @@ SKYSCRAPER_BEGIN
 
 class cTkAttachmentPtr
 {
-    __int64 miUniqueID;
+  public:
+    int64_t miUniqueID;
 };
 
 class cTkAttachment : public cEgNodeAttachment

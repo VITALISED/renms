@@ -67,3 +67,18 @@ namespace nms_rapidjson = rapidjson;
 #define EMPTY_CALL()            return NULL
 #define EMPTY_CALL_VOID()       return
 #define EMPTY_CALL_DESTRUCTOR() ;
+
+SKYSCRAPER_BEGIN
+
+inline LPVOID RelToAbsolute(DWORD_PTR lpRelPtr)
+{
+    return (LPVOID)((DWORD_PTR)GetModuleHandleA("NMS.exe") + (DWORD_PTR)lpRelPtr);
+}
+
+template <typename Fn>
+Fn VTableStub(uint64_t lFnPtr, Fn)
+{
+    return reinterpret_cast<Fn>(fnToCast);
+}
+
+SKYSCRAPER_END
