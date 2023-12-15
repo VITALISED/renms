@@ -68,8 +68,8 @@ target_include_directories(
     PRIVATE ${PROJECT_SOURCE_DIR}
     PRIVATE ${PROJECT_SOURCE_DIR}/renms
     PRIVATE ${PROJECT_SOURCE_DIR}/skyscraper
-    PRIVATE ${PROJECT_SOURCE_DIR}/metadata
     PRIVATE ${PROJECT_SOURCE_DIR}/sdk
+    PRIVATE ${RENMS_METADATA_DIR}
 )
 
 set_target_properties(renms_core PROPERTIES PREFIX "")

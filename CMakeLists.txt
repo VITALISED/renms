@@ -40,8 +40,9 @@ include(PrefixSourceFile)
 # Local features
 
 if(${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_CURRENT_SOURCE_DIR})
-
     # Set the output directory properly.
+    set(RENMS_METADATA_DIR ${CMAKE_CURRENT_SOURCE_DIR}/metadata)
+
     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin")
     message(
         STATUS "Binaries will be placed in: ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}"
@@ -78,6 +79,13 @@ if(${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_CURRENT_SOURCE_DIR})
     # ==============================================================================================
 
 else()
+    if(NOT DEFINED RENMS_METADATA_DIR)
+        message(
+            FATAL_ERROR
+                "You don't have RENMS_METADATA_DIR set! You need a copy of ReNMS metadata, you can get it at https://github.com/VITALISED/metadata"
+        )
+    endif()
+
     include(DefaultConfig)
 endif()
 

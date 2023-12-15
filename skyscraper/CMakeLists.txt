@@ -55,7 +55,7 @@ target_include_directories(
     skyscraper
     PRIVATE ${PROJECT_SOURCE_DIR}
     PUBLIC ${PROJECT_SOURCE_DIR}/skyscraper
-    PUBLIC ${PROJECT_SOURCE_DIR}/metadata
+    PUBLIC ${RENMS_METADATA_DIR}
 )
 
 target_link_libraries(skyscraper PUBLIC renms_submodule_dependencies)
