@@ -49,7 +49,7 @@ if(DOXYGEN_FOUND)
         )
 
         add_dependencies(Sphinx Doxygen)
-        add_dependencies(Doxygen resdk)
+        add_dependencies(Doxygen metadata_generator)
 
     elseif(NOT SPHINX_FOUND)
         message(

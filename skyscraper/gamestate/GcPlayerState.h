@@ -48,8 +48,8 @@
 #include <gamestate/gcwordgroupknowledge.meta.h>
 #include <gamestate/interactions/gcsavedinteractionracedata.meta.h>
 #include <gamestate/playerdata/gcplayertitle.meta.h>
-#include <metadata/regcexactresource.meta.h>
 #include <reality/gcrewarddeath.meta.h>
+#include <regcexactresource.meta.h>
 #include <simulation/customisation/gccustomisationbannergroup.meta.h>
 #include <simulation/customisation/gccustomisationshipbobbleheads.meta.h>
 #include <simulation/customisation/gccustomisationthrustereffects.meta.h>

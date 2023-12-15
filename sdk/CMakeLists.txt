@@ -8,3 +8,5 @@ add_library(
     "textchat.cpp"
     "textchat.h"
 )
+
+target_link_libraries(renms_sdk PUBLIC skyscraper renms_submodule_dependencies)

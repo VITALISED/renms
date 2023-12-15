@@ -30,10 +30,10 @@
 #include <toolkit/utilities/containers/TkUnorderedMap.h>
 #include <toolkit/utilities/containers/TkVector.h>
 
-#include <metadata/toolkit/animation/blendtree/tkanimanimnode.meta.h>
-#include <metadata/toolkit/animation/blendtree/tkanimblendnode.meta.h>
-#include <metadata/toolkit/animation/tkanimationdata.meta.h>
-#include <metadata/toolkit/animation/tkanimblendtree.meta.h>
+#include <toolkit/animation/blendtree/tkanimanimnode.meta.h>
+#include <toolkit/animation/blendtree/tkanimblendnode.meta.h>
+#include <toolkit/animation/tkanimationdata.meta.h>
+#include <toolkit/animation/tkanimblendtree.meta.h>
 
 SKYSCRAPER_BEGIN
 

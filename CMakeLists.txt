@@ -55,16 +55,10 @@ if(${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_CURRENT_SOURCE_DIR})
 
     message(STATUS "CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}")
 
-    # if(NOT CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo") message( FATAL_ERROR
-    # "CMAKE_BUILD_TYPE must be set to RelWithDebInfo. I hate to do you like
-    # this, but" " this is what they built the game with and if the structs
-    # aren't exactly the" " same in memory, it won't work. Or it might, but then
-    # we have an even bigger" " problem." ) endif()
-
     # Temporary fix, see issue #31
     message(
         WARNING
-            "Due to a bug in vscode, we won't check if the build type is RelWithDebInfo."
+            "Due to a bug in vscode, we won't check if the build type is RelWithDebInfo/Release."
             " See issue #31 for more info. I trust you haven't ignored this and it's set"
             " correctly. - tractorbeam"
     )
@@ -94,6 +88,7 @@ set(SPDLOG_FMT_EXTERNAL ON)
 set(SPDLOG_BUILD_SHARED OFF)
 set(POLYHOOK_BUILD_STATIC_RUNTIME OFF)
 
+add_library(renms_submodule_dependencies INTERFACE)
 invoke_adding_dependencies_renms()
 
 # ==================================================================================================
@@ -119,16 +114,13 @@ file(
     ${CMAKE_CURRENT_SOURCE_DIR}/renms/*.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/tools/heridium/*.h
     ${CMAKE_CURRENT_SOURCE_DIR}/tools/heridium/*.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/api/*.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/api/*.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/sdk/*.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/sdk/*.cpp
 )
 
 foreach(SOURCE_ITEM ${SOURCES_TO_ADD_COMMENTS})
     add_sources_prefix_renms(${SOURCE_ITEM})
 endforeach()
-
-# No library prefixes, useful for cross-compiling users
-set_target_properties(renms heridium PROPERTIES PREFIX "")
 
 # Make sure warnings about conversion from NULL to a pointer are disabled with
 # non-MSVC compilers.
@@ -159,11 +151,17 @@ add_custom_target(
 )
 
 # --------------------------------------------------------------------------------------------------
-# resdk - Generates the metadata classes for renms, giving it enough headers to
-# make plugins for it.
+# metadata_generator - Generates the metadata classes for renms, giving it
+# enough headers to make plugins for it.
 make_directory(${CMAKE_CURRENT_SOURCE_DIR}/metadata)
 
-add_custom_target(resdk DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/metadata/metadata.h)
+add_custom_target(
+    metadata_generator DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/metadata/metadata.h
+)
+
+if(NOT ${SKIP_NMS_CHECK})
+    add_dependencies(metadata_generator heridium relauncher)
+endif()
 
 add_custom_command(
     OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/metadata/metadata.h
@@ -173,80 +171,6 @@ add_custom_command(
     DEPENDS heridium
 )
 
-# --------------------------------------------------------------------------------------------------
-# skyscraper settings
-
-if(NOT ${SKIP_NMS_CHECK})
-    add_dependencies(skyscraper resdk)
-endif()
-
-target_include_directories(
-    skyscraper
-    PRIVATE ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/skyscraper
-            ${CMAKE_CURRENT_SOURCE_DIR}/metadata
-)
-
-# --------------------------------------------------------------------------------------------------
-# renms_proxy settings (None needed)
-
-# --------------------------------------------------------------------------------------------------
-# renms settings
-
-if(NOT ${SKIP_NMS_CHECK})
-    add_dependencies(resdk heridium relauncher)
-endif()
-
-add_dependencies(renms skyscraper)
-
-target_link_libraries(
-    renms
-    PRIVATE skyscraper
-            fmt
-            PolyHook_2
-            spdlog
-            pybind11::embed
-            renms_sdk
-            ${PYTHON_LIBRARIES}
-)
-target_include_directories(renms PUBLIC ${PYTHON_INCLUDE_DIRS})
-
-target_compile_definitions(renms PRIVATE RENMS FIOS_TYPES_ONLY)
-target_compile_definitions(renms PUBLIC RENMS_VERSION="${PROJECT_VERSION}")
-set_target_properties(renms PROPERTIES OUTPUT_NAME renms)
-
-target_include_directories(
-    renms
-    PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
-    PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/renms
-    PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/skyscraper
-    PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/metadata
-    PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/sdk
-)
-
-target_include_directories(
-    renms_sdk
-    PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
-    PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/skyscraper
-    PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/metadata
-)
-
-target_link_libraries(renms_sdk PUBLIC skyscraper)
-
-# --------------------------------------------------------------------------------------------------
-# relauncher settings (No settings needed)
-
-# --------------------------------------------------------------------------------------------------
-# heridium settings
-target_compile_definitions(heridium PRIVATE RENMS HERIDIUM)
-
-target_include_directories(
-    heridium PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/skyscraper
-                    ${CMAKE_CURRENT_SOURCE_DIR}/renms
-)
-# Some of skyscraper's stuff requires the metadata that heridium generates, so
-# we need to include only the bit of skyscraper that heridium needs.
-target_link_libraries(heridium PRIVATE spdlog fmt PolyHook_2)
-
 # ==================================================================================================
 # Launch target
 
@@ -255,7 +179,7 @@ get_filename_component(NMS_BIN_PATH "${NMS_EXE_PATH}" DIRECTORY)
 # Make sure the past installer's leftovers are uninstalled first!
 add_custom_target(
     renms_launch
-    COMMAND $<TARGET_FILE:relauncher> ${NMS_EXE_PATH} $<TARGET_FILE:renms>
+    COMMAND $<TARGET_FILE:relauncher> ${NMS_EXE_PATH} $<TARGET_FILE:renms_core>
     WORKING_DIRECTORY ${NMS_BIN_PATH}
-    DEPENDS renms relauncher
+    DEPENDS renms_core relauncher
 )

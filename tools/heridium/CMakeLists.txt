@@ -31,4 +31,18 @@ add_library(
 
 target_compile_definitions(heridium PRIVATE D_NMS_VER=${NMS_BUILD})
 
+set_target_properties(heridium PROPERTIES PREFIX "")
+
+target_compile_definitions(heridium PRIVATE RENMS HERIDIUM)
+
+target_include_directories(
+    heridium PRIVATE ${PROJECT_SOURCE_DIR}/skyscraper
+                     ${PROJECT_SOURCE_DIR}/renms
+)
+# Some of skyscraper's stuff requires the metadata that heridium generates, so
+# we need to include only the bit of skyscraper that heridium needs.
+target_link_libraries(
+    heridium PRIVATE spdlog fmt PolyHook_2 renms_submodule_dependencies
+)
+
 add_subdirectory(launcher)

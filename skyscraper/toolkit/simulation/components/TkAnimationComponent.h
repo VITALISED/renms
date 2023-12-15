@@ -28,8 +28,8 @@
 #include <toolkit/utilities/containers/TkLinearHashTable.h>
 #include <toolkit/utilities/containers/TkStackContainer.h>
 
-#include <metadata/toolkit/components/animation/tkanimationcomponentdata.meta.h>
-#include <metadata/toolkit/enginesettings/tkanimdetailsettings.meta.h>
+#include <toolkit/components/animation/tkanimationcomponentdata.meta.h>
+#include <toolkit/enginesettings/tkanimdetailsettings.meta.h>
 
 SKYSCRAPER_BEGIN
 

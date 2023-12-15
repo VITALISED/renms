@@ -18,7 +18,10 @@ function(add_dependency_custom dir include)
             DIRECTORY ${dir} PROPERTIES LINKER_FLAGS "-w"
         )
     endif()
-    include_directories(${CMAKE_CURRENT_SOURCE_DIR}/${include} SYSTEM)
+    target_include_directories(
+        renms_submodule_dependencies
+        INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/${include}" SYSTEM
+    )
 endfunction()
 
 function(invoke_adding_dependencies_renms)

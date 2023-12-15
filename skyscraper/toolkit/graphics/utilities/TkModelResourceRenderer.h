@@ -30,7 +30,7 @@
 #include <toolkit/resources/TkResource.h>
 #include <toolkit/utilities/containers/TkVector.h>
 
-#include <metadata/toolkit/tkmodelrendererdata.meta.h>
+#include <toolkit/tkmodelrendererdata.meta.h>
 
 SKYSCRAPER_BEGIN
 
