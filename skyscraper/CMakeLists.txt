@@ -50,3 +50,16 @@ add_library(
     ${UTILITIES_SOURCES}
     ${ONLINE_SOURCES}
 )
+
+target_include_directories(
+    skyscraper
+    PRIVATE ${PROJECT_SOURCE_DIR}
+    PUBLIC ${PROJECT_SOURCE_DIR}/skyscraper
+    PUBLIC ${RENMS_METADATA_DIR}
+)
+
+target_link_libraries(skyscraper PUBLIC renms_submodule_dependencies)
+
+if(NOT ${SKIP_NMS_CHECK})
+    add_dependencies(skyscraper metadata_generator)
+endif()

@@ -21,6 +21,7 @@
 
 #include "analysis.h"
 #include "heridium.h"
+#include "logger.h"
 
 #ifndef HERIDIUM_LANGUAGE_TARGET
 #define HERIDIUM_LANGUAGE_TARGET EHeridiumLanguageType_CXX
@@ -33,8 +34,7 @@
 DWORD WINAPI MainThread(LPVOID lpReserved)
 {
     UNREFERENCED_PARAMETER(lpReserved);
-
-    CreateLogger("\033[38;2;158;237;255mHeridium\033[0m");
+    heridium::CreateLogger();
     spdlog::info("Hello from Heridium!");
 
     heridium::AnalysisInit();

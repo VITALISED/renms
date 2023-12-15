@@ -1,7 +1,7 @@
 /**
- * @file renms.h
+ * @file logger.h
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2023-12-15
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -21,36 +21,13 @@
 
 #pragma once
 
-#if defined(RENMS)
-
-#include <core/framework.h>
-#include <fmt/format.h>
-// #include <nanoflann.hpp>
-#include <polyhook2/Detour/NatDetour.hpp>
-#include <polyhook2/Enums.hpp>
-#include <polyhook2/IHook.hpp>
-#include <polyhook2/PE/IatHook.hpp>
-#include <spdlog/sinks/rotating_file_sink.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
 #include <spdlog/spdlog.h>
 
-#include <algorithm>
-#include <array>
-#include <filesystem>
-#include <limits>
-#include <string>
-#include <vector>
+#include "heridium.h"
 
-namespace fs = std::filesystem;
+HERIDIUM_BEGIN
 
-#endif // defined(RENMS)
+void CreateLogger();
 
-// clang-format off
-#define RENMS_BEGIN namespace renms {
-#define RENMS_END }
-// clang-format on
-
-// Plugin API for developers
-#if !defined(RENMS)
-#include "plugins/api.h"
-#endif //! defined(RENMS)
+HERIDIUM_END

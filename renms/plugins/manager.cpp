@@ -70,7 +70,6 @@ PluginManager::PluginManager()
         if (!lPlugin) continue;
 
         lPlugin->LoadExecutable();
-        // lPlugin->LoadScripts();
 
         mPluginList.push_back(lPlugin);
     }

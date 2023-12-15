@@ -13,14 +13,14 @@
 # You should have received a copy of the GNU General Public License along with
 # this program.  If not, see <https://www.gnu.org/licenses/>.
 
-set(RENMS_CONFIG_VERSION 4)
+set(RENMS_CONFIG_VERSION 5)
 
-# Sorry for having it in a seperate file instead of having the option stuff be a
-# part of the main CMakeLists.txt, but it's just to make sure these settings
-# don't get synced with the repo.
-
-set(SKIP_NMS_CHECK FALSE)
+set(BUILD_EXAMPLES ON)
 set(NMS_EXE_PATH "C:/Your/Path/To/NMS/Exe/Dir/Here/NMS.exe")
-set(EXAMPLE_BUILD_TYPE "simple_plugin") # you can comment this out to not build
-                                        # any examples
+
+# Currently does nothing, will be used for intercompatibility between versions.
 set(NMS_BUILD 123456)
+
+# This is just for debugging the build system, and access to NMS is 100%
+# required for renms to build. See the BUILD.MD for more info.
+set(SKIP_NMS_CHECK OFF)

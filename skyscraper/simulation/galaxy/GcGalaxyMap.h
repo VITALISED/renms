@@ -37,8 +37,8 @@
 #include <toolkit/system/memory/TkTransientHeap.h>
 #include <toolkit/utilities/containers/TkClassPool.h>
 
-#include <metadata/simulation/galaxy/gcgalaxywaypoint.meta.h>
 #include <simulation/galaxy/gcgalaxyrendersetupdata.meta.h>
+#include <simulation/galaxy/gcgalaxywaypoint.meta.h>
 
 SKYSCRAPER_BEGIN
 

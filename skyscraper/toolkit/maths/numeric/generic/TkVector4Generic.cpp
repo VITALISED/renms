@@ -1,7 +1,7 @@
 /**
- * @file TkHitCurve.h
+ * @file TkVector4Generic.cpp
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2023-12-14
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -19,20 +19,15 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#pragma once
-
-#include <skyscraper.h>
-
-#include <toolkit/utilities/containers/TkVector.h>
-
-#include <toolkit/animation/tkhitcurvedata.meta.h>
+#include <toolkit/maths/numeric/generic/TkVector4Generic.h>
 
 SKYSCRAPER_BEGIN
 
-class cTkHitCurve
+cTkVector4::cTkVector4(){};
+
+cTkVector4::cTkVector4(float lfX, float lfY, float lfZ, float lfW)
 {
-    const cTkHitCurveData *mpData;
-    cTkVector<std::pair<float, float>> mafHitTimes;
-};
+    this->mVal = _mm_set_ps(lfX, lfY, lfZ, lfW);
+}
 
 SKYSCRAPER_END

@@ -1,7 +1,7 @@
 /**
- * @file python.h
+ * @file logger.cpp
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2023-12-15
  * 
  * Copyright (C) 2023  VITALISED & Contributors
  * 
@@ -19,27 +19,30 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#pragma once
+#include "logger.h"
 
-#include <renms.h>
+HERIDIUM_BEGIN
 
-#include <pybind11/embed.h>
-#include <pybind11/pybind11.h>
+void CreateLogger()
+{
+    // fix ANSI colors
+    HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+    if (hOut != INVALID_HANDLE_VALUE)
+    {
+        DWORD dwMode = 0;
+        GetConsoleMode(hOut, &dwMode);
 
-#include <filesystem>
+        dwMode |= 0x0004;
+        SetConsoleMode(hOut, dwMode);
+    }
 
-using namespace std::filesystem;
+    std::shared_ptr<spdlog::sinks::stdout_color_sink_mt> console_sink =
+        std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
 
-namespace py = pybind11;
+    console_sink->set_pattern(" [%n] %v");
 
-void __renms_log(const char *lpacMessage);
-void __renms_debug(const char *lpacMessage);
-void __renms_warn(const char *lpacMessage);
-void __renms_error(const char *lpacMessage);
+    spdlog::set_default_logger(std::make_shared<spdlog::logger>(
+        "\033[38;2;158;237;255mHeridium\033[0m", spdlog::sinks_init_list({console_sink})));
+}
 
-RENMS_BEGIN
-
-void CreateScriptEnvironment();
-void ExecutePythonFile(path lFilePath);
-
-RENMS_END
+HERIDIUM_END

@@ -27,15 +27,16 @@
 #include <core/filesystem.h>
 #include <core/warning.h>
 #include <fios/fios.h>
+#include <logging/logger.h>
 #include <memory/thread.h>
 #include <plugins/fsm.h>
-#include <scripts/python.h>
+//#include <scripts/python.h>
 
 DWORD WINAPI MainThread(LPVOID lpReserved)
 {
     UNREFERENCED_PARAMETER(lpReserved);
 
-    CreateLogger("\033[38;2;219;88;85mReNMS\033[0m");
+    renms::CreateLogger();
     spdlog::info("ReNMS v.{} -- Initializing things...", RENMS_VERSION);
     // renms::CreateScriptEnvironment();
     renms::config::Init();

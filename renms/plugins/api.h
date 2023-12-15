@@ -19,10 +19,11 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+// NOTE - This is Deprecated as of 12/12/23, use the new api instead.
+
 #pragma once
 
 #include <application/GcApplication.h>
-#include <memory/memory.h>
 #include <toolkit/utilities/string/TkString.h>
 
 typedef uint64_t renmshook_t;
@@ -48,7 +49,7 @@ renmshook_t RENMS_API CreateHook(uint64_t lpTarget, uint64_t lpDetour, uint64_t 
 bool RENMS_API DispatchHook(renmshook_t lpHook);
 inline nms::cGcApplication *GetGcApplication()
 {
-    return reinterpret_cast<nms::cGcApplication *>(renms::RelToAbsolute(GCAPPLICATION));
+    return reinterpret_cast<nms::cGcApplication *>((uintptr_t)GetModuleHandleA("NMS.exe") + (uintptr_t)(GCAPPLICATION));
 }
 
 // re-exported from PLH

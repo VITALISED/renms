@@ -41,7 +41,7 @@ void config::Init()
 
     if (!lSettingsIniFile.good())
     {
-        Generate(lSettingsFilePath);
+        config::Generate(lSettingsFilePath);
         spdlog::warn("No config found, one has been generated at {}", lSettingsFilePath.string());
         return;
     }
@@ -57,7 +57,7 @@ void config::Init()
     if (lbCreatePluginManager) { gPluginManager = new PluginManager(); }
 }
 
-void config::Generate(path configPath)
+void config::Generate(fs::path configPath)
 {
     ini::IniFile pluginIni;
 

@@ -1,7 +1,7 @@
 /**
- * @file TkHitCurve.h
+ * @file TkColour.cpp
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2023-12-14
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -19,20 +19,15 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#pragma once
-
-#include <skyscraper.h>
-
-#include <toolkit/utilities/containers/TkVector.h>
-
-#include <toolkit/animation/tkhitcurvedata.meta.h>
+#include <toolkit/graphics/TkColour.h>
 
 SKYSCRAPER_BEGIN
 
-class cTkHitCurve
+cTkColour::cTkColour(){};
+
+cTkColour::cTkColour(uint8_t luiR, uint8_t luiG, uint8_t luiB, uint8_t luiA)
 {
-    const cTkHitCurveData *mpData;
-    cTkVector<std::pair<float, float>> mafHitTimes;
-};
+    _mm_set_ps(luiR / 255.0f, luiG / 255.0f, luiB / 255.0f, luiA / 255.0f);
+}
 
 SKYSCRAPER_END

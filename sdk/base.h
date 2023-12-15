@@ -1,7 +1,7 @@
 /**
- * @file renms.h
+ * @file defines.h
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2023-12-12
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -21,36 +21,19 @@
 
 #pragma once
 
-#if defined(RENMS)
+#ifdef RENMS
+#define RENMS_ENTRY __declspec(dllimport)
+#else
+#define RENMS_ENTRY __declspec(dllexport)
+#endif
 
-#include <core/framework.h>
-#include <fmt/format.h>
-// #include <nanoflann.hpp>
-#include <polyhook2/Detour/NatDetour.hpp>
-#include <polyhook2/Enums.hpp>
-#include <polyhook2/IHook.hpp>
-#include <polyhook2/PE/IatHook.hpp>
-#include <spdlog/sinks/rotating_file_sink.h>
-#include <spdlog/sinks/stdout_color_sinks.h>
-#include <spdlog/spdlog.h>
+#define RENMS_API extern
 
-#include <algorithm>
-#include <array>
-#include <filesystem>
-#include <limits>
-#include <string>
-#include <vector>
-
-namespace fs = std::filesystem;
-
-#endif // defined(RENMS)
+#define GCAPPLICATION         0x49707E0
+#define GCTEXTCHATMANAGER_SAY 0x806080
+#define TKCOMPONENTMANAGER    0x44BE3E0
 
 // clang-format off
-#define RENMS_BEGIN namespace renms {
-#define RENMS_END }
+#define RENMS_SDK_BEGIN namespace renms_sdk {
+#define RENMS_SDK_END }
 // clang-format on
-
-// Plugin API for developers
-#if !defined(RENMS)
-#include "plugins/api.h"
-#endif //! defined(RENMS)

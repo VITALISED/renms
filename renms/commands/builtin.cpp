@@ -54,11 +54,10 @@ void EchoCommandDispatch(std::vector<std::string> *laArgs)
         laArgs->begin(), laArgs->end(), lsAccumulated,
         [](const std::string &s1, const std::string &s2) -> std::string { return s1.empty() ? s2 : s1 + " " + s2; });
 
-    nms::cTkFixedString<1023, char> *lpacMessageBody = new nms::cTkFixedString<1023, char>();
-
-    strcpy_s(lpacMessageBody->macBuffer, 1023, lsAccumulated.c_str());
+    nms::cTkFixedString<1121, char> lpacMessageBody = nms::cTkFixedString<1121, char>(lsAccumulated.c_str());
 
     spdlog::info(lsAccumulated);
+    renms_sdk::SendTextMessage(&lpacMessageBody);
 
     free(laArgs);
 }
