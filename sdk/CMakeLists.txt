@@ -10,3 +10,5 @@ add_library(
 )
 
 target_link_libraries(renms_sdk PUBLIC skyscraper renms_submodule_dependencies)
+
+target_include_directories(renms_sdk PUBLIC ${PROJECT_SOURCE_DIR})
