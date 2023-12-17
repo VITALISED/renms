@@ -29,9 +29,8 @@
 
 #define RENMS_API extern
 
-#define GCAPPLICATION         0x49707E0
-#define GCTEXTCHATMANAGER_SAY 0x806080
-#define TKCOMPONENTMANAGER    0x44BE3E0
+#define GCAPPLICATION_GOG   0x49707E0
+#define GCAPPLICATION_STEAM 0x495EF10
 
 // clang-format off
 #define RENMS_SDK_BEGIN namespace renms_sdk {
