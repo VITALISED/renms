@@ -25,7 +25,13 @@ RENMS_SDK_BEGIN
 
 nms::cGcApplication *GetApplication()
 {
-    return reinterpret_cast<nms::cGcApplication *>(RelToAbsolute(GCAPPLICATION));
+
+    if (GetModuleHandleA("Galaxy64.dll"))
+        return reinterpret_cast<nms::cGcApplication *>(RelToAbsolute(GCAPPLICATION_GOG));
+    if (GetModuleHandleA("steam_api64.dll"))
+        return reinterpret_cast<nms::cGcApplication *>(RelToAbsolute(GCAPPLICATION_STEAM));
+
+    return NULL;
 }
 
 // nms::cTkComponentManager* GetComponentManager()

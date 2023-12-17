@@ -22,10 +22,14 @@
 #include <core/warning.h>
 
 RENMS_HOOK(
-    cTkFileSystem__IsModded, renms::RelToAbsolute(0x256EC60), bool, (uint64_t thiscall) { return true; });
+    cTkFileSystem__IsModded, renms::SignatureScan("48 8B 01 48 85 C0 74 ? 0F B6 80 92 26 00 00"), bool,
+    (uint64_t thiscall) { return true; });
 
 RENMS_HOOK(
-    cGcApplicationGameModeSelectorState__RenderWarning, renms::RelToAbsolute(0x1BF7E0), void,
+    cGcApplicationGameModeSelectorState__RenderWarning,
+    renms::SignatureScan(
+        "48 8B C4 48 89 58 10 48 89 70 18 55 57 41 56 48 8D 6C 24 90 48 81 EC ? ? ? ? 48 8B 1D ? ? ? ?"),
+    void,
     (uint64_t thiscall, const char *lpacWarningTitle, const char *lpacWarningPress, const char *lStatus1,
      char *lStatus2, float lfTimeout) {
         return RENMS_CAST(

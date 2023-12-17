@@ -28,6 +28,7 @@
 #include <memory/hook.h>
 #include <memory/vtable.h>
 #include <plugins/api.h>
+#include <sdk/core.h>
 
 RENMS_BEGIN
 
