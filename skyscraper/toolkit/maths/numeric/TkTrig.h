@@ -1,7 +1,7 @@
 /**
- * @file helpers.cpp
+ * @file TkTrig.h
  * @author VITALISED & Contributors
- * @since 2023-12-12
+ * @since 2023-12-18
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -19,23 +19,17 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include "helpers.h"
+#pragma once
 
-RENMS_SDK_BEGIN
+#include <skyscraper.h>
 
-nms::cGcApplication *GetApplication()
+SKYSCRAPER_BEGIN
+
+template <typename T>
+class cTkTrig
 {
-    if (GetModuleHandleA("Galaxy64.dll"))
-        return reinterpret_cast<nms::cGcApplication *>(RelToAbsolute(GCAPPLICATION_GOG));
-    if (GetModuleHandleA("steam_api64.dll"))
-        return reinterpret_cast<nms::cGcApplication *>(RelToAbsolute(GCAPPLICATION_STEAM));
+  public:
+    static T ACos(T x) { return std::acos(x); }
+};
 
-    return NULL;
-}
-
-// nms::cTkComponentManager* GetComponentManager()
-// {
-//     return reinterpret_cast<nms::cTkComponentManager*>(renms::RelToAbsolute(TKCOMPONENTMANAGER);)
-// }
-
-RENMS_SDK_END
+SKYSCRAPER_END

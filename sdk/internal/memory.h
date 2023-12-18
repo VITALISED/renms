@@ -21,6 +21,8 @@
 
 #pragma once
 
+#include <Windows.h>
+
 #include "../base.h"
 
 RENMS_SDK_BEGIN

@@ -31,10 +31,31 @@ void TeleportCommandDispatch(std::vector<std::string> *laArgs)
         float lfY = std::stof(laArgs->at(1));
         float lfZ = std::stof(laArgs->at(2));
 
-        nms::cTkVector3 lPos = nms::cTkVector3(lfX, lfY, lfZ);
+        spdlog::info(lfX);
 
-        GetGcApplication()->mpData->mSimulation.mPlayer.mPosition = lPos;
+        nms::cTkVector3 *lPos = new nms::cTkVector3(lfX, lfY, lfZ);
+        nms::cTkVector3 lDir  = GetGcApplication()->mpData->mSimulation.mPlayer.mFacingDir;
+        nms::cTkVector3 lVel  = GetGcApplication()->mpData->mSimulation.mPlayer.mLastVelocities.back();
+        cTkVector3 lPosition  = GetGcApplication()->mpData->mSimulation.mPlayer.mPosition;
+
+        std::string lPositionStr = fmt::format("Teleporting to: {} {} {}", lPos->mfX, lPos->mfY, lPos->mfZ);
+        spdlog::info(lPositionStr);
+
+        GetGcApplication()->mpData->mSimulation.mPlayer.SetToPosition(lPos, &lDir, &lVel);
+
+        delete lPos;
     }
+
+    free(laArgs);
+}
+
+void GetPositionDispatch(std::vector<std::string> *laArgs)
+{
+    cTkVector3 lPosition     = GetGcApplication()->mpData->mSimulation.mPlayer.mPosition;
+    std::string lPositionStr = fmt::format("{} {} {}", lPosition.mfX, lPosition.mfY, lPosition.mfZ);
+
+    nms::cTkFixedString<1121, char> lpacMessageBody = nms::cTkFixedString<1121, char>(lPositionStr.c_str());
+    renms_sdk::SendTextMessage(&lpacMessageBody);
 
     free(laArgs);
 }
@@ -44,6 +65,8 @@ void TestCommandDispatch(std::vector<std::string> *laArgs)
     spdlog::info("Woah, it's a test.");
 
     for (std::string lsArg : *laArgs) {}
+
+    free(laArgs);
 }
 
 void EchoCommandDispatch(std::vector<std::string> *laArgs)
@@ -64,13 +87,15 @@ void EchoCommandDispatch(std::vector<std::string> *laArgs)
 
 void AddBuiltinCommands()
 {
-    Command *lTestCommand = new Command("test", &TestCommandDispatch);
-    Command *lEchoCommand = new Command("echo", &EchoCommandDispatch);
-    Command *lTPCommand   = new Command("tp", &TeleportCommandDispatch);
+    Command *lTestCommand   = new Command("test", &TestCommandDispatch);
+    Command *lEchoCommand   = new Command("echo", &EchoCommandDispatch);
+    Command *lTPCommand     = new Command("tp", &TeleportCommandDispatch);
+    Command *lGetPosCommand = new Command("getpos", &GetPositionDispatch);
 
     gCommandDispatcher.RegisterCommand(lTestCommand);
     gCommandDispatcher.RegisterCommand(lEchoCommand);
     gCommandDispatcher.RegisterCommand(lTPCommand);
+    gCommandDispatcher.RegisterCommand(lGetPosCommand);
 }
 
 RENMS_END

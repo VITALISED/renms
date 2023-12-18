@@ -1,7 +1,7 @@
 /**
- * @file helpers.cpp
+ * @file GcPlayer.cpp
  * @author VITALISED & Contributors
- * @since 2023-12-12
+ * @since 2023-12-18
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -19,23 +19,19 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include "helpers.h"
+#include <simulation/player/GcPlayer.h>
 
-RENMS_SDK_BEGIN
+SKYSCRAPER_BEGIN
 
-nms::cGcApplication *GetApplication()
+void cGcPlayer::SetToPosition(const cTkVector3 *lPos, const cTkVector3 *lDir, const cTkVector3 *lVel)
 {
-    if (GetModuleHandleA("Galaxy64.dll"))
-        return reinterpret_cast<nms::cGcApplication *>(RelToAbsolute(GCAPPLICATION_GOG));
-    if (GetModuleHandleA("steam_api64.dll"))
-        return reinterpret_cast<nms::cGcApplication *>(RelToAbsolute(GCAPPLICATION_STEAM));
+    typedef void (*stub)(cGcPlayer *thiscall, const cTkVector3 *lPos, const cTkVector3 *lDir, const cTkVector3 *lVel);
 
-    return NULL;
+    uint64_t addr =
+        reinterpret_cast<uint64_t>(renms_sdk::SignatureScan("48 89 5C 24 08 48 89 6C 24 10 48 89 74 24 18 57 48 83 EC "
+                                                            "? 0F 29 74 24 60 49 8B F9 0F 29 7C 24 50 49 8B F0"));
+
+    return reinterpret_cast<stub>(addr)(this, lPos, lDir, lVel);
 }
 
-// nms::cTkComponentManager* GetComponentManager()
-// {
-//     return reinterpret_cast<nms::cTkComponentManager*>(renms::RelToAbsolute(TKCOMPONENTMANAGER);)
-// }
-
-RENMS_SDK_END
+SKYSCRAPER_END
