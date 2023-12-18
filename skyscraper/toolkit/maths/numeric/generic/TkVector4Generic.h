@@ -114,6 +114,25 @@ class _MM_ALIGN16 cTkVector4
         if (x) _aligned_free(x);
     }
 
+    static cTkVector4 *ConvertFrom_2_10_10_10(cTkVector4 *result, uint32_t lVec)
+    {
+        result->mfX = static_cast<float>((lVec & 0x000003FF) >> 0);
+        result->mfY = static_cast<float>((lVec & 0x000FFC00) >> 10);
+        result->mfZ = static_cast<float>((lVec & 0x3FF00000) >> 20);
+        result->mfW = static_cast<float>((lVec & 0xC0000000) >> 30);
+        return result;
+    }
+
+    uint32_t ConvertTo_2_10_10_10()
+    {
+        uint32_t lxX = static_cast<uint32_t>(mfX) & 0x3FF;
+        uint32_t lxY = (static_cast<uint32_t>(mfY) & 0x3FF) << 10;
+        uint32_t lxZ = (static_cast<uint32_t>(mfZ) & 0x3FF) << 20;
+        uint32_t lxW = (static_cast<uint32_t>(mfW) & 0x3) << 30;
+
+        return lxX | lxY | lxZ | lxW;
+    }
+
     union {
         struct
         {
