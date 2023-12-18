@@ -27,7 +27,7 @@
 
 SKYSCRAPER_BEGIN
 
-class cTkVector4
+class _MM_ALIGN16 cTkVector4
 {
   public:
     inline cTkVector4() : mVal(_mm_setzero_ps()) {}
