@@ -53,7 +53,7 @@ add_library(
 
 target_include_directories(
     skyscraper
-    PRIVATE ${PROJECT_SOURCE_DIR}
+    PUBLIC ${PROJECT_SOURCE_DIR}
     PUBLIC ${PROJECT_SOURCE_DIR}/skyscraper
     PUBLIC ${RENMS_METADATA_DIR}
 )

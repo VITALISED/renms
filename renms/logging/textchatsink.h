@@ -41,8 +41,9 @@ class textchatsink : public spdlog::sinks::base_sink<Mutex>
         if (!gApplication->mpData->mSimulation.mbSimulationInLoadPhase &&
             gApplication->mpData->mSimulation.mbSimulationPrepared)
         {
-            nms::cTkFixedString<1121, char> lMessage =
-                nms::cTkFixedString<1121, char>(fmt::to_string(formatted).c_str());
+            std::string buff = fmt::to_string(formatted);
+            if (!buff.empty() && buff[buff.length() - 1] == '\n') { buff.erase(buff.length() - 1); }
+            nms::cTkFixedString<1121, char> lMessage = nms::cTkFixedString<1121, char>(buff.c_str());
             renms_sdk::SendTextMessage(&lMessage);
         }
     }

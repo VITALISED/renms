@@ -1,7 +1,7 @@
 /**
- * @file TkVector4Generic.cpp
+ * @file TkTrig.h
  * @author VITALISED & Contributors
- * @since 2023-12-14
+ * @since 2023-12-18
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -19,15 +19,17 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include <toolkit/maths/numeric/generic/TkVector4Generic.h>
+#pragma once
+
+#include <skyscraper.h>
 
 SKYSCRAPER_BEGIN
 
-cTkVector4::cTkVector4(){};
-
-cTkVector4::cTkVector4(float lfX, float lfY, float lfZ, float lfW)
+template <typename T>
+class cTkTrig
 {
-    this->mVal = _mm_set_ps(lfX, lfY, lfZ, lfW);
-}
+  public:
+    static T ACos(T x) { return std::acos(x); }
+};
 
 SKYSCRAPER_END

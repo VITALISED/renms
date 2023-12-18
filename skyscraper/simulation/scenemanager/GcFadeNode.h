@@ -24,6 +24,7 @@
 #include <skyscraper.h>
 
 #include <toolkit/core/types/TkHandle.h>
+#include <toolkit/utilities/containers/TkStackContainer.h>
 
 SKYSCRAPER_BEGIN
 

@@ -31,6 +31,7 @@
 #include <rapidjson/document.h>
 #include <rapidjson/rapidjson.h>
 #include <robin_hood.h>
+#include <sdk/internal/memory.h>
 #include <vulkan/vulkan.h>
 #include <windows.h> //see toolkit/system/TkCSMutex.h
 
@@ -70,15 +71,12 @@ namespace nms_rapidjson = rapidjson;
 
 SKYSCRAPER_BEGIN
 
-inline LPVOID RelToAbsolute(DWORD_PTR lpRelPtr)
-{
-    return (LPVOID)((DWORD_PTR)GetModuleHandleA("NMS.exe") + (DWORD_PTR)lpRelPtr);
-}
+static const __m128 SIGNMASK = _mm_castsi128_ps(_mm_set1_epi32(0x80000000));
 
-template <typename Fn>
-Fn VTableStub(uint64_t lFnPtr, Fn)
-{
-    return reinterpret_cast<Fn>(lFnPtr);
-}
+// template <typename... Args>
+// Fn FnStub(uint64_t lFnPtr, Fn)
+// {
+//     return (Fn)lFnPtr;
+// }
 
 SKYSCRAPER_END

@@ -37,7 +37,7 @@ target_compile_definitions(heridium PRIVATE RENMS HERIDIUM)
 
 target_include_directories(
     heridium PRIVATE ${PROJECT_SOURCE_DIR}/skyscraper
-                     ${PROJECT_SOURCE_DIR}/renms
+                     ${PROJECT_SOURCE_DIR}/renms ${PROJECT_SOURCE_DIR}
 )
 # Some of skyscraper's stuff requires the metadata that heridium generates, so
 # we need to include only the bit of skyscraper that heridium needs.

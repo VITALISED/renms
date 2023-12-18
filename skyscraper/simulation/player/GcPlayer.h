@@ -337,6 +337,8 @@ class cGcPlayer : public cGcPlayerCommon
     float mfFreighterMegaWarpTimer;
     uint64_t mu64LastAutoSaveTimeStamp;
     cGcPlayer::cGcSummonPetData mSummonPetData;
+
+    void SetToPosition(const cTkVector3 *lPos, const cTkVector3 *lDir, const cTkVector3 *lVel);
 };
 
 SKYSCRAPER_END
