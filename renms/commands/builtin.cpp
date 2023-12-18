@@ -25,26 +25,22 @@ RENMS_BEGIN
 
 void TeleportCommandDispatch(std::vector<std::string> *laArgs)
 {
-    for (std::string lsArg : *laArgs)
-    {
-        float lfX = std::stof(laArgs->at(0));
-        float lfY = std::stof(laArgs->at(1));
-        float lfZ = std::stof(laArgs->at(2));
 
-        spdlog::info(lfX);
+    float lfX = std::stof(laArgs->at(0));
+    float lfY = std::stof(laArgs->at(1));
+    float lfZ = std::stof(laArgs->at(2));
 
-        nms::cTkVector3 *lPos = new nms::cTkVector3(lfX, lfY, lfZ);
-        nms::cTkVector3 lDir  = GetGcApplication()->mpData->mSimulation.mPlayer.mFacingDir;
-        nms::cTkVector3 lVel  = GetGcApplication()->mpData->mSimulation.mPlayer.mLastVelocities.back();
-        cTkVector3 lPosition  = GetGcApplication()->mpData->mSimulation.mPlayer.mPosition;
+    nms::cTkVector3 *lPos = new nms::cTkVector3(lfX, lfY, lfZ);
+    nms::cTkVector3 lDir  = GetGcApplication()->mpData->mSimulation.mPlayer.mFacingDir;
+    nms::cTkVector3 lVel  = GetGcApplication()->mpData->mSimulation.mPlayer.mLastVelocities.back();
+    cTkVector3 lPosition  = GetGcApplication()->mpData->mSimulation.mPlayer.mPosition;
 
-        std::string lPositionStr = fmt::format("Teleporting to: {} {} {}", lPos->mfX, lPos->mfY, lPos->mfZ);
-        spdlog::info(lPositionStr);
+    std::string lPositionStr = fmt::format("Teleporting to: {} {} {}", lPos->mfX, lPos->mfY, lPos->mfZ);
+    spdlog::info(lPositionStr);
 
-        GetGcApplication()->mpData->mSimulation.mPlayer.SetToPosition(lPos, &lDir, &lVel);
+    GetGcApplication()->mpData->mSimulation.mPlayer.SetToPosition(lPos, &lDir, &lVel);
 
-        delete lPos;
-    }
+    delete lPos;
 
     free(laArgs);
 }

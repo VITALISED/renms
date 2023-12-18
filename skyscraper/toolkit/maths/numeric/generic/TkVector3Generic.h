@@ -95,20 +95,16 @@ class _MM_ALIGN16 cTkVector3
     /// Equality operators
     inline bool operator==(const cTkVector3 &b) const
     {
-        return (((_mm_movemask_ps(_mm_cmpeq_ps(mVal, b.mVal))) & 0x7) == 0x7);
+        return (((_mm_movemask_ps(_mm_cmpeq_ps(mVal, b.mVal))) & 0xF) == 0xF);
     }
     inline bool operator!=(const cTkVector3 &b) const { return !(*this == b); }
 
-    /// Unary minus operator
     inline cTkVector3 operator-() const { return _mm_xor_ps(mVal, SIGNMASK); }
 
-    /// Subscript operator
-    // Note: there is not bound checking here.
     inline const float &operator[](const int i) const { return i == 0 ? this->mfX : (i == 1 ? this->mfY : this->mfZ); }
     inline float &operator[](const int i) { return i == 0 ? this->mfX : (i == 1 ? this->mfY : this->mfZ); }
 
-    /// Cross product
-    inline cTkVector3 cross(const cTkVector3 &b) const
+    inline cTkVector3 Cross(const cTkVector3 &b) const
     {
         return _mm_sub_ps(
             _mm_mul_ps(
@@ -119,29 +115,26 @@ class _MM_ALIGN16 cTkVector3
                 _mm_shuffle_ps(b.mVal, b.mVal, _MM_SHUFFLE(3, 0, 2, 1))));
     }
 
-    /// Dot product
-    inline float dot(const cTkVector3 &b) const { return _mm_cvtss_f32(_mm_dp_ps(mVal, b.mVal, 0x71)); }
-    /// Length of the vector
-    inline float length() const { return _mm_cvtss_f32(_mm_sqrt_ss(_mm_dp_ps(mVal, mVal, 0x71))); }
-    /// Returns the normalized vector
-    inline cTkVector3 normalize() const
+    inline float Dot(const cTkVector3 &b) const { return _mm_cvtss_f32(_mm_dp_ps(mVal, b.mVal, 0x71)); }
+
+    inline float Length() const { return _mm_cvtss_f32(_mm_sqrt_ss(_mm_dp_ps(mVal, mVal, 0x71))); }
+
+    inline cTkVector3 Normalize() const
     {
         // multiplying by rsqrt does not yield an accurate enough result, so we
         // divide by sqrt instead.
         return _mm_div_ps(mVal, _mm_sqrt_ps(_mm_dp_ps(mVal, mVal, 0xFF)));
     }
 
-    /// Overloaded operators that ensure alignment
     inline void *operator new[](size_t x) { return _aligned_malloc(x, 16); }
     inline void operator delete[](void *x)
     {
         if (x) _aligned_free(x);
     }
 
-    /// Textual representation
-    friend std::ostream &operator<<(std::ostream &os, const cTkVector3 &t);
+    // Textual representation
+    // friend std::ostream &operator<<(std::ostream &os, const cTkVector3 &t);
 
-    /// Direct access member variables.
     union {
         struct
         {

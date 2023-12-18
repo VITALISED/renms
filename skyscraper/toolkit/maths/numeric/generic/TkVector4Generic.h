@@ -30,15 +30,97 @@ SKYSCRAPER_BEGIN
 class cTkVector4
 {
   public:
-    __m128 mVal;
+    inline cTkVector4() : mVal(_mm_setzero_ps()) {}
+    inline cTkVector4(float lfX, float lfY, float lfZ, float lfW) : mVal(_mm_set_ps(mfW, lfZ, lfY, lfX)) {}
+    inline cTkVector4(__m128 m) : mVal(m) {}
 
-    cTkVector4();
-    cTkVector4(float lfX, float lfY, float lfZ, float lfW);
-#ifdef _MSC_VER
-    float operator[](uint64_t liIndex) { return this->mVal.m128_f32[liIndex]; }
-#else
-    float operator[](uint64_t liIndex) { return this->mVal[liIndex]; }
-#endif
+    inline cTkVector4 operator+(const cTkVector4 &b) const { return _mm_add_ps(mVal, b.mVal); }
+    inline cTkVector4 operator-(const cTkVector4 &b) const { return _mm_sub_ps(mVal, b.mVal); }
+    inline cTkVector4 operator*(const cTkVector4 &b) const { return _mm_mul_ps(mVal, b.mVal); }
+    inline cTkVector4 operator/(const cTkVector4 &b) const { return _mm_div_ps(mVal, b.mVal); }
+
+    inline cTkVector4 &operator+=(const cTkVector4 &b)
+    {
+        mVal = _mm_add_ps(mVal, b.mVal);
+        return *this;
+    }
+    inline cTkVector4 &operator-=(const cTkVector4 &b)
+    {
+        mVal = _mm_sub_ps(mVal, b.mVal);
+        return *this;
+    }
+    inline cTkVector4 &operator*=(const cTkVector4 &b)
+    {
+        mVal = _mm_mul_ps(mVal, b.mVal);
+        return *this;
+    }
+    inline cTkVector4 &operator/=(const cTkVector4 &b)
+    {
+        mVal = _mm_div_ps(mVal, b.mVal);
+        return *this;
+    }
+
+    inline cTkVector4 operator+(float b) const { return _mm_add_ps(mVal, _mm_set1_ps(b)); }
+    inline cTkVector4 operator-(float b) const { return _mm_sub_ps(mVal, _mm_set1_ps(b)); }
+    inline cTkVector4 operator*(float b) const { return _mm_mul_ps(mVal, _mm_set1_ps(b)); }
+    inline cTkVector4 operator/(float b) const { return _mm_div_ps(mVal, _mm_set1_ps(b)); }
+
+    inline cTkVector4 &operator+=(float b)
+    {
+        mVal = _mm_add_ps(mVal, _mm_set1_ps(b));
+        return *this;
+    }
+    inline cTkVector4 &operator-=(float b)
+    {
+        mVal = _mm_sub_ps(mVal, _mm_set1_ps(b));
+        return *this;
+    }
+    inline cTkVector4 &operator*=(float b)
+    {
+        mVal = _mm_mul_ps(mVal, _mm_set1_ps(b));
+        return *this;
+    }
+    inline cTkVector4 &operator/=(float b)
+    {
+        mVal = _mm_div_ps(mVal, _mm_set1_ps(b));
+        return *this;
+    }
+
+    inline const float &operator[](int i) const
+    {
+        switch (i)
+        {
+        case 0: return mfX;
+        case 1: return mfY;
+        case 2: return mfZ;
+        case 3: return mfW;
+        }
+    }
+
+    inline float &operator[](int i)
+    {
+        switch (i)
+        {
+        case 0: return mfX;
+        case 1: return mfY;
+        case 2: return mfZ;
+        case 3: return mfW;
+        }
+    }
+
+    inline void *operator new[](size_t x) { return _aligned_malloc(x, 16); }
+    inline void operator delete[](void *x)
+    {
+        if (x) _aligned_free(x);
+    }
+
+    union {
+        struct
+        {
+            float mfX, mfY, mfZ, mfW;
+        };
+        __m128 mVal;
+    };
 };
 
 SKYSCRAPER_END
