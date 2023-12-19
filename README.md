@@ -4,7 +4,7 @@
 
 ## Overview
 
-ReNMS is a No Man's Sky SDK featuring a high-level type framework for working with NMS or the Skyscraper engine in general. Supports complete access to most of the game's runtime memory and classes (including those in metadata mods), a header generator for metadata classes with around ~2400 headers and a further manually recreated 200-300 headers. Supports a dynamic plugin loading system for you to load libraries at runtime with a fairly ergonomic and native C++ interface.
+ReNMS is a No Man's Sky SDK modding framework featuring a high-level type framework for working with No Man's Sky or the Skyscraper engine. Supports complete access to most of the game's runtime memory and classes (including those in metadata mods), a header generator for metadata classes with around ~2400 headers and a further manually recreated 200-300 headers. Supports a dynamic plugin loading system for you to load libraries at runtime with a fairly ergonomic and native C++ interface.
 
 ![customised mod warning](docs/banner_a.png)
 
