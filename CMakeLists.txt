@@ -21,11 +21,7 @@ project(
     VERSION 0.3
 )
 
-find_package(
-    Python3
-    COMPONENTS Development Interpreter
-    REQUIRED
-)
+# find_package( Python3 COMPONENTS Development Interpreter REQUIRED )
 
 # ==================================================================================================
 # Includes
@@ -90,8 +86,7 @@ else()
 endif()
 
 # ==================================================================================================
-# Dependencies.
-find_package(Python3 REQUIRED)
+# Dependencies. find_package(Python3 REQUIRED)
 set(SPDLOG_FMT_EXTERNAL ON)
 set(SPDLOG_BUILD_SHARED OFF)
 set(POLYHOOK_BUILD_STATIC_RUNTIME OFF)

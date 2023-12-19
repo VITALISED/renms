@@ -73,10 +73,4 @@ SKYSCRAPER_BEGIN
 
 static const __m128 SIGNMASK = _mm_castsi128_ps(_mm_set1_epi32(0x80000000));
 
-// template <typename... Args>
-// Fn FnStub(uint64_t lFnPtr, Fn)
-// {
-//     return (Fn)lFnPtr;
-// }
-
 SKYSCRAPER_END

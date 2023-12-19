@@ -42,13 +42,14 @@ add_library(
     ${GAMESTATE_SOURCES}
     ${GRAPHICS_SOURCES}
     ${NETWORKING_SOURCES}
+    ${ONLINE_SOURCES}
     ${REALITY_SOURCES}
+    ${RESOURCES_SOURCES}
     ${SIMULATION_SOURCES}
     ${SYSTEM_SOURCES}
     ${TOOLKIT_SOURCES}
-    ${RESOURCES_SOURCES}
     ${UTILITIES_SOURCES}
-    ${ONLINE_SOURCES}
+    skyscraper.h
 )
 
 target_include_directories(

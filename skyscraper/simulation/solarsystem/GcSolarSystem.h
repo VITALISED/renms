@@ -32,8 +32,8 @@
 #include <simulation/solarsystem/planet/GcPlanet.h>
 #include <simulation/solarsystem/planet/GcPlanetGenerator.h>
 #include <simulation/spaceship/GcSpaceShipWarp.h>
-#include <toolkit/system/TkAddNodesHandle.h>
 #include <toolkit/system/TkIterationState.h>
+#include <toolkit/utilities/engine/TkEngineUtils.h>
 
 #include <gamestate/gcplayerspawnstatedata.meta.h>
 #include <simulation/player/gcscaneffectdata.meta.h>

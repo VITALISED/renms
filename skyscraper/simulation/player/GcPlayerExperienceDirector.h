@@ -33,9 +33,9 @@
 #include <toolkit/graphics/utilities/TkModelResourceRenderer.h>
 #include <toolkit/maths/geometry/TkSphere.h>
 #include <toolkit/maths/numeric/TkSmoothCD.h>
-#include <toolkit/system/TkAddNodesHandle.h>
 #include <toolkit/utilities/containers/TkClassPool.h>
 #include <toolkit/utilities/containers/TkVector.h>
+#include <toolkit/utilities/engine/TkEngineUtils.h>
 #include <toolkit/utilities/random/TkPersonalRNG.h>
 
 #include <gameplay/gcplayerexperiencespawndata.meta.h>
