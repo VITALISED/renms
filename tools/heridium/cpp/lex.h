@@ -21,8 +21,6 @@
 
 #pragma once
 
-#include <format>
-
 #include <chrono>
 
 #include "notation.h"
@@ -54,7 +52,7 @@
 
 #define HM_BEGIN_BUFFER std::string buffer = ""
 #define HM_PRELUDE(lsFile, lsDate, liNMSBuild)                                             \
-    std::string __PRELUDE_FMTED = std::format(PRELUDE_DOCSTR, lsFile, lsDate, liNMSBuild); \
+    std::string __PRELUDE_FMTED = fmt::format(PRELUDE_DOCSTR, lsFile, lsDate, liNMSBuild); \
     buffer.append(__PRELUDE_FMTED);                                                        \
     buffer.append("\n\n#pragma once\n\n#include <toolkit/data/TkMetaDataClasses.h>\n");
 #define HM_NAMESPACE_BEGIN buffer += "SKYSCRAPER_BEGIN\n\n";

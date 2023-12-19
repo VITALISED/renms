@@ -76,7 +76,7 @@ void EchoCommandDispatch(std::vector<std::string> *laArgs)
     nms::cTkFixedString<1121, char> lpacMessageBody = nms::cTkFixedString<1121, char>(lsAccumulated.c_str());
 
     spdlog::info(lsAccumulated);
-    renms_sdk::SendTextMessage(&lpacMessageBody);
+    // renms_sdk::SendTextMessage(&lpacMessageBody);
 
     free(laArgs);
 }
