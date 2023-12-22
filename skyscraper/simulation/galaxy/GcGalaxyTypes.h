@@ -36,30 +36,36 @@ SKYSCRAPER_BEGIN
 
 class cGcGalacticVoxelCoordinate
 {
-    __int16 mX;
-    __int16 mZ;
-    __int16 mY;
+  public:
+    int16_t mX;
+    int16_t mZ;
+    int16_t mY;
     bool mbValid;
 };
 
 class cGcGalacticSolarSystemAddress
 {
+  public:
     cGcGalacticVoxelCoordinate mVoxelCoordinate;
-    unsigned __int16 mSolarIndex;
-    unsigned __int16 mIteration;
+    uint16_t mSolarIndex;
+    uint16_t mIteration;
 };
 
 class cGcGalaxyAttributesAtAddress
 {
+  public:
     cGcGalaxyVoxelAttributesData mVoxel;
     cTkColour mVoxelPrimaryColour;
     cTkColour mVoxelSecondaryColour;
     cGcGalaxyStarAttributesData mStar;
     bool mbValid;
+
+    cGcGalaxyAttributesAtAddress(){};
 };
 
 class cGcInterstellarEvent
 {
+  public:
     TkID<256> mID;
     cGcGalacticAddressData mGalacticAddress;
     TkID<128> mMissionID;

@@ -37,11 +37,14 @@
 #include <simulation/gcspaceshipclasses.meta.h>
 #include <simulation/spaceship/ai/gcaishipspawndata.meta.h>
 #include <simulation/spaceship/ai/gcaispaceshipmanagerdata.meta.h>
+#include <simulation/spaceship/ai/gcaispaceshippreloadcachedata.meta.h>
 #include <simulation/spaceship/gcshipaiattackdatatable.meta.h>
 #include <simulation/spaceship/gcshipaicombatdefinition.meta.h>
 #include <toolkit/tkmodelresource.meta.h>
 
 SKYSCRAPER_BEGIN
+
+class cGcAISpaceShipPreloadCacheData;
 
 enum ePlayerBoostCheck
 {
@@ -82,6 +85,7 @@ class cGcAIShipSpawnEvent
 
 class cGcAISpaceshipManager
 {
+  public:
     enum eSortMethod
     {
         ESortMethod_Type,

@@ -284,6 +284,8 @@ class cGcHUDManager
     bool mbHUDScreensPoolCtr;
     bool mbReloadRequest;
     cTkVector</*cGcInteractionComponent*/ uintptr_t *> maInteractionOffScreenRenderers;
+
+    ~cGcHUDManager() {}
 };
 
 SKYSCRAPER_END

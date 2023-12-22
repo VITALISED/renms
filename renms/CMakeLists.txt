@@ -16,7 +16,6 @@
 set(RENMS_CORE_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/dllmain.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/plugins/plugin.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/plugins/api.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/plugins/fsm.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/plugins/manager.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/logging/logger.cpp
@@ -43,7 +42,6 @@ set(RENMS_CORE_HEADERS
     ${CMAKE_CURRENT_SOURCE_DIR}/memory/memory.h
     ${CMAKE_CURRENT_SOURCE_DIR}/memory/thread.h
     ${CMAKE_CURRENT_SOURCE_DIR}/memory/vtable.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/plugins/api.h
     ${CMAKE_CURRENT_SOURCE_DIR}/plugins/fsm.h
     ${CMAKE_CURRENT_SOURCE_DIR}/plugins/manager.h
     ${CMAKE_CURRENT_SOURCE_DIR}/plugins/plugin.h

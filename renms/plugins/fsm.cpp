@@ -27,7 +27,7 @@ void HandleGcApplicationUpdate(nms::cGcApplication *gApplication)
 {
     for (void *lUpdateCallback : *renms::config::gUpdateCallbacks)
     {
-        reinterpret_cast<PluginUpdate_t>(lUpdateCallback)();
+        reinterpret_cast<decltype(&PluginUpdate)>(lUpdateCallback)();
     }
 }
 

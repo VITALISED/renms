@@ -22,7 +22,7 @@ See [BUILD.md](BUILD.md) for instructions. (potentially outdated)
 
 We're currently working on polishing existing headers and adding new calls to the game. It would be cool to port some definitions to a standalone version agnostic platform but this is time consuming and inconvenient to maintain with the handful of people working on the project right now.
 
-Feel free to show off what you make to us in our ["official" discord](https://discord.gg/SbEQFsJxNV). We also live in [No Man's Sky Retro discord](https://discord.gg/tEYNuMmAvR).
+Feel free to show off what you make to us in our ["official" discord](https://discord.gg/SbEQFsJxNV). We also live in the [No Man's Sky Retro discord](https://discord.gg/tEYNuMmAvR).
 
 ## Contributing / Plugin Dev
 

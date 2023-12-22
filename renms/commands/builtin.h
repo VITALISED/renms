@@ -25,12 +25,17 @@
 
 #include <commands/commands.h>
 #include <commands/dispatcher.h>
-#include <plugins/api.h>
+#include <sdk/core.h>
 #include <sdk/textchat.h>
+#include <simulation/solarsystem/GcSolarSystemQuery.h>
 #include <toolkit/maths/numeric/generic/TkVector3Generic.h>
+#include <toolkit/maths/utilities/hash/TkSpookyV2.h>
 #include <toolkit/utilities/string/TkString.h>
 
+#include <cstdint>
 #include <numeric>
+
+#include <simulation/spaceship/ai/gcaispaceshippreloadcachedata.meta.h>
 
 RENMS_BEGIN
 

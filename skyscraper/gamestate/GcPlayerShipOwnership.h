@@ -95,6 +95,8 @@ class cGcPlayerShipOwnership
     cGcPlayerShipOwnership::eMeshRefreshState mMeshRefreshState;
     cTkSmartResHandle mRefreshSwapRes;
     bool mbNextSummonIsFree;
+
+    ~cGcPlayerShipOwnership() {}
 };
 
 SKYSCRAPER_END

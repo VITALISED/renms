@@ -146,12 +146,21 @@ class cTkDynamicArray
     int miSize;
     bool mbAllocatedFromData;
     uint8_t macMagicPad[3];
+    inline cTkDynamicArray() {}
+    T *operator[](int liIndex) { return reinterpret_cast<T *>(this->mArray.miOffset + sizeof(T) * liIndex); }
 };
 
 template <typename T, unsigned int size>
 class cTkFixedArray
 {
   public:
+    inline cTkFixedArray() {}
+
+    cTkFixedArray(const T (&initialValues)[size])
+    {
+        for (uint32_t i = 0; i < size; ++i) { maArray[i] = initialValues[i]; }
+    }
+
     T maArray[size];
 };
 

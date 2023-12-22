@@ -52,7 +52,8 @@ void Plugin::LoadExecutable()
     }
 
     // Execute plugin main
-    PluginMain_t pluginEntry = reinterpret_cast<PluginMain_t>(GetProcAddress(PluginHandle, "PluginMain"));
+    decltype(&PluginMain) pluginEntry =
+        reinterpret_cast<decltype(&PluginMain)>(GetProcAddress(PluginHandle, "PluginMain"));
     if (pluginEntry) { pluginEntry(); }
     else
     {
@@ -62,7 +63,8 @@ void Plugin::LoadExecutable()
         return;
     }
 
-    PluginUpdate_t pluginUpdate = reinterpret_cast<PluginMain_t>(GetProcAddress(PluginHandle, "PluginUpdate"));
+    decltype(&PluginUpdate) pluginUpdate =
+        reinterpret_cast<decltype(&PluginUpdate)>(GetProcAddress(PluginHandle, "PluginUpdate"));
     if (pluginUpdate) { renms::config::gUpdateCallbacks->push_back(pluginUpdate); }
     else { spdlog::error("Couldn't find void RENMS_ENTRY PluginUpdate in {}, skipping step.", this->msDisplayName); }
 }

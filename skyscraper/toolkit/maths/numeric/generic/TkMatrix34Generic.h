@@ -30,7 +30,7 @@ SKYSCRAPER_BEGIN
 class cTkMatrix34
 {
   public:
-    cTkMatrix34();
+    cTkMatrix34() {};
 
     cTkVector3 mRight, mUp, mAt, mPos;
 };

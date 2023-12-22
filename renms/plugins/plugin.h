@@ -24,7 +24,7 @@
 #include <renms.h>
 
 #include <core/config.h>
-#include <plugins/api.h>
+#include <sdk/core.h>
 
 RENMS_BEGIN
 
