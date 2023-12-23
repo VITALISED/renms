@@ -26,6 +26,7 @@ set(RENMS_CORE_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/commands/commands.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/commands/dispatcher.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/fios/fios.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/testing/testhooks.cpp
 )
 
 set(RENMS_CORE_HEADERS
@@ -46,6 +47,7 @@ set(RENMS_CORE_HEADERS
     ${CMAKE_CURRENT_SOURCE_DIR}/plugins/manager.h
     ${CMAKE_CURRENT_SOURCE_DIR}/plugins/plugin.h
     ${CMAKE_CURRENT_SOURCE_DIR}/renms.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/testing/testhooks.h
 )
 
 add_library(renms_core SHARED ${RENMS_CORE_HEADERS} ${RENMS_CORE_SOURCES})

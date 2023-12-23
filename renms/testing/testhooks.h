@@ -1,7 +1,7 @@
 /**
- * @file TkSeed.h
+ * @file testhooks.h
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2023-12-24
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -21,19 +21,13 @@
 
 #pragma once
 
-#include <skyscraper.h>
+#include <renms.h>
 
-SKYSCRAPER_BEGIN
+#include <memory/hook.h>
+#include <sdk/core.h>
 
-class cTkSeed
-{
-  public:
-    inline cTkSeed() { this->mbValid = true; }
-    inline cTkSeed(uint64_t lu64SeedValue) { this->mu64SeedValue = lu64SeedValue; }
-    inline uint64_t GetValue() { return mu64SeedValue; }
+RENMS_BEGIN
 
-    uint64_t mu64SeedValue;
-    bool mbValid;
-};
+void CreateTestingHooks();
 
-SKYSCRAPER_END
+RENMS_END

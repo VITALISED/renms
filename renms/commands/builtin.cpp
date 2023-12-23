@@ -101,10 +101,10 @@ auto fmix64_david_stafford_mix02(uint64_t value)
 
 void GetUACommandDispatch(std::vector<std::string> *laArgs)
 {
-    uint64_t UA                      = 4891770163701468;
+    cTkSeed UA                       = cTkSeed(0x16109FEEE26DC);
     nms::cGcSolarSystemQuery *lQuery = new nms::cGcSolarSystemQuery();
-    lQuery->Run(UA, nms::cGcSolarSystemQuery::SystemAndPlanets, false);
-    spdlog::info("UA: {:X}", UA);
+    lQuery->Run(UA.GetValue(), nms::cGcSolarSystemQuery::SystemAndPlanets, false);
+    spdlog::info("UA: {:X}", UA.GetValue());
     spdlog::info("System seed: {:X}", lQuery->mSystemSeed.mu64SeedValue);
     spdlog::info("Planets:");
     for (PlanetGenerationQuery planetQuery : lQuery->maPlanetAttributes)
@@ -129,32 +129,16 @@ void GetUACommandDispatch(std::vector<std::string> *laArgs)
     cTkDynamicArray<cGcAISpaceshipPreloadCacheData> systemShips =
         renms_sdk::GetApplication()->mpData->mSimulation.mpSolarSystem->mSolarSystemData.maSystemShips;
 
-    uint64_t computedua = 0xB6D4CB0BCF49;
-
-    spdlog::info("Guh {:X}", computedua);
-
-    // Extract the high 32 bits of lSeed->mu64SeedValue
-    uint32_t highBits = static_cast<uint32_t>(computedua >> 32);
-
-    // XOR the original mu64SeedValue with its high and rotated versions
-    uint32_t rngstate0 = static_cast<uint32_t>(computedua) ^ highBits ^ ((computedua << 16) | (computedua >> 48));
-    // Check if the lower 32 bits of mu64SeedValue are zero
-    uint32_t rngstate1 = static_cast<uint32_t>(computedua) + (static_cast<uint32_t>(computedua) == 0);
-
-    // shuffle rng states somewhat
-    // rngstate0 = rngstate1 + 1517746329 * rngstate0;
-    // rngstate1 = rngstate1 + 1517746329 * rngstate0;
-    // rngstate0 = rngstate1 + 1517746329 * rngstate0;
-    // rngstate1 = rngstate1 + 1517746329 * rngstate0;
-    // rngstate0 = rngstate1 + 1517746329 * rngstate0;
-    // rngstate1 = rngstate1 + 1517746329 * rngstate0;
-
-    uint64_t gahgahah = 0x27DEF26A155F3494i64;
-    rngstate0         = 0x155F3494;
-    rngstate1         = 0x27DEF26A;
-
     int v71                  = EShipClass_Freighter;
     int tradeshipscachecount = systemShips.miSize; // temp value
+
+    cTkPersonalRNG lRNG = cTkPersonalRNG();
+    lRNG.Reseed(&UA);
+    lRNG.ShuffleState();
+    lRNG.ShuffleState(); // this is a float gen call from the look
+    lRNG.ShuffleState();
+
+    // need to handle the generation of asteroids
 
     // generate ship seeds
     for (int i = 0; i < 9; i++)
@@ -164,18 +148,11 @@ void GetUACommandDispatch(std::vector<std::string> *laArgs)
         {
             for (int i = 0; i < tradeshipscachecount; i++)
             {
-                // shuffle rng for ship seed.
-                rngstate0 = rngstate1 + 1517746329 * rngstate0;
-                rngstate1 = rngstate1 + 1517746329 * rngstate0;
-
-                uint64_t rngstate = (uint64_t)rngstate0 << 32 | rngstate1;
-
-                uint64_t finalseed =
-                    0xE36AA5C613612997ui64 * ((0x64DD81482CBD31D7i64 * ((rngstate)) ^ ((rngstate)) >> 33)) ^
-                    ((0x64DD81482CBD31D7i64 * ((rngstate)) ^ ((rngstate)) >> 33)) >> 33;
+                cTkSeed finalseed;
+                lRNG.GenSeed(&finalseed);
 
                 // spdlog::info("finalseed {}", finalseed);
-                spdlog::info("seeds: {:X} | {:X}", systemShips[i]->mSeed.mu64SeedValue, finalseed);
+                spdlog::info("seeds: {:X} | {:X}", systemShips[i]->mSeed.mu64SeedValue, finalseed.mu64SeedValue);
             }
         }
         else { v71++; }
