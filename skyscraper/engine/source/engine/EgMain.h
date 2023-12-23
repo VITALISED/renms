@@ -63,6 +63,9 @@ enum Mode
 
 } // namespace EgRenderCullMode
 
+/**
+ * Public entry for engine structures, not super fleshed out at the moment.
+ */
 namespace Engine
 {
 

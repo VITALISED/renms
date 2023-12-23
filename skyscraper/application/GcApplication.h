@@ -74,11 +74,24 @@
 SKYSCRAPER_BEGIN
 
 /**
- * A singleton managing most of the game's heap allocated structures and other classes.
+ * @brief Global singleton storing most data in Game Components. Implements FSM calls
+ * @details
+ * Whilst this struct stores most things, you will want to use @ref cTkEngineUtils for Node calls as of right
+ * now, since we dont have globals for @ref Engine objects directly.
+ * If you're using the @ref renms_sdk you should be able to invoke it directly on your platform using the following
+ * example code:
+ *
+ * @code{.cpp}
+ * nms::cGcApplication* gApplication = renms_sdk::GetApplication();
+ * @endcode
+ *
  */
 class cGcApplication : public cTkFSM
 {
   public:
+    /**
+     * @brief Storage class for GcApplication.
+     */
     struct ALIGN(16) Data
     {
         cGcFirstBootContext mFirstBootContext;

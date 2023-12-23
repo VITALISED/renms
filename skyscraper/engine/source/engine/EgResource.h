@@ -30,6 +30,10 @@
 
 SKYSCRAPER_BEGIN
 
+/**
+ * @brief Abstract class based on Horde3D::Resource. See
+ * https://github.com/horde3d/Horde3D/blob/master/Horde3D/Source/Horde3DEngine/egResource.h
+ */
 class cEgResource : public cTkResource
 {
   public:

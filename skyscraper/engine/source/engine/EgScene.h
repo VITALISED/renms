@@ -102,6 +102,7 @@ class cEgRenderableSceneNode : public cEgSceneNode
 
 class cEgSceneNodeTemplate
 {
+  public:
     int miType;
     unsigned int muNameHash;
     cTkSharedPtr<std::string> msName;

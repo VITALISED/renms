@@ -2,19 +2,19 @@
  * @file TkStackContainer.h
  * @author VITALISED & Contributors
  * @since 2023-12-05
- * 
+ *
  * Copyright (C) 2023  VITALISED & Contributors
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
@@ -179,12 +179,11 @@ class StackWString : public StackContainer<
   private:
     DISALLOW_COPY_AND_ASSIGN(StackWString);
 };
-// StackVector
-//
-// Example:
-//   StackVector<int, 16> foo;
-//   foo->push_back(22);  // we have overloaded operator->
-//   foo[0] = 10;         // as well as operator[]
+
+/**
+ * @brief Mostly 1:1 copy of Chromium's stack vector. See
+ * https://chromium.googlesource.com/chromium/chromium/+/master/base/stack_container.h
+ */
 template <typename T, size_t stack_capacity>
 class cTkStackVector : public StackContainer<std::vector<T, StackAllocator<T, stack_capacity>>, stack_capacity>
 {

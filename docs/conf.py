@@ -24,7 +24,7 @@ exhale_args = {
     "rootFileName":          "library_root.rst",
     "doxygenStripFromPath":  "..",
     # Heavily encouraged optional argument (see docs)
-    "rootFileTitle":         "Metadata and Internal",
+    "rootFileTitle":         "Index",
     # Suggested optional arguments
     "createTreeView":        False,
     # TIP: if using the sphinx-bootstrap-theme, you need
