@@ -30,6 +30,8 @@ nms::cGcApplication *GetApplication()
     if (GetModuleHandleA("steam_api64.dll"))
         return reinterpret_cast<nms::cGcApplication *>(RelToAbsolute(GCAPPLICATION_STEAM));
 
+    std::runtime_error("Unknown platform!");
+
     return NULL;
 }
 

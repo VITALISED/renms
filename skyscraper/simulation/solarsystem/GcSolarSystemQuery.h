@@ -84,6 +84,9 @@ class cGcSolarSystemQuery
     cGcSolarSystemGenerator::GenerationData mSolarSystemGenerationData;
     cGcSolarSystemData mSolarSystemData;
     cGcSolarSystemAsteroidFields mSolarSystemInfoMap;
+
+    cGcSolarSystemQuery();
+    void Run(uint64_t lUA, cGcSolarSystemQuery::Type leType, bool lbGenerateObjectLists);
 };
 
 SKYSCRAPER_END

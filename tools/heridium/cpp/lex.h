@@ -65,6 +65,9 @@
 #define HM_SEMI        buffer += ";\n"
 #define HM_BUFFER_CSTR buffer.c_str()
 #define HM_BUFFER      buffer;
+#define HM_CONSTVAL(name, value)                                                                            \
+    this->msConstBuffers.append("        NO_UNIQUE_ADDRESS const int ki").append(name).append("ArraySize"); \
+    this->msConstBuffers.append(";\n")
 
 #define HM_UNION_BEGIN \
     HM_INDENT;         \
@@ -84,6 +87,14 @@
     HM_SEMI
 
 #define HM_BEGIN_ENUM_BUFFER this->msEnumBuffer = "";
+
+#define HM_METHOD_DEF(return_type, name, arguments, empty_body)    \
+    HM_INDENT;                                                     \
+    buffer.append(return_type);                                    \
+    if (!std::string(return_type).empty()) { buffer.append(" "); } \
+    buffer.append(name).append(arguments);                         \
+    if (empty_body) { buffer.append(" {}\n"); }                    \
+    else { buffer.append(";\n"); }
 
 #define HM_ISDEPENDENCYDEFINED(lpacName) \
     (std::find(this->mDefinedTypes.begin(), this->mDefinedTypes.end(), lpacName) != this->mDefinedTypes.end())
@@ -169,7 +180,7 @@
 #define HM_META_MEMBER(lpacMember)                                       \
     HM_INDENT;                                                           \
     HM_INDENT;                                                           \
-    buffer.append("NO_UNIQUE_ADDRESS class cTkMetaDataMember mMember_"); \
+    buffer.append("NO_UNIQUE_ADDRESS cTkMetaDataMember mMember_");       \
     buffer.append(heridium::CXX_GetNotationForMember(lpacMember.mType)); \
     buffer.append(lpacMember.mpacName);                                  \
     HM_SEMI

@@ -1,7 +1,7 @@
 /**
- * @file TkStopwatch.h
+ * @file TkByteSwap.h
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2023-12-23
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -25,12 +25,23 @@
 
 SKYSCRAPER_BEGIN
 
-class cTkStopwatch
+class cTkByteSwap
 {
   public:
-    uint64_t miDuration;
-    uint64_t miStartTime;
-    bool mbRunning;
+    static uint32_t inline GetLowValOf64(uint64_t lValue)
+    {
+        uint32_t lowerBitsValue = static_cast<uint32_t>(lValue);
+
+        return lowerBitsValue + (lowerBitsValue == 0 ? 1 : 0);
+    }
+
+    static uint32_t GetHighValOf64(uint64_t lValue)
+    {
+        uint32_t highBitsValue = static_cast<uint32_t>(lValue >> 32);
+        uint32_t rotatedValue  = static_cast<uint32_t>((lValue << 16) | (lValue >> 16));
+
+        return static_cast<uint32_t>(lValue) ^ highBitsValue ^ rotatedValue;
+    }
 };
 
 SKYSCRAPER_END

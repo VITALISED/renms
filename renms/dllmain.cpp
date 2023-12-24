@@ -30,7 +30,8 @@
 #include <logging/logger.h>
 #include <memory/thread.h>
 #include <plugins/fsm.h>
-//#include <scripts/python.h>
+#include <testing/testhooks.h>
+// #include <scripts/python.h>
 
 DWORD WINAPI MainThread(LPVOID lpReserved)
 {
@@ -46,6 +47,7 @@ DWORD WINAPI MainThread(LPVOID lpReserved)
     renms::CreateTargetDirectories();
     renms::CreateWarningHooks();
     renms::CreateFSMGcApplicationHooks();
+    renms::CreateTestingHooks();
 
     renms::ResumeModuleThread(renms::GetNMSModuleHandle());
     spdlog::info("NMS is running.");

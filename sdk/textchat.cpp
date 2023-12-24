@@ -27,9 +27,8 @@ void SendTextMessage(nms::cTkFixedString<1121, char> *lsMessage)
 {
     nms::cGcApplication *gApplication = GetApplication();
 
-    cGcTextChatManager__PostLocalMessage lSayFn =
-        reinterpret_cast<cGcTextChatManager__PostLocalMessage>(SignatureScan(
-            "48 89 5C 24 08 48 89 6C 24 10 48 89 74 24 18 48 89 7C 24 20 41 56 48 81 EC ? ? ? ? 4D 8B D0"));
+    cGcTextChatManager__PostLocalMessage lSayFn = reinterpret_cast<cGcTextChatManager__PostLocalMessage>(
+        SignatureScan("48 89 5C 24 08 48 89 6C 24 10 48 89 74 24 18 48 89 7C 24 20 41 56 48 81 EC ? ? ? ? 4D 8B D0"));
 
     nms::cTkFixedString<128, char> lRelevantPlayer = nms::cTkFixedString<128, char>("Explorer");
     nms::cTkColour lTransparent                    = nms::cTkColour(0, 0, 0, 0);

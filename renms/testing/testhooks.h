@@ -1,7 +1,7 @@
 /**
- * @file TkStopwatch.h
+ * @file testhooks.h
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2023-12-24
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -21,16 +21,13 @@
 
 #pragma once
 
-#include <skyscraper.h>
+#include <renms.h>
 
-SKYSCRAPER_BEGIN
+#include <memory/hook.h>
+#include <sdk/core.h>
 
-class cTkStopwatch
-{
-  public:
-    uint64_t miDuration;
-    uint64_t miStartTime;
-    bool mbRunning;
-};
+RENMS_BEGIN
 
-SKYSCRAPER_END
+void CreateTestingHooks();
+
+RENMS_END

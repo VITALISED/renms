@@ -146,6 +146,8 @@ class cGcGameState
     bool mbLastDeathTriggeredSlotSelect;
     bool mbWaitingForSeasonalGameMode;
     cGcCloudSaveManager mCloudSaveManager;
+
+    ~cGcGameState() {}
 };
 
 SKYSCRAPER_END

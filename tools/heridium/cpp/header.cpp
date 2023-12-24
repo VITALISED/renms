@@ -2,19 +2,19 @@
  * @file header.cpp
  * @author VITALISED & Contributors
  * @since 2023-12-12
- * 
+ *
  * Copyright (C) 2023  VITALISED & Contributors
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
@@ -114,6 +114,7 @@ std::string HeridiumCXXFile::DoHeaderFirstPass()
             break;
         case cTkMetaDataMember::EType_Enum: HM_PUSHSTRING(this->DoEnumLookup(&currentMember)); break;
         case cTkMetaDataMember::EType_Flags: HM_PUSHSTRING(this->DoFlagLookup(&currentMember)); break;
+        case cTkMetaDataMember::EType_StaticArray: HM_CONSTVAL(currentMember.mpacName, currentMember.miCount); break;
         default: break;
         }
 
@@ -128,6 +129,7 @@ std::string HeridiumCXXFile::DoHeaderFirstPass()
             break;
         case cTkMetaDataMember::EType_Enum: HM_PUSHSTRING(this->DoEnumLookup(&currentMember)); break;
         case cTkMetaDataMember::EType_Flags: HM_PUSHSTRING(this->DoFlagLookup(&currentMember)); break;
+        case cTkMetaDataMember::EType_StaticArray: HM_CONSTVAL(currentMember.mpacName, currentMember.miCount); break;
         default: break;
         }
     }
@@ -146,6 +148,20 @@ std::string HeridiumCXXFile::GetInnerType(cTkMetaDataMember *lpCurrentMember)
     case cTkMetaDataMember::EType_Flags: return HM_FLAGNAME(lpCurrentMember->mpacName);
     default: return heridium::CXX_MemberTypeToNamed(lpCurrentMember->mInnerType);
     }
+}
+
+std::string HeridiumCXXFile::AddMethodDefinitions()
+{
+    HM_BEGIN_BUFFER;
+
+    HM_METHOD_DEF("inline", this->mpMetaDataClass->mpacName, "()", true);
+    HM_METHOD_DEF(
+        std::string(this->mpMetaDataClass->mpacName).append("*"), "Cast", "(cTkClassPointer* lClassPtr)", false);
+    // HM_METHOD_DEF("", this->mpMetaDataClass->mpacName, "()", false);
+    // HM_METHOD_DEF("", this->mpMetaDataClass->mpacName, "()", false);
+    // HM_METHOD_DEF("", this->mpMetaDataClass->mpacName, "()", false);
+
+    return HM_BUFFER;
 }
 
 void HeridiumCXXFile::WriteHeaderFile()
@@ -174,7 +190,14 @@ void HeridiumCXXFile::WriteHeaderFile()
 
     HM_PUSHSTRING("\n");
 
+    HM_PUSHSTRING(this->AddMethodDefinitions());
+
+    HM_PUSHSTRING("\n");
+
     HM_UNION_BEGIN;
+
+    // HM_PUSHSTRING(this->msConstBuffers);
+    // if (!this->msConstBuffers.empty()) { HM_PUSHSTRING("\n"); }
 
     HM_STRUCT_BEGIN;
 

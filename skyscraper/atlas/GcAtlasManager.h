@@ -38,6 +38,10 @@ typedef int Enum;
 
 }
 
+/**
+ * @brief "Atlas" structures and calls refer to the NMS discovery servers. It's effectively a high level HTTP wrapper.
+ * The Atlas Manager is of course, the high level controller for transport and broker tasks and dispatches.
+ */
 class cGcAtlasManager
 {
   public:

@@ -29,7 +29,7 @@ template <int liSize, typename T>
 class cTkFixedString
 {
   public:
-    cTkFixedString() {}
+    cTkFixedString() = default;
     cTkFixedString(const char *lpacBuffer) { this->Copy(lpacBuffer); }
     void Copy(const char *lpacBuffer) { strcpy_s(macBuffer, liSize, lpacBuffer); }
 

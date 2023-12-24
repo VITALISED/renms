@@ -16,7 +16,6 @@
 set(RENMS_CORE_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/dllmain.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/plugins/plugin.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/plugins/api.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/plugins/fsm.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/plugins/manager.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/logging/logger.cpp
@@ -27,6 +26,7 @@ set(RENMS_CORE_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/commands/commands.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/commands/dispatcher.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/fios/fios.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/testing/testhooks.cpp
 )
 
 set(RENMS_CORE_HEADERS
@@ -43,11 +43,11 @@ set(RENMS_CORE_HEADERS
     ${CMAKE_CURRENT_SOURCE_DIR}/memory/memory.h
     ${CMAKE_CURRENT_SOURCE_DIR}/memory/thread.h
     ${CMAKE_CURRENT_SOURCE_DIR}/memory/vtable.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/plugins/api.h
     ${CMAKE_CURRENT_SOURCE_DIR}/plugins/fsm.h
     ${CMAKE_CURRENT_SOURCE_DIR}/plugins/manager.h
     ${CMAKE_CURRENT_SOURCE_DIR}/plugins/plugin.h
     ${CMAKE_CURRENT_SOURCE_DIR}/renms.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/testing/testhooks.h
 )
 
 add_library(renms_core SHARED ${RENMS_CORE_HEADERS} ${RENMS_CORE_SOURCES})

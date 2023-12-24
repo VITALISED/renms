@@ -38,6 +38,10 @@ class PulseItemList
     unsigned int mNumItems;
 };
 
+/**
+ * @brief Pulse music is the system implemented - at least partially by 65daysofstatic, the band who were working on
+ * No Man's Sky's soundscapes.
+ */
 class cGcAudioPulseMusic
 {
   public:
