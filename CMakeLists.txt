@@ -52,14 +52,6 @@ if(${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_CURRENT_SOURCE_DIR})
 
     message(STATUS "CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}")
 
-    # Temporary fix, see issue #31
-    message(
-        WARNING
-            "Due to a bug in vscode, we won't check if the build type is RelWithDebInfo/Release."
-            " See issue #31 for more info. I trust you haven't ignored this and it's set"
-            " correctly. - tractorbeam"
-    )
-
     # ==============================================================================================
     # Config Stuff
     if(EXISTS "${CMAKE_SOURCE_DIR}/config.cmake")
