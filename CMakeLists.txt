@@ -57,9 +57,12 @@ if(${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_CURRENT_SOURCE_DIR})
     if(EXISTS "${CMAKE_SOURCE_DIR}/config.cmake")
         include(${CMAKE_SOURCE_DIR}/config.cmake)
     else()
-        message(
-            FATAL_ERROR
-                "No config.cmake found! Check out the config-template.cmake."
+        file(COPY_FILE ${CMAKE_SOURCE_DIR}/config-template.cmake ${CMAKE_SOURCE_DIR}/config.cmake)
+
+        message(FATAL_ERROR
+                    "A config.cmake was not found! One was made for you, but we need to know where your install of NMS 2.13 is.\n\
+Look inside the config.cmake for the option, and set it's exact path. \
+It must end with NMS.exe. See the BUILD.md for why it needs to know this."
         )
     endif()
 
@@ -129,7 +132,6 @@ endif()
 add_custom_target(
     uberclean
     COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target clean
-    COMMAND git submodule deinit --all -f
     COMMAND ${CMAKE_COMMAND} -E remove_directory
             ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
     COMMAND ${CMAKE_COMMAND} -E remove_directory
