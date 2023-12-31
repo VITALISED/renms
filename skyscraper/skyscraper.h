@@ -27,11 +27,11 @@
 
 #include <havok_stubs.h>
 // #include <nanoflann.hpp>
+#include <common/memory/memory.h>
 #include <nanoflann_stubs.h>
 #include <rapidjson/document.h>
 #include <rapidjson/rapidjson.h>
 #include <robin_hood.h>
-#include <sdk/internal/memory.h>
 #include <vulkan/vulkan.h>
 #include <windows.h> //see toolkit/system/TkCSMutex.h
 

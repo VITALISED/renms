@@ -59,7 +59,9 @@ target_include_directories(
     PUBLIC ${RENMS_METADATA_DIR}
 )
 
-target_link_libraries(skyscraper PUBLIC renms_submodule_dependencies)
+target_link_libraries(
+    skyscraper PUBLIC renms_submodule_dependencies renms_common
+)
 
 if(NOT ${SKIP_NMS_CHECK})
     add_dependencies(skyscraper metadata_generator)

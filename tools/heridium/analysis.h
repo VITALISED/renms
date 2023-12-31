@@ -21,8 +21,8 @@
 
 #pragma once
 
-#include <memory/hook.h>
-#include <memory/thread.h>
+#include <common/memory/hook.h>
+#include <common/thread/thread.h>
 #include <toolkit/data/TkMetaData.h>
 #include <toolkit/data/TkMetaDataXML.h>
 #include <toolkit/utilities/containers/TkVector.h>

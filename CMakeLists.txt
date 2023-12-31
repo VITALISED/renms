@@ -57,10 +57,13 @@ if(${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_CURRENT_SOURCE_DIR})
     if(EXISTS "${CMAKE_SOURCE_DIR}/config.cmake")
         include(${CMAKE_SOURCE_DIR}/config.cmake)
     else()
-        file(COPY_FILE ${CMAKE_SOURCE_DIR}/config-template.cmake ${CMAKE_SOURCE_DIR}/config.cmake)
+        file(COPY_FILE ${CMAKE_SOURCE_DIR}/config-template.cmake
+             ${CMAKE_SOURCE_DIR}/config.cmake
+        )
 
-        message(FATAL_ERROR
-                    "A config.cmake was not found! One was made for you, but we need to know where your install of NMS 2.13 is.\n\
+        message(
+            FATAL_ERROR
+                "A config.cmake was not found! One was made for you, but we need to know where your install of NMS 2.13 is.\n\
 Look inside the config.cmake for the option, and set it's exact path. \
 It must end with NMS.exe. See the BUILD.md for why it needs to know this."
         )
@@ -115,6 +118,8 @@ file(
     ${CMAKE_CURRENT_SOURCE_DIR}/tools/heridium/*.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/sdk/*.h
     ${CMAKE_CURRENT_SOURCE_DIR}/sdk/*.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/common/*.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/common/*.cpp
 )
 
 foreach(SOURCE_ITEM ${SOURCES_TO_ADD_COMMENTS})

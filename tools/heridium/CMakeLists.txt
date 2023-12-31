@@ -43,6 +43,7 @@ target_include_directories(
 # we need to include only the bit of skyscraper that heridium needs.
 target_link_libraries(
     heridium PRIVATE spdlog fmt PolyHook_2 renms_submodule_dependencies
+                     renms_common
 )
 
 add_subdirectory(launcher)
