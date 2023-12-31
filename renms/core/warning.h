@@ -23,8 +23,8 @@
 
 #include <renms.h>
 
+#include <common/memory/hook.h>
 #include <core/config.h>
-#include <memory/hook.h>
 #include <sdk/core.h>
 
 RENMS_BEGIN

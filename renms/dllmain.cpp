@@ -23,12 +23,12 @@
 
 #include <commands/builtin.h>
 #include <commands/dispatcher.h>
+#include <common/thread/thread.h>
 #include <core/config.h>
 #include <core/filesystem.h>
 #include <core/warning.h>
 #include <fios/fios.h>
 #include <logging/logger.h>
-#include <memory/thread.h>
 #include <plugins/fsm.h>
 #include <testing/testhooks.h>
 // #include <scripts/python.h>

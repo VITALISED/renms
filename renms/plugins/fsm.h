@@ -25,8 +25,8 @@
 
 #include <application/GcApplication.h>
 #include <core/config.h>
-#include <memory/hook.h>
-#include <memory/vtable.h>
+#include <common/memory/hook.h>
+#include <common/memory/vtable.h>
 #include <sdk/core.h>
 
 RENMS_BEGIN
