@@ -27,6 +27,10 @@
 
 SKYSCRAPER_BEGIN
 
+/**
+ * @union TkID
+ * @brief Core identifier type
+ */
 template <uint32_t Size>
 union TkID {
     TkID(){};

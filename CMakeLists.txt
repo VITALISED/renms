@@ -102,6 +102,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_C_STANDARD 17)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 
+add_subdirectory(common)
 add_subdirectory(skyscraper)
 add_subdirectory(sdk)
 add_subdirectory(renms)
