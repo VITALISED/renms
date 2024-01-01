@@ -22,7 +22,7 @@
 #pragma once
 
 #if (_ITERATOR_DEBUG_LEVEL > 0)
-#pragma warning("You're compiling skyscraper structures in Debug. STL containers will be the wrong size.")
+#pragma message("You're compiling skyscraper structures in Debug. STL containers will be the wrong size.")
 #endif
 
 #include <havok_stubs.h>
