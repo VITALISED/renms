@@ -36,7 +36,7 @@
 
 SKYSCRAPER_BEGIN
 
-class cGcPlayerFreighterOwnership : INetworkPlayerEventsHandler
+class cGcPlayerFreighterOwnership : public INetworkPlayerEventsHandler
 {
   public:
     enum eMeshRefreshState

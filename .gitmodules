@@ -43,3 +43,6 @@
 [submodule "submodules/hgnanoflann"]
 	path = submodules/hgnanoflann
 	url = https://github.com/VITALISED/hgnanoflann.git
+[submodule "submodules/pcre2"]
+	path = submodules/pcre2
+	url = https://github.com/PCRE2Project/pcre2.git

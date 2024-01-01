@@ -65,7 +65,7 @@ class ITkDocumentWriter
     virtual void AddKey(const char *);
 };
 
-class cTkDocumentWriterJSON : ITkDocumentWriter
+class cTkDocumentWriterJSON : public ITkDocumentWriter
 {
   public:
     cTkStringAssembler *mAssembler;

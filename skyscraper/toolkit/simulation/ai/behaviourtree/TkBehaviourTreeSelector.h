@@ -31,6 +31,7 @@ SKYSCRAPER_BEGIN
 
 class cTkBehaviourTreeSelector : public cTkBehaviourTreeNode
 {
+  public:
     TkID<128> mHandle;
     cTkVector<cTkBehaviourTreeNode *> mChildren;
     int miNextChildToUpdate;

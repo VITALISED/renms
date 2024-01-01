@@ -47,9 +47,9 @@ class PersistentData
 class cGcBaseBuildingPersistentBuffer : public cGcNetworkSynchronisedBuffer
 {
   public:
-    struct BaseBuildingPersistentData : PersistentData<cGcPersistentBBObjectData>
+    class BaseBuildingPersistentData : public PersistentData<cGcPersistentBBObjectData>
     {
-        ~BaseBuildingPersistentData() { EMPTY_CALL_DESTRUCTOR(); }
+        virtual ~BaseBuildingPersistentData() { ; }
     };
 
     cTkVector<cGcBaseBuildingPersistentBuffer::BaseBuildingPersistentData> maBaseBuildingObjects;

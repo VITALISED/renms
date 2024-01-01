@@ -162,7 +162,7 @@ class cGcIntroFeed
     bool mbValid;
 };
 
-class cGcGalaxyMap : IKnowledgeEventHandler, IDiscoveryManagerEventHandler, AutoPooled<23>
+class cGcGalaxyMap : public IKnowledgeEventHandler, public IDiscoveryManagerEventHandler, public AutoPooled<23>
 {
   public:
     enum MapMode

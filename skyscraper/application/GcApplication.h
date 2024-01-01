@@ -93,7 +93,7 @@ class cGcApplication : public cTkFSM
     /**
      * @brief Storage class for GcApplication.
      */
-    struct ALIGN(16) Data
+    struct Data
     {
         cGcFirstBootContext mFirstBootContext;
         cTkMcQmcLFSRStore mTkMcQmcLFSRStore;

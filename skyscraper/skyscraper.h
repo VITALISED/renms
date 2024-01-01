@@ -52,9 +52,12 @@
 
 namespace nms_rapidjson = rapidjson;
 
+// We need to check for definition due to the way SWIG expands the macro.
 // clang-format off
+#if !defined (SKYSCRAPER_BEGIN) || !defined (SKYSCRAPER_END)
 #define SKYSCRAPER_BEGIN namespace nms {
 #define SKYSCRAPER_END };
+#endif
 // clang-format on
 
 #ifdef _MSC_VER

@@ -28,7 +28,7 @@
 
 SKYSCRAPER_BEGIN
 
-class cGcTelemetryManager : IStatVariantWatcher
+class cGcTelemetryManager : public IStatVariantWatcher
 {
   public:
     robin_hood::detail::Table<

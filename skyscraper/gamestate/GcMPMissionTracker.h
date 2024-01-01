@@ -65,7 +65,7 @@ class cGcMPMissionSelectionHelper
     cGcRpcCallBase *MPMB;
 };
 
-class cGcMPMissionTracker : INetworkPlayerEventsHandler, IDiscoveryManagerEventHandler
+class cGcMPMissionTracker : public INetworkPlayerEventsHandler, public IDiscoveryManagerEventHandler
 {
   public:
     struct sGcSyncedMPMissionPlayerData

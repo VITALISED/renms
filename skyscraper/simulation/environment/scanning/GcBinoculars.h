@@ -48,7 +48,7 @@ struct ScanInfo
     bool mbAlwaysKnown;
 };
 
-class ALIGN(16) cGcBinoculars
+class cGcBinoculars
 {
   public:
     enum eMode

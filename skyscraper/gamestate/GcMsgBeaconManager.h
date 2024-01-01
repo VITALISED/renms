@@ -31,7 +31,7 @@
 
 SKYSCRAPER_BEGIN
 
-class cGcMsgBeacon : AutoPooled<5>
+class cGcMsgBeacon : public AutoPooled<5>
 {
   public:
     enum UploadStatus

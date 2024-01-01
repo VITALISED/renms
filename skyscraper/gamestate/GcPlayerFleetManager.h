@@ -52,7 +52,7 @@ class cGcPurchasableFrigateTracker
     cTkVector<TkHandle> maUnavailableFrigates;
 };
 
-class cGcPlayerFleetManager : INetworkPlayerEventsHandler
+class cGcPlayerFleetManager : public INetworkPlayerEventsHandler
 {
   public:
     cGcPlayerCommunicatorMessage mDamageCommunicatorMessage;

@@ -36,7 +36,7 @@ SKYSCRAPER_BEGIN
 namespace GcDiscoverySearchConstraints
 {
 
-class ConstraintBase : AutoPooled<19>
+class ConstraintBase : public AutoPooled<19>
 {
   public:
     virtual ~ConstraintBase();
@@ -93,7 +93,7 @@ struct DiscoveryInfo
 
 } // namespace DiscoveryResolver
 
-class cGcDiscoverySearch : AutoPooled<19>
+class cGcDiscoverySearch : public AutoPooled<19>
 {
   public:
     enum SortMode

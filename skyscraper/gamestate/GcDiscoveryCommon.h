@@ -31,7 +31,7 @@
 
 SKYSCRAPER_BEGIN
 
-class cGcDiscoveryPayload : AutoPooled<19>
+class cGcDiscoveryPayload : public AutoPooled<19>
 {
   public:
     unsigned int kuSignificantElements;
@@ -39,7 +39,7 @@ class cGcDiscoveryPayload : AutoPooled<19>
     unsigned int muNumElements;
 };
 
-class cGcDiscoveryData : AutoPooled<19>
+class cGcDiscoveryData : public AutoPooled<19>
 {
   public:
     uint64_t mUniverseAddress;
@@ -59,14 +59,14 @@ class cGcDiscoveryDataRing
 struct DefaultDiscoveryDataHashing
 {};
 
-class cGcDiscoveryMetadata : AutoPooled<19>
+class cGcDiscoveryMetadata : public AutoPooled<19>
 {
   public:
     cTkFixedString<127, char> mCustomName;
     bool mbHasCustomName;
 };
 
-class cGcDiscoveryRecord : AutoPooled<19>
+class cGcDiscoveryRecord : public AutoPooled<19>
 {
   public:
     cGcDiscoveryData mData;
@@ -78,7 +78,7 @@ class cGcDiscoveryRecord : AutoPooled<19>
 };
 
 template <typename Hash, int MemPoolIdx>
-class cGcDiscoveryStoreImpl : AutoPooled<19>
+class cGcDiscoveryStoreImpl : public AutoPooled<19>
 {
   public:
     struct ConstIterator
@@ -119,7 +119,7 @@ class cGcDiscoveryStoreImpl : AutoPooled<19>
     uint64_t mu64ChangeID;
 };
 
-class cGcManagedDiscovery : AutoPooled<19>
+class cGcManagedDiscovery : public AutoPooled<19>
 {
   public:
     struct SubmitState
@@ -142,7 +142,7 @@ class cGcManagedDiscovery : AutoPooled<19>
     int mTimestampAtUpload;
 };
 
-class cGcDiscoveryExport : AutoPooled<19>
+class cGcDiscoveryExport : public AutoPooled<19>
 {
   public:
     struct Planet

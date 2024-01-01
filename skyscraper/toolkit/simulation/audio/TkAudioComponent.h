@@ -25,6 +25,7 @@
 
 #include <toolkit/audio/wwise/TkAudioManagerWwise.h>
 #include <toolkit/simulation/components/TkAnimationComponent.h>
+#include <toolkit/utilities/containers/TkStackContainer.h>
 
 #include <toolkit/components/audio/tkaudiocomponentdata.meta.h>
 
@@ -35,7 +36,7 @@ class cTkAudioComponent : public cTkComponent
   public:
     cTkAudioComponentData *mpData;
     std::array<int, 256> miFrameTracker;
-    cTkStackVector<short> miAnimIndices;
+    cTkStackVector<short, 16> miAnimIndices;
     int miNumAnimTriggers;
     cTkAnimationComponent *mpAnimation;
     bool mbCreature;

@@ -38,6 +38,7 @@ typedef WinHttpTask::State::Enum eIkConstraintType;
 
 struct AnimTransform
 {
+  public:
     cTkVector3 mNodeScale;
     cTkQuaternion mNodeRotationQuat;
     cTkVector3 mNodeTranslation;
@@ -46,6 +47,7 @@ struct AnimTransform
 
 class cTkJacobianRow
 {
+  public:
     int miStateSize;
     int miStateSizeAlignedUp;
     float mfValue;
@@ -56,6 +58,7 @@ class cTkIKFullBody;
 
 class cTkIKConstraint
 {
+  public:
     float mfStrength;
     bool mbEnable;
     eIkConstraintType mType;
@@ -75,6 +78,7 @@ class cTkIKConstraint
 
 class cTkIKJointXZPushConstraint : public cTkIKConstraint
 {
+  public:
     cTkVector3 mvDesiredPos;
     cTkEulerVector mvDesiredRot;
     TkHandle muNode;
@@ -86,6 +90,7 @@ class cTkIKJointXZPushConstraint : public cTkIKConstraint
 
 class cTkIKJointHeightConstraint : public cTkIKConstraint
 {
+  public:
     cTkVector3 mvDesiredPos;
     cTkVector3 mvBoneOffset;
     cTkEulerVector mvDesiredRot;
@@ -100,20 +105,23 @@ class cTkIKJointHeightConstraint : public cTkIKConstraint
 
 class cTkIKCenterOfGravityConstraint : public cTkIKConstraint
 {
+  public:
     cTkVector3 mvDesiredPos;
     cTkVector3 mvPosChange;
 };
 
 class cTkIKRotYModifyConstraint : public cTkIKConstraint
 {
+  public:
     float mfDesiredRot;
     TkHandle muNode;
     int mBoneIndex;
     float mfRotChange;
 };
 
-class cGcPistonConstraint : cTkIKConstraint
+class cGcPistonConstraint : public cTkIKConstraint
 {
+  public:
     TkHandle muJoint1;
     int miJoint1Index;
     TkHandle muJoint2;
@@ -124,23 +132,27 @@ class cGcPistonConstraint : cTkIKConstraint
 
 class cPreAdditiveCallback
 {
+  public:
     virtual void PreAdditive(cTkMatrix34 *, AnimTransform *, int);
 };
 
 template <typename T>
 class cTkPreAdditiveCallbackForwarder : public cPreAdditiveCallback
 {
+  public:
     T *mForwardedTo;
 };
 
 class cOnPostAnimCallback
 {
+  public:
     virtual void OnPostAnim(cTkMatrix34 *, AnimTransform *, int, const cTkPhysRelMat34 *);
 };
 
 template <typename T>
 class cTkOnPostAnimCallbackForwarder : public cOnPostAnimCallback
 {
+  public:
     T *mForwardedTo;
 };
 

@@ -48,6 +48,7 @@ class cTkTypedSmartResHandle
 
 class cTkResource
 {
+  public:
     int32_t miType;
     cTkFixedString<256, char> msName;
     int32_t mxFlags;

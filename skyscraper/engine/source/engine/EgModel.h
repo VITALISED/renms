@@ -23,15 +23,48 @@
 
 #include <skyscraper.h>
 
+#include <engine/source/engine/EgAnimation.h>
 #include <engine/source/engine/EgGeometry.h>
 #include <engine/source/engine/EgScene.h>
 #include <toolkit/utilities/containers/TkVector.h>
 
 SKYSCRAPER_BEGIN
 
+class cEgModelNode;
+
+template <typename T>
+class cCallbackWithPriority
+{
+    T *mCallback;
+    int mPriority;
+};
+
+class cEgLodNodes
+{
+  public:
+    int miNumLods;
+    int miNumMeshes;
+    cTkStackVector<std::array<TkHandle, 5>, 2> mapLodNodes;
+};
+
+class cEgJointNode : public cEgSceneNode, public IAnimatableNode
+{
+  public:
+    cEgModelNode *mpParentModel;
+    cTkMatrix34 mBaseMatrix;
+    unsigned int muJointIndex;
+};
+
 class cEgModelNode : public cEgSceneNode
 {
   public:
+    struct AnimationWorkBuffer
+    {
+        cTkMatrix34 *maPose;
+        cTkMatrix34 *maRelativeModelMatrix;
+        cEgBoundingBox mLocalAabb;
+    };
+
     cTkTypedSmartResHandle<cEgGeometryResource> mpGeometryResource;
     cTkTypedSmartResHandle<cEgGeometryResource> mpBaseGeometryResource;
     float mfCullDist;
@@ -50,8 +83,8 @@ class cEgModelNode : public cEgSceneNode
     bool mbHasOldSkinMats;
     bool mbUpdateBoundingFromAnim;
     bool mbAnimCulled;
-    cTkVector<cTkVector4, TkSTLAllocatorShim<cTkVector4, 16, -1>> mSkinMatrixRows;
-    cTkVector<cTkVector4, TkSTLAllocatorShim<cTkVector4, 16, -1>> mPrevSkinMatrixRows;
+    cTkVector<cTkVector4> mSkinMatrixRows;
+    cTkVector<cTkVector4> mPrevSkinMatrixRows;
     int miPrevSkinRowsFrame;
     cTkVector<cEgJointNode *> mJointList;
     cTkVector<int> maJointIndex;
