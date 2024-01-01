@@ -39,10 +39,6 @@ set(RENMS_CORE_HEADERS
     ${CMAKE_CURRENT_SOURCE_DIR}/fios/fios.h
     ${CMAKE_CURRENT_SOURCE_DIR}/logging/logger.h
     ${CMAKE_CURRENT_SOURCE_DIR}/logging/textchatsink.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/memory/hook.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/memory/memory.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/memory/thread.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/memory/vtable.h
     ${CMAKE_CURRENT_SOURCE_DIR}/plugins/fsm.h
     ${CMAKE_CURRENT_SOURCE_DIR}/plugins/manager.h
     ${CMAKE_CURRENT_SOURCE_DIR}/plugins/plugin.h
@@ -55,8 +51,14 @@ add_library(renms_core SHARED ${RENMS_CORE_HEADERS} ${RENMS_CORE_SOURCES})
 add_dependencies(renms_core skyscraper)
 
 target_link_libraries(
-    renms_core PRIVATE skyscraper fmt PolyHook_2 spdlog renms_sdk
-                       renms_submodule_dependencies
+    renms_core
+    PRIVATE skyscraper
+            fmt
+            PolyHook_2
+            spdlog
+            renms_sdk
+            renms_submodule_dependencies
+            renms_common
 )
 target_compile_definitions(renms_core PRIVATE RENMS FIOS_TYPES_ONLY)
 target_compile_definitions(renms_core PUBLIC RENMS_VERSION="${PROJECT_VERSION}")

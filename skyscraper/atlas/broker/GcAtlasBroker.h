@@ -73,7 +73,7 @@ class cGcAtlasRecvVoxel : public cGcAtlasShared
     cTkFixedArray<uint64_t, 8> mau64ThingsFound;
 };
 
-class cGcIBrokerData : AutoPooled<5>
+class cGcIBrokerData : public AutoPooled<5>
 {
   public:
     virtual ~cGcIBrokerData();
@@ -120,7 +120,7 @@ class AtlasRequestTask : public AtlasTaskCommon
     float mTTL;
 };
 
-class AtlasResponseTask : AtlasTaskCommon
+class AtlasResponseTask : public AtlasTaskCommon
 {
   public:
     AtlasRequestResult mResult;

@@ -28,9 +28,9 @@ void cGcPlayer::SetToPosition(const cTkVector3 *lPos, const cTkVector3 *lDir, co
     typedef void (*fn_type)(
         cGcPlayer *thiscall, const cTkVector3 *lPos, const cTkVector3 *lDir, const cTkVector3 *lVel);
 
-    return reinterpret_cast<fn_type>(reinterpret_cast<uint64_t>(
-        renms_sdk::SignatureScan("48 89 5C 24 08 48 89 6C 24 10 48 89 74 24 18 57 48 83 EC "
-                                 "? 0F 29 74 24 60 49 8B F9 0F 29 7C 24 50 49 8B F0")))(this, lPos, lDir, lVel);
+    return reinterpret_cast<fn_type>(renms::SignatureScan("48 89 5C 24 08 48 89 6C 24 10 48 89 74 24 18 57 48 83 EC "
+                                                          "? 0F 29 74 24 60 49 8B F9 0F 29 7C 24 50 49 8B F0"))(
+        this, lPos, lDir, lVel);
 }
 
 SKYSCRAPER_END

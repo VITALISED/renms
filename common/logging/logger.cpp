@@ -1,7 +1,7 @@
 /**
- * @file StencilModes.h
+ * @file logger.cpp
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2023-12-31
  * 
  * Copyright (C) 2023  VITALISED & Contributors
  * 
@@ -19,26 +19,3 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#pragma once
-
-#include <skyscraper.h>
-
-SKYSCRAPER_BEGIN
-
-namespace StencilModes
-{
-	enum List 
-	{
-		Disabled,
-		MaskWrite,
-		MaskRead,
-		MaskReadInvert,
-		MaskWriteInside,
-		MaskWriteOnce,
-		MaskReadWriteNotEqual,
-		MaskReadWriteInvert,
-		MaskReadWrite,
-	};
-}
-
-SKYSCRAPER_END

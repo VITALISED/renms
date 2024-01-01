@@ -25,6 +25,10 @@
 
 SKYSCRAPER_BEGIN
 
+/**
+ * @class cTkFixedString
+ * @brief Templated fixed size char/wchar string type
+ */
 template <int liSize, typename T>
 class cTkFixedString
 {

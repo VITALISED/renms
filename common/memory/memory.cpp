@@ -1,7 +1,7 @@
 /**
- * @file memory.h
+ * @file memory.cpp
  * @author VITALISED & Contributors
- * @since 2023-12-15
+ * @since 2023-12-31
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -19,31 +19,22 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#pragma once
+#include <common/memory/memory.h>
 
-#include <Windows.h>
+RENMS_BEGIN
 
-#include "../base.h"
-
-RENMS_SDK_BEGIN
-
-inline HMODULE GetNMSModuleHandle()
+RENMS_POINTER_TYPE RelToAbsolute(RENMS_POINTER_TYPE lpRelPtr)
 {
-    return GetModuleHandleA("NMS.exe");
+    return GetNMSModulePointer() + lpRelPtr;
 }
 
-inline LPVOID RelToAbsolute(DWORD_PTR lpRelPtr)
+RENMS_POINTER_TYPE CalculateHalfPointerToFull(
+    RENMS_HALFPOINTER_TYPE lpHalf, RENMS_POINTER_TYPE lpFull, int liInstructionOffset, int liInstructionLength)
 {
-    return (LPVOID)((DWORD_PTR)GetModuleHandleA("NMS.exe") + (DWORD_PTR)lpRelPtr);
+    return lpFull + static_cast<RENMS_POINTER_TYPE>(lpHalf + liInstructionOffset + liInstructionLength);
 }
 
-inline DWORD_PTR CalculateHalfPointerToFull(
-    HALF_PTR lpHalf, DWORD_PTR lpFull, int liInstructionOffset = 1, int liInstructionLength = 5)
-{
-    return lpFull + static_cast<DWORD_PTR>(lpHalf + liInstructionOffset + liInstructionLength);
-}
-
-inline std::shared_ptr<std::vector<int>> IDAPatternToVec(const char *lpacSig)
+std::shared_ptr<std::vector<int>> IDAPatternToVec(const char *lpacSig)
 {
     std::shared_ptr<std::vector<int>> bytes = std::make_shared<std::vector<int>>();
 
@@ -66,7 +57,7 @@ inline std::shared_ptr<std::vector<int>> IDAPatternToVec(const char *lpacSig)
     return bytes;
 }
 
-inline LPVOID ScanPattern(std::shared_ptr<std::vector<int>> lpPattern)
+RENMS_POINTER_TYPE SignatureScan_Internal(std::shared_ptr<std::vector<int>> lpPattern)
 {
     const HMODULE module_handle = GetNMSModuleHandle();
 
@@ -94,15 +85,15 @@ inline LPVOID ScanPattern(std::shared_ptr<std::vector<int>> lpPattern)
                 break;
             }
         }
-        if (found) return (LPVOID)&scan_bytes[i];
+        if (found) return reinterpret_cast<RENMS_POINTER_TYPE>(&scan_bytes[i]);
     }
 
     return NULL;
 }
 
-inline LPVOID SignatureScan(const char *lpacSignature)
+RENMS_POINTER_TYPE SignatureScan(const char *lpacSignature)
 {
-    return ScanPattern(IDAPatternToVec(lpacSignature));
+    return SignatureScan_Internal(IDAPatternToVec(lpacSignature));
 }
 
-RENMS_SDK_END
+RENMS_END

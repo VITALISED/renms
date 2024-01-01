@@ -19,6 +19,15 @@ It must end with NMS.exe. See the BUILD.md for why it needs to know this."
 
     endif()
 
+    if (NMS_EXE_PATH STREQUAL "C:/Your/Path/To/NMS/Exe/Dir/Here/NMS.exe" AND NOT SKIP_NMS_CHECK)
+        message(
+            FATAL_ERROR
+                "NMS_EXE_PATH hasn't been changed from the default!\n\
+Look inside the config.cmake for the option, and set it's exact path. \
+It must end with NMS.exe. See the BUILD.md for why it needs to know this."
+        )
+    endif()
+
     get_filename_component(NMS_EXE_PATH "${NMS_EXE_PATH}" ABSOLUTE)
     if(NOT EXISTS "${NMS_EXE_PATH}" AND NOT SKIP_NMS_CHECK)
         message(

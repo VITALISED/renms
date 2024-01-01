@@ -33,7 +33,7 @@ SKYSCRAPER_BEGIN
 
 class cGcStatsManager;
 
-class cGcGameAnalytics : INetworkPlayerEventsHandler
+class cGcGameAnalytics : public INetworkPlayerEventsHandler
 {
   public:
     enum ConnectionState

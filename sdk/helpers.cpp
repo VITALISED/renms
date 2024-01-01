@@ -26,9 +26,9 @@ RENMS_SDK_BEGIN
 nms::cGcApplication *GetApplication()
 {
     if (GetModuleHandleA("Galaxy64.dll"))
-        return reinterpret_cast<nms::cGcApplication *>(RelToAbsolute(GCAPPLICATION_GOG));
+        return reinterpret_cast<nms::cGcApplication *>(renms::RelToAbsolute(GCAPPLICATION_GOG));
     if (GetModuleHandleA("steam_api64.dll"))
-        return reinterpret_cast<nms::cGcApplication *>(RelToAbsolute(GCAPPLICATION_STEAM));
+        return reinterpret_cast<nms::cGcApplication *>(renms::RelToAbsolute(GCAPPLICATION_STEAM));
 
     std::runtime_error("Unknown platform!");
 

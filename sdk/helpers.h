@@ -22,9 +22,9 @@
 #pragma once
 
 #include <application/GcApplication.h>
+#include <common/memory/memory.h>
 
 #include "base.h"
-#include "internal/memory.h"
 
 RENMS_SDK_BEGIN
 

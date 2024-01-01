@@ -74,6 +74,7 @@
 SKYSCRAPER_BEGIN
 
 /**
+ * @class cGcApplication
  * @brief Global singleton storing most data in Game Components. Implements FSM calls
  * @details
  * Whilst this struct stores most things, you will want to use @ref cTkEngineUtils for Node calls as of right
@@ -92,7 +93,7 @@ class cGcApplication : public cTkFSM
     /**
      * @brief Storage class for GcApplication.
      */
-    struct ALIGN(16) Data
+    struct Data
     {
         cGcFirstBootContext mFirstBootContext;
         cTkMcQmcLFSRStore mTkMcQmcLFSRStore;

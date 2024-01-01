@@ -98,7 +98,7 @@ struct GraphLink
     float mfDistance;
 };
 
-class GraphNode : AutoPooled<4>
+class GraphNode : public AutoPooled<4>
 {
     cTkVector3 mPos;
     uint64_t mu64SystemID;
@@ -129,7 +129,7 @@ struct GoalData
     uint64_t mu64TargetSystemID;
 };
 
-class SearchContext : GPN::SearchInterface
+class SearchContext : public GPN::SearchInterface
 {
     enum State
     {

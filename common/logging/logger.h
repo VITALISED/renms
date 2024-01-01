@@ -1,7 +1,7 @@
 /**
- * @file warning.h
+ * @file logger.h
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2023-12-31
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -18,17 +18,3 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-
-#pragma once
-
-#include <renms.h>
-
-#include <common/memory/hook.h>
-#include <core/config.h>
-#include <sdk/core.h>
-
-RENMS_BEGIN
-
-void CreateWarningHooks();
-
-RENMS_END

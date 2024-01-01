@@ -40,7 +40,7 @@ if(DOXYGEN_FOUND)
         add_custom_target(
             Sphinx
             COMMAND
-                ${SPHINX_EXECUTABLE} -j auto -b html
+                ${SPHINX_EXECUTABLE} -j auto
                 # Tell Breathe where to find the Doxygen output
                 -Dbreathe_projects.ReNMS=${DOXYGEN_OUTPUT_DIR}/xml
                 ${SPHINX_SOURCE} ${SPHINX_BUILD}
@@ -48,8 +48,8 @@ if(DOXYGEN_FOUND)
             COMMENT "Generating documentation with Sphinx"
         )
 
-        add_dependencies(Sphinx Doxygen)
-        add_dependencies(Doxygen metadata_generator)
+        # add_dependencies(Sphinx Doxygen) add_dependencies(Doxygen
+        # metadata_generator)
 
     elseif(NOT SPHINX_FOUND)
         message(

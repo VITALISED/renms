@@ -1,7 +1,7 @@
 /**
- * @file warning.h
+ * @file common_pch.h
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2023-12-31
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -19,16 +19,13 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#pragma once
+#include <Windows.h>
+#include <fmt/format.h>
+#include <spdlog/spdlog.h>
 
-#include <renms.h>
+#define WIN32_LEAN_AND_MEAN
 
-#include <common/memory/hook.h>
-#include <core/config.h>
-#include <sdk/core.h>
-
-RENMS_BEGIN
-
-void CreateWarningHooks();
-
-RENMS_END
+#define RENMS_BEGIN \
+    namespace renms \
+    {
+#define RENMS_END }

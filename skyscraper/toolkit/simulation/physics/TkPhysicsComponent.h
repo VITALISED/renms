@@ -2,19 +2,19 @@
  * @file TkPhysicsComponent.h
  * @author VITALISED & Contributors
  * @since 2023-12-05
- * 
+ *
  * Copyright (C) 2023  VITALISED & Contributors
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
@@ -27,7 +27,7 @@
 #include <toolkit/simulation/physics/havok/TkCollision.h>
 #include <toolkit/simulation/physics/havok/TkPhysicsConstraint.h>
 #include <toolkit/simulation/physics/havok/TkRigidBody.h>
-#include <toolkit/utilities/containers/TkStackVector.h>
+#include <toolkit/utilities/containers/TkStackContainer.h>
 #include <toolkit/utilities/containers/TkVector.h>
 
 #include <toolkit/components/physics/tkdynamicchaincomponentdata.meta.h>
@@ -38,6 +38,7 @@ SKYSCRAPER_BEGIN
 
 class cTkPhysicsComponent : public cTkComponent
 {
+  public:
     struct SubBody
     {
         cTkCollision *mpColl;
@@ -63,7 +64,7 @@ class cTkPhysicsComponent : public cTkComponent
     cTkCollision mCollision;
     cTkCollision mComplexCollision;
     TkHandle mNextNodeToBuildCollision;
-    cTkStackVector<TkHandle> maNodesToIgnoreBuildingCollision;
+    cTkStackVector<TkHandle, 16> maNodesToIgnoreBuildingCollision;
     cTkMatrix34 mGraphicsToPhysics;
     cTkMatrix34 mPhysicsToGraphics;
     cTkVector3 mGraphicsScale;
@@ -82,7 +83,7 @@ class cTkPhysicsComponent : public cTkComponent
     float mfRagdollLifetime;
     int miRagdollFrameCountdown;
     int miRagdollImpactFrameCnt;
-    unsigned __int16 muRagdollCollisionMask;
+    uint16_t muRagdollCollisionMask;
     cTkVector3 mvRagdollInitialVelocity;
     bool mbPrepared;
     bool mbLevelGraphicsMatrix;

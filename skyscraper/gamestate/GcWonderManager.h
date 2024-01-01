@@ -28,7 +28,7 @@
 
 SKYSCRAPER_BEGIN
 
-class cGcWonderManager : IDiscoveryManagerEventHandler
+class cGcWonderManager : public IDiscoveryManagerEventHandler
 {
   public:
     struct sWonderData

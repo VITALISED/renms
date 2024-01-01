@@ -16,50 +16,20 @@
 # old way of doing things @tractorbeam: everyone point and laugh at the cmake
 # noob
 
-file(GLOB_RECURSE APPLICATION_SOURCES "./application" "*.cpp" "*.h")
-file(GLOB_RECURSE ATLAS_SOURCES "./atlas" "*.cpp" "*.h")
-file(GLOB_RECURSE AUDIO_SOURCES "./audio" "*.cpp" "*.h")
-file(GLOB_RECURSE BASEBUILDING_SOURCES "./basebuilding" "*.cpp" "*.h")
-file(GLOB_RECURSE ENGINE_SOURCES "./engine" "*.cpp" "*.h")
-file(GLOB_RECURSE GAMESTATE_SOURCES "./gamestate" "*.cpp" "*.h")
-file(GLOB_RECURSE GRAPHICS_SOURCES "./graphics" "*.cpp" "*.h")
-file(GLOB_RECURSE NETWORKING_SOURCES "./networking" "*.cpp" "*.h")
-file(GLOB_RECURSE REALITY_SOURCES "./reality" "*.cpp" "*.h")
-file(GLOB_RECURSE SIMULATION_SOURCES "./simulation" "*.cpp" "*.h")
-file(GLOB_RECURSE SYSTEM_SOURCES "./system" "*.cpp" "*.h")
-file(GLOB_RECURSE TOOLKIT_SOURCES "./tookit" "*.cpp" "*.h")
-file(GLOB_RECURSE UTILITIES_SOURCES "./utilities" "*.cpp" "*.h")
-file(GLOB_RECURSE RESOURCES_SOURCES "./resources" "*.cpp" "*.h")
-file(GLOB_RECURSE ONLINE_SOURCES "./online" "*.cpp" "*.h")
+file(GLOB_RECURSE SKYSCRAPER_HEADERS "./" "*.h" "*.inl")
+file(GLOB_RECURSE SKYSCRAPER_SOURCES "./" "*.cpp")
 
-add_library(
-    skyscraper STATIC
-    ${APPLICATION_SOURCES}
-    ${ATLAS_SOURCES}
-    ${AUDIO_SOURCES}
-    ${BASEBUILDING_SOURCES}
-    ${ENGINE_SOURCES}
-    ${GAMESTATE_SOURCES}
-    ${GRAPHICS_SOURCES}
-    ${NETWORKING_SOURCES}
-    ${ONLINE_SOURCES}
-    ${REALITY_SOURCES}
-    ${RESOURCES_SOURCES}
-    ${SIMULATION_SOURCES}
-    ${SYSTEM_SOURCES}
-    ${TOOLKIT_SOURCES}
-    ${UTILITIES_SOURCES}
-    skyscraper.h
-)
+add_library(skyscraper STATIC ${SKYSCRAPER_HEADERS} ${SKYSCRAPER_SOURCES})
 
 target_include_directories(
     skyscraper
-    PUBLIC ${PROJECT_SOURCE_DIR}
     PUBLIC ${PROJECT_SOURCE_DIR}/skyscraper
     PUBLIC ${RENMS_METADATA_DIR}
 )
 
-target_link_libraries(skyscraper PUBLIC renms_submodule_dependencies)
+target_link_libraries(
+    skyscraper PUBLIC renms_submodule_dependencies renms_common
+)
 
 if(NOT ${SKIP_NMS_CHECK})
     add_dependencies(skyscraper metadata_generator)

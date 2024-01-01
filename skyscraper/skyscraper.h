@@ -27,11 +27,11 @@
 
 #include <havok_stubs.h>
 // #include <nanoflann.hpp>
+#include <common/memory/memory.h>
 #include <nanoflann_stubs.h>
 #include <rapidjson/document.h>
 #include <rapidjson/rapidjson.h>
 #include <robin_hood.h>
-#include <sdk/internal/memory.h>
 #include <vulkan/vulkan.h>
 #include <windows.h> //see toolkit/system/TkCSMutex.h
 
@@ -52,9 +52,12 @@
 
 namespace nms_rapidjson = rapidjson;
 
+// We need to check for definition due to the way SWIG expands the macro.
 // clang-format off
+#if !defined (SKYSCRAPER_BEGIN) || !defined (SKYSCRAPER_END)
 #define SKYSCRAPER_BEGIN namespace nms {
 #define SKYSCRAPER_END };
+#endif
 // clang-format on
 
 #ifdef _MSC_VER

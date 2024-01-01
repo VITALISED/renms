@@ -2,19 +2,19 @@
  * @file TkNGuiEditor.h
  * @author VITALISED & Contributors
  * @since 2023-12-05
- * 
+ *
  * Copyright (C) 2023  VITALISED & Contributors
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
@@ -43,17 +43,19 @@ class cTkNGuiEditor;
 
 class cTkNGuiPopup
 {
-    VFT<1> *__vftable;
+  public:
     cTkNGuiEditor *mpGui;
     cTkVector2 mPosition;
     cTkVector2 mSize;
+
+    virtual bool Render();
 };
 
 class cTkComboBoxPopup : public cTkNGuiPopup
 {
-    VFT<1> *__vftable;
+  public:
     const char *mpacLabel;
-    __int64 *mpaiSelectionMap;
+    int64_t *mpaiSelectionMap;
     const char **mpaacEntries;
     int miNumEntries;
     float mfContentWidth;
@@ -61,22 +63,28 @@ class cTkComboBoxPopup : public cTkNGuiPopup
     int *mpiSelected;
     int miSelectedSize;
     bool mbDoScrollBars;
+
+    virtual bool Render();
 };
 
-struct cTkIconSelectPopup : public cTkNGuiPopup
+class cTkIconSelectPopup : public cTkNGuiPopup
 {
-    VFT<1> *__vftable;
+  public:
     unsigned int *mpuIcon;
+
+    virtual bool Render();
 };
 
 class cTkNGuiScrollData
 {
+  public:
     float mfScrollX;
     float mfScrollY;
 };
 
 class cTkNGuiWindowData
 {
+  public:
     void (*mGuiCreateCallback)(cTkNGuiElementID, void *);
     void (*mGuiRenderCallback)(void *);
     void *mpCallbackData;
@@ -98,6 +106,7 @@ class cTkNGuiWindowData
 
 class cTkNGuiTreeData
 {
+  public:
     bool mbIsMaximised;
     bool mbTabled;
     cTkVector2 mStartPos;
@@ -107,23 +116,27 @@ class cTkNGuiTreeData
 
 class cTkNGuiToggleData
 {
+  public:
     bool mbIsActive;
 };
 
 class cTkNGuiPanelData
 {
+  public:
     float mfHeight;
     float mfLabelWidth;
 };
 
 class cTkNGuiUndoStack
 {
+  public:
     cTkVector<cTkNGuiUndoable *> maUndoStack;
     int miUndoStackIndex;
 };
 
 class cTkNGuiEditor : public cTkNGui
 {
+  public:
     enum eMenu
     {
         EMenu_Closed   = 0xFFFFFFFF,

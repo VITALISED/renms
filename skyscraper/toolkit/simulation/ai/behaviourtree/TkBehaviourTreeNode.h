@@ -57,30 +57,31 @@ enum eBehaviourTreeNodeType
 
 class cTkBehaviourTreeNode
 {
+  public:
     eBehaviourTreeState meState;
     eBehaviourTreeNodeType meType;
     struct
     {
-        __int8 mbRunning : 1;
-        __int8 mbDebugBreak : 1;
-        __int8 mbExpanded : 1;
-        __int8 mbDebugDraw : 1;
+        int8_t mbRunning : 1;
+        int8_t mbDebugBreak : 1;
+        int8_t mbExpanded : 1;
+        int8_t mbDebugDraw : 1;
     } mFlags;
 
     virtual ~cTkBehaviourTreeNode();
-    eBehaviourTreeState Update(float);
-    void Cancel();
-    void Subscribe(cTkMetaMessageMap<2> *);
-    void AddNode(cTkBehaviourTreeNode *);
-    int GetNumChildren();
-    cTkBehaviourTreeNode *GetChild(int);
-    const char *GetName();
-    void GetDescription(cTkFixedString<64, char> *);
-    void ToggleDebugBreak();
-    bool CanDebugBreak();
-    bool IsDebugBreakSet();
-    bool CanExpand();
-    void NGuiRender();
+    virtual eBehaviourTreeState Update(float);
+    virtual void Cancel();
+    virtual void Subscribe(cTkMetaMessageMap<2> *);
+    virtual void AddNode(cTkBehaviourTreeNode *);
+    virtual int GetNumChildren();
+    virtual cTkBehaviourTreeNode *GetChild(int);
+    virtual const char *GetName();
+    virtual void GetDescription(cTkFixedString<64, char> *);
+    virtual void ToggleDebugBreak();
+    virtual bool CanDebugBreak();
+    virtual bool IsDebugBreakSet();
+    virtual bool CanExpand();
+    virtual void NGuiRender();
 };
 
 SKYSCRAPER_END

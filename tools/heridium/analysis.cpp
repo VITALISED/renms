@@ -21,60 +21,52 @@
 
 #include "analysis.h"
 
-uint64_t cTkMetaData__Register__TRAMPOLINE = 0;
+RENMS_HOOK(
+    cTkMetaData__Register, renms::RelToAbsolute(0x248ABC0), void,
+    (const cTkMetaDataClass *lpClassMetadata, void (*lDefaultFunction)(cTkClassPointer *, cTkLinearMemoryPool *),
+     void (*lFixingFunction)(cTkClassPointer *, bool, uint64_t), void (*lValidateFunction)(cTkClassPointer *),
+     bool (*lEqualsFunction)(const cTkClassPointer *, const cTkClassPointer *),
+     void (*lRenderFunction)(cTkClassPointer *), void (*lCopyFunction)(cTkClassPointer *, const cTkClassPointer *),
+     cTkClassPointer *(*lCreateFunction)(cTkClassPointer *result),
+     uint64_t (*lHashFunction)(const cTkClassPointer *, uint64_t, bool), void (*lDestroyFunction)(cTkClassPointer *)) {
+        std::string lsKey = lpClassMetadata->mpacName;
 
-void cTkMetaData__Register__DETOUR(
-    const cTkMetaDataClass *lpClassMetadata, void (*lDefaultFunction)(cTkClassPointer *, cTkLinearMemoryPool *),
-    void (*lFixingFunction)(cTkClassPointer *, bool, unsigned __int64), void (*lValidateFunction)(cTkClassPointer *),
-    bool (*lEqualsFunction)(const cTkClassPointer *, const cTkClassPointer *),
-    void (*lRenderFunction)(cTkClassPointer *), void (*lCopyFunction)(cTkClassPointer *, const cTkClassPointer *),
-    cTkClassPointer *(*lCreateFunction)(cTkClassPointer *result),
-    unsigned __int64 (*lHashFunction)(const cTkClassPointer *, unsigned __int64, bool),
-    void (*lDestroyFunction)(cTkClassPointer *))
-{
-    std::string lsKey = lpClassMetadata->mpacName;
+        if (lsKey.find_first_of("c") != std::string::npos) { lsKey = lsKey.substr(lsKey.find_first_of("c")); }
 
-    if (lsKey.find_first_of("c") != std::string::npos) { lsKey = lsKey.substr(lsKey.find_first_of("c")); }
+        std::transform(
+            lsKey.begin(), lsKey.end(), lsKey.begin(), [](unsigned char c) { return (char)std::tolower(c); });
 
-    std::transform(lsKey.begin(), lsKey.end(), lsKey.begin(), [](unsigned char c) { return (char)std::tolower(c); });
+        std::string lPath = std::filesystem::current_path().string();
+        lPath.append("/");
 
-    std::string lPath = std::filesystem::current_path().string();
-    lPath.append("/");
+        bool lbFoundPath = false;
 
-    bool lbFoundPath = false;
-
-    for (std::pair<const char *, const char *> lItem : gClassPaths)
-    {
-        if (lItem.first == lsKey)
+        for (std::pair<const char *, const char *> lItem : gClassPaths)
         {
-            lPath.append(lItem.second);
-            lbFoundPath = true;
+            if (lItem.first == lsKey)
+            {
+                lPath.append(lItem.second);
+                lbFoundPath = true;
+            }
         }
-    }
 
-    if (!lbFoundPath) lPath.append("/unmapped/").append(lsKey).append(".meta.h");
+        if (!lbFoundPath) lPath.append("/unmapped/").append(lsKey).append(".meta.h");
 
-    spdlog::info(lPath);
+        spdlog::info(lPath);
 
-    HeridiumCXXFile(lPath, lpClassMetadata);
+        HeridiumCXXFile(lPath, lpClassMetadata);
 
-    return PLH::FnCast(cTkMetaData__Register__TRAMPOLINE, cTkMetaData__Register__DETOUR)(
-        lpClassMetadata, lDefaultFunction, lFixingFunction, lValidateFunction, lEqualsFunction, lRenderFunction,
-        lCopyFunction, lCreateFunction, lHashFunction, lDestroyFunction);
-}
-
-PLH::x64Detour cTkMetaData__Register__HOOK(
-    (uint64_t)renms::RelToAbsolute(0x248ABC0), (uint64_t)cTkMetaData__Register__DETOUR,
-    &cTkMetaData__Register__TRAMPOLINE);
+        return PLH::FnCast(cTkMetaData__Register__TRAMPOLINE, cTkMetaData__Register__DETOUR)(
+            lpClassMetadata, lDefaultFunction, lFixingFunction, lValidateFunction, lEqualsFunction, lRenderFunction,
+            lCopyFunction, lCreateFunction, lHashFunction, lDestroyFunction);
+    });
 
 HERIDIUM_BEGIN
 
 void AnalysisInit()
 {
     CreateOutputDirectories();
-
-    cTkMetaData__Register__HOOK.hook();
-
+    RENMS_DISPATCH_HOOK(cTkMetaData__Register);
     renms::ResumeModuleThread(renms::GetNMSModuleHandle());
 }
 

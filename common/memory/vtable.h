@@ -1,7 +1,7 @@
 /**
- * @file warning.h
+ * @file vtable.h
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2023-12-31
  *
  * Copyright (C) 2023  VITALISED & Contributors
  *
@@ -19,16 +19,14 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#pragma once
-
-#include <renms.h>
-
-#include <common/memory/hook.h>
-#include <core/config.h>
-#include <sdk/core.h>
+#include <common/common_pch.h>
 
 RENMS_BEGIN
 
-void CreateWarningHooks();
+template <typename T>
+void **GetVTable(T *lpObj)
+{
+    return *reinterpret_cast<void ***>(lpObj);
+}
 
 RENMS_END

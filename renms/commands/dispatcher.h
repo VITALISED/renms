@@ -24,7 +24,7 @@
 #include <renms.h>
 
 #include <commands/commands.h>
-#include <memory/hook.h>
+#include <common/memory/hook.h>
 #include <toolkit/utilities/string/TkString.h>
 
 using namespace nms;
