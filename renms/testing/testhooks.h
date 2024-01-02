@@ -23,8 +23,8 @@
 
 #include <renms.h>
 
+#include <application/GcApplication.h>
 #include <common/memory/hook.h>
-#include <sdk/core.h>
 
 RENMS_BEGIN
 

@@ -25,7 +25,6 @@
 
 #include <common/memory/hook.h>
 #include <core/config.h>
-#include <sdk/core.h>
 
 RENMS_BEGIN
 

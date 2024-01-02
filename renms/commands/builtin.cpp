@@ -31,14 +31,14 @@ void TeleportCommandDispatch(std::vector<std::string> *laArgs)
     float lfZ = std::stof(laArgs->at(2));
 
     nms::cTkVector3 *lPos = new nms::cTkVector3(lfX, lfY, lfZ);
-    nms::cTkVector3 lDir  = renms_sdk::GetApplication()->mpData->mSimulation.mPlayer.mFacingDir;
-    nms::cTkVector3 lVel  = renms_sdk::GetApplication()->mpData->mSimulation.mPlayer.mLastVelocities.back();
-    cTkVector3 lPosition  = renms_sdk::GetApplication()->mpData->mSimulation.mPlayer.mPosition;
+    nms::cTkVector3 lDir  = cGcApplication::GetInstance()->mpData->mSimulation.mPlayer.mFacingDir;
+    nms::cTkVector3 lVel  = cGcApplication::GetInstance()->mpData->mSimulation.mPlayer.mLastVelocities.back();
+    cTkVector3 lPosition  = cGcApplication::GetInstance()->mpData->mSimulation.mPlayer.mPosition;
 
     std::string lPositionStr = fmt::format("Teleporting to: {} {} {}", lPos->mfX, lPos->mfY, lPos->mfZ);
     spdlog::info(lPositionStr);
 
-    renms_sdk::GetApplication()->mpData->mSimulation.mPlayer.SetToPosition(lPos, &lDir, &lVel);
+    cGcApplication::GetInstance()->mpData->mSimulation.mPlayer.SetToPosition(lPos, &lDir, &lVel);
 
     delete lPos;
 
@@ -47,7 +47,7 @@ void TeleportCommandDispatch(std::vector<std::string> *laArgs)
 
 void GetPositionDispatch(std::vector<std::string> *laArgs)
 {
-    cTkVector3 lPosition     = renms_sdk::GetApplication()->mpData->mSimulation.mPlayer.mPosition;
+    cTkVector3 lPosition     = cGcApplication::GetInstance()->mpData->mSimulation.mPlayer.mPosition;
     std::string lPositionStr = fmt::format("{} {} {}", lPosition.mfX, lPosition.mfY, lPosition.mfZ);
 
     spdlog::info(lPositionStr);
@@ -58,7 +58,7 @@ void GetPositionDispatch(std::vector<std::string> *laArgs)
 void TestCommandDispatch(std::vector<std::string> *laArgs)
 {
     spdlog::info("Woah, it's a test.");
-    spdlog::info("{:X}", (uintptr_t)renms_sdk::GetApplication());
+    spdlog::info("{:X}", (uintptr_t)cGcApplication::GetInstance());
     spdlog::info("{:X}", (uintptr_t)GetModuleHandleA(NULL));
 
     for (std::string lsArg : *laArgs) {}
@@ -123,11 +123,11 @@ void GetUACommandDispatch(std::vector<std::string> *laArgs)
     spdlog::info("Assumed AI Ship Seed: {}", actualSeed);
     spdlog::info(
         "Actual AI Ship Seed: {}",
-        renms_sdk::GetApplication()->mpData->mSimulation.mAISpaceshipManager.mSeed.mu64SeedValue);
+        cGcApplication::GetInstance()->mpData->mSimulation.mAISpaceshipManager.mSeed.mu64SeedValue);
     spdlog::info("Ships:");
 
     cTkDynamicArray<cGcAISpaceshipPreloadCacheData> systemShips =
-        renms_sdk::GetApplication()->mpData->mSimulation.mpSolarSystem->mSolarSystemData.maSystemShips;
+        cGcApplication::GetInstance()->mpData->mSimulation.mpSolarSystem->mSolarSystemData.maSystemShips;
 
     int v71                  = EShipClass_Freighter;
     int tradeshipscachecount = systemShips.miSize; // temp value

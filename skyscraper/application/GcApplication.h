@@ -165,6 +165,8 @@ class cGcApplication : public cTkFSM
     void Destruct();
     void StatePrepare(cTkFSMState *, const void *);
     void StateRelease(cTkFSMState *, const void *);
+
+    static cGcApplication *GetInstance();
 };
 
 SKYSCRAPER_END

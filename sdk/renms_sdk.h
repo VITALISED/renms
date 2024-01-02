@@ -29,10 +29,5 @@
 
 #define RENMS_API extern
 
-#define GCAPPLICATION_GOG   0x49707E0
-#define GCAPPLICATION_STEAM 0x495EF10
-
-// clang-format off
-#define RENMS_SDK_BEGIN namespace renms_sdk {
-#define RENMS_SDK_END }
-// clang-format on
+extern "C" void RENMS_ENTRY PluginMain();
+extern "C" void RENMS_ENTRY PluginUpdate();

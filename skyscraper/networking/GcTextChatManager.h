@@ -119,6 +119,10 @@ class cGcTextChatManager
         false, 80, cTkFixedString<128, char>, int, UnorderedMapHashes::Hash<cTkFixedString<128, char>>,
         std::equal_to<cTkFixedString<128, char>>>
         mStringCountHash;
+
+    void PostLocalMessage(
+        const cTkFixedString<1121, char> *lsMessage, const cTkFixedString<128, char> *lpRelevantPlayerName,
+        const cTkColour *lBackgroundColour, int liRelevantPlayerIndex, float lfDisplayDuration);
 };
 
 SKYSCRAPER_END

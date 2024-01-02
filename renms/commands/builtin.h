@@ -23,10 +23,9 @@
 
 #include <renms.h>
 
+#include <application/GcApplication.h>
 #include <commands/commands.h>
 #include <commands/dispatcher.h>
-#include <sdk/core.h>
-#include <sdk/textchat.h>
 #include <simulation/solarsystem/GcSolarSystemQuery.h>
 #include <toolkit/maths/numeric/generic/TkVector3Generic.h>
 #include <toolkit/maths/utilities/hash/TkSpookyV2.h>

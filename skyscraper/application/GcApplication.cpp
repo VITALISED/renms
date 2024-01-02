@@ -1,9 +1,9 @@
 /**
- * @file core.h
+ * @file GcApplication.cpp
  * @author VITALISED & Contributors
- * @since 2023-12-12
+ * @since 2024-01-02
  *
- * Copyright (C) 2023  VITALISED & Contributors
+ * Copyright (C) 2024  VITALISED & Contributors
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,10 +19,20 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#pragma once
+#include <application/GcApplication.h>
 
-#include "helpers.h"
-#include "textchat.h"
+SKYSCRAPER_BEGIN
 
-extern "C" void RENMS_ENTRY PluginMain();
-extern "C" void RENMS_ENTRY PluginUpdate();
+cGcApplication *cGcApplication::GetInstance()
+{
+    if (GetModuleHandleA("Galaxy64.dll"))
+        return reinterpret_cast<nms::cGcApplication *>(renms::RelToAbsolute(0x49707E0));
+    if (GetModuleHandleA("steam_api64.dll"))
+        return reinterpret_cast<nms::cGcApplication *>(renms::RelToAbsolute(0x495EF10));
+
+    std::runtime_error("Unknown platform!");
+
+    return NULL;
+}
+
+SKYSCRAPER_END
