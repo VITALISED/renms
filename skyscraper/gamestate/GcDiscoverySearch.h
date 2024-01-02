@@ -23,6 +23,7 @@
 
 #include <skyscraper.h>
 
+#include <gamestate/GcDiscoveryCommon.h>
 #include <toolkit/core/types/TkID.h>
 #include <toolkit/graphics/utilities/TkModelResourceRenderer.h>
 #include <toolkit/utilities/containers/TkVector.h>

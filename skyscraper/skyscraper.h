@@ -52,9 +52,12 @@
 
 namespace nms_rapidjson = rapidjson;
 
-// We need to check for definition due to the way SWIG expands the macro.
+// We need to do this weirdly because of the way CppSharp does namespaces
 // clang-format off
-#if !defined (SKYSCRAPER_BEGIN) || !defined (SKYSCRAPER_END)
+#if defined(NO_SKYSCRAPER_NAMESPACE)
+#define SKYSCRAPER_BEGIN
+#define SKYSCRAPER_END
+#else
 #define SKYSCRAPER_BEGIN namespace nms {
 #define SKYSCRAPER_END };
 #endif

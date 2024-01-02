@@ -28,6 +28,8 @@
 #include <toolkit/system/memory/pools/TkMemoryPool.h>
 #include <toolkit/utilities/containers/TkMetaMessageMap.h>
 
+#include <gamestate/gcuniverseaddressdata.meta.h>
+
 SKYSCRAPER_BEGIN
 
 enum AtlasRequestResult

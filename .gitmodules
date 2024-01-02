@@ -46,3 +46,6 @@
 [submodule "submodules/pcre2"]
 	path = submodules/pcre2
 	url = https://github.com/PCRE2Project/pcre2.git
+[submodule "cmake/cppsharp-cmake"]
+	path = cmake/cppsharp-cmake
+	url = https://github.com/VITALISED/cppsharp-cmake.git

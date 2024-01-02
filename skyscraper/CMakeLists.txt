@@ -34,3 +34,14 @@ target_link_libraries(
 if(NOT ${SKIP_NMS_CHECK})
     add_dependencies(skyscraper metadata_generator)
 endif()
+
+find_package(CppSharp)
+if(CPPSHARP_FOUND)
+    include(UseCppSharp)
+    add_cppsharp_target(
+        skyscraper_csharp skyscraper
+        ${CMAKE_CURRENT_SOURCE_DIR}/application/GcApplication.h "Skyscraper"
+        "-DNO_SKYSCRAPER_NAMESPACE=1"
+    )
+    target_link_libraries(skyscraper_csharp PRIVATE skyscraper)
+endif()

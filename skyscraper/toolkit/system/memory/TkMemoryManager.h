@@ -69,6 +69,16 @@ enum eMemoryHeapType
 template <typename T>
 class TkSTLAllocatorShim : public std::allocator<T>
 {
+  public:
+    using std::allocator<T>::allocator;
+
+    TkSTLAllocatorShim() noexcept : std::allocator<T>() {}
+    TkSTLAllocatorShim(const TkSTLAllocatorShim &other) noexcept : std::allocator<T>(other) {}
+    TkSTLAllocatorShim(TkSTLAllocatorShim &&other) noexcept : std::allocator<T>(std::move(other)) {}
+    template <typename U>
+    TkSTLAllocatorShim(const TkSTLAllocatorShim<U> &other) noexcept : std::allocator<T>(other)
+    {}
+
     template <typename U>
     struct rebind
     {

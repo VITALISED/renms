@@ -25,6 +25,7 @@
 
 #include <networking/GcLobbyId.h>
 #include <networking/GcNetworkConstants.h>
+#include <networking/GcNetworkPrivilegesManager.h>
 #include <toolkit/core/types/TkID.h>
 #include <toolkit/networking/TkReplicatedVariableArray.h>
 #include <toolkit/networking/TkReplicatedVariablePlayer.h>
@@ -62,7 +63,7 @@ class cGcNetworkPlayerReplicatedState
             cTkReplicatedVariablePlayer<cTkFixedString<64, char>> mQueueName;
             cTkReplicatedVariablePlayer<cTkFixedString<64, char>> mTicketId;
             cTkReplicatedVariablePlayer<cTkFixedString<4, char>> mDevice;
-            cTkReplicatedVariablePlayer<enum ePrivilegeState> meFireteamJoinability;
+            cTkReplicatedVariablePlayer<ePrivilegeState> meFireteamJoinability;
             cTkReplicatedVariablePlayer<cTkFixedString<64, char>> mNativeSessionId;
             cTkReplicatedVariablePlayer<cGcSettlementState> mCurrentSettlement;
             cTkReplicatedVariablePlayer<cGcDifficultySettingsReplicatedState> mDifficultySettings;
