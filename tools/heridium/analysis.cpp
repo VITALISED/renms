@@ -22,7 +22,8 @@
 #include "analysis.h"
 
 RENMS_HOOK(
-    cTkMetaData__Register, renms::RelToAbsolute(0x248ABC0), void,
+    cTkMetaData__Register,
+    renms::SignatureScan("48 89 5C 24 18 48 89 74 24 20 41 54 41 56 41 57 48 81 EC ? ? ? ? 48 83 3D ? ? ? ? ?"), void,
     (const cTkMetaDataClass *lpClassMetadata, void (*lDefaultFunction)(cTkClassPointer *, cTkLinearMemoryPool *),
      void (*lFixingFunction)(cTkClassPointer *, bool, uint64_t), void (*lValidateFunction)(cTkClassPointer *),
      bool (*lEqualsFunction)(const cTkClassPointer *, const cTkClassPointer *),
@@ -65,6 +66,18 @@ HERIDIUM_BEGIN
 
 void AnalysisInit()
 {
+    // renms::SignatureScanner<RENMS_POINTER_TYPE> lScanner = renms::SignatureScanner<RENMS_POINTER_TYPE>(
+    //     "48 89 5C 24 18 48 89 74 24 20 41 54 41 56 41 57 48 81 EC ? ? ? ? 48 83 3D ? ? ? ? ?");
+
+    // auto guh =
+    //     renms::IDAPatternToVec("48 89 5C 24 18 48 89 74 24 20 41 54 41 56 41 57 48 81 EC ? ? ? ? 48 83 3D ? ? ? ?
+    //     ?");
+
+    // std::for_each(guh->begin(), guh->end(), [](int lItem) { spdlog::info("wire {}", lItem); });
+
+    // spdlog::info(lScanner.Scan());
+    // spdlog::info(
+    //     renms::SignatureScan("48 89 5C 24 18 48 89 74 24 20 41 54 41 56 41 57 48 81 EC ? ? ? ? 48 83 3D ? ? ? ? ?"));
     CreateOutputDirectories();
     RENMS_DISPATCH_HOOK(cTkMetaData__Register);
     renms::ResumeModuleThread(renms::GetNMSModuleHandle());

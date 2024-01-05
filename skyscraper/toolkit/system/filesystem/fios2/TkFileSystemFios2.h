@@ -1,9 +1,9 @@
 /**
- * @file warning.h
+ * @file TkFileSystemFios2.h
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2024-01-03
  *
- * Copyright (C) 2023  VITALISED & Contributors
+ * Copyright (C) 2024  VITALISED & Contributors
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,14 +21,29 @@
 
 #pragma once
 
-#include <renms.h>
+#include <skyscraper.h>
 
-#include <common/memory/hook.h>
-#include <common/platform/wine.h>
-#include <core/config.h>
+#include <sceFios2.h>
+#include <toolkit/utilities/string/TkString.h>
 
-RENMS_BEGIN
+SKYSCRAPER_BEGIN
 
-void CreateWarningHooks();
+class cTkFiosCacheDesc
+{
+  public:
+    cTkFixedString<256, char> msPath;
+    int miNumBlocks;
+    int miBlockSize;
+    SceFiosRamCacheContext mRamCacheContext;
+    void *mpRamCacheWorkBuffer;
+};
 
-RENMS_END
+class cTkMountedFIOSArchive
+{
+  public:
+    cTkFixedString<128, char> mFullArchivePath;
+    SceFiosBuffer mBuffer;
+    int mFH;
+};
+
+SKYSCRAPER_END

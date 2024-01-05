@@ -25,10 +25,8 @@ SKYSCRAPER_BEGIN
 
 cGcApplication *cGcApplication::GetInstance()
 {
-    if (GetModuleHandleA("Galaxy64.dll"))
-        return reinterpret_cast<nms::cGcApplication *>(renms::RelToAbsolute(0x49707E0));
-    if (GetModuleHandleA("steam_api64.dll"))
-        return reinterpret_cast<nms::cGcApplication *>(renms::RelToAbsolute(0x495EF10));
+    if (GetModuleHandleA("Galaxy64.dll")) return reinterpret_cast<cGcApplication *>(renms::RelToAbsolute(0x49707E0));
+    if (GetModuleHandleA("steam_api64.dll")) return reinterpret_cast<cGcApplication *>(renms::RelToAbsolute(0x495EF10));
 
     std::runtime_error("Unknown platform!");
 

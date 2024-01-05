@@ -23,6 +23,7 @@
 
 #include <common/common_pch.h>
 #include <common/memory/memory.h>
+#include <common/memory/scanner.h>
 #include <polyhook2/Detour/NatDetour.hpp>
 #include <polyhook2/Enums.hpp>
 #include <polyhook2/IHook.hpp>
@@ -48,6 +49,13 @@ inline std::string replace_hookid(std::string lsName)
     RENMS_POINTER_TYPE name##__TRAMPOLINE = NULL;                     \
     return_type name##__DETOUR detour_fn PLH::x64Detour name##__HOOK( \
         offset, reinterpret_cast<RENMS_POINTER_TYPE>(name##__DETOUR), &name##__TRAMPOLINE)
+
+
+// #define RENMS_HOOK(name, pattern, return_type, detour_fn)             \
+//     RENMS_POINTER_TYPE name##__TRAMPOLINE = NULL;                     \
+//     return_type name##__DETOUR detour_fn PLH::x64Detour name##__HOOK( \
+//         renms::SignatureScanner<RENMS_POINTER_TYPE>(pattern).Scan(),  \
+//         reinterpret_cast<RENMS_POINTER_TYPE>(name##__DETOUR), &name##__TRAMPOLINE)
 
 #define RENMS_IAT_HOOK(name, module, return_type, detour_fn)        \
     RENMS_POINTER_TYPE name##__TRAMPOLINE = NULL;                   \

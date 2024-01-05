@@ -42,10 +42,20 @@ void CreateLogger()
     std::shared_ptr<textchatsink_mt> textchat_sink = std::make_shared<textchatsink_mt>();
 
     textchat_sink->set_pattern("[<RED>%n<>] <PLAYER_%%02d>%v<>");
-    console_sink->set_pattern(" [\033[38;2;219;88;85m%n\033[0m] %v");
     file_sink->set_level(spdlog::level::trace);
-    spdlog::set_default_logger(
-        std::make_shared<spdlog::logger>("ReNMS", spdlog::sinks_init_list({console_sink, file_sink, textchat_sink})));
+
+    if (!IsPlatformWine())
+    {
+        console_sink->set_pattern(" [\033[38;2;219;88;85m%n\033[0m] %v");
+        spdlog::set_default_logger(std::make_shared<spdlog::logger>(
+            "ReNMS", spdlog::sinks_init_list({console_sink, file_sink, textchat_sink})));
+    }
+    else
+    {
+        console_sink->set_pattern(" [ReNMS] %v");
+        spdlog::set_default_logger(std::make_shared<spdlog::logger>(
+            "ReNMS", spdlog::sinks_init_list({console_sink, file_sink, textchat_sink})));
+    }
 };
 
 RENMS_END

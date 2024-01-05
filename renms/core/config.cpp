@@ -54,6 +54,8 @@ void config::Init()
 
     if (pluginIni["settings"].contains("disable_plugins")) lbCreatePluginManager = false;
 
+    if (IsPlatformWine()) { spdlog::warn("You're running on a Wine-based installation. You might have problems!"); }
+
     if (lbCreatePluginManager) { gPluginManager = new PluginManager(); }
 }
 

@@ -61,6 +61,7 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserv
     {
     case DLL_PROCESS_ATTACH:
         AllocConsole();
+        std::cin.get();
         DisableThreadLibraryCalls(hModule);
 
         CreateThread(nullptr, 0, MainThread, hModule, 0, nullptr);

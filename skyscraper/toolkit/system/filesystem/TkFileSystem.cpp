@@ -1,9 +1,9 @@
 /**
- * @file warning.h
+ * @file TkFileSystem.cpp
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2024-01-03
  *
- * Copyright (C) 2023  VITALISED & Contributors
+ * Copyright (C) 2024  VITALISED & Contributors
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,16 +19,18 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#pragma once
+#include <toolkit/system/filesystem/TkFileSystem.h>
 
-#include <renms.h>
+SKYSCRAPER_BEGIN
 
-#include <common/memory/hook.h>
-#include <common/platform/wine.h>
-#include <core/config.h>
+cTkFileSystem *cTkFileSystem::GetInstance()
+{
+    if (GetModuleHandleA("Galaxy64.dll")) return reinterpret_cast<cTkFileSystem *>(renms::RelToAbsolute(0x44C0578));
+    if (GetModuleHandleA("steam_api64.dll")) return reinterpret_cast<cTkFileSystem *>(renms::RelToAbsolute(0x44AEC88));
 
-RENMS_BEGIN
+    std::runtime_error("Unknown platform!");
 
-void CreateWarningHooks();
+    return NULL;
+}
 
-RENMS_END
+SKYSCRAPER_END

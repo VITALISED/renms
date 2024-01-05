@@ -47,7 +47,7 @@ DWORD WINAPI MainThread(LPVOID lpReserved)
     renms::CreateTargetDirectories();
     renms::CreateWarningHooks();
     renms::CreateFSMGcApplicationHooks();
-    renms::CreateTestingHooks();
+    // renms::CreateTestingHooks();
 
     renms::ResumeModuleThread(renms::GetNMSModuleHandle());
     spdlog::info("NMS is running.");

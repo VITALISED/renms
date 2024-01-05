@@ -31,6 +31,8 @@ target_link_libraries(
     skyscraper PUBLIC renms_submodule_dependencies renms_common
 )
 
+target_compile_definitions(skyscraper PUBLIC RENMS FIOS_TYPES_ONLY)
+
 if(NOT ${SKIP_NMS_CHECK})
     add_dependencies(skyscraper metadata_generator)
 endif()

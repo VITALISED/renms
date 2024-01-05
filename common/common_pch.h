@@ -23,6 +23,8 @@
 #include <fmt/format.h>
 #include <spdlog/spdlog.h>
 
+#include <iostream>
+
 #define WIN32_LEAN_AND_MEAN
 
 #define RENMS_BEGIN \
