@@ -31,25 +31,26 @@ RENMS_HOOK(
      cTkClassPointer *(*lCreateFunction)(cTkClassPointer *result),
      uint64_t (*lHashFunction)(const cTkClassPointer *, uint64_t, bool), void (*lDestroyFunction)(cTkClassPointer *)) {
         std::string lsKey = lpClassMetadata->mpacName;
+        bool lbFoundPath  = false;
+        std::string lPath = std::filesystem::current_path().string();
 
         if (lsKey.find_first_of("c") != std::string::npos) { lsKey = lsKey.substr(lsKey.find_first_of("c")); }
 
-        std::transform(
-            lsKey.begin(), lsKey.end(), lsKey.begin(), [](unsigned char c) { return (char)std::tolower(c); });
+        std::transform(lsKey.begin(), lsKey.end(), lsKey.begin(), [](unsigned char c) {
+            return static_cast<char>(std::tolower(c));
+        });
 
-        std::string lPath = std::filesystem::current_path().string();
         lPath.append("/");
 
-        bool lbFoundPath = false;
-
-        for (std::pair<const char *, const char *> lItem : gClassPaths)
-        {
-            if (lItem.first == lsKey)
-            {
-                lPath.append(lItem.second);
-                lbFoundPath = true;
-            }
-        }
+        std::for_each(
+            gClassPaths.begin(), gClassPaths.end(),
+            [&lPath, &lbFoundPath, lsKey](std::pair<const char *, const char *> lItem) {
+                if (lItem.first == lsKey)
+                {
+                    lPath.append(lItem.second);
+                    lbFoundPath = true;
+                }
+            });
 
         if (!lbFoundPath) lPath.append("/unmapped/").append(lsKey).append(".meta.h");
 
