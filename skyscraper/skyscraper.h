@@ -28,6 +28,7 @@
 #include <havok_stubs.h>
 // #include <nanoflann.hpp>
 #include <common/memory/memory.h>
+#include <common/memory/trampoline.h>
 #include <nanoflann_stubs.h>
 #include <rapidjson/document.h>
 #include <rapidjson/rapidjson.h>

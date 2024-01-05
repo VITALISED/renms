@@ -25,8 +25,6 @@
 #include <common/memory/memory.h>
 #include <common/platform/wine.h>
 
-#include <cstdio>
-
 RENMS_BEGIN
 
 template <typename _PtrTy>
@@ -35,14 +33,9 @@ class SignatureScanner
   public:
     using PointerType = _PtrTy;
 
-    inline SignatureScanner(std::string lsPattern)
-    {
-        this->msPattern     = std::string(lsPattern);
-        this->mPatternBytes = std::make_shared<std::vector<int>>();
-        this->IDAPatternToBytes();
-    }
+    inline SignatureScanner() {}
 
-    inline SignatureScanner(std::string &lsPattern)
+    inline SignatureScanner(std::string lsPattern)
     {
         this->msPattern     = std::string(lsPattern);
         this->mPatternBytes = std::make_shared<std::vector<int>>();
