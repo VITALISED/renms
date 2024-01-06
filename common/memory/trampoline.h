@@ -41,7 +41,7 @@ class Trampoline
     inline Fn Cast(RENMS_POINTER_TYPE lpFunction) { return reinterpret_cast<Fn>(lpFunction); }
 
     template <typename... Args>
-    inline auto Invoke(Args... lArgs)
+    inline auto Invoke(Args &&...lArgs)
     {
         return (mpFunction(std::forward<Args>(lArgs)...));
     }
