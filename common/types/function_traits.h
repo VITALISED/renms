@@ -1,9 +1,9 @@
 /**
- * @file warning.h
+ * @file function_traits.h
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2024-01-10
  *
- * Copyright (C) 2023  VITALISED & Contributors
+ * Copyright (C) 2024  VITALISED & Contributors
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,15 +21,23 @@
 
 #pragma once
 
-#include <renms.h>
-
-#include <common/memory/hook.h>
-#include <common/platform/wine.h>
-#include <core/config.h>
-#include <toolkit/system/filesystem/TkFileSystem.h>
+#include <common/common_pch.h>
 
 RENMS_BEGIN
 
-void CreateWarningHooks();
+template <typename T>
+class FunctionTraits;
+
+template <typename R, typename... Args>
+class FunctionTraits<R (*)(Args...)> : public FunctionTraits<R(Args...)>
+{};
+
+template <typename R, typename... Args>
+class FunctionTraits<R(Args...)>
+{
+  public:
+    using ReturnType = R;
+    using Arguments  = std::tuple<Args...>;
+};
 
 RENMS_END

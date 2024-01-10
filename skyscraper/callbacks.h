@@ -1,9 +1,9 @@
 /**
- * @file warning.h
+ * @file callbacks.h
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2024-01-08
  *
- * Copyright (C) 2023  VITALISED & Contributors
+ * Copyright (C) 2024  VITALISED & Contributors
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,15 +21,14 @@
 
 #pragma once
 
-#include <renms.h>
+#include <skyscraper.h>
 
-#include <common/memory/hook.h>
-#include <common/platform/wine.h>
-#include <core/config.h>
-#include <toolkit/system/filesystem/TkFileSystem.h>
+#include <application/GcApplication.h>
 
-RENMS_BEGIN
+SKYSCRAPER_BEGIN
 
-void CreateWarningHooks();
+SKYSCRAPER_CALLBACK_ENTRY_DEF();
 
-RENMS_END
+SKYSCRAPER_CALLBACK_DEFINITIONS(ADD_CALLBACK_DEFINITION(cTkFileSystem, IsModded));
+
+SKYSCRAPER_END

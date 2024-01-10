@@ -7,6 +7,7 @@ set(RENMS_COMMON_HEADERS
     ${CMAKE_CURRENT_SOURCE_DIR}/thread/thread.h
     ${CMAKE_CURRENT_SOURCE_DIR}/memory/scanner.h
     ${CMAKE_CURRENT_SOURCE_DIR}/memory/trampoline.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/types/function_traits.h
 )
 set(RENMS_COMMON_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/logging/logger.cpp

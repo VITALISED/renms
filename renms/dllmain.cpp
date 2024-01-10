@@ -30,12 +30,15 @@
 #include <fios/fios.h>
 #include <logging/logger.h>
 #include <plugins/fsm.h>
+#include <skyscraper/callbacks.h>
 #include <testing/testhooks.h>
 // #include <scripts/python.h>
 
 DWORD WINAPI MainThread(LPVOID lpReserved)
 {
     UNREFERENCED_PARAMETER(lpReserved);
+
+    SKYSCRAPER_CALLBACK_ENTRY();
 
     renms::CreateLogger();
     spdlog::info("ReNMS v.{} -- Initializing things...", RENMS_VERSION);

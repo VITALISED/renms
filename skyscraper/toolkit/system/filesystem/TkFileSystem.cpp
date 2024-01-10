@@ -23,6 +23,8 @@
 
 SKYSCRAPER_BEGIN
 
+DECLARE_DETAIL_IMPL_NOTRAMPOLINE(cTkFileSystem::IsModded);
+
 cTkFileSystem *cTkFileSystem::GetInstance()
 {
     if (GetModuleHandleA("Galaxy64.dll")) return reinterpret_cast<cTkFileSystem *>(renms::RelToAbsolute(0x44C0578));

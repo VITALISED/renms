@@ -1,9 +1,9 @@
 /**
- * @file warning.h
+ * @file callbacks.cpp
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2024-01-08
  *
- * Copyright (C) 2023  VITALISED & Contributors
+ * Copyright (C) 2024  VITALISED & Contributors
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,17 +19,15 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#pragma once
-
-#include <renms.h>
-
-#include <common/memory/hook.h>
-#include <common/platform/wine.h>
-#include <core/config.h>
+#include <application/GcApplication.h>
+#include <callbacks.h>
+#include <polyhook2/Detour/NatDetour.hpp>
 #include <toolkit/system/filesystem/TkFileSystem.h>
 
-RENMS_BEGIN
+SKYSCRAPER_BEGIN
 
-void CreateWarningHooks();
+ADD_HOOK_CALLBACK(cTkFileSystem, IsModded, bool cTkFileSystem_IsModded(cTkFileSystem *thiscall), thiscall);
 
-RENMS_END
+SETUP_CALLBACK_DETOUR_ENTRY(INVOKE_CALLBACK_ENTRY(cTkFileSystem, IsModded));
+
+SKYSCRAPER_END

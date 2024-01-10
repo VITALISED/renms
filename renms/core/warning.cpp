@@ -46,10 +46,16 @@ RENMS_BEGIN
 
 void CreateWarningHooks()
 {
+    using namespace nms;
+
+    DECLARE_HOOK_FLAGS(
+        cTkFileSystem::IsModded, [](cTkFileSystem *thiscall) -> bool { return true; },
+        renms::DetourThreadFlags(0, true));
+
     if (renms::config::gShouldShowWarning && !IsPlatformWine())
     {
         RENMS_DISPATCH_HOOK(cGcApplicationGameModeSelectorState__RenderWarning);
-        RENMS_DISPATCH_HOOK(cTkFileSystem__IsModded);
+        // RENMS_DISPATCH_HOOK(cTkFileSystem__IsModded);
     }
 }
 

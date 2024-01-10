@@ -47,6 +47,32 @@ class cTkFilename : public cTkFixedString<128, char>
 class cTkFileSystem
 {
   public:
+    /**
+     * Methods
+     */
+
+    inline bool IsModded()
+    {
+        if (this->mpData) return this->mpData->mbIsModded;
+        return false;
+    };
+
+    /**
+     * Custom implementations
+     */
+
+    static cTkFileSystem *GetInstance();
+
+    /**
+     * Detail declarations
+     */
+
+    DECLARE_METHOD_DETAIL(IsModded, bool(cTkFileSystem *), "48 8B 01 48 85 C0 74 ? 0F B6 80 92 26 00 00");
+
+    /**
+     * Members
+     */
+
     struct Data : public AutoPooled<4>
     {
         cTkTFixedFreeList<FIOS2HANDLE, 4> mFileHandleFreeList;
@@ -68,8 +94,6 @@ class cTkFileSystem
     };
 
     cTkFileSystem::Data *mpData;
-
-    static cTkFileSystem *GetInstance();
 };
 
 SKYSCRAPER_END

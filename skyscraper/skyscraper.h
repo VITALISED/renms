@@ -27,6 +27,7 @@
 
 #include <havok_stubs.h>
 // #include <nanoflann.hpp>
+#include <common/memory/hook.h>
 #include <common/memory/memory.h>
 #include <common/memory/trampoline.h>
 #include <nanoflann_stubs.h>
@@ -50,6 +51,8 @@
 #include <memory>
 #include <string>
 #include <unordered_map>
+
+#include <tuple>
 
 namespace nms_rapidjson = rapidjson;
 
