@@ -154,12 +154,53 @@ std::string HeridiumCXXFile::AddMethodDefinitions()
 {
     HM_BEGIN_BUFFER;
 
-    HM_METHOD_DEF("inline", this->mpMetaDataClass->mpacName, "()", true);
+    const std::string lsClassName = this->mpMetaDataClass->mpacName;
+
+    HM_PUSHSTRING("    /**\n     * Constructors\n     */\n\n");
+    HM_METHOD_DEF("inline", lsClassName, "()", true);
+
+    HM_PUSHSTRING("\n");
+
+    HM_PUSHSTRING("    /**\n     * Methods\n     */\n\n");
+    HM_METHOD_DEF("void", "FixDown", "(uint64_t liDynamicOffset)", false);
+    HM_METHOD_DEF("void", "FixUp", "(uint64_t liDynamicOffset)", false);
+    HM_METHOD_DEF("uint64_t", "GenerateHash", "(uint64_t luHash, bool lbDeep)", false);
+    HM_METHOD_DEF("void", "NGuiRender", "()", false);
+    HM_METHOD_DEF("void", "ReadFromXMLNode", "(XMLNode &lDataNode, bool lbMergeWithExisting)", false);
+    HM_METHOD_DEF("bool", "Save", "(const char *lpacFilename, bool lbClearAllExistingData)", false);
+    HM_METHOD_DEF("void", "ValidateData", "()", false);
+    HM_METHOD_DEF("void", "SetDefaults", "()", false);
+    HM_METHOD_DEF("void", "WriteToClassPtr", "(cTkClassPointer &lClassPtr)", false);
+    HM_METHOD_DEF("void", "WriteToXMLNode", "(XMLNode &lDataNode, bool lbForceShortForm, bool lbGlobal)", false);
+    HM_PUSHSTRING("\n");
+
+    HM_PUSHSTRING("    /**\n     * Class Pointer Calls\n     */\n\n");
     HM_METHOD_DEF(
-        std::string(this->mpMetaDataClass->mpacName).append("*"), "Cast", "(cTkClassPointer* lClassPtr)", false);
-    // HM_METHOD_DEF("", this->mpMetaDataClass->mpacName, "()", false);
-    // HM_METHOD_DEF("", this->mpMetaDataClass->mpacName, "()", false);
-    // HM_METHOD_DEF("", this->mpMetaDataClass->mpacName, "()", false);
+        std::string("static ").append(this->mpMetaDataClass->mpacName).append("&"), "Cast",
+        "(cTkClassPointer &lClassPtr)", false);
+    HM_METHOD_DEF(
+        std::string("static const ").append(this->mpMetaDataClass->mpacName).append("&"), "Cast",
+        "(const cTkClassPointer &lClassPtr)", false);
+    HM_METHOD_DEF(
+        "static bool", "ClassPointerCompare", "(const cTkClassPointer &lPtr, const cTkClassPointer &lOtherPtr)", false);
+    HM_METHOD_DEF("static void", "ClassPointerCopy", "(cTkClassPointer &lDest, const cTkClassPointer &lSource)", false);
+    HM_METHOD_DEF("static cTkClassPointer&", "ClassPointerCreate", "()", false);
+    HM_METHOD_DEF(
+        "static void", "ClassPointerCreateDefault", "(cTkClassPointer& lPtr, cTkLinearMemoryPool* lpAllocator)", false);
+    HM_METHOD_DEF("static void", "ClassPointerDestroy", "(cTkClassPointer &lPtr)", false);
+    HM_METHOD_DEF(
+        "static void", "ClassPointerFix", "(cTkClassPointer &lPtr, bool lbFixUp, uint64_t liDynamicOffset)", false);
+    HM_METHOD_DEF(
+        "static uint64_t", "ClassPointerGenerateHash", "(const cTkClassPointer &lPtr, uint64_t luHash, bool lbDeep)",
+        false);
+    HM_METHOD_DEF(
+        "static void", "ClassPointerRead",
+        "(cTkClassPointer &lPtr, XMLNode &lDataNode, cTkLinearMemoryPool *lpAllocator)", false);
+    HM_METHOD_DEF("static bool", "ClassPointerSave", "(const cTkClassPointer &lPtr, const char *lpacFilename)", false);
+    HM_METHOD_DEF("static void", "ClassPointerValidateData", "(cTkClassPointer &lPtr)", false);
+    HM_METHOD_DEF(
+        "static void", "ClassPointerWrite", "(const cTkClassPointer &lPtr, XMLNode &lDataNode, bool lbForceShortForm)",
+        false);
 
     return HM_BUFFER;
 }
@@ -194,12 +235,14 @@ void HeridiumCXXFile::WriteHeaderFile()
 
     HM_PUSHSTRING("\n");
 
-    HM_UNION_BEGIN;
+    // HM_UNION_BEGIN;
 
     // HM_PUSHSTRING(this->msConstBuffers);
     // if (!this->msConstBuffers.empty()) { HM_PUSHSTRING("\n"); }
 
-    HM_STRUCT_BEGIN;
+    // HM_STRUCT_BEGIN;
+
+    HM_PUSHSTRING("    /**\n     * Members\n     */\n\n");
 
     for (int i = 0; i < this->mpMetaDataClass->miNumMembers; i++)
     {
@@ -296,17 +339,21 @@ void HeridiumCXXFile::WriteHeaderFile()
         }
     }
 
-    HM_STRUCT_END;
+    HM_PUSHSTRING("\n");
 
-    // for (int i = 0; i < this->mpMetaDataClass->miNumMembers; i++)
-    // {
-    //     cTkMetaDataMember currentMember = this->mpMetaDataClass->maMembers[i];
-    //     HM_META_MEMBER(currentMember);
-    // }
+    // HM_STRUCT_END;
 
-    // HM_METADATA_CLASS;
+    HM_PUSHSTRING("    /**\n     * Metadata\n     */\n\n");
 
-    HM_UNION_END;
+    for (int i = 0; i < this->mpMetaDataClass->miNumMembers; i++)
+    {
+        cTkMetaDataMember currentMember = this->mpMetaDataClass->maMembers[i];
+        HM_META_MEMBER(currentMember);
+    }
+
+    HM_METADATA_CLASS;
+
+    // HM_UNION_END;
 
     HM_CLASS_END;
 

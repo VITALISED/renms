@@ -77,6 +77,7 @@ enum ePlayerSpawnLocationOverride
 
 class cGcGameConfigCache
 {
+  public:
     eBootLoadDelay meBootLoadDelay;
     bool mbSkipIntro;
     bool mbSkipPlanetDiscoverOnBoot;

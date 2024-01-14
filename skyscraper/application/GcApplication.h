@@ -59,6 +59,7 @@
 #include <system/input/GcInput.h>
 #include <system/input/GcVibrationManager.h>
 #include <toolkit/graphics/debug/TkDebugRenderer.h>
+#include <toolkit/maths/numeric/TkIntTuples.h>
 #include <toolkit/maths/utilities/spatial/TkSampleDistribution.h>
 #include <toolkit/system/TkCSMutex.h>
 #include <toolkit/system/input/TkInputManager.h>
@@ -103,6 +104,22 @@ class cGcApplication : public cTkFSM
     virtual void StateRelease(cTkFSMState *, const void *) final;
 
     /**
+     * Methods
+     */
+
+    void NotifyResolutionChangedCallback(const cTkIntTuple2<int, 0> &lScreenRes);
+    bool DrainFileLoadsAndPollableTasks(bool lbTimeoutWithFrame);
+    bool DrainFileLoadsAndPollableTasks(bool lbTimeoutWithFrame, int liLoadBalancingTimeout);
+    void HideSimulationNodes();
+    void ShowSimulationNodes();
+    bool AllowPause();
+    void ChangeAppGameMode(ePresetGameMode leMode, int liPlayerSlotIndex);
+    void UpdateInputManagers(float lfTimestep);
+    void VRAssertCallback(cTkAssertData &lAssertData, bool *lpbIgnoreFlag, bool *lpbBreakEnabled);
+    void UpdateVRAssertMessage();
+    bool IsAccessibleUIEnabled();
+
+    /**
      * Getter/Setters
      */
 
@@ -130,12 +147,12 @@ class cGcApplication : public cTkFSM
 
     /**
      * @fn cGcApplication::GetInstance
-     * @brief Get the singleton instance of cGcApplication.
+     * @brief Get the running instance of cGcApplication.
      */
     static cGcApplication *GetInstance();
 
     /**
-     * Detail declarations
+     * Detail
      */
 
     DECLARE_METHOD_DETAIL(Update, void(cGcApplication *), "40 53 48 83 EC ? E8 ? ? ? ? 48 89 05 ? ? ? ?");
