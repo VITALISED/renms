@@ -37,6 +37,7 @@ class cTkPersonalRNG
     static const uint32_t kiRandContext = 1517746329;
 
     inline cTkPersonalRNG() { this->Reseed(); }
+    inline cTkPersonalRNG(const cTkSeed &lNewSeed) { this->Reseed(lNewSeed); }
 
     inline void ShuffleState()
     {
@@ -71,11 +72,11 @@ class cTkPersonalRNG
         this->mState1 = cTkByteSwap::GetHighValOf64(lHash ^ (lHash >> 33));
     }
 
-    inline void Reseed(cTkSeed *lNewSeed)
+    inline void Reseed(const cTkSeed &lNewSeed)
     {
-        if (lNewSeed->mbValid)
+        if (lNewSeed.mbValid)
         {
-            uint64_t lValue = lNewSeed->GetValue();
+            uint64_t lValue = lNewSeed.GetValue();
             this->mState0   = cTkByteSwap::GetLowValOf64(lValue);
             this->mState1   = cTkByteSwap::GetHighValOf64(lValue);
         }

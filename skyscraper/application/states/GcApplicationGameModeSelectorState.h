@@ -95,10 +95,67 @@ class cGcApplicationGameModeSelectorState : public cGcApplicationState
         ERandom,
     };
 
+    virtual ~cGcApplicationGameModeSelectorState() final;
+    virtual void Construct() final;
+    virtual void Prepare(cTkFSMState *, const void *) final;
+    virtual void Update(float) final;
+    virtual void Event(unsigned int, const void *) final;
+    virtual void Release(cTkFSMState *, const void *) final;
+    virtual void Destruct() final;
+    virtual void Render(EgRenderParity::List) final;
+
+    void SystemCleanUp_PreparePhase();
+    void LoadAndSetupUI();
+    void SetupSlotUI(TkID<128> *lLayerName);
+    void RefreshSlotUI();
+    bool FormatSeasonTimeString(
+        cTkFixedString<128, char> *lOutString, int64_t liTimeRemaining, const char *lpUIString,
+        const char *lpPluralUIString);
+    bool ShouldDisplaySeasonHint();
+    void UpdateSeasonalGameModeUI();
+    void SetupMultiplayerUI();
+    void SetupCloudSavesUI();
+    void SetupStartUI();
+    void SetupCustomDifficultyUI();
+    void SetupOptionsUI();
+    void SetupCreditsUI();
+    void SetupRemapControlsUI();
+    void UnloadAndDiscardUI();
+    void FetchSaveDataState();
+    void RenderCursor();
+    void UpdateMultiplayerFriendsUI();
+    void UpdateManageCloudSavesUI();
+    void DownloadCloudData();
+    static void DoPatchNotes(
+        cGcNGuiLayer *lpPatchButton, cGcNGuiLayer *lpPatchBox, cGcLayerInteractControl *lpInteractLayer,
+        const cTkVector<GcGameStatePersistence::StorageSlotInformation> *laSlots);
+    void DoOKCancelDialog();
+    void OnSeasonWarningClosed();
+    void UpdateStartUI();
+    void UpdateCustomDifficultyUI();
+    void SwitchToInLobbyState(cGcApplicationGameModeSelectorState::MultiplayerState leState);
+    void LeaveMultiplayerState();
+    void CustomIconFX(void *lpData);
+    void DoUpdateLogicDuringRender();
+    void UpdateLogicSlotSelect();
+    void UpdateSeasonalSlotHover(const GcGameStatePersistence::StorageSlotInformation *lSlotInfo, const int liSlotIdx);
+    void RestoreRenderPipeline();
+    void UpdateLogicModeSelect();
+    static void OnSeasonalDataBecomeAvailable(cGcApplicationGameModeSelectorState *lpThis);
+    void SwitchToOptions(bool lbIsReturning);
+    void LeaveOptionsScreen();
+    void UpdateDeletionWarningDlg(float lfTimeStep);
+    void RenderWarningMessages();
+    void RenderWarning(
+        const char *lpacWarningTitle, const char *lpacWarningPress, const char *lStatus1, char *lStatus2,
+        float lfTimeout);
+    bool HasPressedBackorQuit(eInputValidation leInputType);
+
     template <typename T, uint32_t Count>
     struct EnumIconResources
     {
         cTkSmartResHandle mResources[Count];
+        ~EnumIconResources();
     };
 
     struct WarningDlgComponents
@@ -236,15 +293,6 @@ class cGcApplicationGameModeSelectorState : public cGcApplicationState
     float mfCloudResultTimer;
     cGcApplicationGameModeSelectorState::DisplayState meScreenToReturnToFromOptionsScreen;
     cGcApplicationGameModeSelectorState::CloudSaveUpdateState meCloudSaveUpdateState;
-
-    virtual ~cGcApplicationGameModeSelectorState() { EMPTY_CALL_DESTRUCTOR(); }
-    virtual void Construct();
-    virtual void Prepare(cTkFSMState *, const void *);
-    virtual void Update(float);
-    virtual void Event(unsigned int, const void *);
-    virtual void Release(cTkFSMState *, const void *);
-    virtual void Destruct();
-    virtual void Render(EgRenderParity::List);
 };
 
 SKYSCRAPER_END

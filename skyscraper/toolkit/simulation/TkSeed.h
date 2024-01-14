@@ -29,8 +29,12 @@ class cTkSeed
 {
   public:
     inline cTkSeed() { this->mbValid = true; }
-    inline cTkSeed(uint64_t lu64SeedValue) { this->mu64SeedValue = lu64SeedValue; }
-    inline uint64_t GetValue() { return mu64SeedValue; }
+    inline cTkSeed(uint64_t lu64SeedValue)
+    {
+        this->mu64SeedValue = lu64SeedValue;
+        this->mbValid       = true;
+    }
+    inline uint64_t GetValue() const { return mu64SeedValue; }
 
     uint64_t mu64SeedValue;
     bool mbValid;

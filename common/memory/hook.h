@@ -105,6 +105,8 @@ struct DetourThreadFlags
     name##_::gCallbacks.push_back(hook);      \
     name##_::gDetourThreadFlags.push_back(renms::DetourThreadFlags(flags));
 
+// Whoever thought below was a good idea needs to explode
+
 // Detour must be class##_##name
 
 #define ADD_HOOK_CALLBACK_V(class, name, detour, ...)                                                                  \

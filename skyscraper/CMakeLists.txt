@@ -19,6 +19,8 @@
 file(GLOB_RECURSE SKYSCRAPER_HEADERS "./" "*.h" "*.inl")
 file(GLOB_RECURSE SKYSCRAPER_SOURCES "./" "*.cpp")
 
+include(${CMAKE_CURRENT_SOURCE_DIR}/Signatures.cmake)
+
 add_library(skyscraper STATIC ${SKYSCRAPER_HEADERS} ${SKYSCRAPER_SOURCES})
 
 target_include_directories(
@@ -29,6 +31,7 @@ target_include_directories(
 
 target_link_libraries(
     skyscraper PUBLIC renms_submodule_dependencies renms_common
+                      skyscraper_definitions
 )
 
 target_compile_definitions(skyscraper PUBLIC RENMS FIOS_TYPES_ONLY)

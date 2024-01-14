@@ -112,53 +112,9 @@ void GetUACommandDispatch(std::vector<std::string> *laArgs)
         if (planetQuery.mName.macBuffer) { spdlog::info("Name: {}", planetQuery.mName.macBuffer); }
     }
 
-    cGcAISpaceshipManager dest;
-
-    uint64_t solarsystemseed = lQuery->mSystemSeed.mu64SeedValue;
-
-    uint64_t v8 = 0x64DD81482CBD31D7i64 * (solarsystemseed ^ (solarsystemseed >> 33));
-    uint64_t actualSeed =
-        (0xE36AA5C613612997ui64 * (v8 ^ (v8 >> 33))) ^ ((0xE36AA5C613612997ui64 * (v8 ^ (v8 >> 33))) >> 33);
-
-    spdlog::info("Assumed AI Ship Seed: {}", actualSeed);
-    spdlog::info(
-        "Actual AI Ship Seed: {}",
-        cGcApplication::GetInstance()->mpData->mSimulation.mAISpaceshipManager.mSeed.mu64SeedValue);
-    spdlog::info("Ships:");
-
-    cTkDynamicArray<cGcAISpaceshipPreloadCacheData> systemShips =
-        cGcApplication::GetInstance()->mpData->mSimulation.mpSolarSystem->mSolarSystemData.maSystemShips;
-
-    int v71                  = EShipClass_Freighter;
-    int tradeshipscachecount = systemShips.miSize; // temp value
-
-    cTkPersonalRNG lRNG = cTkPersonalRNG();
-    lRNG.Reseed(&UA);
-    lRNG.ShuffleState();
-    lRNG.ShuffleState(); // this is a float gen call from the look
-    lRNG.ShuffleState();
-
-    // need to handle the generation of asteroids
-
-    // generate ship seeds
-    for (int i = 0; i < 9; i++)
-    {
-        // not freighter gen
-        if (v71 != EShipClass_Freighter)
-        {
-            for (int i = 0; i < tradeshipscachecount; i++)
-            {
-                cTkSeed finalseed;
-                lRNG.GenSeed(&finalseed);
-
-                // spdlog::info("finalseed {}", finalseed);
-                spdlog::info("seeds: {:X} | {:X}", systemShips[i]->mSeed.mu64SeedValue, finalseed.mu64SeedValue);
-            }
-        }
-        else { v71++; }
-    }
-
-    for (int i = 0; i < systemShips.miSize; i++) {}
+    nms::cGcSolarSystemGenerator lGenerator = nms::cGcSolarSystemGenerator();
+    lGenerator.Construct();
+    // lGenerator.Generate();
 
     free(laArgs);
 }

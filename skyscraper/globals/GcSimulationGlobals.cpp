@@ -1,9 +1,9 @@
 /**
- * @file GcApplicationBootState.h
+ * @file GcSimulationGlobals.cpp
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2024-01-12
  *
- * Copyright (C) 2023  VITALISED & Contributors
+ * Copyright (C) 2024  VITALISED & Contributors
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,20 +19,13 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#pragma once
-
-#include <skyscraper.h>
-
-#include <application/states/GcApplicationState.h>
+#include <globals/GcSimulationGlobals.h>
 
 SKYSCRAPER_BEGIN
 
-class cGcApplicationBootState : public cGcApplicationState
+cGcSimulationGlobals *cGcSimulationGlobals::GetInstance()
 {
-  public:
-    virtual void Construct();
-    virtual void Update(float);
-    virtual void Render();
-};
+    return reinterpret_cast<cGcSimulationGlobals *>(renms::RelToAbsolute(0x4E5BF60));
+}
 
 SKYSCRAPER_END

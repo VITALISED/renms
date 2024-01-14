@@ -1,9 +1,9 @@
 /**
- * @file GcApplicationBootState.h
+ * @file TkAssert.h
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2024-01-13
  *
- * Copyright (C) 2023  VITALISED & Contributors
+ * Copyright (C) 2024  VITALISED & Contributors
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,16 +23,19 @@
 
 #include <skyscraper.h>
 
-#include <application/states/GcApplicationState.h>
-
 SKYSCRAPER_BEGIN
 
-class cGcApplicationBootState : public cGcApplicationState
+class cTkAssertData
 {
   public:
-    virtual void Construct();
-    virtual void Update(float);
-    virtual void Render();
+    void *fgwnd;
+    const char *file;
+    unsigned int line;
+    const char *fn;
+    const char *expression;
+    const char *message;
+    const char *callstack;
+    bool mbPrintCallstack;
 };
 
 SKYSCRAPER_END
