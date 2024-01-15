@@ -142,6 +142,10 @@ class cGcAtlasBroker
     cGcAtlasTransport *mpTransport;
     cGcAtlasBroker::State::Enum meState;
 
+    cGcAtlasBroker::CompletionResult Complete(
+        const AtlasRequestTask *lpRequestTask, AtlasResponseTask *lpResponseTask,
+        const bool lbShouldRunDoCompletionRoutine);
+
     virtual ~cGcAtlasBroker();
     virtual void Reset();
     virtual const char *GetName();

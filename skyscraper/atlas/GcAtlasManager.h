@@ -45,8 +45,33 @@ typedef int Enum;
 class cGcAtlasManager
 {
   public:
+    void Construct();
+    void Destruct();
+    void Update();
+    // TODO: Nanovg crap
+    void RenderActivityIcon(const cTkVector2 &lCenterPos, void *lpContext, bool lfScale, float lCenterPos_0);
+    cGcAtlasBroker::State::Enum GetConnectionState();
+    cGcAtlasBroker::State::Enum GetDisplayConnectionState();
+    uint64_t InternalEnqueueRequest(
+        const cTkMetaMessageWrapperTemplated<void> &lRequestMetadata, float lRequestTimeoutSeconds,
+        const TkID<128> &lpacDebugTag);
+    bool CancelRequest(uint64_t lHandle);
+    bool PollForRequestCompletion(uint64_t lHandle);
+    uint64_t FetchRequestResult(
+        uint64_t lHandle, cTkMetaMessageWrapperTemplated<cGcAtlasShared> &lMetadataResult,
+        uint64_t &lu64RequestMetadataClassType, TkID<128> *lpDebugTagOut);
+    bool FreeRequestResult(uint64_t lHandle);
+    cGcAtlasCommunityData *GetAtlasCommunityData();
+    void DoThreadedUpdate(void *lpData);
+    bool IsConnectionDown();
+
+    template <typename T>
+    uint64_t EnqueueRequest(const T &lMetaType, float lRequestTimeoutSeconds, const TkID<128> &lpacDebugTag);
+
     struct Data
     {
+        void UpdateInternal();
+
         float mfLastUpdateTime;
         cGcAtlasTransport *mpActiveTransport;
         cGcAtlasBroker *mpActiveBroker;
