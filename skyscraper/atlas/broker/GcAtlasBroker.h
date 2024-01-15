@@ -23,12 +23,51 @@
 
 #include <skyscraper.h>
 
+#include <atlas/broker/GcAtlasCommunityData.h>
+#include <atlas/broker/recv/GcAtlasRecvActiveFeaturedBasesQuery.h>
+#include <atlas/broker/recv/GcAtlasRecvBaseImages.h>
+#include <atlas/broker/recv/GcAtlasRecvBaseList.h>
+#include <atlas/broker/recv/GcAtlasRecvBaseQueryList.h>
+#include <atlas/broker/recv/GcAtlasRecvBasic.h>
+#include <atlas/broker/recv/GcAtlasRecvBlob.h>
+#include <atlas/broker/recv/GcAtlasRecvDiscoveryExact.h>
+#include <atlas/broker/recv/GcAtlasRecvDiscoveryList.h>
+#include <atlas/broker/recv/GcAtlasRecvFeaturedBasesQueryList.h>
+#include <atlas/broker/recv/GcAtlasRecvMonumentList.h>
+#include <atlas/broker/recv/GcAtlasRecvSettlementList.h>
+#include <atlas/broker/recv/GcAtlasRecvTotalContribution.h>
+#include <atlas/broker/recv/GcAtlasRecvVoxel.h>
+#include <atlas/broker/requests/GcAtlasSendChangeFeaturedBasesEnv.h>
+#include <atlas/broker/requests/GcAtlasSendMarkFeaturedBase.h>
+#include <atlas/broker/requests/GcAtlasSendMarkFeaturedBaseWithImage.h>
+#include <atlas/broker/requests/GcAtlasSendQueryActiveFeaturedBases.h>
+#include <atlas/broker/requests/GcAtlasSendQueryBaseImages.h>
+#include <atlas/broker/requests/GcAtlasSendQueryBases.h>
+#include <atlas/broker/requests/GcAtlasSendQueryFeaturedBases.h>
+#include <atlas/broker/requests/GcAtlasSendQuerySeasonData.h>
+#include <atlas/broker/requests/GcAtlasSendRemoveFeaturedBases.h>
+#include <atlas/broker/requests/GcAtlasSendReport.h>
+#include <atlas/broker/requests/GcAtlasSendReportBase.h>
+#include <atlas/broker/requests/GcAtlasSendRequestBases.h>
+#include <atlas/broker/requests/GcAtlasSendRequestBlob.h>
+#include <atlas/broker/requests/GcAtlasSendRequestDiscoveryAllOnPlanet.h>
+#include <atlas/broker/requests/GcAtlasSendRequestDiscoveryCategory.h>
+#include <atlas/broker/requests/GcAtlasSendRequestDiscoveryExact.h>
+#include <atlas/broker/requests/GcAtlasSendRequestMonument.h>
+#include <atlas/broker/requests/GcAtlasSendRequestSettlements.h>
+#include <atlas/broker/requests/GcAtlasSendRequestTotalContribution.h>
+#include <atlas/broker/requests/GcAtlasSendRequestVoxel.h>
+#include <atlas/broker/requests/GcAtlasSendSubmitBaseWithImage.h>
+#include <atlas/broker/requests/GcAtlasSendSubmitContributionActual.h>
+#include <atlas/broker/requests/GcAtlasSendSubmitDiscoveryExact.h>
+#include <atlas/broker/requests/GcAtlasSendSubmitMessage.h>
+#include <atlas/broker/requests/GcAtlasSendSubmitMonument.h>
+#include <atlas/broker/requests/GcAtlasSendSubmitSeasonStageCompleted.h>
+#include <atlas/broker/requests/GcAtlasSendSubmitSettlement.h>
 #include <atlas/transport/GcAtlasTransport.h>
 #include <toolkit/core/types/TkID.h>
 #include <toolkit/system/memory/pools/TkMemoryPool.h>
 #include <toolkit/utilities/containers/TkMetaMessageMap.h>
-
-#include <gamestate/gcuniverseaddressdata.meta.h>
 
 SKYSCRAPER_BEGIN
 
@@ -44,72 +83,17 @@ enum AtlasRequestResult
     Failed_RateLimited,
 };
 
-enum ePackageType
-{
-    EPackageType_Unknown,
-    EPackageType_Discovery,
-    EPackageType_Message,
-    EPackageType_NumTypes,
-};
-
-class cGcAtlasShared
-{
-  public:
-    uint64_t mu64ClientUserdata;
-    virtual ~cGcAtlasShared();
-};
-
-class cGcAtlasSendReport : public cGcAtlasShared
-{
-  public:
-    ePackageType mePackageType;
-    cTkFixedString<64, char> macRID;
-    cGcUniverseAddressData mUniverseAddress;
-    cTkFixedString<32, char> macRL;
-    cTkFixedString<32, char> macRC;
-};
-
-class cGcAtlasRecvVoxel : public cGcAtlasShared
-{
-    int miNumberOfThings;
-    cTkFixedArray<uint64_t, 8> mau64ThingsFound;
-};
-
 class cGcIBrokerData : public AutoPooled<5>
 {
   public:
     virtual ~cGcIBrokerData();
 };
 
-struct AtlasCommunalMissionTier
-{
-    unsigned int luMissionIndex;
-    unsigned int luTierReached;
-};
-
-class cGcAtlasCommunityData
-{
-  public:
-    uint64_t muCurrentCMIndex;
-    uint64_t muCurrentCMStartEpoch;
-    uint64_t muCurrentCMEndEpoch;
-    uint64_t muNextCMStartEpoch;
-    uint64_t muNextCMEndEpoch;
-    uint64_t muMyCMContribution;
-    uint64_t muMaxIndividualContribution;
-    cTkVector<uint64_t> maContributionLevels;
-    uint64_t muCurrentTotalContribution;
-    cTkVector<AtlasCommunalMissionTier> mPreviousTiersReached;
-    unsigned int muSecondsBetweenCmRefreshes;
-    bool mbUpdatePending;
-    bool mbRequestUpdate;
-    uint64_t muTimeOfLastRefresh;
-    uint64_t mRequestHandle;
-};
-
 class AtlasTaskCommon
 {
   public:
+    virtual ~AtlasTaskCommon();
+
     cGcIBrokerData *mpBrokerData;
     uint64_t mHandle;
     cTkMetaMessageWrapperTemplated<cGcAtlasShared> mMetadata;
@@ -134,7 +118,15 @@ class cGcAtlasBroker
   public:
     struct State
     {
-        typedef int Enum;
+        enum Enum
+        {
+            Invalid,
+            Disconnected,
+            Authenticate,
+            Ready,
+            __EnumTerminator,
+            Unspecified,
+        };
     };
 
     enum CompletionResult
@@ -151,80 +143,80 @@ class cGcAtlasBroker
     cGcAtlasBroker::State::Enum meState;
 
     virtual ~cGcAtlasBroker();
-    // virtual void Reset();
-    // virtual const char *GetName();
-    // virtual bool RequiresTransport();
-    // virtual unsigned int GetReadyStateCounter();
-    // virtual bool Construct(cGcAtlasTransport *);
-    // virtual void Destruct();
-    // virtual void Update(float);
-    // virtual void UpdateThreadStart();
-    // virtual void UpdateThreadEnd();
-    // virtual AtlasRequestResult Service(AtlasTaskCommon *);
-    // virtual void Abandon(AtlasTaskCommon *);
-    // virtual void DeleteTaskData(cGcIBrokerData *);
-    // virtual bool GetMessagesEnabled();
-    // virtual const char *GetOpenIdToken();
-    // virtual cGcAtlasCommunityData *GetAtlasCommunityData();
-    // virtual cGcURL *GetAtlasBaseImagesRoute();
-    // virtual cGcURL *GetAtlasFeaturedBaseImagesRoute();
-    // virtual cGcURL *GetAtlasSeasonDataRoute();
-    // virtual cGcAtlasBroker::CompletionResult DoCompletion(
-    //     cGcIBrokerData *, const cGcAtlasSendRequestSettlements *, cGcAtlasRecvSettlementList *);
-    // virtual cGcAtlasBroker::CompletionResult DoCompletion(
-    //     cGcIBrokerData *, const cGcAtlasSendSubmitSettlement *, cGcAtlasRecvBasic *);
-    // virtual cGcAtlasBroker::CompletionResult DoCompletion(
-    //     cGcIBrokerData *, const cGcAtlasSendSubmitSeasonStageCompleted *, cGcAtlasRecvBasic *);
-    // virtual cGcAtlasBroker::CompletionResult DoCompletion(
-    //     cGcIBrokerData *, const cGcAtlasSendQuerySeasonData *, cGcAtlasRecvBasic *);
-    // virtual cGcAtlasBroker::CompletionResult DoCompletion(
-    //     cGcIBrokerData *, const cGcAtlasSendRequestTotalContribution *, cGcAtlasRecvTotalContribution *);
-    // virtual cGcAtlasBroker::CompletionResult DoCompletion(
-    //     cGcIBrokerData *, const cGcAtlasSendSubmitContributionActual *, cGcAtlasRecvBasic *);
-    // virtual cGcAtlasBroker::CompletionResult DoCompletion(
-    //     cGcIBrokerData *, const cGcAtlasSendRequestMonument *, cGcAtlasRecvMonumentList *);
-    // virtual cGcAtlasBroker::CompletionResult DoCompletion(
-    //     cGcIBrokerData *, const cGcAtlasSendSubmitMonument *, cGcAtlasRecvBasic *);
-    // virtual cGcAtlasBroker::CompletionResult DoCompletion(
-    //     cGcIBrokerData *, const cGcAtlasSendRequestBlob *, cGcAtlasRecvBlob *);
-    // virtual cGcAtlasBroker::CompletionResult DoCompletion(
-    //     cGcIBrokerData *, const cGcAtlasSendRequestVoxel *, cGcAtlasRecvVoxel *);
-    // virtual cGcAtlasBroker::CompletionResult DoCompletion(
-    //     cGcIBrokerData *, const cGcAtlasSendReportBase *, cGcAtlasRecvBasic *);
-    // virtual cGcAtlasBroker::CompletionResult DoCompletion(
-    //     cGcIBrokerData *, const cGcAtlasSendReport *, cGcAtlasRecvBasic *);
-    // virtual cGcAtlasBroker::CompletionResult DoCompletion(
-    //     cGcIBrokerData *, const cGcAtlasSendSubmitBaseWithImage *, cGcAtlasRecvBasic *);
-    // virtual cGcAtlasBroker::CompletionResult DoCompletion(
-    //     cGcIBrokerData *, const cGcAtlasSendSubmitBase *, cGcAtlasRecvBasic *);
-    // virtual cGcAtlasBroker::CompletionResult DoCompletion(
-    //     cGcIBrokerData *, const cGcAtlasSendSubmitMessage *, cGcAtlasRecvBasic *);
-    // virtual cGcAtlasBroker::CompletionResult DoCompletion(
-    //     cGcIBrokerData *, const cGcAtlasSendSubmitDiscoveryExact *, cGcAtlasRecvBasic *);
-    // virtual cGcAtlasBroker::CompletionResult DoCompletion(
-    //     cGcIBrokerData *, const cGcAtlasSendQueryBaseImages *, cGcAtlasRecvBaseImages *);
-    // virtual cGcAtlasBroker::CompletionResult DoCompletion(
-    //     cGcIBrokerData *, const cGcAtlasSendChangeFeaturedBasesEnv *, cGcAtlasRecvBasic *);
-    // virtual cGcAtlasBroker::CompletionResult DoCompletion(
-    //     cGcIBrokerData *, const cGcAtlasSendRemoveFeaturedBases *, cGcAtlasRecvBasic *);
-    // virtual cGcAtlasBroker::CompletionResult DoCompletion(
-    //     cGcIBrokerData *, const cGcAtlasSendQueryActiveFeaturedBases *, cGcAtlasRecvActiveFeaturedBasesQuery *);
-    // virtual cGcAtlasBroker::CompletionResult DoCompletion(
-    //     cGcIBrokerData *, const cGcAtlasSendMarkFeaturedBaseWithImage *, cGcAtlasRecvBasic *);
-    // virtual cGcAtlasBroker::CompletionResult DoCompletion(
-    //     cGcIBrokerData *, const cGcAtlasSendMarkFeaturedBase *, cGcAtlasRecvBasic *);
-    // virtual cGcAtlasBroker::CompletionResult DoCompletion(
-    //     cGcIBrokerData *, const cGcAtlasSendQueryFeaturedBases *, cGcAtlasRecvFeaturedBasesQueryList *);
-    // virtual cGcAtlasBroker::CompletionResult DoCompletion(
-    //     cGcIBrokerData *, const cGcAtlasSendQueryBases *, cGcAtlasRecvBaseQueryList *);
-    // virtual cGcAtlasBroker::CompletionResult DoCompletion(
-    //     cGcIBrokerData *, const cGcAtlasSendRequestBases *, cGcAtlasRecvBaseList *);
-    // virtual cGcAtlasBroker::CompletionResult DoCompletion(
-    //     cGcIBrokerData *, const cGcAtlasSendRequestDiscoveryAllOnPlanet *, cGcAtlasRecvDiscoveryList *);
-    // virtual cGcAtlasBroker::CompletionResult DoCompletion(
-    //     cGcIBrokerData *, const cGcAtlasSendRequestDiscoveryCategory *, cGcAtlasRecvDiscoveryList *);
-    // virtual cGcAtlasBroker::CompletionResult DoCompletion(
-    //     cGcIBrokerData *, const cGcAtlasSendRequestDiscoveryExact *, cGcAtlasRecvDiscoveryExact *);
+    virtual void Reset();
+    virtual const char *GetName();
+    virtual bool RequiresTransport();
+    virtual unsigned int GetReadyStateCounter();
+    virtual bool Construct(cGcAtlasTransport *);
+    virtual void Destruct();
+    virtual void Update(float);
+    virtual void UpdateThreadStart();
+    virtual void UpdateThreadEnd();
+    virtual AtlasRequestResult Service(AtlasTaskCommon *);
+    virtual void Abandon(AtlasTaskCommon *);
+    virtual void DeleteTaskData(cGcIBrokerData *);
+    virtual bool GetMessagesEnabled();
+    virtual const char *GetOpenIdToken();
+    virtual cGcAtlasCommunityData *GetAtlasCommunityData();
+    virtual cGcURL *GetAtlasBaseImagesRoute();
+    virtual cGcURL *GetAtlasFeaturedBaseImagesRoute();
+    virtual cGcURL *GetAtlasSeasonDataRoute();
+    virtual cGcAtlasBroker::CompletionResult DoCompletion(
+        cGcIBrokerData *, const cGcAtlasSendRequestSettlements *, cGcAtlasRecvSettlementList *);
+    virtual cGcAtlasBroker::CompletionResult DoCompletion(
+        cGcIBrokerData *, const cGcAtlasSendSubmitSettlement *, cGcAtlasRecvBasic *);
+    virtual cGcAtlasBroker::CompletionResult DoCompletion(
+        cGcIBrokerData *, const cGcAtlasSendSubmitSeasonStageCompleted *, cGcAtlasRecvBasic *);
+    virtual cGcAtlasBroker::CompletionResult DoCompletion(
+        cGcIBrokerData *, const cGcAtlasSendQuerySeasonData *, cGcAtlasRecvBasic *);
+    virtual cGcAtlasBroker::CompletionResult DoCompletion(
+        cGcIBrokerData *, const cGcAtlasSendRequestTotalContribution *, cGcAtlasRecvTotalContribution *);
+    virtual cGcAtlasBroker::CompletionResult DoCompletion(
+        cGcIBrokerData *, const cGcAtlasSendSubmitContributionActual *, cGcAtlasRecvBasic *);
+    virtual cGcAtlasBroker::CompletionResult DoCompletion(
+        cGcIBrokerData *, const cGcAtlasSendRequestMonument *, cGcAtlasRecvMonumentList *);
+    virtual cGcAtlasBroker::CompletionResult DoCompletion(
+        cGcIBrokerData *, const cGcAtlasSendSubmitMonument *, cGcAtlasRecvBasic *);
+    virtual cGcAtlasBroker::CompletionResult DoCompletion(
+        cGcIBrokerData *, const cGcAtlasSendRequestBlob *, cGcAtlasRecvBlob *);
+    virtual cGcAtlasBroker::CompletionResult DoCompletion(
+        cGcIBrokerData *, const cGcAtlasSendRequestVoxel *, cGcAtlasRecvVoxel *);
+    virtual cGcAtlasBroker::CompletionResult DoCompletion(
+        cGcIBrokerData *, const cGcAtlasSendReportBase *, cGcAtlasRecvBasic *);
+    virtual cGcAtlasBroker::CompletionResult DoCompletion(
+        cGcIBrokerData *, const cGcAtlasSendReport *, cGcAtlasRecvBasic *);
+    virtual cGcAtlasBroker::CompletionResult DoCompletion(
+        cGcIBrokerData *, const cGcAtlasSendSubmitBaseWithImage *, cGcAtlasRecvBasic *);
+    virtual cGcAtlasBroker::CompletionResult DoCompletion(
+        cGcIBrokerData *, const cGcAtlasSendSubmitBase *, cGcAtlasRecvBasic *);
+    virtual cGcAtlasBroker::CompletionResult DoCompletion(
+        cGcIBrokerData *, const cGcAtlasSendSubmitMessage *, cGcAtlasRecvBasic *);
+    virtual cGcAtlasBroker::CompletionResult DoCompletion(
+        cGcIBrokerData *, const cGcAtlasSendSubmitDiscoveryExact *, cGcAtlasRecvBasic *);
+    virtual cGcAtlasBroker::CompletionResult DoCompletion(
+        cGcIBrokerData *, const cGcAtlasSendQueryBaseImages *, cGcAtlasRecvBaseImages *);
+    virtual cGcAtlasBroker::CompletionResult DoCompletion(
+        cGcIBrokerData *, const cGcAtlasSendChangeFeaturedBasesEnv *, cGcAtlasRecvBasic *);
+    virtual cGcAtlasBroker::CompletionResult DoCompletion(
+        cGcIBrokerData *, const cGcAtlasSendRemoveFeaturedBases *, cGcAtlasRecvBasic *);
+    virtual cGcAtlasBroker::CompletionResult DoCompletion(
+        cGcIBrokerData *, const cGcAtlasSendQueryActiveFeaturedBases *, cGcAtlasRecvActiveFeaturedBasesQuery *);
+    virtual cGcAtlasBroker::CompletionResult DoCompletion(
+        cGcIBrokerData *, const cGcAtlasSendMarkFeaturedBaseWithImage *, cGcAtlasRecvBasic *);
+    virtual cGcAtlasBroker::CompletionResult DoCompletion(
+        cGcIBrokerData *, const cGcAtlasSendMarkFeaturedBase *, cGcAtlasRecvBasic *);
+    virtual cGcAtlasBroker::CompletionResult DoCompletion(
+        cGcIBrokerData *, const cGcAtlasSendQueryFeaturedBases *, cGcAtlasRecvFeaturedBasesQueryList *);
+    virtual cGcAtlasBroker::CompletionResult DoCompletion(
+        cGcIBrokerData *, const cGcAtlasSendQueryBases *, cGcAtlasRecvBaseQueryList *);
+    virtual cGcAtlasBroker::CompletionResult DoCompletion(
+        cGcIBrokerData *, const cGcAtlasSendRequestBases *, cGcAtlasRecvBaseList *);
+    virtual cGcAtlasBroker::CompletionResult DoCompletion(
+        cGcIBrokerData *, const cGcAtlasSendRequestDiscoveryAllOnPlanet *, cGcAtlasRecvDiscoveryList *);
+    virtual cGcAtlasBroker::CompletionResult DoCompletion(
+        cGcIBrokerData *, const cGcAtlasSendRequestDiscoveryCategory *, cGcAtlasRecvDiscoveryList *);
+    virtual cGcAtlasBroker::CompletionResult DoCompletion(
+        cGcIBrokerData *, const cGcAtlasSendRequestDiscoveryExact *, cGcAtlasRecvDiscoveryExact *);
 };
 
 SKYSCRAPER_END
