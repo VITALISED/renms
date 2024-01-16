@@ -23,6 +23,7 @@
 
 #include <skyscraper.h>
 
+#include <gamestate/GcPlayerBasePersistentBuffer.h>
 #include <toolkit/utilities/containers/TkVector.h>
 
 SKYSCRAPER_BEGIN
@@ -30,6 +31,20 @@ SKYSCRAPER_BEGIN
 class cGcBaseLinkMap
 {
   public:
+    struct sLinkSocket;
+
+    void Clear();
+    uint16_t AddLinkObject(cGcPlayerBasePersistentBuffer *lpBuffer, int liObjectIndex);
+    void RemoveLinkObject(cGcPlayerBasePersistentBuffer *lpBuffer, uint16_t liLinkObjIndex);
+    void LinkSockets(const sLinkSocket &a, const sLinkSocket &b);
+
+    enum eConnectionType
+    {
+        EConnectionType_NormalLinks,
+        EConnectionType_DependantLinks,
+        EConnectionType_DependentLinks,
+    };
+
     struct sLinkSocket
     {
         uint16_t miLinkIndex;

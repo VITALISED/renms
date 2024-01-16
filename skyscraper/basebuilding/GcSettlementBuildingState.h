@@ -23,11 +23,18 @@
 
 #include <skyscraper.h>
 
+#include <simulation/solarsystem/buildings/GcBuilding.h>
+
 SKYSCRAPER_BEGIN
 
 class cGcSettlementBuildingState
 {
   public:
+    cGcSettlementBuildingState &Get(const cGcBuilding &lBuilding);
+    void StoreInPlayerState(cGcBuilding &lBuilding);
+    // FIXME: not sure what the enum is for this, seems to go up to around ~5 or so
+    int GetNextAdvancement();
+
     int miValue;
 };
 

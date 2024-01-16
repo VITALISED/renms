@@ -25,11 +25,26 @@
 
 #include <toolkit/maths/utilities/spatial/TkVector3KD.h>
 
+#include <gamestate/basebuilding/gcpersistentbaseentry.meta.h>
+
 SKYSCRAPER_BEGIN
+
+class cGcPlayerBasePersistentBuffer;
 
 class cGcBaseBuildingBaseLayout
 {
   public:
+    void GenerateLayout(cGcPlayerBasePersistentBuffer *lpBaseBuffer);
+    void GenerateLayout(
+        uint64_t lBaseUA, const cTkVector3 &lBaseWorldOffsetPosition, const cTkMatrix34 &lBaseOrientation,
+        const cGcPersistentBaseEntry &lObjects, int liCount);
+    void AddObject(const TkID<128> &lObjectId, const cTkVector3 &lLocalPosition);
+    void Update(float lfTimeStep);
+    bool ForceGenerateLayout();
+    bool TestSphere(const cTkVector3 &lWorldOffsetPosition);
+    bool TestBox(const cTkAABB &lWorldOffsetAABB);
+    bool TestLayout(cGcBaseBuildingBaseLayout &lLayout);
+
     uint64_t mBaseUA;
     cTkVector3 mBasePosition;
     cTkVector3 mBaseUp;

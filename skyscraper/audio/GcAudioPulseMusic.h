@@ -24,6 +24,7 @@
 #include <skyscraper.h>
 
 #include <audio/GcAudioAggregates.h>
+#include <engine/source/shared/utxmlparser.h>
 #include <toolkit/maths/numeric/generic/TkVector2Generic.h>
 #include <toolkit/utilities/containers/TkVector.h>
 #include <toolkit/utilities/string/TkString.h>

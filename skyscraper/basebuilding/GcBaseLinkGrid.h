@@ -35,6 +35,31 @@ SKYSCRAPER_BEGIN
 class cGcLinkGrid
 {
   public:
+    struct sEvent;
+    struct sLinkObjectInstance;
+
+    void AddExistingObject(
+        cGcPlayerBasePersistentBuffer *lpBuffer, uint16_t luiBufferIndex, uint16_t luiLinkIndex,
+        const cGcBaseBuildingEntry *lpEntry, uint64_t lu64Timestamp, uint16_t luiAmount, bool lbConnectionEnabled,
+        bool lbRateEnabled, uint8_t luiDependantsDisabled);
+    void AddObjectCopy(const cGcLinkGrid::sLinkObjectInstance &lObject);
+    void UpdateEstimates(float lfTimeStep);
+    void Simulate(uint64_t lu64ToTimestamp, cGcPlayerBasePersistentBuffer *lpBuffer, bool lbSaveChangesToBuffer);
+    void AddAmountToObject(
+        uint64_t lu64Timestamp, cGcPlayerBasePersistentBuffer *lpBuffer, uint16_t luiInstanceIndex, int liAmount,
+        bool lbDistributeAmongstGroup);
+    void DeleteObject(uint16_t luiInstanceIndex);
+    void GetDayNightEvents(
+        uint64_t lu64FromTimestamp, uint64_t lu64ToTimestamp, uint64_t lUA, const cTkVector3 &lWorldOffsetPosition,
+        cTkVector<cGcLinkGrid::sEvent> &lOutEvents);
+    void GetStormEvents(
+        uint64_t lu64FromTimestamp, uint64_t lu64ToToTimestamp, uint64_t lUA,
+        cTkVector<cGcLinkGrid::sEvent> &lOutEvents);
+    void CopyOutRepeatingEvents(
+        uint64_t lu64FromTimestamp, uint64_t lu64ToTimestamp, const cGcLinkGrid::sEvent *lEvent, int liEventsCycleCount,
+        uint64_t lu64CycleTime, cTkVector<cGcLinkGrid::sEvent> &lOutEvents);
+    void AssignGroups(uint64_t lu64ToTimestamp, uint16_t luiGroupToggle);
+
     struct sLinkGroup
     {
         int miPositiveRate;
@@ -67,6 +92,13 @@ class cGcLinkGrid
         cGcRegionHotspots::sHotspotHandle mHotspotHandle;
         uint16_t muiGroupIndex;
     };
+
+    struct sEvent
+    {
+        uint64_t mu64Timestamp;
+        uint8_t muiRateLevel;
+    };
+
     cTkVector<cGcLinkGrid::sLinkObjectInstance> mObjects;
     cTkVector<cGcLinkGrid::sLinkGroup> mGroups;
     uint16_t muiGroupsCount;

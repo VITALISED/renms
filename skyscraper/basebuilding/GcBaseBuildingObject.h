@@ -42,6 +42,8 @@ struct CacheMask
 
 struct SnapSocketsMask
 {
+    bool IsCompatible(const SnapSocketsMask &lMask);
+
     CacheMask mInMask;
     CacheMask mOutMask;
 };
