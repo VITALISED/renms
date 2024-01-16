@@ -33,18 +33,32 @@ SKYSCRAPER_BEGIN
 template <typename T>
 class PulseItemList
 {
+  public:
+    PulseItemList<T> *Load(const XMLNode &lNode);
+    void Release();
+
     T *mpCurrent;
     T *mpFirst;
     unsigned int mNumItems;
 };
 
 /**
- * @brief Pulse music is the system implemented - at least partially by 65daysofstatic, the band who were working on
- * No Man's Sky's soundscapes.
+ * @brief Pulse music is the music soundscape system implemented - at least partially by 65daysofstatic, the band who
+ * were working on No Man's Sky's soundtrack.
  */
 class cGcAudioPulseMusic
 {
   public:
+    void Construct();
+    void Prepare();
+    bool LoadProject(const cTkFixedString<256, char> &lProjectFilename);
+    void ReleaseProject();
+    void StopMusic();
+    void Release();
+    void SetVariantIndex(int index, const cTkFixedString<256, char> &lDebugText);
+    void ResetSoundScapeType();
+    uint64_t GetRNDRange(int liMin, int liMax);
+
     enum PlayingState
     {
         Stopped,
@@ -104,6 +118,12 @@ class cGcAudioPulseMusic
         {
             struct EventGenerator
             {
+                void GenerateSubEvents(
+                    float lfAttenuation, cGcAudioPulseMusic::SoundScape::SoundScapeIndex *lpParentSoundScape);
+                void Update(
+                    cGcAudioPulseMusic::SoundScape::SoundScapeIndex *lpParentSoundScape, float lfTimeStep,
+                    bool lbBeatTriggered);
+
                 struct ModulatorLink
                 {
                     cTkFixedString<256, char> mModulator;
@@ -115,6 +135,9 @@ class cGcAudioPulseMusic
 
                 struct AudioEvent
                 {
+                    bool Play();
+                    void EndOfEventCallbackFunc(int leType, void *lpCallbackInfo); // TODO: AK types
+
                     TkAudioObject mAudioObject;
                     float mInitialVolume;
                     TkAudioID mPlayEventID;

@@ -46,10 +46,57 @@ struct AkAuxSendValue
 class cGcAudioManager : public cTkAudioManager
 {
   public:
+    enum UIState;
+
+    /**
+     * Virtuals
+     */
+
+    virtual void Update(const cTkMatrix34 *, float, const cTkVector3 *, const cTkMatrix34 *, int) final;
+    virtual void Render() final;
+    virtual bool Release() final;
+    virtual void Destruct() final;
+    virtual void UpdateAuxSendWithFalloffConcrete(const cTkVector3 *, TkAudioObject, const float) final;
+
+    /**
+     * Methods
+     */
+
+    void Construct();
+    void BeginLoadingMusic();
+    void StopLoadingMusic();
+    void OnSimulationStateEnter(bool lbFirstBoot);
+    void NextPulseVariant(const cTkFixedString<256, char> &lDebugText);
+    void ChangeUIState(cGcAudioManager::UIState leState);
+    void UpdateAuxSendFull(TkAudioObject lAudioObject);
+    void RunDopplerRequests(float lfTimeStep);
+    void SortAndCueFootsteps();
+    void RunObstructionQueries(const cTkMatrix34 &lListenerTM, float lfTimeStep);
+    void UpdateAudioPulseState(float lfTimeStep);
+    void UpdateAudioEnvironment(float lfTimeStep, bool lbForceUpdate);
+    void UpdateAudioEnvironment_LocationAndInterest(float lfTimeStep, bool lbForceUpdate);
+    void UpdateAudioEnvironment_FreighterTriggers(float lfTimeStep, bool lbForceUpdate);
+    void UpdateAudioEnvironment_InteriorTriggers(float lfTimeStep, bool lbForceUpdate);
+
+    /**
+     * Members
+     */
+
     enum DopplerMode
     {
         Full,
         IgnoreListenerVelocity,
+    };
+
+    enum UIState : uint8_t
+    {
+        None,
+        AmbientCam,
+        Frontend,
+        Map,
+        Overlay,
+        Photomode,
+        ByteBeat,
     };
 
     struct PulseMixControl
