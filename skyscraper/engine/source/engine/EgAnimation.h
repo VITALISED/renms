@@ -23,6 +23,7 @@
 
 #include <skyscraper.h>
 
+#include <engine/source/engine/EgModel.h>
 #include <engine/source/engine/EgResource.h>
 #include <toolkit/animation/engine/TkNodeAnimationControllerEngine.h>
 #include <toolkit/animation/utils/TkIKSolver.h>
@@ -35,8 +36,20 @@
 
 SKYSCRAPER_BEGIN
 
+class cEgModelNode;
+
 class IAnimatableNode
 {
+  public:
+    virtual ~IAnimatableNode();
+    virtual const char *GetANName();
+    virtual unsigned int GetANNameHash();
+    virtual bool IsJoint();
+    virtual int GetJointIndex();
+    virtual int GetLOD();
+    virtual void SetLOD(int);
+    virtual IAnimatableNode *GetANParent();
+    virtual cEgModelNode *GetParentModel();
     int miNodeIndex;
     int miNodeLOD;
 };
@@ -69,6 +82,61 @@ class cEgAnimationResource : public cEgResource
 class cEgAnimationController
 {
   public:
+    struct AnimMapping;
+
+    void ResizeNodeList();
+    void RegisterNode(IAnimatableNode *lpNode);
+    cEgAnimationController::AnimMapping *CreateAnimMapping(
+        const TkID<128> &lName, cEgAnimationResource *lpAnim, const cTkStackVector<uint32_t, 1> &lStartNodeHashes);
+    void MapAnimationResource(
+        uint32_t luNode, cEgAnimationResource *lpAnimResource, const cTkStackVector<uint32_t, 1> &lStartNodeHashes,
+        cEgAnimationController::AnimMapping *lpMap);
+    bool SetWorldPoseMatrix(int liJointIndex, const cTkMatrix34 &lMatrix);
+    void RRunPreAdditiveCallback(
+        AnimTransform *laXformArray, const int *laJointIndex, const int *laJointParentIndex, int liNumJoints,
+        cTkVector<cCallbackWithPriority<cPreAdditiveCallback>> &preAdditiveCallbacks);
+    void WriteBindPose(
+        AnimTransform *laXformArray, cEgGeometryResource *lpGeoRes, cTkVector<bool> &lbIgnoreJoints,
+        const int *laNodeToJoint, int liNumNodes);
+    void MirrorPose(
+        AnimTransform *laCurStage, cEgGeometryResource *lpGeoRes, IAnimatableNode **lNodeList,
+        cTkVector<bool> &lbIgnoreJoints, const int *laNodeToJoint, const int *laJointToNode, int liNumNodes);
+    void ExtractZeroFrame(
+        AnimTransform *laXformArray, const cEgAnimationController &lMapping, cTkVector<bool> &lbIgnoreJoints,
+        const int *laNodeToJoint, int liNumNodes);
+    // Learnt a new word today
+    void Subtract(
+        AnimTransform *laSubtractFrom, AnimTransform *laSubtrahend, cTkVector<bool> &lbIgnoreJoints,
+        const int *laNodeToJoint, int liNumNodes);
+    void Add(
+        AnimTransform *laCurStage, AnimTransform *laXformArray, float lfWeight, cEgGeometryResource *lpGeoRes,
+        cTkVector<bool> &lbIgnoreJoints, const int *laNodeToJoint, int liNumNodes);
+    void NlerpAdd(
+        AnimTransform *laCurStage, AnimTransform *laXformArray, float lfWeight, cEgGeometryResource *lpGeoRes,
+        cTkVector<bool> &lbIgnoreJoints, const int *laNodeToJoint, int liNumNodes);
+    void NlerpComplete(
+        AnimTransform *laCurStage, float lfWeight, cEgGeometryResource *lpGeoRes, cTkVector<bool> &lbIgnoreJoints,
+        const int *laNodeToJoint, int liNumNodes);
+    void NlerpMultiplt(
+        AnimTransform *laCurStage, float lfWeight, cEgGeometryResource *lpGeoRes, cTkVector<bool> &lbIgnoreJoints,
+        const int *laNodeToJoint, int liNumNodes);
+    void Multiply(
+        AnimTransform *laCurStage, AnimTransform *laXformArray, float lfWeight, cEgGeometryResource *lpGeoRes,
+        cTkVector<bool> &lbIgnoreJoints, const int *laNodeToJoint, int liNumNodes);
+    void Blend(
+        AnimTransform *laCurStage, AnimTransform *laXformArray, float lfWeight, cEgGeometryResource *lpGeoRes,
+        cTkVector<bool> &lbIgnoreJoints, const int *laNodeToJoint, int liNumNodes);
+    void EvalCommandListInternal(
+        AnimTransform *laxFormArray_, const int *laNodeToJoint, const int *laJointToNode, const int *laJointIndex,
+        const int *laJointParentIndex, cTkVector<bool> &lbIgnoreJoints, int liNumNodes, int liMaxJointIndex,
+        cEgGeometryResource *lpGeoRes, cTkVector<cCallbackWithPriority<cPreAdditiveCallback>> &preAdditiveCallback);
+    void BuildSkinningMatrices(
+        cEgModelNode *lpModel, const cTkMatrix34 &lModelMat, int *laJointIndex, int *laJointParentIndex,
+        cEgGeometryResource *lpGeometryResource, cTkMatrix34 *laPose, cTkMatrix34 *laRelativeModelMatrix,
+        cTkMatrix34 *laSkinningMats, int64_t liNumJoints);
+    bool AddAnimToAdditivePose(
+        cEgAnimationResource *lpAnimResource, float lfTIme, float lfWeight, TkID<128> *, float, float);
+
     struct JointLODGroup
     {
         int miLOD;

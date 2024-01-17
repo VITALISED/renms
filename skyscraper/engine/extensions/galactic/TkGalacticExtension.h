@@ -25,24 +25,23 @@
 
 SKYSCRAPER_BEGIN
 
-namespace TkGalactic
+class TkGalactic
 {
-
-struct ParticleInstanceData
-{
-    float mfSize;
-    float mfRandom1;
-    float mfRandom2;
-    float mfX;
-    float mfY;
-    float mfZ;
-    float mfW;
-    float mfR;
-    float mfG;
-    float mfB;
-    float mfA;
+  public:
+    struct ParticleInstanceData
+    {
+        float mfSize;
+        float mfRandom1;
+        float mfRandom2;
+        float mfX;
+        float mfY;
+        float mfZ;
+        float mfW;
+        float mfR;
+        float mfG;
+        float mfB;
+        float mfA;
+    };
 };
-
-} // namespace TkGalactic
 
 SKYSCRAPER_END
