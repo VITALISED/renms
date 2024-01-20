@@ -46,11 +46,13 @@ struct TkShaderBufferHandle
 
 class cTkVertexAttributeMapping
 {
+  public:
     int16_t maAttributeLocs[19];
 };
 
 class cTkShaderAsyncLoadData
 {
+  public:
     int32_t mVertexShaderOp;
     int32_t mFragmentShaderOp;
     int32_t mHullShaderOp;

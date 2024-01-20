@@ -44,36 +44,6 @@ enum eMasterModelNodeDistance
     First,
 };
 
-class TkAddNodesHandle
-{
-  public:
-    enum eAddNodesState
-    {
-        EAddNodesState_None,
-        EAddNodesState_Searching,
-        EAddNodesState_Adding
-    };
-
-    enum eState
-    {
-        EState_Adding,
-        EState_Preparing,
-        EState_Complete,
-    };
-
-    TkStrongType<int, TkStrongTypeIDs::TkResHandleID> mSceneGraphResource;
-    TkHandle mParentNode;
-    TkHandle mNode;
-    TkHandle mLastAddedNode;
-    std::shared_ptr<TkAddNodesHandle> mpAddReferencedResourceHandle;
-    uint64_t mu64Timeout;
-    cEgSceneNodeTemplate *mpLastAddedTemplate;
-    cTkAttachment *mpCurrentAttachment;
-    int miCount;
-    eAddNodesState meAddNodesState;
-    eState meState;
-};
-
 class cTkEngineUtils
 {
   public:

@@ -23,8 +23,13 @@
 
 #include <skyscraper.h>
 
+#include <simulation/solarsystem/buildings/GcBuilding.h>
+
+#include <gameplay/gcsettlementstattype.meta.h>
 #include <gamestate/gcsettlementstate.meta.h>
+#include <reality/gcsettlementstatchange.meta.h>
 #include <simulation/environment/gcbuildingclassification.meta.h>
+#include <simulation/solarsystem/gcsolarsystemdata.meta.h>
 
 SKYSCRAPER_BEGIN
 
