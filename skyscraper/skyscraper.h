@@ -22,12 +22,14 @@
 #pragma once
 
 #if (_ITERATOR_DEBUG_LEVEL > 0)
-#pragma warning("You're compiling skyscraper structures in Debug. STL containers will be the wrong size.")
+#pragma message("You're compiling skyscraper structures in Debug. STL containers will be the wrong size.")
 #endif
 
 #include <havok_stubs.h>
 // #include <nanoflann.hpp>
+#include <common/memory/hook.h>
 #include <common/memory/memory.h>
+#include <common/memory/trampoline.h>
 #include <nanoflann_stubs.h>
 #include <rapidjson/document.h>
 #include <rapidjson/rapidjson.h>
@@ -50,11 +52,16 @@
 #include <string>
 #include <unordered_map>
 
+#include <tuple>
+
 namespace nms_rapidjson = rapidjson;
 
-// We need to check for definition due to the way SWIG expands the macro.
+// We need to do this weirdly because of the way CppSharp does namespaces
 // clang-format off
-#if !defined (SKYSCRAPER_BEGIN) || !defined (SKYSCRAPER_END)
+#if defined(NO_SKYSCRAPER_NAMESPACE)
+#define SKYSCRAPER_BEGIN
+#define SKYSCRAPER_END
+#else
 #define SKYSCRAPER_BEGIN namespace nms {
 #define SKYSCRAPER_END };
 #endif

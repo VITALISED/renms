@@ -26,6 +26,7 @@
 #include <engine/source/engine/EgPrimatives.h>
 #include <engine/source/engine/EgResource.h>
 #include <toolkit/animation/utils/TkIKSolver.h>
+#include <toolkit/graphics/shader/TkVertexDefinition.h>
 #include <toolkit/graphics/shader/TkVertexLayoutRuntime.h>
 #include <toolkit/simulation/physics/TkLDSWind.h>
 #include <toolkit/system/thread/TkSpinMutex.h>
@@ -33,6 +34,7 @@
 #include <toolkit/utilities/containers/TkStackContainer.h>
 #include <toolkit/utilities/containers/TkVector.h>
 
+#include <toolkit/scene/geometry/tkgeometrydata.meta.h>
 #include <toolkit/scene/geometry/tkjointmirroraxis.meta.h>
 
 SKYSCRAPER_BEGIN
@@ -79,8 +81,8 @@ class cEgGeometryStreamer
     int miNumMeshes;
     cTkVector<cTkFixedString<128, char>> maMeshNames;
     cTkVector<cTkFixedString<128, char>> maLODMeshNames;
-    cTkVector<unsigned __int64> maMeshNameHashes;
-    cTkVector<unsigned __int64> maDoubleBufferedMeshNameHashes;
+    cTkVector<uint64_t> maMeshNameHashes;
+    cTkVector<uint64_t> maDoubleBufferedMeshNameHashes;
     robin_hood::detail::Table<true, 80, int, void, robin_hood::hash<int, void>, std::equal_to<int>>
         mDoubleBufferedMeshes;
     cTkVector<bool> mabIsMeshProcedural;
@@ -107,11 +109,42 @@ class cEgGeometryAABBCache
 };
 
 /**
+ * @class cEgGeometryResource
  * @brief Class based on Horde3D struct Horde3D::GeometryResource, see
  * https://github.com/horde3d/Horde3D/blob/master/Horde3D/Source/Horde3DEngine/egGeometry.h
  */
 class cEgGeometryResource : public cEgResource
 {
+  public:
+    virtual ~cEgGeometryResource();
+    virtual cTkResource *Clone();
+    virtual void CloneInternal(const cTkResource *);
+    virtual void Release();
+    virtual void InitDefault();
+    virtual bool Load(const char *, int);
+    virtual int GetElementCount(int);
+    virtual int GetElementParamInt(int, int, int);
+    virtual void SetElementParamInt(int, int, int, int);
+    virtual void *MapResStream(int, int, int, bool, bool, const char *);
+    virtual uint32_t GetDeletionFrameDelay();
+
+    void SetSkinnedVertexData(int liVertIndex, const cTkSkinnedVertexData &lData);
+    const AnimTransform *GetBindTransform(uint32_t luJointIndex);
+    void FactoryFunc(const std::string &lsName, int liFlags, cTkResourceDescriptor *lpResourceDescriptor);
+    int64_t GetIndexBufferHandle(int liGeometryBufferIndex);
+    void GetSkinnedVertexData(
+        int liVertex, uint32_t liAlitidIndex, cTkSkinnedVertexData &lData, char *lpaVertexStreamIn);
+    int64_t GetVertexBufferHandle(int liGeometryBufferIndex);
+    void InsertElement(char *lpVertexData, int, const cTkVector2 &lVector, const cTkVertexElement *lpVertexElement);
+    void InsertElement(char *lpVertexData, int, const cTkVector3 &lVector, const cTkVertexElement *lpVertexElement);
+    void InsertElement(char *lpVertexData, int, const cTkVector4 &lVector, const cTkVertexElement *lpVertexElement);
+    void *MapResStream(int liElem, int liElemIdx, int liStream, bool lbRead, bool lbWrite);
+    bool ParseData(cTkGeometryData &lData);
+    void ReleaseVertexBuffer(int iVertBuf);
+    void SetSkinnedVertexData(
+        int liVertIndex, const cTkSkinnedVertexData &lData, char *lpaVertexStream, int liStreamIndex);
+    void UpdateDynamicVertData(uint32_t liAltidIndex);
+
     uint32_t muIndexBuffer;
     cTkStackVector<uint32_t, 1> maVertexBuffers;
     cTkStackVector<uint32_t, 1> maSmallVertexBuffers;
@@ -148,17 +181,6 @@ class cEgGeometryResource : public cEgResource
     cTkVertexLayoutRT mSmallVertexLayout;
     cTkVector<cEgModelNode *> mModelNodesThatUseThisGeometry;
     GeometryStreaming::cEgGeometryStreamer mStreamManager;
-
-    ~cEgGeometryResource();
-    cTkResource *Clone();
-    void CloneInternal(const cTkResource *);
-    void Release();
-    void InitDefault();
-    bool Load(const char *, int);
-    int GetElementCount(int);
-    int GetElementParamInt(int, int, int);
-    void SetElementParamInt(int, int, int, int);
-    void *MapResStream(int, int, int, bool, bool, const char *);
 };
 
 SKYSCRAPER_END

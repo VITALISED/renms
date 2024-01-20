@@ -52,7 +52,6 @@ union $51FF97503943AB88CE860D641BF6512E {
     float x[16];
 };
 
-/* 41020 */
 struct mat4x4
 {
     union {

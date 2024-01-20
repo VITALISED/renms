@@ -23,6 +23,7 @@
 
 #include <renms.h>
 
+#include <common/platform/wine.h>
 #include <inicpp.h>
 
 RENMS_BEGIN

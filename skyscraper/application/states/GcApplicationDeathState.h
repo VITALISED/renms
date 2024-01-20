@@ -35,7 +35,31 @@ SKYSCRAPER_BEGIN
 class cGcApplicationDeathState : public cGcApplicationState
 {
   public:
-    typedef cGcAsyncLoadOps::Operation Phase;
+    virtual ~cGcApplicationDeathState() final;
+    virtual void Construct() final;
+    virtual void Prepare(cTkFSMState *, const void *) final;
+    virtual void Update(float) final;
+    virtual void Release(cTkFSMState *, const void *) final;
+    virtual void Render(EgRenderParity::List) final;
+
+    void RestoreRenderPipeline();
+
+    enum Phase
+    {
+        Death,
+        WaitForQuote,
+        Pause,
+        Resurrection,
+        Spawn,
+        DrainTasks,
+        RegenAroundSpawn,
+        QuoteFade,
+        ResetBitsBeforeStateChange,
+        ReturnToModeSelectUI,
+        ReturnToGame,
+        ResetSeasonSaveData,
+        WaitForSave,
+    };
 
     TkStrongType<int, TkStrongTypeIDs::TkResHandleID> mPipelineResource;
     cTkVector<bool> maPreviousPipelineStageState;
@@ -60,13 +84,6 @@ class cGcApplicationDeathState : public cGcApplicationState
     bool mbPlayerCrashingOnPlanetFromShip;
     bool mbPlayerWasInAbandonedFreighter;
     bool mbFirstUpdate;
-
-    virtual ~cGcApplicationDeathState();
-    virtual void Construct();
-    virtual void Prepare(cTkFSMState *, const void *);
-    virtual void Update(float);
-    virtual void Release(cTkFSMState *, const void *);
-    virtual void Render(EgRenderParity::List);
 };
 
 SKYSCRAPER_END

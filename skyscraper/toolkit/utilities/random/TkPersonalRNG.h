@@ -36,7 +36,8 @@ class cTkPersonalRNG
     constexpr uint32_t i2_32ml() { return 1 / (2 ^ 32 - 1); }
     static const uint32_t kiRandContext = 1517746329;
 
-    cTkPersonalRNG() { this->Reseed(); }
+    inline cTkPersonalRNG() { this->Reseed(); }
+    inline cTkPersonalRNG(const cTkSeed &lNewSeed) { this->Reseed(lNewSeed); }
 
     inline void ShuffleState()
     {
@@ -71,11 +72,11 @@ class cTkPersonalRNG
         this->mState1 = cTkByteSwap::GetHighValOf64(lHash ^ (lHash >> 33));
     }
 
-    inline void Reseed(cTkSeed *lNewSeed)
+    inline void Reseed(const cTkSeed &lNewSeed)
     {
-        if (lNewSeed->mbValid)
+        if (lNewSeed.mbValid)
         {
-            uint64_t lValue = lNewSeed->GetValue();
+            uint64_t lValue = lNewSeed.GetValue();
             this->mState0   = cTkByteSwap::GetLowValOf64(lValue);
             this->mState1   = cTkByteSwap::GetHighValOf64(lValue);
         }
@@ -152,17 +153,20 @@ class cTkPersonalRNG
         }
     }
 
-    template <typename T>
-    inline auto **SelectRandomItemFromContainer(const T *lContainer)
-    {
-        if (lContainer->size() < 1) { ; }
+    // FIXME: this is causing issues with CppSharp. Probably because it's auto**, might need to rewrite the actual
+    // implementation
 
-        int lRange = this->GenInt32Range(0, lContainer->size());
+    // template <typename T>
+    // inline auto **SelectRandomItemFromContainer(const T *lContainer)
+    // {
+    //     if (lContainer->size() < 1) { ; }
 
-        if (lRange >= lContainer->size()) { ; }
+    //     int lRange = this->GenInt32Range(0, lContainer->size());
 
-        return lContainer[lRange];
-    }
+    //     if (lRange >= lContainer->size()) { ; }
+
+    //     return lContainer[lRange];
+    // }
 
     uint32_t mState0;
     uint32_t mState1;

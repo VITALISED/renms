@@ -2,19 +2,19 @@
  * @file GcApplicationScratchpadState.h
  * @author VITALISED & Contributors
  * @since 2023-12-05
- * 
+ *
  * Copyright (C) 2023  VITALISED & Contributors
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
@@ -46,6 +46,7 @@ struct HDRConfig
 
 class cGcPresetDualPMap
 {
+  public:
     cTkSmartResHandle mFront;
     cTkSmartResHandle mBack;
     TkStrongType<int, TkStrongTypeIDs::cTkNGuiFontHandleID> mPreview;
@@ -57,6 +58,7 @@ class cGcPresetDualPMap
 
 class cGcPresetTerrainTexture
 {
+  public:
     cTkSmartResHandle mTerrainMaterial;
     cTkSmartResHandle mTextureDiffuseRes;
     cTkSmartResHandle mTextureNormalRes;
@@ -68,8 +70,23 @@ class cGcPresetTerrainTexture
 class cGcApplicationScratchpadState : public cGcApplicationState
 {
   public:
-    struct CustomData
+    virtual ~cGcApplicationScratchpadState();
+    virtual void Construct();
+    virtual void Prepare(cTkFSMState *, const void *);
+    virtual void Update(float);
+    virtual void Event(unsigned int, const void *);
+    virtual void Release(cTkFSMState *, const void *);
+    virtual void Destruct();
+    virtual void Render(EgRenderParity::List);
+
+    static void RenderNGuiCallback(cGcApplicationScratchpadState *lpMePtr);
+
+    class CustomData
     {
+      public:
+        void Update(const float lfTime, const float lfTimeStep);
+        void RenderNGui();
+
         float mfAsteroidSize;
         cTkSphere mPlacement;
         cGcAsteroidLayout mLayout;
@@ -78,8 +95,12 @@ class cGcApplicationScratchpadState : public cGcApplicationState
         cTkVector<cGcAsteroidGeneratorSlab> mGeneratorSlabs;
     };
 
-    struct StateData
+    class StateData
     {
+      public:
+        StateData();
+        ~StateData();
+
         float mfTime;
         HDRConfig mHDRConfig;
         bool mPause;
@@ -105,15 +126,6 @@ class cGcApplicationScratchpadState : public cGcApplicationState
 
     std::unique_ptr<cGcApplicationScratchpadState::CustomData> mCustomData;
     std::unique_ptr<cGcApplicationScratchpadState::StateData> mStateData;
-
-    virtual ~cGcApplicationScratchpadState() { EMPTY_CALL_DESTRUCTOR(); }
-    virtual void Construct();
-    virtual void Prepare(cTkFSMState *, const void *);
-    virtual void Update(float);
-    virtual void Event(unsigned int, const void *);
-    virtual void Release(cTkFSMState *, const void *);
-    virtual void Destruct();
-    virtual void Render(EgRenderParity::List);
 };
 
 SKYSCRAPER_END

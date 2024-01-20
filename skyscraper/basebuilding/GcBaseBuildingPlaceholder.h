@@ -44,6 +44,10 @@ struct sBaseBuildingMaterial
 class cGcProjectorEffect
 {
   public:
+    void UpdateRender(
+        const cTkPhysRelVec3 &lStart, const cTkPhysRelMat34 &lTargetMat, const cGcBaseBuildingEntry *lpEntry,
+        const cTkColour &lColour);
+
     cTkSmartResHandle mProjectorEffectRes;
     TkHandle mProjectorEffectNode;
     cTkSmartResHandle mPointerLineRes;
@@ -56,6 +60,41 @@ class cGcProjectorEffect
 class cGcBaseBuildingPlayerPlacement
 {
   public:
+    enum RotationAxis;
+    struct sInvalidPlacementMetadata;
+
+    bool IsValid();
+    TkID<128> &GetCurrentID();
+    bool HasTwinPosition();
+    void Construct();
+    void Update(float lfTimeStep);
+    void UpdateRender();
+    void Destruct();
+    void GetInvalidPositionDescription(cTkFixedString<256, char> &lDescription);
+    void RotatePlaceHolder(float lfAmount, cGcBaseBuildingPlayerPlacement::RotationAxis leAxis, bool lbCameraSpace);
+    void UpdatePosition(float lfSlerp); // what the fuck is a slerp
+    void RestorePlaceholderSettings();
+    bool IsSnapped(TkHandle lNode);
+    void SetValidPosition(
+        bool lbValue, eInvalidPlacementReason leReason,
+        cGcBaseBuildingPlayerPlacement::sInvalidPlacementMetadata &lReasonMetadata);
+    void SetSelectedNode(TkHandle lNode, bool lbSuppressScanEffect);
+    void SetCurrentBaseIndex(BaseIndex luBaseIndex);
+    void SetColourIndex(uint8_t luColourIndex);
+    void SetMaterialIndex(uint8_t luMaterialIndex);
+    bool DuplicateSelectedNode();
+    BaseIndex &GetBaseIndexForCurrentPart();
+    void SetPreviewMode(bool lbPreviewMode);
+    void SetPlaceholderHeartSize(float lfHeartSize);
+    void SetGhostHeartSize(int liGhostIndex, float lfHeartSize);
+    float GetMinPlacementDistanceForCurrentObject();
+    bool DoesPartExistAsProductInInventories(const TkID<128> &lPartId);
+    cTkPhysRelMat34 &PreviewMatrix();
+    bool UpdateLoadPlaceholder();
+    void GetScanEffect(bool lbSelection, cGcScanEffectData &lOutScanEffectData);
+    void SetNodeState(TkHandle lNode, const char *lsStateName);
+    TkHandle &AddGhostHeartToObject(const TkID<128> &lObjectID, TkHandle lObjectNode, const cTkVector3 &lLocalPosition);
+
     enum RotationAxis
     {
         ERotationAxis_XAxis,

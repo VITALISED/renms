@@ -27,6 +27,10 @@ project(
 # Includes
 
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
+# This is a horror
+set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake/cppsharp-cmake"
+                      ${CMAKE_MODULE_PATH}
+)
 
 include(AddSubmoduleDependency)
 include(ConfigParser)

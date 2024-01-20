@@ -1,9 +1,9 @@
 /**
- * @file helpers.h
+ * @file GcAtlasRecvBaseImages.h
  * @author VITALISED & Contributors
- * @since 2023-12-12
+ * @since 2024-01-15
  *
- * Copyright (C) 2023  VITALISED & Contributors
+ * Copyright (C) 2024  VITALISED & Contributors
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,14 +21,22 @@
 
 #pragma once
 
-#include <application/GcApplication.h>
-#include <common/memory/memory.h>
+#include <skyscraper.h>
 
-#include "base.h"
+#include <atlas/broker/GcAtlasShared.h>
+#include <toolkit/data/TkMetaDataClasses.h>
 
-RENMS_SDK_BEGIN
+SKYSCRAPER_BEGIN
 
-nms::cGcApplication *GetApplication();
-// nms::cTkComponentManager *GetComponentManager();
+class cGcAtlasRecvBaseImages : public cGcAtlasShared
+{
+  public:
+    virtual ~cGcAtlasRecvBaseImages() final;
 
-RENMS_SDK_END
+    int miNumberOfImages;
+    int miDataTimestamp;
+    uint64_t mu64ImageDataPtr;
+    int miImageDataSize;
+};
+
+SKYSCRAPER_END

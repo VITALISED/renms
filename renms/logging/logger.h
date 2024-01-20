@@ -23,7 +23,8 @@
 
 #include <renms.h>
 
-#include <logging/textchatsink.h>
+#include <common/platform/wine.h>
+#include <sdk/textchatsink.h>
 #include <spdlog/sinks/rotating_file_sink.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
 #include <spdlog/spdlog.h>

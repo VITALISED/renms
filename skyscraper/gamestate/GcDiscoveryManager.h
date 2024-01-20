@@ -26,7 +26,9 @@
 #include <gamestate/GcDiscoveryCommon.h>
 #include <gamestate/GcDiscoverySearch.h>
 #include <networking/GcNetworkRpcCall.h>
+#include <toolkit/utilities/containers/TkDeque.h>
 #include <toolkit/utilities/containers/TkStackContainer.h>
+#include <toolkit/utilities/random/TkPersonalRNG.h>
 
 #include <atlas/gcatlasdiscovery.meta.h>
 #include <gamestate/gcuniverseaddressdata.meta.h>

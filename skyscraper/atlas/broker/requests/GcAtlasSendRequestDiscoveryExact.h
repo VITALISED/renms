@@ -1,9 +1,9 @@
 /**
- * @file defines.h
+ * @file GcAtlasSendRequestDiscoveryExact.h
  * @author VITALISED & Contributors
- * @since 2023-12-12
+ * @since 2024-01-15
  *
- * Copyright (C) 2023  VITALISED & Contributors
+ * Copyright (C) 2024  VITALISED & Contributors
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,18 +21,21 @@
 
 #pragma once
 
-#ifdef RENMS
-#define RENMS_ENTRY __declspec(dllimport)
-#else
-#define RENMS_ENTRY __declspec(dllexport)
-#endif
+#include <skyscraper.h>
 
-#define RENMS_API extern
+#include <atlas/broker/GcAtlasShared.h>
+#include <toolkit/data/TkMetaDataClasses.h>
 
-#define GCAPPLICATION_GOG   0x49707E0
-#define GCAPPLICATION_STEAM 0x495EF10
+#include <atlas/gcatlasdiscovery.meta.h>
 
-// clang-format off
-#define RENMS_SDK_BEGIN namespace renms_sdk {
-#define RENMS_SDK_END }
-// clang-format on
+SKYSCRAPER_BEGIN
+
+class cGcAtlasSendRequestDiscoveryExact : public cGcAtlasShared
+{
+  public:
+    virtual ~cGcAtlasSendRequestDiscoveryExact() final;
+
+    cGcAtlasDiscoveryData mData;
+};
+
+SKYSCRAPER_END

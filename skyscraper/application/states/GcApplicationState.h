@@ -54,6 +54,13 @@ typedef WinHttpTask::State::Enum Enum;
 class cGcApplicationState : public cTkFSMState
 {
   public:
+    virtual ~cGcApplicationState();
+    virtual void ThreadedUpdate();
+    virtual bool ThreadSyncPoint();
+    virtual void BuildRenderQueue();
+
+    cGcApplicationState();
+
     cTkPhysRelMat34 mStereoCameraMatrices[2];
     cTkPhysRelMat34 mStereoPrevCameraMatrices[2];
     cTkSmartResHandle mShadowsPipelineRes;
@@ -70,11 +77,6 @@ class cGcApplicationState : public cTkFSMState
     cTkMatrix44 mMainPrevViewMatrix;
     cTkPhysRelMat34 mPrevCameraMatrix;
     cTkPhysRelMat34 mCameraMatrix;
-
-    virtual ~cGcApplicationState() { EMPTY_CALL_DESTRUCTOR(); }
-    virtual void ThreadedUpdate();
-    virtual bool ThreadSyncPoint();
-    virtual void BuildRenderQueue();
 };
 
 SKYSCRAPER_END

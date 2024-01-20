@@ -34,8 +34,8 @@ void HandleGcApplicationUpdate(nms::cGcApplication *gApplication)
 RENMS_HOOK(
     cGcApplication__Update, renms::SignatureScan("40 53 48 83 EC ? E8 ? ? ? ? 48 89 05 ? ? ? ?"), void,
     (nms::cGcApplication * thiscall) {
-        HandleGcApplicationUpdate(renms_sdk::GetApplication());
-        return RENMS_CAST(cGcApplication__Update, renms_sdk::GetApplication());
+        HandleGcApplicationUpdate(cGcApplication::GetInstance());
+        return RENMS_CAST(cGcApplication__Update, cGcApplication::GetInstance());
     });
 
 RENMS_BEGIN

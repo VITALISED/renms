@@ -34,6 +34,8 @@ SKYSCRAPER_BEGIN
 class ShorelineAudio
 {
   public:
+    void Update(float lfTimeStep);
+
     struct ShorelinePoint
     {
         cTkVector3 mPos;

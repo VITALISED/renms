@@ -59,6 +59,7 @@
 #include <system/input/GcInput.h>
 #include <system/input/GcVibrationManager.h>
 #include <toolkit/graphics/debug/TkDebugRenderer.h>
+#include <toolkit/maths/numeric/TkIntTuples.h>
 #include <toolkit/maths/utilities/spatial/TkSampleDistribution.h>
 #include <toolkit/system/TkCSMutex.h>
 #include <toolkit/system/input/TkInputManager.h>
@@ -79,17 +80,87 @@ SKYSCRAPER_BEGIN
  * @details
  * Whilst this struct stores most things, you will want to use @ref cTkEngineUtils for Node calls as of right
  * now, since we dont have globals for @ref Engine objects directly.
- * If you're using the @ref renms_sdk you should be able to invoke it directly on your platform using the following
- * example code:
+ *
+ * You can access it by calling
+ * cGcApplication::GetInstance()
  *
  * @code{.cpp}
- * nms::cGcApplication* gApplication = renms_sdk::GetApplication();
+ * cGcApplication* gApplication = cGcApplication::GetInstance();
  * @endcode
  *
  */
 class cGcApplication : public cTkFSM
 {
   public:
+    /**
+     * Virtuals
+     */
+
+    virtual ~cGcApplication() final;
+    virtual void Construct() final;
+    virtual void Update() final;
+    virtual void Destruct() final;
+    virtual void StatePrepare(cTkFSMState *, const void *) final;
+    virtual void StateRelease(cTkFSMState *, const void *) final;
+
+    /**
+     * Methods
+     */
+
+    void NotifyResolutionChangedCallback(const cTkIntTuple2<int, 0> &lScreenRes);
+    bool DrainFileLoadsAndPollableTasks(bool lbTimeoutWithFrame);
+    bool DrainFileLoadsAndPollableTasks(bool lbTimeoutWithFrame, int liLoadBalancingTimeout);
+    void HideSimulationNodes();
+    void ShowSimulationNodes();
+    bool AllowPause();
+    void ChangeAppGameMode(ePresetGameMode leMode, int liPlayerSlotIndex);
+    void UpdateInputManagers(float lfTimestep);
+    void VRAssertCallback(cTkAssertData &lAssertData, bool *lpbIgnoreFlag, bool *lpbBreakEnabled);
+    void UpdateVRAssertMessage();
+    bool IsAccessibleUIEnabled();
+
+    /**
+     * Getter/Setters
+     */
+
+    inline cGcSimulation *GetSimulation() { return &mpData->mSimulation; }
+    inline cGcRealityManager *GetRealityManager() { return &mpData->mRealityManager; }
+    inline cGcGameState *GetGameState() { return &mpData->mGameState; }
+    inline cGcSeasonalData *GetSeasonalData() { return &mpData->mSeasonalData; }
+    inline cGcHUDManager *GetHUDManager() { return &mpData->mHUDManager; }
+    inline cGcFrontendManager *GetFrontendManager() { return &mpData->mFrontendManager; }
+    inline cGcInWorldUIManager *GetInWorldUIManager() { return &mpData->mInWorldUIManager; }
+    inline cGcCameraManager *GetCameraManager() { return &mpData->mCameraManager; }
+    inline cGcGraphicsManager *GetGraphicsManager() { return &mpData->mGraphicsManager; }
+    inline cTkInputManager *GetInputManager() { return mpData->mpInputManager; }
+    inline cGcGalaxyMap *GetGalaxyMap() { return &mpData->mGalaxyMap; }
+    inline cGcDebugEditor *GetDebugEditor() { return &mpData->mDebugEditor; }
+    inline cTkDebugRenderer *GetDebugRenderer() { return &mpData->mDebugRenderer; }
+    inline cGcNGuiManager *GetNGuiManager() { return &mpData->mNGuiManager; }
+    inline cGcFirstBootContext *GetFirstBootContext() { return &mpData->mFirstBootContext; }
+    inline cGcNetworkManager *GetNetworkManager() { return &mpData->mNetworkManager; }
+    inline cGcAtlasManager *GetAtlasManager() { return &mpData->mAtlasManager; }
+
+    /**
+     * Custom implementations
+     */
+
+    /**
+     * @fn cGcApplication::GetInstance
+     * @brief Get the running instance of cGcApplication.
+     */
+    static cGcApplication *GetInstance();
+
+    /**
+     * Detail
+     */
+
+    DECLARE_METHOD_DETAIL(Update, void(cGcApplication *), "40 53 48 83 EC ? E8 ? ? ? ? 48 89 05 ? ? ? ?");
+
+    /**
+     * Members
+     */
+
     /**
      * @brief Storage class for GcApplication.
      */
@@ -158,13 +229,6 @@ class cGcApplication : public cTkFSM
     bool mResumeFromSuspendSave;
     cTkVector<cTkFixedString<128, char>> mAssertMessage;
     cTkCSMutex mAssertMessageLock;
-
-    ~cGcApplication();
-    void Construct();
-    void Update();
-    void Destruct();
-    void StatePrepare(cTkFSMState *, const void *);
-    void StateRelease(cTkFSMState *, const void *);
 };
 
 SKYSCRAPER_END

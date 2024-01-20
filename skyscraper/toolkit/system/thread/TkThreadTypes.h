@@ -1,9 +1,9 @@
 /**
- * @file textchat.h
+ * @file TkThreadTypes.h
  * @author VITALISED & Contributors
- * @since 2023-12-12
+ * @since 2024-01-19
  *
- * Copyright (C) 2023  VITALISED & Contributors
+ * Copyright (C) 2024  VITALISED & Contributors
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,18 +19,18 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include <toolkit/graphics/TkColour.h>
-#include <toolkit/utilities/string/TkString.h>
+#pragma once
 
-#include "helpers.h"
+#include <skyscraper.h>
 
-RENMS_SDK_BEGIN
+SKYSCRAPER_BEGIN
 
-typedef void (*cGcTextChatManager__PostLocalMessage)(
-    nms::cGcTextChatManager *thiscall, nms::cTkFixedString<1121, char> *lsMessage,
-    nms::cTkFixedString<128, char> *lpRelevantPlayerName, nms::cTkColour *lBackgroundColour, int liRelevantPlayerIndex,
-    float lfDisplayDuration);
+enum eThreadType
+{
+    EThread_Render,
+    EThread_Update,
+    EThread_Sync,
+    EThread_Num,
+};
 
-void SendTextMessage(nms::cTkFixedString<1121, char> *lsMessageBody);
-
-RENMS_SDK_END
+SKYSCRAPER_END

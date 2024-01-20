@@ -1,9 +1,9 @@
 /**
- * @file core.h
+ * @file GcAtlasSendRemoveFeaturedBases.h
  * @author VITALISED & Contributors
- * @since 2023-12-12
+ * @since 2024-01-15
  *
- * Copyright (C) 2023  VITALISED & Contributors
+ * Copyright (C) 2024  VITALISED & Contributors
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,8 +21,21 @@
 
 #pragma once
 
-#include "helpers.h"
-#include "textchat.h"
+#include <skyscraper.h>
 
-extern "C" void RENMS_ENTRY PluginMain();
-extern "C" void RENMS_ENTRY PluginUpdate();
+#include <atlas/broker/GcAtlasShared.h>
+#include <toolkit/data/TkMetaDataClasses.h>
+
+#include <atlas/gcatlasfeaturedbasestatechange.meta.h>
+
+SKYSCRAPER_BEGIN
+
+class cGcAtlasSendRemoveFeaturedBases : public cGcAtlasShared
+{
+  public:
+    virtual ~cGcAtlasSendRemoveFeaturedBases() final;
+
+    cTkDynamicArray<cGcAtlasFeaturedBaseStateChange> maBaseList;
+};
+
+SKYSCRAPER_END

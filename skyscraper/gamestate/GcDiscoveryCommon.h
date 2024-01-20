@@ -27,6 +27,7 @@
 #include <toolkit/system/memory/pools/TkMemoryPool.h>
 #include <toolkit/utilities/containers/TkVector.h>
 
+#include <reality/gcdiscoveryowner.meta.h>
 #include <reality/gcdiscoverytype.meta.h>
 
 SKYSCRAPER_BEGIN

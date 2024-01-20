@@ -24,10 +24,12 @@
 #include <renms.h>
 
 #include <application/GcApplication.h>
-#include <core/config.h>
 #include <common/memory/hook.h>
 #include <common/memory/vtable.h>
-#include <sdk/core.h>
+#include <core/config.h>
+#include <sdk/renms_sdk.h>
+
+using namespace nms;
 
 RENMS_BEGIN
 

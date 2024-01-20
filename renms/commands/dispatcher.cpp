@@ -50,7 +50,7 @@ bool HandleTextChatInput(const cTkFixedString<1023, char> *lMessageText)
 }
 
 RENMS_HOOK(
-    cGcTextChatInput__ParseTextForCommands, renms::RelToAbsolute(0x804E70), void,
+    cGcTextChatInput__ParseTextForCommands, renms::SignatureScan("40 55 53 41 56 48 8D AC 24 40 FC FF FF"), void,
     (uint64_t thiscall, const cTkFixedString<1023, char> *lMessageText) {
         if (!renms::CommandDispatcher::StartsWithPrefix(lMessageText))
             return RENMS_CAST(cGcTextChatInput__ParseTextForCommands, thiscall, lMessageText);

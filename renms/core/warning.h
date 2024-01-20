@@ -24,8 +24,9 @@
 #include <renms.h>
 
 #include <common/memory/hook.h>
+#include <common/platform/wine.h>
 #include <core/config.h>
-#include <sdk/core.h>
+#include <toolkit/system/filesystem/TkFileSystem.h>
 
 RENMS_BEGIN
 

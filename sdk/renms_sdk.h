@@ -1,5 +1,5 @@
 /**
- * @file textchat.cpp
+ * @file defines.h
  * @author VITALISED & Contributors
  * @since 2023-12-12
  *
@@ -19,22 +19,15 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include "textchat.h"
+#pragma once
 
-RENMS_SDK_BEGIN
+#ifdef RENMS
+#define RENMS_ENTRY __declspec(dllimport)
+#else
+#define RENMS_ENTRY __declspec(dllexport)
+#endif
 
-void SendTextMessage(nms::cTkFixedString<1121, char> *lsMessage)
-{
-    nms::cGcApplication *gApplication = GetApplication();
+#define RENMS_API extern
 
-    cGcTextChatManager__PostLocalMessage lSayFn =
-        reinterpret_cast<cGcTextChatManager__PostLocalMessage>(renms::SignatureScan(
-            "48 89 5C 24 08 48 89 6C 24 10 48 89 74 24 18 48 89 7C 24 20 41 56 48 81 EC ? ? ? ? 4D 8B D0"));
-
-    nms::cTkFixedString<128, char> lRelevantPlayer = nms::cTkFixedString<128, char>("Explorer");
-    nms::cTkColour lTransparent                    = nms::cTkColour(0, 0, 0, 0);
-
-    lSayFn(&gApplication->mpData->mNetworkManager.mTextChatManager, lsMessage, &lRelevantPlayer, &lTransparent, 0, 5.0);
-}
-
-RENMS_SDK_END
+extern "C" void RENMS_ENTRY PluginMain();
+extern "C" void RENMS_ENTRY PluginUpdate();

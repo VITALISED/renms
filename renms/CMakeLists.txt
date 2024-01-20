@@ -38,7 +38,6 @@ set(RENMS_CORE_HEADERS
     ${CMAKE_CURRENT_SOURCE_DIR}/core/warning.h
     ${CMAKE_CURRENT_SOURCE_DIR}/fios/fios.h
     ${CMAKE_CURRENT_SOURCE_DIR}/logging/logger.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/logging/textchatsink.h
     ${CMAKE_CURRENT_SOURCE_DIR}/plugins/fsm.h
     ${CMAKE_CURRENT_SOURCE_DIR}/plugins/manager.h
     ${CMAKE_CURRENT_SOURCE_DIR}/plugins/plugin.h
