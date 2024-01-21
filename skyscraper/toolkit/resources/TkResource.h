@@ -49,6 +49,17 @@ class cTkTypedSmartResHandle
 class cTkResource
 {
   public:
+    virtual ~cTkResource();
+    virtual bool IsLoaded();
+    virtual void SetDescriptor(const cTkResourceDescriptor *lpDescriptor);
+    virtual int32_t GetDataSize()            = 0;
+    virtual bool OnResourceLoaded()          = 0;
+    virtual uint32_t GetDeletionFrameDelay() = 0;
+    virtual cTkResource *Clone()             = 0;
+    virtual void CloneInternal(const cTkResource *lpResource);
+    virtual void Release() = 0;
+    virtual bool Equals(const char *lpacName, const cTkResourceDescriptor *lpDescriptor, int32_t liType);
+
     int32_t miType;
     cTkFixedString<256, char> msName;
     int32_t mxFlags;
@@ -65,17 +76,6 @@ class cTkResource
     std::set<cTkSmartResHandle> mOwnedResources;
     cTkResourceDescriptor mDescriptor;
     uint16_t muHotRequestNumber;
-
-    virtual ~cTkResource();
-    virtual bool IsLoaded();
-    virtual void SetDescriptor(const cTkResourceDescriptor *lpDescriptor);
-    virtual int32_t GetDataSize()            = 0;
-    virtual bool OnResourceLoaded()          = 0;
-    virtual uint32_t GetDeletionFrameDelay() = 0;
-    virtual cTkResource *Clone()             = 0;
-    virtual void CloneInternal(const cTkResource *lpResource);
-    virtual void Release() = 0;
-    virtual bool Equals(const char *lpacName, const cTkResourceDescriptor *lpDescriptor, int32_t liType);
 };
 
 SKYSCRAPER_END

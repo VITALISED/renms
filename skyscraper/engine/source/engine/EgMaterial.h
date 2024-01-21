@@ -26,6 +26,7 @@
 #include <engine/source/engine/EgResource.h>
 #include <engine/source/engine/EgShader.h>
 
+#include <toolkit/scene/materials/tkmaterialdata.meta.h>
 #include <toolkit/scene/materials/tkmaterialuniform.meta.h>
 
 SKYSCRAPER_BEGIN
@@ -33,6 +34,8 @@ SKYSCRAPER_BEGIN
 class cEgMaterialSampler
 {
   public:
+    void SetName(const std::string &lName);
+
     std::string msName;
     uint64_t mNameHash;
     std::string msTextureName;
@@ -47,6 +50,30 @@ class cEgMaterialSampler
 class cEgMaterialResource : public cEgResource
 {
   public:
+    virtual ~cEgMaterialResource();
+    virtual bool OnResourceLoaded();
+    virtual cTkResource *Clone();
+    virtual void CloneInternal(const cTkResource *);
+    virtual void Release();
+    virtual void InitDefault();
+    virtual bool Load(const char *, int);
+    virtual int GetElementCount(int);
+    virtual int GetElementParamInt(int, int, int);
+    virtual void SetElementParamInt(int, int, int, int);
+    virtual float GetElementParamFloat(int, int, int, int);
+    virtual void SetElementParamFloat(int, int, int, int, float);
+    virtual const char *GetElementParamStr(int, int, int);
+    virtual void SetElementParamStr(int, int, int, const char *);
+
+    uint64_t GetTextureSortHash();
+    bool GetUniform(const char *lsName, float *lpfA, float *lpfB, float *lpfC, float *lpfD);
+    bool ParseNode(cTkMaterialData &lData);
+    bool SetSampler(const char *lsName, cEgTextureResource *lpTexture);
+    bool SetUniformArray(const char *lsName, const float *lpafData, int liNumVectors);
+    bool SetUniformArray(uint64_t lNameHash, const float *lpafData, int liNumVectors);
+
+    static void FactoryFunc(const std::string &lsName, int liFlags, cTkResourceDescriptor *lpResourceDescriptor);
+
     cTkSmartResHandle mFurMaterialHandle;
     std::atomic<bool> mbBuffersInitialised;
     int32_t mShaderFlags;
@@ -72,21 +99,6 @@ class cEgMaterialResource : public cEgResource
     uint32_t mbCreateFur : 1;
     uint32_t miShaderContextsLoaded : 23;
     int32_t miTransparencyLayerID;
-
-    ~cEgMaterialResource();
-    bool OnResourceLoaded();
-    cTkResource *Clone();
-    void CloneInternal(const cTkResource *);
-    void Release();
-    void InitDefault();
-    bool Load(const char *, int);
-    int GetElementCount(int);
-    int GetElementParamInt(int, int, int);
-    void SetElementParamInt(int, int, int, int);
-    float GetElementParamFloat(int, int, int, int);
-    void SetElementParamFloat(int, int, int, int, float);
-    const char *GetElementParamStr(int, int, int);
-    void SetElementParamStr(int, int, int, const char *);
 };
 
 SKYSCRAPER_END

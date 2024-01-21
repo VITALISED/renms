@@ -130,7 +130,6 @@ class cEgGeometryResource : public cEgResource
 
     void SetSkinnedVertexData(int liVertIndex, const cTkSkinnedVertexData &lData);
     const AnimTransform *GetBindTransform(uint32_t luJointIndex);
-    void FactoryFunc(const std::string &lsName, int liFlags, cTkResourceDescriptor *lpResourceDescriptor);
     int64_t GetIndexBufferHandle(int liGeometryBufferIndex);
     void GetSkinnedVertexData(
         int liVertex, uint32_t liAlitidIndex, cTkSkinnedVertexData &lData, char *lpaVertexStreamIn);
@@ -144,6 +143,8 @@ class cEgGeometryResource : public cEgResource
     void SetSkinnedVertexData(
         int liVertIndex, const cTkSkinnedVertexData &lData, char *lpaVertexStream, int liStreamIndex);
     void UpdateDynamicVertData(uint32_t liAltidIndex);
+
+    static void FactoryFunc(const std::string &lsName, int liFlags, cTkResourceDescriptor *lpResourceDescriptor);
 
     uint32_t muIndexBuffer;
     cTkStackVector<uint32_t, 1> maVertexBuffers;

@@ -39,28 +39,35 @@
 
 SKYSCRAPER_BEGIN
 
+struct RenderingOrder
+{
+    enum List
+    {
+        None,
+        FrontToBack,
+        BackToFront,
+        StateChanges,
+        Mesh,
+        Custom,
+        NumRenderingOrders,
+    };
+};
+
 class cEgNodeAttachment
 {
   public:
-    TkHandle mNode;
-
     virtual ~cEgNodeAttachment();
     virtual void OnUpdate();
+
+    void AttachToNode(TkHandle lNode);
+    cEgNodeAttachment *GetFromNode(TkHandle lNode);
+
+    TkHandle mNode;
 };
 
 class cEgSceneNode
 {
   public:
-    TkHandle mLookupHandle;
-    unsigned int muNameHash;
-    cTkSmartResHandle mResHandle;
-    unsigned int muNetworkId;
-    cTkSharedPtr<std::string> msName;
-    cTkSharedPtr<cTkResourceDescriptor const> mpAltId;
-    cEgNodeAttachment *mpNodeAttachment;
-    cTkSlotAlloc *mpAllocator;
-    int miIsMaster;
-
     virtual ~cEgSceneNode();
     virtual void ParseRefAttrib(cTkSceneNodeAttributeData *);
     virtual int GetParameterInt(int);
@@ -84,6 +91,23 @@ class cEgSceneNode
     virtual void OnDetach(cEgSceneNode *);
     virtual void PreTransferRenderData();
     virtual void OnDetachInstanceAware(cEgSceneNode *);
+
+    cTkMatrix34 &ComputePrevTransformInOffsetSpace(const cTkVector3 &lvOffset);
+    cTkMatrix34 &ComputeTransformInOffsetSpace(const cTkVector3 &lvOffset);
+    void SetHasAsyncUpdate(bool lbUpdates);
+    void SetHasLods(bool lbHasLods);
+    void SetRenderable(bool lbRenderable);
+    void SetTransform(const cTkMatrix34 &lMatrix);
+
+    TkHandle mLookupHandle;
+    unsigned int muNameHash;
+    cTkSmartResHandle mResHandle;
+    unsigned int muNetworkId;
+    cTkSharedPtr<std::string> msName;
+    cTkSharedPtr<cTkResourceDescriptor const> mpAltId;
+    cEgNodeAttachment *mpNodeAttachment;
+    cTkSlotAlloc *mpAllocator;
+    int miIsMaster;
 };
 
 class cEgModelNode;
@@ -91,13 +115,15 @@ class cEgModelNode;
 class cEgRenderableSceneNode : public cEgSceneNode
 {
   public:
-    cTkTypedSmartResHandle<cEgMaterialResource> mpMaterialResource;
-    cEgModelNode *mpParentModel;
-    int miRenderLayer;
-
     virtual ~cEgRenderableSceneNode();
     virtual void OnAttach(cEgSceneNode *);
     virtual void OnDetach(cEgSceneNode *);
+
+    void RecalculateRenderID();
+
+    cTkTypedSmartResHandle<cEgMaterialResource> mpMaterialResource;
+    cEgModelNode *mpParentModel;
+    int miRenderLayer;
 };
 
 class cEgSceneNodeTemplate

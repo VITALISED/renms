@@ -1,9 +1,9 @@
 /**
- * @file EgRenderer.h
+ * @file TkJobQueues.h
  * @author VITALISED & Contributors
- * @since 2023-12-05
+ * @since 2024-01-22
  *
- * Copyright (C) 2023  VITALISED & Contributors
+ * Copyright (C) 2024  VITALISED & Contributors
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,14 +25,10 @@
 
 SKYSCRAPER_BEGIN
 
-struct EgRenderParity
+class cTkDependencyCounter
 {
-    enum List
-    {
-        Single,
-        EvenRender,
-        OddRender,
-    };
+  public:
+    std::atomic<int> miValue;
 };
 
 SKYSCRAPER_END

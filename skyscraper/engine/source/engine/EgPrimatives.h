@@ -23,7 +23,9 @@
 
 #include <skyscraper.h>
 
+#include <toolkit/maths/geometry/TkPlane.h>
 #include <toolkit/maths/numeric/generic/TkMatrix34Generic.h>
+#include <toolkit/maths/numeric/generic/TkMatrix44Generic.h>
 #include <toolkit/maths/numeric/generic/TkVector3Generic.h>
 #include <toolkit/utilities/containers/TkVector.h>
 
@@ -57,6 +59,27 @@ class cEgMorphTarget
   public:
     std::string msName;
     cTkVector<cEgMorphDiff> mDiffs;
+};
+
+class cEgFrustum
+{
+  public:
+    void BuildViewFrustum(
+        const cTkMatrix44 &lViewMatrixWithOffset, const cTkMatrix44 &lViewMatrixWithOffsetInverted,
+        const cTkMatrix44 &lProjectionMatrix, const cTkMatrix44 &lInvProjectionMatrix, const cTkVector3 &lOffset,
+        bool lbForceGL_NDC);
+
+    static void CalculateFrustumCorners(const cEgFrustum &lFrustum, cTkVector3 *laCornersOut);
+    static cEgFrustum &CalculateShadowFrustum(
+        const cEgFrustum &lFrustum, const cEgFrustum &lViewDir, const cTkVector3 &);
+
+    cTkPlane maPlanes[15];
+    cTkVector3 maCorners[8];
+    cTkVector3 mPos;
+    cTkVector3 mOrigin;
+    cTkVector3 mOffset;
+    int miNumPlanes;
+    bool mbShadowFrustum;
 };
 
 SKYSCRAPER_END

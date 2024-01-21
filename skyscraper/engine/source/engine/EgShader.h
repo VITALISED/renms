@@ -34,82 +34,102 @@
 
 SKYSCRAPER_BEGIN
 
-namespace BlendModes
+struct BlendModes
 {
-typedef cEgTerrain::Actions List;
-}
-
-namespace TestModes
-{
-// note this is probably incorrect, IDA thinks this is a typedef to ItemLookupType from some gamestate struct for some
-// reason
-enum List
-{
-    Always,
-    IgnoreBroken,
-    IgnoreDepleted,
-    IgnoreBrokenAndDepleted,
-    Upgrades,
-    Upgrades_IgnoreBrokenAndDepleted,
+    enum List
+    {
+        Replace,
+        Blend,
+        Add,
+        Mult,
+        Blend_OutputOneMinusAlpha,
+        Add_OutputOneMinusAlpha,
+        Blend_OutputAlpha,
+        Subtractive,
+        InvSourceAlpha,
+        SourceAlpha,
+        RgbOnly,
+        AlphaOnly,
+    };
 };
-}; // namespace TestModes
 
-namespace CullModes
+struct TestModes
 {
-// note this is probably incorrect, IDA thinks this is a typedef to cGcPlayer::eRocketBootsDoubleTapState for some
-// reason
-enum List
-{
-    None,
-    WaitingForRelease,
-    WaitingForSecondTap,
-    SingleTap,
-    DoubleTap,
+    enum List
+    {
+        Always,
+        Equal,
+        Less,
+        LessEqual,
+        Greater,
+        GreaterEqual,
+        NotEqual,
+    };
 };
-}; // namespace CullModes
 
-namespace ShadingRate
+struct CullModes
 {
-enum List
-{
-    NoChange,
-    Reduce_1x2,
-    Reduce_2x1,
-    Reduce_2x2,
-    Reduce_2x4,
-    Reduce_4x2,
-    Reduce_4x4,
+    enum List
+    {
+        Back,
+        Front,
+        None,
+    };
 };
-}; // namespace ShadingRate
 
-namespace FillModes
+struct ShadingRate
 {
-enum List
-{
-    Solid,
-    Wireframe,
+    enum List
+    {
+        NoChange,
+        Reduce_1x2,
+        Reduce_2x1,
+        Reduce_2x2,
+        Reduce_2x4,
+        Reduce_4x2,
+        Reduce_4x4,
+    };
 };
-}; // namespace FillModes
 
-namespace StencilModes
+struct FillModes
 {
-enum List
-{
-    Disabled,
-    MaskWrite,
-    MaskRead,
-    MaskReadInvert,
-    MaskWriteInside,
-    MaskWriteOnce,
-    MaskReadWriteNotEqual,
-    MaskReadWriteInvert,
-    MaskReadWrite,
+    enum List
+    {
+        Solid,
+        Wireframe,
+    };
 };
-} // namespace StencilModes
+
+struct StencilModes
+{
+    enum List
+    {
+        Disabled,
+        MaskWrite,
+        MaskRead,
+        MaskReadInvert,
+        MaskWriteInside,
+        MaskWriteOnce,
+        MaskReadWriteNotEqual,
+        MaskReadWriteInvert,
+        MaskReadWrite,
+    };
+};
 
 struct cEgCodeResource : public cEgResource
 {
   public:
+    virtual ~cEgCodeResource();
+    virtual cTkResource *Clone();
+    virtual void CloneInternal(const cTkResource *);
+    virtual void Release();
+    virtual void InitDefault();
+    virtual bool Load(const char *, int);
+
+    bool HasDependency(cEgCodeResource *lpCodeResource);
+
+    static void FactoryFunc(const std::string &lsName, int liFlags, cTkResourceDescriptor *lpDescriptor);
+
     struct cEgShaderSize
     {
         int32_t miOffset;
@@ -120,13 +140,6 @@ struct cEgCodeResource : public cEgResource
     std::string msCodeAssembledCache;
     cTkVector<std::pair<cTkTypedSmartResHandle<cEgCodeResource>, cEgCodeResource::cEgShaderSize>> mIncludes;
     cTkVector<cEgCodeResource::cEgShaderSize> mEndifs;
-
-    ~cEgCodeResource();
-    cTkResource *Clone();
-    void CloneInternal(const cTkResource *);
-    void Release();
-    void InitDefault();
-    bool Load(const char *, int);
 };
 
 class cEgShaderCombination
