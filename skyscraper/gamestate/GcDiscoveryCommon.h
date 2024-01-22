@@ -24,6 +24,9 @@
 #include <skyscraper.h>
 
 #include <atlas/broker/GcAtlasBroker.h>
+#include <toolkit/data/TkDocumentReader.h>
+#include <toolkit/data/TkDocumentWriter.h>
+#include <toolkit/maths/utilities/hash/TkSpookyV2.h>
 #include <toolkit/system/memory/pools/TkMemoryPool.h>
 #include <toolkit/utilities/containers/TkVector.h>
 
@@ -43,6 +46,11 @@ class cGcDiscoveryPayload : public AutoPooled<19>
 class cGcDiscoveryData : public AutoPooled<19>
 {
   public:
+    void HashSpooky(SpookyHash &lState);
+    void Invalidate();
+    ITkDocumentReader::ReadResult LoadPersistent(ITkDocumentReader &lReader);
+    bool SavePersistent(ITkDocumentWriter &lWriter);
+
     uint64_t mUniverseAddress;
     cGcDiscoveryPayload mu64Payload;
     eDiscoveryType meType;
@@ -51,6 +59,7 @@ class cGcDiscoveryData : public AutoPooled<19>
 template <int Amount>
 class cGcDiscoveryDataRing
 {
+  public:
     std::array<cGcDiscoveryData, Amount> mDataBuffer;
     std::array<uint64_t, Amount> mHashBuffer;
     unsigned int muWriteIndex;
@@ -63,6 +72,9 @@ struct DefaultDiscoveryDataHashing
 class cGcDiscoveryMetadata : public AutoPooled<19>
 {
   public:
+    ITkDocumentReader::ReadResult LoadPersistent(ITkDocumentReader &lReader);
+    void SetCustomName(const char *lpacNewName);
+
     cTkFixedString<127, char> mCustomName;
     bool mbHasCustomName;
 };
@@ -70,6 +82,11 @@ class cGcDiscoveryMetadata : public AutoPooled<19>
 class cGcDiscoveryRecord : public AutoPooled<19>
 {
   public:
+    void CloneFrom(const cGcDiscoveryRecord &lOther);
+    ITkDocumentReader::ReadResult LoadPersistent(ITkDocumentReader &lReader);
+    void SavePersistent(ITkDocumentWriter &lWriter);
+    void StartAsyncChecks();
+
     cGcDiscoveryData mData;
     cGcDiscoveryOwner mOwnership;
     cGcDiscoveryMetadata mMetadata;
@@ -84,19 +101,6 @@ class cGcDiscoveryStoreImpl : public AutoPooled<19>
   public:
     struct ConstIterator
     {
-        // std::const_iterator<std::_Vector_val<std::_Simple_types<robin_hood::detail::Table<
-        //     1, 80, unsigned __int64, cGcDiscoveryRecord *, robin_hood::hash<unsigned __int64, void>,
-        //     std::equal_to<unsigned __int64>, 19> *>>>
-        //     mArrayIterator;
-        // std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<robin_hood::detail::Table<
-        //     1, 80, unsigned __int64, cGcDiscoveryRecord *, robin_hood::hash<unsigned __int64, void>,
-        //     std::equal_to<unsigned __int64>, 19> *>>>
-        //     mArrayIteratorEnd;
-        // robin_hood::detail::Table<
-        //     1, 80, unsigned __int64, cGcDiscoveryRecord *, robin_hood::hash<unsigned __int64, void>,
-        //     std::equal_to<unsigned __int64>, 19>::Iter<1>
-        //     mMapIter;
-
         cTkVector<robin_hood::detail::Table<
             true, 80, uint64_t, cGcDiscoveryRecord *, robin_hood::hash<uint64_t, void>,
             std::equal_to<uint64_t>>>::const_iterator mArrayIterator;
@@ -123,6 +127,9 @@ class cGcDiscoveryStoreImpl : public AutoPooled<19>
 class cGcManagedDiscovery : public AutoPooled<19>
 {
   public:
+    ITkDocumentReader::ReadResult LoadAndResolve(
+        ITkDocumentReader &lReader, cGcDiscoveryStoreImpl<DefaultDiscoveryDataHashing, 19> &lStore);
+
     struct SubmitState
     {
         enum Enum
@@ -161,6 +168,7 @@ class cGcDiscoveryExport : public AutoPooled<19>
         int miSortTimestamp;
         cTkVector<cGcDiscoveryExport::Planet> mPlanets;
     };
+    
     cTkVector<cGcDiscoveryExport::SolarSystem> mSolarSystems;
 };
 

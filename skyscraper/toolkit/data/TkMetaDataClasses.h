@@ -27,6 +27,7 @@
 #include <toolkit/core/types/TkID.h>
 #include <toolkit/data/TkMetaData.h>
 #include <toolkit/data/TkMetaDataXML.h>
+#include <toolkit/maths/geometry/TkPhysRelVec3.h>
 #include <toolkit/maths/numeric/generic/TkMatrix34Generic.h>
 #include <toolkit/maths/numeric/generic/TkMatrix44Generic.h>
 #include <toolkit/maths/numeric/generic/TkVector2Generic.h>
@@ -165,6 +166,9 @@ class cTkFixedArray
 };
 
 class cTkDynamicString : public cTkDynamicArray<char>
+{};
+
+class cTkDynamicWideString : public cTkDynamicArray<wchar_t>
 {};
 
 SKYSCRAPER_END

@@ -23,7 +23,10 @@
 
 #include <skyscraper.h>
 
+#include <gamestate/GcPersistencyHandle.h>
+#include <networking/GcNetworkPlayer.h>
 #include <networking/GcNetworkSynchronisedBuffer.h>
+#include <networking/messages/GcNetworkSyncMessages.h>
 #include <toolkit/core/types/TkID.h>
 #include <toolkit/maths/numeric/generic/TkVector3Generic.h>
 #include <toolkit/networking/TkUserIdBase.h>
@@ -37,19 +40,42 @@ template <typename T>
 class PersistentData
 {
   public:
-    T mData;
-    uint16_t miInc;
-
     virtual ~PersistentData();
     virtual bool IsValid();
+
+    T mData;
+    uint16_t miInc;
 };
 
 class cGcBaseBuildingPersistentBuffer : public cGcNetworkSynchronisedBuffer
 {
   public:
+    virtual ~cGcBaseBuildingPersistentBuffer();
+    virtual uint16_t GenerateHashValue(int);
+    virtual std::shared_ptr<cGcNetworkHashMessage> *GenerateHashMessage(std::shared_ptr<cGcNetworkHashMessage> *result);
+    virtual std::shared_ptr<cGcNetworkSyncMessage> *GenerateSyncMessage(
+        std::shared_ptr<cGcNetworkSyncMessage> *result, int);
+    virtual void ApplySyncMessage(const cGcNetworkSyncMessage *, cGcNetworkPlayer *);
+    virtual bool HasNetworkOwner(cTkUserIdBase<cTkFixedString<64, char>> *);
+
+    void GetObjectCountsById(
+        const TkID<128> &lID, const cTkVector3 &lLocalPosition, uint32_t &liOutPlanetCount, uint32_t &liOutRegionCount,
+        uint64_t &lu64Address);
+    bool HasNetworkOwner(cTkUserIdBase<cTkFixedString<64, char>> &lOutOwnerId);
+    void InitializeFromData(const cTkDynamicArray<cGcPersistentBBObjectData> &lBaseBuildingData);
+    void RefundBlacklistedBuildingObjects();
+    void RemoveDataFromRegion(uint16_t liDataIndex);
+    GcPersistencyHandle &StoreBaseBuildingObject(
+        const TkID<128> &lID, const cTkVector3 &lLocalUp, const cTkVector3 &lLocalAt,
+        const cTkVector3 &lLocationPosition, uint64_t luRegionSeed, uint64_t lUserData, uint64_t lUA);
+    bool UpdateBaseBuildingObject(GcPersistencyHandle lHandle, uint64_t luNewTimeStamp, uint64_t luNewUserData);
+
     class BaseBuildingPersistentData : public PersistentData<cGcPersistentBBObjectData>
     {
-        virtual ~BaseBuildingPersistentData() { ; }
+      public:
+        virtual ~BaseBuildingPersistentData();
+
+        bool IsValid();
     };
 
     cTkVector<cGcBaseBuildingPersistentBuffer::BaseBuildingPersistentData> maBaseBuildingObjects;

@@ -26,6 +26,7 @@
 #include <gamestate/GcDiscoveryCommon.h>
 #include <gamestate/GcDiscoverySearch.h>
 #include <networking/GcNetworkRpcCall.h>
+#include <toolkit/data/TkDocumentReader.h>
 #include <toolkit/utilities/containers/TkDeque.h>
 #include <toolkit/utilities/containers/TkStackContainer.h>
 #include <toolkit/utilities/random/TkPersonalRNG.h>
@@ -67,8 +68,13 @@ class IDiscoveryManagerEventHandler
     virtual void DiscoveryDataSubmitted(const cGcDiscoveryData *);
 };
 
-struct Session : AutoPooled<19>
+class Session : AutoPooled<19>
 {
+  public:
+    ITkDocumentReader::ReadResult LoadPersistent(ITkDocumentReader &lReader);
+    void SavePersistent(ITkDocumentWriter &lWriter);
+    bool RemoveRecord(cGcDiscoveryRecord *lpRecord);
+
     cGcDiscoveryStoreImpl<DefaultDiscoveryDataHashing, 19> mDiscoveryStore;
     cTkVector<cGcManagedDiscovery *> mManagedAvailableForSubmission;
     cTkDeque<cGcManagedDiscovery *> mManagedQueuedToSubmit;
@@ -94,8 +100,64 @@ struct AtlasRequestContext
 class cGcDiscoveryManager
 {
   public:
+    enum ExportSortOption;
+
+    bool BeginRemoteQueryAllOnPlanet(const uint64_t &lu64Address, uint64_t);
+    bool BeginRemoteQueryCategory(const uint64_t &lu64Address, eDiscoveryType leCategory, uint64_t);
+    int BeginRemoteQueryExact(const cGcDiscoveryData &lDiscoveryData, uint64_t);
+    void Clear();
+    void Construct();
+    cGcDiscoverySearch *CreateSearchInstance();
+    GcDiscoverySearchConstraints::ConstraintBase *GenerateDiscoveryExport(
+        cGcDiscoveryManager::ExportSortOption leExportSortOption, cTkVector<uint64_t> *lpOrphans,
+        cTkVector<GcDiscoverySearchConstraints::ConstraintBase *> *lpapConstraints);
+    int LookupDiscoveryWithStatus(
+        const cGcDiscoveryData &lDiscoveryData, const cGcDiscoveryRecord *&lpDiscoveryRecordFound);
+    void Prepare();
+    bool SubmitCustomNameForDiscovery(const cGcDiscoveryRecord *lpRecord, cTkFixedString<128, char> *lpacCustomName);
+    bool SubmitDiscoveryData(const cGcDiscoveryData &lDiscoveryData, bool *lpbLocallyNew);
+    void UnRegisterForEvents(IDiscoveryManagerEventHandler *lpHandler);
+
+    static void RPCNewDiscovery(
+        cGcNetworkPlayer *lpPlayer, cGcDiscoveryData lDiscoveryData, int liTimestamp,
+        cTkFixedString<128, char> lCustomName);
+
+    enum ExportSortOption : uint8_t
+    {
+        NewestFirst,
+        OldestFirst,
+        OldestFirstWithPropagation,
+    };
+
     struct Data : AutoPooled<19>
     {
+        bool ConvertAndUpsertAtlasData(
+            const cGcAtlasDiscovery &lAtlasData, cGcDiscoveryData &lDiscoveryData, bool lbClean);
+        void DeleteSearchInstance(cGcDiscoverySearch *lpSearch);
+        void HideAllDiscoveriesByBlockedUsers();
+        void HideDiscoveryIfOwnerBlocked(const cGcDiscoveryRecord *lpRecord, const char *);
+        bool IsDiscoveryOwnedByPlayer(const cGcDiscoveryRecord *lpRecord);
+        ITkDocumentReader::ReadResult LoadPersistent(ITkDocumentReader &lReader);
+        void NotifyDiscovery(
+            uint64_t lHandle, const cTkMetaMessageWrapperTemplated<cGcAtlasShared> &lMetadata,
+            uint64_t lu64RequestMetadataClassType);
+        bool ProcessAtlasResponse(
+            uint64_t lHandle, const cTkMetaMessageWrapperTemplated<cGcAtlasShared> &lMetadata,
+            uint64_t lu64RequestMetadataClassType, AtlasRequestResult leResult);
+        bool RetrieveOwnerDisplayName(const std::shared_ptr<cGcAsyncOpsTempDiscovery> &lpAsyncDiscovery);
+        void RunSearches();
+        /**
+         * @fn SubbitDiscoveryReport (sic)
+         */
+        void SubbitDiscoveryReport(cGcDiscoveryRecord *lpDiscoveryRecord);
+        bool SubmitDiscoveryData(const cGcDiscoveryData &lDiscoveryData, int liTimestamp, bool *lpbLocallyNew);
+        bool SynchronousTrimDb(cGcDiscoveryManager *lpHost, uint32_t, uint32_t);
+        void UpdateCheckReportQueue(float lfTimeStep);
+        void UpdateCheckSubmissionQueue(float lfTimeStep);
+        void UpdateProcessRequestsAsyncOps();
+        void UpdateProcessRequestsInFlight();
+        void UpdateProcessSubmitted();
+
         cTkStackVector<IDiscoveryManagerEventHandler *, 4> mEventHandlers;
         Session *mpSession;
         cGcDiscoveryDataRing<40> mUndiscoveredRing;

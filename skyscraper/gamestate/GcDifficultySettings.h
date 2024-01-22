@@ -23,6 +23,8 @@
 
 #include <skyscraper.h>
 
+#include <reality/gcunlockabletreecosttype.meta.h>
+#include <user/gcdifficultysettingenum.meta.h>
 #include <user/gcdifficultystatedata.meta.h>
 
 SKYSCRAPER_BEGIN
@@ -30,6 +32,64 @@ SKYSCRAPER_BEGIN
 class cGcDifficultySettings
 {
   public:
+    enum ePresetMatchType;
+    enum eCurrencyScalingMode;
+
+    bool AreItemsDestroyedOnDeath();
+    bool ArePurchasesWithCostTypeFree(eTypeOfCost leTypeOfCost, eCurrency leCurrency);
+    cGcDifficultyPresetType CompareSettingDifficulty(
+        const cGcDifficultySettingsData &lSettingsA, const cGcDifficultySettingsData &lSettingsB,
+        eDifficultySetting leSetting);
+    bool DoesSprintingDrainEnergy();
+    void FillPersistentBaseDifficultyData(cGcPersistentBaseDifficultyData &lOutPersistentBaseData);
+    float GetCurrencyCostMultiplier(
+        eTypeOfCost leTypeOfCost, eCurrency leCurrency, cGcDifficultySettings::eCurrencyScalingMode leScalingMode,
+        bool);
+    cGcDifficultySettingsReplicatedState &GetReplicatedState();
+    TkID<256> *GetSettingOptionLocIDs(eDifficultySetting leSetting, cTkVector<TkID<256>> &laOutOptionLocIDs);
+    float GetSprintingRateMultipler();
+    bool HasDifficultyAlwaysBeenAtPresetorHarder(eDifficultyPresetType leTestPreset);
+    bool IsChargingFree();
+    bool IsEnergyBarEnabled();
+    bool IsFuelCheap();
+    bool IsFuelFree();
+    bool IsItemGraveSpawnedOnDeath();
+    bool IsSaveDestroyedOnDeath();
+    bool IsSprintingUnlimited();
+    void Save(cGcDifficultyStateData &lStateData);
+    float ScaleCurrencyCost(
+        int liCost, cGcDifficultySettings::eCurrencyScalingMode leScalingMode, eTypeOfCost leTypeOfCost,
+        eCurrency leCurrency, bool);
+    void SetSettingsData(cGcDifficultySettingsData &lSettingsData);
+
+    static cTkFixedString<64, char> &GetDifficultyIconStringInsert(const cGcNetworkPlayer *lpNetPlayer);
+    static int FindMatchingPreset(
+        cGcDifficultySettingsData &lSettingsData, cGcDifficultySettings::ePresetMatchType leMatchType);
+    static int *GetOptionListSettingAsIntWritable(cGcDifficultySettingsData &lData, eDifficultySetting leSetting);
+    static cGcDifficultyPresetType GetPresetForGameMode(ePresetGameMode leGameMode);
+    static cGcDifficultySettingsData &GetPresetSettingsClampedByEditability(
+        cGcDifficultySettingsData &lInCurrentSettings, eDifficultyPresetType leGameMode);
+    static cGcDifficultySettingsData *GetToggleSettingWritable(
+        cGcDifficultySettingsData &lData, eDifficultySetting leSetting);
+
+    enum ePresetMatchType
+    {
+        EPresetMatchType_Exact,
+        EPresetMatchType_WithinEditability,
+    };
+
+    enum ePresetRoundingDir
+    {
+        EPresetRoundingDir_Up,
+        EPresetRoundingDir_Down,
+    };
+
+    enum eCurrencyScalingMode
+    {
+        ECurrencyScalingMode_DisplayedPrice,
+        ECurrencyScalingMode_FinalTransaction,
+    };
+
     cGcDifficultyStateData mDifficultyStateData;
     bool mbDifficultySettingsDirty;
 };

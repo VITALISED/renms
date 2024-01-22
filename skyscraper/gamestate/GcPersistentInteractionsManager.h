@@ -24,6 +24,7 @@
 #include <skyscraper.h>
 
 #include <gamestate/GcBaseBuildingGlobalBuffer.h>
+#include <gamestate/GcPersistencyHandle.h>
 #include <gamestate/GcPersistentInteractionBuffer.h>
 #include <gamestate/GcPlayerBasePersistentBuffer.h>
 #include <gamestate/GcTerrainEditsPersistentBuffer.h>
@@ -33,18 +34,6 @@
 #include <gamestate/gcmaintenancecontainer.meta.h>
 
 SKYSCRAPER_BEGIN
-
-struct GcPersistencyHandle
-{
-    union {
-        struct
-        {
-            uint32_t miLookup : 21;
-            uint32_t miIncrementor : 11;
-        };
-        uint32_t miLookupInt;
-    };
-};
 
 class cGcMaintenanceBuffer : public cGcVariablePersistentInteractionBuffer<cGcMaintenanceContainer>
 {};

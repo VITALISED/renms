@@ -38,6 +38,14 @@ struct TkCloudDataInfo
 class cGcCloudSaveManager
 {
   public:
+    int CombineSaveData();
+    bool CompressSaveData();
+    bool DecompressSaveData();
+    bool ExtractSaveData();
+    bool GetObjectFromJsonReadStream(const char *lpKeyName, void *lpOutputData, int64_t liMaxSize);
+
+    static void ExportSaveToCloudThread(void *lpData);
+
     cGcGameState *mpGameState;
     std::function<void(bool)> mpOnCompletionCallback;
     uint64_t mTempJsonFile;

@@ -24,6 +24,7 @@
 #include <skyscraper.h>
 
 #include <toolkit/core/types/TkID.h>
+#include <toolkit/data/TkDocumentWriter.h>
 #include <toolkit/maths/geometry/TkPhysRelVec3.h>
 #include <toolkit/maths/numeric/generic/TkVector2Generic.h>
 #include <toolkit/maths/numeric/generic/TkVector3Generic.h>
@@ -33,37 +34,6 @@
 #include <toolkit/voxel/TkHalfVectors.h>
 
 SKYSCRAPER_BEGIN
-
-class ITkDocumentWriter
-{
-  public:
-    virtual ~ITkDocumentWriter();
-    virtual TkID<128> *GetWriterFormat(TkID<128> *result);
-    virtual void Clear();
-    virtual void PushContext(const char *);
-    virtual void PopContext();
-    virtual void OpenArray(const char *);
-    virtual void OpenObject(const char *);
-    virtual void Close();
-    virtual void AddValue(unsigned int);
-    virtual void AddValue(int);
-    virtual void AddValue(float);
-    virtual void AddValue(const cTkSeed *);
-    virtual void AddValue(const TkID<256> *);
-    virtual void AddValue(const TkID<128> *);
-    virtual void AddValue(const uint64_t);
-    virtual void AddValue(const int64_t);
-    virtual void AddValue(const bool);
-    virtual void AddValue(const wchar_t *);
-    virtual void AddValue(const char *);
-    virtual void AddValue(const long double);
-    virtual void AddValue(const cTkHalfVector4 *);
-    virtual void AddValue(const cTkVector2 *);
-    virtual void AddValue(const cTkVector3 *);
-    virtual void AddValue(const cTkVector4 *);
-    virtual void AddValue(const cTkPhysRelVec3 *);
-    virtual void AddKey(const char *);
-};
 
 class cTkDocumentWriterJSON : public ITkDocumentWriter
 {

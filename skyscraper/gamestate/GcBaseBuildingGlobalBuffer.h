@@ -24,12 +24,20 @@
 #include <skyscraper.h>
 
 #include <gamestate/GcBaseBuildingPersistentBuffer.h>
+#include <gamestate/GcPersistencyHandle.h>
 
 SKYSCRAPER_BEGIN
 
 class cGcBaseBuildingGlobalBuffer
 {
   public:
+    GcPersistencyHandle &FindBaseBuildingObject(
+        const TkID<128> &lId, uint64_t lUA, const cTkVector3 &lPosition, int liPlayerIndex);
+    const cGcPersistentBBObjectData *GetBaseBuildingObjectData(GcPersistencyHandle lHandle);
+    void PopulateBufferData(cTkDynamicArray<cGcPersistentBBObjectData> &lBufferData);
+    void SetBufferOwnerId(int liPlayerIndex, const cTkUserIdBase<cTkFixedString<64, char>> &lOwnerId);
+    bool UpdateBaseBuildingObjectTimestamp(GcPersistencyHandle lHandle, uint64_t lNewTimeStamp);
+
     cGcBaseBuildingPersistentBuffer mPersistentBuffers[32];
 };
 

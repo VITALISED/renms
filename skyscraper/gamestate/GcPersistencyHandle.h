@@ -1,9 +1,9 @@
 /**
- * @file GcBlockList.h
+ * @file GcPersistencyHandle.h
  * @author VITALISED & Contributors
- * @since 2023-12-06
+ * @since 2024-01-22
  *
- * Copyright (C) 2023  VITALISED & Contributors
+ * Copyright (C) 2024  VITALISED & Contributors
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,26 +23,18 @@
 
 #include <skyscraper.h>
 
-#include <toolkit/system/memory/pools/TkMemoryPool.h>
-
-#include <user/gcblocklistpersistence.meta.h>
-
 SKYSCRAPER_BEGIN
 
-class cGcBlockList
+struct GcPersistencyHandle
 {
-  public:
-    void AddMessageToBlockList(const char *lpcMessageId);
-
-    struct Data : AutoPooled<5>
-    {
-        bool IsMessageOnBlockList(const char *lpcMessageId);
-        bool IsOnBlockList(const char *lpcUserId, const char *lpcPlatform, const char *);
-
-        cGcBlockListPersistence *mBlockListArray;
+    union {
+        struct
+        {
+            uint32_t miLookup : 21;
+            uint32_t miIncrementor : 11;
+        };
+        uint32_t miLookupInt;
     };
-
-    cGcBlockList::Data *mpData;
 };
 
 SKYSCRAPER_END
