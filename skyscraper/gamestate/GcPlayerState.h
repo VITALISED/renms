@@ -58,6 +58,16 @@
 
 SKYSCRAPER_BEGIN
 
+enum ItemLookupType
+{
+    Always,
+    IgnoreBroken,
+    IgnoreDepleted,
+    IgnoreBrokenAndDepleted,
+    Upgrades,
+    Upgrades_IgnoreBrokenAndDepleted,
+};
+
 enum ePlayerFinalisePurchaseState
 {
     EPlayerFinalisePurchaseState_None,

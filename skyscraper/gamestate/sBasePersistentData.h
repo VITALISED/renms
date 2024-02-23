@@ -1,9 +1,9 @@
 /**
- * @file GcEntitlementManager.h
+ * @file sBasePersistentData.h
  * @author VITALISED & Contributors
- * @since 2023-12-09
+ * @since 2024-01-23
  *
- * Copyright (C) 2023  VITALISED & Contributors
+ * Copyright (C) 2024  VITALISED & Contributors
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,18 +23,17 @@
 
 #include <skyscraper.h>
 
-#include <entitlements/gcentitlementrewardstable.meta.h>
+#include <basebuilding/GcBaseBuildingManagerTypes.h>
+#include <gamestate/GcPersistencyHandle.h>
 
 SKYSCRAPER_BEGIN
 
-class cGcEntitlementManager
-{
-  public:
-    bool HasEntitlementReward(int liEntitlement);
-    bool HasUsedEntitlementReward(TkID<128> &lEntitlementId);
-    void MarkEntitlementUsed(TkID<128> &lEntitlementId, TkID<128> &lRewardId);
+// TODO: move me to GcBaseBuildingManagerTypes!
 
-    cGcEntitlementRewardsTable *mpEntitlementRewardsTable;
+struct sComponentBaseObjectHandle
+{
+    sBaseObjectHandle mBaseObjectHandle;
+    unsigned int muLookupIndex;
 };
 
 SKYSCRAPER_END

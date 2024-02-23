@@ -36,17 +36,17 @@ struct sHashValue
 class cGcNetworkBufferHash
 {
   public:
+    virtual ~cGcNetworkBufferHash();
+    virtual sHashValue &GetHashValue(unsigned int);
+    virtual uint64_t GetHashTimestamp();
+    virtual uint16_t GenerateHashValue(int);
+    virtual void OnHashOffsetChanged(int);
+
     const int kiChunkSize;
     int miChunkHashOffset;
     cTkVector<sHashValue> maChunkHashValues;
     uint64_t mu64Timestamp;
     bool mbInitialised;
-
-    virtual ~cGcNetworkBufferHash();
-    virtual sHashValue *GetHashValue(sHashValue *result, unsigned int);
-    virtual uint64_t GetHashTimestamp();
-    virtual uint16_t GenerateHashValue(int);
-    virtual void OnHashOffsetChanged(int);
 };
 
 SKYSCRAPER_END

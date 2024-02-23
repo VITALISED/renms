@@ -23,7 +23,7 @@
 
 #include <skyscraper.h>
 
-#include <gamestate/GcPersistentInteractionsManager.h>
+#include <gamestate/GcPersistencyHandle.h>
 
 SKYSCRAPER_BEGIN
 

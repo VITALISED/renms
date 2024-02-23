@@ -49,57 +49,6 @@
 
 SKYSCRAPER_BEGIN
 
-enum InventoryChoice
-{
-    _None = -1,
-    Personal,
-    Personal_TechOnly,
-    Personal_Cargo,
-    Weapon,
-    Ship,
-    Ship_TechOnly,
-    Ship_Cargo,
-    Freighter,
-    Freighter_TechOnly,
-    Freighter_Cargo,
-    _Vehicle,
-    Vehicle_TechOnly,
-    Chest1,
-    Chest2,
-    Chest3,
-    Chest4,
-    Chest5,
-    Chest6,
-    Chest7,
-    Chest8,
-    Chest9,
-    Chest10,
-    ChestMagic,
-    ChestMagic2,
-    MaintenanceObject,
-    FrontendPage,
-    CookingIngredients,
-    RocketLocker,
-    Num_Choices,
-};
-
-struct InventoryData
-{
-    uint8_t mePlayerInventory[4];
-    cTkSmartResHandle mModelResHandle;
-    cTkModelRendererData *mpModelRenderData;
-    TkID<256> mInventoryName;
-};
-
-class InventoryTransferData
-{
-  public:
-    cTkVector<InventoryData> maLeft;
-    int miCurrentLeft;
-    cTkVector<InventoryData> maRight;
-    int miCurrentRight;
-};
-
 class cGcInventorySlotAction
 {
   public:

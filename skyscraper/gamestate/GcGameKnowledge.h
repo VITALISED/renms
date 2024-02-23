@@ -23,6 +23,8 @@
 
 #include <skyscraper.h>
 
+#include <toolkit/data/TkDocumentReader.h>
+
 #include <simulation/galaxy/gcgalaxywaypoint.meta.h>
 
 SKYSCRAPER_BEGIN
@@ -36,6 +38,14 @@ class IKnowledgeEventHandler
 class cGcGameKnowledge
 {
   public:
+    eGalaxyWaypointType AddGalacticWaypoint(const cGcGalaxyWaypoint &lWaypoint, bool, bool lbTestRun);
+    void ClearAllSpecificWayPoints(eGalaxyWaypointType leType);
+    void ClearAllWaypoints();
+    bool FindExactGalacticWaypoint(const cGcGalaxyWaypoint &lWaypoint);
+    const cGcGalaxyWaypoint *GetGalacticWaypointWithAddress(const cGcGalacticAddressData &lAddress);
+    ITkDocumentReader::ReadResult LoadPersistent(const ITkDocumentReader &lReader);
+    bool RemoveGalacticWaypoint(const cGcGalaxyWaypoint &lWaypoint);
+
     struct Data
     {
         cTkStackVector<cGcGalaxyWaypoint, 8> mWaypoints;

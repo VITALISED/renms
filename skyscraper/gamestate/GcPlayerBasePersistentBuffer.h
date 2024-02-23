@@ -27,6 +27,7 @@
 #include <basebuilding/GcBaseLinkGrid.h>
 #include <basebuilding/GcBaseLinkGroups.h>
 #include <gamestate/GcBaseBuildingPersistentBuffer.h>
+#include <gamestate/GcPersistencyHandle.h>
 #include <networking/GcNetworkSynchronisedBuffer.h>
 #include <toolkit/maths/geometry/TkPhysRelMat34.h>
 
@@ -43,14 +44,40 @@ SKYSCRAPER_BEGIN
 class cGcPlayerBasePersistentBuffer : public cGcNetworkSynchronisedBuffer
 {
   public:
+    struct PlayerBasePersistentData;
+
+    virtual ~cGcPlayerBasePersistentBuffer();
+    virtual uint16_t GenerateHashValue(int);
+    virtual void OnHashOffsetChanged(int);
+    virtual std::shared_ptr<cGcNetworkHashMessage> &GenerateHashMessage();
+    virtual std::shared_ptr<cGcNetworkSyncMessage> &GenerateSyncMessage(int);
+    virtual void ApplySyncMessage(const cGcNetworkSyncMessage *, cGcNetworkPlayer *);
+    virtual bool HasNetworkOwner(cTkUserIdBase<cTkFixedString<64, char>> *);
+
+    void AddAmountToGrid(
+        GcPersistencyHandle lPartHandle, int liAmount, bool lbPartOnly, int liDependant, bool lbDontBroadcast);
+    void AddBaseObjects(const cTkVector<cGcPlayerBasePersistentBuffer::PlayerBasePersistentData> &lObjects);
+    void ApplySyncDataToObject(int liObjIndex, cGcPersistentBaseEntry &lNewData, uint64_t lu64NewRegionId);
+    void ApplySyncRemoveObject(int liObjIndex, bool lbLinkConnectionsChanged, bool lbLinkGridDataChanged);
+    bool AreObjectsOnSameGrid(GcPersistencyHandle lHandle1, GcPersistencyHandle lHandle2);
+    bool AreObjectsTransferLinked(int liObjIndex1, int liObjIndex2);
+    void CheckDiscoveryOwnerData();
+    void ClaimPlayerBase(
+        ePersistentBaseTypes leBaseType, const cTkPhysRelMat34 &lBaseMatrix, uint64_t lUA,
+        cTkUserIdBase<cTkFixedString<64, char>> &lOwnerId);
+    void ClearAndUnClaimBase();
+    void ClearPlayerBase();
+    int CountObjectsById(const TkID<128> &lID, const cTkVector3 &lLocalPosition, int liOutRegionCount);
+    int CreateNewLinkGrid();
+    GcPersistencyHandle &FindBaseBuildingObject(const TkID<128> &lID, const cTkVector3 &lLocalPosition);
+    void ForceAddNodesAroundPlayer(cTkVector3 &lPlayerPosition, float lfRadius);
+
     struct PlayerBasePersistentData : PersistentData<cGcPersistentBaseEntry>
     {
         uint64_t muRegionId;
         uint16_t muiLinkIndex;
         uint16_t muiGridIndex;
         const cGcBaseBuildingEntry *mpBuildingEntry;
-
-        ~PlayerBasePersistentData() { EMPTY_CALL_DESTRUCTOR(); }
     };
 
     struct sStats

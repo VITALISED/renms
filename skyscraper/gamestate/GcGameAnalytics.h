@@ -36,6 +36,25 @@ class cGcStatsManager;
 class cGcGameAnalytics : public INetworkPlayerEventsHandler
 {
   public:
+    void AddCrossplayEvent(std::string lKey, int liValue, bool lbUseValue);
+    void AddCustomEvent(const char *lpKey, int liValue, bool lbEncodeValueInEventId);
+    void AddProgressionEvent(const char *lpMission, int liStage, bool lbIsComplete);
+    void AddRequiredKeyValues(cTkDocumentWriterJSON *lpDocWriter, bool lbCrossplay);
+    cTkFixedString<128, char> &BuildHeirachicalEventId(const char *lpString);
+    void CheckJsonBuffer();
+    void Construct();
+    void EndSession(bool lbCrossplay);
+    void HttpHandleInitRequestResult(const Http::RequestResult &lResult);
+    void HttpHandleSessionStartRequestResult(const Http::RequestResult &lResult);
+    void OnMultiplayerSessionFinished(cGcNetworkConstants::LobbyType leLobbyType);
+    void OnMultiplayerSessionStarting(cGcNetworkConstants::LobbyType leLobbyType);
+    void OnNetworkPlayerStateEvent(cGcNetworkPlayer *lpPlayer, eGcNetworkPlayerStateEvent leEvent);
+    bool StartEvents();
+    void StartSession(bool lbCrossplay);
+    void Update(float lfTimeStep);
+    void UpdateFireteamSession();
+    void UploadEventsJSON();
+
     enum ConnectionState
     {
         E_OK,

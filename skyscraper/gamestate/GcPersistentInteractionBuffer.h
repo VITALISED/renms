@@ -25,9 +25,11 @@
 
 #include <networking/GcNetworkSynchronisedBuffer.h>
 #include <networking/messages/GcNetworkSyncMessages.h>
+#include <simulation/environment/regiondata/terrain/GcRegionTerrain.h>
 #include <toolkit/maths/utilities/spatial/TkVector3KD.h>
 #include <toolkit/networking/TkUserIdBase.h>
 
+#include <gamestate/interactions/gcinteractionbuffer.meta.h>
 #include <gamestate/interactions/gcinteractionbuffertype.meta.h>
 #include <gamestate/interactions/gcinteractiondata.meta.h>
 
@@ -38,6 +40,34 @@ class cGcNetworkPlayer;
 class cGcPersistentInteractionBuffer : public cGcNetworkSynchronisedBuffer
 {
   public:
+    virtual ~cGcPersistentInteractionBuffer();
+    virtual sHashValue &GetHashValue(unsigned int);
+    virtual uint64_t GetHashTimestamp();
+    virtual uint16_t GenerateHashValue(int);
+    virtual void OnHashOffsetChanged(int);
+    virtual std::shared_ptr<cGcNetworkHashMessage> &GenerateHashMessage();
+    virtual std::shared_ptr<cGcNetworkSyncMessage> &GenerateSyncMessage(int);
+    virtual void ApplySyncMessage(const cGcNetworkSyncMessage *, cGcNetworkPlayer *);
+    virtual bool HasNetworkOwner(cTkUserIdBase<cTkFixedString<64, char>> *);
+    virtual bool ShouldSyncWithPlayer(cGcNetworkPlayer *);
+
+    const cGcInteractionData *GetInteraction(const cTkVector3 &lPosition);
+    const cGcInteractionData *GetInteractionCheckingFurthest(const cTkVector3 &lPosition, float lfRadius);
+    const cGcInteractionData *GetInteractionOnPlanet(const cTkVector3 &lPlanetOffsetPosition, float lfRadius);
+    const cGcInteractionData *GetMatchingInteraction(
+        const cTkVector3 &lPosition, uint64_t muiMatchingValue, float lfRadius);
+    const cGcInteractionData *GetNearestInteraction(const cTkVector3 &lPosition, float &lDistance);
+    void InitializeFromData(const cGcInteractionBuffer &lBufferData);
+    void InternalDoTreeRebuildNoLock();
+    void LoadGalacticAddressBuffers(const uint64_t &lu64Address);
+    void PopulateBufferData(cGcInteractionBuffer &lBufferData);
+    void RefreshRelevantComponents(
+        const cTkVector3 &lUpdatedLocation, cTkUserIdBase<cTkFixedString<64, char>> &lPlayerId, uint64_t lData);
+    bool RegionHasInteractionsPlanetPosition(cGcRegionTerrain *lpRegion);
+    void SaveInteraction(const cTkVector3 &lPosition, const cGcInteractionData &lData, bool lbReplace, float lfRadius);
+    void StoreInteraction(const cGcInteractionData &lData, bool lbReplace, float lfRadius);
+    void Update(float lfTimeStep);
+
     union {
         const int kiDistressSignalMaxBufferSize;
         const int kiCrateMaxBufferSize;
@@ -70,23 +100,36 @@ class cGcPersistentInteractionBuffer : public cGcNetworkSynchronisedBuffer
     bool mbPersistenceActive;
     bool mbTreeHasData;
     bool mbTreeNeedsRebuild;
-
-    virtual ~cGcPersistentInteractionBuffer() { EMPTY_CALL_DESTRUCTOR(); }
-    virtual sHashValue *GetHashValue(sHashValue *result, unsigned int);
-    virtual uint64_t GetHashTimestamp();
-    virtual uint16_t GenerateHashValue(int);
-    virtual void OnHashOffsetChanged(int);
-    virtual std::shared_ptr<cGcNetworkHashMessage> *GenerateHashMessage(std::shared_ptr<cGcNetworkHashMessage> *result);
-    virtual std::shared_ptr<cGcNetworkSyncMessage> *GenerateSyncMessage(
-        std::shared_ptr<cGcNetworkSyncMessage> *result, int);
-    virtual void ApplySyncMessage(const cGcNetworkSyncMessage *, cGcNetworkPlayer *);
-    virtual bool HasNetworkOwner(cTkUserIdBase<cTkFixedString<64, char>> *);
-    virtual bool ShouldSyncWithPlayer(cGcNetworkPlayer *);
 };
 
 template <typename T>
-struct cGcVariablePersistentInteractionBuffer : public cGcPersistentInteractionBuffer
+class cGcVariablePersistentInteractionBuffer : public cGcPersistentInteractionBuffer
 {
+  public:
+    enum eLocation;
+
+    virtual std::shared_ptr<cGcNetworkSyncMessage> &GenerateSyncMessage(int);
+    virtual void ApplySyncMessage(const cGcNetworkSyncMessage *, cGcNetworkPlayer *);
+    virtual bool HasNetworkOwner(cTkUserIdBase<cTkFixedString<64, char>> *);
+    virtual bool ShouldSyncWithPlayer(cGcNetworkPlayer *);
+
+    void InitializeFromVariableData(const cGcInteractionBuffer &lBufferData, const cTkDynamicArray<T> &lVariableData);
+    cGcInteractionData &SaveVariableInteraction(
+        const cTkVector3 &lPosition, cGcVariablePersistentInteractionBuffer<T>::eLocation leLocation, const T &lData,
+        float lfRadius, bool);
+
+    enum eLocation
+    {
+        ELocation_UserSpace,
+        ELocation_OnPlanet,
+        ELocation_InFreighter,
+        ELocation_InBase,
+        ELocation_InSpaceStation,
+        ELocation_InSpace,
+        ELocation_Frigate,
+        ELocation_NumTypes,
+    };
+
     cTkVector<T> mVariableData;
     const int mkiSyncMessageMaxSize;
 };

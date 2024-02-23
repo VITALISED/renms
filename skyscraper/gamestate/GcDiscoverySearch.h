@@ -34,65 +34,61 @@
 
 SKYSCRAPER_BEGIN
 
-namespace GcDiscoverySearchConstraints
+struct GcDiscoverySearchConstraints
 {
-
-class ConstraintBase : public AutoPooled<19>
-{
-  public:
-    virtual ~ConstraintBase();
-    virtual bool Accept(const cGcDiscoveryRecord *);
+    class ConstraintBase : public AutoPooled<19>
+    {
+      public:
+        virtual ~ConstraintBase();
+        virtual bool Accept(const cGcDiscoveryRecord *);
+    };
 };
 
-} // namespace GcDiscoverySearchConstraints
-
-namespace DiscoveryResolver
+struct DiscoveryResolver
 {
-
-struct NameAndOwnerResult
-{
-    enum NameResultDetail
+    struct NameAndOwnerResult
     {
-        Undiscovered_UsingGeneratedName,
-        Discovered_UsingGeneratedName_NoCustomName,
-        Discovered_Remote_UsingGeneratedName_UGCIsLockedDown,
-        Discovered_Remote_UsingGeneratedName_CustomNameFailedProfanityFilter,
-        Discovered_Remote_UsingGeneratedName_DiscoveryHiddenOrBlocked,
-        Discovered_UsingCustomName,
-        Invalid,
+        enum NameResultDetail
+        {
+            Undiscovered_UsingGeneratedName,
+            Discovered_UsingGeneratedName_NoCustomName,
+            Discovered_Remote_UsingGeneratedName_UGCIsLockedDown,
+            Discovered_Remote_UsingGeneratedName_CustomNameFailedProfanityFilter,
+            Discovered_Remote_UsingGeneratedName_DiscoveryHiddenOrBlocked,
+            Discovered_UsingCustomName,
+            Invalid,
+        };
+
+        DiscoveryResolver::NameAndOwnerResult::NameResultDetail meNameResultDetail;
+        cTkFixedString<127, char> mDisplayName;
+        cTkFixedString<127, char> mLocalisedDisplayName;
+        uint8_t meOwnershipResult[4];
+        cGcDiscoveryOwner mOwnership;
+        bool mbOwnedByCurrentPlayer;
     };
 
-    DiscoveryResolver::NameAndOwnerResult::NameResultDetail meNameResultDetail;
-    cTkFixedString<127, char> mDisplayName;
-    cTkFixedString<127, char> mLocalisedDisplayName;
-    uint8_t meOwnershipResult[4];
-    cGcDiscoveryOwner mOwnership;
-    bool mbOwnedByCurrentPlayer;
-};
-
-struct DiscoveryInfo
-{
-    struct DiscoveryInfoValue
+    struct DiscoveryInfo
     {
-        TkID<256> mTitle;
-        cTkFixedString<128, char> msValue;
-        bool mbHighlight;
+        struct DiscoveryInfoValue
+        {
+            TkID<256> mTitle;
+            cTkFixedString<128, char> msValue;
+            bool mbHighlight;
+        };
+
+        cTkFixedString<128, char> msTitle;
+        DiscoveryResolver::NameAndOwnerResult mNameAndOwner;
+        cTkVector<DiscoveryResolver::DiscoveryInfo::DiscoveryInfoValue> mValues;
+        eDiscoveryType meDiscoveryType;
+        int miWorth;
+        cTkModelResourceRenderer *mpThumbnail;
+        float mfDisplayTime;
+        float mfDisplayTimer;
+        float mfAnimateInTime;
+        bool mbNewDiscovery;
+        bool mbWeird;
     };
-
-    cTkFixedString<128, char> msTitle;
-    DiscoveryResolver::NameAndOwnerResult mNameAndOwner;
-    cTkVector<DiscoveryResolver::DiscoveryInfo::DiscoveryInfoValue> mValues;
-    eDiscoveryType meDiscoveryType;
-    int miWorth;
-    cTkModelResourceRenderer *mpThumbnail;
-    float mfDisplayTime;
-    float mfDisplayTimer;
-    float mfAnimateInTime;
-    bool mbNewDiscovery;
-    bool mbWeird;
 };
-
-} // namespace DiscoveryResolver
 
 class cGcDiscoverySearch : public AutoPooled<19>
 {

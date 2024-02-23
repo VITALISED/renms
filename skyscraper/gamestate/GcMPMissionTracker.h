@@ -26,6 +26,7 @@
 #include <gamestate/GcDiscoveryManager.h>
 #include <networking/GcLobbyId.h>
 #include <networking/GcNetworkPlayerEventsHandler.h>
+#include <simulation/environment/scanning/GcScanEvenManager.h>
 #include <toolkit/networking/TkUserIdBase.h>
 #include <toolkit/utilities/containers/TkBitArray.h>
 #include <toolkit/utilities/containers/TkVector.h>
@@ -37,6 +38,36 @@ SKYSCRAPER_BEGIN
 class cGcMPMissionSelectionHelper
 {
   public:
+    struct sGcOfferedMPMissionParticipant;
+
+    void Construct();
+    cTkVector<cGcMPMissionSelectionHelper::sGcOfferedMPMissionParticipant> &GetAllParticipants(
+        const TkID<128> &lMissionId, const cTkSeed &lSeed);
+    cGcScanEventManager::InterstellarSearchResult &GetMissionTargetUA(
+        const TkID<128> &lMissionId, const cTkSeed &lMissionSeed, const cTkSeed &lTargetSeed, bool lbIsWeekendEvent);
+    bool HasMissionBeenHandedIn(const TkID<128> &lMissionId, const cTkSeed &lSeed);
+    bool HasMissionOffer(
+        const cTkUserIdBase<cTkFixedString<64, char>> &lParticipant, TkID<128> *lpMissionId, cTkSeed *lpSeed);
+    bool HasMissionStarted(const TkID<128> &lMissionId, const cTkSeed &lSeed);
+    bool HasMissionStarted(const cTkUserIdBase<cTkFixedString<64, char>> &lParticipant);
+    bool IsAvailableToCurrentPlayer(const TkID<128> &lMissionId, const cTkSeed &lSeed);
+    void JoinMission(const TkID<128> &lMissionId, const cTkSeed &lSeed, bool lbIsWeekend);
+    void LeaveMission();
+    void OnMissionHandedIn(const cTkUserIdBase<cTkFixedString<64, char>> &lParticipant);
+    void OnMissionStarted(const cTkUserIdBase<cTkFixedString<64, char>> &lParticipant);
+    void Ready(bool lbReady, const TkID<128> &lMissionId, const cTkSeed &lSeed);
+    void RemoveParticipant(const cTkUserIdBase<cTkFixedString<64, char>> &lParticipant);
+    bool StartMission(const TkID<128> &lMissionId, const cTkSeed &lSeed);
+
+    static void RPCOnMissionOfferRescinded(cGcNetworkPlayer *lpLeader);
+    static void RPCOnMissionOffered(
+        cGcNetworkPlayer *lpPlayer, uint64_t lParticipantUA, bool lbUAIsFallback, uint64_t luiJoinTime,
+        bool lbParticipantReady, TkID<128> lMissionId, cTkSeed lSeed, bool lbStarted, bool lbIsWeekend);
+    static void RPCOnMissionStartedProper(cGcNetworkPlayer *lpPlayer);
+    static void RPCOnParticipantReadyStatus(
+        cGcNetworkPlayer *lpPlayer, TkID<128> lMissionId, cTkSeed lSeed, bool lbReady);
+    static void RPCOnRemotePlayerLeftMission(cGcNetworkPlayer *lpPlayer);
+
     struct sGcOfferedMPMissionParticipant
     {
         cTkUserIdBase<cTkFixedString<64, char>> mParticipant;
@@ -48,6 +79,10 @@ class cGcMPMissionSelectionHelper
 
     struct sGcOfferedMPMission
     {
+        void AddUniqueParticipant(
+            const cTkUserIdBase<cTkFixedString<64, char>> &lParticipant, uint64_t lParticipantUA, bool lbUAIsFallback,
+            uint64_t lJoinTime, bool lbParticipantReady);
+
         cTkSeed mSeed;
         TkID<128> mMissionId;
         bool mbHasStarted;

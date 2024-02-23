@@ -1,5 +1,5 @@
 /**
- * @file GcPersistencyHandle.h
+ * @file GcObjectPlacementComponent.h
  * @author VITALISED & Contributors
  * @since 2024-01-22
  *
@@ -23,20 +23,34 @@
 
 #include <skyscraper.h>
 
+#include <toolkit/simulation/components/TkComponent.h>
+
+#include <gameplay/gcobjectplacementcomponentdata.meta.h>
+
 SKYSCRAPER_BEGIN
 
-struct GcPersistencyHandle
+class cGcObjectPlacementComponent : public cTkComponent
 {
-    bool IsValid();
-
-    union {
-        struct
-        {
-            uint32_t miLookup : 21;
-            uint32_t miIncrementor : 11;
-        };
-        uint32_t miLookupInt;
+  public:
+    enum ePlaceObjectState
+    {
+        EPlaceObjectState_None,
+        EPlaceObjectState_Requested,
+        EPlaceObjectState_Pending,
+        EPlaceObjectState_Place,
+        EPlaceObjectState_Complete,
     };
+
+    cGcObjectPlacementComponent::ePlaceObjectState meObjectPlacementState;
+    TkHandle mGroupNode;
+    TkHandle mNode;
+    int miNumObjectsAdded;
+    int miNumGroupsAdded;
+    cTkVector3 mPrevPosition;
+    cTkVector<cTkMatrix34> maStartMatrices;
+    cTkVector<float> mafOffsets;
+    uint64_t mSeed;
+    cGcObjectPlacementComponentData *mpData;
 };
 
 SKYSCRAPER_END

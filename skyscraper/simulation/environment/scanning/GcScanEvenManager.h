@@ -37,6 +37,13 @@ SKYSCRAPER_BEGIN
 class cGcScanEventManager
 {
   public:
+    class InterstellarSearchResult
+    {
+      public:
+        bool mbUsingFallback;
+        uint64_t mResultUA;
+    };
+
     cGcRpcCallBase *RRSE;
     float mfNextEventTime;
     bool mbHasBeenToSpace;

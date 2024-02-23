@@ -25,6 +25,7 @@
 
 #include <toolkit/utilities/containers/TkVector.h>
 
+#include <gamestate/gcexpeditioneventsavedata.meta.h>
 #include <reality/gcrewardtableitem.meta.h>
 #include <simulation/gcexpeditioneventdata.meta.h>
 #include <simulation/gcexpeditioninterventioneventdata.meta.h>
@@ -32,20 +33,22 @@
 SKYSCRAPER_BEGIN
 
 class cGcFleetFrigate;
+class cGcFleetExpedition;
+class cGcPlayerFleetManager;
+
+enum eFrigateDamageResponse
+{
+    EFrigateDamageResponse_Ignored,
+    EFrigateDamageResponse_Destroyed,
+    EFrigateDamageResponse_Continued,
+    EFrigateDamageResponse_Recalled,
+    EFrigateDamageResponse_RepairedByAnotherFrigate,
+    EFrigateDamageResponse_NumTypes,
+};
 
 class cGcDamageResponse
 {
   public:
-    enum eFrigateDamageResponse
-    {
-        EFrigateDamageResponse_Ignored,
-        EFrigateDamageResponse_Destroyed,
-        EFrigateDamageResponse_Continued,
-        EFrigateDamageResponse_Recalled,
-        EFrigateDamageResponse_RepairedByAnotherFrigate,
-        EFrigateDamageResponse_NumTypes,
-    };
-
     cTkSeed mDamagedFrigateSeed;
     cTkSeed mRepairingFrigateSeed;
     eFrigateDamageResponse meDamageResponse;
@@ -54,6 +57,23 @@ class cGcDamageResponse
 class cGcExpeditionEventResult
 {
   public:
+    void AddAffectedFrigate(const cTkSeed &lSeed, eFrigateDamageResponse leEffect, const cTkSeed &lRepairerSeed);
+    void AttemptToRepairFrigates(cGcFleetExpedition &lExpedition);
+    void CalculateNumberOfDamagedFrigates();
+    void ChooseDescription(cGcFleetExpedition &lExpedition, TkID<128> &lOutRewardID);
+    void ChooseRewards(cGcFleetExpedition &lExpedition, const TkID<128> &lRewardID);
+    void DamageFrigates(cGcFleetExpedition &lExpedition);
+    float GetChanceOfFrigateDamage();
+    void GetDescription(const cGcFleetExpedition &lExpedition, cTkFixedString<2048, char> &lOutDescription);
+    float GetEventDifficulty(const cGcFleetExpedition &lExpedition);
+    TkID<256> &GetInterventionDialog();
+    void Load(const cGcExpeditionEventSaveData &lSaveData, const cGcFleetExpedition &lExpedition, bool lbHasHappened);
+    void OnInterventionDeclined();
+    void OnInterventionFailed(const cGcFleetExpedition &lExpedition);
+    void OnInterventionSucceeded(const cGcFleetExpedition &lExpedition);
+    void OverrideReward(const TkID<128> &lRewardID);
+    void Save(cGcExpeditionEventSaveData &lSaveData, const cGcPlayerFleetManager &lFleetManager);
+
     cTkVector<cGcDamageResponse> maAffectedFrigates;
     cTkVector<cGcRewardTableItem const *> mapRewards;
     const cGcExpeditionEventData *mpEventData;

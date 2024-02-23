@@ -24,10 +24,23 @@
 #include <skyscraper.h>
 
 #include <networking/GcNetworkBufferHash.h>
+#include <networking/messages/GcNetworkSyncMessages.h>
 
 SKYSCRAPER_BEGIN
 
 class cGcNetworkSynchronisedBuffer : public cGcNetworkBufferHash
-{};
+{
+  public:
+    virtual ~cGcNetworkSynchronisedBuffer();
+    virtual sHashValue &GetHashValue(unsigned int);
+    virtual uint64_t GetHashTimestamp();
+    virtual uint16_t GenerateHashValue(int);
+    virtual void OnHashOffsetChanged(int);
+    virtual std::shared_ptr<cGcNetworkHashMessage> &GenerateHashMessage();
+    virtual std::shared_ptr<cGcNetworkSyncMessage> &GenerateSyncMessage(int);
+    virtual void ApplySyncMessage(const cGcNetworkSyncMessage *, cGcNetworkPlayer *);
+    virtual bool HasNetworkOwner(cTkUserIdBase<cTkFixedString<64, char>> *);
+    virtual bool ShouldSyncWithPlayer(cGcNetworkPlayer *);
+};
 
 SKYSCRAPER_END

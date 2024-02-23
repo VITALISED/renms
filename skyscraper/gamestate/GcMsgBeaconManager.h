@@ -34,6 +34,8 @@ SKYSCRAPER_BEGIN
 class cGcMsgBeacon : public AutoPooled<5>
 {
   public:
+    void RemoveMarker();
+
     enum UploadStatus
     {
         eFailed,

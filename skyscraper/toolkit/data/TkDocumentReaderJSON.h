@@ -1,9 +1,9 @@
 /**
- * @file GcEntitlementManager.h
+ * @file TkDocumentReaderJSON.h
  * @author VITALISED & Contributors
- * @since 2023-12-09
+ * @since 2024-01-23
  *
- * Copyright (C) 2023  VITALISED & Contributors
+ * Copyright (C) 2024  VITALISED & Contributors
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,18 +23,22 @@
 
 #include <skyscraper.h>
 
-#include <entitlements/gcentitlementrewardstable.meta.h>
+#include <toolkit/data/TkDocumentReader.h>
+#include <toolkit/utilities/containers/TkStackContainer.h>
 
 SKYSCRAPER_BEGIN
 
-class cGcEntitlementManager
+class cTkDocumentReaderJSON : public ITkDocumentReader
 {
   public:
-    bool HasEntitlementReward(int liEntitlement);
-    bool HasUsedEntitlementReward(TkID<128> &lEntitlementId);
-    void MarkEntitlementUsed(TkID<128> &lEntitlementId, TkID<128> &lRewardId);
-
-    cGcEntitlementRewardsTable *mpEntitlementRewardsTable;
+    nms_rapidjson::GenericDocument<nms_rapidjson::UTF8<char>> mJsonDocument;
+    nms_rapidjson::GenericValue<nms_rapidjson::UTF8<char>> *mCursor;
+    std::array<nms_rapidjson::GenericValue<nms_rapidjson::UTF8<char>> *, 32> mCursorStack;
+    cTkStackVector<const char *, 32> mContextTrail;
+    int miCursorStackIndex;
+    bool mbAllowSkipIdsCaret;
+    uint64_t mJsonFile;
+    char *mpStreamBuffer;
 };
 
 SKYSCRAPER_END
